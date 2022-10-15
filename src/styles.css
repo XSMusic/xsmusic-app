@@ -5,3 +5,17 @@
 .pointer {
   cursor: pointer;
 }
+
+app-root {
+  height: 100vh;
+}
+
+@layer utilities {
+  .filter-grayscale {
+    filter: grayscale(100%);
+  }
+
+  .filter-none {
+    filter: grayscale(0%);;
+  }
+}

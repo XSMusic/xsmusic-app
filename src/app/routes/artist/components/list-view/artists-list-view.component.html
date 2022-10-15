@@ -3,26 +3,32 @@
   <table class="w-full whitespace-nowrap">
     <tbody>
       <tr *ngFor="let artist of artists" tabindex="0"
-        class="focus:outline-none hover:opacity-75 h-16 border border-gray-100 rounded-lg pointer">
+        class="h-16 border-b border-gray-100 dark:border-black dark:border-0 rounded-lg pointer"
+        (click)="goToProfile.emit(artist._id)">
         <td>
-          <div class="ml-5">
-            <img [src]="artist.image" [alt]="artist.name" width="16" height="16"
-              class="h-16 w-16 object-cover object-center lg:h-12 lg:w-12 rounded-lg">
+          <div class="w-12">
+            <img [src]="artist.image" [alt]="artist.name"
+              class="h-12 w-12 object-cover object-center lg:h-12 lg:w-12 rounded-lg hover:filter-grayscale">
           </div>
         </td>
-        <td class="">
-          <div class="flex items-center pl-5">
+        <td class="pl-5">
+          <div class="flex items-center ">
             <p class="text-base font-medium leading-none text-gray-700 mr-2">{{ artist.name }} </p>
           </div>
         </td>
-        <td class="pl-24">
-          <div class="flex items-center">
-            <img [src]="artist.country | countryFlag" [alt]="artist.country">
+        <td>
+          <div class="w-12">
+            <div class="flex items-center">
+              <img [src]="artist.country | countryFlag" [alt]="artist.country" class="h-6 w-6">
+            </div>
           </div>
         </td>
         <td class="pl-5">
           <div class="flex items-center">
-            <p class="text-sm leading-none text-gray-600 ml-2">{{ artist.styles }}</p>
+            <span *ngFor="let style of artist.styles"
+              class="text-xs py-1 px-2.5 leading-none text-center font-bold bg-red-700 text-white rounded mr-1">
+              {{ style }}
+            </span>
           </div>
         </td>
         <td class="pl-5">
@@ -38,16 +44,9 @@
               <path d="M13.3333 9.1665V9.17484" stroke="#52525B" stroke-width="1.25" stroke-linecap="round"
                 stroke-linejoin="round"></path>
             </svg>
-            <p class="text-sm leading-none text-gray-600 ml-2">23</p>
+            <p class="text-sm leading-none text-gray-600 dark:text-white ml-2">23</p>
           </div>
         </td>
-
-
-        <td class="pl-4">
-          <button
-            class="focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none">View</button>
-        </td>
-
       </tr>
     </tbody>
   </table>

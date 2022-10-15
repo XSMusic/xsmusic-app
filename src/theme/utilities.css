@@ -1,0 +1,8 @@
+@layer utilities {
+  .filter-grayscale {
+    filter: grayscale(100%);
+  }
+  .filter-none {
+    filter: none;
+  }
+}

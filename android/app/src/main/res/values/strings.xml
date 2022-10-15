@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">xsmusic</string>
+    <string name="title_activity_main">xsmusic</string>
+    <string name="package_name">com.xsmusic.xs</string>
+    <string name="custom_url_scheme">com.xsmusic.xs</string>
+</resources>

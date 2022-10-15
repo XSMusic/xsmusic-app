@@ -5,6 +5,7 @@ export const artistMock: Artist[] = [
     name: 'DJ Nano',
     image:
       'https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2021/08/05/16281648599708.jpg',
+    styles: ['Dance', 'House'],
     created: '2022-10-13 22:22',
     updated: '2022-10-13 22:22',
   }),

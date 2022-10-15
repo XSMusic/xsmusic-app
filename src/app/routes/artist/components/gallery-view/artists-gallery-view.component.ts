@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'artists-gallery-view',
@@ -6,4 +6,5 @@ import { Component, Input } from '@angular/core';
 })
 export class ArtistsGalleryViewComponent {
   @Input() artists: any[] = [];
+  @Output() goToProfile = new EventEmitter<string>();
 }

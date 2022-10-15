@@ -7,7 +7,8 @@
       class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-l-lg  border-gray-200 hover:bg-gray-100 hover:text-black dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-red-500 dark:focus:text-white;"
       [ngClass]="{'bg-gray-100 text-black': view === 'gallery'}">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
         </path>
       </svg>&nbsp;
       Galeria
@@ -16,8 +17,7 @@
       class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-r-md border border-gray-200 hover:bg-gray-100 hover:text-black dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-red-500 dark:focus:text-white"
       [ngClass]="{'bg-gray-100 text-black': view === 'list'}">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16">
         </path>
       </svg>&nbsp;
       Listado
@@ -25,8 +25,10 @@
   </div>
 
 
-  <artists-list-view *ngIf="view === 'list'" [artists]="artists"></artists-list-view>
+  <artists-list-view *ngIf="view === 'list'" [artists]="artists" (goToProfile)="goToProfile($event)">
+  </artists-list-view>
 
-  <artists-gallery-view *ngIf="view === 'gallery'" [artists]="artists"></artists-gallery-view>
+  <artists-gallery-view *ngIf="view === 'gallery'" [artists]="artists" (goToProfile)="goToProfile($event)">
+  </artists-gallery-view>
 
 </div>

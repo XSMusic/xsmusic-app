@@ -12,7 +12,7 @@ const routes: Routes = [
     path: 'artists',
     data: { breadcrumb: 'Artistas' },
     loadChildren: () =>
-      import('./artist/artist.module').then((m) => m.ArtistsModule),
+      import('./artist/pages/artist/artist.module').then((m) => m.ArtistsModule),
   },
 ];
 

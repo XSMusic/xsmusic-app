@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Artist } from '@models';
 import { artistMock } from '@shared/services/artist/artists.mock';
 
@@ -8,7 +9,8 @@ import { artistMock } from '@shared/services/artist/artists.mock';
 })
 export class ArtistsPage implements OnInit {
   artists: Artist[] = [];
-  view = 'list';
+  view = 'gallery';
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.setArtists();
@@ -16,5 +18,9 @@ export class ArtistsPage implements OnInit {
 
   setArtists() {
     this.artists = artistMock;
+  }
+
+  goToProfile(id: string) {
+    this.router.navigate(['artists/one/', id]);
   }
 }

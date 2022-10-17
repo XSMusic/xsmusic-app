@@ -16,6 +16,6 @@ app-root {
   }
 
   .filter-none {
-    filter: grayscale(0%);;
+    filter: grayscale(0%);
   }
 }

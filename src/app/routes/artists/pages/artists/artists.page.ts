@@ -20,7 +20,7 @@ export class ArtistsPage implements OnInit {
     this.artists = artistMock;
   }
 
-  goToProfile(id: string) {
-    this.router.navigate(['artists/one/', id]);
+  goToProfile(slug: string) {
+    this.router.navigate(['artists/profile/', slug]);
   }
 }

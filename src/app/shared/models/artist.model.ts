@@ -4,8 +4,9 @@ export class Artist {
   image = '';
   styles?: string[] = [];
   country? = 'es';
+  slug = '';
   created? = '';
-  updated? = '';
+  updated?= '';
   constructor(data?: Artist) {
     if (data) {
       this._id = data._id ?? this.name;
@@ -13,6 +14,7 @@ export class Artist {
       this.image = data.image ?? this.image;
       this.styles = data.styles ?? this.styles;
       this.country = data.country ?? this.country;
+      this.slug = data.slug ?? this.slug;
       this.created = data.created ?? this.created;
       this.updated = data.updated ?? this.updated;
     }

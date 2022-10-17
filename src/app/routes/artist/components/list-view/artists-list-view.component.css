@@ -1,7 +1,0 @@
-@tailwind components;
-
-@layer components {
-  .button-blue-rounded {
-    @apply text-white font-semibold bg-blue-500;
-  }
-}

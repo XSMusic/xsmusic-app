@@ -4,7 +4,7 @@
     <tbody>
       <tr *ngFor="let artist of artists" tabindex="0"
         class="h-16 border-b border-gray-100 dark:border-black dark:border-0 rounded-lg pointer"
-        (click)="goToProfile.emit(artist._id)">
+        (click)="goToProfile.emit(artist.slug)">
         <td>
           <div class="w-12">
             <img [src]="artist.image" [alt]="artist.name"

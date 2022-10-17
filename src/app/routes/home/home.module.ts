@@ -10,7 +10,7 @@ import { RouterModule } from '@angular/router';
       {
         path: '',
         component: HomeComponent,
-        data: { breadcrumb: 'Inicio', title: 'Inicio' },
+        data: { breadcrumb: '', title: 'Inicio' },
       },
     ]),
   ],

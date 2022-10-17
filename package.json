@@ -1,6 +1,6 @@
 {
-  "name": "xsmusic",
-  "version": "0.0.0",
+  "name": "xsmusic-app",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -8,6 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
+  "description": "xsmusic-app",
   "private": true,
   "dependencies": {
     "@angular/animations": "^14.2.0",
@@ -23,6 +24,7 @@
     "@capacitor/core": "latest",
     "@capacitor/ios": "^4.3.0",
     "@ngneat/tailwind": "^7.0.3",
+    "daisyui": "^2.31.0",
     "moment": "^2.29.4",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

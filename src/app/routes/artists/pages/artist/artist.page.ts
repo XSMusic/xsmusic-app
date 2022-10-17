@@ -6,10 +6,10 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: 'artist.page.html',
 })
 export class ArtistPage implements OnInit {
-  id!: string;
+  slug!: string;
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.id = this.route.snapshot.paramMap.get('id')!;
+    this.slug = this.route.snapshot.paramMap.get('slug')!;
   }
 }

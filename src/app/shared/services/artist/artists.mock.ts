@@ -8,6 +8,7 @@ export const artistMock: Artist[] = [
     styles: ['Dance', 'House'],
     created: '2022-10-13 22:22',
     updated: '2022-10-13 22:22',
+    slug: 'dj-nano',
   }),
   new Artist({
     _id: '2',
@@ -17,6 +18,7 @@ export const artistMock: Artist[] = [
     styles: ['House', 'Tech-House', 'Techno'],
     created: '2022-10-13 22:22',
     updated: '2022-10-13 22:22',
+    slug: 'carl-cox',
   }),
   new Artist({
     name: 'David Guetta',
@@ -24,6 +26,7 @@ export const artistMock: Artist[] = [
     country: 'fr',
     styles: ['House', 'Dance'],
     created: '2022-10-13 22:22',
+    slug: 'david-guetta',
   }),
   new Artist({
     name: 'Tiësto',
@@ -31,17 +34,20 @@ export const artistMock: Artist[] = [
     country: 'nl',
     styles: ['Trance'],
     updated: '2022-10-13 22:22',
+    slug: 'tiesto',
   }),
   new Artist({
     name: 'Prueba 2',
     image:
       'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
     created: '2022-10-13 22:22',
+    slug: 'prueba2',
   }),
   new Artist({
     name: 'Prueba 3',
     image:
       'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
     updated: '2022-10-13 22:22',
+    slug: 'prueba3',
   }),
 ];

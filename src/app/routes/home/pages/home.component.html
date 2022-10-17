@@ -1,1 +1,10 @@
-<header-custom [title]="'Home'"></header-custom>
+<header-custom [title]="'Home'" [breadcrumb]="false"></header-custom>
+
+<div class="grid gap-8 lg:grid-cols-2 sm:max-w-sm sm:mx-auto lg:max-w-full mx-4">
+  <div></div>
+  <div></div>
+  <app-last-artists-block></app-last-artists-block>
+</div>
+
+<button class="btn btn-primary btn-rounded swap swap-rotate" data-toggle-theme="xstheme,dracula"
+  data-act-class="swap-active" (click)="changeTheme()">Hello </button>

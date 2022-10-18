@@ -18,8 +18,8 @@ export class NavbarComponent implements OnInit {
   menuItems = [
     { name: 'Inicio', route: routesConfig.home },
     { name: 'Artistas', route: routesConfig.artists },
-    { name: 'Temas', route: routesConfig.tracks },
     { name: 'Sets', route: routesConfig.sets },
+    { name: 'Temas', route: routesConfig.tracks },
   ];
 
   constructor(private router: Router) {}

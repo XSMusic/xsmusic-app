@@ -2,11 +2,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 
 @Component({
-  selector: 'artists-gallery-view',
-  templateUrl: 'artists-gallery-view.component.html',
+  selector: 'artists-view-list',
+  templateUrl: 'artists-view-list.component.html',
   animations: [inOutAnimation],
 })
-export class ArtistsGalleryViewComponent {
+export class ArtistsViewListComponent {
   @Input() artists: any[] = [];
   @Output() goToProfile = new EventEmitter<string>();
 }

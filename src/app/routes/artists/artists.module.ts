@@ -3,10 +3,10 @@ import { SharedModule } from '@shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { ArtistsPage } from './pages/artists/artists.page';
 import { ArtistPage } from './pages/artist/artist.page';
-import { ArtistsGalleryViewComponent } from './components/gallery-view/artists-gallery-view.component';
-import { ArtistsListViewComponent } from './components/list-view/artists-list-view.component';
-import { ArtistInfoBlockComponent } from './components/info-block/artist-info-block.component';
-import { ArtistsButtonsBlockComponent } from './components/buttons-block/artists-buttons-block.component';
+import { ArtistsViewGalleryComponent } from './components/view-gallery/artists-view-gallery.component';
+import { ArtistsViewListComponent } from './components/view-list/artists-view-list.component';
+import { ArtistBlockInfoComponent } from './components/block-info/artist-block-info.component';
+import { ArtistsBlockButtonsComponent } from './components/block-buttons/artists-block-buttons.component';
 
 @NgModule({
   imports: [
@@ -28,10 +28,10 @@ import { ArtistsButtonsBlockComponent } from './components/buttons-block/artists
   declarations: [
     ArtistsPage,
     ArtistPage,
-    ArtistsButtonsBlockComponent,
-    ArtistsListViewComponent,
-    ArtistsGalleryViewComponent,
-    ArtistInfoBlockComponent,
+    ArtistsBlockButtonsComponent,
+    ArtistsViewListComponent,
+    ArtistsViewGalleryComponent,
+    ArtistBlockInfoComponent,
   ],
   providers: [],
 })

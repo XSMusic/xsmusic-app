@@ -1,15 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Artist } from '@models';
-import { ArtistService } from '@shared/services/api/artist/artist.service';
 
 @Component({
-  selector: 'artist-info-block',
-  templateUrl: 'artist-info-block.component.html',
+  selector: 'artist-block-info',
+  templateUrl: 'artist-block-info.component.html',
 })
-export class ArtistInfoBlockComponent implements OnInit {
+export class ArtistBlockInfoComponent implements OnInit {
   @Input() artist!: Artist;
   information: { name: string; type?: string; value: any }[] = [];
-  constructor() {}
 
   ngOnInit() {
     this.setInformation();

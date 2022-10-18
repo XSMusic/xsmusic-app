@@ -2,10 +2,10 @@ import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { Modal } from '@shared/components/ui/modal/modal.model';
 
 @Component({
-  selector: 'artists-buttons-block',
-  templateUrl: 'artists-buttons-block.component.html',
+  selector: 'artists-block-buttons',
+  templateUrl: 'artists-block-buttons.component.html',
 })
-export class ArtistsButtonsBlockComponent implements OnInit {
+export class ArtistsBlockButtonsComponent implements OnInit {
   @Output() changeView = new EventEmitter<string>();
   view = 'gallery';
   optionsModal!: Modal;

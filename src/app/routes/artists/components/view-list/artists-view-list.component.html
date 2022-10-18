@@ -2,7 +2,7 @@
   <table class="w-full whitespace-nowrap">
     <tbody>
       <tr *ngFor="let artist of artists" tabindex="0"
-        class="h-16 border-b border-gray-100 rounded-lg dark:border-black dark:border-0 pointer hover:bg-gray-100"
+        class="h-16 border-b border-gray-100 rounded-lg cursor-pointer dark:border-black dark:border-0 hover:bg-gray-100"
         (click)="goToProfile.emit(artist.slug)">
         <td>
           <div class="w-12">

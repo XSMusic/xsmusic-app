@@ -1,0 +1,15 @@
+<div @inOut class="grid w-full grid-cols-1 gap-4 py-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+  <div *ngFor="let artist of artists" class="relative overflow-hidden bg-black shadow-xl cursor-pointer rounded-2xl" (click)="goToProfile.emit(artist.slug)">
+    <img class="object-cover w-full h-48 opacity-60 hover:filter-grayscale" [src]="artist.image" alt="Flower and sky" />
+
+    <div class="absolute bottom-0 left-0 w-full px-6 py-1">
+      <div class="flex">
+        <div class="mb-3 text-2xl font-semibold text-white">
+          {{ artist.name }}
+        </div>
+        <img [src]="artist.country | countryFlag" class="w-6 h-6 mx-2 mt-1.5" alt="">
+      </div>
+
+    </div>
+  </div>
+</div>

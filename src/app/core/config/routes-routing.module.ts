@@ -20,6 +20,18 @@ const routes: Routes = [
       ),
   },
   {
+    path: routesConfig.tracks,
+    data: { breadcrumb: 'Temas' },
+    loadChildren: () =>
+      import('../../routes/tracks/tracks.module').then((m) => m.TracksModule),
+  },
+  {
+    path: routesConfig.sets,
+    data: { breadcrumb: 'Sets' },
+    loadChildren: () =>
+      import('../../routes/sets/sets.module').then((m) => m.SetsModule),
+  },
+  {
     path: routesConfig.search,
     data: { breadcrumb: 'Buscador' },
     loadChildren: () =>

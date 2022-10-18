@@ -2,6 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { Router, NavigationEnd, Event } from '@angular/router';
 import { filter, distinctUntilChanged } from 'rxjs';
+import { routesConfig } from '@core/config';
 
 @Component({
   selector: 'navbar',
@@ -15,10 +16,10 @@ export class NavbarComponent implements OnInit {
   searchPage = false;
   submenuItems: any = [];
   menuItems = [
-    { name: 'Inicio', route: '/home' },
-    { name: 'Artistas', route: '/artists' },
-    { name: 'Temas', route: '/tracks' },
-    { name: 'Sets', route: '/sets' },
+    { name: 'Inicio', route: routesConfig.home },
+    { name: 'Artistas', route: routesConfig.artists },
+    { name: 'Temas', route: routesConfig.tracks },
+    { name: 'Sets', route: routesConfig.sets },
   ];
 
   constructor(private router: Router) {}

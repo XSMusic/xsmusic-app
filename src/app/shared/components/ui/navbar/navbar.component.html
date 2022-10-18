@@ -24,8 +24,8 @@
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            <a *ngFor="let menu of menuItems" [routerLink]="menu.route" routerLinkActive="bg-red-700 text-white"
-              class="px-3 py-2 text-sm font-medium rounded-2xl dark:text-white hover:bg-red-700 hover:text-white"
+            <a *ngFor="let menu of menuItems" [routerLink]="menu.route" routerLinkActive="bg-gray-100 text-black"
+              class="px-3 py-2 text-sm font-medium rounded-2xl dark:text-white hover:bg-gray-100 hover:text-black"
               aria-current="page">{{ menu.name }}</a>
           </div>
         </div>

@@ -30,8 +30,8 @@
     <div class="py-1" role="none">
 
       <a (click)="selectType(type)" *ngFor="let type of types"
-        class="block px-4 py-2 text-sm text-gray-700 pointer hover:bg-gray-100"
-        [ngClass]="{'bg-gray-100 text-gray-900 no-pointer': type.name === typeSelected.name }" role="menuitem" tabindex="-1" id="menu-item-0">
+        class="block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-gray-100"
+        [ngClass]="{'bg-gray-100 text-gray-900 cursor-default': type.name === typeSelected.name }" role="menuitem" tabindex="-1" id="menu-item-0">
         {{ type.name }}
       </a>
     </div>

@@ -1,23 +1,23 @@
 <header-custom [title]="artist.name"></header-custom>
 
 <div @inOut class="container grid gap-4 px-3 mx-auto mt-3 overflow-auto text-center md:grid-cols-4 rounded-xl ">
-  <div class="block w-full col-span-3 p-4 mx-auto border md:col-span-2 rounded-2xl pointer">
+  <div class="block w-full col-span-3 p-4 mx-auto border cursor-pointer md:col-span-2 rounded-2xl">
     <div [ngStyle]="{
       'background-image': 'url(' + artist.image + ')'
     }" class="bg-center bg-cover h-72 rounded-2xl hover:filter-grayscale"></div>
     <div class="p-2">
       <h1 class="pt-2 text-xl font-extrabold text-left">{{ artist.name }}</h1>
       <p *ngIf="!viewMore" class="text-left">{{ artist.info! | truncateText:200 }}
-        <span *ngIf="artist.info!.length > 200" class="font-semibold pointer" (click)="viewMore = true">Ver mas</span>
+        <span *ngIf="artist.info!.length > 200" class="font-semibold cursor-pointer" (click)="viewMore = true">Ver mas</span>
       </p>
       <p *ngIf="viewMore" class="text-left">{{ artist.info! }}
-        <span *ngIf="artist.info!.length > 200" class="font-semibold pointer" (click)="viewMore = false">Ver menos</span>
+        <span *ngIf="artist.info!.length > 200" class="font-semibold cursor-pointer" (click)="viewMore = false">Ver menos</span>
       </p>
     </div>
   </div>
 
   <div class="block col-span-3 text-left md:col-span-2">
-    <artist-info-block [artist]="artist"></artist-info-block>
+    <artist-block-info [artist]="artist"></artist-block-info>
 
     <div class="my-3 overflow-hidden text-center border shadow-lg rounded-2xl">
       <div class="w-full py-2 font-extrabold border-b ">Sets

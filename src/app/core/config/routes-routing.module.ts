@@ -8,13 +8,22 @@ const routes: Routes = [
   {
     path: routesConfig.home,
     data: { breadcrumb: 'Inicio' },
-    loadChildren: () => import('../../routes/home/home.module').then((m) => m.HomeModule),
+    loadChildren: () =>
+      import('../../routes/home/home.module').then((m) => m.HomeModule),
   },
   {
     path: routesConfig.artists,
     data: { breadcrumb: 'Artistas' },
     loadChildren: () =>
-      import('../../routes/artists/artists.module').then((m) => m.ArtistsModule),
+      import('../../routes/artists/artists.module').then(
+        (m) => m.ArtistsModule
+      ),
+  },
+  {
+    path: routesConfig.search,
+    data: { breadcrumb: 'Buscador' },
+    loadChildren: () =>
+      import('../../routes/search/search.module').then((m) => m.SearchModule),
   },
 ];
 

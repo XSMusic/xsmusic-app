@@ -3,11 +3,10 @@ import { themeChange } from 'theme-change';
 
 @Component({
   selector: 'home',
-  templateUrl: 'home.component.html',
+  templateUrl: 'home.page.html',
 })
-export class HomeComponent {
-
+export class HomePage {
   changeTheme() {
-    themeChange(true)
+    themeChange(true);
   }
 }

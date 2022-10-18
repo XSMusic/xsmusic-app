@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { HomeComponent } from './pages/home.component';
+import { HomePage } from './pages/home.page';
 import { SharedModule } from '../../shared/shared.module';
 import { RouterModule } from '@angular/router';
 
@@ -9,13 +9,13 @@ import { RouterModule } from '@angular/router';
     RouterModule.forChild([
       {
         path: '',
-        component: HomeComponent,
+        component: HomePage,
         data: { breadcrumb: '', title: 'Inicio' },
       },
     ]),
   ],
   exports: [],
-  declarations: [HomeComponent],
+  declarations: [HomePage],
   providers: [],
 })
 export class HomeModule {}

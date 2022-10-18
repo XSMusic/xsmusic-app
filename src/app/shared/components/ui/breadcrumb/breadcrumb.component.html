@@ -1,58 +1,39 @@
-<nav class="mx-auto max-w-7xl py-1 px-3 sm:px-6 lg:px-6 border-0" aria-label="Breadcrumb">
-  <ol class="inline-flex items-center space-x-1 md:space-x-3">
+<div class="py-1 text-sm border-0 breadcrumbs">
+  <ol class="flex gap-2 list-reset">
+    <li><a [routerLink]="'/home'"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+      class="w-4 h-4 mt-0.5">
+      <path stroke-linecap="round" stroke-linejoin="round"
+        d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+    </svg>
+</a></li>
+    <li><span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" class="w-3 h-3 mt-1">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
+        </svg>
+      </span>
+    </li>
     <ng-container *ngFor="let breadcrumb of breadcrumbs; let i = index">
-      <li class="inline-flex items-center" *ngIf="i === 0">
-        <a href="#"
-          class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
-          <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
-            </path>
-          </svg>
-          {{ breadcrumb.label }}
-        </a>
+      <li>
+        <a *ngIf="i !== breadcrumbs.length -1" [routerLink]="breadcrumb.url">{{breadcrumb.label}}</a>
+        <span *ngIf="i === breadcrumbs.length -1">{{breadcrumb.label}}</span>
       </li>
-      <li aria-current="page" *ngIf="i !== 0">
-        <div class="flex items-center">
-          <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd"
-              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-              clip-rule="evenodd"></path>
+      <li *ngIf="i !== breadcrumbs.length -1"><span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="w-3 h-3 mt-1">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
           </svg>
-          <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400">{{ breadcrumb.label }}</span>
-        </div>
+        </span>
       </li>
     </ng-container>
   </ol>
-</nav>
-<!-- <nav class="mx-auto max-w-7xl py-1 px-3 sm:px-6 lg:px-6 border-0" aria-label="Breadcrumb">
-  <ol class="breadcrumb inline-flex items-center space-x-1 md:space-x-3">
+</div>
 
-    <li *ngFor="let breadcrumb of breadcrumbs; let i = index" class="inline-flex items-center">
-      <span [routerLink]="breadcrumb.url" routerLinkActive="router-link-active">
-
-        <a href="#"
-          class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
-
-          <svg *ngIf="i === 0" class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
-            </path>
-          </svg>
-          <span class="mr-2 h-4">
-          {{ breadcrumb.label }}
-          </span>
-
-          <svg *ngIf="i !== breadcrumbs.length -1" class="mh-0 w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd"
-              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-              clip-rule="evenodd"></path>
-          </svg>
-        </a>
-      </span>
-    </li>
-
+<!--
+<nav class="w-full rounded-md bg-grey-light">
+  <ol class="flex list-reset">
+    <li><a href="#" class="text-blue-600 hover:text-blue-700">Home</a></li>
+    <li><span class="mx-2 text-gray-500"></span></li>
+    <li><a href="#" class="text-blue-600 hover:text-blue-700">Library</a></li>
+    <li><span class="mx-2 text-gray-500"></span></li>
+    <li class="text-gray-500">Data</li>
   </ol>
-
 </nav> -->

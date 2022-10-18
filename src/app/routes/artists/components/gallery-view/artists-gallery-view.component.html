@@ -1,53 +1,30 @@
-<!-- <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-  <div class="group relative pointer" *ngFor="let artist of artists" (click)="goToProfile.emit(artist.slug)">
-    <div class="min-h-60  w-full overflow-hidden rounded-lg bg-gray-200 group-hover:filter-grayscale sm:h-60">
-      <img [src]="artist.image" [alt]="artist.name"
-        class="h-full w-full object-cover object-center lg:h-full lg:w-full">
-    </div>
-    <div class="mt-4 flex justify-between">
-      <div>
-        <h3 class="text-medium py-1 text-gray-700 dark:text-white">
-          <a>
-            <span aria-hidden="true" class="absolute inset-0"></span>
-            {{ artist.name }}
-          </a>
-        </h3>
-        <span *ngFor="let style of artist.styles | slice: 0:3"
-          class="mh-12 text-xs py-1 px-2.5 leading-none text-center font-bold bg-red-700 text-white rounded mr-1">
-          {{ style }}
-        </span>
-      </div>
-      <p class="text-sm font-medium text-gray-900">
-        <img [src]="artist.country | countryFlag" [alt]="artist.country">
-      </p>
-    </div>
-  </div>
-</div> -->
+<div @inOut class="py-4">
+  <div class="grid gap-4 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
+    <div class="block border shadow-xl rounded-2xl pointer" *ngFor="let artist of artists"
+      (click)="goToProfile.emit(artist.slug)">
+      <div class="">
+        <img [src]="artist.image"
+          class="object-cover w-full h-64 max-w-full p-3 shadow-soft-2xl rounded-3xl hover:filter-grayscale" alt="" />
+        <div class="px-5 py-2 pb-5 ">
+          <div class="flex justify-between">
 
+            <a href="/" aria-label="Category" title="Visit the East"
+              class="inline-block mb-3 text-2xl font-bold leading-5 transition-colors duration-200 hover:text-gray-600">
+              {{ artist.name }}
+            </a>
 
-<div class="px-0 py-6 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-0 lg:py-8">
-  <div class="grid gap-8 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
-    <div class="overflow-hidden transition-shadow duration-300 bg-white rounded-xl shadow-md"
-      *ngFor="let artist of artists" (click)="goToProfile.emit(artist.slug)">
-      <img [src]="artist.image" class="object-cover w-full h-64" alt="" />
-      <div class="p-5 ">
-        <div class="flex justify-between">
-
-          <a href="/" aria-label="Category" title="Visit the East"
-            class="inline-block mb-3 text-2xl font-bold leading-5 transition-colors duration-200 hover:text-deep-purple-accent-700">
-            {{ artist.name }}
-          </a>
-
-          <span class="text-sm font-medium text-gray-900">
-            <img [src]="artist.country | countryFlag" [alt]="artist.country">
-          </span>
+            <span class="text-sm font-medium text-gray-900">
+              <img [src]="artist.country | countryFlag" [alt]="artist.country">
+            </span>
+          </div>
+          <p>
+            <span *ngFor="let style of artist.styles | slice: 0:3"
+              class="px-2 py-1 mr-1 text-xs font-bold leading-none text-center text-white bg-red-700 rounded mh-12">
+              {{ style }}
+            </span>
+          </p>
         </div>
-        <p>
-          <span *ngFor="let style of artist.styles | slice: 0:3"
-            class="mh-12 text-xs py-1 px-2 leading-none text-center font-bold bg-red-700 text-white rounded mr-1">
-            {{ style }}
-          </span>
-        </p>
+
       </div>
     </div>
   </div>

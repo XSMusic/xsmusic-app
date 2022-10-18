@@ -6,6 +6,10 @@
   cursor: pointer;
 }
 
+.no-pointer {
+  cursor: default;
+}
+
 app-root {
   height: 100vh;
 }

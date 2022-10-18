@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Artist } from '@models';
-import { artistMock } from '../../../services/artist/artists.mock';
+import { artistMock } from '../../../services/api/artist/artists.mock';
 
 @Component({
   selector: 'app-last-artists-block',

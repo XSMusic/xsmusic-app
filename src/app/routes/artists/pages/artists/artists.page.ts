@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { Artist } from '@models';
-import { artistMock } from '@shared/services/artist/artists.mock';
+import { artistMock } from '@shared/services/api/artist/artists.mock';
 
 @Component({
   selector: 'artists',
   templateUrl: 'artists.page.html',
+  animations: [inOutAnimation],
 })
 export class ArtistsPage implements OnInit {
   artists: Artist[] = [];
@@ -22,5 +24,9 @@ export class ArtistsPage implements OnInit {
 
   goToProfile(slug: string) {
     this.router.navigate(['artists/profile/', slug]);
+  }
+
+  changeView(view: string) {
+    this.view = view;
   }
 }

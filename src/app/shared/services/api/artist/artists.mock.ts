@@ -1,4 +1,4 @@
-import { Artist } from '../../models/artist.model';
+import { Artist } from '../../../models/artist.model';
 export const artistMock: Artist[] = [
   new Artist({
     _id: '1',
@@ -6,6 +6,7 @@ export const artistMock: Artist[] = [
     image:
       'https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2021/08/05/16281648599708.jpg',
     styles: ['Dance', 'House'],
+    gender: 'male',
     created: '2022-10-13 22:22',
     updated: '2022-10-13 22:22',
     slug: 'dj-nano',
@@ -16,6 +17,7 @@ export const artistMock: Artist[] = [
     image: 'https://media.resources.festicket.com/www/artists/carlcox-2018.jpg',
     country: 'us',
     styles: ['House', 'Tech-House', 'Techno'],
+    gender: 'male',
     created: '2022-10-13 22:22',
     updated: '2022-10-13 22:22',
     slug: 'carl-cox',
@@ -25,6 +27,7 @@ export const artistMock: Artist[] = [
     image: 'https://media.resources.festicket.com/www/artists/DavidGuetta.jpg',
     country: 'fr',
     styles: ['House', 'Dance'],
+    gender: 'male',
     created: '2022-10-13 22:22',
     slug: 'david-guetta',
   }),
@@ -33,15 +36,17 @@ export const artistMock: Artist[] = [
     image: 'https://i.scdn.co/image/ab6761610000e5eb8cb651b2e77c6d30b1de15e4',
     country: 'nl',
     styles: ['Trance'],
+    gender: 'male',
     updated: '2022-10-13 22:22',
     slug: 'tiesto',
   }),
   new Artist({
-    name: 'Prueba 2',
+    name: 'Manola DJ',
     image:
       'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
     created: '2022-10-13 22:22',
-    slug: 'prueba2',
+    gender: 'female',
+    slug: 'manola-dj',
   }),
   new Artist({
     name: 'Prueba 3',

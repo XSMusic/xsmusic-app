@@ -16,7 +16,7 @@
             <a routerLink="/home">{{ valueArray }}</a><span *ngIf="i !== item.value.length -1">, </span>
           </span>
         </div>
-        <p *ngIf="item.type === 'date'">{{ item.value !== '' ? (item.value | date:'dd-MM-Y') : 'No disponible'  }} {{ item.value !== '' ? '('+ utilsService.getYearsOld(item.value) +')' : '' }}</p>
+        <p *ngIf="item.type === 'date'">{{ item.value !== '' ? (item.value | date:'dd-MM-Y') : 'No disponible'  }} {{ item.value !== '' ? '('+ getYearsOld(item.value) +')' : '' }}</p>
       </div>
     </div>
   </div>

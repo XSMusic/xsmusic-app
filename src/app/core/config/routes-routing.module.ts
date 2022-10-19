@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { routesConfig } from '@config';
+import { NgxPermissionsGuard } from 'ngx-permissions';
 
 const routes: Routes = [
   { path: '*', redirectTo: routesConfig.home, pathMatch: 'full' },
@@ -42,6 +43,18 @@ const routes: Routes = [
     data: { breadcrumb: 'Buscador' },
     loadChildren: () =>
       import('../../routes/search/search.module').then((m) => m.SearchModule),
+  },
+  {
+    path: 'admin',
+    data: {
+      breadcrumb: 'admin',
+      permissions: {
+        only: 'ADMIN',
+      },
+    },
+    loadChildren: () =>
+      import('../../routes/admin/admin.module').then((m) => m.AdminModule),
+    canActivate: [NgxPermissionsGuard],
   },
 ];
 

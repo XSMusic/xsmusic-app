@@ -10,8 +10,6 @@ export class AppComponent implements OnInit {
   constructor(private permissionsService: NgxPermissionsService) {}
   ngOnInit(): void {
     this.preventBackButton();
-    const perm = ['ADMIN'];
-    this.permissionsService.loadPermissions(perm);
   }
 
   preventBackButton() {

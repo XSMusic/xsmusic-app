@@ -4,7 +4,7 @@ import { User } from '@models';
 import { UserCreateFakeDto, UserGetAllDto } from './dtos/user.dto';
 import { Observable } from 'rxjs/internal/Observable';
 import { BehaviorSubject, share, take } from 'rxjs';
-import { SearchDto } from '@core/dtos/generic.dto';
+// import { SearchDto } from '@core/dtos/generic.dto';
 import { LocalStorageService } from '@services';
 import { environment } from '@env/environment';
 
@@ -12,7 +12,7 @@ import { environment } from '@env/environment';
 export class UserService {
     private change$ = new BehaviorSubject<User | undefined>(undefined);
     private _user?: User;
-    url = `${environment.urlApi}/users`;
+    url = `${environment.API_URL}/users`;
     constructor(
         private httpClient: HttpClient,
         private localStorageService: LocalStorageService
@@ -24,11 +24,11 @@ export class UserService {
             .pipe(take(1));
     }
 
-    search(data: SearchDto): Observable<User[]> {
-        return this.httpClient
-            .post<User[]>(`${this.url}/search`, data)
-            .pipe(take(1));
-    }
+    // search(data: SearchDto): Observable<User[]> {
+    //     return this.httpClient
+    //         .post<User[]>(`${this.url}/search`, data)
+    //         .pipe(take(1));
+    // }
 
     getOne(id: string): Observable<User> {
         return this.httpClient

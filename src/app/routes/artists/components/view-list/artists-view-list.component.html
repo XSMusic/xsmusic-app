@@ -14,7 +14,7 @@
             <p class="my-1 mr-2 text-base font-semibold leading-none text-black hover:text-gray-500"
               (click)="goToProfile.emit(artist.slug)">{{ artist.name }} </p>
             <p class="mr-2 text-sm font-light leading-none text-gray-700">{{ artist.birthdate ?
-              utilsService.getYearsOld(artist.birthdate) + ' años' : '' }} </p>
+              getYearsOld(artist.birthdate) + ' años' : '' }} </p>
           </div>
         </td>
         <td>

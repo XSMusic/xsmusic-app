@@ -26,10 +26,12 @@
       "@components": ["app/shared/components"],
       "@directives": ["app/shared/directives"],
       "@env/*": ["environments/*"],
+      "@interfaces": ["app/shared/interfaces"],
       "@models": ["app/shared/models"],
       "@pipes": ["app/shared/pipes"],
       "@services": ["app/shared/services"],
-      "@shared/*": ["app/shared/*"]
+      "@shared/*": ["app/shared/*"],
+      "@utils": ["app/shared/utils"]
     }
   },
   "angularCompilerOptions": {

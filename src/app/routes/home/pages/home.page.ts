@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
+import { AuthService, LoginService } from '@core/auth';
 import { NgxPermissionsService, NgxRolesService } from 'ngx-permissions';
 
 @Component({
@@ -12,21 +13,26 @@ export class HomePage {
   roles$;
   constructor(
     private rolesService: NgxRolesService,
-    private permissionsService: NgxPermissionsService
+    private permissionsService: NgxPermissionsService,
+    private authService: AuthService
   ) {
-    this.permissions$ = permissionsService.permissions$
-    this.roles$ = rolesService.roles$
+    this.permissions$ = permissionsService.permissions$;
+    this.roles$ = rolesService.roles$;
   }
-  allowTab() {
 
+  login() {
+    this.authService.login('', '').subscribe((response) => {
+      console.log(response);
+    })
+  }
+
+  allowTab() {
     this.permissionsService.addPermission('GG');
     this.rolesService.addRole('Nice', ['GG']);
-
   }
 
   prohibitTab() {
     // this.permissionsService.removePermission('Nice')
     this.rolesService.removeRole('Nice');
-
   }
 }

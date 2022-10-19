@@ -4,6 +4,8 @@ import { Router, NavigationEnd, Event } from '@angular/router';
 import { filter, distinctUntilChanged } from 'rxjs';
 import { routesConfig } from '@core/config';
 import { NgxPermissionsService } from 'ngx-permissions';
+import { Menu, User } from '@models';
+import { AuthService } from '@core/auth';
 
 @Component({
   selector: 'navbar',
@@ -13,23 +15,31 @@ import { NgxPermissionsService } from 'ngx-permissions';
 export class NavbarComponent implements OnInit {
   @ViewChild('submenu') menu!: HTMLElement;
   menuState = false;
+  menuProfileState = false;
   searchBarState = false;
   searchPage = false;
-  submenuItems: any = [];
-  menuItems: { name: string; route: string }[] = [];
+  menuItems: Menu[] = [];
+  menuItemsAdmin: Menu[] = [];
+  menuProfileItems: Menu[] = [];
+  user!: User;
 
   constructor(
     private router: Router,
-    private permissionsService: NgxPermissionsService
+    private permissionsService: NgxPermissionsService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     this.checkPageSearch();
-    this.setMenuItems()
+    this.setMenuProfileItems();
+    this.setMenuItems();
+    this.authService.user().subscribe((response) => {
+      this.user = response;
+    });
+    console.log(this.user);
   }
 
   async setMenuItems() {
-    const isAdmin = await this.permissionsService.hasPermission('ADMIN');
     this.menuItems = [
       { name: 'Inicio', route: routesConfig.home },
       { name: 'Artistas', route: routesConfig.artists },
@@ -37,9 +47,14 @@ export class NavbarComponent implements OnInit {
       { name: 'Sets', route: routesConfig.sets },
       { name: 'Tracks', route: routesConfig.tracks },
     ];
-    if (isAdmin) {
-      this.menuItems.push({ name: 'Admin', route: '/admin'})
-    }
+    this.menuItemsAdmin = [
+      ...this.menuItems,
+      { name: 'Admin', route: 'admin' },
+    ];
+  }
+
+  setMenuProfileItems() {
+    this.menuProfileItems = [{ name: 'Cerrar sesion', action: 'logout' }];
   }
 
   checkPageSearch() {
@@ -64,6 +79,13 @@ export class NavbarComponent implements OnInit {
     this.searchBarState = !this.searchBarState;
     if (this.searchBarState) {
       this.menuState = false;
+    }
+  }
+
+  onClickMenuProfileItem(item: Menu) {
+    this.menuProfileState = false;
+    if (item.action === 'logout') {
+      this.authService.logout();
     }
   }
 }

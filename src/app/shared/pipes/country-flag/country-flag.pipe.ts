@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { flags } from 'assets/json/flags';
+import { flags } from 'assets/data/flags';
 
 @Pipe({
   name: 'countryFlag',

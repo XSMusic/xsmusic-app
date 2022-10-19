@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Artist } from '@models';
-import { UtilsService } from '@shared/services/system/utils.service';
+import { getYearsOld } from '@shared/utils/utils';
 
 @Component({
   selector: 'artist-block-info',
@@ -9,8 +9,7 @@ import { UtilsService } from '@shared/services/system/utils.service';
 export class ArtistBlockInfoComponent implements OnInit {
   @Input() artist!: Artist;
   information: { name: string; type?: string; value: any }[] = [];
-  constructor(public utilsService: UtilsService) { }
-
+  getYearsOld = getYearsOld;
   ngOnInit() {
     this.setInformation();
   }

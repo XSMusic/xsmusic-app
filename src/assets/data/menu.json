@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Inicio",
+    "route": ""
+  },
+  { "name": "Artistas", "route": "artists" },
+  { "name": "Clubs", "route": "clubs" },
+  { "name": "Sets", "route": "sets" },
+  { "name": "Tracks", "route": "tracks" },
+  {
+    "name": "Admin",
+    "route": "",
+    "permissions": {
+      "only": "ADMIN"
+    }
+  }
+]

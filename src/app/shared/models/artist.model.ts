@@ -2,6 +2,7 @@ export class Artist {
   _id? = '';
   name = '';
   image = '';
+  birthdate? = '';
   styles?: string[] = [];
   country? = 'es';
   gender? = '';
@@ -15,6 +16,7 @@ export class Artist {
       this._id = data._id ?? this.name;
       this.name = data.name ?? this.name;
       this.image = data.image ?? this.image;
+      this.birthdate = data.birthdate ?? this.birthdate;
       this.styles = data.styles ?? this.styles;
       this.country = data.country ?? this.country;
       this.gender = data.gender ?? this.gender;

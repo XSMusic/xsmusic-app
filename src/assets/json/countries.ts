@@ -736,6 +736,10 @@ export const countries: { id: string; name: string }[] = [
     name: 'Uganda',
   },
   {
+    id: 'uk',
+    name: 'Reino Unido',
+  },
+  {
     id: 'uy',
     name: 'Uruguay',
   },

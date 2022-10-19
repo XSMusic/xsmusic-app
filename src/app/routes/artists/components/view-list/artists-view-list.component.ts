@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
+import { Artist } from '@models';
+import { UtilsService } from '@shared/services/system/utils.service';
 
 @Component({
   selector: 'artists-view-list',
@@ -7,6 +9,9 @@ import { inOutAnimation } from '@core/animations/enter-leave.animations';
   animations: [inOutAnimation],
 })
 export class ArtistsViewListComponent {
-  @Input() artists: any[] = [];
+  @Input() artists: Artist[] = [];
   @Output() goToProfile = new EventEmitter<string>();
+  @Output() filter = new EventEmitter<{ name: string; value: string }>();
+  constructor(public utilsService: UtilsService) {}
+
 }

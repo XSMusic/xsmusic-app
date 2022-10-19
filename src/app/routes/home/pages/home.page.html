@@ -1,10 +1,12 @@
 <header-custom [title]="'Home'" [breadcrumb]="false"></header-custom>
 
-<div class="grid gap-8 mx-4 lg:grid-cols-2 sm:max-w-sm sm:mx-auto lg:max-w-full">
-  <div></div>
-  <div></div>
-  <app-last-artists-block></app-last-artists-block>
+<div class="container px-4 pt-3 mx-auto max-w-full-xl sm:pb-0 max-w-7sm">
+  <!-- <app-last-artists-block></app-last-artists-block> -->
 
 
-</div>
 
+
+<div *ngxPermissionsOnly="'ADMIN'">ADMIN</div>
+<div *ngxPermissionsOnly="'ANONYMOUS'">ANONYMOUS</div>
+
+perro

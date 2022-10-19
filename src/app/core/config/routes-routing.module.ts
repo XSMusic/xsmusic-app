@@ -20,6 +20,12 @@ const routes: Routes = [
       ),
   },
   {
+    path: routesConfig.clubs,
+    data: { breadcrumb: 'Clubs' },
+    loadChildren: () =>
+      import('../../routes/clubs/clubs.module').then((m) => m.ClubsModule),
+  },
+  {
     path: routesConfig.tracks,
     data: { breadcrumb: 'Temas' },
     loadChildren: () =>

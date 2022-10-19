@@ -1,8 +1,8 @@
-
 // Artist
 export { LastArtistsBlockComponent } from './artist/last-artists-block/last-artists-block.component';
 
 //UI
+export { AlertComponent } from './ui/alert/alert.component';
 export { BreadcrumbeComponent } from './ui/breadcrumb/breadcrumb.component';
 export { HeaderComponent } from './ui/header/header.component';
 export { ModalComponent } from './ui/modal/modal.component';

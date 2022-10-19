@@ -11,7 +11,7 @@ import { artistMock } from '@shared/services/api/artist/artists.mock';
   animations: [inOutAnimation],
 })
 export class ArtistPage implements OnInit {
-  artist!: Artist;
+  artist!: Artist
   artists: Artist[] = artistMock;
   slug!: string;
   information: { name: string; type?: string; value: any }[] = [];
@@ -27,8 +27,8 @@ export class ArtistPage implements OnInit {
   }
 
   getArtist() {
-    this.artistService.getOneBySlug(this.slug).subscribe({
-      next: (artist) => {
+    this.artistService.getOneBySlug(this.slug)!.subscribe({
+      next: (artist: any) => {
         this.artist = artist;
       },
       error: (error: any) => {},

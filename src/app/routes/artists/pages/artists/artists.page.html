@@ -4,7 +4,9 @@
 
   <artists-block-buttons (changeView)="changeView($event)"></artists-block-buttons>
 
-  <artists-view-list *ngIf="view === 'list'" [artists]="artists" (goToProfile)="goToProfile($event)">
+  <alert type="info" message="Filtro activado." actionText="Quitar" (action)="removeFilter()" *ngIf="filtered"></alert>
+
+  <artists-view-list *ngIf="view === 'list'" [artists]="artists" (goToProfile)="goToProfile($event)" (filter)="filter($event)">
   </artists-view-list>
 
   <artists-view-gallery *ngIf="view === 'gallery'" [artists]="artists" (goToProfile)="goToProfile($event)">

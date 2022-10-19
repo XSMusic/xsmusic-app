@@ -1,6 +1,8 @@
-<div @inOut class="grid w-full grid-cols-1 gap-4 py-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-  <div *ngFor="let artist of artists" class="relative overflow-hidden bg-black shadow-xl cursor-pointer rounded-2xl" (click)="goToProfile.emit(artist.slug)">
-    <img class="object-cover w-full h-48 opacity-60 hover:filter-grayscale" [src]="artist.image" alt="Flower and sky" />
+<div @inOut class="grid w-full grid-cols-1 gap-4 py-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+  <div *ngFor="let artist of artists" class="relative overflow-hidden bg-black shadow-xl cursor-pointer rounded-2xl"
+    (click)="goToProfile.emit(artist.slug)">
+    <img class="object-cover w-full h-80 opacity-60 hover:filter-grayscale" [src]="artist.image" alt="Flower and sky"
+      onError />
 
     <div class="absolute bottom-0 left-0 w-full px-6 py-1">
       <div class="flex">

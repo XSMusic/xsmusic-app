@@ -7,9 +7,7 @@ import { BehaviorSubject, Observable, share } from 'rxjs';
 })
 export class TokenService {
     private key = 'XSToken';
-
     private change$ = new BehaviorSubject<string | undefined>(undefined);
-
     private _token?: string;
 
     constructor(private store: LocalStorageService) {}

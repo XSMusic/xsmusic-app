@@ -68,11 +68,9 @@ export class AuthService {
     if (!this.check()) {
       return of(new User()).pipe(tap((user) => this.user$.next(user)));
     }
-    console.log(this.user$.getValue());
     if (!this.user$.getValue()) {
       return of(this.user$.getValue()).pipe(share());
     }
-
     return this.loginService.me().pipe(tap((user) => this.user$.next(user)));
   }
 }

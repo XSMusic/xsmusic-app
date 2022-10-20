@@ -19,13 +19,12 @@ export class FakeLoginService extends LoginService {
 
   override login(): Observable<LoginResponseI> {
     return new Observable((obs) => {
-      obs.next({ user: admin, token: 'tokenPrueba' });
+      obs.next({ user: user, token: 'token' });
     });
   }
 
   override me() {
-    console.log('me');
-    return of(admin);
+    return of(user);
   }
 
   override menu() {

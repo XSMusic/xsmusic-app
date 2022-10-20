@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { AuthService, LoginService } from '@core/auth';
-import { NgxPermissionsService, NgxRolesService } from 'ngx-permissions';
+import { AuthService } from '@core/auth';
 
 @Component({
   selector: 'home',
@@ -9,30 +8,21 @@ import { NgxPermissionsService, NgxRolesService } from 'ngx-permissions';
   animations: [inOutAnimation],
 })
 export class HomePage {
-  permissions$;
-  roles$;
-  constructor(
-    private rolesService: NgxRolesService,
-    private permissionsService: NgxPermissionsService,
-    private authService: AuthService
-  ) {
-    this.permissions$ = permissionsService.permissions$;
-    this.roles$ = rolesService.roles$;
+  constructor(private authService: AuthService) {}
+
+  loginUser() {
+    this.authService
+      .login('manolo@gmail.com', 'manolo')
+      .subscribe((response) => {
+        console.log(response);
+      });
   }
 
-  login() {
-    this.authService.login('', '').subscribe((response) => {
-      console.log(response);
-    })
-  }
-
-  allowTab() {
-    this.permissionsService.addPermission('GG');
-    this.rolesService.addRole('Nice', ['GG']);
-  }
-
-  prohibitTab() {
-    // this.permissionsService.removePermission('Nice')
-    this.rolesService.removeRole('Nice');
+  loginAdmin() {
+    this.authService
+      .login('xskunk@gmail.com', 'xskunk')
+      .subscribe((response) => {
+        console.log(response);
+      });
   }
 }

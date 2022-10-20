@@ -8,5 +8,7 @@ import { inOutAnimation } from '@core/animations/enter-leave.animations';
 })
 export class ArtistsViewGalleryComponent {
   @Input() artists: any[] = [];
+  @Input() loading = true;
   @Output() goToProfile = new EventEmitter<string>();
+  @Output() onScroll = new EventEmitter<void>();
 }

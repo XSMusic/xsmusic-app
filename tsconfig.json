@@ -31,6 +31,7 @@
       "@pipes": ["app/shared/pipes"],
       "@services": ["app/shared/services"],
       "@shared/*": ["app/shared/*"],
+      "@dtos": ["app/shared/dtos"],
       "@utils": ["app/shared/utils"]
     }
   },

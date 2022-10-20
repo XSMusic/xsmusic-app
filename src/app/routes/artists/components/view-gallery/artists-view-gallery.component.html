@@ -1,17 +1,30 @@
-<div @inOut class="grid w-full grid-cols-1 gap-4 py-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-  <div *ngFor="let artist of artists" class="relative overflow-hidden bg-black shadow-xl cursor-pointer rounded-2xl"
-    (click)="goToProfile.emit(artist.slug)">
-    <img class="object-cover w-full h-80 opacity-60 hover:filter-grayscale" [src]="artist.image" alt="Flower and sky"
-      onError />
+<ng-container *ngIf="!loading">
+  <div @inOut class="grid w-full grid-cols-1 gap-4 py-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <div *ngFor="let artist of artists" class="relative overflow-hidden bg-black shadow-xl cursor-pointer rounded-2xl"
+      (click)="goToProfile.emit(artist.slug)">
+      <img class="object-cover w-full h-80 opacity-60 hover:filter-grayscale" [src]="artist.image" alt="Flower and sky"
+        onError />
 
-    <div class="absolute bottom-0 left-0 w-full px-6 py-1">
-      <div class="flex">
-        <div class="mb-3 text-2xl font-semibold text-white">
-          {{ artist.name }}
+      <div class="absolute bottom-0 left-0 w-full px-6 py-1">
+        <div class="flex">
+          <div class="mb-3 text-2xl font-semibold text-white">
+            {{ artist.name }}
+          </div>
+          <img [src]="artist.country | countryFlag" class="w-6 h-6 mx-2 mt-1.5" alt="">
         </div>
-        <img [src]="artist.country | countryFlag" class="w-6 h-6 mx-2 mt-1.5" alt="">
-      </div>
 
+      </div>
     </div>
   </div>
-</div>
+  <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+    (scrolled)="onScroll.emit()"></div>
+
+</ng-container>
+
+<ng-container *ngIf="loading">
+  <div class="grid w-full grid-cols-1 gap-4 py-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <div *ngFor="let artist of [1,2,3,4,5,6,7,8,9,10,11,12]"
+      class="relative overflow-hidden bg-gray-100 shadow-xl cursor-pointer rounded-2xl h-80 animate-pulse">
+    </div>
+  </div>
+</ng-container>

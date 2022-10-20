@@ -6,9 +6,12 @@
 
   <alert type="info" message="Filtro activado." actionText="Quitar" (action)="removeFilter()" *ngIf="filtered"></alert>
 
-  <artists-view-list *ngIf="view === 'list'" [artists]="artists" (goToProfile)="goToProfile($event)" (filter)="filter($event)">
+  <artists-view-list *ngIf="view === 'list'" [artists]="artists" [loading]="loading" (goToProfile)="goToProfile($event)"
+    (filter)="filter($event)" (onScroll)="onScroll()">
   </artists-view-list>
 
-  <artists-view-gallery *ngIf="view === 'gallery'" [artists]="artists" (goToProfile)="goToProfile($event)">
+  <artists-view-gallery *ngIf="view === 'gallery'" [artists]="artists" [loading]="loading" (goToProfile)="goToProfile($event)"
+    (onScroll)="onScroll()">
   </artists-view-gallery>
+
 </div>

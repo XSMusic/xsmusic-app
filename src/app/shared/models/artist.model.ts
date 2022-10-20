@@ -1,14 +1,14 @@
 export class Artist {
   _id? = '';
-  name = '';
-  image = '';
+  name? = '';
+  image? = '';
   birthdate? = '';
   styles?: string[] = [];
   country? = 'es';
   gender? = '';
   info? =
     'Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga placeat, incidunt nostrum alias eligendi quia ad quo perferendis consequuntur, tempora explicabo, vero aliquam necessitatibus facere nisi ipsa eos esse repellat.';
-  slug = '';
+  slug? = '';
   created? = '';
   updated? = '';
   constructor(data?: Artist) {

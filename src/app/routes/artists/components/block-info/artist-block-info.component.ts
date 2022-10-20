@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Artist } from '@models';
+import { ArtistService } from '@services';
 import { getYearsOld } from '@shared/utils/utils';
 
 @Component({
@@ -7,9 +7,12 @@ import { getYearsOld } from '@shared/utils/utils';
   templateUrl: 'artist-block-info.component.html',
 })
 export class ArtistBlockInfoComponent implements OnInit {
-  @Input() artist!: Artist;
+  @Input() artist: any;
   information: { name: string; type?: string; value: any }[] = [];
   getYearsOld = getYearsOld;
+  edit = false;
+
+  constructor(private artistService: ArtistService) {}
   ngOnInit() {
     this.setInformation();
   }
@@ -18,6 +21,7 @@ export class ArtistBlockInfoComponent implements OnInit {
     this.information = [
       {
         name: 'Nombre',
+        type:"name",
         value: this.artist.name,
       },
       {
@@ -27,19 +31,38 @@ export class ArtistBlockInfoComponent implements OnInit {
       },
       {
         name: 'F. Nacimiento',
-        type: 'date',
+        type: 'birthdate',
         value: this.artist.birthdate,
       },
       {
         name: 'Pais',
-        type: 'image',
-        value: this.artist.country!,
+        type: 'country',
+        value: this.artist.country,
       },
       {
         name: 'Estilos',
-        type: 'array',
+        type: 'styles',
         value: this.artist.styles!,
       },
     ];
+  }
+
+  updateInfo() {
+    const data = {
+      _id: this.artist._id,
+      name: this.artist.name,
+      gender: this.artist.gender,
+      birthdate: this.artist.birthdate,
+      country: this.artist.country,
+      styles: this.artist.styles!,
+    };
+    this.artistService.update(data).subscribe({
+      next: (response: any) => {
+        console.log(response)
+        this.edit = false;
+        this.setInformation();
+      },
+      error: (err) => {}
+    })
   }
 }

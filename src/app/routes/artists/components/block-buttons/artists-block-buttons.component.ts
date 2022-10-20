@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
-import { Modal } from '@shared/components/ui/modal/modal.model';
+import { ToastService } from '@services';
+import { ModalAlert } from '@shared/components/ui/modal-alert/modal-alert.model';
+import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 
 @Component({
   selector: 'artists-block-buttons',
@@ -8,11 +10,11 @@ import { Modal } from '@shared/components/ui/modal/modal.model';
 export class ArtistsBlockButtonsComponent implements OnInit {
   @Output() changeView = new EventEmitter<string>();
   view = 'gallery';
-  optionsModal!: Modal;
   viewLSKey = 'view_artist';
 
+  constructor(private toast: ToastService) {}
+
   ngOnInit(): void {
-    this.setOptionsModal();
     const view = localStorage.getItem(this.viewLSKey);
     if (view) {
       this.view = view;
@@ -26,11 +28,12 @@ export class ArtistsBlockButtonsComponent implements OnInit {
     localStorage.setItem(this.viewLSKey, view);
   }
 
-  setOptionsModal() {
-    this.optionsModal = new Modal(
-      'filter',
-      'Proximamente',
-      '<b>¡Estamos en obras!</b>'
-    );
+
+
+  openFilter() {
+     this.toast.showToast(TOAST_STATE.warning, '¡Estamos en obras!');
+     setTimeout(() => {
+       this.toast.dismissToast();
+     }, 3000);
   }
 }

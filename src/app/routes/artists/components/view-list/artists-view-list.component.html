@@ -1,49 +1,61 @@
-<div @inOut class="my-2 overflow-x-auto">
-  <table class="w-full whitespace-nowrap">
-    <tbody>
-      <tr *ngFor="let artist of artists" tabindex="0"
-        class="h-16 border-b border-gray-100 rounded-lg cursor-pointer dark:border-black dark:border-0 ">
-        <td>
-          <div class="w-12">
-            <img [src]="artist.image" [alt]="artist.name" onError
-              class="object-cover object-center w-12 h-12 rounded-2xl lg:h-12 lg:w-12 hover:filter-grayscale">
-          </div>
-        </td>
-        <td class="pl-5">
-          <div class="items-center ">
-            <p class="my-1 mr-2 text-base font-semibold leading-none text-black hover:text-gray-500"
-              (click)="goToProfile.emit(artist.slug)">{{ artist.name }} </p>
-            <p class="mr-2 text-sm font-light leading-none text-gray-700">{{ artist.birthdate ?
-              getYearsOld(artist.birthdate) + ' años' : '' }} </p>
-          </div>
-        </td>
-        <td>
-          <div class="w-12">
-            <div class="flex items-center">
-              <img [src]="artist.country! | countryFlag" [alt]="artist.country"
-                class="w-6 h-6 mx-2 my-1 hover:h-8 hover:w-8"
-                (click)="filter.emit({name: 'country', value: artist.country!})">
+<ng-container *ngIf="!loading">
+  <div @inOut class="my-2 overflow-x-auto">
+    <table class="w-full whitespace-nowrap">
+      <tbody>
+        <tr *ngFor="let artist of artists" tabindex="0"
+          class="h-16 border-b border-gray-100 rounded-lg cursor-pointer dark:border-black dark:border-0 ">
+          <td>
+            <div class="w-12">
+              <img [src]="artist.image" [alt]="artist.name" onError
+                class="object-cover object-center w-12 h-12 rounded-2xl lg:h-12 lg:w-12 hover:filter-grayscale">
             </div>
-          </div>
-        </td>
-        <td>
-          <span *ngFor="let style of artist.styles!.slice(0,2); let i = index"
-            class="px-2 py-1 mr-1 text-xs border rounded-2xl hover:bg-gray-100"
-            (click)="filter.emit({name: 'style', value: style})">
-            {{ style | titlecase }}
-          </span>
-        </td>
-        <td class="pl-5">
-          <div class="flex items-center">
-            <p class="mr-2 text-sm font-light leading-none text-gray-700">0 Sets</p>
-          </div>
-        </td>
-        <td class="pl-5">
-          <div class="flex items-center">
-            <p class="mr-2 text-sm font-light leading-none text-gray-700">0 Tracks</p>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+          </td>
+          <td class="pl-5">
+            <div class="items-center ">
+              <p class="my-1 mr-2 text-base font-semibold leading-none text-black hover:text-gray-500"
+                (click)="goToProfile.emit(artist.slug)">{{ artist.name }} </p>
+              <p class="mr-2 text-sm font-light leading-none text-gray-700">{{ artist.birthdate ?
+                getYearsOld(artist.birthdate) + ' años' : '' }} </p>
+            </div>
+          </td>
+          <td>
+            <div class="w-12">
+              <div class="flex items-center">
+                <img [src]="artist.country! | countryFlag" [alt]="artist.country"
+                  class="w-6 h-6 mx-2 my-1 hover:h-8 hover:w-8"
+                  (click)="filter.emit({name: 'country', value: artist.country!})">
+              </div>
+            </div>
+          </td>
+          <td>
+            <span *ngFor="let style of artist.styles!.slice(0,2); let i = index"
+              class="px-2 py-1 mr-1 text-xs border rounded-2xl hover:bg-gray-100"
+              (click)="filter.emit({name: 'style', value: style})">
+              {{ style | titlecase }}
+            </span>
+          </td>
+          <td class="pl-5">
+            <div class="flex items-center">
+              <p class="mr-2 text-sm font-light leading-none text-gray-700">0 Sets</p>
+            </div>
+          </td>
+          <td class="pl-5">
+            <div class="flex items-center">
+              <p class="mr-2 text-sm font-light leading-none text-gray-700">0 Tracks</p>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+    (scrolled)="onScroll.emit()"></div>
+</ng-container>
+
+<ng-container *ngIf="loading">
+  <div class="w-full py-2">
+    <div *ngFor="let artist of [1,2,3,4,5,6,7,8,9,10,11,12]"
+      class="relative h-24 my-4 overflow-hidden bg-gray-100 shadow-xl cursor-pointer animate-pulse">
+    </div>
+  </div>
+</ng-container>

@@ -1,5 +1,5 @@
 <ng-container *ngIf="artist">
-  <header-custom [title]="artist.name"></header-custom>
+  <header-custom [title]="artist.name!"></header-custom>
 
   <div @inOut class="container grid gap-4 px-3 mx-auto mt-3 overflow-auto text-center lg:grid-cols-4 rounded-xl ">
     <div class="block w-full col-span-3 p-4 mx-auto border md:col-span-2 rounded-2xl">

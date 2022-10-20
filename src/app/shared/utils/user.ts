@@ -10,8 +10,8 @@ export const admin: User = {
 
 export const user: User = {
   _id: '2',
-  name: 'unknown',
-  email: 'unknown',
+  name: 'Pepe',
+  email: 'pepe@gmail.com',
   image:
     'https://josexs.gallerycdn.vsassets.io/extensions/josexs/xstheme/0.0.2/1664810338655/Microsoft.VisualStudio.Services.Icons.Default',
   role: 'USER',

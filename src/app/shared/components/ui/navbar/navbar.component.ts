@@ -23,11 +23,7 @@ export class NavbarComponent implements OnInit {
   menuProfileItems: Menu[] = [];
   user!: User;
 
-  constructor(
-    private router: Router,
-    private permissionsService: NgxPermissionsService,
-    private authService: AuthService
-  ) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.checkPageSearch();
@@ -36,7 +32,6 @@ export class NavbarComponent implements OnInit {
     this.authService.user().subscribe((response) => {
       this.user = response;
     });
-    console.log(this.user);
   }
 
   async setMenuItems() {
@@ -54,7 +49,10 @@ export class NavbarComponent implements OnInit {
   }
 
   setMenuProfileItems() {
-    this.menuProfileItems = [{ name: 'Cerrar sesion', action: 'logout' }];
+    this.menuProfileItems = [
+      { name: 'Editar perfil', action: 'accountEdit' },
+      { name: 'Cerrar sesion', action: 'logout' },
+    ];
   }
 
   checkPageSearch() {
@@ -84,8 +82,11 @@ export class NavbarComponent implements OnInit {
 
   onClickMenuProfileItem(item: Menu) {
     this.menuProfileState = false;
-    if (item.action === 'logout') {
+    if (item.action === 'accountEdit') {
+      this.router.navigate([`${routesConfig.account}/${routesConfig.edit}`]);
+    } else if (item.action === 'logout') {
       this.authService.logout();
+      this.router.navigate([routesConfig.home]);
     }
   }
 }

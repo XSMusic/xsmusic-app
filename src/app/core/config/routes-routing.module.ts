@@ -45,6 +45,27 @@ const routes: Routes = [
       import('../../routes/search/search.module').then((m) => m.SearchModule),
   },
   {
+    path: routesConfig.auth,
+    data: { breadcrumb: '' },
+    loadChildren: () =>
+      import('../../routes/auth/auth.module').then((m) => m.ArtistsModule),
+  },
+  {
+    path: routesConfig.account,
+    data: {
+      breadcrumb: 'auth',
+      permissions: {
+        only: ['USER', 'ADMIN'],
+      },
+    },
+    loadChildren: () =>
+      import('../../routes/account/account.module').then(
+        (m) => m.AccountModule
+      ),
+    canActivate: [NgxPermissionsGuard],
+  },
+
+  {
     path: 'admin',
     data: {
       breadcrumb: 'admin',

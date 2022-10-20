@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { Artist } from '@models';
-import { ArtistsGetAllBodyI } from '@shared/services/api/artist/artist.interface';
+import { ArtistGetAllDto } from '@shared/services/api/artist';
 import { ArtistService } from '@shared/services/api/artist/artist.service';
 
 @Component({
@@ -14,22 +14,33 @@ export class ArtistsPage implements OnInit {
   artists: Artist[] = [];
   view = 'gallery';
   filtered = false;
-  body: ArtistsGetAllBodyI = {
+  body: ArtistGetAllDto = {
     page: 1,
-    limit: 20,
-    filter: [],
+    pageSize: 20,
+    order: ['name', 'desc'],
   };
+  loading = true;
+  error = false;
   constructor(private router: Router, private artistService: ArtistService) {}
 
   ngOnInit() {
     this.getArtists();
   }
 
-  getArtists() {
-    this.artistService.getAll().subscribe({
+  getArtists(more = false) {
+    this.artistService.getAll(this.body).subscribe({
       next: (response) => {
-        this.artists = response;
-        this.filtered = this.body.filter.length > 0;
+        if (!more) {
+          this.artists = response.items;
+        } else {
+          this.artists = this.artists.concat(response.items);
+        }
+        this.loading = false;
+        this.error = false;
+      },
+      error: () => {
+        this.loading = false;
+        this.error = true;
       },
     });
   }
@@ -43,13 +54,15 @@ export class ArtistsPage implements OnInit {
   }
 
   filter(event: { name: string; value: string }) {
-    this.body.filter = [event.name, event.value];
     this.getArtists();
   }
 
   removeFilter() {
-    this.body.filter = [];
     this.getArtists();
+  }
 
+  onScroll() {
+    this.body.page++;
+    this.getArtists(true);
   }
 }

@@ -14,7 +14,6 @@ export class StartupService {
   constructor(
     private authService: AuthService,
     private permissonsService: NgxPermissionsService,
-    private rolesService: NgxRolesService,
     private menuService: MenuBootstrapService
   ) {}
 
@@ -28,8 +27,8 @@ export class StartupService {
         .change()
         .pipe(
           tap((user: any) => this.setPermissions(user)),
-          switchMap(() => this.authService.menu()),
-          tap((menu) => this.setMenu(menu)),
+          // switchMap(() => this.authService.menu()),
+          // tap((menu) => this.setMenu(menu)),
         )
         .subscribe({
           next: () => resolve(),

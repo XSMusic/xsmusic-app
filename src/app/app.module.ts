@@ -8,8 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { initializerProviders } from '@shared/services/system/initializer.providers';
-import { LoginService } from '@core/auth';
-import { FakeLoginService } from './fake-login.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +20,7 @@ import { FakeLoginService } from './fake-login.service';
     AppRoutingModule,
   ],
   providers: [
-    { provide: LoginService, useClass: FakeLoginService }, // <= Remove it in the real APP
+    // { provide: LoginService, useClass: FakeLoginService }, // <= Remove it in the real APP
     initializerProviders,
   ],
   bootstrap: [AppComponent],

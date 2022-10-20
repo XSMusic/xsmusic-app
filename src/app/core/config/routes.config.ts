@@ -9,4 +9,9 @@ export const routesConfig = {
   track: 'track',
   sets: 'sets',
   set: 'set',
-}
+  auth: 'auth',
+  login: 'login',
+  register: 'register',
+  account: 'account',
+  edit: 'edit',
+};

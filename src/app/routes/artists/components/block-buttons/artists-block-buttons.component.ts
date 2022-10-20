@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { ToastService } from '@services';
-import { ModalAlert } from '@shared/components/ui/modal-alert/modal-alert.model';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 
 @Component({

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ArtistService } from '@services';
+import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
 import { getYearsOld } from '@shared/utils/utils';
 
 @Component({

@@ -17,11 +17,6 @@ import { ModalService } from '@services';
       state('close', style({ opacity: 0 })),
       transition('open <=> close', [animate('300ms ease-out')]),
     ]),
-    trigger('modalTrigger', [
-      state('open', style({ display: 'block', opacity: 100 })),
-      state('close', style({ display: 'none', opacity: 0 })),
-      transition('open <=> close', [animate('300ms ease-out')]),
-    ]),
   ],
 })
 export class ModalComponent {

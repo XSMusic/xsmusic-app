@@ -4,6 +4,7 @@ export { LastArtistsBlockComponent } from './artist/last-artists-block/last-arti
 //UI
 export { AlertComponent } from './ui/alert/alert.component';
 export { BreadcrumbeComponent } from './ui/breadcrumb/breadcrumb.component';
+export { FullImageComponent } from './ui/full-image/full-image.component';
 export { HeaderComponent } from './ui/header/header.component';
 export { ModalComponent } from './ui/modal/modal.component';
 export { NavbarComponent } from './ui/navbar/navbar.component';

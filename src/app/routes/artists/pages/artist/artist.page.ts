@@ -4,6 +4,7 @@ import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { Artist } from '@models';
 import { ArtistService } from '@shared/services/api/artist/artist.service';
 import { artistMock } from '@shared/services/api/artist/artists.mock';
+import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
 
 @Component({
   selector: 'artist',
@@ -18,7 +19,8 @@ export class ArtistPage implements OnInit {
   viewMore = false;
   constructor(
     private route: ActivatedRoute,
-    private artistService: ArtistService
+    private artistService: ArtistService,
+    private fullImage: FullImageService
   ) {}
 
   ngOnInit() {
@@ -33,5 +35,9 @@ export class ArtistPage implements OnInit {
       },
       error: (error: any) => {},
     });
+  }
+
+  showImage(image: string) {
+    this.fullImage.showImageFull(image);
   }
 }

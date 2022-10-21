@@ -22,7 +22,11 @@
           {{ item.value === 'male' ? 'Hombre' : 'Mujer' }}
         </p>
         <div class="flex gap-2" *ngIf="item.type === 'country'">
-          <img class="w-6" [src]="item.value | countryFlag" alt="item.name" />
+          <img
+            class="w-6 cursor-pointer"
+            [src]="item.value | countryFlag"
+            alt="item.name"
+          />
           {{ item.value | countryName }}
         </div>
         <div class="flex gap-1" *ngIf="item.type === 'styles'">

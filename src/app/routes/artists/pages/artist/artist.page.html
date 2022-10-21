@@ -10,9 +10,10 @@
     >
       <img
         [src]="artist.image"
-        class="object-cover w-full rounded-2xl h-80 hover:filter-grayscale"
+        class="object-cover w-full cursor-pointer rounded-2xl h-80 hover:filter-grayscale"
         onError
-        alt=""
+        [alt]="artist.name"
+        (click)="showImage(artist.image!)"
       />
       <div class="p-2">
         <h1 class="pt-2 text-xl font-extrabold text-left">{{ artist.name }}</h1>

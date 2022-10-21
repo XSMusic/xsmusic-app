@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import {
   AlertComponent,
   BreadcrumbeComponent,
+  FullImageComponent,
   HeaderComponent,
   LastArtistsBlockComponent,
   ModalComponent,
@@ -27,6 +28,7 @@ import { httpInterceptorProviders } from '@core/interceptors';
 const components = [
   AlertComponent,
   BreadcrumbeComponent,
+  FullImageComponent,
   HeaderComponent,
   LastArtistsBlockComponent,
   ModalComponent,

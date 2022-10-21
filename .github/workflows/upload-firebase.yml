@@ -16,6 +16,10 @@ jobs:
           node-version: '18.x'
       - run: npm install
       - run: npm run set-env -- --environment=prod
+      - run: 'echo "$ENV" > .env'
+        shell: bash
+        env:
+         SSH_KEY: ${{secrets.ENV}}
       - run: npm run build:ci
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:

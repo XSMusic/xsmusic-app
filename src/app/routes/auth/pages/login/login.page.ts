@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
 import { AuthService } from '@core/auth';
 import { routesConfig } from '@core/config';
 import { ToastService } from '@services';
-import { ToastModel } from '@shared/components/ui/toast/toast.model';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 
 @Component({
@@ -33,7 +32,7 @@ export class LoginPage {
         this.dismissToast();
       },
       error: (error) => {
-        this.toast.showToast(TOAST_STATE.danger, error);
+        this.toast.showToast(TOAST_STATE.error, error);
         this.dismissToast();
       },
     });

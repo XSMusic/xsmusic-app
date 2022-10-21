@@ -17,6 +17,7 @@ export const environment = {
    ANOTHER_API_SECRET: "${process.env['ANOTHER_API_SECRET']}"
 };
 `;
+console.log(environmentFileContent);
 // write the content to the respective file
 writeFile(targetPath, environmentFileContent, function (err: any) {
   if (err) {

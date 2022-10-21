@@ -1,5 +1,6 @@
 # XSMusic
 
-Repositorio de la PWA/APP de XSMusic realizada en **Angular - Capacitor**
+Repositorio de la PWA/APP de XSMusic realizada en **Angular - Tailwind - Capacitor**
 
-Se esta utilizando [DaisyUI](https://daisyui.com/docs) en conjunto con Tailwind
+####  Notas
+Cada vez que se añada un valor en el archivo .env, hay que añadir el archivo completo al secreto ENV de Github [aqui](https://github.com/josexs/xsmusic-app/settings/secrets/actions)

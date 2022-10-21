@@ -14,7 +14,7 @@
             name="email"
             [(ngModel)]="email"
             class="block w-full px-4 py-2 m-0 text-xl font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:border-gray-600 focus:outline-none"
-            placeholder="Email address"
+            placeholder="Email"
           />
         </div>
 
@@ -26,15 +26,15 @@
             [(ngModel)]="password"
             autocomplete="on"
             class="block w-full px-4 py-2 m-0 text-xl font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:border-border-600 focus:outline-none"
-            placeholder="Password"
+            placeholder="Contraseña"
           />
         </div>
 
         <div class="flex items-center justify-between mb-6">
           <div class="form-group form-check"></div>
           <a
-            href="#!"
-            class="text-black transition duration-200 ease-in-out hover:text-gray-700 focus:text-gray-700 active:text-gray-800"
+            (click)="wip()"
+            class="text-black transition duration-200 ease-in-out cursor-pointer hover:text-gray-700 focus:text-gray-700 active:text-gray-800"
             >¿Contraseña olvidada?</a
           >
         </div>
@@ -59,10 +59,7 @@
         <a
           class="flex items-center justify-center w-full py-3 mb-3 text-sm font-medium leading-snug text-white uppercase transition duration-150 ease-in-out rounded shadow-md px-7 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
           style="background-color: #3b5998"
-          href="#!"
-          role="button"
-          data-mdb-ripple="true"
-          data-mdb-ripple-color="light"
+          (click)="wip()"
         >
           <!-- Facebook -->
           <svg
@@ -79,10 +76,7 @@
         <a
           class="flex items-center justify-center w-full py-3 text-sm font-medium leading-snug text-white uppercase transition duration-150 ease-in-out rounded shadow-md px-7 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
           style="background-color: #55acee"
-          href="#!"
-          role="button"
-          data-mdb-ripple="true"
-          data-mdb-ripple-color="light"
+          (click)="wip()"
         >
           <!-- Twitter -->
           <svg

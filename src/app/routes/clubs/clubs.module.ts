@@ -10,7 +10,7 @@ import { ClubPage } from './pages/clubs/clubs.page';
       {
         path: '',
         component: ClubPage,
-        data: { breadcrumb: '', title: 'Artistas - Listado' },
+        data: { breadcrumb: '', title: 'Clubs - Listado' },
       },
     ]),
   ],

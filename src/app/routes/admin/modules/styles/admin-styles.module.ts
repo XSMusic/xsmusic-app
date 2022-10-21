@@ -10,7 +10,7 @@ import { AdminStylesPage } from './pages/admin-styles.page';
       {
         path: '',
         component: AdminStylesPage,
-        data: { breadcrumb: 'Estilos', title: 'Estilos' },
+        data: { breadcrumb: 'Estilos', title: 'Admin - Estilos' },
       },
     ]),
   ],

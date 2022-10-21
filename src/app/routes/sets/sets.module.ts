@@ -10,7 +10,7 @@ import { RouterModule } from '@angular/router';
       {
         path: '',
         component: SetsPage,
-        data: { breadcrumb: '', title: 'Tracks - Listado' },
+        data: { breadcrumb: '', title: 'Sets - Listado' },
       },
     ]),
   ],

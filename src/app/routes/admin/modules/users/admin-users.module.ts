@@ -10,7 +10,7 @@ import { AdminUsersPage } from './pages/admin-users.page';
       {
         path: '',
         component: AdminUsersPage,
-        data: { breadcrumb: 'Estilos', title: 'Estilos' },
+        data: { breadcrumb: 'Usuarios', title: 'Usuarios' },
       },
     ]),
   ],

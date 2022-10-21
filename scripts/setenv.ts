@@ -14,10 +14,8 @@ const environmentFileContent = `
 export const environment = {
    production: ${isProduction},
    API_URL: "${process.env['API_URL']}",
-   ANOTHER_API_SECRET: "${process.env['ANOTHER_API_SECRET']}"
 };
 `;
-console.log(environmentFileContent);
 // write the content to the respective file
 writeFile(targetPath, environmentFileContent, function (err: any) {
   if (err) {

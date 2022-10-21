@@ -6,7 +6,6 @@
     "set-env": "ts-node ./scripts/setenv.ts",
     "start": "npm run set-env -- --environment=dev && ng serve",
     "build": "npm run set-env -- --environment=prod && ng build",
-    "build:ci": "ng build",
     "watch": "ng build --watch --configuration development",
     "run:android": "ng build && npx capacitor run android",
     "run:note": "ng build && npx capacitor run android --target R5CN80DTHJP",

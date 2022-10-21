@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
-import { ToastService } from '@services';
+import { ModalService, ToastService } from '@services';
+import { MODAL_STATE } from '@shared/services/ui/modal/modal.service';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class ArtistsBlockButtonsComponent implements OnInit {
   view = 'gallery';
   viewLSKey = 'view_artist';
 
-  constructor(private toast: ToastService) {}
+  constructor(private toast: ToastService, private modal: ModalService) {}
 
   ngOnInit(): void {
     const view = localStorage.getItem(this.viewLSKey);
@@ -27,12 +28,11 @@ export class ArtistsBlockButtonsComponent implements OnInit {
     localStorage.setItem(this.viewLSKey, view);
   }
 
-
+  openOrder() {
+    this.modal.showModal(MODAL_STATE.info, 'titulo loco', 'Vamossss');
+  }
 
   openFilter() {
-     this.toast.showToast(TOAST_STATE.warning, '¡Estamos en obras!');
-     setTimeout(() => {
-       this.toast.dismissToast();
-     }, 3000);
+    this.toast.showToast(TOAST_STATE.warning, '¡Estamos en obras!');
   }
 }

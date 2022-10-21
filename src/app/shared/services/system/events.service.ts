@@ -3,7 +3,6 @@ import { Subject, Subscription } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class EventsService {
-
   private channels: { [key: string]: Subject<any> } = {};
 
   subscribe(topic: string, observer: (_: any) => void): Subscription {

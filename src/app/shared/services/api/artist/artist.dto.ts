@@ -1,5 +1,5 @@
-export interface ArtistGetAllDto {
-  page: number;
-  pageSize: number;
-  order: string[];
+import { GetAllDto } from '@interfaces';
+
+export interface ArtistGetAllDto extends GetAllDto {
+  filter?: string[];
 }

@@ -5,6 +5,10 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: 'admin.page.html',
 })
 export class AdminPage implements OnInit {
+  tempButtons = [
+    { name: 'Estilos', route: 'styles' },
+    { name: 'Users', route: 'users' },
+  ];
   constructor() {}
 
   ngOnInit() {}

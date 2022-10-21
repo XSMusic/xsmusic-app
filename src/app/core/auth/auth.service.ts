@@ -7,7 +7,6 @@ import { LoginService } from './login.service';
 import { Menu, User } from '@models';
 import { LoginResponseI } from '@interfaces';
 import { UserService } from '@services';
-import { isEmptyObject } from '@shared/utils';
 import { NgxPermissionsService } from 'ngx-permissions';
 
 @Injectable({
@@ -23,7 +22,7 @@ export class AuthService {
     private loginService: LoginService,
     private tokenService: TokenService,
     private userService: UserService,
-    private permissionService : NgxPermissionsService
+    private permissionService: NgxPermissionsService
   ) {}
 
   init() {

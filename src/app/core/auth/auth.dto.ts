@@ -1,5 +1,5 @@
 export interface AuthLogInDto {
-    email: string;
-    password: string;
-    site: string;
+  email: string;
+  password: string;
+  site: string;
 }

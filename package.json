@@ -9,6 +9,8 @@
     "watch": "ng build --watch --configuration development",
     "run:android": "ng build && npx capacitor run android",
     "run:note": "ng build && npx capacitor run android --target R5CN80DTHJP",
+    "prettier:list": "prettier --list-different \"./{e2e,src}/**/*.{scss,css,ts,html}\" || ECHO .",
+    "prettier": "prettier --write \"./{e2e,src}/**/*.{scss,css,ts,html}\"",
     "test": "ng test"
   },
   "description": "xsmusic-app",
@@ -31,6 +33,7 @@
     "dotenv": "^16.0.3",
     "ngx-infinite-scroll": "^14.0.0",
     "ngx-permissions": "^14.0.0",
+    "prettier": "^2.7.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

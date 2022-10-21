@@ -29,18 +29,10 @@ export class LoginPage {
       next: () => {
         this.router.navigate([routesConfig.home]);
         this.toast.showToast(TOAST_STATE.success, '¡Bienvenido!');
-        this.dismissToast();
       },
       error: (error) => {
         this.toast.showToast(TOAST_STATE.error, error);
-        this.dismissToast();
       },
     });
-  }
-
-  private dismissToast(): void {
-    setTimeout(() => {
-      this.toast.dismissToast();
-    }, 3000);
   }
 }

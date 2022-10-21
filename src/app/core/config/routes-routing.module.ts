@@ -68,7 +68,7 @@ const routes: Routes = [
   {
     path: 'admin',
     data: {
-      breadcrumb: 'admin',
+      breadcrumb: 'Admin',
       permissions: {
         only: 'ADMIN',
       },

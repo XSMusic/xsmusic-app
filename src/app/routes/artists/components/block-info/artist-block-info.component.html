@@ -1,7 +1,12 @@
 <div class="overflow-hidden border shadow-lg rounded-2xl">
-  <div class="w-full py-2 font-extrabold text-center border-b ">Información
-    <button class="px-2 py-0 ml-2 text-xs font-light bg-gray-100 border cursor-pointer rounded-2xl"
-      *ngxPermissionsOnly="'ADMIN'" (click)="edit = !edit">Editar
+  <div class="w-full py-2 font-extrabold text-center border-b">
+    Información
+    <button
+      class="px-2 py-0 ml-2 text-xs font-light bg-gray-100 border cursor-pointer rounded-2xl hover:bg-gray-200"
+      *ngxPermissionsOnly="'ADMIN'"
+      (click)="edit = !edit"
+    >
+      Editar
     </button>
   </div>
 
@@ -9,39 +14,59 @@
     <div class="py-1 mx-4" *ngFor="let item of information">
       <div class="grid grid-cols-2">
         <p class="font-bold">{{ item.name }}</p>
-        <p *ngIf="item.type === 'name'">{{ item.value !== '' ? item.value : 'No
-          disponible'}}</p>
-        <p *ngIf="item.type === 'gender'">{{ item.value === 'male' ? 'Hombre' : 'Mujer' }}</p>
+        <p *ngIf="item.type === 'name'">
+          {{ item.value !== '' ? item.value : 'No
+          disponible' }}
+        </p>
+        <p *ngIf="item.type === 'gender'">
+          {{ item.value === 'male' ? 'Hombre' : 'Mujer' }}
+        </p>
         <div class="flex gap-2" *ngIf="item.type === 'country'">
-          <img class="w-6" [src]="item.value | countryFlag" alt="item.name">
+          <img class="w-6" [src]="item.value | countryFlag" alt="item.name" />
           {{ item.value | countryName }}
         </div>
         <div class="flex gap-1" *ngIf="item.type === 'styles'">
           <p *ngIf="item.value.length === 0">No disponible</p>
           <span *ngFor="let valueArray of item.value; index as i">
-            <a routerLink="/home">{{ valueArray }}</a><span *ngIf="i !== item.value.length -1">, </span>
+            <a routerLink="/home">{{ valueArray }}</a
+            ><span *ngIf="i !== item.value.length - 1">, </span>
           </span>
         </div>
-        <p *ngIf="item.type === 'birthdate'">{{ item.value !== '' ? (item.value | date:'dd-MM-Y') : 'No disponible' }} {{
-          item.value !== '' ? '('+ getYearsOld(item.value) +')' : '' }}</p>
+        <p *ngIf="item.type === 'birthdate'">
+          {{
+            item.value !== '' ? (item.value | date: 'dd-MM-Y') : 'No disponible'
+          }}
+          {{ item.value !== '' ? '(' + getYearsOld(item.value) + ')' : '' }}
+        </p>
       </div>
     </div>
   </div>
   <ng-container *ngIf="edit">
-    <div *ngxPermissionsOnly="'ADMIN'" class="grid gap-0 p-3 grid-col-2 md:grid-cols-2">
+    <div
+      *ngxPermissionsOnly="'ADMIN'"
+      class="grid gap-0 p-3 grid-col-2 md:grid-cols-2"
+    >
       <div class="py-1 mx-4" *ngFor="let item of information">
         <div class="grid grid-cols-2">
-          <p class="font-bold">{{ item.name }} </p>
+          <p class="font-bold">{{ item.name }}</p>
 
-          <input type="text" id="first_name"
+          <input
+            type="text"
+            id="first_name"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-0.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            [(ngModel)]="artist[item.type!]" required />
+            [(ngModel)]="artist[item.type!]"
+            required
+          />
         </div>
       </div>
     </div>
     <div class="flex">
-      <button class="w-full px-2 py-0 m-2 text-xs font-light bg-gray-100 border cursor-pointer rounded-2xl"
-        *ngxPermissionsOnly="'ADMIN'" (click)="updateInfo()">Editar
+      <button
+        class="w-full px-2 py-1 m-2 text-xs font-light bg-gray-100 border cursor-pointer rounded-2xl hover:bg-gray-200"
+        *ngxPermissionsOnly="'ADMIN'"
+        (click)="updateInfo()"
+      >
+        Editar
       </button>
     </div>
   </ng-container>

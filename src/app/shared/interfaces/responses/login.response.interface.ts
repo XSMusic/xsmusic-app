@@ -1,6 +1,6 @@
-import { User } from "@models";
+import { User } from '@models';
 
 export interface LoginResponseI {
-    user: User;
-    token: string;
+  user: User;
+  token: string;
 }

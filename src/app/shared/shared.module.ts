@@ -7,7 +7,7 @@ import {
   BreadcrumbeComponent,
   HeaderComponent,
   LastArtistsBlockComponent,
-  ModalAlertComponent,
+  ModalComponent,
   NavbarComponent,
   SearchBarComponent,
   ToastComponent,
@@ -19,7 +19,6 @@ import {
   ArtistService,
   LocalStorageService,
   StartupService,
-  ToastService,
   UserService,
 } from '@services';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -30,10 +29,10 @@ const components = [
   BreadcrumbeComponent,
   HeaderComponent,
   LastArtistsBlockComponent,
-  ModalAlertComponent,
+  ModalComponent,
   NavbarComponent,
   SearchBarComponent,
-  ToastComponent
+  ToastComponent,
 ];
 const directives = [OnImageErrorDirective];
 const modules = [

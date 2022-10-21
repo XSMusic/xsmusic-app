@@ -21,7 +21,7 @@ export class ArtistBlockInfoComponent implements OnInit {
     this.information = [
       {
         name: 'Nombre',
-        type:"name",
+        type: 'name',
         value: this.artist.name,
       },
       {
@@ -58,11 +58,11 @@ export class ArtistBlockInfoComponent implements OnInit {
     };
     this.artistService.update(data).subscribe({
       next: (response: any) => {
-        console.log(response)
+        console.log(response);
         this.edit = false;
         this.setInformation();
       },
-      error: (err) => {}
-    })
+      error: (err) => {},
+    });
   }
 }

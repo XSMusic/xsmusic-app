@@ -26,7 +26,7 @@ export class StartupService {
       this.authService
         .change()
         .pipe(
-          tap((user: any) => this.setPermissions(user)),
+          tap((user: any) => this.setPermissions(user))
           // switchMap(() => this.authService.menu()),
           // tap((menu) => this.setMenu(menu)),
         )
@@ -45,6 +45,6 @@ export class StartupService {
   }
 
   private setMenu(menu: Menu[]) {
-      this.menuService.set(menu);
+    this.menuService.set(menu);
   }
 }

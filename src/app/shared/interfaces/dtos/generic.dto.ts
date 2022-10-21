@@ -1,3 +1,9 @@
+export interface GetAllDto {
+  page: number;
+  pageSize: number;
+  order: string[];
+}
+
 export interface IdDto {
   id: string;
 }

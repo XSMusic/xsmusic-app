@@ -14,7 +14,6 @@ import { routesConfig } from '../../core/config/routes.config';
         component: AccountEditPage,
         data: { breadcrumb: 'Login', title: 'Login' },
       },
-
     ]),
   ],
   exports: [],

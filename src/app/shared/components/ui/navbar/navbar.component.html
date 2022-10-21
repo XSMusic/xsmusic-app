@@ -1,84 +1,176 @@
-<nav class="bg-white border-b dark:bg-black dark:border-b dark:border-b-gray-700">
+<nav
+  class="bg-white border-b dark:bg-black dark:border-b dark:border-b-gray-700"
+>
   <div class="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
     <div class="relative flex items-center justify-between h-16">
       <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
         <!-- Mobile menu button-->
-        <button type="button" (click)="openOrCloseMenu()"
+        <button
+          type="button"
+          (click)="openOrCloseMenu()"
           class="inline-flex items-center justify-center p-2 text-black rounded-2xl hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-          aria-controls="mobile-menu" aria-expanded="false">
-          <svg class="block w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-            stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+        >
+          <svg
+            class="block w-6 h-6"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            />
           </svg>
-          <svg class="hidden w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-            stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          <svg
+            class="hidden w-6 h-6"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
           </svg>
         </button>
       </div>
-      <div class="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start">
+      <div
+        class="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start"
+      >
         <div class="flex items-center flex-shrink-0">
-          <img class="block w-auto rounded cursor-pointer hover:border-2xl h-9 lg:hidden hover:bg-gray-100 "
-            src="assets/images/logo-negro.png" alt="XSMusic" routerLink="/home">
-          <img class="hidden w-auto rounded cursor-pointer hover:border-2xl h-9 lg:block hover:bg-gray-100"
-            src="assets/images/logo-negro.png" alt="XSMusic" routerLink="/home">
+          <img
+            class="block w-auto rounded cursor-pointer hover:border-2xl h-9 lg:hidden hover:bg-gray-100"
+            src="assets/images/logo-negro.png"
+            alt="XSMusic"
+            routerLink="/home"
+          />
+          <img
+            class="hidden w-auto rounded cursor-pointer hover:border-2xl h-9 lg:block hover:bg-gray-100"
+            src="assets/images/logo-negro.png"
+            alt="XSMusic"
+            routerLink="/home"
+          />
         </div>
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
             <ng-template [ngxPermissionsOnly]="['ADMIN']">
-              <a *ngFor="let menu of menuItemsAdmin" [routerLink]="menu.route" routerLinkActive="bg-gray-100 text-black"
+              <a
+                *ngFor="let menu of menuItemsAdmin"
+                [routerLink]="menu.route"
+                routerLinkActive="bg-gray-100 text-black"
                 class="px-3 py-2 text-sm font-medium rounded-2xl dark:text-white hover:bg-gray-100 hover:text-black"
-                aria-current="page">{{ menu.name }}</a>
+                aria-current="page"
+                >{{ menu.name }}</a
+              >
             </ng-template>
             <ng-template [ngxPermissionsExcept]="['ADMIN']">
-              <a *ngFor="let menu of menuItems" [routerLink]="menu.route" routerLinkActive="bg-gray-100 text-black"
+              <a
+                *ngFor="let menu of menuItems"
+                [routerLink]="menu.route"
+                routerLinkActive="bg-gray-100 text-black"
                 class="px-3 py-2 text-sm font-medium rounded-2xl dark:text-white hover:bg-gray-100 hover:text-black"
-                aria-current="page">{{ menu.name }}</a>
+                aria-current="page"
+                >{{ menu.name }}</a
+              >
             </ng-template>
           </div>
         </div>
       </div>
-      <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+      <div
+        class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+      >
         <!-- Search  -->
-        <button type="button" (click)="openOrCloseSearchBar()"
-          class="p-2 text-sm text-black rounded-2xl hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        <button
+          type="button"
+          (click)="openOrCloseSearchBar()"
+          class="p-2 text-sm text-black rounded-2xl hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-5 h-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
           </svg>
         </button>
 
         <div class="relative ml-3">
           <ng-template [ngxPermissionsExcept]="['ADMIN', 'USER']">
-            <button type="button" routerLink="/auth"
-              class="p-2 text-sm text-black rounded-2xl hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
+            <button
+              type="button"
+              routerLink="/auth"
+              class="p-2 text-sm text-black rounded-2xl hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
+                />
               </svg>
             </button>
-
           </ng-template>
-
 
           <ng-template [ngxPermissionsOnly]="['ADMIN', 'USER']">
             <!-- Menu Profile -->
-            <button type="button"
+            <button
+              type="button"
               class="flex text-sm bg-gray-100 rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-              id="user-menu-button" aria-expanded="false" aria-haspopup="true"
-              (click)="menuProfileState = !menuProfileState">
-              <img class="w-8 h-8 rounded-full" [src]="user.image" onError alt="">
+              id="user-menu-button"
+              aria-expanded="false"
+              aria-haspopup="true"
+              (click)="menuProfileState = !menuProfileState"
+            >
+              <img
+                class="w-8 h-8 rounded-full"
+                [src]="user.image"
+                onError
+                alt=""
+              />
             </button>
 
-            <div *ngIf="menuProfileState"
+            <div
+              *ngIf="menuProfileState"
               class="absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg cursor-pointer ring-1 ring-black ring-opacity-5 focus:outline-none"
-              role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-              <a *ngFor="let menu of menuProfileItems" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                role="menuitem" tabindex="-1" (click)="onClickMenuProfileItem(menu)">{{ menu.name }}</a>
+              role="menu"
+              aria-orientation="vertical"
+              aria-labelledby="user-menu-button"
+              tabindex="-1"
+            >
+              <a
+                *ngFor="let menu of menuProfileItems"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                role="menuitem"
+                tabindex="-1"
+                (click)="onClickMenuProfileItem(menu)"
+                >{{ menu.name }}</a
+              >
             </div>
           </ng-template>
-
         </div>
       </div>
     </div>
@@ -87,18 +179,29 @@
   <div *ngIf="menuState" class="sm:hidden" id="mobile-menu">
     <div class="px-2 pt-2 pb-3 space-y-1">
       <ng-template [ngxPermissionsOnly]="['ADMIN']">
-        <a *ngFor="let menu of menuItemsAdmin" (click)="openOrCloseMenu()" [routerLink]="menu.route"
+        <a
+          *ngFor="let menu of menuItemsAdmin"
+          (click)="openOrCloseMenu()"
+          [routerLink]="menu.route"
           routerLinkActive="bg-gray-900 text-gray-100"
-          class="block px-3 py-2 text-base font-medium text-black rounded-2xl" aria-current="page">{{ menu.name }}</a>
+          class="block px-3 py-2 text-base font-medium text-black rounded-2xl"
+          aria-current="page"
+          >{{ menu.name }}</a
+        >
       </ng-template>
       <ng-template [ngxPermissionsExcept]="['ADMIN']">
-        <a *ngFor="let menu of menuItems" (click)="openOrCloseMenu()" [routerLink]="menu.route"
+        <a
+          *ngFor="let menu of menuItems"
+          (click)="openOrCloseMenu()"
+          [routerLink]="menu.route"
           routerLinkActive="bg-gray-900 text-gray-100"
-          class="block px-3 py-2 text-base font-medium text-black rounded-2xl" aria-current="page">{{ menu.name }}</a>
+          class="block px-3 py-2 text-base font-medium text-black rounded-2xl"
+          aria-current="page"
+          >{{ menu.name }}</a
+        >
       </ng-template>
     </div>
   </div>
-
 </nav>
 <div *ngIf="searchBarState" class="p-4">
   <search-bar @inOut (closeSearch)="searchBarState = false"></search-bar>

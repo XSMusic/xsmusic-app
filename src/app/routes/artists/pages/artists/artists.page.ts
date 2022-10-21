@@ -13,7 +13,6 @@ import { ArtistService } from '@shared/services/api/artist/artist.service';
 export class ArtistsPage implements OnInit {
   artists: Artist[] = [];
   view = 'gallery';
-  filtered = false;
   body: ArtistGetAllDto = {
     page: 1,
     pageSize: 20,
@@ -54,10 +53,13 @@ export class ArtistsPage implements OnInit {
   }
 
   filter(event: { name: string; value: string }) {
+    console.log(event);
+    this.body.filter = [event.name, event.value];
     this.getArtists();
   }
 
   removeFilter() {
+    this.body.filter = [];
     this.getArtists();
   }
 

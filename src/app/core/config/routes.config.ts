@@ -14,4 +14,6 @@ export const routesConfig = {
   register: 'register',
   account: 'account',
   edit: 'edit',
+  styles: 'styles',
+  users: 'users',
 };

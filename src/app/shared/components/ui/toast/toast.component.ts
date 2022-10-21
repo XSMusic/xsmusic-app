@@ -20,10 +20,6 @@ import { ToastService } from '@services';
   ],
 })
 export class ToastComponent {
-  toastClass!: string[];
-  toastMessage!: string;
-  showToast!: boolean;
-
   constructor(public toast: ToastService) {}
 
   dismiss(): void {

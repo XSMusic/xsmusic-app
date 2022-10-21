@@ -5,7 +5,7 @@ export { LastArtistsBlockComponent } from './artist/last-artists-block/last-arti
 export { AlertComponent } from './ui/alert/alert.component';
 export { BreadcrumbeComponent } from './ui/breadcrumb/breadcrumb.component';
 export { HeaderComponent } from './ui/header/header.component';
-export { ModalAlertComponent } from './ui/modal-alert/modal-alert.component';
+export { ModalComponent } from './ui/modal/modal.component';
 export { NavbarComponent } from './ui/navbar/navbar.component';
 export { SearchBarComponent } from './ui/search-bar/search-bar.component';
 export { ToastComponent } from './ui/toast/toast.component';

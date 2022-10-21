@@ -15,7 +15,8 @@ jobs:
         with:
           node-version: '17.x'
       - run: npm install
-      - run: npm run build
+      - run: npm run set-env -- --environment=prod
+      - run: npm run build:ci
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'

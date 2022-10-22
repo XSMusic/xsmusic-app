@@ -7,11 +7,12 @@ import {
   BreadcrumbeComponent,
   FullImageComponent,
   HeaderComponent,
-  LastArtistsBlockComponent,
+  ArtistsLastBlockComponent,
   ModalComponent,
   NavbarComponent,
   SearchBarComponent,
   ToastComponent,
+  ArtistsViewListComponent,
 } from '@components';
 import { CountryFlagPipe, CountryNamePipe, TruncateTextPipe } from '@pipes';
 import { OnImageErrorDirective } from './directives';
@@ -27,10 +28,11 @@ import { httpInterceptorProviders } from '@core/interceptors';
 
 const components = [
   AlertComponent,
+  ArtistsLastBlockComponent,
+  ArtistsViewListComponent,
   BreadcrumbeComponent,
   FullImageComponent,
   HeaderComponent,
-  LastArtistsBlockComponent,
   ModalComponent,
   NavbarComponent,
   SearchBarComponent,

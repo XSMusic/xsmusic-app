@@ -5,11 +5,11 @@ import { ArtistService, ToastService } from '@services';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 
 @Component({
-  selector: 'app-last-artists-block',
-  templateUrl: 'last-artists-block.component.html',
+  selector: 'artists-last-block',
+  templateUrl: 'artists-last-block.component.html',
   animations: [inOutAnimation],
 })
-export class LastArtistsBlockComponent implements OnInit {
+export class ArtistsLastBlockComponent implements OnInit {
   @Input() artists?: Artist[] = [];
   constructor(
     private artistService: ArtistService,

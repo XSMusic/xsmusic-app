@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import { ArtistsPage } from './pages/artists/artists.page';
 import { ArtistPage } from './pages/artist/artist.page';
 import { ArtistsViewGalleryComponent } from './components/view-gallery/artists-view-gallery.component';
-import { ArtistsViewListComponent } from './components/view-list/artists-view-list.component';
 import { ArtistBlockInfoComponent } from './components/block-info/artist-block-info.component';
 import { ArtistsBlockButtonsComponent } from './components/block-buttons/artists-block-buttons.component';
 
@@ -29,7 +28,6 @@ import { ArtistsBlockButtonsComponent } from './components/block-buttons/artists
     ArtistsPage,
     ArtistPage,
     ArtistsBlockButtonsComponent,
-    ArtistsViewListComponent,
     ArtistsViewGalleryComponent,
     ArtistBlockInfoComponent,
   ],

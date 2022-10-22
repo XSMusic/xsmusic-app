@@ -14,7 +14,7 @@ export class AdminStylesPage implements OnInit {
   body: GetAllDto = {
     page: 1,
     pageSize: 20,
-    order: ['name', 'desc'],
+    order: ['name', 'asc'],
   };
   loading = true;
   error = false;

@@ -1,18 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { GetAllDto } from '@interfaces';
 import { Artist } from '@models';
-import { ArtistService } from '@shared/services/api/artist/artist.service';
+import { ArtistService } from '@services';
 
 @Component({
-  selector: 'artists',
-  templateUrl: 'artists.page.html',
-  animations: [inOutAnimation],
+  selector: 'page-admin-artists',
+  templateUrl: 'admin-artists.page.html',
 })
-export class ArtistsPage implements OnInit {
+export class AdminArtistsPage {
   artists: Artist[] = [];
-  view = 'gallery';
   body: GetAllDto = {
     page: 1,
     pageSize: 20,
@@ -46,10 +43,6 @@ export class ArtistsPage implements OnInit {
 
   goToProfile(slug: string) {
     this.router.navigate(['artists/profile/', slug]);
-  }
-
-  changeView(view: string) {
-    this.view = view;
   }
 
   filter(event: { name: string; value: string }) {

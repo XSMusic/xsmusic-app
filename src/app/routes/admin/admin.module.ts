@@ -15,6 +15,14 @@ import { AdminTotalsComponent } from './components/totals/admin-totals.component
         data: { breadcrumb: '', title: 'Admin' },
       },
       {
+        path: routesConfig.artists,
+        data: { breadcrumb: 'Artistas' },
+        loadChildren: () =>
+          import('./modules/artists/admin-artists.module').then(
+            (m) => m.AdminArtistsModule
+          ),
+      },
+      {
         path: routesConfig.styles,
         data: { breadcrumb: 'Estilos' },
         loadChildren: () =>
@@ -24,7 +32,7 @@ import { AdminTotalsComponent } from './components/totals/admin-totals.component
       },
       {
         path: routesConfig.users,
-        data: { breadcrumb: '' },
+        data: { breadcrumb: 'Usuarios' },
         loadChildren: () =>
           import('./modules/users/admin-users.module').then(
             (m) => m.AdminUsersModule

@@ -1,12 +1,68 @@
-<div class="grid items-center w-full grid-cols-2 gap-2 md:grid-cols-6">
-    <div
-      class="p-3 border border-gray-100 rounded-md shadow-md cursor-pointer focus:animate-pulse hover:bg-gray-100"
-      *ngFor="let total of totals"
-      [routerLink]="total.route"
-    >
-      <div class="text-sm text-gray-500">{{ total.name }}</div>
-      <div class="text-xl font-bold">{{ total.value }}</div>
-    </div>
+<!-- Desktop version -->
+<div
+  class="items-center hidden w-full grid-cols-2 gap-2 sm:grid md:grid-cols-6"
+>
+  <div
+    class="p-3 border border-gray-100 rounded-md shadow-md cursor-pointer focus:animate-pulse hover:bg-gray-100"
+    *ngFor="let total of totals"
+    [routerLink]="total.route"
+  >
+    <div class="text-sm text-gray-500">{{ total.name }}</div>
+    <div class="text-xl font-bold">{{ total.value }}</div>
   </div>
-  <br />
+</div>
 
+<!-- Mobile version -->
+<div
+  class="grid items-center w-full grid-cols-2 gap-2 sm:hidden md:grid-cols-6"
+>
+  <div
+    class="p-3 border border-gray-100 rounded-md shadow-md cursor-pointer focus:animate-pulse hover:bg-gray-100"
+    *ngFor="let total of totals | slice: 0:endSlice"
+    [routerLink]="total.route"
+  >
+    <div class="text-sm text-gray-500">{{ total.name }}</div>
+    <div class="text-xl font-bold">{{ total.value }}</div>
+  </div>
+</div>
+
+<div
+  (click)="viewMoreTotals()"
+  class="cursor-pointer sm:hidden flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5"
+>
+  <p class="mx-4 mb-0 font-semibold text-center">
+    <span *ngIf="endSlice === 2">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+        />
+      </svg>
+    </span>
+    <span *ngIf="endSlice === totals.length">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+        />
+      </svg>
+    </span>
+  </p>
+</div>
+<br />

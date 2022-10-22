@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
+import { GetAllDto } from '@interfaces';
 import { Artist } from '@models';
-import { ArtistGetAllDto } from '@shared/services/api/artist';
 import { ArtistService } from '@shared/services/api/artist/artist.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { ArtistService } from '@shared/services/api/artist/artist.service';
 export class ArtistsPage implements OnInit {
   artists: Artist[] = [];
   view = 'gallery';
-  body: ArtistGetAllDto = {
+  body: GetAllDto = {
     page: 1,
     pageSize: 20,
     order: ['name', 'desc'],

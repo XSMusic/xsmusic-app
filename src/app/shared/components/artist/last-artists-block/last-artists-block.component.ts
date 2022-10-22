@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { Artist } from '@models';
 import { ArtistService, ToastService } from '@services';
-import { artistMock } from '@shared/services/api/artist/artists.mock';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 
 @Component({
@@ -11,7 +10,7 @@ import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
   animations: [inOutAnimation],
 })
 export class LastArtistsBlockComponent implements OnInit {
-  @Input() artists?: Artist[] = artistMock;
+  @Input() artists?: Artist[] = [];
   constructor(
     private artistService: ArtistService,
     private toast: ToastService

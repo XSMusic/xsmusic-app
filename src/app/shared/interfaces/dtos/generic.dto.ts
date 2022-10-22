@@ -2,6 +2,7 @@ export interface GetAllDto {
   page: number;
   pageSize: number;
   order: string[];
+  filter?: string[];
 }
 
 export interface IdDto {

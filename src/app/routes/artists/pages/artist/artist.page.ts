@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { Artist } from '@models';
 import { ArtistService } from '@shared/services/api/artist/artist.service';
-import { artistMock } from '@shared/services/api/artist/artists.mock';
 import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
 
 @Component({
@@ -13,7 +12,7 @@ import { FullImageService } from '@shared/services/ui/full-image/full-image.serv
 })
 export class ArtistPage implements OnInit {
   artist!: Artist;
-  artists: Artist[] = artistMock;
+  artists: Artist[] = [];
   slug!: string;
   information: { name: string; type?: string; value: any }[] = [];
   viewMore = false;

@@ -3,6 +3,7 @@ import { AdminPage } from './pages/admin.page';
 import { SharedModule } from '@shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { routesConfig } from '@core/config';
+import { AdminTotalsComponent } from './components/totals/admin-totals.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ import { routesConfig } from '@core/config';
       },
       {
         path: routesConfig.styles,
-        data: { breadcrumb: '' },
+        data: { breadcrumb: 'Estilos' },
         loadChildren: () =>
           import('./modules/styles/admin-styles.module').then(
             (m) => m.AdminStylesModule
@@ -32,7 +33,7 @@ import { routesConfig } from '@core/config';
     ]),
   ],
   exports: [],
-  declarations: [AdminPage],
+  declarations: [AdminPage, AdminTotalsComponent],
   providers: [],
 })
 export class AdminModule {}

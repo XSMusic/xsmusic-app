@@ -1,17 +1,17 @@
-<form class="container sm:mx-auto" (ngSubmit)="goToSearch()">
+<div class="container sm:mx-auto">
   <div class="flex">
     <div class="relative w-full">
       <input
         [(ngModel)]="searchText"
-        type="search"
         name="searchText"
         class="block p-2.5 px-3 w-full z-20 text-sm text-gray-900 rounded-xl border-l-1 border border-gray-300 hover:bg-gray-50"
         placeholder="¿Que buscas?"
+        (keyup)="onKeyUpSearch($event)"
         required
       />
       <button
-        type="submit"
-        class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-black rounded-r-xl border border-gray-300 hover:bg-gray-800"
+      class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-black rounded-r-xl border border-gray-300 hover:bg-gray-800"
+      (click)="validationSearch()"
       >
         <svg
           aria-hidden="true"
@@ -29,37 +29,6 @@
           ></path>
         </svg>
       </button>
-    </div>
-  </div>
-
-  <div
-    *ngIf="filter"
-    @inOut
-    class="absolute z-10 mt-2 bg-white shadow-lg rounded-xl w-44 ring-1 ring-black ring-opacity-5 focus:outline-none"
-  >
-    <div class="py-1" role="none">
-      <a
-        (click)="selectType(type)"
-        *ngFor="let type of types"
-        class="block px-4 py-2 text-sm text-white bg-black cursor-pointer hover:bg-gray-100"
-        [ngClass]="{
-          'bg-gray-100 text-gray-900 cursor-default':
-            type.name === typeSelected.name
-        }"
-        role="menuitem"
-        tabindex="-1"
-        id="menu-item-0"
-      >
-        {{ type.name }}
-      </a>
-    </div>
-  </div>
-</form>
-
-<div *ngIf="error" class="toast toast-end">
-  <div @inOut class="alert alert-error">
-    <div>
-      <span>{{ errorText }}</span>
     </div>
   </div>
 </div>

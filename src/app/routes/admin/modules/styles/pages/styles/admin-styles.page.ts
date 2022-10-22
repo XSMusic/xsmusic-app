@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
+import { getIcon } from '@core/config/icons.config';
 import { GetAllDto } from '@interfaces';
 import { Style } from '@models';
 import { StyleService } from '@shared/services/api/style/style.service';
@@ -7,7 +8,7 @@ import { StyleService } from '@shared/services/api/style/style.service';
 @Component({
   selector: 'page-admin-styles',
   templateUrl: 'admin-styles.page.html',
-  animations: [inOutAnimation]
+  animations: [inOutAnimation],
 })
 export class AdminStylesPage implements OnInit {
   styles: Style[] = [];
@@ -18,7 +19,8 @@ export class AdminStylesPage implements OnInit {
   };
   loading = true;
   error = false;
-  constructor(private styleService: StyleService) { }
+  getIcon = getIcon
+  constructor(private styleService: StyleService) {}
 
   ngOnInit() {
     this.getStyles();

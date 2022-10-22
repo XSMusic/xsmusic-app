@@ -21,12 +21,12 @@
           <td class="pl-5">
             <div class="items-center">
               <p
-                class="my-1 mr-2 text-base font-semibold leading-none text-black hover:text-gray-500"
+                class="my-1 mr-2 text-base font-extrabold leading-none text-black hover:text-gray-500"
                 (click)="goToProfile.emit(artist.slug)"
               >
                 {{ artist.name }}
               </p>
-              <p class="mr-2 text-sm font-light leading-none text-gray-700">
+              <p class="mt-1 text-sm font-light leading-none text-gray-500">
                 {{
                   artist.birthdate
                     ? getYearsOld(artist.birthdate) + ' años'

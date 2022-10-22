@@ -30,6 +30,7 @@
     "@capacitor/core": "latest",
     "@capacitor/ios": "^4.3.0",
     "@ngneat/tailwind": "^7.0.3",
+    "angular-svg-icon": "^14.0.0",
     "dotenv": "^16.0.3",
     "ngx-infinite-scroll": "^14.0.0",
     "ngx-permissions": "^14.0.0",

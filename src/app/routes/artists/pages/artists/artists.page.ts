@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { GetAllDto } from '@interfaces';
+import { GetAllDto, SearchDto } from '@interfaces';
 import { Artist } from '@models';
 import { ToastService } from '@services';
 import { ArtistService } from '@shared/services/api/artist/artist.service';
@@ -22,7 +22,11 @@ export class ArtistsPage implements OnInit {
   };
   loading = true;
   error = false;
-  constructor(private router: Router, private artistService: ArtistService, private toast: ToastService) {}
+  constructor(
+    private router: Router,
+    private artistService: ArtistService,
+    private toast: ToastService
+  ) {}
 
   ngOnInit() {
     this.getArtists();
@@ -42,7 +46,7 @@ export class ArtistsPage implements OnInit {
       error: (error) => {
         this.loading = false;
         this.error = true;
-        this.toast.showToast(TOAST_STATE.error, error)
+        this.toast.showToast(TOAST_STATE.error, error);
       },
     });
   }
@@ -71,8 +75,18 @@ export class ArtistsPage implements OnInit {
     this.getArtists(true);
   }
 
-  search(event: { text: string; type: string }) {
-    // TODO: Añadir search
-    this.toast.showToast(TOAST_STATE.warning, 'Proximanete');
+  onSearch(event: { text: string; type: string }) {
+    if (event.text === '') {
+      this.body.page = 1;
+      this.getArtists();
+    } else {
+      const body: SearchDto = { value: event.text, limit: 20 };
+      this.artistService.search(body).subscribe({
+        next: (response) => {
+          this.artists = response;
+        },
+        error: (error) => this.toast.showToast(TOAST_STATE.error, error),
+      });
+    }
   }
 }

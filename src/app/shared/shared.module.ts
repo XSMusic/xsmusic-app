@@ -15,10 +15,16 @@ import {
   ArtistsViewListComponent,
   ArtistsButtonsComponent,
 } from '@components';
-import { CountryFlagPipe, CountryNamePipe, TruncateTextPipe } from '@pipes';
+import {
+  CountryFlagPipe,
+  CountryNamePipe,
+  IconPipe,
+  TruncateTextPipe,
+} from '@pipes';
 import { OnImageErrorDirective } from './directives';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import {
+  AngularSvgIconPreloaderService,
   ArtistService,
   LocalStorageService,
   StartupService,
@@ -26,6 +32,7 @@ import {
 } from '@services';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { httpInterceptorProviders } from '@core/interceptors';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 const components = [
   AlertComponent,
@@ -48,13 +55,15 @@ const modules = [
   InfiniteScrollModule,
   NgxPermissionsModule,
   RouterModule,
+  AngularSvgIconModule,
 ];
-const pipes = [CountryFlagPipe, CountryNamePipe, TruncateTextPipe];
+const pipes = [CountryFlagPipe, CountryNamePipe, TruncateTextPipe, IconPipe];
 const services: any = [
   ArtistService,
   LocalStorageService,
   StartupService,
   UserService,
+  AngularSvgIconPreloaderService,
 ];
 
 @NgModule({

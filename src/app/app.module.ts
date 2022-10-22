@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { initializerProviders } from '@shared/services/system/initializer.providers';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +18,7 @@ import { initializerProviders } from '@shared/services/system/initializer.provid
     HttpClientModule,
     SharedModule,
     NgxPermissionsModule.forRoot(),
+    AngularSvgIconModule.forRoot(),
     AppRoutingModule,
   ],
   providers: [

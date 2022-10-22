@@ -1,5 +1,6 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Component, EventEmitter, Output, OnInit, Input } from '@angular/core';
+import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { ModalService, ToastService } from '@services';
 import { MODAL_STATE } from '@shared/services/ui/modal/modal.service';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
@@ -13,6 +14,7 @@ import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
       state('open', style({ transform: 'translateY(-50%)', width: '200px' })),
       transition('open <=> close', [animate('300ms ease-in-out')]),
     ]),
+    inOutAnimation,
   ],
 })
 export class ArtistsButtonsComponent implements OnInit {
@@ -46,6 +48,4 @@ export class ArtistsButtonsComponent implements OnInit {
   openFilter() {
     this.toast.showToast(TOAST_STATE.warning, '¡Estamos en obras!');
   }
-
-  openSearch() {}
 }

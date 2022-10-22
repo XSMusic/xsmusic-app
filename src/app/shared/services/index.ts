@@ -1,3 +1,4 @@
+export { AngularSvgIconPreloaderService } from './system/angular-svg-icon-preloader.service';
 export { StatsService } from './api/stats/stats.service';
 export { ArtistService } from './api/artist/artist.service';
 export { EventsService } from './system/events.service';

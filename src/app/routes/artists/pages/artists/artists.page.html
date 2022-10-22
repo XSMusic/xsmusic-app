@@ -1,7 +1,11 @@
 <header-custom [title]="'Artistas'" [breadcrumb]="false"></header-custom>
 
 <div class="container px-4 pt-3 mx-auto max-w-full-xl sm:pb-0 max-w-7sm">
-  <artists-buttons [viewButtons]="true" (changeView)="changeView($event)" (search)="search($event)"></artists-buttons>
+  <artists-buttons
+    [viewButtons]="true"
+    (changeView)="changeView($event)"
+    (search)="onSearch($event)"
+  ></artists-buttons>
 
   <alert
     type="info"

@@ -22,6 +22,7 @@ export class NavbarComponent implements OnInit {
   menuItemsAdmin: Menu[] = [];
   menuProfileItems: Menu[] = [];
   user!: User;
+  adminPage = false;
 
   constructor(private router: Router, private authService: AuthService) {}
 
@@ -62,6 +63,7 @@ export class NavbarComponent implements OnInit {
         distinctUntilChanged()
       )
       .subscribe((e: any) => {
+        this.adminPage = e.url.indexOf('admin') !== -1;
         this.searchPage = e.url.indexOf('search') !== -1;
       });
   }

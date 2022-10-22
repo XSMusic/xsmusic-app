@@ -13,6 +13,7 @@ import {
   SearchBarComponent,
   ToastComponent,
   ArtistsViewListComponent,
+  ArtistsButtonsComponent,
 } from '@components';
 import { CountryFlagPipe, CountryNamePipe, TruncateTextPipe } from '@pipes';
 import { OnImageErrorDirective } from './directives';
@@ -28,6 +29,7 @@ import { httpInterceptorProviders } from '@core/interceptors';
 
 const components = [
   AlertComponent,
+  ArtistsButtonsComponent,
   ArtistsLastBlockComponent,
   ArtistsViewListComponent,
   BreadcrumbeComponent,

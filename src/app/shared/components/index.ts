@@ -1,6 +1,7 @@
 // Artist
-export { ArtistsViewListComponent } from './artists/artists-view-list/artists-view-list.component';
+export { ArtistsButtonsComponent } from './artists/artists-buttons/artists-buttons.component';
 export { ArtistsLastBlockComponent } from './artists/artists-last-block/artists-last-block.component';
+export { ArtistsViewListComponent } from './artists/artists-view-list/artists-view-list.component';
 //UI
 export { AlertComponent } from './ui/alert/alert.component';
 export { BreadcrumbeComponent } from './ui/breadcrumb/breadcrumb.component';

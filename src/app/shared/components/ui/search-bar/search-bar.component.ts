@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { Router } from '@angular/router';
+import { ToastService } from '@services';
+import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 
 @Component({
   selector: 'search-bar',
@@ -15,10 +17,11 @@ export class SearchBarComponent implements OnInit {
   error = false;
   errorText = '';
   @Input() searchPage = false;
+  @Input() type = 'artists';
   @Output() closeSearch = new EventEmitter<void>();
-  @Output() emitSearchBody = new EventEmitter<{ text: string; type: string }>();
+  @Output() search = new EventEmitter<{ text: string; type: string }>();
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private toast: ToastService) {}
 
   ngOnInit() {
     this.setTypes();
@@ -40,20 +43,15 @@ export class SearchBarComponent implements OnInit {
 
   goToSearch(): void {
     if (this.searchText) {
-      if (!this.searchPage) {
-        this.closeSearch.emit();
-        const url = `/search/${this.searchText}/${this.typeSelected.value}`;
-        this.router.navigate([url]);
-      } else {
-        this.emitSearchBody.emit({
-          text: this.searchText,
-          type: this.typeSelected.value,
-        });
-        this.searchText = '';
-      }
+      this.search.emit({
+        text: this.searchText,
+        type: this.type,
+      });
+      this.searchText = '';
     } else {
       this.error = true;
-      this.errorText = 'Tienes que introducir algo en la busqueda';
+      const errorText = 'Tienes que introducir algo en la busqueda';
+      this.toast.showToast(TOAST_STATE.warning, errorText);
       setTimeout(() => {
         this.error = false;
         this.errorText = '';

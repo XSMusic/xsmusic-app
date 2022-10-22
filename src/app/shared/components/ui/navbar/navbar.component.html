@@ -50,13 +50,21 @@
         <div class="flex items-center flex-shrink-0">
           <img
             class="block w-auto rounded cursor-pointer hover:border-2xl h-9 lg:hidden hover:bg-gray-100"
-            src="assets/images/logo-negro.png"
+            [src]="
+              !adminPage
+                ? 'assets/images/logo-negro.png'
+                : 'assets/images/logo-rojo.png'
+            "
             alt="XSMusic"
             routerLink="/home"
           />
           <img
             class="hidden w-auto rounded cursor-pointer hover:border-2xl h-9 lg:block hover:bg-gray-100"
-            src="assets/images/logo-negro.png"
+            [src]="
+              !adminPage
+                ? 'assets/images/logo-negro.png'
+                : 'assets/images/logo-rojo.png'
+            "
             alt="XSMusic"
             routerLink="/home"
           />
@@ -70,8 +78,8 @@
                 routerLinkActive="bg-gray-100 text-black"
                 class="px-3 py-2 text-sm font-medium rounded-2xl dark:text-white hover:bg-gray-100 hover:text-black"
                 aria-current="page"
-                >{{ menu.name }}</a
-              >
+                >{{ menu.name }}
+              </a>
             </ng-template>
             <ng-template [ngxPermissionsExcept]="['ADMIN']">
               <a
@@ -89,27 +97,6 @@
       <div
         class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
       >
-        <!-- Search  -->
-        <button
-          type="button"
-          (click)="openOrCloseSearchBar()"
-          class="p-2 text-sm text-black rounded-2xl hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-5 h-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg>
-        </button>
 
         <div class="relative ml-3">
           <ng-template [ngxPermissionsExcept]="['ADMIN', 'USER']">
@@ -203,6 +190,3 @@
     </div>
   </div>
 </nav>
-<div *ngIf="searchBarState" class="p-4">
-  <search-bar @inOut (closeSearch)="searchBarState = false"></search-bar>
-</div>

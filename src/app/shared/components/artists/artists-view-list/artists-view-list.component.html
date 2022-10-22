@@ -72,6 +72,14 @@
               </p>
             </div>
           </td>
+
+          <td class="pl-5" *ngxPermissionsOnly="'ADMIN'">
+            <div class="flex items-center">
+              <p class="mr-2 text-sm font-light leading-none text-gray-700">
+                {{ artist.updated | date: 'dd-MM-Y'}}
+              </p>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>

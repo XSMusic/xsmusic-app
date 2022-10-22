@@ -3,7 +3,9 @@ import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { GetAllDto } from '@interfaces';
 import { Artist } from '@models';
+import { ToastService } from '@services';
 import { ArtistService } from '@shared/services/api/artist/artist.service';
+import { TOAST_STATE } from '../../../../shared/services/ui/toast/toast.service';
 
 @Component({
   selector: 'artists',
@@ -20,7 +22,7 @@ export class ArtistsPage implements OnInit {
   };
   loading = true;
   error = false;
-  constructor(private router: Router, private artistService: ArtistService) {}
+  constructor(private router: Router, private artistService: ArtistService, private toast: ToastService) {}
 
   ngOnInit() {
     this.getArtists();
@@ -37,9 +39,10 @@ export class ArtistsPage implements OnInit {
         this.loading = false;
         this.error = false;
       },
-      error: () => {
+      error: (error) => {
         this.loading = false;
         this.error = true;
+        this.toast.showToast(TOAST_STATE.error, error)
       },
     });
   }
@@ -66,5 +69,10 @@ export class ArtistsPage implements OnInit {
   onScroll() {
     this.body.page++;
     this.getArtists(true);
+  }
+
+  search(event: { text: string; type: string }) {
+    // TODO: Añadir search
+    this.toast.showToast(TOAST_STATE.warning, 'Proximanete');
   }
 }

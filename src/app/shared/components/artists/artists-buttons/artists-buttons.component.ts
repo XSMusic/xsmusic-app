@@ -1,16 +1,27 @@
-import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Component, EventEmitter, Output, OnInit, Input } from '@angular/core';
 import { ModalService, ToastService } from '@services';
 import { MODAL_STATE } from '@shared/services/ui/modal/modal.service';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 
 @Component({
-  selector: 'artists-block-buttons',
-  templateUrl: 'artists-block-buttons.component.html',
+  selector: 'artists-buttons',
+  templateUrl: 'artists-buttons.component.html',
+  animations: [
+    trigger('searchTrigger', [
+      state('close', style({ transform: 'translateY(0%)', width: '' })),
+      state('open', style({ transform: 'translateY(-50%)', width: '200px' })),
+      transition('open <=> close', [animate('300ms ease-in-out')]),
+    ]),
+  ],
 })
-export class ArtistsBlockButtonsComponent implements OnInit {
+export class ArtistsButtonsComponent implements OnInit {
+  @Input() viewButtons = false;
   @Output() changeView = new EventEmitter<string>();
+  @Output() search = new EventEmitter<{ text: string; type: string }>();
   view = 'gallery';
   viewLSKey = 'view_artist';
+  searchState = false;
 
   constructor(private toast: ToastService, private modal: ModalService) {}
 
@@ -35,4 +46,6 @@ export class ArtistsBlockButtonsComponent implements OnInit {
   openFilter() {
     this.toast.showToast(TOAST_STATE.warning, '¡Estamos en obras!');
   }
+
+  openSearch() {}
 }

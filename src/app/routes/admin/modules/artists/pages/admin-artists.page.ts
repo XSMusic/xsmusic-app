@@ -13,7 +13,7 @@ export class AdminArtistsPage {
   body: GetAllDto = {
     page: 1,
     pageSize: 20,
-    order: ['created', 'desc'],
+    order: ['updated', 'desc'],
   };
   loading = true;
   error = false;

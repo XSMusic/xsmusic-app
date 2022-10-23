@@ -38,7 +38,6 @@ export class AdminTotalsComponent implements OnInit {
   }
 
   viewMoreTotals() {
-    console.log(this.endSlice);
     if (this.endSlice === 2) {
       this.endSlice = this.totals.length;
     } else {

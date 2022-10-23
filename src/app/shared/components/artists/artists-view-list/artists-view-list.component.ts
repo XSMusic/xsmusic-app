@@ -19,7 +19,6 @@ export class ArtistsViewListComponent {
   constructor(private fullImage: FullImageService) {}
 
   showImage(image: string) {
-    console.log(image);
     this.fullImage.showImageFull(image);
   }
 }

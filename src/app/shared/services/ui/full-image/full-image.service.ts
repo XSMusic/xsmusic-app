@@ -11,7 +11,6 @@ export class FullImageService {
   showImageFull(image: string) {
     this.imageFull$.next(image);
     this.showFull$.next(true);
-    console.log('image', image);
   }
 
   dismissImageFull() {

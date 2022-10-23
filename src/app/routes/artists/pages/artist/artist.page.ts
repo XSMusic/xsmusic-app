@@ -31,7 +31,7 @@ export class ArtistPage implements OnInit {
   }
 
   getArtist() {
-    this.artistService.getOneBySlug({ slug: this.slug })!.subscribe({
+    this.artistService.getOne({ slug: this.slug })!.subscribe({
       next: (artist: any) => {
         this.artist = artist;
       },

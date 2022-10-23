@@ -3,7 +3,7 @@ export class Artist {
   name? = '';
   image? = '';
   birthdate? = '';
-  styles?: string[] = [];
+  styles?: any[] = [];
   country? = 'es';
   gender? = '';
   info? = '';
@@ -12,7 +12,7 @@ export class Artist {
   updated? = '';
   constructor(data?: Artist) {
     if (data) {
-      for (var property in data) {
+      for (const property in data) {
         if (data.hasOwnProperty(property))
           (<any>this)[property] = (<any>data)[property];
       }

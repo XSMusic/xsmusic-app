@@ -51,11 +51,11 @@
           </td>
           <td>
             <span
-              *ngFor="let style of artist.styles!.slice(0, 2); let i = index"
+              *ngFor="let style of artist.styles; let i = index"
               class="px-2 py-1 mr-1 text-xs border rounded-2xl hover:bg-gray-100"
-              (click)="filter.emit({ name: 'style', value: style })"
+              (click)="filter.emit({ name: 'styles', value: style.name })"
             >
-              {{ style | titlecase }}
+              {{ style.name | titlecase }}
             </span>
           </td>
           <td class="pl-5">

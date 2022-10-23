@@ -55,7 +55,6 @@ export class AdminArtistsPage {
   }
 
   filter(event: { name: string; value: string }) {
-    console.log(event);
     this.body.filter = [event.name, event.value];
     this.getArtists();
   }

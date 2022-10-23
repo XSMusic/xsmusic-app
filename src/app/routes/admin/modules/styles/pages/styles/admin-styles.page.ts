@@ -2,11 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { getIcon } from '@core/config/icons.config';
-import { GetAllDto, SearchDto } from '@interfaces';
+import { SearchDto } from '@interfaces';
 import { Style } from '@models';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
+import { StyleGetAllDto } from '@shared/services/api/style/style.dto';
 import { StyleService } from '@shared/services/api/style/style.service';
-import { ToastService, TOAST_STATE } from '@shared/services/ui/toast/toast.service';
+import {
+  ToastService,
+  TOAST_STATE,
+} from '@shared/services/ui/toast/toast.service';
 
 @Component({
   selector: 'page-admin-styles',
@@ -15,10 +19,11 @@ import { ToastService, TOAST_STATE } from '@shared/services/ui/toast/toast.servi
 })
 export class AdminStylesPage implements OnInit {
   styles: Style[] = [];
-  body: GetAllDto = {
+  body: StyleGetAllDto = {
     page: 1,
     pageSize: 20,
     order: ['name', 'asc'],
+    complete: true,
   };
   loading = true;
   error = false;
@@ -52,7 +57,6 @@ export class AdminStylesPage implements OnInit {
   }
 
   filter(event: { name: string; value: string }) {
-    console.log(event);
     this.body.filter = [event.name, event.value];
     this.getStyles();
   }
@@ -69,7 +73,7 @@ export class AdminStylesPage implements OnInit {
 
   onClickButton(button: ButtonBlockItem) {
     if (button.action === 'add') {
-      this.router.navigate(["admin/styles/one"])
+      this.router.navigate(['admin/styles/one']);
     }
   }
 

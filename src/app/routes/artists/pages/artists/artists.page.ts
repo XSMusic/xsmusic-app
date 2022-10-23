@@ -57,8 +57,6 @@ export class ArtistsPage implements OnInit {
     this.router.navigate(['artists/profile/', slug]);
   }
 
-  changeView(view: string) {}
-
   filter(event: { name: string; value: string }) {
     console.log(event);
     this.body.filter = [event.name, event.value];

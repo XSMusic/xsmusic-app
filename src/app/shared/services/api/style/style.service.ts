@@ -3,14 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { Style } from '@models';
 import { Observable } from 'rxjs';
 import { environment } from '@env/environment';
-import { GetAllDto, IdDto, MessageI, PaginatorI, SearchDto } from '@interfaces';
+import { IdDto, MessageI, PaginatorI, SearchDto } from '@interfaces';
+import { StyleGetAllDto } from './style.dto';
 
 @Injectable({ providedIn: 'root' })
 export class StyleService {
   url = `${environment.API_URL}/styles`;
   constructor(private httpClient: HttpClient) {}
 
-  getAll(data: GetAllDto): Observable<PaginatorI<Style>> {
+  getAll(data: StyleGetAllDto): Observable<PaginatorI<Style>> {
     return this.httpClient.post<PaginatorI<Style>>(`${this.url}/getAll`, data);
   }
 

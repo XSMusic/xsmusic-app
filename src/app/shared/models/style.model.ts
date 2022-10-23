@@ -3,13 +3,14 @@ export class Style {
   name? = '';
   created? = '';
   updated? = '';
+  artists?: { count: number };
 
   constructor(data?: Style) {
     if (data) {
-      this._id = data._id ?? this.name;
-      this.name = data.name ?? this.name;
-      this.created = data.created ?? this.created;
-      this.updated = data.updated ?? this.updated;
+      for (const property in data) {
+        if (data.hasOwnProperty(property))
+          (<any>this)[property] = (<any>data)[property];
+      }
     }
   }
 }

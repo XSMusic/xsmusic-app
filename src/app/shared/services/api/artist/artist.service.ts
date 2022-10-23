@@ -5,11 +5,10 @@ import { Observable } from 'rxjs';
 import { environment } from '@env/environment';
 import {
   GetAllDto,
-  IdDto,
+  IdSlugDto,
   MessageI,
   PaginatorI,
   SearchDto,
-  SlugDto,
 } from '@interfaces';
 
 @Injectable({ providedIn: 'root' })
@@ -21,12 +20,8 @@ export class ArtistService {
     return this.httpClient.post<PaginatorI<Artist>>(`${this.url}/getAll`, data);
   }
 
-  getOneById(data: IdDto): Observable<Artist> {
-    return this.httpClient.post<Artist>(`${this.url}/getOneById`, data);
-  }
-
-  getOneBySlug(data: SlugDto): Observable<Artist> {
-    return this.httpClient.post<Artist>(`${this.url}/getOneBySlug`, data);
+  getOne(data: IdSlugDto): Observable<Artist> {
+    return this.httpClient.post<Artist>(`${this.url}/getOne`, data);
   }
 
   search(data: SearchDto): Observable<Artist[]> {

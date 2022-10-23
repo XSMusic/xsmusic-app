@@ -32,7 +32,10 @@
         <div class="grid-cols-2" *ngIf="item.type === 'styles'">
           <p *ngIf="item.value.length === 0">No disponible</p>
           <span *ngFor="let valueArray of item.value; index as i">
-            <a class="px-2 py-1 text-xs bg-gray-100 border border-gray-100 rounded-2xl" routerLink="/home">{{ valueArray }}</a
+            <a
+              class="px-2 py-1 text-xs bg-gray-100 border border-gray-100 rounded-2xl"
+              routerLink="/home"
+              >{{ valueArray.name }}</a
             >
           </span>
         </div>

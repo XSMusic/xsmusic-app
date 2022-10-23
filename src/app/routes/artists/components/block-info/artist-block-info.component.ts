@@ -61,8 +61,7 @@ export class ArtistBlockInfoComponent implements OnInit {
       styles: this.artist.styles!,
     };
     this.artistService.update(data).subscribe({
-      next: (response: any) => {
-        console.log(response);
+      next: () => {
         this.edit = false;
         this.setInformation();
       },

@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { getIcon } from '@core/config/icons.config';
-import { GetAllDto } from '@interfaces';
+import { GetAllDto, SearchDto } from '@interfaces';
 import { Style } from '@models';
+import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 import { StyleService } from '@shared/services/api/style/style.service';
+import { ToastService, TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 
 @Component({
   selector: 'page-admin-styles',
@@ -20,7 +23,11 @@ export class AdminStylesPage implements OnInit {
   loading = true;
   error = false;
   getIcon = getIcon;
-  constructor(private styleService: StyleService) {}
+  constructor(
+    private router: Router,
+    private styleService: StyleService,
+    private toast: ToastService
+  ) {}
 
   ngOnInit() {
     this.getStyles();
@@ -58,5 +65,26 @@ export class AdminStylesPage implements OnInit {
   onScroll() {
     this.body.page++;
     this.getStyles(true);
+  }
+
+  onClickButton(button: ButtonBlockItem) {
+    if (button.action === 'add') {
+      this.router.navigate(["admin/styles/one"])
+    }
+  }
+
+  onSearch(event: { text: string; type: string }) {
+    if (event.text === '') {
+      this.body.page = 1;
+      this.getStyles();
+    } else {
+      const body: SearchDto = { value: event.text, limit: 20 };
+      this.styleService.search(body).subscribe({
+        next: (response) => {
+          this.styles = response;
+        },
+        error: (error) => this.toast.showToast(TOAST_STATE.error, error),
+      });
+    }
   }
 }

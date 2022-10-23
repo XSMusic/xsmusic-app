@@ -13,7 +13,7 @@ import {
   SearchBarComponent,
   ToastComponent,
   ArtistsViewListComponent,
-  ArtistsButtonsComponent,
+  ButtonsBlockComponent,
 } from '@components';
 import { CountryFlagPipe, CountryNamePipe, TruncateTextPipe } from '@pipes';
 import { OnImageErrorDirective } from './directives';
@@ -31,7 +31,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 
 const components = [
   AlertComponent,
-  ArtistsButtonsComponent,
+  ButtonsBlockComponent,
   ArtistsLastBlockComponent,
   ArtistsViewListComponent,
   BreadcrumbeComponent,

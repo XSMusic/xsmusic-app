@@ -4,8 +4,9 @@ import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { GetAllDto, SearchDto } from '@interfaces';
 import { Artist } from '@models';
 import { ToastService } from '@services';
+import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 import { ArtistService } from '@shared/services/api/artist/artist.service';
-import { TOAST_STATE } from '../../../../shared/services/ui/toast/toast.service';
+import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 
 @Component({
   selector: 'artists',
@@ -22,6 +23,7 @@ export class ArtistsPage implements OnInit {
   };
   loading = true;
   error = false;
+  buttons = [];
   constructor(
     private router: Router,
     private artistService: ArtistService,
@@ -55,9 +57,7 @@ export class ArtistsPage implements OnInit {
     this.router.navigate(['artists/profile/', slug]);
   }
 
-  changeView(view: string) {
-    this.view = view;
-  }
+  changeView(view: string) {}
 
   filter(event: { name: string; value: string }) {
     console.log(event);
@@ -73,6 +73,12 @@ export class ArtistsPage implements OnInit {
   onScroll() {
     this.body.page++;
     this.getArtists(true);
+  }
+
+  onClickButton(button: ButtonBlockItem) {
+    if (button.action === 'viewGallery' || button.action === 'viewList') {
+      this.view = button.action;
+    }
   }
 
   onSearch(event: { text: string; type: string }) {

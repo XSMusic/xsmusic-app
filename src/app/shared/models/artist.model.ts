@@ -6,24 +6,16 @@ export class Artist {
   styles?: string[] = [];
   country? = 'es';
   gender? = '';
-  info? =
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga placeat, incidunt nostrum alias eligendi quia ad quo perferendis consequuntur, tempora explicabo, vero aliquam necessitatibus facere nisi ipsa eos esse repellat.';
+  info? = '';
   slug? = '';
   created? = '';
   updated? = '';
   constructor(data?: Artist) {
     if (data) {
-      this._id = data._id ?? this.name;
-      this.name = data.name ?? this.name;
-      this.image = data.image ?? this.image;
-      this.birthdate = data.birthdate ?? this.birthdate;
-      this.styles = data.styles ?? this.styles;
-      this.country = data.country ?? this.country;
-      this.gender = data.gender ?? this.gender;
-      this.info = data.info ?? this.info;
-      this.slug = data.slug ?? this.slug;
-      this.created = data.created ?? this.created;
-      this.updated = data.updated ?? this.updated;
+      for (var property in data) {
+        if (data.hasOwnProperty(property))
+          (<any>this)[property] = (<any>data)[property];
+      }
     }
   }
 }

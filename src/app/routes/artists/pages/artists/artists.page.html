@@ -1,11 +1,11 @@
 <header-custom [title]="'Artistas'" [breadcrumb]="false"></header-custom>
 
 <div class="container px-4 pt-3 mx-auto max-w-full-xl sm:pb-0 max-w-7sm">
-  <artists-buttons
-    [viewButtons]="true"
-    (changeView)="changeView($event)"
+  <buttons-block
+    type="artists"
     (search)="onSearch($event)"
-  ></artists-buttons>
+    (onClickButton)="onClickButton($event)"
+  ></buttons-block>
 
   <alert
     type="info"
@@ -16,7 +16,7 @@
   ></alert>
 
   <artists-view-list
-    *ngIf="view === 'list'"
+    *ngIf="view === 'viewList'"
     [artists]="artists"
     [loading]="loading"
     (goToProfile)="goToProfile($event)"
@@ -26,7 +26,7 @@
   </artists-view-list>
 
   <artists-view-gallery
-    *ngIf="view === 'gallery'"
+    *ngIf="view === 'viewGallery'"
     [artists]="artists"
     [loading]="loading"
     (goToProfile)="goToProfile($event)"

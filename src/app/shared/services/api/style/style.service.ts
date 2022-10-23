@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Style } from '@models';
 import { Observable } from 'rxjs';
 import { environment } from '@env/environment';
-import { GetAllDto, IdDto, MessageI, PaginatorI } from '@interfaces';
+import { GetAllDto, IdDto, MessageI, PaginatorI, SearchDto } from '@interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class StyleService {
@@ -16,6 +16,10 @@ export class StyleService {
 
   getOneById(data: IdDto): Observable<Style> {
     return this.httpClient.post<Style>(`${this.url}/getOneById`, data);
+  }
+
+  search(data: SearchDto): Observable<Style[]> {
+    return this.httpClient.post<Style[]>(`${this.url}/search`, data);
   }
 
   create(data: Style): Observable<MessageI> {

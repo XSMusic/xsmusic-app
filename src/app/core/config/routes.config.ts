@@ -16,4 +16,5 @@ export const routesConfig = {
   edit: 'edit',
   styles: 'styles',
   users: 'users',
+  one: 'one'
 };

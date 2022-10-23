@@ -3,7 +3,6 @@ import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { Router, NavigationEnd, Event } from '@angular/router';
 import { filter, distinctUntilChanged } from 'rxjs';
 import { routesConfig } from '@core/config';
-import { NgxPermissionsService } from 'ngx-permissions';
 import { Menu, User } from '@models';
 import { AuthService } from '@core/auth';
 

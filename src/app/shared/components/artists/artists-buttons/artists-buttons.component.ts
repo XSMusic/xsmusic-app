@@ -1,4 +1,10 @@
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
 import { Component, EventEmitter, Output, OnInit, Input } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { ModalService, ToastService } from '@services';

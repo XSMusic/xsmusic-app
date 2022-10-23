@@ -1,10 +1,7 @@
 <header-custom [title]="'Buscador'" [breadcrumb]="false"></header-custom>
 
 <div class="container px-4 pt-3 mx-auto max-w-full-xl sm:pb-0 max-w-7sm">
-  <search-bar
-    [searchPage]="true"
-    (search)="getSearchBody($event)"
-  ></search-bar>
+  <search-bar [searchPage]="true" (search)="getSearchBody($event)"></search-bar>
 
   <p class="py-4">{{ text }} - {{ type }}</p>
 </div>

@@ -47,9 +47,9 @@ export class MenuBootstrapService {
   }
 
   /** Get the menu item name based on current route. */
-  getItemName(routeArr: string[]): string {
-    return 'this.getLevel(routeArr)[routeArr.length - 1];';
-  }
+  // getItemName(routeArr: string[]): string {
+  //   return this.getLevel(routeArr)[routeArr.length - 1];
+  // }
 
   // Whether is a leaf menu
   private isLeafItem(item: any): boolean {

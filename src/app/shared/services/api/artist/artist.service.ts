@@ -3,7 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Artist } from '@models';
 import { Observable } from 'rxjs';
 import { environment } from '@env/environment';
-import { GetAllDto, IdDto, MessageI, PaginatorI, SearchDto, SlugDto } from '@interfaces';
+import {
+  GetAllDto,
+  IdDto,
+  MessageI,
+  PaginatorI,
+  SearchDto,
+  SlugDto,
+} from '@interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class ArtistService {

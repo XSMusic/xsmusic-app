@@ -6,7 +6,7 @@ export const countryFlag = (countryCode: string): string => {
 };
 
 export const countryName = (countryCode: string): string => {
-  return countries.find((item) => item.id === countryCode)?.name!;
+  return countries.find((item) => item.id === countryCode)?.name ?? 'es';
 };
 
 export const getYearsOld = (dateString: string) => {

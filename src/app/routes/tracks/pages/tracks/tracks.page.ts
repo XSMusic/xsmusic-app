@@ -5,7 +5,11 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: 'tracks.page.html',
 })
 export class TracksPage implements OnInit {
-  constructor() {}
+  constructor() {
+    console.log('TracksPage constructor');
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('TracksPage ngOnInit');
+  }
 }

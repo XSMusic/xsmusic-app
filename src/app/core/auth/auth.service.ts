@@ -73,6 +73,3 @@ export class AuthService {
     return this.loginService.me().pipe(tap((user) => this.user$.next(user)));
   }
 }
-function isObjectEmpty(arg0: {}) {
-  throw new Error('Function not implemented.');
-}

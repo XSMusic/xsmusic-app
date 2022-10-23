@@ -11,6 +11,7 @@
     "run:note": "ng build && npx capacitor run android --target R5CN80DTHJP",
     "prettier:list": "prettier --list-different \"./{e2e,src}/**/*.{scss,css,ts,html}\" || ECHO .",
     "prettier": "prettier --write \"./{e2e,src}/**/*.{scss,css,ts,html}\"",
+    "lint": "eslint \"**/*.{ts,tsx}\" --fix",
     "test": "ng test"
   },
   "description": "xsmusic-app",
@@ -42,19 +43,35 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.2.2",
+    "@angular-eslint/builder": "14.0.2",
+    "@angular-eslint/eslint-plugin": "14.0.2",
+    "@angular-eslint/eslint-plugin-template": "14.0.2",
+    "@angular-eslint/template-parser": "14.0.2",
     "@angular/cli": "~14.2.2",
     "@angular/compiler-cli": "^14.2.0",
     "@capacitor/cli": "latest",
     "@types/jasmine": "~4.0.0",
     "@types/jest": "^29.2.0",
+    "@typescript-eslint/eslint-plugin": "^5.40.1",
+    "eslint": "~7.6.0",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-jsdoc": "30.7.6",
+    "eslint-plugin-prefer-arrow": "1.2.2",
     "jasmine-core": "~4.3.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
+    "lint-staged": "^13.0.3",
     "tailwindcss": "^3.1.8",
     "ts-node": "^10.9.1",
     "typescript": "~4.7.2"
+  },
+  "eslintIgnore": [
+    "*.spec.ts"
+  ],
+  "lint-staged": {
+    "*.ts": "eslint --fix"
   }
 }

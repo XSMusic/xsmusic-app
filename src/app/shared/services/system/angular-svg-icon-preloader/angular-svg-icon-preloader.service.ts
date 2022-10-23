@@ -9,7 +9,7 @@ import { take } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AngularSvgIconPreloaderService {
-  private configUrl: string = './assets/data/icons.json';
+  private configUrl = './assets/data/icons.json';
   private iconsFileData!: {
     iconImageFiles: IconImageFile[];
     customIcons: CustomIconData[];

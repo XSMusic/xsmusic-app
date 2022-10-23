@@ -6,6 +6,6 @@ import { countries } from 'assets/data/countries';
 })
 export class CountryNamePipe implements PipeTransform {
   transform(countryCode: string): string {
-    return countries.find((item) => item.id === countryCode)?.name!;
+    return countries.find((item) => item.id === countryCode)?.name ?? 'es';
   }
 }

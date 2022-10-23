@@ -17,6 +17,6 @@ export const getIcon = (name: string, width = 4, height = 4) => {
       </svg>`;
   } else {
     // TODO: Devolver icono generico
-    return "";
+    return '';
   }
 };

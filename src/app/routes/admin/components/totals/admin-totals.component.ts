@@ -29,7 +29,7 @@ export class AdminTotalsComponent implements OnInit {
   getStats() {
     this.statsService.getForAdmin().subscribe({
       next: (response: any) => {
-        for (let total of this.totals) {
+        for (const total of this.totals) {
           total.value = response[total.id];
         }
       },
@@ -45,5 +45,4 @@ export class AdminTotalsComponent implements OnInit {
       this.endSlice = 2;
     }
   }
-
 }

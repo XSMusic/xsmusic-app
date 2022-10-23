@@ -5,7 +5,11 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: 'clubs.page.html',
 })
 export class ClubPage implements OnInit {
-  constructor() {}
+  constructor() {
+    console.log('ClubPage constructor');
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('ClubPage ngOnInit');
+  }
 }

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Style } from '@models';
 import { Observable } from 'rxjs';
 import { environment } from '@env/environment';
-import { GetAllDto, IdDto, MessageI, PaginatorI, SlugDto } from '@interfaces';
+import { GetAllDto, IdDto, MessageI, PaginatorI } from '@interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class StyleService {

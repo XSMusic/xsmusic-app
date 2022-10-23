@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { Artist } from '@models';
+import { ToastService } from '@services';
 import { ArtistService } from '@shared/services/api/artist/artist.service';
 import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
+import { TOAST_STATE } from '../../../../shared/services/ui/toast/toast.service';
 
 @Component({
   selector: 'artist',
@@ -19,7 +21,8 @@ export class ArtistPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private artistService: ArtistService,
-    private fullImage: FullImageService
+    private fullImage: FullImageService,
+    private toast: ToastService
   ) {}
 
   ngOnInit() {
@@ -32,7 +35,7 @@ export class ArtistPage implements OnInit {
       next: (artist: any) => {
         this.artist = artist;
       },
-      error: (error: any) => {},
+      error: (error) => this.toast.showToast(TOAST_STATE.error, error),
     });
   }
 

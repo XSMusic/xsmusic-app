@@ -19,7 +19,7 @@ export class AdminStylesPage implements OnInit {
   };
   loading = true;
   error = false;
-  getIcon = getIcon
+  getIcon = getIcon;
   constructor(private styleService: StyleService) {}
 
   ngOnInit() {

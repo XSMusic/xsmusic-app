@@ -8,10 +8,10 @@ import { filter, map } from 'rxjs';
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
-  constructor(private router: Router, private titleService: Title){}
+  constructor(private router: Router, private titleService: Title) {}
   ngOnInit(): void {
     this.preventBackButton();
-    this.setTitle()
+    this.setTitle();
   }
 
   preventBackButton() {

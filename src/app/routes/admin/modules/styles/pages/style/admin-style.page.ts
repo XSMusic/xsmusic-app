@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageI } from '@interfaces';
 import { Style } from '@models';
 import { ToastService } from '@services';
 import { StyleService } from '@shared/services/api/style/style.service';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
-import { Validators} from '@angular/forms'
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'page-admin-style',
@@ -38,7 +38,7 @@ export class AdminStylePage implements OnInit {
   }
 
   initForm() {
-      this.form = this.formBuilder.group({
+    this.form = this.formBuilder.group({
       name: [this.style.name, [Validators.minLength(3), Validators.required]],
     });
   }
@@ -76,5 +76,4 @@ export class AdminStylePage implements OnInit {
     this.toastService.showToast(TOAST_STATE.success, response.message);
     this.router.navigate(['admin/styles']);
   }
-
 }

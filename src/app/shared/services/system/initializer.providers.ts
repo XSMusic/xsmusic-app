@@ -6,7 +6,9 @@ export function StartupServiceFactory(startupService: StartupService) {
   return () => startupService.load();
 }
 
-export function AngularSvgIconPreloaderServiceFactory(svgSvc: AngularSvgIconPreloaderService) {
+export function AngularSvgIconPreloaderServiceFactory(
+  svgSvc: AngularSvgIconPreloaderService
+) {
   return () => svgSvc.load();
 }
 

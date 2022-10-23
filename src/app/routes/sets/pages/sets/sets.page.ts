@@ -5,7 +5,11 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: 'sets.page.html',
 })
 export class SetsPage implements OnInit {
-  constructor() {}
+  constructor() {
+    console.log('SetsPage constructor');
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('SetsPage ngOnInit');
+  }
 }

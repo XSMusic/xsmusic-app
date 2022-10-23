@@ -1,3 +1,4 @@
+/*eslint-disable */
 const { writeFile } = require('fs');
 const { argv } = require('yargs');
 // read environment variables from .env file
@@ -21,5 +22,6 @@ writeFile(targetPath, environmentFileContent, function (err: any) {
   if (err) {
     console.log(err);
   }
-   console.log(`✅ ${targetPath}`);
+  console.log(`✅ ${targetPath}`);
 });
+/*eslint-disable */

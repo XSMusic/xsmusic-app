@@ -14,8 +14,8 @@ import { FullImageService } from '@shared/services/ui/full-image/full-image.serv
   styleUrls: ['./full-image.component.css'],
   animations: [
     trigger('imageTrigger', [
-      state('open', style({  opacity: 100 })),
-      state('close', style({ opacity: 0, })),
+      state('open', style({ opacity: 100 })),
+      state('close', style({ opacity: 0 })),
       transition('open <=> close', [animate('300ms ease-in-out')]),
     ]),
   ],

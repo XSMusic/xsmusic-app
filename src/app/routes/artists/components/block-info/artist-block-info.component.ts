@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ArtistService } from '@services';
-import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
+import { ArtistService, ToastService } from '@services';
+import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { getYearsOld } from '@shared/utils/utils';
 
 @Component({
@@ -13,7 +13,10 @@ export class ArtistBlockInfoComponent implements OnInit {
   getYearsOld = getYearsOld;
   edit = false;
 
-  constructor(private artistService: ArtistService) {}
+  constructor(
+    private artistService: ArtistService,
+    private toast: ToastService
+  ) {}
   ngOnInit() {
     this.setInformation();
   }
@@ -63,7 +66,7 @@ export class ArtistBlockInfoComponent implements OnInit {
         this.edit = false;
         this.setInformation();
       },
-      error: (err) => {},
+      error: (error) => this.toast.showToast(TOAST_STATE.error, error),
     });
   }
 }

@@ -37,7 +37,7 @@ export class BreadcrumbeComponent implements OnInit {
    */
   buildBreadCrumb(
     route: ActivatedRoute,
-    url: string = '',
+    url = '',
     breadcrumbs: IBreadCrumb[] = []
   ): IBreadCrumb[] {
     //If no routeConfig is avalailable we are on the root path

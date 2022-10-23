@@ -1,5 +1,5 @@
 import { APP_INITIALIZER } from '@angular/core';
-import { AngularSvgIconPreloaderService } from './angular-svg-icon-preloader.service';
+import { AngularSvgIconPreloaderService } from './angular-svg-icon-preloader/angular-svg-icon-preloader.service';
 import { StartupService } from './startup.service';
 
 export function StartupServiceFactory(startupService: StartupService) {

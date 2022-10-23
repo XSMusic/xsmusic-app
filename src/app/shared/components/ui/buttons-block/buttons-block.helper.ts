@@ -33,6 +33,28 @@ export const buttonsByType = [
     ],
   },
   {
+    name: 'artistsAdmin',
+    buttons: [
+      new ButtonBlockItem({
+        name: 'Ordenar',
+        icon: 'order',
+        isFirst: true,
+        action: 'order',
+      }),
+      new ButtonBlockItem({
+        name: 'Filtrar',
+        icon: 'filter',
+        action: 'filter',
+      }),
+      new ButtonBlockItem({
+        name: 'Buscar',
+        icon: 'search',
+        isLast: true,
+        action: 'search',
+      }),
+    ],
+  },
+  {
     name: 'styles',
     buttons: [
       new ButtonBlockItem({

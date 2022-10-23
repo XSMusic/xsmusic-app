@@ -78,6 +78,8 @@ export class ArtistsPage implements OnInit {
   onClickButton(button: ButtonBlockItem) {
     if (button.action === 'viewGallery' || button.action === 'viewList') {
       this.view = button.action;
+    } else {
+      this.toast.showToast(TOAST_STATE.info, 'En construccion');
     }
   }
 

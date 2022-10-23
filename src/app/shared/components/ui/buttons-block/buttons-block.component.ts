@@ -26,7 +26,7 @@ import { ButtonBlockItem } from './buttons-block.model';
   ],
 })
 export class ButtonsBlockComponent implements OnInit {
-  @Input() type: 'artists' | 'styles' = 'artists';
+  @Input() type: 'artists' | 'artistsAdmin' | 'styles' = 'artists';
   buttons: ButtonBlockItem[] = [];
   @Output() changeView = new EventEmitter<string>();
   @Output() search = new EventEmitter<{ text: string; type: string }>();
@@ -42,13 +42,10 @@ export class ButtonsBlockComponent implements OnInit {
     this.setButtons();
     const view = localStorage.getItem(this.viewLSKey);
     if (view) {
-
       const buttonsFiltered = this.buttons.filter(
         (item) => item.action === view
       );
-      console.log(this.buttons.filter(
-        (item) => item.action === view
-      ))
+      console.log(this.buttons.filter((item) => item.action === view));
       if (buttonsFiltered.length > 0) {
         const button = buttonsFiltered[0];
         this.clickButton(button);
@@ -78,7 +75,7 @@ export class ButtonsBlockComponent implements OnInit {
         this.searchState = !this.searchState;
         break;
       default:
-        this.onClickButton.emit(button)
+        this.onClickButton.emit(button);
         break;
     }
   }

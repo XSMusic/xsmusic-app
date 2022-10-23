@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { GetAllDto } from '@interfaces';
+import { GetAllDto, SearchDto } from '@interfaces';
 import { Artist } from '@models';
 import { ArtistService } from '@services';
+import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
+import {
+  ToastService,
+  TOAST_STATE,
+} from '@shared/services/ui/toast/toast.service';
 
 @Component({
   selector: 'page-admin-artists',
@@ -17,7 +22,11 @@ export class AdminArtistsPage {
   };
   loading = true;
   error = false;
-  constructor(private router: Router, private artistService: ArtistService) {}
+  constructor(
+    private router: Router,
+    private artistService: ArtistService,
+    private toast: ToastService
+  ) {}
 
   ngOnInit() {
     this.getArtists();
@@ -59,5 +68,26 @@ export class AdminArtistsPage {
   onScroll() {
     this.body.page++;
     this.getArtists(true);
+  }
+
+  onClickButton(button: ButtonBlockItem) {
+    if (button.action === 'order' || button.action === 'filter') {
+      this.toast.showToast(TOAST_STATE.info, 'En construccion');
+    }
+  }
+
+  onSearch(event: { text: string; type: string }) {
+    if (event.text === '') {
+      this.body.page = 1;
+      this.getArtists();
+    } else {
+      const body: SearchDto = { value: event.text, limit: 20 };
+      this.artistService.search(body).subscribe({
+        next: (response) => {
+          this.artists = response;
+        },
+        error: (error) => this.toast.showToast(TOAST_STATE.error, error),
+      });
+    }
   }
 }

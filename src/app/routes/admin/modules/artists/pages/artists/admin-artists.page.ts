@@ -50,8 +50,8 @@ export class AdminArtistsPage {
     });
   }
 
-  goToProfile(slug: string) {
-    this.router.navigate(['artists/profile/', slug]);
+  goToProfile(artist: Artist) {
+    this.router.navigate(['admin/artists/one/', artist._id]);
   }
 
   filter(event: { name: string; value: string }) {

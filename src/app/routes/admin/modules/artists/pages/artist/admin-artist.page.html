@@ -1,0 +1,164 @@
+<header-custom [title]="title"></header-custom>
+
+<div class="container px-4 pt-3 mx-auto max-w-full-xl sm:pb-0 max-w-7sm">
+  <form
+    class="grid gap-4 md:grid-cols-2"
+    *ngIf="form"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+  >
+    <div class="mb-1">
+      <label for="name" class="mb-3 block text-base font-medium text-[#07074D]">
+        Nombre
+      </label>
+      <input
+        id="name"
+        type="text"
+        formControlName="name"
+        placeholder="Introduce el nombre"
+        class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
+      />
+    </div>
+
+    <div class="mb-1">
+      <label
+        for="country"
+        class="mb-3 flex gap-2 text-base font-medium text-[#07074D]"
+      >
+        Pais
+        <img
+          *ngIf="artist.country !== ''"
+          [src]="artist.country! | countryFlag"
+          [alt]="artist.country"
+        />
+      </label>
+      <select
+        id="country"
+        type="text"
+        formControlName="country"
+        placeholder="Introduce el codigo del pais"
+        class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
+      >
+        <option *ngFor="let countryItem of countries" [value]="countryItem.id">
+          {{ countryItem.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="mb-1">
+      <label
+        for="birthdate"
+        class="mb-3 block text-base font-medium text-[#07074D]"
+      >
+        Fecha nacimiento
+      </label>
+      <input
+        id="birthdate"
+        type="text"
+        formControlName="birthdate"
+        placeholder="Introduce la fecha de nacimiento en formato ingles"
+        class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
+      />
+    </div>
+
+    <div class="mb-1">
+      <label
+        for="gender"
+        class="mb-3 block text-base font-medium text-[#07074D]"
+      >
+        Genero
+      </label>
+      <select
+        id="gender"
+        type="text"
+        formControlName="gender"
+        placeholder="Introduce el Genero"
+        class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
+      >
+        <option value="male">Hombre</option>
+        <option value="female">Mujer</option>
+        <option value="various">Varios</option>
+      </select>
+    </div>
+
+    <div class="col-span-2 mb-1">
+      <label class="mb-3 block text-base font-medium text-[#07074D]">
+        <span class="text-gray-700">Estilos</span>
+      </label>
+      <div class="flex gap-2 my-2">
+        <span
+          (click)="onClickStyleItem(styleSelected)"
+          class="px-2 py-1 text-xs bg-gray-100 border cursor-pointer rounded-2xl"
+          *ngFor="let styleSelected of artist.styles"
+        >
+          {{ styleSelected.name }}
+        </span>
+      </div>
+      <select
+        class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md form-multiselect"
+        (change)="onChangeStyleSelect($event)"
+      >
+        <option *ngFor="let style of styles" [value]="style._id">
+          {{ style.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-span-2 mb-1">
+      <label
+        for="image"
+        class="mb-3 block text-base font-medium text-[#07074D]"
+      >
+        Imagen
+      </label>
+      <input
+        id="image"
+        type="text"
+        formControlName="image"
+        placeholder="Introduce la imagen"
+        class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
+      />
+    </div>
+
+    <div class="col-span-2 mb-1">
+      <label for="info" class="mb-3 block text-base font-medium text-[#07074D]">
+        Info
+      </label>
+      <textarea
+        id="info"
+        type="text"
+        formControlName="info"
+        placeholder="Introduce el codigo del pais"
+        class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
+        rows="5"
+      ></textarea>
+    </div>
+
+    <!-- Actions Buttons -->
+    <div class="col-span-2 mb-2">
+      <button
+        type="submit"
+        [disabled]="!form.valid"
+        class="w-full py-1 m-1 md:w-32 rounded-2xl"
+        [ngClass]="form.valid ? 'bg-green-500 border-green-500 text-white hover:bg-green-600 hover:border-green-600' : 'text-white bg-green-300 border-2 border-green-300'"
+      >
+        Guardar
+      </button>
+      <button
+        *ngIf="artist._id"
+        (click)="onDelete()"
+        class="w-full py-1 m-1 text-white bg-red-500 border-2 border-red-500 hover:bg-red-600 hover:border-red-600 hover:text-white md:w-32 rounded-2xl"
+      >
+        Eliminar
+      </button>
+
+      <button
+        *ngIf="artist._id"
+        [routerLink]="['/artists/profile/', artist.slug]"
+        class="w-full py-1 m-1 text-white bg-blue-500 border-2 border-blue-500 hover:bg-blue-600 hover:border-blue-600 hover:text-white md:w-32 rounded-2xl"
+      >
+        Ver perfil
+      </button>
+    </div>
+  </form>
+</div>

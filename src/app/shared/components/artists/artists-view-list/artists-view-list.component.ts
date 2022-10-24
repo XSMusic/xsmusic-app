@@ -12,7 +12,7 @@ import { getYearsOld } from '@utils';
 export class ArtistsViewListComponent {
   @Input() artists: Artist[] = [];
   @Input() loading = true;
-  @Output() goToProfile = new EventEmitter<string>();
+  @Output() goToProfile = new EventEmitter<Artist>();
   @Output() filter = new EventEmitter<{ name: string; value: string }>();
   @Output() onScroll = new EventEmitter<void>();
   getYearsOld = getYearsOld;

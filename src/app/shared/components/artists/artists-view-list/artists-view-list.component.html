@@ -5,7 +5,7 @@
         <tr
           *ngFor="let artist of artists"
           tabindex="0"
-          class="h-16 border-b border-gray-100 rounded-lg cursor-pointer dark:border-black dark:border-0"
+          class="h-16 border-b border-gray-100 rounded-lg dark:border-black dark:border-0"
         >
           <td>
             <div class="w-12">
@@ -13,7 +13,7 @@
                 [src]="artist.image"
                 [alt]="artist.name"
                 onError
-                class="object-cover object-center w-12 h-12 rounded-2xl lg:h-12 lg:w-12 hover:filter-grayscale"
+                class="object-cover object-center w-12 h-12 cursor-pointer rounded-2xl lg:h-12 lg:w-12 hover:filter-grayscale"
                 (click)="showImage(artist.image!)"
               />
             </div>
@@ -21,8 +21,8 @@
           <td class="pl-5">
             <div class="items-center">
               <p
-                class="my-1 mr-2 text-base font-extrabold leading-none text-black hover:text-gray-500"
-                (click)="goToProfile.emit(artist.slug)"
+                class="my-1 mr-2 text-base font-extrabold leading-none text-black cursor-pointer hover:text-gray-500"
+                (click)="goToProfile.emit(artist)"
               >
                 {{ artist.name }}
               </p>
@@ -41,7 +41,7 @@
                 <img
                   [src]="artist.country! | countryFlag"
                   [alt]="artist.country"
-                  class="w-6 h-6 mx-2 my-1 hover:h-8 hover:w-8"
+                  class="w-6 h-6 mx-2 my-1 cursor-pointer hover:h-8 hover:w-8"
                   (click)="
                     filter.emit({ name: 'country', value: artist.country! })
                   "
@@ -52,7 +52,7 @@
           <td>
             <span
               *ngFor="let style of artist.styles; let i = index"
-              class="px-2 py-1 mr-1 text-xs border rounded-2xl hover:bg-gray-100"
+              class="gap-1 px-2 py-1 mr-1 text-xs text-center border cursor-pointer rounded-2xl hover:bg-gray-100"
               (click)="filter.emit({ name: 'styles', value: style.name })"
             >
               {{ style.name | titlecase }}
@@ -76,7 +76,7 @@
           <td class="pl-5" *ngxPermissionsOnly="'ADMIN'">
             <div class="flex items-center">
               <p class="mr-2 text-sm font-light leading-none text-gray-700">
-                {{ artist.updated | date: 'dd-MM-Y' }}
+                {{ artist.updated! | timeAgo }}
               </p>
             </div>
           </td>

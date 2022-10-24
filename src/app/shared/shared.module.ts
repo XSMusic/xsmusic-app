@@ -15,7 +15,12 @@ import {
   ArtistsViewListComponent,
   ButtonsBlockComponent,
 } from '@components';
-import { CountryFlagPipe, CountryNamePipe, TruncateTextPipe } from '@pipes';
+import {
+  CountryFlagPipe,
+  CountryNamePipe,
+  TruncateTextPipe,
+  TimeAgoPipe,
+} from '@pipes';
 import { OnImageErrorDirective } from './directives';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import {
@@ -52,7 +57,7 @@ const modules = [
   RouterModule,
   AngularSvgIconModule,
 ];
-const pipes = [CountryFlagPipe, CountryNamePipe, TruncateTextPipe];
+const pipes = [CountryFlagPipe, CountryNamePipe, TimeAgoPipe, TruncateTextPipe];
 const services: any = [
   ArtistService,
   LocalStorageService,

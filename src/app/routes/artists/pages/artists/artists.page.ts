@@ -53,8 +53,8 @@ export class ArtistsPage implements OnInit {
     });
   }
 
-  goToProfile(slug: string) {
-    this.router.navigate(['artists/profile/', slug]);
+  goToProfile(artist: Artist) {
+    this.router.navigate(['artists/profile/', artist.slug]);
   }
 
   filter(event: { name: string; value: string }) {

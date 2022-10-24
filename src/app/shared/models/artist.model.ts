@@ -1,5 +1,5 @@
 export class Artist {
-  _id? = '';
+  _id?: string;
   name? = '';
   image? = '';
   birthdate? = '';
@@ -7,9 +7,9 @@ export class Artist {
   country? = 'es';
   gender? = '';
   info? = '';
-  slug? = '';
-  created? = '';
-  updated? = '';
+  slug?: string;
+  created?: string;
+  updated?: string;
   constructor(data?: Artist) {
     if (data) {
       for (const property in data) {

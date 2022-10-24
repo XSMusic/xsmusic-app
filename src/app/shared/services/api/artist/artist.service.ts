@@ -37,6 +37,6 @@ export class ArtistService {
   }
 
   deleteOne(id: string): Observable<MessageI> {
-    return this.httpClient.delete<MessageI>(`${this.url}/deleteOne/${id}`);
+    return this.httpClient.delete<MessageI>(`${this.url}/one/${id}`);
   }
 }

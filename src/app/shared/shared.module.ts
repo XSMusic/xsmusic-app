@@ -27,6 +27,7 @@ import {
   AngularSvgIconPreloaderService,
   ArtistService,
   LocalStorageService,
+  ScrapingService,
   StartupService,
   UserService,
 } from '@services';
@@ -64,6 +65,7 @@ const services: any = [
   StartupService,
   UserService,
   AngularSvgIconPreloaderService,
+  ScrapingService,
 ];
 
 @NgModule({

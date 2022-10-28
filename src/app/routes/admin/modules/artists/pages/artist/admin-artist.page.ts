@@ -1,12 +1,16 @@
 import { Component } from '@angular/core';
 import { Artist, Style } from '@models';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ArtistService, ToastService } from '@services';
+import { ArtistService, ScrapingService, ToastService } from '@services';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MessageI } from '@interfaces';
+import {
+  MessageI,
+  ScrapingGetInfoArtistDto,
+  ScrapingGetInfoArtistResponse,
+} from '@interfaces';
 import { StyleService } from '@shared/services/api/style/style.service';
 import { countries } from 'assets/data/countries';
+import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
 
 @Component({
   selector: 'page-admin-artist',
@@ -17,16 +21,26 @@ export class AdminArtistPage {
   artist = new Artist();
   styles: Style[] = [];
   title!: string;
-  form!: FormGroup;
   countries = countries;
+  scraping: any = {
+    images: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/David_Guetta_live_%40_MTV_EMA_2018.png/220px-David_Guetta_live_%40_MTV_EMA_2018.png',
+      'https://clubbingspain.com/imagenes/David-Guetta-2016-600.jpg',
+    ],
+    infos: [
+      'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Assumenda, iure. Cupiditate, ducimus incidunt! Non labore, fuga quidem voluptatum quis nam fugit laudantium tempore, laborum, consequatur nemo officia! Corporis, laboriosam aperiam!',
+      'tururu yeah oh si Lorem ipsum dolor, sit amet consectetur adipisicing elit. Assumenda, iure. Cupiditate, ducimus incidunt! Non labore, fuga quidem voluptatum quis nam fugit laudantium tempore, laborum, consequatur nemo officia! Corporis, laboriosam aperiam!',
+    ],
+  };
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private artistService: ArtistService,
     private toastService: ToastService,
-    private formBuilder: FormBuilder,
-    private styleService: StyleService
+    private styleService: StyleService,
+    private scrapingService: ScrapingService,
+    private fullImage: FullImageService
   ) {}
 
   ngOnInit() {
@@ -37,7 +51,6 @@ export class AdminArtistPage {
       this.title = 'Editar Artista';
     } else {
       this.title = 'Nuevo Artista';
-      this.initForm();
     }
   }
 
@@ -50,45 +63,16 @@ export class AdminArtistPage {
       });
   }
 
-  initForm() {
-    this.form = this.formBuilder.group({
-      name: [this.artist.name, [Validators.minLength(3), Validators.required]],
-      country: [
-        this.artist.country,
-        [Validators.minLength(2), Validators.required],
-      ],
-      image: [
-        this.artist.image,
-        [Validators.minLength(3), Validators.required],
-      ],
-      birthdate: [
-        this.artist.birthdate,
-      ],
-      gender: [
-        this.artist.gender,
-        [Validators.minLength(3), Validators.required],
-      ],
-      info: [this.artist.info, [Validators.minLength(3), Validators.required]],
-    });
-  }
-
   getOne() {
     this.artistService.getOne({ id: this.id }).subscribe({
       next: (response) => {
         this.artist = response;
-        this.initForm();
       },
       error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
     });
   }
 
   onSubmit() {
-    this.artist.name = this.form.value['name'];
-    this.artist.country = this.form.value['country'];
-    this.artist.birthdate = this.form.value['birthdate'];
-    this.artist.gender = this.form.value['gender'];
-    this.artist.image = this.form.value['image'];
-    this.artist.info = this.form.value['info'];
     const observable = this.id
       ? this.artistService.update(this.artist)
       : this.artistService.create(this.artist);
@@ -119,7 +103,10 @@ export class AdminArtistPage {
       console.log(newStyle);
       this.artist.styles?.push(newStyle);
     } else {
-      this.toastService.showToast(TOAST_STATE.warning, 'No puedes añadir mas de 5 estilos')
+      this.toastService.showToast(
+        TOAST_STATE.warning,
+        'No puedes añadir mas de 5 estilos'
+      );
     }
   }
 
@@ -128,5 +115,44 @@ export class AdminArtistPage {
     this.artist.styles = this.artist.styles?.filter(
       (style) => style.name !== item.name
     );
+  }
+
+  onKeyUpName(event: any) {
+    console.log(event);
+    const body: ScrapingGetInfoArtistDto = {
+      name: event.target.value,
+      countryCode: this.artist.country,
+    };
+    this.scrapingService.getInfoArtist(body).subscribe({
+      next: (response) => this.setArtistFromScraping(response),
+      error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+    });
+  }
+
+  setArtistFromScraping(response: ScrapingGetInfoArtistResponse) {
+    if (response.social.web !== '' && this.artist.social.web === '') {
+      this.artist.social.web = response.social.web;
+    }
+    if (response.birthdate !== '' && this.artist.birthdate === '') {
+      this.artist.birthdate = response.birthdate;
+    }
+    if (response.image) {
+      this.scraping.images = response.image;
+    }
+    if (response.info) {
+      this.scraping.infos = response.info;
+    }
+  }
+
+  showImage(image: string) {
+    this.fullImage.showImageFull(image);
+  }
+
+  selectImage(image: string) {
+    this.artist.image = image;
+  }
+
+  selectInfo(info: string) {
+    this.artist.info = info;
   }
 }

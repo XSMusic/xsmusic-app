@@ -8,6 +8,13 @@ export class Artist {
   gender? = '';
   info? = '';
   slug?: string;
+  social = {
+    web: '',
+    facebook: '',
+    twitter: '',
+    spotify: '',
+    soundcloud: '',
+  };
   created?: string;
   updated?: string;
   constructor(data?: Artist) {

@@ -60,6 +60,38 @@ export const buttonsByType = [
     ],
   },
   {
+    name: 'artistAdmin',
+    buttons: [
+      new ButtonBlockItem({
+        name: 'Info',
+        icon: 'info',
+        isFirst: true,
+        isActive: true,
+        isActivatable: true,
+        action: 'viewInfo',
+      }),
+      new ButtonBlockItem({
+        name: 'Sesiones',
+        icon: 'sets',
+        isActivatable: true,
+        action: 'viewSets',
+      }),
+      new ButtonBlockItem({
+        name: 'Tracks',
+        icon: 'info',
+        isActivatable: true,
+        action: 'viewSets',
+      }),
+      new ButtonBlockItem({
+        name: 'Events',
+        icon: 'calendar',
+        isActivatable: true,
+        isLast: true,
+        action: 'viewSets',
+      }),
+    ],
+  },
+  {
     name: 'styles',
     buttons: [
       new ButtonBlockItem({

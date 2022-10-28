@@ -1,3 +1,4 @@
+export { ScrapingService } from './api/scraping/scraping.service';
 export { AngularSvgIconPreloaderService } from './system/angular-svg-icon-preloader/angular-svg-icon-preloader.service';
 export { StatsService } from './api/stats/stats.service';
 export { ArtistService } from './api/artist/artist.service';

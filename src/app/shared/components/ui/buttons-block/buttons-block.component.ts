@@ -26,7 +26,8 @@ import { ButtonBlockItem } from './buttons-block.model';
   ],
 })
 export class ButtonsBlockComponent implements OnInit {
-  @Input() type: 'artists' | 'artistsAdmin' | 'styles' = 'artists';
+  @Input() type: 'artists' | 'artistsAdmin' | 'artistAdmin' | 'styles' =
+    'artists';
   buttons: ButtonBlockItem[] = [];
   @Output() changeView = new EventEmitter<string>();
   @Output() search = new EventEmitter<{ text: string; type: string }>();
@@ -99,19 +100,5 @@ export class ButtonsBlockComponent implements OnInit {
         item.isActive = false;
       }
     }
-  }
-
-  setView(view: string) {
-    this.view = view;
-    this.changeView.emit(this.view);
-    localStorage.setItem(this.viewLSKey, view);
-  }
-
-  openOrder() {
-    this.modal.showModal(MODAL_STATE.info, 'titulo loco', 'Vamossss');
-  }
-
-  openFilter() {
-    this.toast.showToast(TOAST_STATE.warning, '¡Estamos en obras!');
   }
 }

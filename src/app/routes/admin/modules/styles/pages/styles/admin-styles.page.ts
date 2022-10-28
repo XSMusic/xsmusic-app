@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { getIcon } from '@core/config/icons.config';
 import { SearchDto } from '@interfaces';
 import { Style } from '@models';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
@@ -27,7 +26,6 @@ export class AdminStylesPage implements OnInit {
   };
   loading = true;
   error = false;
-  getIcon = getIcon;
   constructor(
     private router: Router,
     private styleService: StyleService,

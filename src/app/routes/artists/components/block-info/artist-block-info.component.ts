@@ -59,6 +59,7 @@ export class ArtistBlockInfoComponent implements OnInit {
       birthdate: this.artist.birthdate,
       country: this.artist.country,
       styles: this.artist.styles!,
+      social: this.artist.social
     };
     this.artistService.update(data).subscribe({
       next: () => {

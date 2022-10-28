@@ -33,7 +33,7 @@
           <p *ngIf="item.value.length === 0">No disponible</p>
           <span *ngFor="let valueArray of item.value; index as i">
             <a
-              class="px-2 py-1 text-xs bg-gray-100 border border-gray-100 rounded-2xl"
+              class="px-2 py-1 text-xs bg-gray-100 border border-gray-100 shadow-md rounded-2xl"
               routerLink="/home"
               >{{ valueArray.name }}</a
             >
@@ -69,7 +69,7 @@
     </div>
     <div class="flex">
       <button
-        class="w-full px-2 py-1 m-2 text-xs font-light bg-gray-100 border cursor-pointer rounded-2xl hover:bg-gray-200"
+        class="w-full px-2 py-1 m-2 text-xs font-light bg-gray-100 border shadow-md cursor-pointer rounded-2xl hover:bg-gray-200"
         *ngxPermissionsOnly="'ADMIN'"
         (click)="updateInfo()"
       >

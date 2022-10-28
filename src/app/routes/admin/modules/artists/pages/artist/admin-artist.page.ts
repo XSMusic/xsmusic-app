@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { Artist, Style } from '@models';
-import { ArtistService, ScrapingService, ToastService } from '@services';
+import {
+  ArtistService,
+  ModalService,
+  ScrapingService,
+  ToastService,
+} from '@services';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -11,6 +16,7 @@ import {
 import { StyleService } from '@shared/services/api/style/style.service';
 import { countries } from 'assets/data/countries';
 import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
+import { MODAL_STATE } from '@shared/services/ui/modal/modal.service';
 
 @Component({
   selector: 'page-admin-artist',
@@ -23,14 +29,8 @@ export class AdminArtistPage {
   title!: string;
   countries = countries;
   scraping: any = {
-    images: [
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/David_Guetta_live_%40_MTV_EMA_2018.png/220px-David_Guetta_live_%40_MTV_EMA_2018.png',
-      'https://clubbingspain.com/imagenes/David-Guetta-2016-600.jpg',
-    ],
-    infos: [
-      'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Assumenda, iure. Cupiditate, ducimus incidunt! Non labore, fuga quidem voluptatum quis nam fugit laudantium tempore, laborum, consequatur nemo officia! Corporis, laboriosam aperiam!',
-      'tururu yeah oh si Lorem ipsum dolor, sit amet consectetur adipisicing elit. Assumenda, iure. Cupiditate, ducimus incidunt! Non labore, fuga quidem voluptatum quis nam fugit laudantium tempore, laborum, consequatur nemo officia! Corporis, laboriosam aperiam!',
-    ],
+    images: [],
+    infos: [],
   };
 
   constructor(
@@ -40,7 +40,8 @@ export class AdminArtistPage {
     private toastService: ToastService,
     private styleService: StyleService,
     private scrapingService: ScrapingService,
-    private fullImage: FullImageService
+    private fullImage: FullImageService,
+    private modal: ModalService
   ) {}
 
   ngOnInit() {
@@ -67,6 +68,15 @@ export class AdminArtistPage {
     this.artistService.getOne({ id: this.id }).subscribe({
       next: (response) => {
         this.artist = response;
+        if (!this.artist.social) {
+          this.artist.social = {
+            web: '',
+            facebook: '',
+            twitter: '',
+            soundcloud: '',
+            spotify: '',
+          };
+        }
       },
       error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
     });
@@ -150,6 +160,10 @@ export class AdminArtistPage {
 
   selectImage(image: string) {
     this.artist.image = image;
+  }
+
+  showInfo(info: string) {
+    this.modal.showModal(MODAL_STATE.info, 'Informacion', info);
   }
 
   selectInfo(info: string) {

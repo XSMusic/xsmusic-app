@@ -30,7 +30,7 @@
       </div>
       <button
         *ngIf="artist.info!.length > 200"
-        class="w-full py-1 mt-3 font-semibold border rounded-2xl hover:bg-gray-100"
+        class="w-full py-1 mt-3 font-semibold bg-gray-100 border shadow-md rounded-2xl hover:bg-gray-200"
         (click)="viewMore = !viewMore"
       >
         {{ !viewMore ? 'Ver mas' : 'Ver menos' }}

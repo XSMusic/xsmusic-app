@@ -2,7 +2,7 @@ export interface ScrapingGetInfoArtistResponse {
   name: string;
   image: string;
   birthdate: string;
-  styles: string;
+  styles: any[];
   country: string;
   gender: string;
   info: string;

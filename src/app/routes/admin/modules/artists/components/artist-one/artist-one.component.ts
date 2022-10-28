@@ -30,6 +30,7 @@ export class ArtistOneComponent {
   scraping: any = {
     images: [],
     infos: [],
+    styles: [],
   };
   constructor(
     private router: Router,
@@ -69,7 +70,6 @@ export class ArtistOneComponent {
       const newStyle = this.styles.find(
         (style) => style._id!.toString() === e.target.value.toString()
       );
-      console.log(newStyle);
       this.artist.styles?.push(newStyle);
     } else {
       this.toastService.showToast(
@@ -79,8 +79,14 @@ export class ArtistOneComponent {
     }
   }
 
+  onClickStyleScrapingItem(item: { name: string; _id: string }) {
+    this.artist.styles?.push(item);
+    this.scraping.styles = this.scraping.styles.filter(
+      (style: { name: string; _id: string }) => style !== item
+    );
+  }
+
   onClickStyleItem(item: { name: string; _id: string }) {
-    console.log(item);
     this.artist.styles = this.artist.styles?.filter(
       (style) => style.name !== item.name
     );
@@ -105,12 +111,26 @@ export class ArtistOneComponent {
     if (response.social.web !== '' && this.artist.social.web === '') {
       this.artist.social.web = response.social.web;
     }
+
     if (response.birthdate !== '' && this.artist.birthdate === '') {
       this.artist.birthdate = response.birthdate;
     }
+
+    if (response.styles.length > 0 && this.artist.styles!.length === 0) {
+      this.artist.styles = response.styles;
+    } else if (response.styles.length > 0 && this.artist.styles!.length > 0) {
+      this.scraping.styles = response.styles;
+      for (const style of this.artist.styles!) {
+        this.scraping.styles = this.scraping.styles.filter(
+          (item: { name: string; _id: string }) => item._id !== style._id
+        );
+      }
+    }
+
     if (response.image) {
       this.scraping.images = response.image;
     }
+
     if (response.info) {
       this.scraping.infos = response.info;
     }

@@ -7,9 +7,6 @@ import {
 } from '@angular/animations';
 import { Component, EventEmitter, Output, OnInit, Input } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { ModalService, ToastService } from '@services';
-import { MODAL_STATE } from '@shared/services/ui/modal/modal.service';
-import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { buttonsByType } from './buttons-block.helper';
 import { ButtonBlockItem } from './buttons-block.model';
 
@@ -37,8 +34,6 @@ export class ButtonsBlockComponent implements OnInit {
   viewLSKey = 'view_artist';
   searchState = false;
 
-  constructor(private toast: ToastService, private modal: ModalService) {}
-
   ngOnInit(): void {
     this.setButtons();
     const view = localStorage.getItem(this.viewLSKey);
@@ -46,7 +41,6 @@ export class ButtonsBlockComponent implements OnInit {
       const buttonsFiltered = this.buttons.filter(
         (item) => item.action === view
       );
-      console.log(this.buttons.filter((item) => item.action === view));
       if (buttonsFiltered.length > 0) {
         const button = buttonsFiltered[0];
         this.clickButton(button);
@@ -67,24 +61,18 @@ export class ButtonsBlockComponent implements OnInit {
   }
 
   clickButton(button: ButtonBlockItem) {
-    switch (button.action) {
-      case 'viewGallery':
-      case 'viewList':
-        this.onClickViewsButtons(button);
-        break;
-      case 'search':
-        this.searchState = !this.searchState;
-        break;
-      default:
-        this.onClickButton.emit(button);
-        break;
+    if (button.action.includes('view')) {
+      this.onClickViewsButtons(button);
+    } else if (button.action === 'search') {
+      this.searchState = !this.searchState;
+    } else {
+      this.onClickButton.emit(button);
     }
   }
 
   onClickViewsButtons(button: ButtonBlockItem) {
     localStorage.setItem(this.viewLSKey, button.action);
     if (button.isActive) {
-      console.log('esta activo', button.isActive);
       this.setViewButtonsInactive();
     } else {
       this.setViewButtonsInactive();
@@ -96,7 +84,7 @@ export class ButtonsBlockComponent implements OnInit {
 
   private setViewButtonsInactive(): void {
     for (const item of this.buttons) {
-      if (item.action === 'viewList' || item.action === 'viewGallery') {
+      if (item.action.includes('view') && item.isActivatable) {
         item.isActive = false;
       }
     }

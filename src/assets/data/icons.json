@@ -3,10 +3,6 @@
     {
       "iconName": "google-colors",
       "iconPath": "/assets/images/google.svg"
-    },
-    {
-      "iconName": "dj",
-      "iconPath": "/assets/images/dj.svg"
     }
   ],
   "customIcons": [

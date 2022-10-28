@@ -36,6 +36,7 @@
     "jest": "^29.2.1",
     "ngx-infinite-scroll": "^14.0.0",
     "ngx-permissions": "^14.0.0",
+    "ngx-spinner": "^14.0.0",
     "prettier": "^2.7.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

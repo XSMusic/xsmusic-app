@@ -5,7 +5,7 @@ export class Artist {
   birthdate? = '';
   styles?: any[] = [];
   country? = 'es';
-  gender? = '';
+  gender? = 'male';
   info? = '';
   slug?: string;
   social = {

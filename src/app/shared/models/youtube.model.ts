@@ -1,11 +1,14 @@
-export class User {
-  _id?: string;
-  name!: string;
-  email!: string;
-  image!: string;
-  role!: string;
+export class Youtube {
+  name = '';
+  channel = {
+    id: '',
+    name: '',
+  };
+  videoId = '';
+  info = '';
+  image = '';
 
-  constructor(data?: User) {
+  constructor(data?: Youtube) {
     if (data) {
       for (const property in data) {
         if (data.hasOwnProperty(property))

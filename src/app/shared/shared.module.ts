@@ -14,6 +14,7 @@ import {
   ToastComponent,
   ArtistsViewListComponent,
   ButtonsBlockComponent,
+  MediaListViewComponent,
 } from '@components';
 import {
   CountryFlagPipe,
@@ -27,9 +28,11 @@ import {
   AngularSvgIconPreloaderService,
   ArtistService,
   LocalStorageService,
+  MediaService,
   ScrapingService,
   StartupService,
   UserService,
+  YoutubeService,
 } from '@services';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { httpInterceptorProviders } from '@core/interceptors';
@@ -48,6 +51,7 @@ const components = [
   NavbarComponent,
   SearchBarComponent,
   ToastComponent,
+  MediaListViewComponent,
 ];
 const directives = [OnImageErrorDirective];
 const modules = [
@@ -68,6 +72,8 @@ const services: any = [
   UserService,
   AngularSvgIconPreloaderService,
   ScrapingService,
+  MediaService,
+  YoutubeService,
 ];
 
 @NgModule({

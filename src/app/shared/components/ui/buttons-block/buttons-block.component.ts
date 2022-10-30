@@ -23,8 +23,13 @@ import { ButtonBlockItem } from './buttons-block.model';
   ],
 })
 export class ButtonsBlockComponent implements OnInit {
-  @Input() type: 'artists' | 'artistsAdmin' | 'artistAdmin' | 'styles' =
-    'artists';
+  @Input() type:
+    | 'artists'
+    | 'artistsAdmin'
+    | 'artistAdmin'
+    | 'mediaAdmin'
+    | 'styles'
+    | 'styleAdmin' = 'artists';
   buttons: ButtonBlockItem[] = [];
   @Output() changeView = new EventEmitter<string>();
   @Output() search = new EventEmitter<{ text: string; type: string }>();
@@ -36,22 +41,8 @@ export class ButtonsBlockComponent implements OnInit {
 
   ngOnInit(): void {
     this.setButtons();
-    const view = localStorage.getItem(this.viewLSKey);
-    if (view) {
-      const buttonsFiltered = this.buttons.filter(
-        (item) => item.action === view
-      );
-      if (buttonsFiltered.length > 0) {
-        const button = buttonsFiltered[0];
-        this.clickButton(button);
-      }
-    } else {
-      if (
-        this.buttons[0].action === 'viewGallery' ||
-        this.buttons[0].action === 'viewList'
-      ) {
-        this.clickButton(this.buttons[0]);
-      }
+    if (this.buttons[0].action.includes('view')) {
+      this.clickButton(this.buttons[0]);
     }
   }
 

@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import { Artist, Style } from '@models';
-import {
-  ArtistService,
-  ToastService,
-} from '@services';
+import { ArtistService, ToastService } from '@services';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { ActivatedRoute } from '@angular/router';
 import { StyleService } from '@shared/services/api/style/style.service';
@@ -28,9 +25,9 @@ export class AdminArtistPage {
   view = 'viewInfo';
 
   constructor(
-    private route: ActivatedRoute,
     private artistService: ArtistService,
     private styleService: StyleService,
+    private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
     private toastService: ToastService
   ) {}

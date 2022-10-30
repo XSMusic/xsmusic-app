@@ -19,8 +19,8 @@ import { countries } from 'assets/data/countries';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
-  selector: 'artist-one',
-  templateUrl: 'artist-one.component.html',
+  selector: 'admin-artist-one',
+  templateUrl: 'admin-artist-one.component.html',
 })
 export class ArtistOneComponent {
   @Input() artist: Artist = new Artist();
@@ -108,6 +108,7 @@ export class ArtistOneComponent {
   }
 
   setArtistFromScraping(response: ScrapingGetInfoArtistResponse) {
+    this.artist.country = response.country;
     if (response.social.web !== '' && this.artist.social.web === '') {
       this.artist.social.web = response.social.web;
     }

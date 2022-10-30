@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { GetAllDto, SearchDto } from '@interfaces';
 import { Artist } from '@models';
 import { ArtistService } from '@services';
@@ -12,6 +13,7 @@ import {
 @Component({
   selector: 'page-admin-artists',
   templateUrl: 'admin-artists.page.html',
+  animations: [inOutAnimation],
 })
 export class AdminArtistsPage {
   artists: Artist[] = [];
@@ -23,8 +25,8 @@ export class AdminArtistsPage {
   loading = true;
   error = false;
   constructor(
-    private router: Router,
     private artistService: ArtistService,
+    private router: Router,
     private toast: ToastService
   ) {}
 
@@ -73,7 +75,7 @@ export class AdminArtistsPage {
     if (button.action === 'order' || button.action === 'filter') {
       this.toast.showToast(TOAST_STATE.info, 'En construccion');
     } else if (button.action === 'add') {
-      this.router.navigate(['/admin/artists/one'])
+      this.router.navigate(['/admin/artists/one']);
     }
   }
 

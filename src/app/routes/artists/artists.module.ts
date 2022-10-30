@@ -5,6 +5,7 @@ import { ArtistsPage } from './pages/artists/artists.page';
 import { ArtistPage } from './pages/artist/artist.page';
 import { ArtistsViewGalleryComponent } from './components/view-gallery/artists-view-gallery.component';
 import { ArtistBlockInfoComponent } from './components/block-info/artist-block-info.component';
+import { ArtistBlockImageInfoComponent } from './components/block-image-info/artist-block-image-info.component';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { ArtistBlockInfoComponent } from './components/block-info/artist-block-i
     ArtistsPage,
     ArtistPage,
     ArtistsViewGalleryComponent,
+    ArtistBlockImageInfoComponent,
     ArtistBlockInfoComponent,
   ],
   providers: [],

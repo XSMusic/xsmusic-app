@@ -2,39 +2,14 @@
   <header-custom [title]="artist.name!"></header-custom>
 
   <div
+    *ngIf="artist"
     @inOut
     class="container grid gap-4 px-3 mx-auto mt-3 overflow-auto text-center lg:grid-cols-4 rounded-xl"
   >
     <div
       class="block w-full col-span-3 p-4 mx-auto border md:col-span-2 rounded-2xl"
     >
-      <img
-        [src]="artist.image"
-        class="object-cover w-full cursor-pointer rounded-2xl h-80 hover:filter-grayscale"
-        onError
-        [alt]="artist.name"
-        (click)="showImage(artist.image!)"
-      />
-      <div class="p-2">
-        <h1 class="pt-2 text-xl font-extrabold text-left">{{ artist.name }}</h1>
-        <div
-          *ngIf="!viewMore"
-          class="text-left"
-          [innerHtml]="artist.info! | truncateText:180"
-        ></div>
-        <div
-          *ngIf="viewMore"
-          class="text-left"
-          [innerHtml]="artist.info!"
-        ></div>
-      </div>
-      <button
-        *ngIf="artist.info!.length > 200"
-        class="w-full py-1 mt-3 font-semibold bg-gray-100 border shadow-md rounded-2xl hover:bg-gray-200"
-        (click)="viewMore = !viewMore"
-      >
-        {{ !viewMore ? 'Ver mas' : 'Ver menos' }}
-      </button>
+      <artist-block-image-info [artist]="artist"></artist-block-image-info>
     </div>
 
     <div class="block col-span-3 text-left md:col-span-2">

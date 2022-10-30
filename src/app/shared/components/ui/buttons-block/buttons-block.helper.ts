@@ -97,6 +97,23 @@ export const buttonsByType = [
     ],
   },
   {
+    name: 'mediaAdmin',
+    buttons: [
+      new ButtonBlockItem({
+        name: 'Nuevo',
+        icon: 'plus',
+        isFirst: true,
+        action: 'add',
+      }),
+      new ButtonBlockItem({
+        name: 'Buscar',
+        icon: 'search',
+        isLast: true,
+        action: 'search',
+      }),
+    ],
+  },
+  {
     name: 'styles',
     buttons: [
       new ButtonBlockItem({
@@ -110,6 +127,37 @@ export const buttonsByType = [
         icon: 'search',
         isLast: true,
         action: 'search',
+      }),
+    ],
+  },
+  {
+    name: 'styleAdmin',
+    buttons: [
+      new ButtonBlockItem({
+        name: 'Info',
+        icon: 'info',
+        isFirst: true,
+        isActivatable: true,
+        action: 'viewInfo',
+      }),
+      new ButtonBlockItem({
+        name: 'Artistas',
+        icon: 'info',
+        isActivatable: true,
+        action: 'viewOptions',
+      }),
+      new ButtonBlockItem({
+        name: 'Sets',
+        icon: 'info',
+        isActivatable: true,
+        action: 'viewOptions',
+      }),
+      new ButtonBlockItem({
+        name: 'Tracks',
+        icon: 'info',
+        isLast: true,
+        isActivatable: true,
+        action: 'viewOptions',
       }),
     ],
   },

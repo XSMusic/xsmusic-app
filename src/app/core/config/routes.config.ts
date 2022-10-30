@@ -15,6 +15,7 @@ export const routesConfig = {
   account: 'account',
   edit: 'edit',
   styles: 'styles',
+  media: 'media',
   users: 'users',
   one: 'one',
 };

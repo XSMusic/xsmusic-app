@@ -31,6 +31,14 @@ import { AdminTotalsComponent } from './components/totals/admin-totals.component
           ),
       },
       {
+        path: routesConfig.media,
+        data: { breadcrumb: 'Media' },
+        loadChildren: () =>
+          import('./modules/media/admin-media.module').then(
+            (m) => m.AdminMediaModule
+          ),
+      },
+      {
         path: routesConfig.users,
         data: { breadcrumb: 'Usuarios' },
         loadChildren: () =>

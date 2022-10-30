@@ -1,4 +1,6 @@
-export { Artist } from './artist.model';
-export { Menu } from './menu.model';
-export { Style } from './style.model';
-export { User } from './user.model';
+export * from './artist.model';
+export * from './media.model';
+export * from './menu.model';
+export * from './style.model';
+export * from './user.model';
+export * from './youtube.model';

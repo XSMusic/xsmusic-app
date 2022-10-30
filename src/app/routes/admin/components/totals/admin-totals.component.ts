@@ -10,8 +10,8 @@ export class AdminTotalsComponent implements OnInit {
   totals = [
     { id: 'artists', name: 'Artistas', value: 0, route: '/admin/artists' },
     { id: 'styles', name: 'Estilos', value: 0, route: '/admin/styles' },
-    { id: 'sets', name: 'Sets', value: 0, route: '/admin/sets' },
-    { id: 'tracks', name: 'Tracks', value: 0, route: '/admin/tracks' },
+    { id: 'sets', name: 'Sets', value: 0, route: '/admin/media/sets' },
+    { id: 'tracks', name: 'Tracks', value: 0, route: '/admin/media/tracks' },
     { id: 'clubs', name: 'Clubs', value: 0, route: '/admin/clubs' },
     { id: 'events', name: 'Eventos', value: 0, route: '/admin/events' },
   ];

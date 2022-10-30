@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '@shared/shared.module';
 import { AdminArtistsPage } from './pages/artists/admin-artists.page';
 import { AdminArtistPage } from './pages/artist/admin-artist.page';
-import { ArtistOneComponent } from './components/artist-one/artist-one.component';
+import { ArtistOneComponent } from './components/artist-one/admin-artist-one.component';
 
 @NgModule({
   imports: [

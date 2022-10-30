@@ -1,0 +1,143 @@
+<form *ngIf="media" @inOut class="grid grid-cols-2 gap-4 lg:grid-cols-2">
+  <div class="col-span-2 mb-1 md:col-span-1">
+    <label for="name" class="mb-3 block text-base font-medium text-[#07074D]">
+      Nombre
+    </label>
+    <input
+      name="name"
+      type="text"
+      [(ngModel)]="media.name"
+      placeholder="Introduce el nombre"
+      class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
+    />
+  </div>
+  {{ media.name }}
+
+  <div class="col-span-2 mb-1 md:col-span-1">
+    <label for="source" class="mb-3 block text-base font-medium text-[#07074D]">
+      Medio
+    </label>
+    <select
+      name="source"
+      type="text"
+      [(ngModel)]="media.source"
+      placeholder="Selecciona el medio"
+      class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
+    >
+      <option [value]="null" [disabled]="true" [selected]>
+        Selecciona medio
+      </option>
+      <option *ngFor="let source of sources" [value]="source.value">
+        {{ source.name }}
+      </option>
+    </select>
+  </div>
+
+  <div class="col-span-2 mb-1">
+    <label class="mb-3 block text-base font-medium text-[#07074D]">
+      <span class="text-gray-700">Artista/s</span>
+    </label>
+    <div class="flex gap-2 my-3">
+      <span
+        (click)="onClickItem('artists', artistSelected)"
+        class="px-2 py-1 text-xs bg-gray-100 border shadow-md cursor-pointer rounded-2xl"
+        *ngFor="let artistSelected of media.artists"
+      >
+        {{ artistSelected.name }}
+      </span>
+    </div>
+    <select
+      class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md form-multiselect"
+      (change)="onChangeArtistSelect($event)"
+    >
+      <option [disabled]="true">Selecciona artista</option>
+      <option *ngFor="let artist of artists" [value]="artist._id">
+        {{ artist.name }}
+      </option>
+    </select>
+  </div>
+
+  <div class="col-span-2 mb-1">
+    <label class="mb-3 block text-base font-medium text-[#07074D]">
+      <span class="text-gray-700">Estilo/s</span>
+    </label>
+    <div class="flex gap-2 my-3">
+      <span
+        (click)="onClickItem('styles', styleSelected)"
+        class="px-2 py-1 text-xs bg-gray-100 border shadow-md cursor-pointer rounded-2xl"
+        *ngFor="let styleSelected of media.styles"
+      >
+        {{ styleSelected.name }}
+      </span>
+    </div>
+    <select
+      class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md form-multiselect"
+      (change)="onChangeStyleSelect($event)"
+    >
+      <option [disabled]="true">Selecciona estilo</option>
+      <option *ngFor="let style of styles" [value]="style._id">
+        {{ style.name }}
+      </option>
+    </select>
+  </div>
+
+  <div class="col-span-2 mb-1 md:col-span-1">
+    <label
+      for="sourceId"
+      class="mb-3 block text-base font-medium text-[#07074D]"
+    >
+      Video Id
+    </label>
+    <input
+      name="sourceId"
+      type="text"
+      [(ngModel)]="media.sourceId"
+      placeholder="Introduce el id del video"
+      class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
+    />
+  </div>
+
+  <div class="col-span-2 mb-1 md:col-span-1">
+    <label
+      for="sourceId"
+      class="mb-3 block text-base font-medium text-[#07074D]"
+    >
+      Año
+    </label>
+    <input
+      name="year"
+      type="number"
+      [(ngModel)]="media.year"
+      placeholder="Introduce el año"
+      class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
+    />
+  </div>
+
+  <!-- Actions Buttons -->
+  <div class="col-span-2 mb-2">
+    <button
+      type="submit"
+      (click)="onSubmit()"
+      class="w-full py-1 m-1 text-white bg-green-500 border-green-500 shadow-md md:w-32 rounded-2xl hover:bg-green-600 hover:border-green-600'"
+    >
+      Guardar
+    </button>
+    <button
+      type="button"
+      *ngIf="media._id"
+      (click)="onDelete()"
+      class="w-full py-1 m-1 text-white bg-red-500 border-2 border-red-500 shadow-md hover:bg-red-600 hover:border-red-600 hover:text-white md:w-32 rounded-2xl"
+    >
+      Eliminar
+    </button>
+
+    <button
+      type="button"
+      *ngIf="media._id"
+      [routerLink]="['/artists/profile/', media._id]"
+      class="w-full py-1 m-1 text-white bg-blue-500 border-2 border-blue-500 shadow-md hover:bg-blue-600 hover:border-blue-600 hover:text-white md:w-32 rounded-2xl"
+    >
+      Ver perfil
+    </button>
+  </div>
+</form>

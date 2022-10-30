@@ -75,4 +75,8 @@ export class AdminStylePage implements OnInit {
     this.toastService.showToast(TOAST_STATE.success, response.message);
     this.router.navigate(['admin/styles']);
   }
+
+  onClickButton(event: any) {
+    return event;
+  }
 }

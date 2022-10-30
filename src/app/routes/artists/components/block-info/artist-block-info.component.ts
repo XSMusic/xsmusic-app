@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ArtistService, ToastService } from '@services';
-import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
+import { Artist } from '@models';
 import { getYearsOld } from '@shared/utils/utils';
 
 @Component({
@@ -8,15 +7,11 @@ import { getYearsOld } from '@shared/utils/utils';
   templateUrl: 'artist-block-info.component.html',
 })
 export class ArtistBlockInfoComponent implements OnInit {
-  @Input() artist: any;
+  @Input() artist: Artist = new Artist();
   information: { name: string; type?: string; value: any }[] = [];
   getYearsOld = getYearsOld;
   edit = false;
 
-  constructor(
-    private artistService: ArtistService,
-    private toast: ToastService
-  ) {}
   ngOnInit() {
     this.setInformation();
   }
@@ -49,24 +44,5 @@ export class ArtistBlockInfoComponent implements OnInit {
         value: this.artist.styles!,
       },
     ];
-  }
-
-  updateInfo() {
-    const data = {
-      _id: this.artist._id,
-      name: this.artist.name,
-      gender: this.artist.gender,
-      birthdate: this.artist.birthdate,
-      country: this.artist.country,
-      styles: this.artist.styles!,
-      social: this.artist.social
-    };
-    this.artistService.update(data).subscribe({
-      next: () => {
-        this.edit = false;
-        this.setInformation();
-      },
-      error: (error) => this.toast.showToast(TOAST_STATE.error, error),
-    });
   }
 }

@@ -8,12 +8,11 @@ Cada vez que se añada un valor en el archivo .env, hay que añadir el archivo c
 
 #### TODOs
 - [X] Crear componente loading full-screen
-- [ ] Setear automaticamente los estilos en artistas al scrapear
+- [X] Setear automaticamente los estilos en artistas al scrapear
 - [ ] Separar info de scraping
 - [ ] Creacion de modelos
-  - [ ] Creacion de modelo Set
-  - [ ] Creacion de modelo Track
+  - [X] Creacion de modelo Media
   - [ ] Creacion de modelo Club
   - [ ] Creacion de modelo Event
-- [ ] Buscador de sets/tracks de artista en admin
+- [ ] **WIP** Buscador de sets/tracks de artista en admin
 - [ ] Obtener la fecha de nacimiento de busqueda en google (birthdate of XXX)

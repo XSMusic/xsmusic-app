@@ -5,11 +5,11 @@
   >
     <div
       *ngFor="let artist of artists"
-      class="relative overflow-hidden bg-black shadow-xl cursor-pointer rounded-2xl"
+      class="relative overflow-hidden shadow-xl cursor-pointer rounded-2xl"
       (click)="goToProfile.emit(artist)"
     >
       <img
-        class="object-cover w-full h-80 opacity-60 hover:filter-grayscale"
+        class="object-cover w-full h-80 opacity-80 hover:filter-grayscale"
         [src]="artist.image"
         [alt]="artist.name"
         onError

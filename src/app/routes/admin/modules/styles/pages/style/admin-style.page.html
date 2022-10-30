@@ -1,6 +1,12 @@
 <header-custom [title]="title"></header-custom>
 
 <div class="container px-4 pt-3 mx-auto max-w-full-xl sm:pb-0 max-w-7sm">
+  <buttons-block
+    *ngIf="id"
+    type="styleAdmin"
+    (onClickButton)="onClickButton($event)"
+  ></buttons-block>
+
   <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="mb-6">
       <label for="name" class="mb-3 block text-base font-medium text-[#07074D]">

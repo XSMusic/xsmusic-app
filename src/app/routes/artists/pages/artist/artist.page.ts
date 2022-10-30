@@ -4,8 +4,8 @@ import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { Artist } from '@models';
 import { ToastService } from '@services';
 import { ArtistService } from '@shared/services/api/artist/artist.service';
-import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
-import { TOAST_STATE } from '../../../../shared/services/ui/toast/toast.service';
+import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'artist',
@@ -17,15 +17,16 @@ export class ArtistPage implements OnInit {
   artists: Artist[] = [];
   slug!: string;
   information: { name: string; type?: string; value: any }[] = [];
-  viewMore = false;
+
   constructor(
     private route: ActivatedRoute,
     private artistService: ArtistService,
-    private fullImage: FullImageService,
-    private toast: ToastService
+    private toast: ToastService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit() {
+    this.spinner.show();
     this.slug = this.route.snapshot.paramMap.get('slug')!;
     this.getArtist();
   }
@@ -34,12 +35,12 @@ export class ArtistPage implements OnInit {
     this.artistService.getOne({ slug: this.slug })!.subscribe({
       next: (artist: any) => {
         this.artist = artist;
+        this.spinner.hide();
       },
-      error: (error) => this.toast.showToast(TOAST_STATE.error, error),
+      error: (error) => {
+        this.spinner.hide();
+        this.toast.showToast(TOAST_STATE.error, error);
+      },
     });
-  }
-
-  showImage(image: string) {
-    this.fullImage.showImageFull(image);
   }
 }

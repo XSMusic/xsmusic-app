@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Media } from '@models';
-import { ToastService } from '@services';
+import { MediaService, ToastService } from '@services';
+import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
@@ -11,17 +12,35 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class AdminMediaEditPage implements OnInit {
   id!: string;
   media: Media = new Media();
+  type = '';
   constructor(
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private router: Router,
+    private mediaService: MediaService
   ) {}
 
   ngOnInit() {
+    this.type = this.route.snapshot.routeConfig!.path!.includes('sets')
+      ? 'sets'
+      : 'tracks';
     this.id = this.route.snapshot.paramMap.get('id')!;
+    this.getItem();
+  }
+
+  getItem() {
+    this.mediaService.getOne({ id: this.id }).subscribe({
+      next: (response) => (this.media = response),
+      error: (error: any) =>
+        this.toastService.showToast(TOAST_STATE.error, error),
+    });
   }
 
   onSubmitSuccess() {
     this.media = new Media();
+    const route =
+      this.type === 'sets' ? ['/admin/media/sets'] : ['/admin/media/tracks'];
+    this.router.navigate(route);
   }
 }

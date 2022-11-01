@@ -4,6 +4,8 @@ export class Style {
   created? = '';
   updated? = '';
   artists?: { count: number };
+  sets?: { count: number };
+  tracks?: { count: number };
 
   constructor(data?: Style) {
     if (data) {

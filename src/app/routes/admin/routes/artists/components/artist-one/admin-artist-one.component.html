@@ -1,115 +1,130 @@
-<form class="grid grid-cols-2 gap-4 lg:grid-cols-2">
+<form class="grid grid-cols-1 gap-4 lg:grid-cols-2">
   <div class="col-span-2 mb-1 md:col-span-1">
-    <label for="name" class="mb-3 block text-base font-medium text-[#07074D]">
-      Nombre
-    </label>
-    <input
-      name="name"
-      type="text"
-      (keydown.enter)="$event.preventDefault(); onKeyUpName($event)"
-      [(ngModel)]="artist.name"
-      placeholder="Introduce el nombre"
-      class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
+    <img
+      [src]="artist.image"
+      [alt]="artist.name"
+      (click)="showImage(artist.image!)"
+      class="object-cover w-full cursor-pointer h-80 opacity-80 rounded-2xl"
+      onError
     />
   </div>
 
-  <div class="col-span-2 mb-1 md:col-span-1">
-    <label
-      for="country"
-      class="mb-3 flex gap-2 text-base font-medium text-[#07074D]"
-    >
-      Pais
-      <img
-        *ngIf="artist.country !== ''"
-        [src]="artist.country! | countryFlag"
-        [alt]="artist.country"
+  <div class="lg:grid-cols-2 lg:gap-4 lg:grid">
+    <div class="col-span-2 md:col-span-1">
+      <label for="name" class="mb-3 block text-base font-medium text-[#07074D]">
+        Nombre
+      </label>
+      <input
+        name="name"
+        type="text"
+        (keydown.enter)="$event.preventDefault(); onKeyUpName($event)"
+        [(ngModel)]="artist.name"
+        placeholder="Introduce el nombre"
+        class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
       />
-    </label>
-    <select
-      name="country"
-      type="text"
-      [(ngModel)]="artist.country"
-      placeholder="Introduce el codigo del pais"
-      class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
-    >
-      <option *ngFor="let countryItem of countries" [value]="countryItem.id">
-        {{ countryItem.name }}
-      </option>
-    </select>
-  </div>
-
-  <div class="col-span-2 mb-1 md:col-span-1">
-    <label
-      for="birthdate"
-      class="mb-3 block text-base font-medium text-[#07074D]"
-      [ngClass]="{ 'text-orange-400': artist.birthdate === '' }"
-    >
-      Fecha nacimiento
-    </label>
-    <input
-      name="birthdate"
-      type="text"
-      [(ngModel)]="artist.birthdate"
-      placeholder="Introduce la fecha de nacimiento en formato ingles"
-      class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
-      [ngClass]="{
-        'border-orange-400 placeholder-orange-400': artist.birthdate === ''
-      }"
-    />
-  </div>
-
-  <div class="col-span-2 mb-1 md:col-span-1">
-    <label for="gender" class="mb-3 block text-base font-medium text-[#07074D]">
-      Genero
-    </label>
-    <select
-      name="gender"
-      type="text"
-      [(ngModel)]="artist.gender"
-      placeholder="Introduce el Genero"
-      class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
-    >
-      <option value="male">Hombre</option>
-      <option value="female">Mujer</option>
-      <option value="various">Varios</option>
-    </select>
-  </div>
-
-  <div class="col-span-2 mb-1">
-    <label class="mb-3 block text-base font-medium text-[#07074D]">
-      <span class="text-gray-700">Estilos</span>
-    </label>
-    <div class="flex gap-2 my-3">
-      <span
-        (click)="onClickStyleItem(styleSelected)"
-        class="px-2 py-1 text-xs bg-gray-100 border shadow-md cursor-pointer rounded-2xl"
-        *ngFor="let styleSelected of artist.styles"
-      >
-        {{ styleSelected.name }}
-      </span>
     </div>
-    <select
-      class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md form-multiselect"
-      (change)="onChangeStyleSelect($event)"
-    >
-      <option [disabled]="true">Selecciona estilo</option>
-      <option *ngFor="let style of styles" [value]="style._id">
-        {{ style.name }}
-      </option>
-    </select>
 
-    <div class="flex gap-2 my-3">
-      <span
-        (click)="onClickStyleScrapingItem(styleScraping)"
-        class="px-2 py-1 text-xs bg-gray-100 border shadow-md cursor-pointer rounded-2xl"
-        *ngFor="let styleScraping of scraping.styles"
+    <div class="col-span-2 md:col-span-1">
+      <label
+        for="country"
+        class="mb-3 flex gap-2 text-base font-medium text-[#07074D]"
       >
-        {{ styleScraping.name }}
-      </span>
+        Pais
+        <img
+          *ngIf="artist.country !== ''"
+          [src]="artist.country! | countryFlag"
+          [alt]="artist.country"
+        />
+      </label>
+      <select
+        name="country"
+        type="text"
+        [(ngModel)]="artist.country"
+        placeholder="Introduce el codigo del pais"
+        class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
+      >
+        <option *ngFor="let countryItem of countries" [value]="countryItem.id">
+          {{ countryItem.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-span-2 md:col-span-1">
+      <label
+        for="birthdate"
+        class="mb-3 block text-base font-medium text-[#07074D]"
+        [ngClass]="{ 'text-orange-400': artist.birthdate === '' }"
+      >
+        Fecha nacimiento
+      </label>
+      <input
+        name="birthdate"
+        type="text"
+        [(ngModel)]="artist.birthdate"
+        placeholder="Introduce la fecha de nacimiento en formato ingles"
+        class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
+        [ngClass]="{
+          'border-orange-400 placeholder-orange-400': artist.birthdate === ''
+        }"
+      />
+    </div>
+
+    <div class="col-span-2 md:col-span-1">
+      <label
+        for="gender"
+        class="mb-3 block text-base font-medium text-[#07074D]"
+      >
+        Genero
+      </label>
+      <select
+        name="gender"
+        type="text"
+        [(ngModel)]="artist.gender"
+        placeholder="Introduce el Genero"
+        class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
+      >
+        <option value="male">Hombre</option>
+        <option value="female">Mujer</option>
+        <option value="various">Varios</option>
+      </select>
+    </div>
+
+    <div class="col-span-2">
+      <label class="mb-3 block text-base font-medium text-[#07074D]">
+        <span class="text-gray-700">Estilos</span>
+      </label>
+      <div class="flex gap-2 my-3">
+        <span
+          (click)="onClickStyleItem(styleSelected)"
+          class="px-2 py-1 text-xs bg-gray-100 border shadow-md cursor-pointer rounded-2xl"
+          *ngFor="let styleSelected of artist.styles"
+        >
+          {{ styleSelected.name }}
+        </span>
+      </div>
+      <select
+        class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md form-multiselect"
+        (change)="onChangeStyleSelect($event)"
+      >
+        <option [disabled]="true">Selecciona estilo</option>
+        <option *ngFor="let style of styles" [value]="style._id">
+          {{ style.name }}
+        </option>
+      </select>
+
+      <div class="flex gap-2 my-3" *ngIf="scraping.styles.length > 0">
+        <span
+          (click)="onClickStyleScrapingItem(styleScraping)"
+          class="px-2 py-1 text-xs bg-gray-100 border shadow-md cursor-pointer rounded-2xl"
+          *ngFor="let styleScraping of scraping.styles"
+        >
+          {{ styleScraping.name }}
+        </span>
+      </div>
     </div>
   </div>
 
-  <div class="col-span-2 mb-1">
+  <div class="col-span-2">
     <label for="image" class="mb-3 block text-base font-medium text-[#07074D]">
       Imagen
     </label>

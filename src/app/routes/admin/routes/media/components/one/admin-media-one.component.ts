@@ -8,14 +8,15 @@ import {
   StyleService,
   ToastService,
 } from '@services';
+import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 
 @Component({
-  selector: 'admin-media-edit',
-  templateUrl: 'admin-media-edit.component.html',
+  selector: 'admin-media-one',
+  templateUrl: 'admin-media-one.component.html',
   animations: [inOutAnimation],
 })
-export class AdminMediaEditComponent {
+export class AdminMediaOneComponent {
   @Input() media: Media = new Media();
   @Output() onSubmitSuccess: EventEmitter<any> = new EventEmitter<void>();
   sources = [{ name: 'Youtube', value: 'youtube' }];
@@ -27,7 +28,8 @@ export class AdminMediaEditComponent {
     private styleService: StyleService,
     private mediaService: MediaService,
     private toast: ToastService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private fullImage: FullImageService
   ) {}
 
   ngOnInit() {
@@ -51,16 +53,16 @@ export class AdminMediaEditComponent {
 
   onClickItem(type: 'artists' | 'styles', item: { name: string; _id: string }) {
     this.media[type] = this.media[type]?.filter(
-      (mediaItem: any) => mediaItem.name !== item.name
+      (mediaItem: Media) => mediaItem.name !== item.name
     );
   }
 
   onChangeArtistSelect(e: any) {
     if (this.media.artists!.length < 5) {
-      const newStyle = this.artists.find(
+      const newItem = this.artists.find(
         (artist) => artist._id!.toString() === e.target.value.toString()
       );
-      this.media.artists?.push(newStyle);
+      this.media.artists?.push(newItem);
     } else {
       this.toastService.showToast(
         TOAST_STATE.warning,
@@ -71,10 +73,10 @@ export class AdminMediaEditComponent {
 
   onChangeStyleSelect(e: any) {
     if (this.media.styles!.length < 5) {
-      const newStyle = this.styles.find(
+      const netItem = this.styles.find(
         (style) => style._id!.toString() === e.target.value.toString()
       );
-      this.media.styles?.push(newStyle);
+      this.media.styles?.push(netItem);
     } else {
       this.toastService.showToast(
         TOAST_STATE.warning,
@@ -143,5 +145,9 @@ export class AdminMediaEditComponent {
   onSuccess(response: MessageI) {
     this.toastService.showToast(TOAST_STATE.success, response.message);
     this.onSubmitSuccess.emit();
+  }
+
+  showImage(image: string) {
+    this.fullImage.showImageFull(image);
   }
 }

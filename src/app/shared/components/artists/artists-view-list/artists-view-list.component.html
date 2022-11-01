@@ -61,14 +61,14 @@
           <td class="pl-5">
             <div class="flex items-center">
               <p class="mr-2 text-sm font-light leading-none text-gray-700">
-                0 Sets
+                {{ artist.sets?.count ?? 0 }} Sets
               </p>
             </div>
           </td>
           <td class="pl-5">
             <div class="flex items-center">
               <p class="mr-2 text-sm font-light leading-none text-gray-700">
-                0 Tracks
+                {{ artist.tracks?.count ?? 0 }} Tracks
               </p>
             </div>
           </td>

@@ -7,6 +7,14 @@
     (onClickButton)="onClickButton($event)"
   ></buttons-block>
 
+  <alert
+    type="info"
+    message="Filtro activado."
+    actionText="Quitar"
+    (action)="removeFilter()"
+    *ngIf="body.filter && body.filter.length > 0"
+  ></alert>
+
   <media-list-view
     [media]="items"
     [loading]="loading"

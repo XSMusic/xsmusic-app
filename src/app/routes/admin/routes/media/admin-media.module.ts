@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '@shared/shared.module';
-import { AdminMediaEditComponent } from './components/edit/admin-media-edit.component';
+import { AdminMediaOneComponent } from './components/one/admin-media-one.component';
 import { AdminMediaAddPage } from './pages/add/admin-media-add.page';
 import { AdminMediaEditPage } from './pages/edit/admin-media-edit.page';
 import { AdminMediaListPage } from './pages/list/admin-media-list.page';
@@ -47,7 +47,7 @@ import { AdminMediaListPage } from './pages/list/admin-media-list.page';
     AdminMediaListPage,
     AdminMediaAddPage,
     AdminMediaEditPage,
-    AdminMediaEditComponent,
+    AdminMediaOneComponent,
   ],
   providers: [],
 })

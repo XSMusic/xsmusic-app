@@ -23,7 +23,6 @@ export class ArtistsPage implements OnInit {
   };
   loading = true;
   error = false;
-  buttons = [];
   constructor(
     private router: Router,
     private artistService: ArtistService,

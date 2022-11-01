@@ -14,5 +14,6 @@ Cada vez que se añada un valor en el archivo .env, hay que añadir el archivo c
   - [X] Creacion de modelo Media
   - [ ] Creacion de modelo Club
   - [ ] Creacion de modelo Event
-- [ ] **WIP** Buscador de sets/tracks de artista en admin
 - [ ] Obtener la fecha de nacimiento de busqueda en google (birthdate of XXX)
+- [ ] **WIP** Buscador de sets/tracks de artista en admin
+  - [ ] Al editar un media, se duplican artistas y estilos

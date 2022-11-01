@@ -85,6 +85,11 @@ export class AdminMediaListPage implements OnInit {
     this.getItems();
   }
 
+  removeFilter() {
+    this.body.filter = [];
+    this.getItems();
+  }
+
   onScroll() {
     this.body.page++;
     this.getItems(true);

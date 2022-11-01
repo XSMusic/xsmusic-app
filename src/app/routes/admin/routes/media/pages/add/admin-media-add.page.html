@@ -26,11 +26,11 @@
     </div>
   </div>
 
-  <admin-media-edit
+  <admin-media-one
     *ngIf="media?.name !== ''"
     [media]="media"
     (onSubmitSuccess)="onSubmitSuccess()"
-  ></admin-media-edit>
+  ></admin-media-one>
 
   <div
     @inOut

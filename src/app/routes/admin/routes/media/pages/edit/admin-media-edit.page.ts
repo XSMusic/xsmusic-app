@@ -12,6 +12,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class AdminMediaEditPage implements OnInit {
   id!: string;
   media: Media = new Media();
+  title = '';
   type = '';
   constructor(
     private route: ActivatedRoute,
@@ -25,6 +26,7 @@ export class AdminMediaEditPage implements OnInit {
     this.type = this.route.snapshot.routeConfig!.path!.includes('sets')
       ? 'sets'
       : 'tracks';
+    this.title = this.type === 'sets' ? 'Editar Set' : 'Editar Track';
     this.id = this.route.snapshot.paramMap.get('id')!;
     this.getItem();
   }

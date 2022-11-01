@@ -18,7 +18,7 @@ import { AdminTotalsComponent } from './components/totals/admin-totals.component
         path: routesConfig.artists,
         data: { breadcrumb: 'Artistas' },
         loadChildren: () =>
-          import('./modules/artists/admin-artists.module').then(
+          import('./routes/artists/admin-artists.module').then(
             (m) => m.AdminArtistsModule
           ),
       },
@@ -26,7 +26,7 @@ import { AdminTotalsComponent } from './components/totals/admin-totals.component
         path: routesConfig.styles,
         data: { breadcrumb: 'Estilos' },
         loadChildren: () =>
-          import('./modules/styles/admin-styles.module').then(
+          import('./routes/styles/admin-styles.module').then(
             (m) => m.AdminStylesModule
           ),
       },
@@ -34,7 +34,7 @@ import { AdminTotalsComponent } from './components/totals/admin-totals.component
         path: routesConfig.media,
         data: { breadcrumb: 'Media' },
         loadChildren: () =>
-          import('./modules/media/admin-media.module').then(
+          import('./routes/media/admin-media.module').then(
             (m) => m.AdminMediaModule
           ),
       },
@@ -42,7 +42,7 @@ import { AdminTotalsComponent } from './components/totals/admin-totals.component
         path: routesConfig.users,
         data: { breadcrumb: 'Usuarios' },
         loadChildren: () =>
-          import('./modules/users/admin-users.module').then(
+          import('./routes/users/admin-users.module').then(
             (m) => m.AdminUsersModule
           ),
       },

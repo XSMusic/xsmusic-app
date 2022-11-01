@@ -22,15 +22,15 @@
       <div class="grid w-full grid-cols-3 gap-2 px-1 pt-">
         <div class="p-3 text-center">
           <div class="text-sm text-gray-500">Artistas</div>
-          <div class="text-xl font-bold">{{ style.artists!.count }}</div>
+          <div class="text-xl font-bold">{{ style.artists?.count ?? 0 }}</div>
         </div>
         <div class="p-3 text-center">
           <div class="text-sm text-gray-500">Sets</div>
-          <div class="text-xl font-bold">1</div>
+          <div class="text-xl font-bold">{{ style.sets?.count ?? 0 }}</div>
         </div>
         <div class="p-3 text-center">
           <div class="text-sm text-gray-500">Tracks</div>
-          <div class="text-xl font-bold">1</div>
+          <div class="text-xl font-bold">{{ style.tracks?.count ?? 0 }}</div>
         </div>
       </div>
     </div>

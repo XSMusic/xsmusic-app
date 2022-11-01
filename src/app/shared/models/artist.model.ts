@@ -15,6 +15,8 @@ export class Artist {
     spotify: '',
     soundcloud: '',
   };
+  sets?: { count: number };
+  tracks?: { count: number };
   created?: string;
   updated?: string;
   constructor(data?: Artist) {

@@ -26,24 +26,15 @@
               >
                 {{ mediaItem.name }}
               </p>
+              <p class="mt-1 text-sm font-light leading-none text-gray-500">
+                <span *ngFor="let artist of mediaItem.artists">{{
+                  artist.name
+                }}</span>
+              </p>
             </div>
           </td>
-          <td>
-            <div class="flex flex-row justify-center">
-              <div
-                *ngFor="let artist of mediaItem.artists"
-                class="relative z-0 inline-flex -mr-4 transition duration-300 ease-in-out"
-              >
-                <img
-                  class="z-10 object-cover border-2 border-white rounded-full shadow h-9 w-9 hover:shadow-xl dark:border-slate-800"
-                  [src]="artist.image"
-                  [alt]="artist.name"
-                  onError
-                />
-              </div>
-            </div>
-          </td>
-          <td class="pl-10">
+
+          <td class="pl-5">
             <span
               *ngFor="let style of mediaItem.styles; let i = index"
               class="gap-1 px-2 py-1 mr-1 text-xs text-center border cursor-pointer rounded-2xl hover:bg-gray-100"
@@ -51,6 +42,12 @@
             >
               {{ style.name | titlecase }}
             </span>
+          </td>
+
+          <td class="pl-5">
+            <div class="w-10">
+              <svg-icon [name]="mediaItem.source"></svg-icon>
+            </div>
           </td>
 
           <td class="pl-5">

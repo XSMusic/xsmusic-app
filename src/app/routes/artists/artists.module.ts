@@ -6,6 +6,8 @@ import { ArtistPage } from './pages/artist/artist.page';
 import { ArtistsViewGalleryComponent } from './components/view-gallery/artists-view-gallery.component';
 import { ArtistBlockInfoComponent } from './components/block-info/artist-block-info.component';
 import { ArtistBlockImageInfoComponent } from './components/block-image-info/artist-block-image-info.component';
+import { ArtistBlockSetsComponent } from './components/block-sets/artist-block-sets.component';
+import { ArtistBlockTracksComponent } from './components/block-tracks/artist-block-tracks.component';
 
 @NgModule({
   imports: [
@@ -25,11 +27,15 @@ import { ArtistBlockImageInfoComponent } from './components/block-image-info/art
   ],
   exports: [],
   declarations: [
+    ArtistBlockTracksComponent,
+    ArtistBlockSetsComponent,
     ArtistsPage,
     ArtistPage,
     ArtistsViewGalleryComponent,
     ArtistBlockImageInfoComponent,
     ArtistBlockInfoComponent,
+    ArtistBlockSetsComponent,
+    ArtistBlockTracksComponent,
   ],
   providers: [],
 })

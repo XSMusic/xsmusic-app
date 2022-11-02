@@ -28,7 +28,6 @@ export class AdminMediaAddPage implements OnInit {
 
   ngOnInit() {
     this.getType();
-    console.log(this.type);
   }
 
   getType() {
@@ -57,7 +56,7 @@ export class AdminMediaAddPage implements OnInit {
       name: item.name,
       image: item.image,
       type: this.type,
-      source: this.sourceSelected!,
+      source: this.sourceSelected,
       sourceId: item.videoId,
       info: item.info,
     });

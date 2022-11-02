@@ -1,46 +1,51 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Media } from '@models';
-import { MediaService, ToastService } from '@services';
+import { ToastService, MediaService } from '@services';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
-  selector: 'page-admin-media-edit',
-  templateUrl: 'admin-media-edit.page.html',
+  selector: 'page-set',
+  templateUrl: 'set.page.html',
 })
-export class AdminMediaEditPage implements OnInit {
+export class SetPage implements OnInit {
   id!: string;
   media: Media = new Media();
-  title = '';
-  type = '';
   constructor(
     private route: ActivatedRoute,
     private toastService: ToastService,
     private router: Router,
-    private mediaService: MediaService
+    private mediaService: MediaService,
+    private _sanitizer: DomSanitizer
   ) {}
 
   ngOnInit() {
-    this.type = this.route.snapshot.routeConfig!.path!.includes('sets')
-      ? 'sets'
-      : 'tracks';
-    this.title = this.type === 'sets' ? 'Editar Set' : 'Editar Track';
     this.id = this.route.snapshot.paramMap.get('id')!;
     this.getItem();
   }
 
   getItem() {
     this.mediaService.getOne({ id: this.id }).subscribe({
-      next: (response) => (this.media = response),
+      next: (response) => {
+        this.media = response;
+      },
       error: (error: any) =>
         this.toastService.showToast(TOAST_STATE.error, error),
     });
   }
 
-  onSubmitSuccess() {
-    this.media = new Media();
-    const route =
-      this.type === 'sets' ? ['/admin/media/sets'] : ['/admin/media/tracks'];
-    this.router.navigate(route);
+  getVideoUrl() {
+    return this._sanitizer.bypassSecurityTrustResourceUrl(
+      `https://www.youtube.com/embed/${this.media.sourceId}`
+    );
+  }
+
+  goToArtistProfile(slug: string) {
+    this.router.navigate(['artists/profile/', slug]);
+  }
+
+  goToEdit() {
+    this.router.navigate(['admin/media/sets/edit/', this.id]);
   }
 }

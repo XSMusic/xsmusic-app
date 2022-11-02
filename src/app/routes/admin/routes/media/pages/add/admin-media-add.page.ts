@@ -13,7 +13,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   animations: [inOutAnimation],
 })
 export class AdminMediaAddPage implements OnInit {
-  searchText = 'DJ Nano';
+  searchText = '';
   items: Youtube[] = [];
   itemSelected?: Youtube;
   media: Media = new Media();
@@ -27,7 +27,6 @@ export class AdminMediaAddPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.search();
     this.getType();
     console.log(this.type);
   }

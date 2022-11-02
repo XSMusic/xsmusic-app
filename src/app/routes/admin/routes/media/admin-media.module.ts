@@ -10,6 +10,8 @@ import { AdminMediaListPage } from './pages/list/admin-media-list.page';
   imports: [
     SharedModule,
     RouterModule.forChild([
+      { path: '*', redirectTo: 'sets', pathMatch: 'full' },
+      { path: '', redirectTo: 'sets', pathMatch: 'full' },
       {
         path: 'sets',
         component: AdminMediaListPage,

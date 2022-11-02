@@ -1,4 +1,4 @@
-<form *ngIf="media" @inOut class="grid grid-cols-2 gap-4 lg:grid-cols-2">
+<form @inOut class="grid grid-cols-1 gap-4 lg:grid-cols-2">
   <div class="col-span-2 mb-1 md:col-span-1">
     <img
       [src]="media.image"
@@ -8,8 +8,8 @@
       onError
     />
   </div>
-  <div class="lg:grid-cols-2 lg:gap-4 lg:grid">
-    <div class="col-span-2 mb-1">
+  <div class="grid lg:grid-cols-2 lg:gap-4">
+    <div class="col-span-2 md:col-span-1">
       <label for="name" class="mb-3 block text-base font-medium text-[#07074D]">
         Nombre
       </label>
@@ -22,7 +22,7 @@
       />
     </div>
 
-    <div class="col-span-2 mb-1 md:col-span-1">
+    <div class="col-span-2 md:col-span-1">
       <label
         for="source"
         class="mb-3 block text-base font-medium text-[#07074D]"
@@ -126,6 +126,21 @@
     </select>
   </div>
 
+  <div class="col-span-2 mb-1 md:col-span-2">
+      <label
+        for="sourceId"
+        class="mb-3 block text-base font-medium text-[#07074D]"
+      >
+        Info
+      </label>
+      <textarea
+        name="info"
+        [(ngModel)]="media.info"
+        placeholder="Introduce informacion"
+        class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
+      ></textarea>
+    </div>
+
   <!-- Actions Buttons -->
   <div class="col-span-2 mb-2">
     <button
@@ -147,7 +162,7 @@
     <button
       type="button"
       *ngIf="media._id"
-      [routerLink]="['/artists/profile/', media._id]"
+      [routerLink]="['/sets/', media._id]"
       class="w-full py-1 m-1 text-white bg-blue-500 border-2 border-blue-500 shadow-md hover:bg-blue-600 hover:border-blue-600 hover:text-white md:w-32 rounded-2xl"
     >
       Ver perfil

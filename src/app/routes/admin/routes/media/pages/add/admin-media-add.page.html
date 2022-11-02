@@ -39,6 +39,7 @@
   >
     <div *ngFor="let item of items">
       <div
+      *ngIf="itemSelected !== item"
         class="relative overflow-hidden shadow-xl cursor-pointer rounded-t-2xl rounded-x-2xl"
       >
         <img
@@ -49,7 +50,7 @@
         />
       </div>
       <div class="w-full px-2 py-1 border rounded-x-2xl rounded-b-2xl">
-        <div *ngIf="itemSelected !== item" class="mb-3 font-semibold text-md">
+        <div class="mb-3 font-semibold text-md">
           {{ item.name | truncateText: 75}}
         </div>
 

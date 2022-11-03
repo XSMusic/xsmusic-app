@@ -22,6 +22,7 @@ export class NavbarComponent implements OnInit {
   menuProfileItems: Menu[] = [];
   user!: User;
   adminPage = false;
+  hidden = false;
 
   constructor(private router: Router, private authService: AuthService) {}
 

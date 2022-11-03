@@ -29,7 +29,7 @@ export class ArtistsLastBlockComponent implements OnInit {
     if (window.innerWidth <= 360) {
       this.slidesPerView = 2.5;
     } else if (window.innerWidth <= 500) {
-      this.slidesPerView = 3.15;
+      this.slidesPerView = 5;
     } else if (window.innerWidth <= 1440) {
       this.slidesPerView = 5.5;
     } else if (window.innerWidth > 1441) {

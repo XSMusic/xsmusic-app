@@ -1,42 +1,15 @@
-<!-- <div
-  @inOut
-  class="container grid h-full gap-4 px-1 mx-auto mt-2 overflow-auto text-center grid-col-3 lg:grid-cols-3 rounded-xl"
->
-
-  <div
-    class="relative col-span-3 p-0 cursor-pointer lg:col-span-2 rounded-2xl"
-    *ngFor="let artist of artists | slice: 0:1"
-  >
-    <img
-      [src]="artist.image"
-      class="object-cover w-full cursor-pointer h-80 rounded-2xl y-full x-full hover:filter-grayscale"
-      alt="artist.name"
-    />
-
-     <div class="absolute bottom-2.5 left-0 w-full px-6 py-1">
-        <div class="flex">
-          <div class="mb-3 text-2xl font-bold text-white">
-            {{ artist.name }}
-          </div>
-          <img
-            [src]="artist.country! | countryFlag"
-            class="w-6 h-6 mx-2 mt-1.5"
-            [alt]="artist.country"
-          />
-        </div>
-      </div>
-  </div>
-
-
-</div> -->
+<h1 class="py-3 text-lg font-extrabold">Ultimos artistas</h1>
 
 <swiper [slidesPerView]="slidesPerView" [spaceBetween]="10">
   <ng-template swiperSlide *ngFor="let artist of artists">
-    <img
-      [src]="artist.image"
-      class="object-cover h-32 cursor-pointer w-52 rounded-2xl hover:filter-grayscale"
-      alt="artist.name"
-      (click)="goToArtistProfile(artist.slug!)"
-    />
+    <div class="flex flex-col w-20 text-center hover:opacity-90">
+      <img
+        [src]="artist.image"
+        class="object-cover w-full h-20 rounded-full cursor-pointer hover:filter-grayscale"
+        alt="artist.name"
+        (click)="goToArtistProfile(artist.slug!)"
+      />
+      <p class="pt-1 text-xs font-light text-gray-500">{{ artist.name }}</p>
+    </div>
   </ng-template>
 </swiper>

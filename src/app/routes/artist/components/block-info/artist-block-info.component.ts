@@ -23,11 +23,6 @@ export class ArtistBlockInfoComponent implements OnInit {
   setInformation() {
     this.information = [
       {
-        name: 'Nombre',
-        type: 'name',
-        value: this.artist.name,
-      },
-      {
         name: 'Genero',
         type: 'gender',
         value: this.artist.gender,

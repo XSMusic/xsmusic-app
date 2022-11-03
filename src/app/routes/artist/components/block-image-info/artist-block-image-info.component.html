@@ -1,32 +1,57 @@
 <img
   [src]="artist.image"
-  class="object-cover w-full cursor-pointer rounded-2xl h-80 hover:filter-grayscale"
+  class="object-cover mx-auto mt-3 border-2 rounded-full shadow-sm cursor-pointer w-52 h-52 hover:filter-grayscale"
   onError
   [alt]="artist.name"
   (click)="showImage(artist.image!)"
 />
-<div class="p-2">
-  <h1 class="pt-2 text-xl font-extrabold text-left">{{ artist.name }}</h1>
-  <div
-    *ngIf="!viewMore"
-    class="text-left"
-    [innerHtml]="artist.info! | truncateText: 180"
-  ></div>
-  <div *ngIf="viewMore" class="text-left" [innerHtml]="artist.info!"></div>
-</div>
-<button
-  *ngIf="artist.info!.length > 200"
-  class="w-full py-1 mt-3 font-semibold bg-gray-100 border shadow-md rounded-2xl hover:bg-gray-200"
-  (click)="viewMore = !viewMore"
->
-  {{ !viewMore ? 'Ver mas' : 'Ver menos' }}
-</button>
 
-<div *ngxPermissionsOnly="'ADMIN'">
-  <button
-    class="w-full py-1 mt-3 font-semibold text-white bg-orange-500 border shadow-md rounded-2xl hover:bg-orange-600"
-    (click)="goToEdit(artist._id!)"
-  >
-    Editar Artista
-  </button>
+<p
+  *ngxPermissionsOnly="'ADMIN'"
+  (click)="goToEdit(artist._id!)"
+  class="pt-2 text-3xl font-bold text-center cursor-pointer"
+>
+  {{ artist.name }}
+  <span class="text-lg text-gray-600" *ngIf="artist.birthdate !== ''">{{
+    getYearsOld(artist.birthdate!)
+  }}</span>
+</p>
+
+<p *ngxPermissionsExcept="'ADMIN'" class="pt-2 text-3xl font-bold text-center">
+  {{ artist.name }}
+  <span class="text-lg text-gray-600" *ngIf="artist.birthdate !== ''">{{
+    getYearsOld(artist.birthdate!)
+  }}</span>
+</p>
+
+
+<div
+  class="py-1 mx-auto cursor-pointer"
+  (click)="goToArtistFilter('country', artist.country!)"
+>
+  <div class="flex items-center justify-center gap-2">
+    <img class="w-6" [src]="artist.country! | countryFlag" alt="item.name" />
+    {{ artist.country! | countryName }}
+  </div>
+</div>
+
+<div class="p-2 text-center">
+  <span *ngFor="let style of artist.styles; index as i">
+    <a
+    (click)="goToArtistFilter('styles', style.name)"
+      class="px-2 py-1 mr-2 text-xs bg-gray-100 border border-gray-100 shadow-md cursor-pointer rounded-2xl hover:bg-gray-200 hover:border-gray-200"
+    >
+      {{ style.name }}
+    </a>
+  </span>
+</div>
+
+<div class="py-2">
+  <div class="flex justify-center">
+    <svg-icon *ngIf="artist.social?.web" name="web" svgClass="h-4 w-4" class="px-4"></svg-icon>
+    <svg-icon *ngIf="artist.social?.facebook" name="facebook" svgClass="h-4 w-4" class="px-4"></svg-icon>
+    <svg-icon *ngIf="artist.social?.twitter" name="twitter" svgClass="h-4 w-4" class="px-4"></svg-icon>
+    <svg-icon *ngIf="artist.social?.soundcloud" name="soundcloud" svgClass="h-4 w-4" class="px-4"></svg-icon>
+    <svg-icon *ngIf="artist.social?.spotify" name="spotify" svgClass="h-4 w-4" class="px-4"></svg-icon>
+  </div>
 </div>

@@ -1,113 +1,24 @@
-<div class="my-3 overflow-hidden text-center border shadow-lg rounded-2xl">
-  <div class="w-full py-2 font-extrabold border-b">Sets</div>
-  <div>
+<div
+  class="container grid gap-4 px-3 mx-auto overflow-auto overflow-x-auto text-center lg:grid-cols-1 rounded-xl"
+>
+  <div >
     <p class="p-3" *ngIf="artist.sets.length === 0">
-      Actualmente no hay ningun set para {{ artist.name }}
+      No hay ningun set para {{ artist.name }}
     </p>
 
-    <div
-      id="carouselExampleCaptions"
-      class="relative carousel slide"
-      data-bs-ride="carousel"
-    >
-      <div
-        class="absolute bottom-0 left-0 right-0 flex justify-center p-0 mb-4 carousel-indicators"
-      >
-        <button
-          type="button"
-          data-bs-target="#carouselExampleCaptions"
-          data-bs-slide-to="0"
-          class="active"
-          aria-current="true"
-          aria-label="Slide 1"
-        ></button>
-        <button
-          type="button"
-          data-bs-target="#carouselExampleCaptions"
-          data-bs-slide-to="1"
-          aria-label="Slide 2"
-        ></button>
-        <button
-          type="button"
-          data-bs-target="#carouselExampleCaptions"
-          data-bs-slide-to="2"
-          aria-label="Slide 3"
-        ></button>
-      </div>
-      <div class="relative w-full overflow-hidden carousel-inner">
-        <div class="relative float-left w-full carousel-item active">
+    <div class="flex justify-center">
+      <div *ngFor="let set of artist.sets">
+        <div
+          class="flex flex-col w-40 p-2 py-4 cursor-pointer hover:opacity-90"
+        >
           <img
-            src="https://mdbootstrap.com/img/Photos/Slides/img%20(15).jpg"
-            class="block w-full"
-            alt="..."
+            [src]="set.image"
+            alt="set.name"
+            class="object-cover h-32 rounded-2xl"
           />
-          <div class="absolute hidden text-center carousel-caption md:block">
-            <h5 class="text-xl">First slide label</h5>
-            <p>Some representative placeholder content for the first slide.</p>
-          </div>
-        </div>
-        <div class="relative float-left w-full carousel-item">
-          <img
-            src="https://mdbootstrap.com/img/Photos/Slides/img%20(22).jpg"
-            class="block w-full"
-            alt="..."
-          />
-          <div class="absolute hidden text-center carousel-caption md:block">
-            <h5 class="text-xl">Second slide label</h5>
-            <p>Some representative placeholder content for the second slide.</p>
-          </div>
-        </div>
-        <div class="relative float-left w-full carousel-item">
-          <img
-            src="https://mdbootstrap.com/img/Photos/Slides/img%20(23).jpg"
-            class="block w-full"
-            alt="..."
-          />
-          <div class="absolute hidden text-center carousel-caption md:block">
-            <h5 class="text-xl">Third slide label</h5>
-            <p>Some representative placeholder content for the third slide.</p>
-          </div>
+          <p class="p-2 text-xs text-center">{{ set.name }}</p>
         </div>
       </div>
-      <button
-        class="absolute top-0 bottom-0 left-0 flex items-center justify-center p-0 text-center border-0 carousel-control-prev hover:outline-none hover:no-underline focus:outline-none focus:no-underline"
-        type="button"
-        data-bs-target="#carouselExampleCaptions"
-        data-bs-slide="prev"
-      >
-        <span
-          class="inline-block bg-no-repeat carousel-control-prev-icon"
-          aria-hidden="true"
-        ></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button
-        class="absolute top-0 bottom-0 right-0 flex items-center justify-center p-0 text-center border-0 carousel-control-next hover:outline-none hover:no-underline focus:outline-none focus:no-underline"
-        type="button"
-        data-bs-target="#carouselExampleCaptions"
-        data-bs-slide="next"
-      >
-        <span
-          class="inline-block bg-no-repeat carousel-control-next-icon"
-          aria-hidden="true"
-        ></span>
-        <span class="visually-hidden">Next</span>
-      </button>
     </div>
-
-    <!-- <div
-              *ngFor="let set of artist.sets"
-              class="block p-2 py-4 overflow-x-auto cursor-pointer w-52"
-              (click)="goToSet(set)"
-            >
-              <div class="border shadow-xl rounded-2xl">
-                <img
-                  [src]="set.image"
-                  alt="set.name"
-                  class="w-full h-32 object-coverw-full rounded-t-2xl"
-                />
-                <p class="p-2 text-sm">{{ set.name | truncateText: 20}}</p>
-              </div>
-            </div> -->
   </div>
 </div>

@@ -49,11 +49,12 @@
               </div>
             </div>
           </td>
-          <td class="pl-5">
+          <td class="px-5">
             <span
               *ngFor="let style of artist.styles; let i = index"
-              class="gap-1 px-2 py-1 mr-1 text-xs text-center border cursor-pointer rounded-2xl hover:bg-gray-100"
+              class="gap-1 px-2 py-1 pl-3 mr-1 text-xs text-center cursor-pointer rounded-2xl hover:opacity-80"
               (click)="filter.emit({ name: 'styles', value: style.name })"
+              [ngClass]="[style.colors?.bg ?? 'bg-gray-100', style.colors?.text ?? 'text-black']"
             >
               {{ style.name | titlecase }}
             </span>

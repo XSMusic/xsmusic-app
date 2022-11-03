@@ -5,7 +5,7 @@ export const routesConfig = {
   artists: 'artists',
   artistAdmin: 'admin/artists/one/:id',
   artistsAdmin: 'admin/artists',
-  artistsFilter: 'artists/:filterKey/:filterValue',
+  artistsFilter: 'artists/filter/:filterKey/:filterValue',
   auth: 'auth',
   club: 'club',
   clubs: 'clubs',

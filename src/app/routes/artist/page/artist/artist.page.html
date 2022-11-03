@@ -1,23 +1,11 @@
 <ng-container *ngIf="artist">
-  <header-custom [title]="artist.name!"></header-custom>
+  <artist-block-image-info [artist]="artist"></artist-block-image-info>
 
-  <div
-    *ngIf="artist"
-    @inOut
-    class="container grid gap-4 px-3 mx-auto mt-3 overflow-auto text-center lg:grid-cols-4 rounded-xl"
-  >
-    <div
-      class="block w-full col-span-3 p-4 mx-auto border md:col-span-2 rounded-2xl"
-    >
-      <artist-block-image-info [artist]="artist"></artist-block-image-info>
-    </div>
+  <p class="px-6 py-2 text-center">{{ artist.info! | truncateText: 150}}</p>
 
-    <div class="block col-span-3 text-left md:col-span-2">
-      <artist-block-info [artist]="artist"></artist-block-info>
+  <div class="px-6 pt-2 font-extrabold text-center">Sets</div>
+  <artist-block-sets [view]="view" [artist]="artist"></artist-block-sets>
 
-      <artist-block-sets [artist]="artist"></artist-block-sets>
-
-      <artist-block-tracks [artist]="artist"></artist-block-tracks>
-    </div>
-  </div>
+  <div class="px-6 font-extrabold text-center">Tracks</div>
+  <artist-block-tracks [artist]="artist"></artist-block-tracks>
 </ng-container>

@@ -7,4 +7,5 @@ import { Artist } from '@models';
 })
 export class ArtistBlockSetsComponent {
   @Input() artist!: Artist;
+  @Input() view = 'sets';
 }

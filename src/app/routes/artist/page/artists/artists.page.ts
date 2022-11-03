@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { GetAllDto, SearchDto } from '@interfaces';
+import { routesConfig } from '@core/config';
+import { GetAllDto } from '@interfaces';
 import { Artist } from '@models';
 import { ToastService } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
@@ -21,15 +22,23 @@ export class ArtistsPage implements OnInit {
     pageSize: 20,
     order: ['created', 'desc'],
   };
+  filterKey?: string;
+  filterValue?: string;
   loading = true;
   error = false;
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private artistService: ArtistService,
     private toast: ToastService
   ) {}
 
   ngOnInit() {
+    this.filterKey = this.route.snapshot.paramMap.get('filterKey')!;
+    this.filterValue = this.route.snapshot.paramMap.get('filterValue')!;
+    if (this.filterKey && this.filterValue) {
+      this.body.filter = [this.filterKey, this.filterValue];
+    }
     this.getArtists();
   }
 
@@ -53,16 +62,17 @@ export class ArtistsPage implements OnInit {
   }
 
   goToProfile(artist: Artist) {
-    this.router.navigate(['artists/profile/', artist.slug]);
+    this.router.navigate([routesConfig.artist.replace(':slug', artist.slug!)]);
   }
 
   filter(event: { name: string; value: string }) {
-    console.log(event);
+    this.body.page = 1;
     this.body.filter = [event.name, event.value];
     this.getArtists();
   }
 
   removeFilter() {
+    this.body.page = 1;
     this.body.filter = [];
     this.getArtists();
   }
@@ -85,13 +95,9 @@ export class ArtistsPage implements OnInit {
       this.body.page = 1;
       this.getArtists();
     } else {
-      const body: SearchDto = { value: event.text, limit: 20 };
-      this.artistService.search(body).subscribe({
-        next: (response) => {
-          this.artists = response;
-        },
-        error: (error) => this.toast.showToast(TOAST_STATE.error, error),
-      });
+      this.body.page = 1;
+      this.body.filter = ['name', event.text];
+      this.getArtists();
     }
   }
 }

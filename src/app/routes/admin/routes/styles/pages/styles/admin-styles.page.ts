@@ -1,15 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { SearchDto } from '@interfaces';
 import { Style } from '@models';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 import { StyleGetAllDto } from '@shared/services/api/style/style.dto';
 import { StyleService } from '@shared/services/api/style/style.service';
-import {
-  ToastService,
-  TOAST_STATE,
-} from '@shared/services/ui/toast/toast.service';
 
 @Component({
   selector: 'page-admin-styles',
@@ -29,7 +24,6 @@ export class AdminStylesPage implements OnInit {
   constructor(
     private router: Router,
     private styleService: StyleService,
-    private toast: ToastService
   ) {}
 
   ngOnInit() {
@@ -55,11 +49,13 @@ export class AdminStylesPage implements OnInit {
   }
 
   filter(event: { name: string; value: string }) {
+    this.body.page = 1;
     this.body.filter = [event.name, event.value];
     this.getStyles();
   }
 
   removeFilter() {
+    this.body.page = 1;
     this.body.filter = [];
     this.getStyles();
   }
@@ -80,13 +76,9 @@ export class AdminStylesPage implements OnInit {
       this.body.page = 1;
       this.getStyles();
     } else {
-      const body: SearchDto = { value: event.text, limit: 20 };
-      this.styleService.search(body).subscribe({
-        next: (response) => {
-          this.styles = response;
-        },
-        error: (error) => this.toast.showToast(TOAST_STATE.error, error),
-      });
+      this.body.page = 1;
+      this.body.filter = ['name', event.text];
+      this.getStyles();
     }
   }
 }

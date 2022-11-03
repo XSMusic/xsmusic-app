@@ -1,57 +1,61 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { routesConfig } from '@config';
 import { NgxPermissionsGuard } from 'ngx-permissions';
 
 const routes: Routes = [
-  { path: '*', redirectTo: routesConfig.home, pathMatch: 'full' },
-  { path: '', redirectTo: routesConfig.home, pathMatch: 'full' },
+  { path: '*', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
-    path: routesConfig.home,
+    path: 'home',
     data: { breadcrumb: 'Inicio' },
     loadChildren: () =>
       import('../../routes/home/home.module').then((m) => m.HomeModule),
   },
   {
-    path: routesConfig.artists,
+    path: 'artists',
     data: { breadcrumb: 'Artistas' },
     loadChildren: () =>
-      import('../../routes/artists/artists.module').then(
-        (m) => m.ArtistsModule
-      ),
+      import('../../routes/artist/artist.module').then((m) => m.ArtistModule),
   },
+
   {
-    path: routesConfig.clubs,
+    path: 'clubs',
     data: { breadcrumb: 'Clubs' },
     loadChildren: () =>
       import('../../routes/clubs/clubs.module').then((m) => m.ClubsModule),
   },
   {
-    path: routesConfig.tracks,
+    path: 'tracks',
     data: { breadcrumb: 'Temas' },
     loadChildren: () =>
       import('../../routes/tracks/tracks.module').then((m) => m.TracksModule),
   },
   {
-    path: routesConfig.sets,
+    path: 'sets',
     data: { breadcrumb: 'Sets' },
     loadChildren: () =>
       import('../../routes/sets/sets.module').then((m) => m.SetsModule),
   },
   {
-    path: routesConfig.search,
+    path: 'set',
+    data: { breadcrumb: 'Set' },
+    loadChildren: () =>
+      import('../../routes/set/set.module').then((m) => m.SetModule),
+  },
+  {
+    path: 'search',
     data: { breadcrumb: 'Buscador' },
     loadChildren: () =>
       import('../../routes/search/search.module').then((m) => m.SearchModule),
   },
   {
-    path: routesConfig.auth,
+    path: 'auth',
     data: { breadcrumb: '' },
     loadChildren: () =>
       import('../../routes/auth/auth.module').then((m) => m.ArtistsModule),
   },
   {
-    path: routesConfig.account,
+    path: 'account',
     data: {
       breadcrumb: 'auth',
       permissions: {

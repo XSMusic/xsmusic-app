@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { HomePage } from './pages/home.page';
-import { SharedModule } from '../../shared/shared.module';
 import { RouterModule } from '@angular/router';
+import { TopCountriesComponent } from './components/top-countries/top-countries.component';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ import { RouterModule } from '@angular/router';
     ]),
   ],
   exports: [],
-  declarations: [HomePage],
+  declarations: [HomePage, TopCountriesComponent, TopCountriesComponent],
   providers: [],
 })
 export class HomeModule {}

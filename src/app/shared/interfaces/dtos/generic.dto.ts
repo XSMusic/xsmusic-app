@@ -22,8 +22,3 @@ export interface IdSiteDto {
   id: string;
   site: string;
 }
-
-export interface SearchDto {
-  value: string;
-  limit: number;
-}

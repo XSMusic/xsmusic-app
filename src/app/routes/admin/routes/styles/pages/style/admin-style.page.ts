@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { routesConfig } from '@core/config';
 import { MessageI } from '@interfaces';
-import { Style } from '@models';
+import { Artist, Style } from '@models';
 import { ToastService } from '@services';
 import { StyleService } from '@shared/services/api/style/style.service';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
@@ -15,14 +15,13 @@ export class AdminStylePage implements OnInit {
   id!: string;
   style = new Style();
   title!: string;
-  form!: FormGroup;
+  view = 'viewInfo';
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private styleService: StyleService,
-    private toastService: ToastService,
-    private formBuilder: FormBuilder
+    private toastService: ToastService
   ) {}
 
   ngOnInit() {
@@ -32,41 +31,12 @@ export class AdminStylePage implements OnInit {
       this.title = 'Editar Estilo';
     } else {
       this.title = 'Nuevo Estilo';
-      this.initForm();
     }
-  }
-
-  initForm() {
-    this.form = this.formBuilder.group({
-      name: [this.style.name, [Validators.minLength(3), Validators.required]],
-    });
   }
 
   getOne() {
     this.styleService.getOneById({ id: this.id }).subscribe({
-      next: (response) => {
-        this.style = response;
-        this.initForm();
-      },
-      error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
-    });
-  }
-
-  onSubmit() {
-    this.style.name = this.form.value['name'];
-    const observable = this.id
-      ? this.styleService.update(this.style)
-      : this.styleService.create(this.style);
-    observable.subscribe({
-      next: (response) => this.onSuccess(response),
-      error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
-    });
-  }
-
-  onDelete() {
-    // TODO: Añadir confirmacion por modal
-    this.styleService.deleteOne(this.id).subscribe({
-      next: (response) => this.onSuccess(response),
+      next: (response) => (this.style = response),
       error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
     });
   }
@@ -77,6 +47,14 @@ export class AdminStylePage implements OnInit {
   }
 
   onClickButton(event: any) {
-    return event;
+    this.view = event.action;
+  }
+
+  goTo(type: string, artist: Artist) {
+    if (type === 'artist') {
+      this.router.navigate([
+        routesConfig.artistAdmin.replace(':id', artist._id!),
+      ]);
+    }
   }
 }

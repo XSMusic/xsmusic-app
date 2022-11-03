@@ -49,7 +49,7 @@
               </div>
             </div>
           </td>
-          <td>
+          <td class="pl-5">
             <span
               *ngFor="let style of artist.styles; let i = index"
               class="gap-1 px-2 py-1 mr-1 text-xs text-center border cursor-pointer rounded-2xl hover:bg-gray-100"
@@ -58,19 +58,13 @@
               {{ style.name | titlecase }}
             </span>
           </td>
-          <td class="pl-5">
-            <div class="flex items-center">
-              <p class="mr-2 text-sm font-light leading-none text-gray-700">
-                {{ artist.sets?.count ?? 0 }} Sets
-              </p>
-            </div>
-          </td>
-          <td class="pl-5">
-            <div class="flex items-center">
-              <p class="mr-2 text-sm font-light leading-none text-gray-700">
-                {{ artist.tracks?.count ?? 0 }} Tracks
-              </p>
-            </div>
+          <td class="pl-0">
+            <p class="mb-2 mr-2 text-sm font-light leading-none text-gray-700">
+              <span class="font-black">{{ artist.sets?.count ?? 0 }}</span> {{ artist.sets?.count === 1 ? 'Set' : 'Sets' }}
+            </p>
+            <p class="mr-2 text-sm font-light leading-none text-gray-700">
+              <span class="font-black">{{ artist.tracks?.count ?? 0 }}</span> {{ artist.tracks?.count === 1 ? 'Track' : 'Tracks' }}
+            </p>
           </td>
 
           <td class="pl-5" *ngxPermissionsOnly="'ADMIN'">

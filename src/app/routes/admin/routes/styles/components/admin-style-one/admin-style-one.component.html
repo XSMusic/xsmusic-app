@@ -1,0 +1,67 @@
+<form>
+  <div class="grid lg:grid-cols-2 lg:gap-4 " >
+    <div class="col-span-2 md:col-span-2">
+      <label for="name" class="mb-3 block text-base font-medium text-[#07074D]" >
+        Nombre
+      </label>
+      <input
+        name="name"
+        type="text"
+        [(ngModel)]="style.name"
+        placeholder="Introduce el nombre"
+        class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
+        class="{{(style.colors?.bg ?? '') + ' '  + '' + (style.colors?.text ?? '')}}"
+      />
+    </div>
+
+    <div class="col-span-2 md:col-span-1">
+      <label
+        for="bgColor"
+        class="mb-3 block text-base font-medium text-[#07074D]"
+      >
+        Color fondo
+      </label>
+      <input
+        name="bgColor"
+        type="text"
+        [(ngModel)]="style.colors!.bg"
+        placeholder="Introduce el nombre"
+        class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
+        class="{{(style.colors?.bg ?? '') + ' '  + '' + (style.colors?.text ?? '')}}"
+      />
+    </div>
+
+    <div class="col-span-2 md:col-span-1">
+      <label
+        for="textColor"
+        class="mb-3 block text-base font-medium text-[#07074D]"
+      >
+        Color texto
+      </label>
+      <input
+        name="textColor"
+        type="text"
+        [(ngModel)]="style.colors!.text"
+        placeholder="Introduce el nombre"
+        class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
+        class="{{(style.colors?.bg ?? '') + ' '  + '' + (style.colors?.text ?? '')}}"
+      />
+    </div>
+
+    <div class="col-span-2 mb-2">
+      <button
+        *ngIf="style._id"
+        (click)="onDelete()"
+        class="w-full py-1 m-1 text-white bg-red-500 border-2 border-red-500 hover:bg-red-600 hover:border-red-600 hover:text-white md:w-32 rounded-2xl"
+      >
+        Eliminar
+      </button>
+      <button
+        (click)="onSubmit()"
+        class="w-full py-1 m-1 text-white bg-green-500 md:w-32 rounded-2xl hover:bg-green-400"
+      >
+        Guardar
+      </button>
+    </div>
+  </div>
+</form>

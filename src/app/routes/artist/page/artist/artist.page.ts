@@ -46,6 +46,6 @@ export class ArtistPage implements OnInit {
   }
 
   goToSet(set: Media) {
-    this.router.navigate(["sets", set._id]);
+    this.router.navigate(['sets', set._id]);
   }
 }

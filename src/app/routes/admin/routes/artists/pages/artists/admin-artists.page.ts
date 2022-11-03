@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { GetAllDto, SearchDto } from '@interfaces';
+import { GetAllDto } from '@interfaces';
 import { Artist } from '@models';
 import { ArtistService } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
@@ -57,11 +57,13 @@ export class AdminArtistsPage {
   }
 
   filter(event: { name: string; value: string }) {
+    this.body.page = 1;
     this.body.filter = [event.name, event.value];
     this.getArtists();
   }
 
   removeFilter() {
+    this.body.page = 1;
     this.body.filter = [];
     this.getArtists();
   }
@@ -84,13 +86,9 @@ export class AdminArtistsPage {
       this.body.page = 1;
       this.getArtists();
     } else {
-      const body: SearchDto = { value: event.text, limit: 20 };
-      this.artistService.search(body).subscribe({
-        next: (response) => {
-          this.artists = response;
-        },
-        error: (error) => this.toast.showToast(TOAST_STATE.error, error),
-      });
+      this.body.page = 1;
+      this.body.filter = ['name', event.text];
+      this.getArtists();
     }
   }
 }

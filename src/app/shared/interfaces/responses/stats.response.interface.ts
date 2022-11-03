@@ -6,3 +6,9 @@ export interface StatsTotalsAdminResponseI {
   clubs: number;
   events: number;
 }
+
+export interface StatsGetTopArtistsResponseI {
+  id: string;
+  name: string;
+  total: number
+}

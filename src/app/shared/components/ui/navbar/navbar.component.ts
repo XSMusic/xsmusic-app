@@ -2,9 +2,9 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { Router, NavigationEnd, Event } from '@angular/router';
 import { filter, distinctUntilChanged } from 'rxjs';
-import { routesConfig } from '@core/config';
 import { Menu, User } from '@models';
 import { AuthService } from '@core/auth';
+import { routesConfig } from '@core/config';
 
 @Component({
   selector: 'navbar',
@@ -36,11 +36,11 @@ export class NavbarComponent implements OnInit {
 
   async setMenuItems() {
     this.menuItems = [
-      { name: 'Inicio', route: routesConfig.home },
-      { name: 'Artistas', route: routesConfig.artists },
-      { name: 'Clubs', route: routesConfig.clubs },
-      { name: 'Sets', route: routesConfig.sets },
-      { name: 'Tracks', route: routesConfig.tracks },
+      { name: 'Inicio', route: 'home' },
+      { name: 'Artistas', route: 'artists' },
+      { name: 'Clubs', route: 'clubs' },
+      { name: 'Sets', route: 'sets' },
+      { name: 'Tracks', route: 'tracks' },
     ];
     this.menuItemsAdmin = [
       ...this.menuItems,
@@ -84,7 +84,7 @@ export class NavbarComponent implements OnInit {
   onClickMenuProfileItem(item: Menu) {
     this.menuProfileState = false;
     if (item.action === 'accountEdit') {
-      this.router.navigate([`${routesConfig.account}/${routesConfig.edit}`]);
+      this.router.navigate([`${routesConfig.accountEdit}`]);
     } else if (item.action === 'logout') {
       this.authService.logout();
       this.router.navigate([routesConfig.home]);

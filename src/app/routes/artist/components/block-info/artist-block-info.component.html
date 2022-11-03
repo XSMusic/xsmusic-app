@@ -9,23 +9,27 @@
           {{ item.value !== '' ? item.value : 'No
           disponible' }}
         </p>
-        <p *ngIf="item.type === 'gender'">
+        <p
+          *ngIf="item.type === 'gender'"
+          class="cursor-pointer"
+          (click)="goToArtistFilter('gender', item.value)"
+        >
           {{ item.value === 'male' ? 'Hombre' : 'Mujer' }}
         </p>
-        <div class="flex gap-2" *ngIf="item.type === 'country'">
-          <img
-            class="w-6 cursor-pointer"
-            [src]="item.value | countryFlag"
-            alt="item.name"
-          />
+        <div
+          class="flex gap-2 cursor-pointer"
+          *ngIf="item.type === 'country'"
+          (click)="goToArtistFilter('country', item.value)"
+        >
+          <img class="w-6" [src]="item.value | countryFlag" alt="item.name" />
           {{ item.value | countryName }}
         </div>
         <div class="grid-cols-2" *ngIf="item.type === 'styles'">
           <p *ngIf="item.value.length === 0">No disponible</p>
           <span *ngFor="let valueArray of item.value; index as i">
             <a
+              (click)="goToArtistFilter('styles', valueArray.name)"
               class="px-2 py-1 text-xs bg-gray-100 border border-gray-100 shadow-md rounded-2xl"
-              routerLink="/home"
             >
               {{ valueArray.name }}
             </a>

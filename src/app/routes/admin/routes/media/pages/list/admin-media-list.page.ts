@@ -72,8 +72,15 @@ export class AdminMediaListPage implements OnInit {
     }
   }
 
-  onSearch(e: any) {
-    return e;
+  onSearch(event: { text: string; type: string }) {
+    if (event.text === '') {
+      this.body.page = 1;
+      this.getItems();
+    } else {
+      this.body.page = 1;
+      this.body.filter = ['name', event.text];
+      this.getItems();
+    }
   }
 
   goToProfile(media: Media) {
@@ -81,11 +88,13 @@ export class AdminMediaListPage implements OnInit {
   }
 
   filter(event: { name: string; value: string }) {
+    this.body.page = 1;
     this.body.filter = [event.name, event.value];
     this.getItems();
   }
 
   removeFilter() {
+    this.body.page = 1;
     this.body.filter = [];
     this.getItems();
   }

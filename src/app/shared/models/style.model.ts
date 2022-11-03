@@ -1,11 +1,15 @@
 export class Style {
   _id?: string;
   name? = '';
+  colors?: {
+    bg?: string;
+    text?: string;
+  };
   created? = '';
   updated? = '';
-  artists?: { count: number };
-  sets?: { count: number };
-  tracks?: { count: number };
+  artists?: any;
+  sets?: any;
+  tracks?: any;
 
   constructor(data?: Style) {
     if (data) {

@@ -3,13 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Artist } from '@models';
 import { Observable } from 'rxjs';
 import { environment } from '@env/environment';
-import {
-  GetAllDto,
-  IdSlugDto,
-  MessageI,
-  PaginatorI,
-  SearchDto,
-} from '@interfaces';
+import { GetAllDto, IdSlugDto, MessageI, PaginatorI } from '@interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class ArtistService {
@@ -22,10 +16,6 @@ export class ArtistService {
 
   getOne(data: IdSlugDto): Observable<Artist> {
     return this.httpClient.post<Artist>(`${this.url}/getOne`, data);
-  }
-
-  search(data: SearchDto): Observable<Artist[]> {
-    return this.httpClient.post<Artist[]>(`${this.url}/search`, data);
   }
 
   create(data: Artist): Observable<MessageI> {

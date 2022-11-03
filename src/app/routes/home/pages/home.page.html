@@ -2,16 +2,18 @@
 
 <div class="container px-4 pt-3 mx-auto max-w-full-xl sm:pb-0 max-w-7sm">
   <artists-last-block></artists-last-block>
-  <br />
+  <div class="lg:grid lg:grid-cols-12">
+    <div class="my-2 lg:col-span-10">
+    </div>
 
-  <!-- Pruebas -->
-  <div *ngxPermissionsOnly="'ADMIN'">Esto solo lo ve un admin</div>
-  <div *ngxPermissionsOnly="'USER'">Esto solo lo ve un usuario</div>
-  <div *ngxPermissionsExcept="['ADMIN', 'USER']">
-    Esto solo lo ve un anonimo
+    <div class="my-2 lg:col-span-2">
+      <top-countries></top-countries>
+    </div>
   </div>
 
   <br />
+
+
 
   <div *ngxPermissionsExcept="['ADMIN', 'USER']">
     <div class="flex gap-2">

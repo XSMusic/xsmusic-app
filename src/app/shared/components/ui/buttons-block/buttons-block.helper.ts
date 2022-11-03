@@ -144,7 +144,7 @@ export const buttonsByType = [
         name: 'Artistas',
         icon: 'info',
         isActivatable: true,
-        action: 'viewOptions',
+        action: 'viewArtists',
       }),
       new ButtonBlockItem({
         name: 'Sets',

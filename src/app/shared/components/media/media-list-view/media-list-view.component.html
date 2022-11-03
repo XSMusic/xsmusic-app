@@ -26,10 +26,14 @@
               >
                 {{ mediaItem.name }}
               </p>
-              <p class="mt-1 text-sm font-light leading-none text-gray-500 cursor-pointer hover:text-gray-400">
-                <span *ngFor="let artist of mediaItem.artists" (click)="goToArtistProfile(artist.slug)">{{
-                  artist.name
-                }}</span>
+              <p
+                class="mt-1 text-sm font-light leading-none text-gray-500 cursor-pointer hover:text-gray-400"
+              >
+                <span
+                  *ngFor="let artist of mediaItem.artists"
+                  (click)="goToArtistProfile(artist.slug)"
+                  >{{ artist.name }}</span
+                >
               </p>
             </div>
           </td>

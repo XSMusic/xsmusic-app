@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { routesConfig } from '@core/config';
 import { Artist } from '@models';
 import { getYearsOld } from '@shared/utils/utils';
 
@@ -11,6 +13,8 @@ export class ArtistBlockInfoComponent implements OnInit {
   information: { name: string; type?: string; value: any }[] = [];
   getYearsOld = getYearsOld;
   edit = false;
+
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.setInformation();
@@ -44,5 +48,13 @@ export class ArtistBlockInfoComponent implements OnInit {
         value: this.artist.styles!,
       },
     ];
+  }
+
+  goToArtistFilter(key: string, value: string) {
+    this.router.navigate([
+      routesConfig.artistsFilter
+        .replace(':filterKey', key)
+        .replace(':filterValue', value),
+    ]);
   }
 }

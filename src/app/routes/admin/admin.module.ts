@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { AdminPage } from './pages/admin.page';
 import { SharedModule } from '@shared/shared.module';
 import { RouterModule } from '@angular/router';
-import { routesConfig } from '@core/config';
 import { AdminTotalsComponent } from './components/totals/admin-totals.component';
 
 @NgModule({
@@ -15,7 +14,7 @@ import { AdminTotalsComponent } from './components/totals/admin-totals.component
         data: { breadcrumb: '', title: 'Admin' },
       },
       {
-        path: routesConfig.artists,
+        path: 'artists',
         data: { breadcrumb: 'Artistas' },
         loadChildren: () =>
           import('./routes/artists/admin-artists.module').then(
@@ -23,7 +22,7 @@ import { AdminTotalsComponent } from './components/totals/admin-totals.component
           ),
       },
       {
-        path: routesConfig.styles,
+        path: 'styles',
         data: { breadcrumb: 'Estilos' },
         loadChildren: () =>
           import('./routes/styles/admin-styles.module').then(
@@ -31,7 +30,7 @@ import { AdminTotalsComponent } from './components/totals/admin-totals.component
           ),
       },
       {
-        path: routesConfig.media,
+        path: 'media',
         data: { breadcrumb: 'Media' },
         loadChildren: () =>
           import('./routes/media/admin-media.module').then(
@@ -39,7 +38,7 @@ import { AdminTotalsComponent } from './components/totals/admin-totals.component
           ),
       },
       {
-        path: routesConfig.users,
+        path: 'users',
         data: { breadcrumb: 'Usuarios' },
         loadChildren: () =>
           import('./routes/users/admin-users.module').then(

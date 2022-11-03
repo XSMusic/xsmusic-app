@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared/shared.module';
 import { RouterModule } from '@angular/router';
-import { ArtistsPage } from './pages/artists/artists.page';
-import { ArtistPage } from './pages/artist/artist.page';
-import { ArtistsViewGalleryComponent } from './components/view-gallery/artists-view-gallery.component';
 import { ArtistBlockInfoComponent } from './components/block-info/artist-block-info.component';
 import { ArtistBlockImageInfoComponent } from './components/block-image-info/artist-block-image-info.component';
 import { ArtistBlockSetsComponent } from './components/block-sets/artist-block-sets.component';
 import { ArtistBlockTracksComponent } from './components/block-tracks/artist-block-tracks.component';
+import { ArtistPage } from './page/artist/artist.page';
+import { ArtistsViewGalleryComponent } from './components/view-gallery/artists-view-gallery.component';
+import { ArtistsPage } from './page/artists/artists.page';
 
 @NgModule({
   imports: [
@@ -16,12 +16,17 @@ import { ArtistBlockTracksComponent } from './components/block-tracks/artist-blo
       {
         path: '',
         component: ArtistsPage,
-        data: { breadcrumb: '', title: 'Artistas - Listado' },
+        data: { title: 'Artista' },
+      },
+      {
+        path: 'filter/:filterKey/:filterValue',
+        component: ArtistsPage,
+        data: { title: 'Artista' },
       },
       {
         path: 'profile/:slug',
         component: ArtistPage,
-        data: { breadcrumb: 'Perfil', title: 'Artistas - Perfil' },
+        data: { title: 'Artista' },
       },
     ]),
   ],
@@ -29,14 +34,14 @@ import { ArtistBlockTracksComponent } from './components/block-tracks/artist-blo
   declarations: [
     ArtistBlockTracksComponent,
     ArtistBlockSetsComponent,
-    ArtistsPage,
     ArtistPage,
-    ArtistsViewGalleryComponent,
     ArtistBlockImageInfoComponent,
     ArtistBlockInfoComponent,
     ArtistBlockSetsComponent,
     ArtistBlockTracksComponent,
+    ArtistsPage,
+    ArtistsViewGalleryComponent,
   ],
   providers: [],
 })
-export class ArtistsModule {}
+export class ArtistModule {}

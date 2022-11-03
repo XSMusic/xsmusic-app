@@ -38,6 +38,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { httpInterceptorProviders } from '@core/interceptors';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { SwiperModule } from 'swiper/angular';
 
 const components = [
   AlertComponent,
@@ -63,6 +64,7 @@ const modules = [
   RouterModule,
   AngularSvgIconModule,
   NgxSpinnerModule,
+  SwiperModule,
 ];
 const pipes = [CountryFlagPipe, CountryNamePipe, TimeAgoPipe, TruncateTextPipe];
 const services: any = [

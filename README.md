@@ -17,3 +17,4 @@ Cada vez que se añada un valor en el archivo .env, hay que añadir el archivo c
 - [ ] Obtener la fecha de nacimiento de busqueda en google (birthdate of XXX)
 - [X] **WIP** Buscador de sets/tracks de artista en admin (Youtube)
   - [X] Al editar un media, se duplican artistas y estilos
+- [ ] Crear top 5 paises

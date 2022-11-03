@@ -15,7 +15,6 @@
     [title]="media.name"
   ></iframe>
   <div class="my-2">
-
     <div class="flex gap-2">
       <div *ngFor="let style of media.styles">
         <div
@@ -34,7 +33,6 @@
             [src]="artist.image"
             alt="artist.name"
             class="object-cover w-6 h-6 rounded-2xl"
-
           />
           <p class="font-semibold">{{ artist.name }}</p>
         </div>
@@ -45,7 +43,7 @@
 
     <div class="my-4">
       <button
-      (click)="goToEdit()"
+        (click)="goToEdit()"
         class="px-2 py-1 text-white bg-red-500 rounded-2xl"
         *ngxPermissionsOnly="'ADMIN'"
       >

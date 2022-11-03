@@ -7,5 +7,4 @@ import { Artist } from '@models';
 })
 export class ArtistBlockTracksComponent {
   @Input() artist!: Artist;
-  constructor() {}
 }

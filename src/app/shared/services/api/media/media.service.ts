@@ -2,13 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '@env/environment';
-import {
-  GetAllDto,
-  IdSlugDto,
-  MessageI,
-  PaginatorI,
-  SearchDto,
-} from '@interfaces';
+import { GetAllDto, IdSlugDto, MessageI, PaginatorI } from '@interfaces';
 import { Media } from '@models';
 
 @Injectable({ providedIn: 'root' })
@@ -22,10 +16,6 @@ export class MediaService {
 
   getOne(data: IdSlugDto): Observable<Media> {
     return this.httpClient.post<Media>(`${this.url}/getOne`, data);
-  }
-
-  search(data: SearchDto): Observable<Media[]> {
-    return this.httpClient.post<Media[]>(`${this.url}/search`, data);
   }
 
   create(data: Media): Observable<MessageI> {

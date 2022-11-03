@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { MediaGetAllDto } from '@interfaces';
 import { Media } from '@models';
 import { MediaService, ToastService } from '@services';
@@ -21,7 +21,6 @@ export class SetsPage implements OnInit {
   loading = true;
   error = false;
   constructor(
-    private route: ActivatedRoute,
     private mediaService: MediaService,
     private router: Router,
     private toast: ToastService
@@ -55,20 +54,29 @@ export class SetsPage implements OnInit {
     }
   }
 
-  onSearch(e: any) {
-    return e;
+  onSearch(event: { text: string; type: string }) {
+    if (event.text === '') {
+      this.body.page = 1;
+      this.getItems();
+    } else {
+      this.body.page = 1;
+      this.body.filter = ['name', event.text];
+      this.getItems();
+    }
   }
 
   goToProfile(media: Media) {
-    this.router.navigate([`sets`, media._id]);
+    this.router.navigate([`set`, media._id]);
   }
 
   filter(event: { name: string; value: string }) {
+    this.body.page = 1;
     this.body.filter = [event.name, event.value];
     this.getItems();
   }
 
   removeFilter() {
+    this.body.page = 1;
     this.body.filter = [];
     this.getItems();
   }

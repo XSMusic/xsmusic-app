@@ -22,6 +22,6 @@ export class MediaListViewComponent {
   }
 
   goToArtistProfile(slug: string) {
-    this.router.navigate(['/artists/profile', slug])
+    this.router.navigate(['/artists/profile', slug]);
   }
 }

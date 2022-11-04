@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import {
   MessageI,
   ScrapingGetInfoArtistDto,
@@ -21,6 +22,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'admin-artist-one',
   templateUrl: 'admin-artist-one.component.html',
+  animations: [inOutAnimation]
 })
 export class ArtistOneComponent {
   @Input() artist: Artist = new Artist();

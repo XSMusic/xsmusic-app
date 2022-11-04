@@ -54,17 +54,22 @@
               *ngFor="let style of artist.styles; let i = index"
               class="gap-1 px-2 py-1 pl-3 mr-1 text-xs text-center cursor-pointer rounded-2xl hover:opacity-80"
               (click)="filter.emit({ name: 'styles', value: style.name })"
-              [ngClass]="[style.colors?.bg ?? 'bg-gray-100', style.colors?.text ?? 'text-black']"
+              [ngStyle]="{
+                background: style.colors?.bg ?? '',
+                color: style.colors?.text ?? ''
+              }"
             >
               {{ style.name | titlecase }}
             </span>
           </td>
           <td class="pl-0">
             <p class="mb-2 mr-2 text-sm font-light leading-none text-gray-700">
-              <span class="font-black">{{ artist.sets?.count ?? 0 }}</span> {{ artist.sets?.count === 1 ? 'Set' : 'Sets' }}
+              <span class="font-black">{{ artist.sets?.count ?? 0 }}</span>
+              {{ artist.sets?.count === 1 ? 'Set' : 'Sets' }}
             </p>
             <p class="mr-2 text-sm font-light leading-none text-gray-700">
-              <span class="font-black">{{ artist.tracks?.count ?? 0 }}</span> {{ artist.tracks?.count === 1 ? 'Track' : 'Tracks' }}
+              <span class="font-black">{{ artist.tracks?.count ?? 0 }}</span>
+              {{ artist.tracks?.count === 1 ? 'Track' : 'Tracks' }}
             </p>
           </td>
 

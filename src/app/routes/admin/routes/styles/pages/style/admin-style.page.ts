@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { routesConfig } from '@core/config';
 import { MessageI } from '@interfaces';
-import { Artist, Style } from '@models';
+import { Artist, Media, Style } from '@models';
 import { ToastService } from '@services';
 import { StyleService } from '@shared/services/api/style/style.service';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
@@ -38,12 +38,11 @@ export class AdminStylePage implements OnInit {
     this.styleService.getOneById({ id: this.id }).subscribe({
       next: (response) => {
         if (!response.colors) {
-          this.style.colors = {
+          response.colors = {
             bg: '',
             text: '',
           };
         }
-        console.log(response);
         this.style = response;
       },
       error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
@@ -59,11 +58,15 @@ export class AdminStylePage implements OnInit {
     this.view = event.action;
   }
 
-  goTo(type: string, artist: Artist) {
+  goTo(type: string, item: Artist | Media): void {
+    let route = '';
     if (type === 'artist') {
-      this.router.navigate([
-        routesConfig.artistAdmin.replace(':id', artist._id!),
-      ]);
+      route = routesConfig.artistAdmin.replace(':id', item._id!);
+    } else if (type === 'set') {
+      route = routesConfig.setAdmin.replace(':id', item._id!);
+    } else if (type === 'track') {
+      route = routesConfig.setAdmin.replace(':id', item._id!);
     }
+    this.router.navigate([route]);
   }
 }

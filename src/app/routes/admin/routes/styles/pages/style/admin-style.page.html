@@ -14,8 +14,16 @@
   ></admin-style-one>
 
   <artists-view-list
+    *ngIf="view === 'viewArtists'"
     [artists]="style.artists"
     [loading]="false"
     (goToProfile)="goTo('artist', $event)"
   ></artists-view-list>
+
+  <media-view-list
+    *ngIf="view === 'viewSets'"
+    [media]="style.sets"
+    [loading]="false"
+    (goToProfile)="goTo('set', $event)"
+  ></media-view-list>
 </div>

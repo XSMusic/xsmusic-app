@@ -5,11 +5,11 @@ import { Media } from '@models';
 import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
 
 @Component({
-  selector: 'media-list-view',
-  templateUrl: 'media-list-view.component.html',
+  selector: 'media-view-list',
+  templateUrl: 'media-view-list.component.html',
   animations: [inOutAnimation],
 })
-export class MediaListViewComponent {
+export class MediaViewListComponent {
   @Input() media: Media[] = [];
   @Input() loading = true;
   @Output() goToProfile = new EventEmitter<Media>();

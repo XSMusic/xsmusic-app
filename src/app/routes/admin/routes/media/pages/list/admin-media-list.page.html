@@ -15,11 +15,11 @@
     *ngIf="body.filter && body.filter.length > 0"
   ></alert>
 
-  <media-list-view
+  <media-view-list
     [media]="items"
     [loading]="loading"
     (goToProfile)="goToProfile($event)"
     (filter)="filter($event)"
     (onScroll)="onScroll()"
-  ></media-list-view>
+  ></media-view-list>
 </div>

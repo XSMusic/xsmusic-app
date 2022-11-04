@@ -41,8 +41,12 @@
           <td class="pl-5">
             <span
               *ngFor="let style of mediaItem.styles; let i = index"
-              class="gap-1 px-2 py-1 mr-1 text-xs text-center border cursor-pointer rounded-2xl hover:bg-gray-100"
+              class="gap-1 px-2 py-1 mr-1 text-xs text-center cursor-pointer rounded-2xl"
               (click)="filter.emit({ name: 'styles', value: style.name })"
+              [ngStyle]="{
+                background: style.colors?.bg ?? '',
+                color: style.colors?.text ?? ''
+              }"
             >
               {{ style.name | titlecase }}
             </span>

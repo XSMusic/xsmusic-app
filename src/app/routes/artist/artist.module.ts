@@ -16,12 +16,12 @@ import { ArtistsPage } from './page/artists/artists.page';
       {
         path: '',
         component: ArtistsPage,
-        data: { title: 'Artista' },
+        data: { title: 'Artistas' },
       },
       {
         path: 'filter/:filterKey/:filterValue',
         component: ArtistsPage,
-        data: { title: 'Artista' },
+        data: { title: 'Artistas' },
       },
       {
         path: 'profile/:slug',

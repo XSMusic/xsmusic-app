@@ -32,12 +32,6 @@ const routes: Routes = [
   },
   {
     path: 'sets',
-    data: { breadcrumb: 'Sets' },
-    loadChildren: () =>
-      import('../../routes/sets/sets.module').then((m) => m.SetsModule),
-  },
-  {
-    path: 'set',
     data: { breadcrumb: 'Set' },
     loadChildren: () =>
       import('../../routes/set/set.module').then((m) => m.SetModule),

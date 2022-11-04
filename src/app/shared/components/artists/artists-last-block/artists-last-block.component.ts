@@ -31,9 +31,9 @@ export class ArtistsLastBlockComponent implements OnInit {
     } else if (window.innerWidth <= 500) {
       this.slidesPerView = 5;
     } else if (window.innerWidth <= 1440) {
-      this.slidesPerView = 5.5;
+      this.slidesPerView = 12.5;
     } else if (window.innerWidth > 1441) {
-      this.slidesPerView = 6.5;
+      this.slidesPerView = 15.5;
     }
   }
 
@@ -41,7 +41,7 @@ export class ArtistsLastBlockComponent implements OnInit {
     this.artistService
       .getAll({
         page: 1,
-        pageSize: 10,
+        pageSize: 20,
         order: ['created', 'desc'],
       })
       .subscribe({

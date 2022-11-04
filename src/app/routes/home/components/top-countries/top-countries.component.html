@@ -1,13 +1,12 @@
-<div class="w-full border rounded-xl">
-  <p class="p-2 text-lg text-center bg-gray-100 border-b">Top Paises</p>
+<div class="w-full ">
+  <h1 class="py-2 text-lg font-extrabold">Top Paises</h1>
   <div
     *ngFor="let country of countries; let i = index"
-    class="items-center content-center m-2 my-2 cursor-pointer"
+    class="m-2 my-2 cursor-pointer "
     (click)="goToFilter(country.id)"
   >
     <div
-      class="flex justify-center gap-2 py-2 font-medium"
-      [ngClass]="{ 'border-b': i !== countries.length - 1 }"
+      class="flex gap-2 py-2 font-medium border-b"
     >
       <img [src]="country.id | countryFlag" alt="" />{{ country.name }}
       <p class="px-2 py-0 pt-1 text-xs bg-gray-100 rounded-3xl">

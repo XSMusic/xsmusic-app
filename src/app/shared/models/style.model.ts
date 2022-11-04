@@ -1,9 +1,9 @@
 export class Style {
   _id?: string;
   name? = '';
-  colors?: {
-    bg?: string;
-    text?: string;
+  colors = {
+    bg: '',
+    text: '',
   };
   created? = '';
   updated? = '';

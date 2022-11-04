@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
+import { routesConfig } from '@core/config';
 import { MessageI } from '@interfaces';
 import { Artist, Media, Style } from '@models';
 import {
@@ -29,7 +31,8 @@ export class AdminMediaOneComponent {
     private mediaService: MediaService,
     private toast: ToastService,
     private toastService: ToastService,
-    private fullImage: FullImageService
+    private fullImage: FullImageService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -149,5 +152,13 @@ export class AdminMediaOneComponent {
 
   showImage(image: string) {
     this.fullImage.showImageFull(image);
+  }
+
+  goToMedia(id: string) {
+    if (this.media.type === 'set') {
+      this.router.navigate([routesConfig.set.replace(':id', id)]);
+    } else {
+      this.router.navigate([routesConfig.track.replace(':id', id)]);
+    }
   }
 }

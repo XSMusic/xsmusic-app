@@ -14,7 +14,7 @@ import {
   ToastComponent,
   ArtistsViewListComponent,
   ButtonsBlockComponent,
-  MediaListViewComponent,
+  MediaViewListComponent,
 } from '@components';
 import {
   CountryFlagPipe,
@@ -52,7 +52,7 @@ const components = [
   NavbarComponent,
   SearchBarComponent,
   ToastComponent,
-  MediaListViewComponent,
+  MediaViewListComponent,
 ];
 const directives = [OnImageErrorDirective];
 const modules = [

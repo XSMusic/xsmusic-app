@@ -34,7 +34,7 @@
           <div class="form-group form-check"></div>
           <a
             (click)="wip()"
-            class="text-black transition duration-200 ease-in-out cursor-pointer hover:text-gray-700 focus:text-gray-700 active:text-gray-800"
+            class="text-black transition duration-200 ease-in-out cursor-pointer dark:text-white hover:text-gray-700 focus:text-gray-700 active:text-gray-800"
             >¿Contraseña olvidada?</a
           >
         </div>
@@ -43,7 +43,7 @@
         <button
           type="submit"
           (click)="loginEmail()"
-          class="inline-block w-full py-3 text-sm font-medium leading-snug text-white uppercase transition duration-150 ease-in-out bg-black rounded shadow-md px-7 hover:bg-gray-800 hover:shadow-lg focus:bg-gray-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-800 active:shadow-lg"
+          class="inline-block w-full py-3 text-sm font-medium leading-snug text-white uppercase transition duration-150 ease-in-out bg-black rounded shadow-md dark:bg-red-600 dark:text-dark px-7 hover:bg-gray-800 hover:shadow-lg active:bg-gray-800 active:shadow-lg"
           data-mdb-ripple="true"
           data-mdb-ripple-color="light"
         >
@@ -53,7 +53,7 @@
         <div
           class="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5"
         >
-          <p class="mx-4 mb-0 font-semibold text-center">O</p>
+          <p class="mx-4 mb-0 font-semibold text-center dark:text-white">O</p>
         </div>
 
         <a
@@ -63,8 +63,8 @@
         >
           <svg-icon
             name="google-colors"
-            [svgStyle]="{ 'width.px': 20, 'height.px': 20 }"
-            class="pr-2"
+            [svgStyle]="{ 'width.px': 18, 'height.px': 18 }"
+            class="pr-2 mr-2"
           ></svg-icon>
           Entrar con Google
         </a>

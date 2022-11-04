@@ -9,7 +9,7 @@
         <button
           type="button"
           (click)="openOrCloseMenu()"
-          class="inline-flex items-center justify-center p-2 text-black rounded-2xl hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+          class="inline-flex items-center justify-center p-2 text-black rounded-2xl hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-white hover:text-gray-900"
           aria-controls="mobile-menu"
           aria-expanded="false"
         >
@@ -50,7 +50,7 @@
       >
         <div class="flex items-center flex-shrink-0">
           <img
-            class="block w-auto rounded cursor-pointer hover:border-2xl h-9 lg:hidden hover:bg-gray-100"
+            class="block w-auto rounded cursor-pointer hover:border-2xl h-9 lg:hidden hover:bg-gray-100 dark:hover:bg-gray-900"
             [src]="
               !adminPage
                 ? 'assets/images/logo-negro.png'
@@ -103,7 +103,7 @@
             <button
               type="button"
               routerLink="/auth"
-              class="p-2 text-sm text-black rounded-2xl hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              class="p-2 text-sm text-black rounded-2xl hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-900 dark:text-white"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -171,10 +171,11 @@
           (click)="openOrCloseMenu()"
           [routerLink]="menu.route"
           routerLinkActive="bg-gray-900 text-gray-100"
-          class="block px-3 py-2 text-base font-medium text-black rounded-2xl"
+          class="block px-3 py-2 text-base font-medium text-black rounded-2xl dark:text-white"
           aria-current="page"
-          >{{ menu.name }}</a
         >
+          {{ menu.name }}
+        </a>
       </ng-template>
       <ng-template [ngxPermissionsExcept]="['ADMIN']">
         <a
@@ -182,10 +183,11 @@
           (click)="openOrCloseMenu()"
           [routerLink]="menu.route"
           routerLinkActive="bg-gray-900 text-gray-100"
-          class="block px-3 py-2 text-base font-medium text-black rounded-2xl"
+          class="block px-3 py-2 text-base font-medium text-black rounded-2xl dark:text-white"
           aria-current="page"
-          >{{ menu.name }}</a
         >
+          {{ menu.name }}
+        </a>
       </ng-template>
     </div>
   </div>

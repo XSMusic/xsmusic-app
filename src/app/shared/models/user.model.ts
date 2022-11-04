@@ -4,6 +4,9 @@ export class User {
   email!: string;
   image!: string;
   role!: string;
+  darkMode!: string;
+  created?: string;
+  updated?: string;
 
   constructor(data?: User) {
     if (data) {

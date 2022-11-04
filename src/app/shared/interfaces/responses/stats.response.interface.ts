@@ -5,6 +5,7 @@ export interface StatsTotalsAdminResponseI {
   tracks: number;
   clubs: number;
   events: number;
+  users: number;
 }
 
 export interface StatsGetTopArtistsResponseI {

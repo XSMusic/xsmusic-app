@@ -4,13 +4,13 @@
       <input
         [(ngModel)]="searchText"
         name="searchText"
-        class="block p-2.5 px-3 w-full z-20 text-sm text-gray-900 rounded-xl border-l-1 border border-gray-300 hover:bg-gray-50"
+        class="z-20 block w-full p-2 px-3 text-sm text-gray-900 border border-gray-300 rounded-xl border-l-1 hover:bg-gray-50"
         placeholder="¿Que buscas?"
         (keyup)="onKeyUpSearch($event)"
         required
       />
       <button
-        class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-black rounded-r-xl border border-gray-300 hover:bg-gray-800"
+        class="absolute top-0 right-0 p-2 text-sm font-medium text-white bg-gray-900 border dark:bg-white dark:text-black rounded-r-xl hover:bg-gray-800"
         (click)="validationSearch()"
       >
         <svg

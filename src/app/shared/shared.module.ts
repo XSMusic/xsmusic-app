@@ -15,12 +15,14 @@ import {
   ArtistsViewListComponent,
   ButtonsBlockComponent,
   MediaViewListComponent,
+  UsersViewListComponent,
 } from '@components';
 import {
   CountryFlagPipe,
   CountryNamePipe,
   TruncateTextPipe,
   TimeAgoPipe,
+  FillArrayPipe,
 } from '@pipes';
 import { OnImageErrorDirective } from './directives';
 import { NgxPermissionsModule } from 'ngx-permissions';
@@ -42,17 +44,18 @@ import { SwiperModule } from 'swiper/angular';
 
 const components = [
   AlertComponent,
-  ButtonsBlockComponent,
   ArtistsLastBlockComponent,
   ArtistsViewListComponent,
   BreadcrumbeComponent,
+  ButtonsBlockComponent,
   FullImageComponent,
   HeaderComponent,
+  MediaViewListComponent,
   ModalComponent,
   NavbarComponent,
   SearchBarComponent,
   ToastComponent,
-  MediaViewListComponent,
+  UsersViewListComponent,
 ];
 const directives = [OnImageErrorDirective];
 const modules = [
@@ -66,15 +69,21 @@ const modules = [
   NgxSpinnerModule,
   SwiperModule,
 ];
-const pipes = [CountryFlagPipe, CountryNamePipe, TimeAgoPipe, TruncateTextPipe];
+const pipes = [
+  CountryFlagPipe,
+  CountryNamePipe,
+  FillArrayPipe,
+  TimeAgoPipe,
+  TruncateTextPipe,
+];
 const services: any = [
+  AngularSvgIconPreloaderService,
   ArtistService,
   LocalStorageService,
+  MediaService,
+  ScrapingService,
   StartupService,
   UserService,
-  AngularSvgIconPreloaderService,
-  ScrapingService,
-  MediaService,
   YoutubeService,
 ];
 

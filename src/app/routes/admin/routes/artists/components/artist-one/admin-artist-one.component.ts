@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
+import { routesConfig } from '@core/config';
 import {
   MessageI,
   ScrapingGetInfoArtistDto,
@@ -64,11 +65,11 @@ export class ArtistOneComponent {
 
   onSuccess(response: MessageI) {
     this.toastService.showToast(TOAST_STATE.success, response.message);
-    this.router.navigate(['admin/artists']);
+    this.router.navigate([routesConfig.artistsAdmin]);
   }
 
   onChangeStyleSelect(e: any) {
-    if (this.artist.styles!.length < 5) {
+    if (this.artist.styles!.length <= 3) {
       const newStyle = this.styles.find(
         (style) => style._id!.toString() === e.target.value.toString()
       );
@@ -76,7 +77,7 @@ export class ArtistOneComponent {
     } else {
       this.toastService.showToast(
         TOAST_STATE.warning,
-        'No puedes añadir mas de 5 estilos'
+        'No puedes añadir mas de 3 estilos'
       );
     }
   }

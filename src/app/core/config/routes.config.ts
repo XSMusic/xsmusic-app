@@ -23,5 +23,6 @@ export const routesConfig = {
   styles: 'admin/styles',
   track: 'tracks/one/:id',
   tracks: 'tracks',
-  users: 'users',
+  usersAdmin: 'admin/users',
+  userAdmin: 'admin/users/one/:id',
 };

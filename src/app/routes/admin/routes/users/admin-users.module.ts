@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '@shared/shared.module';
-import { AdminUsersPage } from './pages/admin-users.page';
+import { AdminUserOneComponent } from './components/admin-user-one/admin-user-one.component';
+import { AdminUserPage } from './pages/user/admin-user.page';
+import { AdminUsersPage } from './pages/users/admin-users.page';
 
 @NgModule({
   imports: [
@@ -10,12 +12,17 @@ import { AdminUsersPage } from './pages/admin-users.page';
       {
         path: '',
         component: AdminUsersPage,
-        data: { breadcrumb: 'Usuarios', title: 'Usuarios' },
+        data: { breadcrumb: '', title: 'Admin - Usuarios' },
+      },
+      {
+        path: 'one/:id',
+        component: AdminUserPage,
+        data: { breadcrumb: '', title: 'Admin - Usuario' },
       },
     ]),
   ],
   exports: [],
-  declarations: [AdminUsersPage],
+  declarations: [AdminUsersPage, AdminUserPage, AdminUserOneComponent],
   providers: [],
 })
 export class AdminUsersModule {}

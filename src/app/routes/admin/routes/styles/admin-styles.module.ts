@@ -18,12 +18,12 @@ import { AdminStylesPage } from './pages/styles/admin-styles.page';
       {
         path: 'one/:id',
         component: AdminStylePage,
-        data: { breadcrumb: 'Editar', title: 'Editar Estilo' },
+        data: { breadcrumb: 'Editar', title: 'Admin - Editar Estilo' },
       },
       {
         path: 'one',
         component: AdminStylePage,
-        data: { breadcrumb: 'Crear', title: 'Crear Estilo' },
+        data: { breadcrumb: 'Crear', title: 'Admin - Crear Estilo' },
       },
     ]),
   ],

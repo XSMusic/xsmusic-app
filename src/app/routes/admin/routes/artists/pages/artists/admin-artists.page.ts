@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
+import { routesConfig } from '@core/config';
 import { GetAllDto } from '@interfaces';
 import { Artist } from '@models';
 import { ArtistService } from '@services';
@@ -52,8 +53,8 @@ export class AdminArtistsPage {
     });
   }
 
-  goToProfile(artist: Artist) {
-    this.router.navigate(['admin/artists/one/', artist._id]);
+  goToProfile(item: Artist) {
+    this.router.navigate([routesConfig.artistAdmin.replace(':id', item._id!)]);
   }
 
   filter(event: { name: string; value: string }) {

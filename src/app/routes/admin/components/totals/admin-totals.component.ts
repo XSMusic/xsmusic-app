@@ -14,6 +14,7 @@ export class AdminTotalsComponent implements OnInit {
     { id: 'tracks', name: 'Tracks', value: 0, route: '/admin/media/tracks' },
     { id: 'clubs', name: 'Clubs', value: 0, route: '/admin/clubs' },
     { id: 'events', name: 'Eventos', value: 0, route: '/admin/events' },
+    { id: 'users', name: 'Usuarios', value: 0, route: '/admin/users' },
   ];
   endSlice = 2;
 

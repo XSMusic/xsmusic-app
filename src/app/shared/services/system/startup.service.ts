@@ -17,19 +17,11 @@ export class StartupService {
     private menuService: MenuBootstrapService
   ) {}
 
-  /**
-   * Load the application only after get the menu or other essential informations
-   * such as permissions and roles.
-   */
   load() {
     return new Promise<void>((resolve) => {
       this.authService
         .change()
-        .pipe(
-          tap((user: any) => this.setPermissions(user))
-          // switchMap(() => this.authService.menu()),
-          // tap((menu) => this.setMenu(menu)),
-        )
+        .pipe(tap((user: any) => this.setPermissions(user)))
         .subscribe({
           next: () => resolve(),
           error: () => resolve(),
@@ -46,5 +38,18 @@ export class StartupService {
 
   private setMenu(menu: Menu[]) {
     this.menuService.set(menu);
+  }
+
+  darkMode() {
+    const themeLS = localStorage.getItem('theme');
+    if (
+      themeLS === 'dark' ||
+      (!('theme' in localStorage) &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
   }
 }

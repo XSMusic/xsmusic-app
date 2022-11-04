@@ -1,3 +1,4 @@
+export { FillArrayPipe } from './fill-array/fill-array.pipe';
 export { TimeAgoPipe } from './timeago/timeago.pipe';
 export { CountryFlagPipe } from './country-flag/country-flag.pipe';
 export { CountryNamePipe } from './country-name/country-name.pipe';

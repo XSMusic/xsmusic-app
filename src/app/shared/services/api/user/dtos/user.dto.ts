@@ -1,8 +1,6 @@
-export interface UserGetAllDto {
-  page: number;
-  pageSize: number;
-  site: string;
-  order: string[];
+import { GetAllDto } from "@interfaces";
+
+export interface UserGetAllDto extends GetAllDto {
   onlyFCM?: boolean;
 }
 

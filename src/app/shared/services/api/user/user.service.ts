@@ -4,9 +4,9 @@ import { User } from '@models';
 import { UserCreateFakeDto, UserGetAllDto } from './dtos/user.dto';
 import { Observable } from 'rxjs/internal/Observable';
 import { BehaviorSubject, share, take } from 'rxjs';
-// import { SearchDto } from '@core/dtos/generic.dto';
 import { LocalStorageService } from '@services';
 import { environment } from '@env/environment';
+import { IdDto, MessageI } from '@interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -22,20 +22,14 @@ export class UserService {
     return this.httpClient.post<any>(`${this.url}/getAll`, data).pipe(take(1));
   }
 
-  // search(data: SearchDto): Observable<User[]> {
-  //     return this.httpClient
-  //         .post<User[]>(`${this.url}/search`, data)
-  //         .pipe(take(1));
-  // }
-
-  getOne(id: string): Observable<User> {
-    return this.httpClient
-      .post<User>(`${this.url}/one`, { id, site: 'admin' })
-      .pipe(take(1));
+  getOne(body: IdDto): Observable<User> {
+    return this.httpClient.post<User>(`${this.url}/one`, body).pipe(take(1));
   }
 
-  create(data: User): Observable<User> {
-    return this.httpClient.post<User>(`${this.url}/create`, data).pipe(take(1));
+  create(data: User): Observable<MessageI> {
+    return this.httpClient
+      .post<MessageI>(`${this.url}/create`, data)
+      .pipe(take(1));
   }
 
   createFake(data: UserCreateFakeDto): Observable<{ message: string }> {
@@ -44,18 +38,12 @@ export class UserService {
       .pipe(take(1));
   }
 
-  update(data: User): Observable<User> {
-    return this.httpClient.put<User>(`${this.url}/update`, data).pipe(take(1));
+  update(data: User): Observable<MessageI> {
+    return this.httpClient.put<MessageI>(`${this.url}/update`, data).pipe(take(1));
   }
 
-  delete(id: string): Observable<User> {
-    return this.httpClient.delete<User>(`${this.url}/one/${id}`).pipe(take(1));
-  }
-
-  deleteAllFake(): Observable<{ message: string }> {
-    return this.httpClient
-      .delete<{ message: string }>(`${this.url}/allFake`)
-      .pipe(take(1));
+  deleteOne(id: string): Observable<MessageI> {
+    return this.httpClient.delete<MessageI>(`${this.url}/one/${id}`).pipe(take(1));
   }
 
   private get user(): User | undefined {

@@ -5,6 +5,9 @@ export { ArtistsViewListComponent } from './artists/artists-view-list/artists-vi
 // Media
 export { MediaViewListComponent } from './media/media-list-view/media-view-list.component';
 
+// User
+export { UsersViewListComponent } from './users/users-view-list/users-view-list.component';
+
 //UI
 export { AlertComponent } from './ui/alert/alert.component';
 export { BreadcrumbeComponent } from './ui/breadcrumb/breadcrumb.component';

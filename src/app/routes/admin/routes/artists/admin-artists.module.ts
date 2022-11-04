@@ -12,17 +12,17 @@ import { ArtistOneComponent } from './components/artist-one/admin-artist-one.com
       {
         path: '',
         component: AdminArtistsPage,
-        data: { breadcrumb: '', title: 'Artistas' },
+        data: { breadcrumb: '', title: 'Admin - Artistas' },
       },
       {
         path: 'one/:id',
         component: AdminArtistPage,
-        data: { breadcrumb: 'Editar Artista', title: 'Editar Artista' },
+        data: { breadcrumb: 'Editar Artista', title: 'Admin - Editar Artista' },
       },
       {
         path: 'one',
         component: AdminArtistPage,
-        data: { breadcrumb: 'Nuevo Artista', title: 'Nuevo Artista' },
+        data: { breadcrumb: 'Nuevo Artista', title: 'Admin - Nuevo Artista' },
       },
     ]),
   ],

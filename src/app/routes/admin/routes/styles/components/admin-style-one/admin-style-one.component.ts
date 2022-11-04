@@ -13,7 +13,7 @@ export class AdminStyleOneComponent {
   @Output() onSuccess = new EventEmitter<MessageI>();
   constructor(
     private styleService: StyleService,
-    private toast: ToastService,
+    private toast: ToastService
   ) {}
 
   onSubmit() {

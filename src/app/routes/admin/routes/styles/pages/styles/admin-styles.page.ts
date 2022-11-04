@@ -21,10 +21,7 @@ export class AdminStylesPage implements OnInit {
   };
   loading = true;
   error = false;
-  constructor(
-    private router: Router,
-    private styleService: StyleService,
-  ) {}
+  constructor(private router: Router, private styleService: StyleService) {}
 
   ngOnInit() {
     this.getStyles();

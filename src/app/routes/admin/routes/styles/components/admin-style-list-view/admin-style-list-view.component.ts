@@ -5,7 +5,7 @@ import { Style } from '@models';
 @Component({
   selector: 'admin-style-list-view',
   templateUrl: 'admin-style-list-view.component.html',
-  animations: [inOutAnimation]
+  animations: [inOutAnimation],
 })
 export class AdminStyleListViewComponent {
   @Input() styles: Style[] = [];

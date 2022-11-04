@@ -19,7 +19,7 @@ export class AdminUserPage implements OnInit {
     private userService: UserService,
     private toast: ToastService,
     private route: ActivatedRoute,
-    private spinner: NgxSpinnerService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit() {

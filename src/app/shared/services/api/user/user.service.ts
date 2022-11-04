@@ -39,11 +39,15 @@ export class UserService {
   }
 
   update(data: User): Observable<MessageI> {
-    return this.httpClient.put<MessageI>(`${this.url}/update`, data).pipe(take(1));
+    return this.httpClient
+      .put<MessageI>(`${this.url}/update`, data)
+      .pipe(take(1));
   }
 
   deleteOne(id: string): Observable<MessageI> {
-    return this.httpClient.delete<MessageI>(`${this.url}/one/${id}`).pipe(take(1));
+    return this.httpClient
+      .delete<MessageI>(`${this.url}/one/${id}`)
+      .pipe(take(1));
   }
 
   private get user(): User | undefined {

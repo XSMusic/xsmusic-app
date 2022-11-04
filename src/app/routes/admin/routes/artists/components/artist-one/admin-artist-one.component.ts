@@ -23,7 +23,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'admin-artist-one',
   templateUrl: 'admin-artist-one.component.html',
-  animations: [inOutAnimation]
+  animations: [inOutAnimation],
 })
 export class ArtistOneComponent {
   @Input() artist: Artist = new Artist();

@@ -6,7 +6,7 @@ import { FullImageService } from '@shared/services/ui/full-image/full-image.serv
 @Component({
   selector: 'users-view-list',
   templateUrl: 'users-view-list.component.html',
-  animations: [inOutAnimation]
+  animations: [inOutAnimation],
 })
 export class UsersViewListComponent {
   @Input() users: User[] = [];

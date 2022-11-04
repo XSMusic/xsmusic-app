@@ -11,5 +11,5 @@ export interface StatsTotalsAdminResponseI {
 export interface StatsGetTopArtistsResponseI {
   id: string;
   name: string;
-  total: number
+  total: number;
 }

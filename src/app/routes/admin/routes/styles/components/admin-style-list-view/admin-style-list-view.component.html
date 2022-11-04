@@ -7,8 +7,8 @@
     *ngFor="let style of styles"
     class="w-full text-center border rounded-md shadow-md cursor-pointer px-auto hover:opacity-80"
     [ngStyle]="{
-      background: style.colors?.bg ?? '',
-      color: style.colors?.text ?? ''
+      background: style.colors.bg,
+      color: style.colors.text
     }"
     [routerLink]="['one/', style._id]"
   >
@@ -18,19 +18,19 @@
 
     <div class="grid w-full grid-cols-3 gap-2 px-1 pt-0">
       <div class="p-3 text-center">
-        <div class="text-sm text-opacity-80" [class]="style.colors?.text ?? ''">
+        <div class="text-sm text-opacity-80" [class]="style.colors.text">
           Artistas
         </div>
         <div class="text-xl font-bold">{{ style.artists?.count ?? 0 }}</div>
       </div>
       <div class="p-3 text-center">
-        <div class="text-sm text-opacity-80" [class]="style.colors?.text ?? ''">
+        <div class="text-sm text-opacity-80" [class]="style.colors.text">
           Sets
         </div>
         <div class="text-xl font-bold">{{ style.sets?.count ?? 0 }}</div>
       </div>
       <div class="p-3 text-center">
-        <div class="text-sm text-opacity-80" [class]="style.colors?.text ?? ''">
+        <div class="text-sm text-opacity-80" [class]="style.colors.text">
           Tracks
         </div>
         <div class="text-xl font-bold">{{ style.tracks?.count ?? 0 }}</div>

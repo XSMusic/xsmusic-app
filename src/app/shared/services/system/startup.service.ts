@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { NgxPermissionsService } from 'ngx-permissions';
-// import { MenuBootstrapService } from './menu-bootstrap.service';
-// import { Menu } from '@models';
 import { AuthService } from '@core/auth';
-import { Menu, User } from '@models';
-import { MenuBootstrapService } from './menu-bootstrap.service';
+import { User } from '@models';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +11,6 @@ export class StartupService {
   constructor(
     private authService: AuthService,
     private permissonsService: NgxPermissionsService,
-    private menuService: MenuBootstrapService
   ) {}
 
   load() {
@@ -34,10 +30,6 @@ export class StartupService {
       const permissions = [user.role];
       this.permissonsService.loadPermissions(permissions);
     }
-  }
-
-  private setMenu(menu: Menu[]) {
-    this.menuService.set(menu);
   }
 
   darkMode() {

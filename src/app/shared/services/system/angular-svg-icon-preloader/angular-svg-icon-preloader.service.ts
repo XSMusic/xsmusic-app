@@ -51,7 +51,7 @@ export class AngularSvgIconPreloaderService {
   loadIcons() {
     this.iconsFileData.iconImageFiles.forEach((i: IconImageFile) => {
       this._iconRegistry
-        .loadSvg(i.iconPath!, i.iconName)!
+        .loadSvg(i.iconPath, i.iconName)!
         .pipe(take(1))
         .subscribe();
     });

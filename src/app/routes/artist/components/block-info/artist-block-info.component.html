@@ -81,13 +81,13 @@
 </div>
 
 <div class="px-6 py-2 text-center">
-    <p *ngIf="!moreInfo">{{ artist.info! | truncateText: 150 }}</p>
-    <div *ngIf="moreInfo" [innerHTML]="artist.info!"></div>
-    <p
-      *ngIf="artist.info!.length > 150"
-      class="font-semibold cursor-pointer"
-      (click)="moreInfo = !moreInfo"
-    >
-      Leer mas
-    </p>
-  </div>
+  <p *ngIf="!moreInfo">{{ artist.info! | truncateText: 150 }}</p>
+  <div *ngIf="moreInfo" [innerHTML]="artist.info!"></div>
+  <p
+    *ngIf="artist.info!.length > 150"
+    class="font-semibold cursor-pointer"
+    (click)="moreInfo = !moreInfo"
+  >
+    Leer mas
+  </p>
+</div>

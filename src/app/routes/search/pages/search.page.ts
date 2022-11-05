@@ -29,6 +29,6 @@ export class SearchPage implements OnInit {
   }
 
   search() {
-    // console.log('searching', this.text, this.type);
+    return '';
   }
 }

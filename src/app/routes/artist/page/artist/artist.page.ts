@@ -17,7 +17,8 @@ export class ArtistPage implements OnInit {
   artists: Artist[] = [];
   slug!: string;
   information: { name: string; type?: string; value: any }[] = [];
-  view = 'sets';
+  views: any[] = [];
+  view = 'set';
 
   constructor(
     private route: ActivatedRoute,
@@ -37,6 +38,10 @@ export class ArtistPage implements OnInit {
     this.artistService.getOne({ slug: this.slug })!.subscribe({
       next: (artist: any) => {
         this.artist = artist;
+        this.views = [
+          { name: 'Sets', value: 'set', counter: artist.sets.length },
+          { name: 'Tracks', value: 'track', counter: artist.tracks.length },
+        ];
         this.spinner.hide();
       },
       error: (error) => {

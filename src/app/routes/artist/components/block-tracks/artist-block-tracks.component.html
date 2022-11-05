@@ -1,23 +1,23 @@
 <div
   class="container grid gap-4 px-3 mx-auto overflow-auto overflow-x-auto text-center lg:grid-cols-1 rounded-xl"
 >
-  <div>
-    <p class="p-3" *ngIf="artist.sets.length === 0">
-      No hay ningun track para {{ artist.name }}
-    </p>
+  <div
+    class="flex justify-center p-3 my-2 font-semibold bg-gray-100 rounded-lg"
+    *ngIf="artist.tracks.length === 0"
+  >
+    <svg-icon name="info-circle" class="mr-3"></svg-icon>
+    No hay ningun track para {{ artist.name }}
+  </div>
 
-    <div class="flex justify-center">
-      <div *ngFor="let track of artist.tracks">
-        <div
-          class="flex flex-col w-40 p-2 py-4 cursor-pointer hover:opacity-90"
-        >
-          <img
-            [src]="track.image"
-            alt="set.name"
-            class="object-cover h-32 rounded-2xl"
-          />
-          <p class="p-2 text-xs text-center">{{ track.name }}</p>
-        </div>
+  <div class="flex justify-center">
+    <div *ngFor="let track of artist.tracks">
+      <div class="flex flex-col w-40 p-2 py-4 cursor-pointer hover:opacity-90">
+        <img
+          [src]="track.image"
+          alt="set.name"
+          class="object-cover h-32 rounded-2xl"
+        />
+        <p class="p-2 text-xs text-center">{{ track.name }}</p>
       </div>
     </div>
   </div>

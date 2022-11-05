@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { ArtistBlockInfoComponent } from './components/block-info/artist-block-info.component';
-import { ArtistBlockImageInfoComponent } from './components/block-image-info/artist-block-image-info.component';
 import { ArtistBlockSetsComponent } from './components/block-sets/artist-block-sets.component';
 import { ArtistBlockTracksComponent } from './components/block-tracks/artist-block-tracks.component';
 import { ArtistPage } from './page/artist/artist.page';
@@ -35,7 +34,6 @@ import { ArtistsPage } from './page/artists/artists.page';
     ArtistBlockTracksComponent,
     ArtistBlockSetsComponent,
     ArtistPage,
-    ArtistBlockImageInfoComponent,
     ArtistBlockInfoComponent,
     ArtistBlockSetsComponent,
     ArtistBlockTracksComponent,

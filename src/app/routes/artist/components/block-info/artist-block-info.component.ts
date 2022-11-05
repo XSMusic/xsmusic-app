@@ -1,48 +1,28 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { routesConfig } from '@core/config';
 import { Artist } from '@models';
+import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
 import { getYearsOld } from '@shared/utils/utils';
 
 @Component({
   selector: 'artist-block-info',
   templateUrl: 'artist-block-info.component.html',
 })
-export class ArtistBlockInfoComponent implements OnInit {
+export class ArtistBlockInfoComponent {
   @Input() artist: Artist = new Artist();
-  information: { name: string; type?: string; value: any }[] = [];
+  viewMore = false;
   getYearsOld = getYearsOld;
-  edit = false;
+  moreInfo = false;
 
-  constructor(private router: Router) {}
+  constructor(private fullImage: FullImageService, private router: Router) {}
 
-  ngOnInit() {
-    this.setInformation();
+  showImage(image: string) {
+    this.fullImage.showImageFull(image);
   }
 
-  setInformation() {
-    this.information = [
-      {
-        name: 'Genero',
-        type: 'gender',
-        value: this.artist.gender,
-      },
-      {
-        name: 'F. Nacimiento',
-        type: 'birthdate',
-        value: this.artist.birthdate,
-      },
-      {
-        name: 'Pais',
-        type: 'country',
-        value: this.artist.country,
-      },
-      {
-        name: 'Estilos',
-        type: 'styles',
-        value: this.artist.styles!,
-      },
-    ];
+  goToEdit(id: string) {
+    this.router.navigate(['admin/artists/one/', id]);
   }
 
   goToArtistFilter(key: string, value: string) {

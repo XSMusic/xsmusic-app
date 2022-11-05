@@ -19,7 +19,7 @@ export class TopCountriesComponent implements OnInit {
   }
 
   getTopArtist() {
-    this.statsService.getTopArtists({ type: 'country', limit: 5 }).subscribe({
+    this.statsService.getTopArtists({ type: 'country', limit: 7 }).subscribe({
       next: (response) => {
         this.countries = response;
       },

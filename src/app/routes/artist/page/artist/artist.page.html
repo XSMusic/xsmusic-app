@@ -1,11 +1,31 @@
 <ng-container *ngIf="artist">
-  <artist-block-image-info [artist]="artist"></artist-block-image-info>
+  <artist-block-info [artist]="artist"></artist-block-info>
 
-  <p class="px-6 py-2 text-center">{{ artist.info! | truncateText: 150}}</p>
 
-  <div class="px-6 pt-2 font-extrabold text-center">Sets</div>
-  <artist-block-sets [view]="view" [artist]="artist"></artist-block-sets>
 
-  <div class="px-6 font-extrabold text-center">Tracks</div>
-  <artist-block-tracks [artist]="artist"></artist-block-tracks>
+  <div class="h-1 mt-2 mb-4 border-b"></div>
+
+  <div class="flex justify-center gap-4">
+    <div
+      *ngFor="let v of views"
+      class="text-lg text-center cursor-pointer"
+      [ngClass]="{ 'font-extrabold': v.value === view}"
+      (click)="view = v.value"
+    >
+      {{ v.name }} <span class="text-sm font-light">({{ v.counter }})</span>
+    </div>
+  </div>
+
+  <artist-block-sets
+    *ngIf="view === 'set'"
+    [artist]="artist"
+    [type]="view"
+  ></artist-block-sets>
+
+  <artist-block-sets
+    *ngIf="view === 'track'"
+    [artist]="artist"
+    [type]="view"
+  ></artist-block-sets>
+
 </ng-container>

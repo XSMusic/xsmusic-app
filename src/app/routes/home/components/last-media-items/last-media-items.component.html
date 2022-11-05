@@ -1,0 +1,73 @@
+<div @inOut class="pt-4 pl-2 pr-4 md:grid md:grid-cols-5">
+  <div class="col-span-3 pb-1 md:pr-2">
+    <div
+      *ngIf="media[0]"
+      class="relative overflow-hidden shadow-xl cursor-pointer rounded-2xl"
+      (click)="goToMedia(media[0])"
+    >
+      <img
+        class="object-cover w-full h-40 hover:filter-grayscale"
+        [ngStyle]="{ height: width > 500 ? '21rem' : '10rem' }"
+        [src]="media[0].image"
+        [alt]="media[0].name"
+        onError
+      />
+      <div
+        class="absolute bottom-0 left-0 w-full px-6 pt-2 text-center text-white"
+        style="background: rgba(0, 0, 0, 0.65)"
+      >
+        <div class="flex flex-col justify-center">
+          <div class="mb-1 text-xl font-semibold text-white md:text-2xl">
+            {{ media[0].name }}
+          </div>
+          <div class="flex justify-center gap-3">
+            <div
+              *ngFor="let artist of media[0].artists"
+              class="mb-3 text-lg font-medium text-white"
+            >
+              {{ artist.name }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="md:col-span-2">
+    <div
+      class="w-full col-span-3 py-1 md:pr-2"
+      *ngFor="let item of media | slice: 1:3"
+      (click)="goToMedia(item)"
+    >
+      <div
+        class="relative overflow-hidden shadow-xl cursor-pointer rounded-2xl"
+      >
+        <img
+          class="object-cover w-full h-40 hover:filter-grayscale"
+          [src]="item.image"
+          [alt]="item.name"
+          onError
+        />
+        <div
+          class="absolute bottom-0 left-0 w-full px-6 pt-2 text-center text-white"
+          style="background: rgba(0, 0, 0, 0.65)"
+        >
+          <div class="flex flex-col justify-center">
+            <div class="mb-1 text-xl font-semibold text-white md:text-2xl">
+              {{ item.name }}
+            </div>
+            <div class="flex flex-col justify-center">
+              <div
+                *ngFor="let artist of item.artists"
+                class="mb-3 text-lg font-medium text-white"
+                style="background: rgba(0, 0, 0, 0.5)"
+              >
+                {{ artist.name }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

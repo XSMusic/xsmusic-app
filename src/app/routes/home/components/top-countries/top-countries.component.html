@@ -1,13 +1,15 @@
 <div class="w-full">
-  <h1 class="py-2 text-lg font-extrabold dark:text-white">Top Paises</h1>
+  <h1 class="text-lg font-extrabold py dark:text-white">Top Paises</h1>
   <div
     *ngFor="let country of countries; let i = index"
     class="m-2 my-2 cursor-pointer"
     (click)="goToFilter(country.id)"
   >
-    <div class="flex gap-2 py-2 font-medium border-b dark:text-white">
+    <div class="flex justify-between gap-2 py-2 font-medium border-b dark:text-white">
+      <div class="flex gap-2">
       <img [src]="country.id | countryFlag" alt="" />{{ country.name }}
-      <p class="px-2 py-0 pt-1 text-xs bg-gray-100 dark:text-black rounded-3xl">
+      </div>
+      <p class="px-2 py-0 pt-1 text-xs bg-gray-100 right dark:text-black rounded-3xl">
         {{ country.total }}
       </p>
     </div>

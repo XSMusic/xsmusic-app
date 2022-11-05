@@ -1,0 +1,19 @@
+<div class="flex gap-4">
+  <h1
+    class="text-lg cursor-pointer dark:text-white"
+    [ngClass]="{ 'font-extrabold': view === 'sets' }"
+    (click)="view = 'sets'"
+  >
+    Ultimos Sets
+  </h1>
+  <h1
+    class="text-lg cursor-pointer dark:text-white"
+    [ngClass]="{ 'font-extrabold': view === 'tracks' }"
+    (click)="view = 'tracks'"
+  >
+    Ultimos Tracks
+  </h1>
+</div>
+
+<last-media-items *ngIf="view === 'sets'" [media]="sets"></last-media-items>
+<last-media-items *ngIf="view === 'tracks'" [media]="tracks"></last-media-items>

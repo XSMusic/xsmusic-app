@@ -2,6 +2,7 @@ import { TracksPage } from './pages/tracks/tracks.page';
 import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared/shared.module';
 import { RouterModule } from '@angular/router';
+import { TrackPage } from './pages/track/track.page';
 
 @NgModule({
   imports: [
@@ -10,12 +11,22 @@ import { RouterModule } from '@angular/router';
       {
         path: '',
         component: TracksPage,
-        data: { breadcrumb: '', title: 'Tracks - Listado' },
+        data: { title: 'Tracks' },
+      },
+      {
+        path: 'filter/:filterKey/:filterValue',
+        component: TracksPage,
+        data: { title: 'Tracks' },
+      },
+      {
+        path: 'one/:id',
+        component: TrackPage,
+        data: { breadcrumb: 'Track', title: 'Track' },
       },
     ]),
   ],
   exports: [],
-  declarations: [TracksPage],
+  declarations: [TracksPage, TrackPage],
   providers: [],
 })
 export class TracksModule {}

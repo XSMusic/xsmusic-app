@@ -17,7 +17,12 @@ import { AdminUsersPage } from './pages/users/admin-users.page';
       {
         path: 'one/:id',
         component: AdminUserPage,
-        data: { breadcrumb: '', title: 'Admin - Usuario' },
+        data: { breadcrumb: '', title: 'Admin - Editar Usuario' },
+      },
+      {
+        path: 'one',
+        component: AdminUserPage,
+        data: { breadcrumb: '', title: 'Admin - Nuevo Usuario' },
       },
     ]),
   ],

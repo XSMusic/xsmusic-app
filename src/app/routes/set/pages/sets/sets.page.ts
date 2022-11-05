@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { routesConfig } from '@core/config';
 import { MediaGetAllDto } from '@interfaces';
 import { Media } from '@models';
 import { MediaService, ToastService } from '@services';
@@ -66,7 +67,7 @@ export class SetsPage implements OnInit {
   }
 
   goToProfile(media: Media) {
-    this.router.navigate([`set`, media._id]);
+    this.router.navigate([routesConfig.set.replace(':id', media._id!)]);
   }
 
   filter(event: { name: string; value: string }) {

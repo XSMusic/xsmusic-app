@@ -1,0 +1,54 @@
+<header-custom
+  *ngIf="media"
+  [title]="media.name!"
+  [breadcrumb]="true"
+></header-custom>
+
+<div class="container px-4 py-3 mx-auto max-w-full-xl sm:pb-0 max-w-7sm">
+  <iframe
+    class="w-full my-0 rounded-2xl"
+    *ngIf="media.source === 'youtube'"
+    width="560"
+    height="315"
+    [src]="getVideoUrl()"
+    allowfullscreen
+    [title]="media.name"
+  ></iframe>
+  <div class="my-2">
+    <div class="flex gap-2">
+      <div *ngFor="let style of media.styles">
+        <div
+          class="flex gap-4 px-2 py-1 text-white bg-black border cursor-pointer rounded-xl hover:bg-gray-800 hover:text-gray-100"
+        >
+          <p class="font-semibold">{{ style.name }}</p>
+        </div>
+      </div>
+
+      <div *ngFor="let artist of media.artists">
+        <div
+          class="flex gap-4 px-2 py-1 bg-gray-200 border cursor-pointer rounded-xl hover:bg-gray-300"
+          (click)="goToArtistProfile(artist.slug)"
+        >
+          <img
+            [src]="artist.image"
+            alt="artist.name"
+            class="object-cover w-6 h-6 rounded-2xl"
+          />
+          <p class="font-semibold">{{ artist.name }}</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="my-2">{{ media.info }}</p>
+
+    <div class="my-4">
+      <button
+        (click)="goToEdit()"
+        class="px-2 py-1 text-white bg-red-500 rounded-2xl"
+        *ngxPermissionsOnly="'ADMIN'"
+      >
+        Editar
+      </button>
+    </div>
+  </div>
+</div>

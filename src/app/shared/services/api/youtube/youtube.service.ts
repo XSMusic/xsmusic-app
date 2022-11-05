@@ -9,8 +9,14 @@ export class YoutubeService {
   url = `${environment.API_URL}/youtube`;
   constructor(private httpClient: HttpClient) {}
 
-  search(query: string): Observable<Youtube[]> {
-    return this.httpClient.post<Youtube[]>(`${this.url}/search`, {
+  searchByText(query: string): Observable<Youtube[]> {
+    return this.httpClient.post<Youtube[]>(`${this.url}/searchByText`, {
+      query,
+    });
+  }
+
+  searchByUrl(query: string): Observable<Youtube[]> {
+    return this.httpClient.post<Youtube[]>(`${this.url}/searchByUrl`, {
       query,
     });
   }

@@ -7,10 +7,10 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { routesConfig } from '@core/config';
 
 @Component({
-  selector: 'page-set',
-  templateUrl: 'set.page.html',
+  selector: 'page-track',
+  templateUrl: 'track.page.html',
 })
-export class SetPage implements OnInit {
+export class TrackPage implements OnInit {
   id!: string;
   media: Media = new Media();
   constructor(
@@ -47,6 +47,6 @@ export class SetPage implements OnInit {
   }
 
   goToEdit() {
-    this.router.navigate([routesConfig.setAdmin.replace(':id', this.id)]);
+    this.router.navigate([routesConfig.trackAdmin.replace(':id', this.id)]);
   }
 }

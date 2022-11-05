@@ -23,6 +23,8 @@ export const routesConfig = {
   styles: 'admin/styles',
   track: 'tracks/one/:id',
   tracks: 'tracks',
+  trackAdmin: 'admin/media/tracks/edit/:id',
+  tracksAdmin: 'admin/media/tracks',
   usersAdmin: 'admin/users',
   userAdmin: 'admin/users/one/:id',
 };

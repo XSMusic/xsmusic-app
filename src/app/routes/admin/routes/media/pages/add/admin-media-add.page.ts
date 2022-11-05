@@ -36,18 +36,26 @@ export class AdminMediaAddPage implements OnInit {
       : 'track';
   }
 
-  search() {
+  search(searchText: string) {
     this.spinner.show();
-    this.youtubeService.search(this.searchText).subscribe({
-      next: (response) => {
-        this.items = response;
-        this.spinner.hide();
-      },
-      error: (error) => {
-        this.spinner.hide();
-        this.toast.showToast(TOAST_STATE.error, error);
-      },
+    this.searchByText(searchText);
+  }
+
+  searchByText(searchText: string) {
+    this.youtubeService.searchByText(searchText).subscribe({
+      next: (response) => this.onResponseSearchSuccess(response),
+      error: (error) => this.onResponseSearchError(error),
     });
+  }
+
+  onResponseSearchSuccess(response: Youtube[]) {
+    this.items = response;
+    this.spinner.hide();
+  }
+
+  onResponseSearchError(error: string) {
+    this.spinner.hide();
+    this.toast.showToast(TOAST_STATE.error, error);
   }
 
   selectItem(item: Youtube) {

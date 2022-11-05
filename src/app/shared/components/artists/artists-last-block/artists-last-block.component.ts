@@ -14,6 +14,12 @@ import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 export class ArtistsLastBlockComponent implements OnInit {
   @Input() artists?: Artist[] = [];
   slidesPerView = 3;
+  loading = true;
+  body = {
+    page: 1,
+    pageSize: 20,
+    order: ['created', 'desc'],
+  };
   constructor(
     private artistService: ArtistService,
     private toast: ToastService,
@@ -38,16 +44,14 @@ export class ArtistsLastBlockComponent implements OnInit {
   }
 
   getLastArtists() {
-    this.artistService
-      .getAll({
-        page: 1,
-        pageSize: 20,
-        order: ['created', 'desc'],
-      })
-      .subscribe({
-        next: (response) => (this.artists = response.items),
-        error: (error) => this.toast.showToast(TOAST_STATE.error, error),
-      });
+    this.loading = true;
+    this.artistService.getAll(this.body).subscribe({
+      next: (response) => {
+        this.artists = response.items;
+        this.loading = false;
+      },
+      error: (error) => this.toast.showToast(TOAST_STATE.error, error),
+    });
   }
 
   goToArtistProfile(slug: string) {

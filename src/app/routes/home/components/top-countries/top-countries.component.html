@@ -1,4 +1,4 @@
-<div class="w-full">
+<div @inOut *ngIf="!loading" class="w-full">
   <h1 class="text-lg font-extrabold py dark:text-white">Top Paises</h1>
   <div
     *ngFor="let country of countries; let i = index"

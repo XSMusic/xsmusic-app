@@ -1,5 +1,7 @@
 <!-- Desktop version -->
 <div
+  @inOut
+  *ngIf="!loading"
   class="items-center hidden w-full grid-cols-2 gap-2 sm:grid md:grid-cols-6"
 >
   <div
@@ -7,13 +9,35 @@
     *ngFor="let total of totals"
     [routerLink]="total.route"
   >
-    <div class="text-sm text-gray-500">{{ total.name }}</div>
-    <div class="text-xl font-bold">{{ total.value }}</div>
+    <div class="flex justify-between">
+      <div>
+        <div class="text-sm text-gray-500">{{ total.name }}</div>
+        <div class="text-xl font-bold">{{ total.value }}</div>
+      </div>
+      <div class="flex flex-col gap-1">
+        <div
+          class="flex mt-1 text-xs font-bold text-green-500"
+          *ngFor="let percentage of total.percentages"
+        >
+          <svg-icon
+            name="arrow-up"
+            svgClass="h-3 mt-0.5"
+            class="fill-green-500"
+          ></svg-icon>
+          {{ percentage.value }}%
+          <span class="ml-1 font-light text-gray-400"
+            >{{ percentage.days }} D</span
+          >
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
 <!-- Mobile version -->
 <div
+  @inOut
+  *ngIf="!loading"
   class="grid items-center w-full grid-cols-2 gap-2 sm:hidden md:grid-cols-6"
 >
   <div
@@ -21,12 +45,34 @@
     *ngFor="let total of totals | slice: 0:endSlice"
     [routerLink]="total.route"
   >
-    <div class="text-sm text-gray-500">{{ total.name }}</div>
-    <div class="text-xl font-bold">{{ total.value }}</div>
+    <div class="flex justify-between">
+      <div>
+        <div class="text-sm text-gray-500">{{ total.name }}</div>
+        <div class="text-xl font-bold">{{ total.value }}</div>
+      </div>
+      <div class="flex flex-col gap-1">
+        <div
+          class="flex mt-1 text-xs font-bold text-green-500"
+          *ngFor="let percentage of total.percentages"
+        >
+          <svg-icon
+            name="arrow-up"
+            svgClass="h-3 mt-0.5"
+            class="fill-green-500"
+          ></svg-icon>
+          {{ percentage.value }}%
+          <span class="ml-1 font-light text-gray-400"
+            >{{ percentage.days }} D</span
+          >
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
 <div
+  @inOut
+  *ngIf="!loading"
   (click)="viewMoreTotals()"
   class="cursor-pointer sm:hidden flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5"
 >

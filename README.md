@@ -7,15 +7,11 @@ Cada vez que se añada un valor en el archivo .env, hay que añadir el archivo c
 
 
 #### TODOs
-- [X] Crear componente loading full-screen
-- [X] Setear automaticamente los estilos en artistas al scrapear
 - [ ] Separar info de scraping
 - [ ] Creacion de modelos
-  - [X] Creacion de modelo Media
   - [ ] Creacion de modelo Club
   - [ ] Creacion de modelo Event
 - [ ] Obtener la fecha de nacimiento de busqueda en google (birthdate of XXX)
-- [X] **WIP** Buscador de sets/tracks de artista en admin (Youtube)
-  - [X] Al editar un media, se duplican artistas y estilos
-- [X] Crear top 5 paises
-- [ ] Scraping de media por url (Youtube)
+- [ ] Buscador de artistas al añadir media
+- [ ] Confirmacion en eliminar
+

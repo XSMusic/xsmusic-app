@@ -6,7 +6,7 @@
       (click)="goToMedia(media[0])"
     >
       <img
-        class="object-cover w-full h-40 hover:filter-grayscale"
+        class="object-cover w-full h-40 hover:filter-grayscale hover:scale-105 hover:duration-1000"
         [ngStyle]="{ height: width > 500 ? '21rem' : '10rem' }"
         [src]="media[0].image"
         [alt]="media[0].name"
@@ -43,7 +43,7 @@
         class="relative overflow-hidden shadow-xl cursor-pointer rounded-2xl"
       >
         <img
-          class="object-cover w-full h-40 hover:filter-grayscale"
+          class="object-cover w-full h-40 hover:filter-grayscale hover:scale-105 hover:duration-1000"
           [src]="item.image"
           [alt]="item.name"
           onError

@@ -13,7 +13,7 @@
                 [src]="mediaItem.image"
                 [alt]="mediaItem.name"
                 onError
-                class="object-cover object-center w-12 h-12 cursor-pointer rounded-2xl lg:h-12 lg:w-12 hover:filter-grayscale"
+                class="object-cover object-center w-12 h-12 cursor-pointer rounded-2xl lg:h-12 lg:w-12 hover:filter-grayscale hover:scale-110 hover:duration-1000"
                 (click)="showImage(mediaItem.image!)"
               />
             </div>
@@ -32,8 +32,9 @@
                 <span
                   *ngFor="let artist of mediaItem.artists"
                   (click)="goToArtistProfile(artist.slug)"
-                  >{{ artist.name }}</span
                 >
+                  {{ artist.name }}
+                </span>
               </p>
             </div>
           </td>
@@ -41,7 +42,7 @@
           <td class="pl-5">
             <span
               *ngFor="let style of mediaItem.styles; let i = index"
-              class="gap-1 px-2 py-1 mr-1 text-xs text-center cursor-pointer rounded-2xl"
+              class="gap-1 px-2 py-1 mr-1 text-xs text-center cursor-pointer rounded-2xl hover:px-2.5 hover:py-1.5 hover:duration-1000"
               (click)="filter.emit({ name: 'styles', value: style.name })"
               [ngStyle]="{
                 background: style.colors?.bg ?? '',

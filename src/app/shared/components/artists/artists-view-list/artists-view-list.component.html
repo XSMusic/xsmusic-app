@@ -13,7 +13,7 @@
                 [src]="artist.image"
                 [alt]="artist.name"
                 onError
-                class="object-cover object-center w-12 h-12 cursor-pointer rounded-2xl lg:h-12 lg:w-12 hover:filter-grayscale"
+                class="object-cover object-center w-12 h-12 cursor-pointer rounded-2xl lg:h-12 lg:w-12 hover:filter-grayscale hover:scale-105 hover:duration-1000"
                 (click)="showImage(artist.image!)"
               />
             </div>
@@ -41,7 +41,7 @@
                 <img
                   [src]="artist.country! | countryFlag"
                   [alt]="artist.country"
-                  class="w-6 h-6 mx-2 my-1 cursor-pointer hover:h-8 hover:w-8"
+                  class="w-6 h-6 mx-2 my-1 cursor-pointer hover:scale-110 hover:duration-1000"
                   (click)="
                     filter.emit({ name: 'country', value: artist.country! })
                   "
@@ -52,7 +52,7 @@
           <td class="px-5">
             <span
               *ngFor="let style of artist.styles; let i = index"
-              class="gap-1 px-2 py-1 pl-3 mr-1 text-xs text-center cursor-pointer rounded-2xl hover:opacity-80"
+              class="gap-1 px-2 py-1 mr-1 text-xs text-center cursor-pointer rounded-2xl hover:px-2.5 hover:py-1.5 hover:duration-1000"
               (click)="filter.emit({ name: 'styles', value: style.name })"
               [ngStyle]="{
                 background: style.colors?.bg ?? '',

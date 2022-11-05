@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { MediaGetAllDto } from '@interfaces';
 import { Media } from '@models';
 import { MediaService, ToastService } from '@services';
@@ -7,6 +8,7 @@ import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 @Component({
   selector: 'last-media',
   templateUrl: './last-media.component.html',
+  animations: [inOutAnimation]
 })
 export class LastMediaComponent implements OnInit {
   sets: Media[] = [];
@@ -18,6 +20,7 @@ export class LastMediaComponent implements OnInit {
     type: 'set',
   };
   view = 'sets';
+  loading = true;
   constructor(
     private mediaService: MediaService,
     private toastService: ToastService
@@ -29,10 +32,12 @@ export class LastMediaComponent implements OnInit {
   }
 
   getLastSets() {
+    this.loading = true;
     this.body.type = 'set';
     this.mediaService.getAll(this.body).subscribe({
       next: (response) => {
         this.sets = response.items;
+        this.loading = false;
       },
       error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
     });

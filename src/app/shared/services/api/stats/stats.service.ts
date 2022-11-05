@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import {
-  StatsGetTopArtistsResponseI,
-  StatsTotalsAdminResponseI,
+  StatsGetTopArtistsI,
+  StatsTotalsAdminI,
 } from '@shared/interfaces/responses/stats.response.interface';
 import { Observable } from 'rxjs';
 import { StatsGetTopArtistsDto } from './stats.dto';
@@ -13,16 +13,14 @@ export class StatsService {
   url = `${environment.API_URL}/stats`;
   constructor(private httpClient: HttpClient) {}
 
-  getForAdmin(): Observable<StatsTotalsAdminResponseI> {
-    return this.httpClient.get<StatsTotalsAdminResponseI>(
-      `${this.url}/getForAdmin`
-    );
+  getForAdmin(): Observable<StatsTotalsAdminI> {
+    return this.httpClient.get<StatsTotalsAdminI>(`${this.url}/getForAdmin`);
   }
 
   getTopArtists(
     body: StatsGetTopArtistsDto
-  ): Observable<StatsGetTopArtistsResponseI[]> {
-    return this.httpClient.post<StatsGetTopArtistsResponseI[]>(
+  ): Observable<StatsGetTopArtistsI[]> {
+    return this.httpClient.post<StatsGetTopArtistsI[]>(
       `${this.url}/getTopArtists`,
       body
     );

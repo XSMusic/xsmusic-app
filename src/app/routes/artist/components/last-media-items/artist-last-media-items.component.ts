@@ -1,11 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { Artist, Media } from '@models';
 
 @Component({
   selector: 'artist-last-media-items',
   templateUrl: './artist-last-media-items.component.html',
+  animations: [inOutAnimation]
 })
 export class ArtistLastMediaItemsComponent implements OnInit {
   @Input() artist!: Artist;

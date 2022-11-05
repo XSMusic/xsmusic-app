@@ -64,6 +64,8 @@ export class AdminArtistPage {
             twitter: '',
             soundcloud: '',
             spotify: '',
+            tiktok: '',
+            instagram: '',
           };
         }
         this.spinner.hide();

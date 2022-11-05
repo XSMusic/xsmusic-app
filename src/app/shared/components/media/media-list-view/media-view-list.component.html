@@ -62,11 +62,15 @@
           <td class="pl-5">
             {{ mediaItem.year !== 0 ? mediaItem.year : 'Año no disponible' }}
           </td>
+
           <td class="pl-5" *ngxPermissionsOnly="'ADMIN'">
-            <div class="flex items-center">
-              <p class="mr-2 text-sm font-light leading-none text-gray-700">
-                {{ mediaItem.updated! | timeAgo }}
-              </p>
+            <div class="flex flex-col">
+              <div class="mr-2 text-sm font-light leading-none text-gray-700">
+                <span class="font-semibold">Cre:</span> {{ mediaItem.created! | timeAgo }}
+              </div>
+              <div class="mr-2 text-sm font-light leading-none text-gray-700">
+                <span class="font-semibold">Act:</span> {{ mediaItem.updated! | timeAgo }}
+              </div>
             </div>
           </td>
         </tr>

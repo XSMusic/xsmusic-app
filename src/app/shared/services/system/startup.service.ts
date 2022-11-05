@@ -3,6 +3,7 @@ import { tap } from 'rxjs/operators';
 import { NgxPermissionsService } from 'ngx-permissions';
 import { AuthService } from '@core/auth';
 import { User } from '@models';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable({
   providedIn: 'root',
@@ -11,16 +12,24 @@ export class StartupService {
   constructor(
     private authService: AuthService,
     private permissonsService: NgxPermissionsService,
+    private spinnerService: NgxSpinnerService
   ) {}
 
   load() {
     return new Promise<void>((resolve) => {
+      this.spinnerService.show();
       this.authService
         .change()
         .pipe(tap((user: any) => this.setPermissions(user)))
         .subscribe({
-          next: () => resolve(),
-          error: () => resolve(),
+          next: () => {
+            this.spinnerService.hide();
+            resolve();
+          },
+          error: () => {
+            this.spinnerService.hide();
+            resolve();
+          },
         });
     });
   }

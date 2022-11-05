@@ -23,8 +23,11 @@ export class AdminMediaOneComponent {
   @Output() onSubmitSuccess: EventEmitter<any> = new EventEmitter<void>();
   sources = [{ name: 'Youtube', value: 'youtube' }];
   bodyItems = { page: 1, pageSize: 1000, order: ['name', 'asc'] };
-  artists: Artist[] = [];
+  artistsAll: Artist[] = [];
+  artistsSearch: Artist[] = [];
   styles: Style[] = [];
+  selectArtistsState = false;
+  artistSearch = null;
   constructor(
     private artistService: ArtistService,
     private styleService: StyleService,
@@ -42,7 +45,10 @@ export class AdminMediaOneComponent {
 
   getAllArtists() {
     this.artistService.getAll(this.bodyItems).subscribe({
-      next: (response) => (this.artists = response.items),
+      next: (response) => {
+        this.artistsAll = response.items;
+        this.artistsSearch = response.items.splice(0, 5);
+      },
       error: (error) => this.toast.showToast(TOAST_STATE.error, error),
     });
   }
@@ -60,17 +66,30 @@ export class AdminMediaOneComponent {
     );
   }
 
+  openCloseArtistsSelection() {
+    this.selectArtistsState = !this.selectArtistsState;
+  }
+
   onChangeArtistSelect(e: any) {
-    if (this.media.artists!.length < 5) {
-      const newItem = this.artists.find(
-        (artist) => artist._id!.toString() === e.target.value.toString()
+    if (this.media.artists!.length < 3) {
+      this.artistsSearch = this.artistsAll.filter((item) =>
+        item.name?.toLowerCase()?.includes(e.target.value.toLowerCase())
       );
-      this.media.artists?.push(newItem);
+      this.selectArtistsState = true;
     } else {
-      this.toastService.showToast(
-        TOAST_STATE.warning,
-        'No puedes añadir mas de 3 artistas'
-      );
+      this.toast.showToast(TOAST_STATE.warning, '3 artistas maximo');
+    }
+  }
+
+  onSelectArtist(artist: Artist) {
+    if (this.media.artists!.length < 3) {
+      this.media.artists?.push(artist);
+      this.artistSearch = null;
+      this.artistsSearch = this.artistsAll;
+      this.selectArtistsState = false;
+    } else {
+      this.toast.showToast(TOAST_STATE.warning, '3 artistas maximo');
+      this.selectArtistsState = false;
     }
   }
 

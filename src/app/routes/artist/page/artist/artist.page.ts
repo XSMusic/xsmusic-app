@@ -16,9 +16,7 @@ export class ArtistPage implements OnInit {
   artist!: Artist;
   artists: Artist[] = [];
   slug!: string;
-  information: { name: string; type?: string; value: any }[] = [];
   views: any[] = [];
-  view = 'set';
 
   constructor(
     private route: ActivatedRoute,

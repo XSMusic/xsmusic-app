@@ -8,7 +8,7 @@ export interface IBreadCrumb {
 }
 
 @Component({
-  selector: 'app-breadcrumb',
+  selector: 'breadcrumb',
   templateUrl: 'breadcrumb.component.html',
 })
 export class BreadcrumbeComponent implements OnInit {

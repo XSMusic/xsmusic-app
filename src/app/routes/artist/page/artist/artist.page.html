@@ -3,26 +3,8 @@
 
   <div class="h-1 mt-2 mb-4 border-b"></div>
 
-  <div class="flex justify-center gap-4">
-    <div
-      *ngFor="let v of views"
-      class="text-lg text-center cursor-pointer"
-      [ngClass]="{ 'font-extrabold': v.value === view}"
-      (click)="view = v.value"
-    >
-      {{ v.name }} <span class="text-sm font-light">({{ v.counter }})</span>
-    </div>
-  </div>
-
-  <artist-block-sets
-    *ngIf="view === 'set'"
+  <artist-last-media
     [artist]="artist"
-    [type]="view"
-  ></artist-block-sets>
-
-  <artist-block-sets
-    *ngIf="view === 'track'"
-    [artist]="artist"
-    [type]="view"
-  ></artist-block-sets>
+    [views]="views"
+  ></artist-last-media>
 </ng-container>

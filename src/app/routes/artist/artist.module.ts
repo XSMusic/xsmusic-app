@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { ArtistBlockInfoComponent } from './components/block-info/artist-block-info.component';
-import { ArtistBlockSetsComponent } from './components/block-sets/artist-block-sets.component';
+import { ArtistLastMediaItemsComponent } from './components/last-media-items/artist-last-media-items.component';
 import { ArtistBlockTracksComponent } from './components/block-tracks/artist-block-tracks.component';
 import { ArtistPage } from './page/artist/artist.page';
 import { ArtistsViewGalleryComponent } from './components/view-gallery/artists-view-gallery.component';
 import { ArtistsPage } from './page/artists/artists.page';
+import { ArtistLastMediaComponent } from './components/last-media/artist-last-media.component';
 
 @NgModule({
   imports: [
@@ -31,13 +32,15 @@ import { ArtistsPage } from './page/artists/artists.page';
   ],
   exports: [],
   declarations: [
+    ArtistLastMediaComponent,
     ArtistBlockTracksComponent,
-    ArtistBlockSetsComponent,
+    ArtistLastMediaItemsComponent,
     ArtistPage,
     ArtistBlockInfoComponent,
-    ArtistBlockSetsComponent,
+    ArtistLastMediaItemsComponent,
     ArtistBlockTracksComponent,
     ArtistsPage,
+    ArtistLastMediaComponent,
     ArtistsViewGalleryComponent,
   ],
   providers: [],

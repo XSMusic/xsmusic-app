@@ -4,10 +4,10 @@ import { routesConfig } from '@core/config';
 import { Artist, Media } from '@models';
 
 @Component({
-  selector: 'artist-block-sets',
-  templateUrl: './artist-block-sets.component.html',
+  selector: 'artist-last-media-items',
+  templateUrl: './artist-last-media-items.component.html',
 })
-export class ArtistBlockSetsComponent implements OnInit {
+export class ArtistLastMediaItemsComponent implements OnInit {
   @Input() artist!: Artist;
   @Input() type = 'set';
   items: Media[] = [];

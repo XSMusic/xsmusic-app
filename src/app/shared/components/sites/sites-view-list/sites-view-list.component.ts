@@ -1,18 +1,18 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { Club } from '@models';
+import { Site } from '@models';
 import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
 import { getYearsOld } from '@utils';
 
 @Component({
-  selector: 'clubs-view-list',
-  templateUrl: 'clubs-view-list.component.html',
+  selector: 'sites-view-list',
+  templateUrl: 'sites-view-list.component.html',
   animations: [inOutAnimation],
 })
-export class ClubViewListComponent {
-  @Input() clubs: Club[] = [];
+export class SiteViewListComponent {
+  @Input() sites: Site[] = [];
   @Input() loading = true;
-  @Output() goToProfile = new EventEmitter<Club>();
+  @Output() goToProfile = new EventEmitter<Site>();
   @Output() filter = new EventEmitter<{ name: string; value: string }>();
   @Output() onScroll = new EventEmitter<void>();
   getYearsOld = getYearsOld;

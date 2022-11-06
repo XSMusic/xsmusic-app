@@ -15,7 +15,7 @@ export class LastMediaItemsComponent {
   constructor(private router: Router) {}
 
   goToMedia(item: Media) {
-    const route = item.type === 'set' ? routesConfig.set : routesConfig.track;
-    this.router.navigate([route.replace(':id', item._id!)]);
+    const route = item.type === 'set' ? [routesConfig.set.replace(':id', item._id!)] : [routesConfig.track.replace(':id', item._id!)];
+    this.router.navigate(route);
   }
 }

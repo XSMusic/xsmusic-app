@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
+import { routesConfig } from '@core/config';
 import { StatsService, ToastService } from '@services';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
+import { AdminTotalsItemI } from './admin-totals.interface';
 
 @Component({
   selector: 'admin-totals',
@@ -9,65 +11,7 @@ import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
   animations: [inOutAnimation],
 })
 export class AdminTotalsComponent implements OnInit {
-  totals = [
-    {
-      id: 'artists',
-      name: 'Artistas',
-      value: 0,
-      percentages: [{ days: '', value: 0 }],
-      route: '/admin/artists',
-      icon: 'user-dj',
-    },
-    {
-      id: 'clubs',
-      name: 'Clubs',
-      value: 0,
-      percentages: [],
-      route: '/admin/clubs',
-      icon: '',
-    },
-    {
-      id: 'styles',
-      name: 'Estilos',
-      value: 0,
-      percentages: [],
-      route: '/admin/styles',
-      icon: '',
-    },
-    {
-      id: 'events',
-      name: 'Eventos',
-      value: 0,
-      percentages: [],
-      route: '/admin/events',
-      icon: 'calendar',
-    },
-    {
-      id: 'sets',
-      name: 'Sets',
-      value: 0,
-      percentages: [],
-      route: '/admin/media/sets',
-      icon: 'sets',
-    },
-    {
-      id: 'tracks',
-      name: 'Tracks',
-      value: 0,
-      percentages: [],
-      route: '/admin/media/tracks',
-      icon: '',
-    },
-
-    {
-      id: 'users',
-      name: 'Usuarios',
-      value: 0,
-      percentages: [],
-      route: '/admin/users',
-      icon: 'users',
-    },
-  ];
+  totals: AdminTotalsItemI[] = [];
   endSlice = 2;
   loading = true;
 
@@ -77,7 +21,79 @@ export class AdminTotalsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.setInitTotals();
     this.getStats();
+  }
+
+  setInitTotals() {
+    this.totals = [
+      {
+        id: 'artists',
+        name: 'Artistas',
+        value: 0,
+        percentages: [{ days: '', value: 0 }],
+        route: routesConfig.artistsAdmin,
+      },
+      {
+        id: 'clubs',
+        name: 'Clubs',
+        value: 0,
+        percentages: [],
+        route: routesConfig.clubsAdmin,
+      },
+      {
+        id: 'styles',
+        name: 'Estilos',
+        value: 0,
+        percentages: [],
+        route: routesConfig.stylesAdmin,
+      },
+      {
+        id: 'events',
+        name: 'Eventos',
+        value: 0,
+        percentages: [],
+        route: '/admin/events',
+      },
+      {
+        id: 'events',
+        name: 'Festivales',
+        value: 0,
+        percentages: [],
+        route: routesConfig.festivalsAdmin
+      },
+      {
+        id: 'sets',
+        name: 'Sets',
+        value: 0,
+        percentages: [],
+        route: routesConfig.setsAdmin,
+      },
+      {
+        id: 'tracks',
+        name: 'Tracks',
+        value: 0,
+        percentages: [],
+        route: routesConfig.tracksAdmin,
+      },
+      {
+        id: 'users',
+        name: 'Usuarios',
+        value: 0,
+        percentages: [],
+        route: routesConfig.usersAdmin,
+      },
+    ];
+
+    this.totals = this.totals.sort((a: any, b: any) => {
+      if (a.total > b.total) {
+        return -1;
+      } else if (b.total > a.total) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
   }
 
   getStats() {

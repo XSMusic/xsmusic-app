@@ -1,13 +1,13 @@
-export class Club {
+export class Site {
   _id?: string;
   name? = '';
   address: any = {
     city: '',
-    country: '',
+    country: 'es',
     coordinates: [],
   };
+  type: 'club' | 'festival' = 'club';
   image? = '';
-  birthdate? = '';
   styles?: any[] = [];
   info? = '';
   slug?: string;
@@ -23,7 +23,7 @@ export class Club {
   };
   created?: string;
   updated?: string;
-  constructor(data?: Club) {
+  constructor(data?: Site) {
     if (data) {
       for (const property in data) {
         if (data.hasOwnProperty(property))

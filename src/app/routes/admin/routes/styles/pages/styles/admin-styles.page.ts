@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
+import { routesConfig } from '@core/config';
 import { Style } from '@models';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 import { StyleGetAllDto } from '@shared/services/api/style/style.dto';
@@ -64,7 +65,7 @@ export class AdminStylesPage implements OnInit {
 
   onClickButton(button: ButtonBlockItem) {
     if (button.action === 'add') {
-      this.router.navigate(['admin/styles/one']);
+      this.router.navigate([routesConfig.styleAdminAdd]);
     }
   }
 

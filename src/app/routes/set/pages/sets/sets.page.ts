@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { routesConfig } from '@core/config';
-import { MediaGetAllDto } from '@interfaces';
+import { GetAllDto } from '@interfaces';
 import { Media } from '@models';
 import { MediaService, ToastService } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
@@ -13,7 +13,7 @@ import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 })
 export class SetsPage implements OnInit {
   items: Media[] = [];
-  body: MediaGetAllDto = {
+  body: GetAllDto = {
     page: 1,
     pageSize: 20,
     order: ['updated', 'desc'],

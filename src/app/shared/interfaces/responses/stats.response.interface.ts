@@ -4,6 +4,7 @@ export interface StatsTotalsAdminI {
   sets: StatsTotalAdminItemI;
   tracks: StatsTotalAdminItemI;
   clubs: StatsTotalAdminItemI;
+  festivals: StatsTotalAdminItemI;
   events: StatsTotalAdminItemI;
   users: StatsTotalAdminItemI;
 }

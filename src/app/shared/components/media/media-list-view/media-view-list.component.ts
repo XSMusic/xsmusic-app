@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
+import { routesConfig } from '@core/config';
 import { Media } from '@models';
 import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
 
@@ -22,6 +23,6 @@ export class MediaViewListComponent {
   }
 
   goToArtistProfile(slug: string) {
-    this.router.navigate(['/artists/profile', slug]);
+    this.router.navigate([routesConfig.artist.replace(':slug', slug)]);
   }
 }

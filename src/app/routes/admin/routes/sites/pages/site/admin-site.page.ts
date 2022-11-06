@@ -1,24 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Club, Style } from '@models';
-import { ToastService, ClubService, StyleService } from '@services';
+import { Site, Style } from '@models';
+import { ToastService, SiteService, StyleService } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
-  selector: 'page-admin-club',
-  templateUrl: 'admin-club.page.html',
+  selector: 'page-admin-site',
+  templateUrl: 'admin-site.page.html',
 })
-export class AdminClubPage implements OnInit {
+export class AdminSitePage implements OnInit {
   id!: string;
-  club: Club = new Club();
+  site: Site = new Site();
   styles: Style[] = [];
   title!: string;
   view = 'viewInfo';
 
   constructor(
-    private clubService: ClubService,
+    private clubService: SiteService,
     private styleService: StyleService,
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
@@ -29,10 +29,10 @@ export class AdminClubPage implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id')!;
     this.getStyles();
     if (this.id) {
-      this.title = 'Editar Artista';
+      this.title = 'Editar';
       this.getOne();
     } else {
-      this.title = 'Nuevo Artista';
+      this.title = 'Nuevo';
     }
   }
 
@@ -49,7 +49,7 @@ export class AdminClubPage implements OnInit {
     this.spinner.show();
     this.clubService.getOne({ id: this.id }).subscribe({
       next: (response) => {
-        this.club = response;
+        this.site = response;
         this.spinner.hide();
       },
       error: (error) => {

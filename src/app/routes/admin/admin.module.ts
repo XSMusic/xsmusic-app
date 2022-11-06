@@ -22,11 +22,11 @@ import { AdminTotalsComponent } from './components/totals/admin-totals.component
           ),
       },
       {
-        path: 'clubs',
-        data: { breadcrumb: 'Clubs' },
+        path: 'sites',
+        data: { breadcrumb: 'Sitios' },
         loadChildren: () =>
-          import('./routes/clubs/admin-clubs.module').then(
-            (m) => m.AdminClubsModule
+          import('./routes/sites/admin-sites.module').then(
+            (m) => m.AdminSitesModule
           ),
       },
       {

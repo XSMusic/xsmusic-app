@@ -85,7 +85,7 @@ export class NavbarComponent implements OnInit {
   onClickMenuProfileItem(item: Menu) {
     this.menuProfileState = false;
     if (item.action === 'accountEdit') {
-      this.router.navigate([`${routesConfig.accountEdit}`]);
+      this.router.navigate([routesConfig.accountEdit]);
     } else if (item.action === 'logout') {
       this.authService.logout();
       this.router.navigate([routesConfig.home]);

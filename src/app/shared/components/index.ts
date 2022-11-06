@@ -3,7 +3,7 @@ export { ArtistsLastBlockComponent } from './artists/artists-last-block/artists-
 export { ArtistsViewListComponent } from './artists/artists-view-list/artists-view-list.component';
 
 // Club
-export { ClubViewListComponent } from './clubs/clubs-view-list/clubs-view-list.component';
+export { SiteViewListComponent as ClubViewListComponent } from './sites/sites-view-list/sites-view-list.component';
 
 // Media
 export { MediaViewListComponent } from './media/media-list-view/media-view-list.component';

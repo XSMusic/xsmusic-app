@@ -1,9 +1,9 @@
 <form @inOut class="grid grid-cols-1 gap-4 lg:grid-cols-2">
   <div class="col-span-2 mb-1 md:col-span-1">
     <img
-      [src]="club.image"
-      [alt]="club.name"
-      (click)="showImage(club.image!)"
+      [src]="site.image"
+      [alt]="site.name"
+      (click)="showImage(site.image!)"
       class="object-cover w-full cursor-pointer h-80 rounded-2xl"
       onError
     />
@@ -17,7 +17,7 @@
       <input
         name="name"
         type="text"
-        [(ngModel)]="club.name"
+        [(ngModel)]="site.name"
         placeholder="Introduce el nombre"
         class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
       />
@@ -25,20 +25,39 @@
 
     <div class="col-span-2 md:col-span-1">
       <label
+        for="type"
+        class="flex gap-2 mb-3 text-base font-semibold text-black"
+      >
+        Tipo
+      </label>
+      <select
+        name="country"
+        type="text"
+        [(ngModel)]="site.type"
+        class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
+      >
+        <option *ngFor="let type of types" [value]="type.value">
+          {{ type.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-span-2 md:col-span-2">
+      <label
         for="country"
         class="flex gap-2 mb-3 text-base font-semibold text-black"
       >
         Pais
         <img
-          *ngIf="club.address.country !== ''"
-          [src]="club.address.country! | countryFlag"
-          [alt]="club.address.country"
+          *ngIf="site.address.country !== ''"
+          [src]="site.address.country! | countryFlag"
+          [alt]="site.address.country"
         />
       </label>
       <select
         name="country"
         type="text"
-        [(ngModel)]="club.address.country"
+        [(ngModel)]="site.address.country"
         placeholder="Introduce el codigo del pais"
         class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
       >
@@ -55,7 +74,7 @@
       <input
         name="lat"
         type="text"
-        [(ngModel)]="club.address.coordinates[0]"
+        [(ngModel)]="site.address.coordinates[0]"
         placeholder="Introduce el nombre"
         class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
       />
@@ -68,7 +87,7 @@
       <input
         name="lng"
         type="text"
-        [(ngModel)]="club.address.coordinates[1]"
+        [(ngModel)]="site.address.coordinates[1]"
         placeholder="Introduce el nombre"
         class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
       />
@@ -84,7 +103,7 @@
       <input
         name="image"
         type="text"
-        [(ngModel)]="club.image"
+        [(ngModel)]="site.image"
         placeholder="Introduce la imagen"
         class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
       />
@@ -99,7 +118,7 @@
       <span
         (click)="onClickStyleItem(styleSelected)"
         class="px-2 py-1 text-xs bg-gray-100 border shadow-md cursor-pointer rounded-2xl"
-        *ngFor="let styleSelected of club.styles"
+        *ngFor="let styleSelected of site.styles"
       >
         {{ styleSelected.name }}
       </span>
@@ -122,7 +141,7 @@
     <input
       name="web"
       type="text"
-      [(ngModel)]="club.social.web"
+      [(ngModel)]="site.social.web"
       placeholder="Introduce Web"
       class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
     />
@@ -134,7 +153,7 @@
     <input
       name="facebook"
       type="text"
-      [(ngModel)]="club.social.facebook"
+      [(ngModel)]="site.social.facebook"
       placeholder="Introduce Facebook"
       class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
     />
@@ -146,7 +165,7 @@
     <input
       name="twitter"
       type="text"
-      [(ngModel)]="club.social.twitter"
+      [(ngModel)]="site.social.twitter"
       placeholder="Introduce Twitter"
       class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
     />
@@ -161,7 +180,7 @@
     <input
       name="soundcloud"
       type="text"
-      [(ngModel)]="club.social.soundcloud"
+      [(ngModel)]="site.social.soundcloud"
       placeholder="Introduce Soundcloud"
       class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
     />
@@ -174,7 +193,7 @@
     <input
       name="spotify"
       type="text"
-      [(ngModel)]="club.social.spotify"
+      [(ngModel)]="site.social.spotify"
       placeholder="Introduce Spotify"
       class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
     />
@@ -187,7 +206,7 @@
     <input
       name="tiktok"
       type="text"
-      [(ngModel)]="club.social.tiktok"
+      [(ngModel)]="site.social.tiktok"
       placeholder="Introduce Tiktok"
       class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
     />
@@ -203,7 +222,7 @@
     <input
       name="instagram"
       type="text"
-      [(ngModel)]="club.social.instagram"
+      [(ngModel)]="site.social.instagram"
       placeholder="Introduce Instagram"
       class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
     />
@@ -219,7 +238,7 @@
     <input
       name="email"
       type="text"
-      [(ngModel)]="club.social.email"
+      [(ngModel)]="site.social.email"
       placeholder="Introduce email"
       class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
     />
@@ -236,7 +255,7 @@
     </button>
     <button
       type="button"
-      *ngIf="club._id"
+      *ngIf="site._id"
       (click)="onDelete()"
       class="w-full py-1 m-1 text-white bg-red-500 border-2 border-red-500 shadow-md hover:bg-red-600 hover:border-red-600 hover:text-white md:w-32 rounded-2xl"
     >

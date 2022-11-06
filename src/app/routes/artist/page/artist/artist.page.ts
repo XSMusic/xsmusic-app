@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
+import { routesConfig } from '@core/config';
 import { Artist, Media } from '@models';
 import { ToastService } from '@services';
 import { ArtistService } from '@shared/services/api/artist/artist.service';
@@ -50,6 +51,6 @@ export class ArtistPage implements OnInit {
   }
 
   goToSet(set: Media) {
-    this.router.navigate(['sets', set._id]);
+    this.router.navigate([routesConfig.set.replace(':id', set._id!)]);
   }
 }

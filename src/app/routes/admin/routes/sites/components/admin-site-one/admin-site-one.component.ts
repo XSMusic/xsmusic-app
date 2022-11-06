@@ -3,28 +3,27 @@ import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { MessageI } from '@interfaces';
-import { Club, Style } from '@models';
-import { ToastService, ClubService } from '@services';
+import { Site, Style } from '@models';
+import { ToastService, SiteService } from '@services';
 import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { countries } from 'assets/data/countries';
 
 @Component({
-  selector: 'admin-club-one',
-  templateUrl: 'admin-club-one.component.html',
+  selector: 'admin-site-one',
+  templateUrl: 'admin-site-one.component.html',
   animations: [inOutAnimation],
 })
-export class AdminClubOneComponent {
-  @Input() club = new Club();
+export class AdminSiteOneComponent {
+  @Input() site = new Site();
   @Input() styles: Style[] = [];
   countries = countries;
-  darkModeValues = [
-    { name: 'Sistema', value: 'system' },
-    { name: 'Activado', value: 'on' },
-    { name: 'Desactivado', value: 'off' },
+  types = [
+    { name: 'Club', value: 'club' },
+    { name: 'Festival', value: 'festival' },
   ];
   constructor(
-    private clubService: ClubService,
+    private siteService: SiteService,
     private fullImage: FullImageService,
     private toastService: ToastService,
     private router: Router
@@ -35,9 +34,9 @@ export class AdminClubOneComponent {
   }
 
   onSubmit() {
-    const observable = this.club._id
-      ? this.clubService.update(this.club)
-      : this.clubService.create(this.club);
+    const observable = this.site._id
+      ? this.siteService.update(this.site)
+      : this.siteService.create(this.site);
     observable.subscribe({
       next: (response) => this.onSuccess(response),
       error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
@@ -46,7 +45,7 @@ export class AdminClubOneComponent {
 
   onDelete() {
     // TODO: Añadir confirmacion por modal
-    this.clubService.deleteOne(this.club._id!).subscribe({
+    this.siteService.deleteOne(this.site._id!).subscribe({
       next: (response) => this.onSuccess(response),
       error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
     });
@@ -58,17 +57,17 @@ export class AdminClubOneComponent {
   }
 
   onClickStyleItem(item: { name: string; _id: string }) {
-    this.club.styles = this.club.styles?.filter(
+    this.site.styles = this.site.styles?.filter(
       (style) => style.name !== item.name
     );
   }
 
   onChangeStyleSelect(e: any) {
-    if (this.club.styles!.length <= 3) {
+    if (this.site.styles!.length <= 3) {
       const newStyle = this.styles.find(
         (style) => style._id!.toString() === e.target.value.toString()
       );
-      this.club.styles?.push(newStyle);
+      this.site.styles?.push(newStyle);
     } else {
       this.toastService.showToast(
         TOAST_STATE.warning,

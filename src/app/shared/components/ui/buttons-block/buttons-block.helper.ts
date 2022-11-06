@@ -97,7 +97,7 @@ export const buttonsByType = [
     ],
   },
   {
-    name: 'clubsAdmin',
+    name: 'sitesAdmin',
     buttons: [
       new ButtonBlockItem({
         name: 'Nuevo',
@@ -124,7 +124,7 @@ export const buttonsByType = [
     ],
   },
   {
-    name: 'clubAdmin',
+    name: 'siteAdmin',
     buttons: [
       new ButtonBlockItem({
         name: 'Info',

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { MediaGetAllDto } from '@interfaces';
+import { routesConfig } from '@core/config';
+import { GetAllDto } from '@interfaces';
 import { Media } from '@models';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 import { MediaService } from '@shared/services/api/media/media.service';
@@ -18,7 +19,7 @@ import {
 export class AdminMediaListPage implements OnInit {
   title = '';
   items: Media[] = [];
-  body: MediaGetAllDto = {
+  body: GetAllDto = {
     page: 1,
     pageSize: 20,
     order: ['updated', 'desc'],
@@ -68,7 +69,11 @@ export class AdminMediaListPage implements OnInit {
     if (button.action === 'order' || button.action === 'filter') {
       this.toast.showToast(TOAST_STATE.info, 'En construccion');
     } else if (button.action === 'add') {
-      this.router.navigate([`/admin/media/${this.type}/add`]);
+      const route =
+        this.type === 'sets'
+          ? [routesConfig.setAdminAdd]
+          : [routesConfig.trackAdminAdd];
+      this.router.navigate(route);
     }
   }
 
@@ -84,7 +89,11 @@ export class AdminMediaListPage implements OnInit {
   }
 
   goToProfile(media: Media) {
-    this.router.navigate([`admin/media/${this.type}/edit/`, media._id]);
+    const route =
+      this.type === 'sets'
+        ? [routesConfig.setAdmin.replace(':id', media._id!)]
+        : [routesConfig.trackAdmin.replace(':id', media._id!)];
+    this.router.navigate(route);
   }
 
   filter(event: { name: string; value: string }) {

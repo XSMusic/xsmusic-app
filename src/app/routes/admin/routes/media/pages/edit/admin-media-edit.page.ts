@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { routesConfig } from '@core/config';
 import { Media } from '@models';
 import { MediaService, ToastService } from '@services';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
@@ -40,7 +41,7 @@ export class AdminMediaEditPage implements OnInit {
   onSubmitSuccess() {
     this.media = new Media();
     const route =
-      this.type === 'sets' ? ['/admin/media/sets'] : ['/admin/media/tracks'];
+      this.type === 'sets' ? [routesConfig.setsAdmin] : [routesConfig.tracksAdmin];
     this.router.navigate(route);
   }
 }

@@ -1,28 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Club } from '@models';
+import { Site } from '@models';
 import { Observable } from 'rxjs';
 import { environment } from '@env/environment';
 import { GetAllDto, IdSlugDto, MessageI, PaginatorI } from '@interfaces';
 
 @Injectable({ providedIn: 'root' })
-export class ClubService {
-  url = `${environment.API_URL}/clubs`;
+export class SiteService {
+  url = `${environment.API_URL}/sites`;
   constructor(private httpClient: HttpClient) {}
 
-  getAll(data: GetAllDto): Observable<PaginatorI<Club>> {
-    return this.httpClient.post<PaginatorI<Club>>(`${this.url}/getAll`, data);
+  getAll(data: GetAllDto): Observable<PaginatorI<Site>> {
+    return this.httpClient.post<PaginatorI<Site>>(`${this.url}/getAll`, data);
   }
 
-  getOne(data: IdSlugDto): Observable<Club> {
-    return this.httpClient.post<Club>(`${this.url}/getOne`, data);
+  getOne(data: IdSlugDto): Observable<Site> {
+    return this.httpClient.post<Site>(`${this.url}/getOne`, data);
   }
 
-  create(data: Club): Observable<MessageI> {
+  create(data: Site): Observable<MessageI> {
     return this.httpClient.post<MessageI>(`${this.url}/create`, data);
   }
 
-  update(data: Club): Observable<MessageI> {
+  update(data: Site): Observable<MessageI> {
     return this.httpClient.put<MessageI>(`${this.url}/update`, data);
   }
 

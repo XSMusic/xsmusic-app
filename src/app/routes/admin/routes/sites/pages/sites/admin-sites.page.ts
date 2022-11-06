@@ -1,32 +1,43 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { routesConfig } from '@core/config';
 import { GetAllDto } from '@interfaces';
-import { Club } from '@models';
-import { ClubService, ToastService } from '@services';
+import { Site } from '@models';
+import { SiteService, ToastService } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 
 @Component({
-  selector: 'page-admin-clubs',
-  templateUrl: 'admin-clubs.page.html',
+  selector: 'page-admin-sites',
+  templateUrl: 'admin-sites.page.html',
 })
-export class AdminClubsPage implements OnInit {
-  clubs: Club[] = [];
+export class AdminSitesPage implements OnInit {
+  title = '';
+  sites: Site[] = [];
   body: GetAllDto = {
     page: 1,
     pageSize: 20,
     order: ['updated', 'desc'],
   };
+  type = '';
   loading = true;
   error = false;
   constructor(
-    private clubService: ClubService,
+    private route: ActivatedRoute,
+    private clubService: SiteService,
     private toast: ToastService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
+    this.type = this.route.snapshot.routeConfig!.path!;
+    if (this.type === 'clubs') {
+      this.title = 'Clubs';
+      this.body.type = 'club';
+    } else {
+      this.title = 'Festivales';
+      this.body.type = 'festival';
+    }
     this.getClubs();
   }
 
@@ -34,9 +45,9 @@ export class AdminClubsPage implements OnInit {
     this.clubService.getAll(this.body).subscribe({
       next: (response) => {
         if (!more) {
-          this.clubs = response.items;
+          this.sites = response.items;
         } else {
-          this.clubs = this.clubs.concat(response.items);
+          this.sites = this.sites.concat(response.items);
         }
         this.loading = false;
         this.error = false;
@@ -47,7 +58,7 @@ export class AdminClubsPage implements OnInit {
       },
     });
   }
-  goToProfile(item: Club) {
+  goToProfile(item: Site) {
     this.router.navigate([routesConfig.clubAdmin.replace(':id', item._id!)]);
   }
 
@@ -72,7 +83,7 @@ export class AdminClubsPage implements OnInit {
     if (button.action === 'order' || button.action === 'filter') {
       this.toast.showToast(TOAST_STATE.info, 'En construccion');
     } else if (button.action === 'add') {
-      this.router.navigate(['/admin/clubs/one']);
+      this.router.navigate([routesConfig.clubAdminAdd]);
     }
   }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { MediaGetAllDto } from '@interfaces';
+import { GetAllDto } from '@interfaces';
 import { Media } from '@models';
 import { MediaService, ToastService } from '@services';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
@@ -13,7 +13,7 @@ import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 export class LastMediaComponent implements OnInit {
   sets: Media[] = [];
   tracks: Media[] = [];
-  body: MediaGetAllDto = {
+  body: GetAllDto = {
     page: 1,
     pageSize: 4,
     order: ['created', 'desc'],

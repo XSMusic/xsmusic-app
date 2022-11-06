@@ -3,18 +3,18 @@
     <table class="w-full whitespace-nowrap">
       <tbody>
         <tr
-          *ngFor="let club of clubs"
+          *ngFor="let site of sites"
           tabindex="0"
           class="h-16 border-b border-gray-100 rounded-lg dark:border-black dark:border-0"
         >
           <td>
             <div class="w-12">
               <img
-                [src]="club.image"
-                [alt]="club.name"
+                [src]="site.image"
+                [alt]="site.name"
                 onError
                 class="object-cover object-center w-12 h-12 cursor-pointer rounded-2xl lg:h-12 lg:w-12 hover:filter-grayscale hover:scale-105 hover:duration-1000"
-                (click)="showImage(club.image!)"
+                (click)="showImage(site.image!)"
               />
             </div>
           </td>
@@ -22,13 +22,13 @@
             <div class="items-center">
               <p
                 class="my-1 mr-2 text-base font-extrabold leading-none text-black cursor-pointer hover:text-gray-500"
-                (click)="goToProfile.emit(club)"
+                (click)="goToProfile.emit(site)"
               >
-                {{ club.name }}
+                {{ site.name }}
               </p>
               <p class="mt-1 text-sm font-light leading-none text-gray-500">
                 {{
-                  club.birthdate ? getYearsOld(club.birthdate) + ' años' : ''
+                  site.birthdate ? getYearsOld(site.birthdate) + ' años' : ''
                 }}
               </p>
             </div>
@@ -37,13 +37,13 @@
             <div class="w-12">
               <div class="flex items-center">
                 <img
-                  [src]="club.address.country! | countryFlag"
-                  [alt]="club.address.country"
+                  [src]="site.address.country! | countryFlag"
+                  [alt]="site.address.country"
                   class="w-6 h-6 mx-2 my-1 cursor-pointer hover:scale-110 hover:duration-1000"
                   (click)="
                     filter.emit({
                       name: 'country',
-                      value: club.address.country!
+                      value: site.address.country!
                     })
                   "
                 />
@@ -52,7 +52,7 @@
           </td>
           <td class="px-5">
             <span
-              *ngFor="let style of club.styles; let i = index"
+              *ngFor="let style of site.styles; let i = index"
               class="gap-1 px-2 py-1 mr-1 text-xs text-center cursor-pointer rounded-2xl hover:px-2.5 hover:py-1.5 hover:duration-1000"
               (click)="filter.emit({ name: 'styles', value: style.name })"
               [ngStyle]="{
@@ -67,7 +67,7 @@
           <td class="pl-5" *ngxPermissionsOnly="'ADMIN'">
             <div class="flex items-center">
               <p class="mr-2 text-sm font-light leading-none text-gray-700">
-                {{ club.updated! | timeAgo }}
+                {{ site.updated! | timeAgo }}
               </p>
             </div>
           </td>

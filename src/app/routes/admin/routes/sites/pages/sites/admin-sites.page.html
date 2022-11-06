@@ -1,8 +1,8 @@
-<header-custom [title]="'Clubs'"></header-custom>
+<header-custom [title]="title"></header-custom>
 
 <div class="container px-4 pt-3 mx-auto max-w-full-xl sm:pb-0 max-w-7sm">
   <buttons-block
-    type="clubsAdmin"
+    type="sitesAdmin"
     (search)="onSearch($event)"
     (onClickButton)="onClickButton($event)"
   ></buttons-block>
@@ -15,11 +15,11 @@
     *ngIf="body.filter && body.filter.length > 0"
   ></alert>
 
-  <clubs-view-list
-    [clubs]="clubs"
+  <sites-view-list
+    [sites]="sites"
     [loading]="loading"
     (goToProfile)="goToProfile($event)"
     (filter)="filter($event)"
     (onScroll)="onScroll()"
-  ></clubs-view-list>
+  ></sites-view-list>
 </div>

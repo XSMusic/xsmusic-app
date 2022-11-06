@@ -19,12 +19,12 @@ import { AdminMediaListPage } from './pages/list/admin-media-list.page';
         data: { breadcrumb: '', title: 'Sets' },
       },
       {
-        path: 'sets/add',
+        path: 'sets/one',
         component: AdminMediaAddPage,
         data: { breadcrumb: 'Nuevo Set', title: 'Nuevo Set' },
       },
       {
-        path: 'sets/edit/:id',
+        path: 'sets/one/:id',
         component: AdminMediaEditPage,
         data: { breadcrumb: 'Editar Set', title: 'Editar Set' },
       },
@@ -34,12 +34,12 @@ import { AdminMediaListPage } from './pages/list/admin-media-list.page';
         data: { breadcrumb: '', title: 'Tracks' },
       },
       {
-        path: 'tracks/add',
+        path: 'tracks/one',
         component: AdminMediaAddPage,
         data: { breadcrumb: 'Nuevo Track', title: 'Nuevo Track' },
       },
       {
-        path: 'tracks/edit/:id',
+        path: 'tracks/one/:id',
         component: AdminMediaEditPage,
         data: { breadcrumb: 'Editar Track', title: 'Editar Track' },
       },

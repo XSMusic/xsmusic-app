@@ -1,4 +1,5 @@
 export * from './artist.model';
+export * from './club.model';
 export * from './media.model';
 export * from './menu.model';
 export * from './style.model';

@@ -16,6 +16,7 @@ import {
   ButtonsBlockComponent,
   MediaViewListComponent,
   UsersViewListComponent,
+  ClubViewListComponent,
 } from '@components';
 import {
   CountryFlagPipe,
@@ -46,6 +47,7 @@ const components = [
   AlertComponent,
   ArtistsLastBlockComponent,
   ArtistsViewListComponent,
+  ClubViewListComponent,
   BreadcrumbeComponent,
   ButtonsBlockComponent,
   FullImageComponent,

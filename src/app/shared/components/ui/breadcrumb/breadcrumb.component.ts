@@ -39,7 +39,9 @@ export class BreadcrumbeComponent implements OnInit {
         ? route.routeConfig.data['breadcrumb']
         : '';
     let path =
-      route.routeConfig && route.routeConfig.data ? route.routeConfig.path! : '';
+      route.routeConfig && route.routeConfig.data
+        ? route.routeConfig.path!
+        : '';
 
     const lastRoutePart = path.split('/').pop() ?? '';
     const isDynamicRoute = lastRoutePart.startsWith(':');

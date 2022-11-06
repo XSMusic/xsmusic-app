@@ -97,6 +97,58 @@ export const buttonsByType = [
     ],
   },
   {
+    name: 'clubsAdmin',
+    buttons: [
+      new ButtonBlockItem({
+        name: 'Nuevo',
+        icon: 'plus',
+        isFirst: true,
+        action: 'add',
+      }),
+      new ButtonBlockItem({
+        name: 'Ordenar',
+        icon: 'order',
+        action: 'order',
+      }),
+      new ButtonBlockItem({
+        name: 'Filtrar',
+        icon: 'filter',
+        action: 'filter',
+      }),
+      new ButtonBlockItem({
+        name: 'Buscar',
+        icon: 'search',
+        isLast: true,
+        action: 'search',
+      }),
+    ],
+  },
+  {
+    name: 'clubAdmin',
+    buttons: [
+      new ButtonBlockItem({
+        name: 'Info',
+        icon: 'info',
+        isFirst: true,
+        isActivatable: true,
+        action: 'viewInfo',
+      }),
+      new ButtonBlockItem({
+        name: 'Opciones',
+        icon: 'info',
+        isActivatable: true,
+        action: 'viewOptions',
+      }),
+      new ButtonBlockItem({
+        name: 'Events',
+        icon: 'calendar',
+        isActivatable: true,
+        isLast: true,
+        action: 'viewEvents',
+      }),
+    ],
+  },
+  {
     name: 'mediaAdmin',
     buttons: [
       new ButtonBlockItem({

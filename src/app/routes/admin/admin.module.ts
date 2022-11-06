@@ -22,6 +22,14 @@ import { AdminTotalsComponent } from './components/totals/admin-totals.component
           ),
       },
       {
+        path: 'clubs',
+        data: { breadcrumb: 'Clubs' },
+        loadChildren: () =>
+          import('./routes/clubs/admin-clubs.module').then(
+            (m) => m.AdminClubsModule
+          ),
+      },
+      {
         path: 'styles',
         data: { breadcrumb: 'Estilos' },
         loadChildren: () =>

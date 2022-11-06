@@ -27,6 +27,10 @@ export class ButtonsBlockComponent implements OnInit {
     | 'artists'
     | 'artistsAdmin'
     | 'artistAdmin'
+    | 'clubs'
+    | 'clubAdmin'
+    | 'clubsAdmin'
+    | 'media'
     | 'mediaAdmin'
     | 'styles'
     | 'styleAdmin' = 'artists';

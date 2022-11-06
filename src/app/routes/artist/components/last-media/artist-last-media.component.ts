@@ -5,7 +5,7 @@ import { Artist } from '@models';
 @Component({
   selector: 'artist-last-media',
   templateUrl: './artist-last-media.component.html',
-  animations: [inOutAnimation]
+  animations: [inOutAnimation],
 })
 export class ArtistLastMediaComponent {
   @Input() views: any[] = [];

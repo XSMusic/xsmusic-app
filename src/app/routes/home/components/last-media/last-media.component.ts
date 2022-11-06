@@ -8,7 +8,7 @@ import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 @Component({
   selector: 'last-media',
   templateUrl: './last-media.component.html',
-  animations: [inOutAnimation]
+  animations: [inOutAnimation],
 })
 export class LastMediaComponent implements OnInit {
   sets: Media[] = [];

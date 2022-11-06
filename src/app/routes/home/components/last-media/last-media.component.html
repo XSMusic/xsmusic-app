@@ -17,5 +17,11 @@
   </h1>
 </div>
 
-<last-media-items *ngIf="!loading && view === 'sets'" [media]="sets"></last-media-items>
-<last-media-items *ngIf="!loading && view === 'tracks'" [media]="tracks"></last-media-items>
+<last-media-items
+  *ngIf="!loading && view === 'sets'"
+  [media]="sets"
+></last-media-items>
+<last-media-items
+  *ngIf="!loading && view === 'tracks'"
+  [media]="tracks"
+></last-media-items>

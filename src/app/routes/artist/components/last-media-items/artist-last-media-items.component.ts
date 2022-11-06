@@ -7,7 +7,7 @@ import { Artist, Media } from '@models';
 @Component({
   selector: 'artist-last-media-items',
   templateUrl: './artist-last-media-items.component.html',
-  animations: [inOutAnimation]
+  animations: [inOutAnimation],
 })
 export class ArtistLastMediaItemsComponent implements OnInit {
   @Input() artist!: Artist;

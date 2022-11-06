@@ -2,11 +2,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
-import { MessageI } from '@interfaces';
-import { Artist, Media, Style } from '@models';
+import { GetAllDto, MessageI } from '@interfaces';
+import { Artist, Media, Site, Style } from '@models';
 import {
   ArtistService,
   MediaService,
+  SiteService,
   StyleService,
   ToastService,
 } from '@services';
@@ -22,15 +23,30 @@ export class AdminMediaOneComponent {
   @Input() media: Media = new Media();
   @Output() onSubmitSuccess: EventEmitter<any> = new EventEmitter<void>();
   sources = [{ name: 'Youtube', value: 'youtube' }];
-  bodyItems = { page: 1, pageSize: 1000, order: ['name', 'asc'] };
-  artistsAll: Artist[] = [];
+  bodyArtist: GetAllDto = {
+    page: 1,
+    pageSize: 5,
+    order: ['name', 'asc'],
+    filter: [],
+  };
+  bodySite: GetAllDto = {
+    page: 1,
+    pageSize: 5,
+    order: ['name', 'asc'],
+    filter: [],
+    type: 'all',
+  };
   artistsSearch: Artist[] = [];
+  sitesSearch: Site[] = [];
   styles: Style[] = [];
   selectArtistsState = false;
+  selectSitesState = false;
   artistSearch = null;
+  siteSearch = null;
   constructor(
     private artistService: ArtistService,
     private styleService: StyleService,
+    private siteService: SiteService,
     private mediaService: MediaService,
     private toast: ToastService,
     private toastService: ToastService,
@@ -40,24 +56,20 @@ export class AdminMediaOneComponent {
 
   ngOnInit() {
     this.getAllStytles();
-    this.getAllArtists();
-  }
-
-  getAllArtists() {
-    this.artistService.getAll(this.bodyItems).subscribe({
-      next: (response) => {
-        this.artistsAll = response.items;
-        this.artistsSearch = response.items.splice(0, 5);
-      },
-      error: (error) => this.toast.showToast(TOAST_STATE.error, error),
-    });
   }
 
   getAllStytles() {
-    this.styleService.getAll(this.bodyItems).subscribe({
-      next: (response) => (this.styles = response.items),
-      error: (error) => this.toast.showToast(TOAST_STATE.error, error),
-    });
+    this.styleService
+      .getAll({
+        page: 1,
+        pageSize: 100,
+        order: ['name', 'asc'],
+        complete: false,
+      })
+      .subscribe({
+        next: (response) => (this.styles = response.items),
+        error: (error) => this.toast.showToast(TOAST_STATE.error, error),
+      });
   }
 
   onClickItem(type: 'artists' | 'styles', item: { name: string; _id: string }) {
@@ -66,16 +78,24 @@ export class AdminMediaOneComponent {
     );
   }
 
-  openCloseArtistsSelection() {
-    this.selectArtistsState = !this.selectArtistsState;
+  closeSelection(type: string) {
+    if (type === 'artists') {
+      this.selectArtistsState = false;
+    } else {
+      this.selectSitesState = false;
+    }
   }
 
-  onChangeArtistSelect(e: any) {
+  onChangeInputArtist(e: any) {
     if (this.media.artists!.length < 3) {
-      this.artistsSearch = this.artistsAll.filter((item) =>
-        item.name?.toLowerCase()?.includes(e.target.value.toLowerCase())
-      );
-      this.selectArtistsState = true;
+      this.bodyArtist.filter = ['name', e.target.value];
+      this.artistService.getAll(this.bodyArtist).subscribe({
+        next: (response) => {
+          this.artistsSearch = response.items;
+          this.selectArtistsState = true;
+        },
+        error: (error) => this.toast.showToast(TOAST_STATE.error, error),
+      });
     } else {
       this.toast.showToast(TOAST_STATE.warning, '3 artistas maximo');
     }
@@ -85,12 +105,26 @@ export class AdminMediaOneComponent {
     if (this.media.artists!.length < 3) {
       this.media.artists?.push(artist);
       this.artistSearch = null;
-      this.artistsSearch = this.artistsAll;
       this.selectArtistsState = false;
     } else {
       this.toast.showToast(TOAST_STATE.warning, '3 artistas maximo');
       this.selectArtistsState = false;
     }
+  }
+
+  onChangeInputSite(e: any) {
+    this.bodySite.filter = ['name', e.target.value];
+    this.siteService.getAll(this.bodySite).subscribe({
+      next: (response) => (this.sitesSearch = response.items),
+      error: (error) => this.toast.showToast(TOAST_STATE.error, error),
+    });
+    this.selectSitesState = true;
+  }
+
+  onSelectSite(site: Site) {
+    this.media.site = site;
+    this.siteSearch = null;
+    this.selectSitesState = false;
   }
 
   onChangeStyleSelect(e: any) {
@@ -173,11 +207,11 @@ export class AdminMediaOneComponent {
     this.fullImage.showImageFull(image);
   }
 
-  goToMedia(id: string) {
+  goToMedia(slug: string) {
     if (this.media.type === 'set') {
-      this.router.navigate([routesConfig.set.replace(':id', id)]);
+      this.router.navigate([routesConfig.set.replace(':slug', slug)]);
     } else {
-      this.router.navigate([routesConfig.track.replace(':id', id)]);
+      this.router.navigate([routesConfig.track.replace(':slug', slug)]);
     }
   }
 }

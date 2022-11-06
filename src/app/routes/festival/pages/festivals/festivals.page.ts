@@ -2,27 +2,27 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { routesConfig } from '@core/config';
 import { GetAllDto } from '@interfaces';
-import { Media } from '@models';
-import { MediaService, ToastService } from '@services';
+import { Site } from '@models';
+import { SiteService, ToastService } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 
 @Component({
-  selector: 'page-sets',
-  templateUrl: 'sets.page.html',
+  selector: 'page-festivals',
+  templateUrl: 'festivals.page.html',
 })
-export class SetsPage implements OnInit {
-  items: Media[] = [];
+export class FestivalsPage implements OnInit {
+  items: Site[] = [];
   body: GetAllDto = {
     page: 1,
     pageSize: 20,
-    order: ['created', 'desc'],
-    type: 'set',
+    order: ['updated', 'desc'],
+    type: 'festival',
   };
   loading = true;
   error = false;
   constructor(
-    private mediaService: MediaService,
+    private siteService: SiteService,
     private router: Router,
     private toast: ToastService
   ) {}
@@ -32,7 +32,7 @@ export class SetsPage implements OnInit {
   }
 
   getItems(more = false): void {
-    this.mediaService.getAll(this.body).subscribe({
+    this.siteService.getAll(this.body).subscribe({
       next: (response) => {
         if (!more) {
           this.items = response.items;
@@ -66,22 +66,8 @@ export class SetsPage implements OnInit {
     }
   }
 
-  goToProfile(data: { type: 'media' | 'site'; media: Media }) {
-    if (data.type === 'media') {
-      this.router.navigate([
-        routesConfig.set.replace(':slug', data.media.slug!),
-      ]);
-    } else {
-      if (data.media.type === 'site') {
-        this.router.navigate([
-          routesConfig.club.replace(':slug', data.media.site.slug!),
-        ]);
-      } else if (data.media.type === 'festival') {
-        this.router.navigate([
-          routesConfig.festival.replace(':slug', data.media.site.slug!),
-        ]);
-      }
-    }
+  goToProfile(site: Site) {
+    this.router.navigate([routesConfig.festival.replace(':slug', site.slug!)]);
   }
 
   filter(event: { name: string; value: string }) {

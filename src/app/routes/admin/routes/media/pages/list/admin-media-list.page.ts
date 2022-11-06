@@ -88,11 +88,11 @@ export class AdminMediaListPage implements OnInit {
     }
   }
 
-  goToProfile(media: Media) {
+  goToProfile(data: { type: 'site' | 'media'; media: Media }) {
     const route =
       this.type === 'sets'
-        ? [routesConfig.setAdmin.replace(':id', media._id!)]
-        : [routesConfig.trackAdmin.replace(':id', media._id!)];
+        ? [routesConfig.setAdmin.replace(':id', data.media._id!)]
+        : [routesConfig.trackAdmin.replace(':id', data.media._id!)];
     this.router.navigate(route);
   }
 

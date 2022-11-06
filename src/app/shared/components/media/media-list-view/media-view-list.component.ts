@@ -13,7 +13,10 @@ import { FullImageService } from '@shared/services/ui/full-image/full-image.serv
 export class MediaViewListComponent {
   @Input() media: Media[] = [];
   @Input() loading = true;
-  @Output() goToProfile = new EventEmitter<Media>();
+  @Output() goToProfile = new EventEmitter<{
+    type: 'site' | 'media';
+    media: Media;
+  }>();
   @Output() filter = new EventEmitter<{ name: string; value: string }>();
   @Output() onScroll = new EventEmitter<void>();
   constructor(private fullImage: FullImageService, private router: Router) {}

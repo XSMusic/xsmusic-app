@@ -56,11 +56,11 @@ export class AdminTotalsComponent implements OnInit {
         route: '/admin/events',
       },
       {
-        id: 'events',
+        id: 'festivals',
         name: 'Festivales',
         value: 0,
         percentages: [],
-        route: routesConfig.festivalsAdmin
+        route: routesConfig.festivalsAdmin,
       },
       {
         id: 'sets',

@@ -11,7 +11,7 @@ import { routesConfig } from '@core/config';
   templateUrl: 'set.page.html',
 })
 export class SetPage implements OnInit {
-  id!: string;
+  slug!: string;
   media: Media = new Media();
   constructor(
     private route: ActivatedRoute,
@@ -22,12 +22,12 @@ export class SetPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.id = this.route.snapshot.paramMap.get('id')!;
+    this.slug = this.route.snapshot.paramMap.get('slug')!;
     this.getItem();
   }
 
   getItem() {
-    this.mediaService.getOne({ id: this.id }).subscribe({
+    this.mediaService.getOne({ slug: this.slug }).subscribe({
       next: (response) => {
         this.media = response;
       },
@@ -42,11 +42,23 @@ export class SetPage implements OnInit {
     );
   }
 
-  goToArtistProfile(slug: string) {
-    this.router.navigate([routesConfig.artist.replace(':slug', slug)]);
+  goToProfile(type: 'artist' | 'site', item: any) {
+    if (type === 'artist') {
+      this.router.navigate([routesConfig.artist.replace(':slug', item.slug)]);
+    } else {
+      if (item.type === 'club') {
+        this.router.navigate([routesConfig.club.replace(':slug', item.slug)]);
+      } else if (item.type === 'festival') {
+        this.router.navigate([
+          routesConfig.festival.replace(':slug', item.slug),
+        ]);
+      }
+    }
   }
 
   goToEdit() {
-    this.router.navigate([routesConfig.setAdmin.replace(':id', this.id)]);
+    this.router.navigate([
+      routesConfig.setAdmin.replace(':id', this.media._id!),
+    ]);
   }
 }

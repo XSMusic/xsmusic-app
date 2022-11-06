@@ -19,7 +19,7 @@ import { SetsPage } from './pages/sets/sets.page';
         data: { title: 'Sets' },
       },
       {
-        path: 'one/:id',
+        path: 'one/:slug',
         component: SetPage,
         data: { breadcrumb: 'Set', title: 'Set' },
       },

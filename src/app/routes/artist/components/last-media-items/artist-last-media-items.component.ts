@@ -22,10 +22,9 @@ export class ArtistLastMediaItemsComponent implements OnInit {
     } else {
       this.items = this.artist.tracks;
     }
-    console.log(this.type, this.items.length);
   }
 
   goTo(item: Media) {
-    this.router.navigate([routesConfig.set.replace(':id', item._id!)]);
+    this.router.navigate([routesConfig.set.replace(':slug', item.slug!)]);
   }
 }

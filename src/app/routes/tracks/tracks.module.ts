@@ -19,7 +19,7 @@ import { TrackPage } from './pages/track/track.page';
         data: { title: 'Tracks' },
       },
       {
-        path: 'one/:id',
+        path: 'one/:slug',
         component: TrackPage,
         data: { breadcrumb: 'Track', title: 'Track' },
       },

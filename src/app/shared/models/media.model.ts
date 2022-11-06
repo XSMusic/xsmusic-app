@@ -4,11 +4,13 @@ export class Media {
   image? = '';
   artists?: any[] = [];
   type? = '';
+  site?: any;
   styles?: any[] = [];
   info? = '';
   source?: any = null;
   sourceId? = '';
   year? = 0;
+  slug? = '';
   created?: string;
   updated?: string;
 

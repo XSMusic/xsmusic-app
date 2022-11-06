@@ -16,7 +16,7 @@ export class TracksPage implements OnInit {
   body: GetAllDto = {
     page: 1,
     pageSize: 20,
-    order: ['updated', 'desc'],
+    order: ['created', 'desc'],
     type: 'track',
   };
   loading = true;
@@ -67,7 +67,7 @@ export class TracksPage implements OnInit {
   }
 
   goToProfile(media: Media) {
-    this.router.navigate([routesConfig.track.replace(':id', media._id!)]);
+    this.router.navigate([routesConfig.track.replace(':slug', media.slug!)]);
   }
 
   filter(event: { name: string; value: string }) {

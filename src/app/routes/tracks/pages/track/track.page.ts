@@ -11,7 +11,7 @@ import { routesConfig } from '@core/config';
   templateUrl: 'track.page.html',
 })
 export class TrackPage implements OnInit {
-  id!: string;
+  slug!: string;
   media: Media = new Media();
   constructor(
     private route: ActivatedRoute,
@@ -22,12 +22,12 @@ export class TrackPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.id = this.route.snapshot.paramMap.get('id')!;
+    this.slug = this.route.snapshot.paramMap.get('slug')!;
     this.getItem();
   }
 
   getItem() {
-    this.mediaService.getOne({ id: this.id }).subscribe({
+    this.mediaService.getOne({ slug: this.slug }).subscribe({
       next: (response) => {
         this.media = response;
       },
@@ -47,6 +47,6 @@ export class TrackPage implements OnInit {
   }
 
   goToEdit() {
-    this.router.navigate([routesConfig.trackAdmin.replace(':id', this.id)]);
+    this.router.navigate([routesConfig.trackAdmin.replace(':id', this.slug)]);
   }
 }

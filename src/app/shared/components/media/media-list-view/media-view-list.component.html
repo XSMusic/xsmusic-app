@@ -4,38 +4,69 @@
       <tbody>
         <tr
           *ngFor="let mediaItem of media"
-          tabindex="0"
           class="h-16 border-b border-gray-100 rounded-lg dark:border-black dark:border-0"
         >
-          <td>
-            <div class="w-12">
+          <td class="pl-3">
+            <div class="flex gap-3 w-80">
               <img
                 [src]="mediaItem.image"
                 [alt]="mediaItem.name"
                 onError
-                class="object-cover object-center w-12 h-12 cursor-pointer rounded-2xl lg:h-12 lg:w-12 hover:filter-grayscale hover:scale-110 hover:duration-1000"
+                class="object-cover object-center w-12 h-12 rounded-lg cursor-pointer lg:h-12 lg:w-12 hover:filter-grayscale hover:scale-110 hover:duration-1000"
                 (click)="showImage(mediaItem.image!)"
               />
+              <div class="flex flex-col">
+                <p
+                  class="my-1 mr-2 text-lg font-extrabold leading-none text-black cursor-pointer hover:text-gray-600"
+                  (click)="
+                    goToProfile.emit({ type: 'media', media: mediaItem })
+                  "
+                >
+                  {{ mediaItem.name }}
+                </p>
+                <p
+                  class="mt-1 text-sm font-light leading-none text-gray-500 cursor-pointer hover:text-gray-400"
+                >
+                  <span
+                    *ngFor="let artist of mediaItem.artists"
+                    (click)="goToArtistProfile(artist.slug)"
+                  >
+                    {{ artist.name }}
+                  </span>
+                </p>
+              </div>
             </div>
           </td>
-          <td class="pl-5">
-            <div class="items-center">
-              <p
-                class="my-1 mr-2 text-base font-extrabold leading-none text-black cursor-pointer hover:text-gray-600"
-                (click)="goToProfile.emit(mediaItem)"
-              >
-                {{ mediaItem.name }}
-              </p>
-              <p
-                class="mt-1 text-sm font-light leading-none text-gray-500 cursor-pointer hover:text-gray-400"
-              >
-                <span
-                  *ngFor="let artist of mediaItem.artists"
-                  (click)="goToArtistProfile(artist.slug)"
+
+          <td class="pl-3">
+            <div
+              class="flex gap-3 w-60"
+              *ngIf="mediaItem.site.name !== 'Desconocido'"
+            >
+              <img
+                [src]="mediaItem.site.image"
+                alt=""
+                class="object-cover object-center rounded-lg cursor-pointer h-9 w-9 hover:filter-grayscale hover:scale-110 hover:duration-1000"
+                onError
+              />
+              <div class="flex flex-col">
+                <p
+                  class="my-0.5 mr-2 text-base font-bold leading-none text-black cursor-pointer hover:text-gray-600"
+                  (click)="goToProfile.emit({ type: 'site', media: mediaItem })"
                 >
-                  {{ artist.name }}
-                </span>
-              </p>
+                  {{ mediaItem.site.name }}
+                </p>
+                <div
+                  class="flex gap-1 text-sm font-light text-gray-500 cursor-pointer hover:text-gray-400"
+                >
+                  <img
+                    [src]="mediaItem.site.address.country! | countryFlag"
+                    [alt]="mediaItem.site.address.country"
+                    class="w-3 h-3 my-1 cursor-pointer hover:scale-110 hover:duration-1000"
+                  />
+                  {{ mediaItem.site.address.country | countryName }}
+                </div>
+              </div>
             </div>
           </td>
 

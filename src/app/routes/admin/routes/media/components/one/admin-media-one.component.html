@@ -89,15 +89,15 @@
           [src]="artistSelected.image"
           alt="artistSelected.name"
           class="w-5 h-5 mr-3 rounded-full"
+          onError
         />
         <span class="pr-1 text-sm font-medium">{{ artistSelected.name }}</span>
       </div>
     </div>
-
     <input
-      (click)="openCloseArtistsSelection()"
+      (click)="closeSelection('artists')"
       name="artist"
-      (keydown.enter)="$event.preventDefault(); onChangeArtistSelect($event)"
+      (keydown.enter)="$event.preventDefault(); onChangeInputArtist($event)"
       [(ngModel)]="artistSearch"
       placeholder="Introduce el artista"
       class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md cursor-pointer"
@@ -111,19 +111,82 @@
     >
       <div
         class="flex px-3 py-2 border-b cursor-pointer hover:bg-gray-200"
-        *ngFor="let artist of artistsSearch | slice: 0:5"
-        (click)="onSelectArtist(artist)"
+        *ngFor="let artistS of artistsSearch"
+        (click)="onSelectArtist(artistS)"
       >
-        <img [src]="artist.image" alt="" class="w-10 h-10 mr-3 rounded-full" />
+        <img
+          [src]="artistS.image"
+          alt=""
+          class="w-10 h-10 mr-3 rounded-full"
+          onError
+        />
         <div class="flex flex-col">
-          <span class="text-sm font-medium">{{ artist.name }}</span>
+          <span class="text-sm font-medium">{{ artistS?.name }}</span>
           <span class="text-sm font-light">
-            {{ artist.country! | countryName }}
+            {{ artistS?.country ?? 'es' | countryName }}
           </span>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- SITE -->
+
+  <div class="col-span-2 mb-1 md:col-span-1">
+    <label class="block mb-3 text-base font-semibold text-black">
+      <span class="text-gray-700">Club/Festival</span>
+    </label>
+    <div class="flex gap-2 my-3" *ngIf="media.site">
+      <div
+        class="flex px-2 py-1 text-xs text-white bg-black border shadow-md cursor-pointer rounded-2xl hover:opacity-80"
+      >
+        <img
+          [src]="media.site?.image"
+          [alt]=""
+          class="w-5 h-5 mr-3 rounded-full"
+          onError
+        />
+        <span class="pr-1 text-sm font-medium">{{ media.site?.name }}</span>
+      </div>
+    </div>
+
+    <input
+      (click)="closeSelection('sites')"
+      name="site"
+      (keydown.enter)="$event.preventDefault(); onChangeInputSite($event)"
+      [(ngModel)]="siteSearch"
+      placeholder="Introduce el club/festival"
+      class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md cursor-pointer"
+      autocomplete="off"
+    />
+
+    <div
+      @inOut
+      class="absolute z-10 w-48 mt-1 bg-white border rounded-lg shadow-lg"
+      *ngIf="selectSitesState"
+    >
+      <div
+        class="flex px-3 py-2 border-b cursor-pointer hover:bg-gray-200"
+        *ngFor="let site of sitesSearch | slice: 0:5"
+        (click)="onSelectSite(site)"
+      >
+        <img
+          [src]="site.image"
+          alt=""
+          class="w-10 h-10 mr-3 rounded-full"
+          onError
+        />
+        <div class="flex flex-col">
+          <span class="text-sm font-medium">{{ site.name }}</span>
+          <span class="text-sm font-light">
+            {{ site.address.country! | countryName }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ESTILOS -->
 
   <div class="col-span-2 mb-1 md:col-span-1">
     <label class="block mb-3 text-base font-semibold text-black">
@@ -186,7 +249,7 @@
     <button
       type="button"
       *ngIf="media._id"
-      (click)="goToMedia(media._id)"
+      (click)="goToMedia(media.slug!)"
       class="w-full py-1 m-1 text-white bg-blue-500 border-2 border-blue-500 shadow-md hover:bg-blue-600 hover:border-blue-600 hover:text-white md:w-32 rounded-2xl"
     >
       Ver perfil

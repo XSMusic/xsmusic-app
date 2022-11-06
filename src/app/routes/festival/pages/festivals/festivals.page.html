@@ -1,8 +1,8 @@
-<header-custom [title]="'Tracks'" [breadcrumb]="true"></header-custom>
+<header-custom [title]="'Festivales'" [breadcrumb]="true"></header-custom>
 
 <div class="container px-4 pt-3 mx-auto max-w-full-xl sm:pb-0 max-w-7sm">
   <buttons-block
-    type="mediaAdmin"
+    type="sites"
     (search)="onSearch($event)"
     (onClickButton)="onClickButton($event)"
   ></buttons-block>
@@ -15,11 +15,11 @@
     *ngIf="body.filter && body.filter.length > 0"
   ></alert>
 
-  <media-view-list
-    [media]="items"
+  <sites-view-list
+    [sites]="items"
     [loading]="loading"
     (goToProfile)="goToProfile($event)"
     (filter)="filter($event)"
     (onScroll)="onScroll()"
-  ></media-view-list>
+  ></sites-view-list>
 </div>

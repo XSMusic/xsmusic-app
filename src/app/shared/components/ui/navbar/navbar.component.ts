@@ -40,6 +40,7 @@ export class NavbarComponent implements OnInit {
       { name: 'Inicio', route: 'home' },
       { name: 'Artistas', route: 'artists' },
       { name: 'Clubs', route: 'clubs' },
+      { name: 'Festivales', route: 'festivals' },
       { name: 'Sets', route: 'sets' },
       { name: 'Tracks', route: 'tracks' },
     ];

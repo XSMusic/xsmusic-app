@@ -41,7 +41,9 @@ export class AdminMediaEditPage implements OnInit {
   onSubmitSuccess() {
     this.media = new Media();
     const route =
-      this.type === 'sets' ? [routesConfig.setsAdmin] : [routesConfig.tracksAdmin];
+      this.type === 'sets'
+        ? [routesConfig.setsAdmin]
+        : [routesConfig.tracksAdmin];
     this.router.navigate(route);
   }
 }

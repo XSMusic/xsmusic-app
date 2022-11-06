@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { routesConfig } from '@core/config';
-import { Artist, Media } from '@models';
+import { Artist } from '@models';
 import { ToastService } from '@services';
 import { ArtistService } from '@shared/services/api/artist/artist.service';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
-  selector: 'artist',
+  selector: 'page-artist',
   templateUrl: 'artist.page.html',
   animations: [inOutAnimation],
 })
@@ -21,7 +20,6 @@ export class ArtistPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private artistService: ArtistService,
     private toast: ToastService,
     private spinner: NgxSpinnerService
@@ -48,9 +46,5 @@ export class ArtistPage implements OnInit {
         this.toast.showToast(TOAST_STATE.error, error);
       },
     });
-  }
-
-  goToSet(set: Media) {
-    this.router.navigate([routesConfig.set.replace(':id', set._id!)]);
   }
 }

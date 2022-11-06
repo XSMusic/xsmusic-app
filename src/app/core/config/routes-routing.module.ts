@@ -22,17 +22,25 @@ const routes: Routes = [
     path: 'clubs',
     data: { breadcrumb: 'Clubs' },
     loadChildren: () =>
-      import('../../routes/clubs/clubs.module').then((m) => m.ClubsModule),
+      import('../../routes/club/club.module').then((m) => m.ClubsModule),
+  },
+  {
+    path: 'festivals',
+    data: { breadcrumb: 'Festivales' },
+    loadChildren: () =>
+      import('../../routes/festival/festivals.module').then(
+        (m) => m.FestivalsModule
+      ),
   },
   {
     path: 'tracks',
-    data: { breadcrumb: 'Temas' },
+    data: { breadcrumb: 'Tracks' },
     loadChildren: () =>
       import('../../routes/tracks/tracks.module').then((m) => m.TracksModule),
   },
   {
     path: 'sets',
-    data: { breadcrumb: 'Set' },
+    data: { breadcrumb: 'Sets' },
     loadChildren: () =>
       import('../../routes/set/set.module').then((m) => m.SetModule),
   },

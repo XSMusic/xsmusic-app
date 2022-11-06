@@ -46,8 +46,7 @@
                 {{ modal.titleModal$ | async }}
               </h3>
               <div class="mt-2">
-                <div class="text-sm text-gray-500" [innerHtml]="">
-                  {{ modal.messageModal$ | async }}
+                <div class="text-sm text-gray-500" [innerHtml]="modal.messageModal$ | async">
                 </div>
               </div>
             </div>

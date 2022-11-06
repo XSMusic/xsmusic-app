@@ -95,10 +95,10 @@ export class ArtistOneComponent {
     );
   }
 
-  onKeyUpName(event: any) {
+  onKeyUpName() {
     this.spinner.show();
     const body: ScrapingGetInfoArtistDto = {
-      name: event.target.value,
+      name: this.artist.name!,
       countryCode: this.artist.country,
     };
     this.scrapingService.getInfoArtist(body).subscribe({

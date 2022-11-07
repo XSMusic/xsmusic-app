@@ -16,13 +16,20 @@
       </div>
       <div class="flex flex-col gap-1">
         <div
-          class="flex mt-1 text-xs font-bold text-green-500"
+          class="flex mt-1 text-xs font-bold"
           *ngFor="let percentage of total.percentages"
+          [ngClass]="{
+            'text-green-500': percentage.value !== 0,
+            'text-red-500': percentage.value === 0
+          }"
         >
           <svg-icon
-            name="arrow-up"
+            [name]="percentage.value === 0 ? 'arrow-down' : 'arrow-up'"
             svgClass="h-3 mt-0.5"
-            class="fill-green-500"
+            [ngClass]="{
+              'fill-green-500': percentage.value !== 0,
+              'fill-red-500': percentage.value === 0
+            }"
           ></svg-icon>
           {{ percentage.value }}%
           <span class="ml-1 font-light text-gray-400">

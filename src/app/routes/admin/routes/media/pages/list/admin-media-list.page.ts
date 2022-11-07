@@ -25,7 +25,7 @@ export class AdminMediaListPage implements OnInit {
     order: ['updated', 'desc'],
     type: '',
   };
-  type = '';
+  type: 'sets' | 'tracks' = 'sets';
   loading = true;
   error = false;
   constructor(
@@ -36,7 +36,7 @@ export class AdminMediaListPage implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.type = this.route.snapshot.routeConfig!.path!;
+    this.type = this.route.snapshot.routeConfig!.path! as 'sets' | 'tracks';
     if (this.type === 'sets') {
       this.title = 'Sets';
       this.body.type = 'set';

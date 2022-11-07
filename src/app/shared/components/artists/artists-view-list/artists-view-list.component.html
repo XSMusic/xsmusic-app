@@ -1,96 +1,190 @@
 <ng-container *ngIf="!loading">
-  <div @inOut class="my-2 overflow-x-auto">
-    <table class="w-full whitespace-nowrap">
-      <tbody>
-        <tr
-          *ngFor="let artist of artists"
-          tabindex="0"
-          class="h-16 border-b border-gray-100 rounded-lg dark:border-black dark:border-0"
-        >
-          <td>
-            <div class="w-12">
-              <img
-                [src]="artist.image"
-                [alt]="artist.name"
-                onError
-                class="object-cover object-center w-12 h-12 cursor-pointer rounded-2xl lg:h-12 lg:w-12 hover:filter-grayscale hover:scale-105 hover:duration-1000"
-                (click)="showImage(artist.image!)"
-              />
-            </div>
-          </td>
-          <td class="pl-5">
-            <div class="items-center">
-              <p
-                class="my-1 mr-2 text-base font-extrabold leading-none text-black cursor-pointer hover:text-gray-500"
-                (click)="goToProfile.emit(artist)"
-              >
-                {{ artist.name }}
-              </p>
-              <p class="mt-1 text-sm font-light leading-none text-gray-500">
-                {{
-                  artist.birthdate
-                    ? getYearsOld(artist.birthdate) + ' años'
-                    : ''
-                }}
-              </p>
-            </div>
-          </td>
-          <td>
-            <div class="w-12">
-              <div class="flex items-center">
+  <ng-container *ngIf="artists.length > 0">
+    <div @inOut class="my-2 overflow-x-auto">
+      <table class="w-full whitespace-nowrap">
+        <tbody>
+          <tr
+            *ngFor="let artist of artists"
+            tabindex="0"
+            class="h-16 border-b border-gray-100 rounded-lg dark:border-black dark:border-0"
+          >
+            <td>
+              <div class="w-12">
                 <img
-                  [src]="artist.country! | countryFlag"
-                  [alt]="artist.country"
-                  class="w-6 h-6 mx-2 my-1 cursor-pointer hover:scale-110 hover:duration-1000"
-                  (click)="
-                    filter.emit({ name: 'country', value: artist.country! })
-                  "
+                  [src]="artist.image"
+                  [alt]="artist.name"
+                  onError
+                  class="object-cover object-center w-12 h-12 cursor-pointer rounded-2xl lg:h-12 lg:w-12 hover:filter-grayscale hover:scale-105 hover:duration-1000"
+                  (click)="showImage(artist.image!)"
                 />
               </div>
-            </div>
-          </td>
-          <td class="px-5">
-            <span
-              *ngFor="let style of artist.styles; let i = index"
-              class="gap-1 px-2 py-1 mr-1 text-xs text-center cursor-pointer rounded-2xl hover:px-2.5 hover:py-1.5 hover:duration-1000"
-              (click)="filter.emit({ name: 'styles', value: style.name })"
-              [ngStyle]="{
-                background: style.colors?.bg ?? '',
-                color: style.colors?.text ?? ''
-              }"
-            >
-              {{ style.name | titlecase }}
-            </span>
-          </td>
-          <td class="pl-0">
-            <p class="mb-2 mr-2 text-sm font-light leading-none text-gray-700">
-              <span class="font-black">{{ artist.sets?.count ?? 0 }}</span>
-              {{ artist.sets?.count === 1 ? 'Set' : 'Sets' }}
-            </p>
-            <p class="mr-2 text-sm font-light leading-none text-gray-700">
-              <span class="font-black">{{ artist.tracks?.count ?? 0 }}</span>
-              {{ artist.tracks?.count === 1 ? 'Track' : 'Tracks' }}
-            </p>
-          </td>
-
-          <td class="pl-5" *ngxPermissionsOnly="'ADMIN'">
-            <div class="flex items-center">
-              <p class="mr-2 text-sm font-light leading-none text-gray-700">
-                {{ artist.updated! | timeAgo }}
+            </td>
+            <td class="pl-5">
+              <div class="items-center">
+                <p
+                  class="my-1 mr-2 text-base font-extrabold leading-none text-black cursor-pointer hover:text-gray-500"
+                  (click)="goToProfile.emit(artist)"
+                >
+                  {{ artist.name }}
+                </p>
+                <p class="mt-1 text-sm font-light leading-none text-gray-500">
+                  {{
+                    artist.birthdate
+                      ? getYearsOld(artist.birthdate) + ' años'
+                      : ''
+                  }}
+                </p>
+              </div>
+            </td>
+            <td>
+              <div class="w-12">
+                <div class="flex items-center">
+                  <img
+                    [src]="artist.country! | countryFlag"
+                    [alt]="artist.country"
+                    class="w-6 h-6 mx-2 my-1 cursor-pointer hover:scale-110 hover:duration-1000"
+                    (click)="
+                      filter.emit({ name: 'country', value: artist.country! })
+                    "
+                  />
+                </div>
+              </div>
+            </td>
+            <td class="px-5">
+              <div class="flex gap-2">
+                <span
+                  *ngFor="let style of artist.styles; let i = index"
+                  class="px-2 py-1 text-xs text-center bg-gray-100 shadow-md cursor-pointer rounded-2xl hover:bg-gray-200"
+                  (click)="filter.emit({ name: 'styles', value: style.name })"
+                >
+                  {{ style.name | titlecase }}
+                </span>
+              </div>
+            </td>
+            <td class="pl-0">
+              <p
+                class="mb-2 mr-2 text-sm font-light leading-none text-gray-700"
+              >
+                <span class="font-black">{{ artist.sets?.count ?? 0 }}</span>
+                {{ artist.sets?.count === 1 ? 'Set' : 'Sets' }}
               </p>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+              <p class="mr-2 text-sm font-light leading-none text-gray-700">
+                <span class="font-black">{{ artist.tracks?.count ?? 0 }}</span>
+                {{ artist.tracks?.count === 1 ? 'Track' : 'Tracks' }}
+              </p>
+            </td>
+
+            <td class="pl-0">
+              <div class="py-2">
+                <div class="flex justify-center gap-3">
+                  <div
+                    *ngIf="artist.social?.web && artist.social?.web !== ''"
+                    (click)="goToSocial(artist.social.web)"
+                  >
+                    <svg-icon
+                      name="web"
+                      svgClass="h-8 w-8  hover:scale-110 hover:duration-1000 cursor-pointer"
+                    ></svg-icon>
+                  </div>
+                  <div
+                    *ngIf="
+                      artist.social?.facebook && artist.social?.facebook !== ''
+                    "
+                    (click)="goToSocial(artist.social.facebook)"
+                  >
+                    <svg-icon
+                      name="facebook"
+                      svgClass="h-8 w-8 hover:scale-110 hover:duration-1000 cursor-pointer"
+                    ></svg-icon>
+                  </div>
+                  <div
+                    *ngIf="
+                      artist.social?.twitter && artist.social?.twitter !== ''
+                    "
+                    (click)="goToSocial(artist.social.twitter)"
+                  >
+                    <svg-icon
+                      name="twitter"
+                      svgClass="h-8 w-8 hover:scale-110 hover:duration-1000 cursor-pointer"
+                    ></svg-icon>
+                  </div>
+                  <div
+                    *ngIf="
+                      artist.social?.soundcloud &&
+                      artist.social?.soundcloud !== ''
+                    "
+                    (click)="goToSocial(artist.social.soundcloud)"
+                  >
+                    <svg-icon
+                      name="soundcloud"
+                      svgClass="h-8 w-8 hover:scale-110 hover:duration-1000 cursor-pointer"
+                    ></svg-icon>
+                  </div>
+                  <div
+                    *ngIf="
+                      artist.social?.spotify && artist.social?.spotify !== ''
+                    "
+                    (click)="goToSocial(artist.social.spotify)"
+                  >
+                    <svg-icon
+                      name="spotify"
+                      svgClass="h-8 w-8 hover:scale-110 hover:duration-1000 cursor-pointer"
+                    ></svg-icon>
+                  </div>
+                  <div
+                    *ngIf="
+                      artist.social?.tiktok && artist.social?.tiktok !== ''
+                    "
+                    (click)="goToSocial(artist.social.tiktok)"
+                  >
+                    <svg-icon
+                      name="tiktok"
+                      svgClass="h-8 w-8 hover:scale-110 hover:duration-1000 cursor-pointer"
+                    ></svg-icon>
+                  </div>
+                  <div
+                    *ngIf="
+                      artist.social?.instagram &&
+                      artist.social?.instagram !== ''
+                    "
+                    (click)="goToSocial(artist.social.instagram)"
+                  >
+                    <svg-icon
+                      name="instagram"
+                      svgClass="h-8 w-8 hover:scale-110 hover:duration-1000 cursor-pointer"
+                    ></svg-icon>
+                  </div>
+                </div>
+              </div>
+            </td>
+
+            <td class="pl-5" *ngxPermissionsOnly="'ADMIN'">
+              <div class="flex items-center">
+                <p class="mr-2 text-sm font-light leading-none text-gray-700">
+                  {{ artist.updated! | timeAgo }}
+                </p>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div
+      class="search-results"
+      infiniteScroll
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="50"
+      (scrolled)="onScroll.emit()"
+    ></div>
+  </ng-container>
+
+  <div class="mt-1" *ngIf="artists.length === 0">
+     <alert
+      type="warning"
+      message="No hay artistas disponibles"
+      actionText="Quitar"
+    ></alert>
   </div>
-  <div
-    class="search-results"
-    infiniteScroll
-    [infiniteScrollDistance]="2"
-    [infiniteScrollThrottle]="50"
-    (scrolled)="onScroll.emit()"
-  ></div>
 </ng-container>
 
 <ng-container *ngIf="loading">

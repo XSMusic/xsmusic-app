@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { Artist, Style } from '@models';
+import { Artist, Media, Style } from '@models';
 import { ArtistService, ToastService } from '@services';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StyleService } from '@shared/services/api/style/style.service';
 import { countries } from 'assets/data/countries';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
+import { routesConfig } from '@core/config';
 
 @Component({
   selector: 'page-admin-artist',
@@ -29,7 +30,8 @@ export class AdminArtistPage {
     private styleService: StyleService,
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -79,5 +81,29 @@ export class AdminArtistPage {
 
   onClickButton(event: ButtonBlockItem) {
     this.view = event.action;
+  }
+
+  goToProfile(data: { type: 'media' | 'site'; media: Media }) {
+    if (data.type === 'media') {
+      if (data.media.type === 'set') {
+        this.router.navigate([
+          routesConfig.setAdmin.replace(':id', data.media._id!),
+        ]);
+      } else {
+        this.router.navigate([
+          routesConfig.trackAdmin.replace(':id', data.media._id!),
+        ]);
+      }
+    } else {
+      if (data.media.site.type === 'club') {
+        this.router.navigate([
+          routesConfig.clubAdmin.replace(':id', data.media.site._id!),
+        ]);
+      } else if (data.media.site.type === 'festival') {
+        this.router.navigate([
+          routesConfig.festivalAdmin.replace(':id', data.media.site._id!),
+        ]);
+      }
+    }
   }
 }

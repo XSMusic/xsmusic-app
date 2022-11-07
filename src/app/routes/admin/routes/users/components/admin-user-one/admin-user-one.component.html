@@ -11,7 +11,10 @@
 
   <div class="grid grid-cols-2 gap-4">
     <div class="col-span-2 md:col-span-1">
-      <label for="name" class="mb-3 block text-base font-medium text-[#07074D]">
+      <label
+        for="name"
+        class="mb-3 block text-base font-extrabold text-[#07074D]"
+      >
         Nombre
       </label>
       <input
@@ -26,7 +29,7 @@
     <div class="col-span-2 md:col-span-1">
       <label
         for="email"
-        class="mb-3 block text-base font-medium text-[#07074D]"
+        class="mb-3 block text-base font-extrabold text-[#07074D]"
       >
         Email
       </label>
@@ -42,7 +45,7 @@
     <div class="col-span-2 md:col-span-2">
       <label
         for="darkMode"
-        class="mb-3 block text-base font-medium text-[#07074D]"
+        class="mb-3 block text-base font-extrabold text-[#07074D]"
       >
         Modo oscuro
       </label>
@@ -50,7 +53,6 @@
         name="darkMode"
         type="text"
         [(ngModel)]="user.darkMode"
-        placeholder="Introduce el codigo del pais"
         class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
       >
         <option
@@ -65,7 +67,7 @@
     <div class="col-span-2 md:col-span-2">
       <label
         for="email"
-        class="mb-3 block text-base font-medium text-[#07074D]"
+        class="mb-3 block text-base font-extrabold text-[#07074D]"
       >
         Imagen
       </label>

@@ -72,11 +72,11 @@ export class SetsPage implements OnInit {
         routesConfig.set.replace(':slug', data.media.slug!),
       ]);
     } else {
-      if (data.media.type === 'site') {
+      if (data.media.site.type === 'club') {
         this.router.navigate([
           routesConfig.club.replace(':slug', data.media.site.slug!),
         ]);
-      } else if (data.media.type === 'festival') {
+      } else if (data.media.site.type === 'festival') {
         this.router.navigate([
           routesConfig.festival.replace(':slug', data.media.site.slug!),
         ]);

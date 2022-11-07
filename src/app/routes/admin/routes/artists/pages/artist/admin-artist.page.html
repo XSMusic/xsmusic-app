@@ -13,7 +13,21 @@
   ></admin-artist-one>
 
   <ng-container *ngIf="view === 'viewOptions'">Opciones</ng-container>
-  <ng-container *ngIf="view === 'viewSets'">Sets</ng-container>
-  <ng-container *ngIf="view === 'viewTracks'">Tracks</ng-container>
+  <ng-container *ngIf="view === 'viewSets'">
+    <media-view-list
+      [media]="artist.sets"
+      [loading]="false"
+      type="sets"
+      (goToProfile)="goToProfile($event)"
+    ></media-view-list>
+  </ng-container>
+  <ng-container *ngIf="view === 'viewTracks'">
+    <media-view-list
+      [media]="artist.tracks"
+      [loading]="false"
+      type="tracks"
+      (goToProfile)="goToProfile($event)"
+    ></media-view-list>
+  </ng-container>
   <ng-container *ngIf="view === 'viewEvents'">Events</ng-container>
 </div>

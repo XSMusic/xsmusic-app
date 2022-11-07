@@ -66,8 +66,10 @@ export class TracksPage implements OnInit {
     }
   }
 
-  goToProfile(media: Media) {
-    this.router.navigate([routesConfig.track.replace(':slug', media.slug!)]);
+  goToProfile(data: { media: Media }) {
+    this.router.navigate([
+      routesConfig.track.replace(':slug', data.media.slug!),
+    ]);
   }
 
   filter(event: { name: string; value: string }) {

@@ -1,6 +1,12 @@
 <div
-  class="relative flex px-4 py-3 text-sm font-bold text-white bg-blue-500 rounded-2xl"
+  @inOut
+  class="relative flex px-4 py-3 text-sm font-bold text-white rounded-lg"
   role="alert"
+  [ngClass]="{
+    'bg-blue-500': type === 'info',
+    'bg-orange-500': type === 'warning',
+    'bg-red-500': type === 'error'
+  }"
 >
   <svg-icon
     class="mr-2 fill-current"

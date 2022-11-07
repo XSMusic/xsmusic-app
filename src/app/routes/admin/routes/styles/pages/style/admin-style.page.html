@@ -24,6 +24,7 @@
     *ngIf="view === 'viewSets'"
     [media]="style.sets"
     [loading]="false"
+    type="sets"
     (goToProfile)="goTo('set', $event)"
   ></media-view-list>
 </div>

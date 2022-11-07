@@ -12,6 +12,7 @@ import { getYearsOld } from '@utils';
 export class SiteViewListComponent {
   @Input() sites: Site[] = [];
   @Input() loading = true;
+  @Input() type: 'clubs' | 'festivals' = 'clubs';
   @Output() goToProfile = new EventEmitter<Site>();
   @Output() filter = new EventEmitter<{ name: string; value: string }>();
   @Output() onScroll = new EventEmitter<void>();

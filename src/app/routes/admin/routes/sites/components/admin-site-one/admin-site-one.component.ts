@@ -53,7 +53,11 @@ export class AdminSiteOneComponent {
 
   onSuccess(response: MessageI) {
     this.toastService.showToast(TOAST_STATE.success, response.message);
-    this.router.navigate([routesConfig.clubsAdmin]);
+    this.router.navigate([
+      this.site.type === 'club'
+        ? routesConfig.clubsAdmin
+        : routesConfig.festivalsAdmin,
+    ]);
   }
 
   onClickStyleItem(item: { name: string; _id: string }) {

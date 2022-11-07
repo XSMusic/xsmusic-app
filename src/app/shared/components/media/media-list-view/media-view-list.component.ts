@@ -12,6 +12,7 @@ import { FullImageService } from '@shared/services/ui/full-image/full-image.serv
 })
 export class MediaViewListComponent {
   @Input() media: Media[] = [];
+  @Input() type: 'sets' | 'tracks' = 'sets';
   @Input() loading = true;
   @Output() goToProfile = new EventEmitter<{
     type: 'site' | 'media';
@@ -25,7 +26,7 @@ export class MediaViewListComponent {
     this.fullImage.showImageFull(image);
   }
 
-  goToArtistProfile(slug: string) {
+  goToOne(slug: string) {
     this.router.navigate([routesConfig.artist.replace(':slug', slug)]);
   }
 }

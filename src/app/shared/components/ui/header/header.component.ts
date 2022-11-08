@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
 })
 export class HeaderComponent {
   @Input() title = '';
-  @Input() breadcrumb = true;
+  @Input() breadcrumb = false;
 }

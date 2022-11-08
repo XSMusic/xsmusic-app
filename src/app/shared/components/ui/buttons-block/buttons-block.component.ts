@@ -24,7 +24,7 @@ import { ButtonBlockItem } from './buttons-block.model';
 })
 export class ButtonsBlockComponent implements OnInit {
   @Input() type:
-    | 'artists'
+    | 'generic'
     | 'artistsAdmin'
     | 'artistAdmin'
     | 'sites'
@@ -33,7 +33,7 @@ export class ButtonsBlockComponent implements OnInit {
     | 'media'
     | 'mediaAdmin'
     | 'styles'
-    | 'styleAdmin' = 'artists';
+    | 'styleAdmin' = 'generic';
   buttons: ButtonBlockItem[] = [];
   @Output() changeView = new EventEmitter<string>();
   @Output() search = new EventEmitter<{ text: string; type: string }>();
@@ -57,21 +57,18 @@ export class ButtonsBlockComponent implements OnInit {
 
   clickButton(button: ButtonBlockItem) {
     if (button.action.includes('view')) {
-      this.onClickViewsButtons(button);
+      this.searchState = false;
     } else if (button.action === 'search') {
       this.searchState = !this.searchState;
     } else {
-      this.onClickButton.emit(button);
+      this.searchState = false;
     }
+    this.onClickViewsButtons(button);
   }
 
   onClickViewsButtons(button: ButtonBlockItem) {
-    localStorage.setItem(this.viewLSKey, button.action);
-    if (button.isActive) {
+    if (!button.isActive) {
       this.setViewButtonsInactive();
-    } else {
-      this.setViewButtonsInactive();
-
       button.isActive = true;
     }
     this.onClickButton.emit(button);
@@ -79,7 +76,7 @@ export class ButtonsBlockComponent implements OnInit {
 
   private setViewButtonsInactive(): void {
     for (const item of this.buttons) {
-      if (item.action.includes('view') && item.isActivatable) {
+      if (item.isActivatable) {
         item.isActive = false;
       }
     }

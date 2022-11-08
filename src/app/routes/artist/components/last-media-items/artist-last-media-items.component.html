@@ -3,6 +3,7 @@
   class="container grid gap-4 px-3 mx-auto text-center lg:grid-cols-1 rounded-xl"
 >
   <div
+    @inOut
     class="flex justify-center p-3 my-2 font-semibold bg-gray-100 rounded-lg"
     *ngIf="items.length === 0"
   >
@@ -13,13 +14,13 @@
   <div class="grid justify-center grid-cols-3">
     <div *ngFor="let item of items">
       <div
-        class="flex flex-col p-2 py-4 cursor-pointer hover:opacity-90"
+        class="flex flex-col p-2 py-4 overflow-hidden cursor-pointer w-100 hover:opacity-90 hover:duration-1000"
         (click)="goTo(item)"
       >
         <img
           [src]="item.image"
           alt="set.name"
-          class="object-cover w-full rounded-2xl"
+          class="object-cover w-full rounded-2xl "
         />
         <p class="p-2 text-xs text-center md:text-base hover:text-gray-800">
           {{ item.name }}

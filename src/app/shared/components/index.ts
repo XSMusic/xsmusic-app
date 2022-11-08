@@ -1,16 +1,18 @@
+
+export { GenericViewGalleryComponent } from './views/gallery/generic-view-gallery/generic-view-gallery.component';
+export { GenericViewGalleryItemsComponent } from './views/gallery/generic-view-gallery-items/generic-view-gallery-items.component';
+
 // Artist
 export { ArtistsLastBlockComponent } from './artists/artists-last-block/artists-last-block.component';
 export { ArtistsViewListComponent } from './artists/artists-view-list/artists-view-list.component';
-
-// Club
-export { SiteViewListComponent as ClubViewListComponent } from './sites/sites-view-list/sites-view-list.component';
-
+// Site
+export { SiteViewListComponent } from './sites/sites-view-list/sites-view-list.component';
+export { SiteLastMediaItemsComponent } from './sites/site-last-media-items/site-last-media-items.component';
+export { SiteLastMediaComponent } from './sites/site-last-media/site-last-media.component';
 // Media
 export { MediaViewListComponent } from './media/media-list-view/media-view-list.component';
-
 // User
 export { UsersViewListComponent } from './users/users-view-list/users-view-list.component';
-
 //UI
 export { AlertComponent } from './ui/alert/alert.component';
 export { BreadcrumbeComponent } from './ui/breadcrumb/breadcrumb.component';

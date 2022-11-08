@@ -1,0 +1,51 @@
+<ng-container *ngIf="!loading">
+  <ng-container *ngIf="artists.length > 0">
+    <div
+      @inOut
+      class="grid w-full grid-cols-1 gap-4 py-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+    >
+      <div
+        *ngFor="let artist of artists"
+        class="relative overflow-hidden shadow-xl cursor-pointer rounded-2xl"
+        (click)="goToProfile.emit(artist)"
+      >
+        <img
+          class="object-cover w-full h-80 hover:filter-grayscale hover:scale-105 hover:duration-1000"
+          [src]="artist.image"
+          [alt]="artist.name"
+          onError
+        />
+
+        <div
+          class="absolute bottom-0 left-0 w-full px-6 pt-2 text-center text-white bg-black opacity-80"
+        >
+          <div class="flex justify-center">
+            <div class="mb-3 text-2xl font-extrabold text-white">
+              {{ artist.name }}
+            </div>
+            <img
+              [src]="artist.country | countryFlag"
+              class="w-6 h-6 mx-2 mt-1.5"
+              [alt]="artist.country"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="search-results"
+      infiniteScroll
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="50"
+      (scrolled)="onScroll.emit()"
+    ></div>
+  </ng-container>
+
+  <div class="mt-1" *ngIf="artists.length === 0">
+    <alert
+      type="warning"
+      message="No hay artistas disponibles"
+      actionText="Quitar"
+    ></alert>
+  </div>
+</ng-container>

@@ -1,8 +1,8 @@
-<header-custom [title]="'Artistas'" [breadcrumb]="true"></header-custom>
+<header-custom [title]="'Artistas'" [breadcrumb]="false"></header-custom>
 
 <div class="container px-4 pt-3 mx-auto max-w-full-xl sm:pb-0 max-w-7sm">
   <buttons-block
-    type="artists"
+    type="generic"
     (search)="onSearch($event)"
     (onClickButton)="onClickButton($event)"
   ></buttons-block>
@@ -15,22 +15,22 @@
     *ngIf="body.filter && body.filter.length > 0"
   ></alert>
 
+  <generic-view-gallery
+    *ngIf="view === 'viewGallery'"
+    [items]="items"
+    [loading]="loading"
+    type="set"
+    (goToOne)="onClickItemViewGallery($event)"
+    (onScroll)="onScroll()"
+  ></generic-view-gallery>
+
   <artists-view-list
     *ngIf="view === 'viewList'"
-    [artists]="artists"
+    [artists]="items"
     [loading]="loading"
     (goToProfile)="goToProfile($event)"
     (filter)="filter($event)"
     (onScroll)="onScroll()"
   >
   </artists-view-list>
-
-  <artists-view-gallery
-    *ngIf="view === 'viewGallery'"
-    [artists]="artists"
-    [loading]="loading"
-    (goToProfile)="goToProfile($event)"
-    (onScroll)="onScroll()"
-  >
-  </artists-view-gallery>
 </div>

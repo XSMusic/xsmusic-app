@@ -15,7 +15,7 @@ import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
   animations: [inOutAnimation],
 })
 export class ArtistsPage implements OnInit {
-  artists: Artist[] = [];
+  items: Artist[] = [];
   view = 'gallery';
   body: GetAllDto = {
     page: 1,
@@ -46,9 +46,9 @@ export class ArtistsPage implements OnInit {
     this.artistService.getAll(this.body).subscribe({
       next: (response) => {
         if (!more) {
-          this.artists = response.items;
+          this.items = response.items;
         } else {
-          this.artists = this.artists.concat(response.items);
+          this.items = this.items.concat(response.items);
         }
         this.loading = false;
         this.error = false;
@@ -59,6 +59,10 @@ export class ArtistsPage implements OnInit {
         this.toast.showToast(TOAST_STATE.error, error);
       },
     });
+  }
+
+  onClickItemViewGallery(item: Artist) {
+    this.router.navigate([routesConfig.artist.replace(':slug', item.slug!)]);
   }
 
   goToProfile(artist: Artist) {

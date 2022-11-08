@@ -19,6 +19,7 @@ export class ClubsPage implements OnInit {
     order: ['updated', 'desc'],
     type: 'club',
   };
+  view = 'gallery';
   loading = true;
   error = false;
   constructor(
@@ -50,7 +51,9 @@ export class ClubsPage implements OnInit {
   }
 
   onClickButton(button: ButtonBlockItem) {
-    if (button.action === 'order' || button.action === 'filter') {
+    if (button.action === 'viewGallery' || button.action === 'viewList') {
+      this.view = button.action;
+    } else if (button.action === 'order' || button.action === 'filter') {
       this.toast.showToast(TOAST_STATE.info, 'En construccion');
     }
   }

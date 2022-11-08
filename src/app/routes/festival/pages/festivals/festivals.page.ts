@@ -19,6 +19,7 @@ export class FestivalsPage implements OnInit {
     order: ['updated', 'desc'],
     type: 'festival',
   };
+  view = 'gallery';
   loading = true;
   error = false;
   constructor(
@@ -50,9 +51,12 @@ export class FestivalsPage implements OnInit {
   }
 
   onClickButton(button: ButtonBlockItem) {
-    if (button.action === 'order' || button.action === 'filter') {
+    if (button.action === 'viewGallery' || button.action === 'viewList') {
+      this.view = button.action;
+    } else if (button.action === 'order' || button.action === 'filter') {
       this.toast.showToast(TOAST_STATE.info, 'En construccion');
     }
+
   }
 
   onSearch(event: { text: string; type: string }) {

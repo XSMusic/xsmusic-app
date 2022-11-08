@@ -1,32 +1,37 @@
 import { ButtonBlockItem } from './buttons-block.model';
 export const buttonsByType = [
   {
-    name: 'artists',
+    name: 'generic',
     buttons: [
       new ButtonBlockItem({
         name: 'Galeria',
         icon: 'gallery',
         isFirst: true,
+        isActivatable: true,
         action: 'viewGallery',
       }),
       new ButtonBlockItem({
         name: 'Listado',
         icon: 'list',
+        isActivatable: true,
         action: 'viewList',
       }),
       new ButtonBlockItem({
         name: 'Ordenar',
         icon: 'order',
+        isActivatable: true,
         action: 'order',
       }),
       new ButtonBlockItem({
         name: 'Filtrar',
         icon: 'filter',
+        isActivatable: true,
         action: 'filter',
       }),
       new ButtonBlockItem({
         name: 'Buscar',
         icon: 'search',
+        isActivatable: true,
         isLast: true,
         action: 'search',
       }),

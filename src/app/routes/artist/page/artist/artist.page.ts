@@ -33,11 +33,11 @@ export class ArtistPage implements OnInit {
 
   getArtist() {
     this.artistService.getOne({ slug: this.slug })!.subscribe({
-      next: (artist: any) => {
-        this.artist = artist;
+      next: (response) => {
+        this.artist = response;
         this.views = [
-          { name: 'Sets', value: 'set', counter: artist.sets.length },
-          { name: 'Tracks', value: 'track', counter: artist.tracks.length },
+          { name: 'Sets', value: 'set', counter: response.sets.length },
+          { name: 'Tracks', value: 'track', counter: response.tracks.length },
         ];
         this.spinner.hide();
       },

@@ -23,6 +23,7 @@ export class NavbarComponent implements OnInit {
   user!: User;
   adminPage = false;
   hidden = false;
+  onePage = false;
 
   constructor(private router: Router, private authService: AuthService) {}
 
@@ -66,6 +67,8 @@ export class NavbarComponent implements OnInit {
       .subscribe((e: any) => {
         this.adminPage = e.url.indexOf('admin') !== -1;
         this.searchPage = e.url.indexOf('search') !== -1;
+        this.onePage =
+          e.url.indexOf('/one/') !== -1 || e.url.indexOf('/profile/') !== -1;
       });
   }
 

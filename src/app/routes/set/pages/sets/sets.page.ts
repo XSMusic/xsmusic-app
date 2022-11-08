@@ -21,6 +21,7 @@ export class SetsPage implements OnInit {
   };
   loading = true;
   error = false;
+  view = 'viewGallery';
   constructor(
     private mediaService: MediaService,
     private router: Router,
@@ -50,7 +51,9 @@ export class SetsPage implements OnInit {
   }
 
   onClickButton(button: ButtonBlockItem) {
-    if (button.action === 'order' || button.action === 'filter') {
+    if (button.action === 'viewGallery' || button.action === 'viewList') {
+      this.view = button.action;
+    } else {
       this.toast.showToast(TOAST_STATE.info, 'En construccion');
     }
   }
@@ -66,7 +69,11 @@ export class SetsPage implements OnInit {
     }
   }
 
-  goToProfile(data: { type: 'media' | 'site'; media: Media }) {
+  onClickItemViewGallery(item: Media) {
+    this.router.navigate([routesConfig.set.replace(':slug', item.slug!)]);
+  }
+
+  onClickItemViewList(data: { type: 'media' | 'site'; media: Media }) {
     if (data.type === 'media') {
       this.router.navigate([
         routesConfig.set.replace(':slug', data.media.slug!),

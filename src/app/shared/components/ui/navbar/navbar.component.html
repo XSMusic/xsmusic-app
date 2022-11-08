@@ -154,40 +154,46 @@
                 role="menuitem"
                 tabindex="-1"
                 (click)="onClickMenuProfileItem(menu)"
-                >{{ menu.name }}</a
               >
+                {{ menu.name }}
+              </a>
             </div>
           </ng-template>
         </div>
       </div>
     </div>
   </div>
-
   <div *ngIf="menuState" class="sm:hidden" id="mobile-menu">
-    <div class="px-2 pt-2 pb-3 space-y-1">
+    <div
+      class="absolute z-10 w-full px-2 pt-2 pb-3 mx-auto space-y-1 text-center bg-white border-b border-gray-100 rounded-b-lg shadow-lg"
+    >
       <ng-template [ngxPermissionsOnly]="['ADMIN']">
-        <a
-          *ngFor="let menu of menuItemsAdmin"
-          (click)="openOrCloseMenu()"
-          [routerLink]="menu.route"
-          routerLinkActive="bg-gray-900 text-gray-100"
-          class="block px-3 py-2 text-base font-medium text-black rounded-2xl dark:text-white"
-          aria-current="page"
-        >
-          {{ menu.name }}
-        </a>
+        <div class="grid grid-cols-2 mb-2 border-gray-100 justify-items-center">
+          <a
+            *ngFor="let menu of menuItemsAdmin"
+            (click)="openOrCloseMenu()"
+            [routerLink]="menu.route"
+            routerLinkActive="border-b-2 border-black"
+            class="block px-3 py-2 text-base font-medium text-black dark:text-white"
+            aria-current="page"
+          >
+            {{ menu.name }}
+          </a>
+        </div>
       </ng-template>
       <ng-template [ngxPermissionsExcept]="['ADMIN']">
-        <a
-          *ngFor="let menu of menuItems"
-          (click)="openOrCloseMenu()"
-          [routerLink]="menu.route"
-          routerLinkActive="bg-gray-900 text-gray-100"
-          class="block px-3 py-2 text-base font-medium text-black rounded-2xl dark:text-white"
-          aria-current="page"
-        >
-          {{ menu.name }}
-        </a>
+        <div class="grid grid-cols-2 mb-2 border-gray-100 justify-items-center">
+          <a
+            *ngFor="let menu of menuItems"
+            (click)="openOrCloseMenu()"
+            [routerLink]="menu.route"
+            routerLinkActive="border-b-2 border-black"
+            class="block px-3 py-2 text-base font-medium text-black dark:text-white"
+            aria-current="page"
+          >
+            {{ menu.name }}
+          </a>
+        </div>
       </ng-template>
     </div>
   </div>

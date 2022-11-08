@@ -1,0 +1,24 @@
+<ng-container *ngIf="!loading">
+  <ng-container *ngIf="items.length > 0">
+    <generic-view-gallery-items
+      [items]="items"
+      (goToOne)="goToOne.emit($event)"
+    ></generic-view-gallery-items>
+    <div
+      class="search-results"
+      infiniteScroll
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="50"
+      (scrolled)="onScroll.emit()"
+    ></div>
+  </ng-container>
+
+  <div class="mt-1" *ngIf="items.length === 0">
+    <alert
+      @inOut
+      type="warning"
+      [message]="geTextNoItems()"
+      actionText="Quitar"
+    ></alert>
+  </div>
+</ng-container>

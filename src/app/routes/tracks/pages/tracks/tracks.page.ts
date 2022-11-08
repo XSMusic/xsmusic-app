@@ -21,6 +21,7 @@ export class TracksPage implements OnInit {
   };
   loading = true;
   error = false;
+  view = 'viewGallery';
   constructor(
     private mediaService: MediaService,
     private router: Router,
@@ -50,7 +51,9 @@ export class TracksPage implements OnInit {
   }
 
   onClickButton(button: ButtonBlockItem) {
-    if (button.action === 'order' || button.action === 'filter') {
+    if (button.action === 'viewGallery' || button.action === 'viewList') {
+      this.view = button.action;
+    } else {
       this.toast.showToast(TOAST_STATE.info, 'En construccion');
     }
   }
@@ -66,10 +69,8 @@ export class TracksPage implements OnInit {
     }
   }
 
-  goToProfile(data: { media: Media }) {
-    this.router.navigate([
-      routesConfig.track.replace(':slug', data.media.slug!),
-    ]);
+  goToProfile(media: Media) {
+    this.router.navigate([routesConfig.track.replace(':slug', media.slug!)]);
   }
 
   filter(event: { name: string; value: string }) {

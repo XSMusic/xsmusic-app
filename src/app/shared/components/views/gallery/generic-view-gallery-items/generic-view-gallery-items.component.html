@@ -1,0 +1,41 @@
+<div
+      @inOut
+      class="grid w-full grid-cols-1 gap-4 py-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3"
+    >
+      <ng-container *ngFor="let item of items">
+        <div
+          *ngIf="item.name !== 'Desconocido'"
+          class="relative overflow-hidden shadow-xl cursor-pointer rounded-2xl"
+          (click)="goToOne.emit(item)"
+        >
+          <img
+            class="object-cover w-full h-80 hover:filter-grayscale hover:scale-105 hover:duration-1000"
+            [src]="item.image"
+            [alt]="item.name"
+            onError
+          />
+
+          <div
+            class="absolute bottom-0 left-0 w-full px-6 pt-2 text-center text-white bg-black opacity-80"
+          >
+            <div class="flex justify-center">
+              <div class="mb-3 text-2xl font-extrabold text-white">
+                {{ item.name }}
+              </div>
+              <img
+                *ngIf="item?.country"
+                [src]="item?.country | countryFlag"
+                class="w-6 h-6 mx-2 mt-1.5"
+                [alt]="item.country"
+              />
+              <img
+                *ngIf="item.address?.country"
+                [src]="item.address?.country | countryFlag"
+                class="w-6 h-6 mx-2 mt-1.5"
+                [alt]="item.country"
+              />
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>

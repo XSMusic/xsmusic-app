@@ -47,6 +47,6 @@ export class TrackPage implements OnInit {
   }
 
   goToEdit() {
-    this.router.navigate([routesConfig.trackAdmin.replace(':id', this.slug)]);
+    this.router.navigate([routesConfig.trackAdmin.replace(':id', this.media._id!)]);
   }
 }

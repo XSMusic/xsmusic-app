@@ -35,10 +35,14 @@ export class ClubPage implements OnInit {
     this.siteService.getOne({ slug: this.slug })!.subscribe({
       next: (response: any) => {
         this.site = response;
-        // this.views = [
-        //   { name: 'Sets', value: 'set', counter: artist.sets.length },
-        //   { name: 'Tracks', value: 'track', counter: artist.tracks.length },
-        // ];
+        this.views = [
+          { name: 'Sets', value: 'set', counter: response.sets.length },
+          {
+            name: 'Eventos',
+            value: 'event',
+            counter: response.events ? response.events.length : 0,
+          },
+        ];
         this.spinner.hide();
       },
       error: (error) => {

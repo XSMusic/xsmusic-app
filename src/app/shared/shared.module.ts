@@ -16,7 +16,11 @@ import {
   ButtonsBlockComponent,
   MediaViewListComponent,
   UsersViewListComponent,
-  ClubViewListComponent,
+  SiteViewListComponent,
+  SiteLastMediaItemsComponent,
+  SiteLastMediaComponent,
+  GenericViewGalleryComponent,
+  GenericViewGalleryItemsComponent,
 } from '@components';
 import {
   CountryFlagPipe,
@@ -47,7 +51,6 @@ const components = [
   AlertComponent,
   ArtistsLastBlockComponent,
   ArtistsViewListComponent,
-  ClubViewListComponent,
   BreadcrumbeComponent,
   ButtonsBlockComponent,
   FullImageComponent,
@@ -56,8 +59,13 @@ const components = [
   ModalComponent,
   NavbarComponent,
   SearchBarComponent,
+  SiteLastMediaComponent,
+  SiteLastMediaItemsComponent,
+  SiteViewListComponent,
   ToastComponent,
   UsersViewListComponent,
+  GenericViewGalleryComponent,
+  GenericViewGalleryItemsComponent,
 ];
 const directives = [OnImageErrorDirective];
 const modules = [
@@ -92,7 +100,8 @@ const services: any = [
 @NgModule({
   imports: [...modules],
   exports: [...modules, ...components, ...pipes, ...directives],
-  declarations: [...components, ...pipes, ...directives],
+  declarations: [
+    ...components, ...pipes, ...directives],
   providers: [...services, httpInterceptorProviders],
 })
 export class SharedModule {}

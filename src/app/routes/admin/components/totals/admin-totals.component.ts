@@ -84,16 +84,6 @@ export class AdminTotalsComponent implements OnInit {
         route: routesConfig.usersAdmin,
       },
     ];
-
-    this.totals = this.totals.sort((a: any, b: any) => {
-      if (a.total > b.total) {
-        return -1;
-      } else if (b.total > a.total) {
-        return 1;
-      } else {
-        return 0;
-      }
-    });
   }
 
   getStats() {

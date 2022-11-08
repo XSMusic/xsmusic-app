@@ -5,11 +5,10 @@
         <tbody>
           <tr
             *ngFor="let artist of artists"
-            tabindex="0"
             class="h-16 border-b border-gray-100 rounded-lg dark:border-black dark:border-0"
           >
-            <td>
-              <div class="w-12">
+            <td class="pl-3">
+              <div class="flex gap-3 w-80">
                 <img
                   [src]="artist.image"
                   [alt]="artist.name"
@@ -17,23 +16,21 @@
                   class="object-cover object-center w-12 h-12 cursor-pointer rounded-2xl lg:h-12 lg:w-12 hover:filter-grayscale hover:scale-105 hover:duration-1000"
                   (click)="showImage(artist.image!)"
                 />
-              </div>
-            </td>
-            <td class="pl-5">
-              <div class="items-center">
-                <p
-                  class="my-1 mr-2 text-base font-extrabold leading-none text-black cursor-pointer hover:text-gray-500"
-                  (click)="goToProfile.emit(artist)"
-                >
-                  {{ artist.name }}
-                </p>
-                <p class="mt-1 text-sm font-light leading-none text-gray-500">
-                  {{
-                    artist.birthdate
-                      ? getYearsOld(artist.birthdate) + ' años'
-                      : ''
-                  }}
-                </p>
+                <div class="flex flex-col">
+                  <p
+                    class="my-1 mr-2 text-lg font-extrabold leading-none text-black cursor-pointer hover:text-gray-600"
+                    (click)="goToProfile.emit(artist)"
+                  >
+                    {{ artist.name }}
+                  </p>
+                  <p class="mt-1 text-sm font-light leading-none text-gray-500">
+                    {{
+                      artist.birthdate
+                        ? getYearsOld(artist.birthdate) + ' años'
+                        : ''
+                    }}
+                  </p>
+                </div>
               </div>
             </td>
             <td>
@@ -179,7 +176,7 @@
   </ng-container>
 
   <div class="mt-1" *ngIf="artists.length === 0">
-     <alert
+    <alert
       type="warning"
       message="No hay artistas disponibles"
       actionText="Quitar"

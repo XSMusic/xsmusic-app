@@ -21,6 +21,8 @@ export class Site {
     tiktok: '',
     email: '',
   };
+  sets?: any;
+  events?: any;
   created?: string;
   updated?: string;
   constructor(data?: Site) {

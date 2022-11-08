@@ -56,7 +56,6 @@ export class FestivalsPage implements OnInit {
     } else if (button.action === 'order' || button.action === 'filter') {
       this.toast.showToast(TOAST_STATE.info, 'En construccion');
     }
-
   }
 
   onSearch(event: { text: string; type: string }) {

@@ -3,7 +3,8 @@
     *ngFor="let v of views"
     class="px-2 pb-1 text-xl text-center cursor-pointer"
     [ngClass]="{
-      'font-extrabold border-b-gray-600 border-b-2 duration-300': v.value === view,
+      'font-extrabold border-b-gray-600 border-b-2 duration-300':
+        v.value === view,
       'font-extralight duration-300': v.value !== view
     }"
     (click)="view = v.value"

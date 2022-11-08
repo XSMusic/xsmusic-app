@@ -1,12 +1,12 @@
 <div @inOut>
   <div class="mx-auto mt-3 overflow-hidden border-2 rounded-full w-52 h-52">
-  <img
-    [src]="site.image"
-    class="object-cover w-full h-full shadow-lg cursor-pointer hover:scale-105 hover:duration-1000"
-    onError
-    [alt]="site.name"
-    (click)="showImage(site.image!)"
-  />
+    <img
+      [src]="site.image"
+      class="object-cover w-full h-full shadow-lg cursor-pointer hover:scale-105 hover:duration-1000"
+      onError
+      [alt]="site.name"
+      (click)="showImage(site.image!)"
+    />
   </div>
 
   <p

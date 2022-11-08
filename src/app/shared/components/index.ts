@@ -1,4 +1,3 @@
-
 export { GenericViewGalleryComponent } from './views/gallery/generic-view-gallery/generic-view-gallery.component';
 export { GenericViewGalleryItemsComponent } from './views/gallery/generic-view-gallery-items/generic-view-gallery-items.component';
 

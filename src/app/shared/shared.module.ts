@@ -100,8 +100,7 @@ const services: any = [
 @NgModule({
   imports: [...modules],
   exports: [...modules, ...components, ...pipes, ...directives],
-  declarations: [
-    ...components, ...pipes, ...directives],
+  declarations: [...components, ...pipes, ...directives],
   providers: [...services, httpInterceptorProviders],
 })
 export class SharedModule {}

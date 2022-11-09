@@ -19,12 +19,19 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
+              {
+                "glob": "**/*",
+                "input": "node_modules/leaflet/dist/images/",
+                "output": "./assets"
+              },
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
               "node_modules/swiper/swiper-bundle.min.css",
               "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
+              "node_modules/leaflet/dist/leaflet.css",
+              "node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.css",
               "src/styles.css"
             ],
             "scripts": []

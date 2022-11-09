@@ -2,6 +2,7 @@ export class Site {
   _id?: string;
   name? = '';
   address: any = {
+    street: '',
     city: '',
     country: 'es',
     coordinates: [],

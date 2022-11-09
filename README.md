@@ -11,4 +11,10 @@ Cada vez que se añada un valor en el archivo .env, hay que añadir el archivo c
 - [ ] Confirmacion en eliminar
 - [ ] Corregir modal en version movil (con texto grande no salen botones)
 - [ ] Guardar imagenes
-- [ ] Track: Al crear asignar sitio desconocido
+- [X] Track: Al crear asignar sitio desconocido
+- [ ] Mapas
+  - [ ] Componente para mapa
+  Opciones: Leatflet openstreetmap
+  - [ ] Conversor de coordenadas en direccion
+  - [ ] Conversor de direccion en coordenadas
+

@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, ElementRef } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { Router, NavigationEnd, Event } from '@angular/router';
 import { filter, distinctUntilChanged } from 'rxjs';
@@ -12,7 +12,8 @@ import { routesConfig } from '@core/config';
   animations: [inOutAnimation],
 })
 export class NavbarComponent implements OnInit {
-  @ViewChild('submenu') menu!: HTMLElement;
+  @ViewChild('menu') menu!: ElementRef;
+  // @ViewChild('submenu') menu!: HTMLElement;
   menuState = false;
   menuProfileState = false;
   searchBarState = false;
@@ -21,6 +22,7 @@ export class NavbarComponent implements OnInit {
   menuItemsAdmin: Menu[] = [];
   menuProfileItems: Menu[] = [];
   user!: User;
+  homePage = false;
   adminPage = false;
   hidden = false;
   onePage = false;
@@ -69,6 +71,7 @@ export class NavbarComponent implements OnInit {
         this.searchPage = e.url.indexOf('search') !== -1;
         this.onePage =
           e.url.indexOf('/one/') !== -1 || e.url.indexOf('/profile/') !== -1;
+        this.homePage = e.url.indexOf('home') !== -1;
       });
   }
 
@@ -93,6 +96,26 @@ export class NavbarComponent implements OnInit {
     } else if (item.action === 'logout') {
       this.authService.logout();
       this.router.navigate([routesConfig.home]);
+    }
+  }
+
+  goToHomeOrAdmin() {
+    if (this.homePage) {
+      this.router.navigate([routesConfig.admin]);
+    } else {
+      this.router.navigate([routesConfig.home]);
+    }
+  }
+
+  toggleMenu() {
+    if (document.getElementById('menu')!.classList.contains('hidden')) {
+      document.getElementById('menu')!.classList.remove('hidden');
+      document.getElementById('menu')!.classList.add('w-full');
+      document.getElementById('menu')!.classList.add('h-screen');
+    } else {
+       document.getElementById('menu')!.classList.add('hidden');
+       document.getElementById('menu')!.classList.remove('w-full');
+       document.getElementById('menu')!.classList.remove('h-screen');
     }
   }
 }

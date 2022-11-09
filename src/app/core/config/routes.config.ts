@@ -1,6 +1,7 @@
 export const routesConfig = {
   account: '/account',
   accountEdit: '/account/edit',
+  admin: '/admin',
   artist: '/artists/profile/:slug',
   artistAdmin: '/admin/artists/one/:id',
   artistAdminAdd: '/admin/artists/one',

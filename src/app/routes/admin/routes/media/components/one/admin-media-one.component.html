@@ -4,7 +4,7 @@
       [src]="media.image"
       [alt]="media.name"
       (click)="showImage(media.image!)"
-      class="object-cover w-full cursor-pointer h-80 rounded-2xl"
+      class="object-cover w-full rounded-lg cursor-pointer h-80"
       onError
     />
   </div>
@@ -18,7 +18,7 @@
         type="text"
         [(ngModel)]="media.name"
         placeholder="Introduce el nombre"
-        class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
       />
     </div>
 
@@ -34,7 +34,7 @@
         type="text"
         [(ngModel)]="media.source"
         placeholder="Selecciona el medio"
-        class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
       >
         <option [value]="null" [disabled]="true" [selected]>
           Selecciona medio
@@ -57,7 +57,7 @@
         type="text"
         [(ngModel)]="media.sourceId"
         placeholder="Introduce el id del video"
-        class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
       />
     </div>
 
@@ -73,7 +73,7 @@
         type="number"
         [(ngModel)]="media.year"
         placeholder="Introduce el año"
-        class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
       />
     </div>
   </div>
@@ -85,7 +85,7 @@
     <div class="flex gap-2 my-3">
       <div
         (click)="onClickItem('artists', artistSelected)"
-        class="flex px-2 py-1 text-xs text-white bg-black border shadow-md cursor-pointer rounded-2xl hover:opacity-80"
+        class="flex px-2 py-1 text-xs text-white bg-black border rounded-lg shadow-md cursor-pointer hover:opacity-80"
         *ngFor="let artistSelected of media.artists"
       >
         <img
@@ -103,7 +103,7 @@
       (keydown.enter)="$event.preventDefault(); onChangeInputArtist($event)"
       [(ngModel)]="artistSearch"
       placeholder="Introduce el artista"
-      class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md cursor-pointer"
+      class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md cursor-pointer"
       autocomplete="off"
     />
 
@@ -141,7 +141,7 @@
     </label>
     <div class="flex gap-2 my-3" *ngIf="media.site">
       <div
-        class="flex px-2 py-1 text-xs text-white bg-black border shadow-md cursor-pointer rounded-2xl hover:opacity-80"
+        class="flex px-2 py-1 text-xs text-white bg-black border rounded-lg shadow-md cursor-pointer hover:opacity-80"
       >
         <img
           [src]="media.site?.image"
@@ -159,7 +159,7 @@
       (keydown.enter)="$event.preventDefault(); onChangeInputSite($event)"
       [(ngModel)]="siteSearch"
       placeholder="Introduce el club/festival"
-      class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md cursor-pointer"
+      class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md cursor-pointer"
       autocomplete="off"
     />
 
@@ -204,7 +204,7 @@
     <div class="flex gap-2 my-3">
       <span
         (click)="onClickItem('styles', styleSelected)"
-        class="px-2 py-1 text-xs bg-gray-100 border shadow-md cursor-pointer rounded-2xl"
+        class="px-2 py-1 text-xs bg-gray-100 border rounded-lg shadow-md cursor-pointer"
         *ngFor="let styleSelected of media.styles"
         [ngStyle]="{
           background: styleSelected.colors.bg,
@@ -215,7 +215,7 @@
       </span>
     </div>
     <select
-      class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md form-multiselect"
+      class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md form-multiselect"
       (change)="onChangeStyleSelect($event)"
     >
       <option [disabled]="true">Selecciona estilo</option>
@@ -236,7 +236,7 @@
       name="info"
       [(ngModel)]="media.info"
       placeholder="Introduce informacion"
-      class="w-full px-6 py-3 text-base font-medium bg-white border border-gray-200 rounded-md"
+      class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
     ></textarea>
   </div>
 
@@ -245,7 +245,7 @@
     <button
       type="submit"
       (click)="onSubmit()"
-      class="w-full py-1 m-1 text-white bg-green-500 border-green-500 shadow-md md:w-32 rounded-2xl hover:bg-green-600 hover:border-green-600'"
+      class="w-full py-1 m-1 text-white bg-green-500 border-green-500 rounded-lg shadow-md md:w-32 hover:bg-green-600 hover:border-green-600'"
     >
       Guardar
     </button>
@@ -253,7 +253,7 @@
       type="button"
       *ngIf="media._id"
       (click)="onDelete()"
-      class="w-full py-1 m-1 text-white bg-red-500 border-2 border-red-500 shadow-md hover:bg-red-600 hover:border-red-600 hover:text-white md:w-32 rounded-2xl"
+      class="w-full py-1 m-1 text-white bg-red-500 border-2 border-red-500 rounded-lg shadow-md hover:bg-red-600 hover:border-red-600 hover:text-white md:w-32"
     >
       Eliminar
     </button>
@@ -262,7 +262,7 @@
       type="button"
       *ngIf="media._id"
       (click)="goToMedia(media.slug!)"
-      class="w-full py-1 m-1 text-white bg-blue-500 border-2 border-blue-500 shadow-md hover:bg-blue-600 hover:border-blue-600 hover:text-white md:w-32 rounded-2xl"
+      class="w-full py-1 m-1 text-white bg-blue-500 border-2 border-blue-500 rounded-lg shadow-md hover:bg-blue-600 hover:border-blue-600 hover:text-white md:w-32"
     >
       Ver perfil
     </button>

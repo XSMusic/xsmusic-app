@@ -3,7 +3,7 @@ export class Media {
   name? = '';
   image? = '';
   artists?: any[] = [];
-  type? = '';
+  type? = 'set';
   site?: any;
   styles?: any[] = [];
   info? = '';

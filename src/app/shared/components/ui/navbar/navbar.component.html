@@ -8,7 +8,7 @@
         <!-- Mobile menu button-->
         <button
           type="button"
-          (click)="openOrCloseMenu()"
+          (click)="toggleMenu()"
           class="inline-flex items-center justify-center p-2 text-black rounded-2xl hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-white hover:text-gray-900"
           aria-controls="mobile-menu"
           aria-expanded="false"
@@ -49,16 +49,12 @@
         class="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start"
       >
         <div class="flex items-center flex-shrink-0">
-          <img
-            class="block w-auto rounded cursor-pointer hover:border-2xl h-9 lg:hidden hover:bg-gray-100 dark:hover:bg-gray-900"
-            [src]="
-              !adminPage
-                ? 'assets/images/logo-negro.png'
-                : 'assets/images/logo-rojo.png'
-            "
-            alt="XSMusic"
-            routerLink="/home"
-          />
+          <p
+            class="block w-auto text-lg font-extrabold rounded cursor-pointer hover:border-2xl lg:hidden hover:bg-gray-100 dark:hover:bg-gray-900"
+            (click)="goToHomeOrAdmin()"
+          >
+            XSMusic
+          </p>
           <img
             class="hidden w-auto rounded cursor-pointer hover:border-2xl h-9 lg:block hover:bg-gray-100"
             [src]="
@@ -163,38 +159,45 @@
       </div>
     </div>
   </div>
-  <div *ngIf="menuState" class="sm:hidden" id="mobile-menu">
-    <div
-      class="absolute z-10 w-full px-2 pt-2 pb-3 mx-auto space-y-1 text-center bg-white border-b border-gray-100 rounded-b-lg shadow-lg"
-    >
-      <ng-template [ngxPermissionsOnly]="['ADMIN']">
-        <div class="grid grid-cols-2 mb-2 border-gray-100 justify-items-center">
-          <a
-            *ngFor="let menu of menuItemsAdmin"
-            (click)="openOrCloseMenu()"
-            [routerLink]="menu.route"
-            routerLinkActive="border-b-2 border-black"
-            class="block px-3 py-2 text-base font-medium text-black dark:text-white"
-            aria-current="page"
-          >
-            {{ menu.name }}
-          </a>
-        </div>
-      </ng-template>
-      <ng-template [ngxPermissionsExcept]="['ADMIN']">
-        <div class="grid grid-cols-2 mb-2 border-gray-100 justify-items-center">
-          <a
-            *ngFor="let menu of menuItems"
-            (click)="openOrCloseMenu()"
-            [routerLink]="menu.route"
-            routerLinkActive="border-b-2 border-black"
-            class="block px-3 py-2 text-base font-medium text-black dark:text-white"
-            aria-current="page"
-          >
-            {{ menu.name }}
-          </a>
-        </div>
-      </ng-template>
+  <div
+    id="menu"
+    class="fixed top-0 left-0 z-50 hidden px-10 py-16 bg-white md:hidden w-100 md:relative"
+  >
+    <div class="fixed md:hidden z-90 top-4 left-6">
+      <a
+        @inOut
+        href="javascript:void(0)"
+        class="text-4xl text-right text-black"
+        (click)="toggleMenu()"
+        >&times;</a
+      >
     </div>
+
+    <ng-template [ngxPermissionsOnly]="['ADMIN']">
+      <div class="flex flex-col gap-6 text-xl font-bold text-center text-black">
+        <a
+          @inOut
+          *ngFor="let menu of menuItemsAdmin"
+          (click)="toggleMenu()"
+          class="duration-300 hover:text-gray-500"
+          [routerLink]="menu.route"
+        >
+          {{ menu.name }}
+        </a>
+      </div>
+    </ng-template>
+    <ng-template [ngxPermissionsExcept]="['ADMIN']">
+      <div class="flex flex-col gap-6 text-xl font-bold text-center text-black">
+        <a
+          @inOut
+          *ngFor="let menu of menuItems"
+          (click)="toggleMenu()"
+          class="duration-300 hover:text-gray-500"
+          [routerLink]="menu.route"
+        >
+          {{ menu.name }}
+        </a>
+      </div>
+    </ng-template>
   </div>
 </nav>

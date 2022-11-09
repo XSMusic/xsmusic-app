@@ -6,7 +6,7 @@ export class Site {
     country: 'es',
     coordinates: [],
   };
-  type: 'club' | 'festival' = 'club';
+  type = null;
   image? = '';
   styles?: any[] = [];
   info? = '';

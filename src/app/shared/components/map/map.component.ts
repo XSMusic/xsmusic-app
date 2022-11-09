@@ -3,18 +3,18 @@ import * as L from 'leaflet';
 
 const iconRetinaUrl = 'assets/images/marker-icon.png';
 const iconUrl = 'assets/images/marker-icon.png';
-const shadowUrl = 'assets/images/marker-shadow.png';
 
 @Component({
   selector: 'map',
   templateUrl: 'map.component.html',
-  styleUrls: ["./map.component.css"]
+  styleUrls: ['./map.component.css'],
 })
 export class MapComponent implements AfterViewInit {
   private map: any;
   @Input() lat = 40.3053858;
   @Input() lng = -3.8712108;
   @Input() titulo = 'prueba marker';
+  @Input() class = '';
 
   ngAfterViewInit(): void {
     this.initMap();
@@ -26,7 +26,7 @@ export class MapComponent implements AfterViewInit {
       zoom: 13,
     });
 
-    console.log(this.map)
+    console.log(this.map);
 
     const tiles = L.tileLayer(
       'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',

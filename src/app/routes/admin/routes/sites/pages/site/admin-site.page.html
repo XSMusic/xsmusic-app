@@ -6,5 +6,22 @@
     (onClickButton)="onClickButton($event)"
   ></buttons-block>
 
-  <admin-site-one [site]="site" [styles]="styles"></admin-site-one>
+  <admin-site-one
+    *ngIf="view === 'viewInfo'"
+    [site]="site"
+    [styles]="styles"
+  ></admin-site-one>
+
+  <div *ngIf="view === 'viewOptions'">
+    <div class="grid md:gap-2 md:grid-cols-2">
+      <div *ngFor="let item of options">
+        <div
+          class="px-3 py-2 my-1 font-medium border rounded-lg cursor-pointer hover:bg-gray-100"
+          (click)="onClickOptionItem(item.action)"
+        >
+          <div>{{ item.name }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

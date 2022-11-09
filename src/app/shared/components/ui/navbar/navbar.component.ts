@@ -13,7 +13,6 @@ import { routesConfig } from '@core/config';
 })
 export class NavbarComponent implements OnInit {
   @ViewChild('menu') menu!: ElementRef;
-  // @ViewChild('submenu') menu!: HTMLElement;
   menuState = false;
   menuProfileState = false;
   searchBarState = false;
@@ -113,9 +112,9 @@ export class NavbarComponent implements OnInit {
       document.getElementById('menu')!.classList.add('w-full');
       document.getElementById('menu')!.classList.add('h-screen');
     } else {
-       document.getElementById('menu')!.classList.add('hidden');
-       document.getElementById('menu')!.classList.remove('w-full');
-       document.getElementById('menu')!.classList.remove('h-screen');
+      document.getElementById('menu')!.classList.add('hidden');
+      document.getElementById('menu')!.classList.remove('w-full');
+      document.getElementById('menu')!.classList.remove('h-screen');
     }
   }
 }

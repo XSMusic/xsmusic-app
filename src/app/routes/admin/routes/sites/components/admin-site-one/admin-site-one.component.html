@@ -1,12 +1,17 @@
-<form @inOut class="grid grid-cols-1 gap-4 lg:grid-cols-2">
-  <div class="col-span-2 mb-1 md:col-span-1">
-    <img
-      [src]="site.image"
-      [alt]="site.name"
-      (click)="showImage(site.image!)"
-      class="object-cover w-full rounded-lg cursor-pointer h-80"
-      onError
-    />
+<form @inOut>
+  <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+    <div class="col-span-2 mb-1 md:col-span-1">
+      <img
+        [src]="site.image"
+        [alt]="site.name"
+        (click)="showImage(site.image!)"
+        class="object-cover w-full rounded-lg cursor-pointer h-72"
+        onError
+      />
+    </div>
+    <div class="col-span-2 mb-1 md:col-span-1">
+      <map class="overflow-hidden rounded-lg h-72"></map>
+    </div>
   </div>
 
   <div class="grid grid-cols-2 gap-4">
@@ -131,191 +136,200 @@
         class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
       />
     </div>
-  </div>
 
-  <div class="col-span-2 md:col-span-2">
-    <label
-      for="email"
-      class="mb-3 block text-base font-extrabold text-[#07074D]"
-    >
-      Imagen
-    </label>
-    <input
-      name="image"
-      type="text"
-      [(ngModel)]="site.image"
-      placeholder="Introduce la imagen"
-      class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
-    />
-  </div>
-
-  <div class="col-span-2">
-    <label class="block mb-3 text-base font-extrabold text-black">
-      <span class="text-gray-700">Estilos</span>
-    </label>
-    <div class="flex gap-2 my-3">
-      <span
-        (click)="onClickStyleItem(styleSelected)"
-        class="px-2 py-1 text-xs bg-gray-100 border rounded-lg shadow-md cursor-pointer"
-        *ngFor="let styleSelected of site.styles"
+    <div class="col-span-2 md:col-span-1">
+      <label
+        for="email"
+        class="mb-3 block text-base font-extrabold text-[#07074D]"
       >
-        {{ styleSelected.name }}
-      </span>
+        Imagen
+      </label>
+      <input
+        name="image"
+        type="text"
+        [(ngModel)]="site.image"
+        placeholder="Introduce la imagen"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
+      />
     </div>
-    <select
-      class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md form-multiselect"
-      (change)="onChangeStyleSelect($event)"
-    >
-      <option [disabled]="true">Selecciona estilo</option>
-      <option *ngFor="let style of styles" [value]="style._id">
-        {{ style.name }}
-      </option>
-    </select>
-  </div>
 
-  <div class="col-span-2 mb-1 md:col-span-1">
-    <label for="web" class="block mb-3 text-base font-extrabold text-black">
-      Web
-    </label>
-    <input
-      name="web"
-      type="text"
-      [(ngModel)]="site.social.web"
-      placeholder="Introduce Web"
-      class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
-    />
-  </div>
-  <div class="col-span-2 mb-1 md:col-span-1">
-    <label
-      for="facebook"
-      class="block mb-3 text-base font-extrabold text-black"
-    >
-      Facebook
-    </label>
-    <input
-      name="facebook"
-      type="text"
-      [(ngModel)]="site.social.facebook"
-      placeholder="Introduce Facebook"
-      class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
-    />
-  </div>
-  <div class="col-span-2 mb-1 md:col-span-1">
-    <label for="twitter" class="block mb-3 text-base font-extrabold text-black">
-      Twitter
-    </label>
-    <input
-      name="twitter"
-      type="text"
-      [(ngModel)]="site.social.twitter"
-      placeholder="Introduce Twitter"
-      class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
-    />
-  </div>
-  <div class="col-span-2 mb-1 md:col-span-1">
-    <label
-      for="soundcloud"
-      class="block mb-3 text-base font-extrabold text-black"
-    >
-      Soundcloud
-    </label>
-    <input
-      name="soundcloud"
-      type="text"
-      [(ngModel)]="site.social.soundcloud"
-      placeholder="Introduce Soundcloud"
-      class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
-    />
-  </div>
+    <div class="col-span-2 md:col-span-1">
+      <label class="block mb-3 text-base font-extrabold text-black">
+        <span class="text-gray-700">Estilos</span>
+      </label>
+      <div class="flex gap-2 my-3">
+        <span
+          (click)="onClickStyleItem(styleSelected)"
+          class="px-2 py-1 text-xs bg-gray-100 border rounded-lg shadow-md cursor-pointer"
+          *ngFor="let styleSelected of site.styles"
+        >
+          {{ styleSelected.name }}
+        </span>
+      </div>
+      <select
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md form-multiselect"
+        (change)="onChangeStyleSelect($event)"
+      >
+        <option [disabled]="true">Selecciona estilo</option>
+        <option *ngFor="let style of styles" [value]="style._id">
+          {{ style.name }}
+        </option>
+      </select>
+    </div>
 
-  <div class="col-span-2 mb-1 md:col-span-1">
-    <label for="spotify" class="block mb-3 text-base font-extrabold text-black">
-      Spotify
-    </label>
-    <input
-      name="spotify"
-      type="text"
-      [(ngModel)]="site.social.spotify"
-      placeholder="Introduce Spotify"
-      class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
-    />
-  </div>
+    <div class="col-span-2 md:col-span-1">
+      <label for="web" class="block mb-3 text-base font-extrabold text-black">
+        Web
+      </label>
+      <input
+        name="web"
+        type="text"
+        [(ngModel)]="site.social.web"
+        placeholder="Introduce Web"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
+      />
+    </div>
+    <div class="col-span-2 mb-1 md:col-span-1">
+      <label
+        for="facebook"
+        class="block mb-3 text-base font-extrabold text-black"
+      >
+        Facebook
+      </label>
+      <input
+        name="facebook"
+        type="text"
+        [(ngModel)]="site.social.facebook"
+        placeholder="Introduce Facebook"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
+      />
+    </div>
+    <div class="col-span-2 mb-1 md:col-span-1">
+      <label
+        for="twitter"
+        class="block mb-3 text-base font-extrabold text-black"
+      >
+        Twitter
+      </label>
+      <input
+        name="twitter"
+        type="text"
+        [(ngModel)]="site.social.twitter"
+        placeholder="Introduce Twitter"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
+      />
+    </div>
+    <div class="col-span-2 mb-1 md:col-span-1">
+      <label
+        for="soundcloud"
+        class="block mb-3 text-base font-extrabold text-black"
+      >
+        Soundcloud
+      </label>
+      <input
+        name="soundcloud"
+        type="text"
+        [(ngModel)]="site.social.soundcloud"
+        placeholder="Introduce Soundcloud"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
+      />
+    </div>
 
-  <div class="col-span-2 mb-1 md:col-span-1">
-    <label for="tiktok" class="block mb-3 text-base font-extrabold text-black">
-      TikTok
-    </label>
-    <input
-      name="tiktok"
-      type="text"
-      [(ngModel)]="site.social.tiktok"
-      placeholder="Introduce Tiktok"
-      class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
-    />
-  </div>
+    <div class="col-span-2 mb-1 md:col-span-1">
+      <label
+        for="spotify"
+        class="block mb-3 text-base font-extrabold text-black"
+      >
+        Spotify
+      </label>
+      <input
+        name="spotify"
+        type="text"
+        [(ngModel)]="site.social.spotify"
+        placeholder="Introduce Spotify"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
+      />
+    </div>
 
-  <div class="col-span-2 mb-1 md:col-span-1">
-    <label
-      for="instagram"
-      class="block mb-3 text-base font-extrabold text-black"
-    >
-      Instagram
-    </label>
-    <input
-      name="instagram"
-      type="text"
-      [(ngModel)]="site.social.instagram"
-      placeholder="Introduce Instagram"
-      class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
-    />
-  </div>
+    <div class="col-span-2 mb-1 md:col-span-1">
+      <label
+        for="tiktok"
+        class="block mb-3 text-base font-extrabold text-black"
+      >
+        TikTok
+      </label>
+      <input
+        name="tiktok"
+        type="text"
+        [(ngModel)]="site.social.tiktok"
+        placeholder="Introduce Tiktok"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
+      />
+    </div>
 
-  <div class="col-span-2 mb-1 md:col-span-1">
-    <label
-      for="instagram"
-      class="block mb-3 text-base font-extrabold text-black"
-    >
-      Email
-    </label>
-    <input
-      name="email"
-      type="text"
-      [(ngModel)]="site.social.email"
-      placeholder="Introduce email"
-      class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
-    />
-  </div>
+    <div class="col-span-2 mb-1 md:col-span-1">
+      <label
+        for="instagram"
+        class="block mb-3 text-base font-extrabold text-black"
+      >
+        Instagram
+      </label>
+      <input
+        name="instagram"
+        type="text"
+        [(ngModel)]="site.social.instagram"
+        placeholder="Introduce Instagram"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
+      />
+    </div>
 
-  <div class="col-span-2 mb-1">
-    <label for="info" class="block mb-3 text-base font-extrabold text-black">
-      Info
-    </label>
-    <textarea
-      name="info"
-      type="text"
-      [(ngModel)]="site.info"
-      placeholder="Introduce informacion"
-      class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
-      rows="5"
-    ></textarea>
-  </div>
+    <div class="col-span-2 mb-1 md:col-span-1">
+      <label
+        for="instagram"
+        class="block mb-3 text-base font-extrabold text-black"
+      >
+        Email
+      </label>
+      <input
+        name="email"
+        type="text"
+        [(ngModel)]="site.social.email"
+        placeholder="Introduce email"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
+      />
+    </div>
 
-  <!-- Actions Buttons -->
-  <div class="col-span-2 mb-2">
-    <button
-      type="submit"
-      (click)="onSubmit()"
-      class="w-full py-1 m-1 text-white bg-green-500 border-green-500 rounded-lg shadow-md md:w-32 hover:bg-green-600 hover:border-green-600'"
-    >
-      Guardar
-    </button>
-    <button
-      type="button"
-      *ngIf="site._id"
-      (click)="onDelete()"
-      class="w-full py-1 m-1 text-white bg-red-500 border-2 border-red-500 rounded-lg shadow-md hover:bg-red-600 hover:border-red-600 hover:text-white md:w-32"
-    >
-      Eliminar
-    </button>
+    <div class="col-span-2">
+      <label for="info" class="block mb-3 text-base font-extrabold text-black">
+        Info
+      </label>
+      <textarea
+        name="info"
+        type="text"
+        [(ngModel)]="site.info"
+        placeholder="Introduce informacion"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
+        rows="5"
+      ></textarea>
+    </div>
+
+    <!-- Actions Buttons -->
+    <div class="col-span-2 mb-2">
+      <button
+        type="submit"
+        (click)="onSubmit()"
+        class="w-full py-1 m-1 text-white bg-green-500 border-green-500 rounded-lg shadow-md md:w-32 hover:bg-green-600 hover:border-green-600'"
+      >
+        Guardar
+      </button>
+      <button
+        type="button"
+        *ngIf="site._id"
+        (click)="onDelete()"
+        class="w-full py-1 m-1 text-white bg-red-500 border-2 border-red-500 rounded-lg shadow-md hover:bg-red-600 hover:border-red-600 hover:text-white md:w-32"
+      >
+        Eliminar
+      </button>
+    </div>
   </div>
 </form>

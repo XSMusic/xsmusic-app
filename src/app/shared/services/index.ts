@@ -1,6 +1,7 @@
 export * from './api/artist/artist.service';
 export * from './api/media/media.service';
 export * from './api/scraping/scraping.service';
+export * from './api/geo/geo.service';
 export * from './api/site/site.service';
 export * from './api/stats/stats.service';
 export * from './api/style/style.service';

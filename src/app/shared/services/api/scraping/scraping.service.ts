@@ -4,6 +4,8 @@ import { environment } from '@env/environment';
 import {
   ScrapingGetInfoArtistDto,
   ScrapingGetInfoArtistResponse,
+  ScrapingGetInfoClubDto,
+  ScrapingGetInfoClubResponse,
 } from '@interfaces';
 import { Observable } from 'rxjs';
 
@@ -17,6 +19,15 @@ export class ScrapingService {
   ): Observable<ScrapingGetInfoArtistResponse> {
     return this.httpClient.post<ScrapingGetInfoArtistResponse>(
       `${this.url}/getInfoArtist`,
+      data
+    );
+  }
+
+  getInfoClub(
+    data: ScrapingGetInfoClubDto
+  ): Observable<ScrapingGetInfoClubResponse> {
+    return this.httpClient.post<ScrapingGetInfoClubResponse>(
+      `${this.url}/getInfoClub`,
       data
     );
   }

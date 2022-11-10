@@ -87,22 +87,32 @@ export const buttonsByType = [
       new ButtonBlockItem({
         name: 'Galeria',
         action: 'viewGallery',
+        isActivatable: true,
       }),
       new ButtonBlockItem({
         name: 'Listado',
         action: 'viewList',
+        isActivatable: true,
+      }),
+      new ButtonBlockItem({
+        name: 'Mapa',
+        action: 'viewMap',
+        isActivatable: true,
       }),
       new ButtonBlockItem({
         name: 'Ordenar',
         action: 'order',
+        isActivatable: true,
       }),
       new ButtonBlockItem({
         name: 'Filtrar',
         action: 'filter',
+        isActivatable: true,
       }),
       new ButtonBlockItem({
         name: 'Buscar',
         action: 'search',
+        isActivatable: true,
       }),
     ],
   },
@@ -112,18 +122,22 @@ export const buttonsByType = [
       new ButtonBlockItem({
         name: 'Nuevo',
         action: 'add',
+        isActivatable: true,
       }),
       new ButtonBlockItem({
         name: 'Ordenar',
         action: 'order',
+        isActivatable: true,
       }),
       new ButtonBlockItem({
         name: 'Filtrar',
         action: 'filter',
+        isActivatable: true,
       }),
       new ButtonBlockItem({
         name: 'Buscar',
         action: 'search',
+        isActivatable: true,
       }),
     ],
   },

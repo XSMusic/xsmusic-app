@@ -4,6 +4,7 @@ export class Site {
   address: any = {
     street: '',
     city: '',
+    poblation: '',
     country: 'es',
     coordinates: [],
   };

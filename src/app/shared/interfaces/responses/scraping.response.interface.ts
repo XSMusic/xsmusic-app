@@ -14,3 +14,13 @@ export interface ScrapingGetInfoArtistResponse {
     soundcloud: string;
   };
 }
+
+export interface ScrapingGetInfoClubResponse {
+  name: string;
+  image: string;
+  address: {
+    street: string;
+    poblation: string;
+    country: string;
+  };
+}

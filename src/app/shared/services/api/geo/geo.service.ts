@@ -10,17 +10,18 @@ export class GeoService {
   constructor(private httpClient: HttpClient) {}
 
   addressToCoordinates(address: string): Observable<{ coordinates: number[] }> {
-    return this.httpClient.get<{ coordinates: number[] }>(
-      `${this.url}/addressToCoordinates/${address}`
+    return this.httpClient.post<{ coordinates: number[] }>(
+      `${this.url}/addressToCoordinates`,
+      { address }
     );
   }
 
   coordinatesToAddress(
-    lat: string,
-    lng: string
+    coordinates: number[]
   ): Observable<GeoCoordinatesToAddressResponseI[]> {
-    return this.httpClient.get<GeoCoordinatesToAddressResponseI[]>(
-      `${this.url}/coordinatesToAddress/${lat}/${lng}`
+    return this.httpClient.post<GeoCoordinatesToAddressResponseI[]>(
+      `${this.url}/coordinatesToAddress`,
+      { coordinates }
     );
   }
 }

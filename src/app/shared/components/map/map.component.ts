@@ -1,8 +1,6 @@
 import { AfterViewInit, Component, Input } from '@angular/core';
+import { Site } from '@models';
 import * as L from 'leaflet';
-
-const iconRetinaUrl = 'assets/images/marker-icon.png';
-const iconUrl = 'assets/images/marker-icon.png';
 
 @Component({
   selector: 'map',
@@ -10,11 +8,12 @@ const iconUrl = 'assets/images/marker-icon.png';
   styleUrls: ['./map.component.css'],
 })
 export class MapComponent implements AfterViewInit {
-  private map: any;
-  @Input() lat = 40.3053858;
-  @Input() lng = -3.8712108;
-  @Input() titulo = 'prueba marker';
+  private map!: L.Map;
+  @Input() center: L.LatLngExpression = [40.3053858, -3.8712108];
   @Input() class = '';
+  @Input() zoom = 13;
+  @Input() markers: Site[] = [];
+  @Input() dragabble = false;
 
   ngAfterViewInit(): void {
     this.initMap();
@@ -22,85 +21,50 @@ export class MapComponent implements AfterViewInit {
 
   private initMap(): void {
     this.map = L.map('map', {
-      center: [this.lat, this.lng],
-      zoom: 13,
+      center: this.center,
+      attributionControl: true,
+      zoom: this.zoom,
     });
 
     console.log(this.map);
-
-    const tiles = L.tileLayer(
-      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      {
-        attribution:
-          '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-      }
-    );
-
-    tiles.addTo(this.map);
-
-    const iconDefault = L.icon({ iconRetinaUrl, iconUrl });
-    L.Marker.prototype.options.icon = iconDefault;
-
-    const lng = this.lng;
-    const lat = this.lat;
-    const marker = L.marker([lat, lng]).bindPopup(this.titulo);
-    marker.addTo(this.map);
+    this.addTiles();
+    this.addMakers();
   }
 
-  // private initMap(): void {
-  //   //configuración del mapa
-  //   console.log(this.lat, this.lon);
+  addTiles() {
+    const tiles = L.tileLayer(
+      'http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
+      {
+        maxZoom: 20,
+        subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+      }
+    );
+    const googleHybrid = L.tileLayer(
+      'http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',
+      {
+        maxZoom: 20,
+        subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+      }
+    );
+    tiles.addTo(this.map);
+  }
 
-  //   this.map = L.map('map', {
-  //     center: [this.lat, this.lon],
-  //     attributionControl: false,
-  //     zoom: 14,
-  //   });
+  addMakers() {
+    for (const site of this.markers) {
+      if (site.address && site.address.coordinates.length > 0) {
+        const img = `<img class="w-10 h-10 rounded-full hover:scale-105 hover:duration-1000" src='${site.image}' />`;
 
-  //   //iconos personalizados
-  //   let iconDefault = L.icon({
-  //     iconRetinaUrl,
-  //     iconUrl,
-  //     shadowUrl,
-  //     iconSize: [25, 41],
-  //     iconAnchor: [12, 41],
-  //     popupAnchor: [1, -34],
-  //     tooltipAnchor: [16, -28],
-  //     shadowSize: [41, 41],
-  //   });
-  //   L.Marker.prototype.options.icon = iconDefault;
-
-  // //titulo
-  // const tiles = L.tileLayer(
-  //   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-  //   {
-  //     maxZoom: 19,
-  //     attribution:
-  //       '&copy; <a href="https://1938.com.es">Web Inteligencia Artificial</a>',
-  //   }
-  // );
-
-  // //marca con pop up
-  // const lon = this.lon + 0.009;
-  // const lat = this.lat + 0.009;
-  // const marker = L.marker([lat + 0.005, lon + 0.005]).bindPopup(this.titulo);
-  // marker.addTo(this.map);
-
-  // //marca forma de circulo
-  // const mark = L.circleMarker([this.lat, this.lon]).addTo(this.map);
-  // mark.addTo(this.map);
-
-  // //ruta
-  // L.Routing.control({
-  //   router: L.Routing.osrmv1({
-  //     serviceUrl: `https://router.project-osrm.org/route/v1/`,
-  //   }),
-  //   showAlternatives: true,
-  //   fitSelectedRoutes: false,
-  //   show: false,
-  //   routeWhileDragging: true,
-  //   waypoints: [L.latLng(this.lat, this.lon), L.latLng(lat, lon)],
-  // }).addTo(this.map);
-  // // tiles.addTo(this.map);
-  // }
+        const icon = L.divIcon({
+          html: img!,
+          className: 'image-icon',
+          iconSize: [52, 52],
+        });
+        const marker = L.marker(site.address.coordinates, {
+          icon,
+          draggable: this.dragabble,
+        }).bindPopup(site.name!);
+        marker.addTo(this.map);
+      }
+    }
+  }
 }

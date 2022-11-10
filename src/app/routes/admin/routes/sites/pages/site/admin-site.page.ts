@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Site, Style } from '@models';
-import { ToastService, SiteService, StyleService, GeoService } from '@services';
+import { ToastService, SiteService, StyleService } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -26,8 +26,7 @@ export class AdminSitePage implements OnInit {
     private styleService: StyleService,
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
-    private toastService: ToastService,
-    private geoService: GeoService
+    private toastService: ToastService
   ) {}
 
   ngOnInit() {
@@ -66,50 +65,5 @@ export class AdminSitePage implements OnInit {
 
   onClickButton(event: ButtonBlockItem) {
     this.view = event.action;
-  }
-
-  onClickOptionItem(action: string) {
-    if (action === 'addressToCoordinates') {
-      this.addressToCoordinates();
-    } else if (action === 'coordinatesToAddress') {
-      this.coordinatesToAddress();
-    }
-  }
-
-  addressToCoordinates() {
-    if (this.site.address.street !== '' && this.site.address.city !== '') {
-      this.geoService
-        .addressToCoordinates(
-          `${this.site.address.street} ${this.site.address.city}`
-        )
-        .subscribe({
-          next: (response) =>
-            (this.site.address.coordinates = response.coordinates),
-          error: (error) =>
-            this.toastService.showToast(TOAST_STATE.error, error),
-        });
-    } else {
-      this.toastService.showToast(TOAST_STATE.error, 'Revisa la direccion');
-    }
-  }
-
-  coordinatesToAddress() {
-    // if (this.site.address.street !== '' && this.site.address.city !== '') {
-    if (this.site.address.coordinates.length === 2) {
-      this.geoService
-        .coordinatesToAddress(
-          this.site.address.coordinates[0],
-          this.site.address.coordinates[1]
-        )
-        .subscribe({
-          next: (response) => {
-            console.log(response);
-          },
-          error: (error) =>
-            this.toastService.showToast(TOAST_STATE.error, error),
-        });
-    } else {
-      this.toastService.showToast(TOAST_STATE.error, 'Revisa las coordenadas');
-    }
   }
 }

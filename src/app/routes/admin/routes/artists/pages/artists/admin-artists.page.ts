@@ -75,7 +75,7 @@ export class AdminArtistsPage {
   }
 
   onClickButton(button: ButtonBlockItem) {
-    if (button.action === 'order' || button.action === 'filter') {
+    if (button.action.includes('view')) {
       this.toast.showToast(TOAST_STATE.info, 'En construccion');
     } else if (button.action === 'add') {
       this.router.navigate([routesConfig.artistAdminAdd]);

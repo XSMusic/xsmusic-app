@@ -5,3 +5,7 @@
 #map {
   height: 100%;
 }
+
+.leaflet-marker-icon {
+  border-radius: 100% !important;
+}

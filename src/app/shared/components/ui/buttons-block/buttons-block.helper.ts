@@ -84,16 +84,16 @@ export const buttonsByType = [
   {
     name: 'sites',
     buttons: [
-      new ButtonBlockItem({
-        name: 'Galeria',
-        action: 'viewGallery',
-        isActivatable: true,
-      }),
-      new ButtonBlockItem({
-        name: 'Listado',
-        action: 'viewList',
-        isActivatable: true,
-      }),
+      // new ButtonBlockItem({
+      //   name: 'Galeria',
+      //   action: 'viewGallery',
+      //   isActivatable: true,
+      // }),
+      // new ButtonBlockItem({
+      //   name: 'Listado',
+      //   action: 'viewList',
+      //   isActivatable: true,
+      // }),
       new ButtonBlockItem({
         name: 'Mapa',
         action: 'viewMap',

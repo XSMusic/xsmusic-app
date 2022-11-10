@@ -11,9 +11,11 @@ export class MapComponent implements AfterViewInit {
   private map!: L.Map;
   @Input() center: L.LatLngExpression = [40.3053858, -3.8712108];
   @Input() class = '';
+  @Input() style = '';
   @Input() zoom = 13;
   @Input() markers: Site[] = [];
   @Input() dragabble = false;
+  popup = L.popup();
 
   ngAfterViewInit(): void {
     this.initMap();
@@ -26,7 +28,6 @@ export class MapComponent implements AfterViewInit {
       zoom: this.zoom,
     });
 
-    console.log(this.map);
     this.addTiles();
     this.addMakers();
   }
@@ -50,21 +51,52 @@ export class MapComponent implements AfterViewInit {
   }
 
   addMakers() {
+    console.log(this.markers);
     for (const site of this.markers) {
       if (site.address && site.address.coordinates.length > 0) {
-        const img = `<img class="w-10 h-10 rounded-full hover:scale-105 hover:duration-1000" src='${site.image}' />`;
+        const img = `<img style="width:3rem; height:3rem" class="object-cover rounded-full hover:scale-105 hover:duration-1000" src='${site.image}' />`;
 
         const icon = L.divIcon({
-          html: img!,
+          html: img,
           className: 'image-icon',
-          iconSize: [52, 52],
+          iconSize: [48, 48],
         });
+
+        const customPopup = `
+        <div class='flex gap-4 w-60'>
+          <img src='${
+            site.image
+          }' alt='' class="object-cover h-20 w-20 rounded-lg"/>
+          <div class='flex-col gap-2'>
+            <div class='text-lg font-extrabold'>${site.name}</div>
+            <div class='font-light'>${site.address.street}, ${
+          site.address.town !== '' ? site.address.town : site.address.state
+        }
+            </div>
+            <a href="clubs/one/${
+              site.slug
+            }" class="cursor-pointer text-black font-bold">
+              Ver perfil
+            </a>
+          </div>
+        </div>`;
+
+        // specify popup options
+        const customOptions = {
+          maxWidth: 500,
+          closeButton: true,
+          autoClose: true,
+        };
         const marker = L.marker(site.address.coordinates, {
           icon,
           draggable: this.dragabble,
-        }).bindPopup(site.name!);
+        }).bindPopup(customPopup, customOptions);
         marker.addTo(this.map);
       }
     }
+  }
+
+  onClick(e: L.LeafletMouseEvent) {
+    console.log(e);
   }
 }

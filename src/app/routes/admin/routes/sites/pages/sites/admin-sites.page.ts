@@ -58,6 +58,7 @@ export class AdminSitesPage implements OnInit {
       },
     });
   }
+
   goToProfile(item: Site) {
     this.router.navigate([routesConfig.clubAdmin.replace(':id', item._id!)]);
   }
@@ -83,7 +84,11 @@ export class AdminSitesPage implements OnInit {
     if (button.action === 'order' || button.action === 'filter') {
       this.toast.showToast(TOAST_STATE.info, 'En construccion');
     } else if (button.action === 'add') {
-      this.router.navigate([routesConfig.clubAdminAdd]);
+      if (this.type === 'clubs') {
+        this.router.navigate([routesConfig.clubAdminAdd]);
+      } else {
+        this.router.navigate([routesConfig.festivalAdminAdd]);
+      }
     }
   }
 

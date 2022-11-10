@@ -8,7 +8,12 @@ import {
   ScrapingGetInfoClubResponse,
 } from '@interfaces';
 import { Site, Style } from '@models';
-import { ToastService, SiteService, ScrapingService, GeoService } from '@services';
+import {
+  ToastService,
+  SiteService,
+  ScrapingService,
+  GeoService,
+} from '@services';
 import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { countries } from 'assets/data/countries';
@@ -109,10 +114,28 @@ export class AdminSiteOneComponent {
       if (response.address.street !== '') {
         this.site.address.street = response.address.street;
       }
+      if (response.address.town !== '') {
+        this.site.address.town = response.address.town;
+      }
+      if (response.address.state !== '') {
+        this.site.address.state = response.address.state;
+      }
+      if (response.address.country !== '') {
+        this.site.address.country = response.address.country;
+      }
+      if (response.address.coordinates.length > 0) {
+        this.site.address.coordinates = response.address.coordinates;
+      }
+      if (response.image !== '') {
+        this.site.image = response.image;
+      }
       this.spinner.hide();
     } catch (error) {
       this.spinner.hide();
-      this.toastService.showToast(TOAST_STATE.error, 'No ha sido posible scrapear sitio');
+      this.toastService.showToast(
+        TOAST_STATE.error,
+        'No ha sido posible scrapear sitio'
+      );
     }
   }
 

@@ -16,6 +16,7 @@ export class AdminSitePage implements OnInit {
   styles: Style[] = [];
   title!: string;
   view = '';
+  type = '';
   options = [
     { name: 'Obtener coordenadas', action: 'addressToCoordinates' },
     { name: 'Obtener direccion', action: 'coordinatesToAddress' },
@@ -32,12 +33,20 @@ export class AdminSitePage implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id')!;
     this.getStyles();
+    this.getType();
     if (this.id) {
       this.title = 'Editar';
       this.getOne();
     } else {
       this.title = 'Nuevo';
+      this.site.type = this.type;
     }
+  }
+
+  getType() {
+    this.type = this.route.snapshot.routeConfig!.path!.includes('clubs')
+      ? 'club'
+      : 'festival';
   }
 
   getStyles() {

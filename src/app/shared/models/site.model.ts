@@ -3,12 +3,12 @@ export class Site {
   name? = '';
   address: any = {
     street: '',
-    city: '',
-    poblation: '',
+    town: '',
+    state: '',
     country: 'es',
     coordinates: [],
   };
-  type = null;
+  type!: string;
   image? = '';
   styles?: any[] = [];
   info? = '';

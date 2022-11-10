@@ -20,7 +20,9 @@ export interface ScrapingGetInfoClubResponse {
   image: string;
   address: {
     street: string;
-    poblation: string;
+    town: string;
+    state: string;
     country: string;
+    coordinates: number[];
   };
 }

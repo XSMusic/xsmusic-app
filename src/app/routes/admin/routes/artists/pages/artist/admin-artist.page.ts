@@ -24,7 +24,10 @@ export class AdminArtistPage {
     infos: [],
   };
   view = 'viewInfo';
-
+  options = [
+    { name: 'Añadir Set', action: 'goToAdminSetAdd' },
+    { name: 'Añadir Track', action: 'goToAdminTrackAdd' },
+  ];
   constructor(
     private artistService: ArtistService,
     private styleService: StyleService,

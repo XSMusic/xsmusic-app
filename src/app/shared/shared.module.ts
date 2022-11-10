@@ -22,6 +22,7 @@ import {
   GenericViewGalleryComponent,
   GenericViewGalleryItemsComponent,
   MapComponent,
+  OptionsItemsComponent,
 } from '@components';
 import {
   CountryFlagPipe,
@@ -68,6 +69,7 @@ const components = [
   GenericViewGalleryComponent,
   GenericViewGalleryItemsComponent,
   MapComponent,
+  OptionsItemsComponent,
 ];
 const directives = [OnImageErrorDirective];
 const modules = [

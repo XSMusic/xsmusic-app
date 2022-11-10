@@ -12,7 +12,10 @@
     [styles]="styles"
   ></admin-artist-one>
 
-  <ng-container *ngIf="view === 'viewOptions'">Opciones</ng-container>
+  <div *ngIf="view === 'viewOptions'">
+    <options-items [options]="options"></options-items>
+  </div>
+
   <ng-container *ngIf="view === 'viewSets'">
     <media-view-list
       [media]="artist.sets"

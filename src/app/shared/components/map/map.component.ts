@@ -54,7 +54,7 @@ export class MapComponent implements AfterViewInit {
     console.log(this.markers);
     for (const site of this.markers) {
       if (site.address && site.address.coordinates.length > 0) {
-        const img = `<img style="width:3rem; height:3rem" class="object-cover rounded-full hover:scale-105 hover:duration-1000" src='${site.image}' />`;
+        const img = `<img style="width:3rem; height:3rem" class="object-cover rounded-full border hover:scale-105 hover:duration-1000" src='${site.image}' />`;
 
         const icon = L.divIcon({
           html: img,
@@ -63,7 +63,7 @@ export class MapComponent implements AfterViewInit {
         });
 
         const customPopup = `
-        <div class='flex gap-4 w-60'>
+        <div class='flex gap-3 w-50'>
           <img src='${
             site.image
           }' alt='' class="object-cover h-20 w-20 rounded-lg"/>
@@ -73,11 +73,11 @@ export class MapComponent implements AfterViewInit {
           site.address.town !== '' ? site.address.town : site.address.state
         }
             </div>
-            <a href="clubs/one/${
+            <div class="text-black"><a href="clubs/one/${
               site.slug
             }" class="cursor-pointer text-black font-bold">
               Ver perfil
-            </a>
+            </a></div>
           </div>
         </div>`;
 

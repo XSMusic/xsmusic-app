@@ -35,7 +35,8 @@
 
   <map
     *ngIf="view === 'viewMap' && items.length > 0"
-    [class]="'rounded-lg overflow-hidden'" [style]="'height: calc(100vh - 175px)'"
+    [class]="'mt-2 rounded-lg overflow-hidden'"
+    [style]="'height: calc(100vh - 175px)'"
     [markers]="items"
   ></map>
 </div>

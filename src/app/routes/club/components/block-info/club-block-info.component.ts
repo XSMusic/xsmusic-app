@@ -25,7 +25,7 @@ export class ClubBlockInfoComponent {
     this.router.navigate([routesConfig.clubAdmin.replace(':id', id)]);
   }
 
-  goToArtistFilter(key: string, value: string) {
+  goToFilter(key: string, value: string) {
     this.router.navigate([
       routesConfig.clubsFilter
         .replace(':filterKey', key)

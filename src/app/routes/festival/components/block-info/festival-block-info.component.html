@@ -24,9 +24,18 @@
     {{ site.name }}
   </p>
 
+   <div class="text-center">
+    <p *ngIf="site.address.street !== '' && site.address.town !== ''">
+      {{ site.address.street }}, {{ site.address.town }}
+    </p>
+    <p *ngIf="site.address.street !== '' && site.address.town === ''">
+      {{ site.address.street }}, {{ site.address.state }}
+    </p>
+  </div>
+
   <div
     class="py-1 mx-auto cursor-pointer"
-    (click)="goToArtistFilter('country', site.address.country!)"
+    (click)="goToFilter('country', site.address.country!)"
   >
     <div class="flex items-center justify-center gap-2">
       <img
@@ -41,7 +50,7 @@
   <div class="p-2 text-center">
     <span *ngFor="let style of site.styles; index as i">
       <a
-        (click)="goToArtistFilter('styles', style.name)"
+        (click)="goToFilter('styles', style.name)"
         class="px-2 py-1 mr-2 text-xs bg-gray-100 border border-gray-100 shadow-md cursor-pointer rounded-2xl hover:bg-gray-200 hover:border-gray-200"
       >
         {{ style.name }}

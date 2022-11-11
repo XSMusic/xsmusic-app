@@ -1,6 +1,12 @@
 <ng-container *ngIf="site">
   <club-block-info [site]="site"></club-block-info>
 
+  <map
+    [class]="'h-44 mx-2 mb-2 rounded-lg overflow-hidden'"
+    [markers]="[site]"
+    [zoom]="15"
+  ></map>
+
   <div class="h-1 mt-2 mb-4 border-b"></div>
 
   <site-last-media [site]="site" [views]="views"></site-last-media>

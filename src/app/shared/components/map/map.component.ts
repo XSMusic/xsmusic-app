@@ -22,8 +22,12 @@ export class MapComponent implements AfterViewInit {
   }
 
   private initMap(): void {
+    const center =
+      this.markers.length === 1
+        ? this.markers[0].address.coordinates
+        : this.center;
     this.map = L.map('map', {
-      center: this.center,
+      center,
       attributionControl: true,
       zoom: this.zoom,
     });

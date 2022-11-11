@@ -13,8 +13,9 @@ Cada vez que se añada un valor en el archivo .env, hay que añadir el archivo c
 - [ ] Guardar imagenes
 - [X] Track: Al crear asignar sitio desconocido
 - [ ] Mapas
-  - [ ] Componente para mapa
+  - [X] Componente para mapa
   Opciones: Leatflet openstreetmap
-  - [ ] Conversor de coordenadas en direccion
-  - [ ] Conversor de direccion en coordenadas
+  - [X] Conversor de coordenadas en direccion
+  - [X] Conversor de direccion en coordenadas
+  - [ ] Añadir arrastrar y devolver coordenadas (opcional)
 

@@ -25,7 +25,7 @@ export class FestivalBlockInfoComponent {
     this.router.navigate([routesConfig.festivalAdmin.replace(':id', id)]);
   }
 
-  goToArtistFilter(key: string, value: string) {
+  goToFilter(key: string, value: string) {
     this.router.navigate([
       routesConfig.festivalsFilter
         .replace(':filterKey', key)

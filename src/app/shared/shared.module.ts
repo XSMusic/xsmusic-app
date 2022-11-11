@@ -23,6 +23,9 @@ import {
   GenericViewGalleryItemsComponent,
   MapComponent,
   OptionsItemsComponent,
+  SitesLastBlockComponent,
+  NavbarMobileMenuComponent,
+  NavbarNormalMenuComponent,
 } from '@components';
 import {
   CountryFlagPipe,
@@ -60,10 +63,13 @@ const components = [
   MediaViewListComponent,
   ModalComponent,
   NavbarComponent,
+  NavbarMobileMenuComponent,
+  NavbarNormalMenuComponent,
   SearchBarComponent,
   SiteLastMediaComponent,
   SiteLastMediaItemsComponent,
   SiteViewListComponent,
+  SitesLastBlockComponent,
   ToastComponent,
   UsersViewListComponent,
   GenericViewGalleryComponent,

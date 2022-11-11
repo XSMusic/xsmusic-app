@@ -1,0 +1,20 @@
+<ng-container *ngIf="!loading">
+  <h1 @inOut class="py-3 text-lg font-extrabold">{{ title }}</h1>
+
+  <div
+    class="flex gap-3 overflow-x-scroll"
+    [ngClass]="{ 'lg:mr-2.5': type === 'club', 'lg:ml-2.5': type === 'festival' }"
+  >
+    <div *ngFor="let site of sites">
+      <div @inOut class="flex flex-col w-20 py-2 text-center hover:opacity-90">
+        <img
+          [src]="site.image"
+          class="object-cover w-full h-20 shadow-lg cursor-pointer rounded-xl hover:filter-grayscale hover:scale-110 hover:duration-1000"
+          alt="artist.name"
+          (click)="goToProfile(site.slug!)"
+        />
+        <p class="pt-2 text-xs font-light text-gray-500">{{ site.name }}</p>
+      </div>
+    </div>
+  </div>
+</ng-container>

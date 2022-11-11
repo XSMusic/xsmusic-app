@@ -16,17 +16,67 @@
         class="absolute bottom-0 left-0 w-full px-6 pt-2 text-center text-white"
         style="background: rgba(0, 0, 0, 0.65)"
       >
-        <div class="flex flex-col justify-center">
-          <div class="mb-1 text-xl font-semibold text-white md:text-2xl">
-            {{ media[0].name }}
-          </div>
-          <div class="flex justify-center gap-3">
-            <div
-              *ngFor="let artist of media[0].artists"
-              class="mb-3 text-lg font-medium text-white"
-            >
-              {{ artist.name }}
+        <!-- ONE BLOCK DESKTOP -->
+        <div class="hidden lg:justify-center lg:flex-col lg:flex">
+          <div class="flex justify-center">
+            <div class="flex justify-center gap-3">
+              <div
+                *ngIf="media[0].type === 'track'"
+                class="mb-2 text-lg font-medium text-white"
+              >
+                {{ media[0].name }} @
+                <span *ngFor="let artist of media[0].artists">{{
+                  artist.name
+                }}</span>
+              </div>
+              <ng-container *ngIf="media[0].type === 'set'">
+                <div
+                  *ngFor="let artist of media[0].artists"
+                  class="mb-3 text-lg font-medium text-white"
+                >
+                  {{ artist.name }}
+                </div>
+              </ng-container>
             </div>
+            <div
+              *ngIf="media[0].type === 'set'"
+              class="text-lg font-medium text-white"
+            >
+              &nbsp;@ {{ media[0].site.name }}
+              {{ media[0].year !== 0 ? media[0].year : '' }}
+            </div>
+          </div>
+        </div>
+
+        <!-- ONE BLOCK MOBILE -->
+        <div class="flex flex-col justify-center lg:hidden">
+          <div class="flex justify-center">
+            <div
+              *ngIf="media[0].type === 'track'"
+              class="mb-2 text-lg font-medium text-white"
+            >
+              {{ media[0].name }} @
+              <span *ngFor="let artist of media[0].artists">{{
+                artist.name
+              }}</span>
+            </div>
+            <div
+              *ngIf="media[0].type === 'set'"
+              class="flex justify-center gap-3"
+            >
+              <div
+                *ngFor="let artist of media[0].artists"
+                class="mb-1 text-lg font-medium text-white"
+              >
+                {{ artist.name }}
+              </div>
+            </div>
+          </div>
+          <div
+            *ngIf="media[0].site.name !== 'Desconocido'"
+            class="mb-2 text-xl font-semibold text-white md:text-2xl"
+          >
+            {{ media[0].site.name }} {{ media[0].year }}
           </div>
         </div>
       </div>
@@ -52,18 +102,64 @@
           class="absolute bottom-0 left-0 w-full px-6 pt-2 text-center text-white"
           style="background: rgba(0, 0, 0, 0.65)"
         >
-          <div class="flex flex-col justify-center">
-            <div class="mb-1 text-xl font-semibold text-white md:text-2xl">
-              {{ item.name }}
-            </div>
+          <!-- ONE BLOCK DESKTOP -->
+          <div class="hidden lg:justify-center lg:flex-col lg:flex">
             <div class="flex flex-col justify-center">
               <div
-                *ngFor="let artist of item.artists"
-                class="mb-3 text-lg font-medium text-white"
-                style="background: rgba(0, 0, 0, 0.5)"
+                *ngIf="item.type === 'track'"
+                class="mb-2 text-lg font-medium text-white"
               >
-                {{ artist.name }}
+                {{ item.name }} @
+                <span *ngFor="let artist of item.artists">{{
+                  artist.name
+                }}</span>
               </div>
+              <ng-container *ngIf="item.type === 'set'">
+                <div
+                  *ngFor="let artist of item.artists"
+                  class="text-lg font-medium text-white"
+                >
+                  {{ artist.name }}
+                </div>
+              </ng-container>
+            </div>
+            <div
+              *ngIf="item.type === 'set'"
+              class="mb-2 text-lg font-medium text-white"
+            >
+              {{ item.site.name }}
+              {{ item.year !== 0 ? item.year : '' }}
+            </div>
+          </div>
+
+          <!-- ONE BLOCK MOBILE -->
+          <div class="flex flex-col justify-center lg:hidden">
+            <div class="flex flex-col justify-center">
+              <div
+                *ngIf="item.type === 'track'"
+                class="mb-2 text-lg font-medium text-white"
+              >
+                {{ item.name }} @
+                <span *ngFor="let artist of item.artists">{{
+                  artist.name
+                }}</span>
+              </div>
+              <ng-container *ngIf="item.type === 'set'">
+                <div
+                  *ngFor="let artist of item.artists"
+                  class="text-lg font-medium text-white"
+                  style="background: rgba(0, 0, 0, 0.5)"
+                >
+                  {{ artist.name }}
+                </div>
+              </ng-container>
+            </div>
+            <div
+              *ngIf="item.type === 'set'"
+              class="mb-2 text-lg font-medium text-white"
+            >
+              {{ media[0].site.name }}
+              {{ media[0].year !== 0 ? media[0].year : '' }}
             </div>
           </div>
         </div>

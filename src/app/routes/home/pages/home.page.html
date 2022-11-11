@@ -2,16 +2,20 @@
   <artists-last-block></artists-last-block>
 
   <div class="lg:grid lg:grid-cols-12">
-    <div class="my-2 lg:col-span-10">
+    <div class="my-2 lg:col-span-12">
       <last-media></last-media>
     </div>
 
-    <div class="my-2 lg:col-span-2">
+    <!-- <div class="my-2 lg:col-span-2">
       <top-countries></top-countries>
-    </div>
+    </div> -->
   </div>
 
   <br />
+  <div class="lg:grid lg:grid-cols-2">
+    <sites-last-block type="club"></sites-last-block>
+    <sites-last-block type="festival"></sites-last-block>
+  </div>
 
   <div *ngxPermissionsExcept="['ADMIN', 'USER']">
     <div class="flex gap-2">

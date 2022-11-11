@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Input } from '@angular/core';
 import { Site } from '@models';
 import * as L from 'leaflet';
+import { Geolocation } from '@capacitor/geolocation';
 
 @Component({
   selector: 'map',
@@ -9,7 +10,9 @@ import * as L from 'leaflet';
 })
 export class MapComponent implements AfterViewInit {
   private map!: L.Map;
-  @Input() center: L.LatLngExpression = [40.3053858, -3.8712108];
+  @Input() center: L.LatLngExpression = [
+    40.417244274063485, -3.7021285218467663,
+  ];
   @Input() class = '';
   @Input() style = '';
   @Input() zoom = 13;
@@ -19,6 +22,7 @@ export class MapComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.initMap();
+    this.getCurrentPosition();
   }
 
   private initMap(): void {
@@ -55,7 +59,6 @@ export class MapComponent implements AfterViewInit {
   }
 
   addMakers() {
-    console.log(this.markers);
     for (const site of this.markers) {
       if (site.address && site.address.coordinates.length > 0) {
         const img = `<img style="width:3rem; height:3rem" class="object-cover rounded-full border hover:scale-105 hover:duration-1000" src='${site.image}' />`;
@@ -91,6 +94,7 @@ export class MapComponent implements AfterViewInit {
           closeButton: true,
           autoClose: true,
         };
+
         const marker = L.marker(site.address.coordinates, {
           icon,
           draggable: this.dragabble,
@@ -100,7 +104,25 @@ export class MapComponent implements AfterViewInit {
     }
   }
 
-  onClick(e: L.LeafletMouseEvent) {
-    console.log(e);
-  }
+  getCurrentPosition = async () => {
+    try {
+      const coordinates = await Geolocation.getCurrentPosition();
+      const img = `<img style="width:3rem; height:3rem" class="object-cover rounded-full border-black hover:scale-105 hover:duration-1000" src='./assets/images/marker-user.png' />`;
+
+      const icon = L.divIcon({
+        html: img,
+        className: 'image-icon',
+        iconSize: [48, 48],
+      });
+
+      const marker = L.marker(
+        [coordinates.coords.latitude, coordinates.coords.longitude],
+        { icon }
+      );
+      marker.addTo(this.map);
+      console.log('Current position:', coordinates);
+    } catch (e) {
+      console.error(e);
+    }
+  };
 }

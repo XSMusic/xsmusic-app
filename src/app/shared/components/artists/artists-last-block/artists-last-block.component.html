@@ -1,8 +1,10 @@
 <ng-container *ngIf="!loading">
   <h1 @inOut class="py-3 text-lg font-extrabold">Ultimos artistas</h1>
 
-  <swiper [slidesPerView]="slidesPerView" [spaceBetween]="10">
-    <ng-template swiperSlide *ngFor="let artist of artists">
+  <div
+    class="flex gap-3 overflow-x-scroll"
+  >
+    <div *ngFor="let artist of artists">
       <div @inOut class="flex flex-col w-20 py-2 text-center hover:opacity-90">
         <img
           [src]="artist.image"
@@ -12,6 +14,6 @@
         />
         <p class="pt-2 text-xs font-light text-gray-500">{{ artist.name }}</p>
       </div>
-    </ng-template>
-  </swiper>
+    </div>
+  </div>
 </ng-container>

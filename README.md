@@ -18,4 +18,4 @@ Cada vez que se añada un valor en el archivo .env, hay que añadir el archivo c
   - [X] Conversor de coordenadas en direccion
   - [X] Conversor de direccion en coordenadas
   - [ ] Añadir arrastrar y devolver coordenadas (opcional)
-
+  - [ ] Obtener localizacion del usuario

@@ -16,7 +16,7 @@ export class ClubsPage implements OnInit {
   body: GetAllDto = {
     page: 1,
     pageSize: 20,
-    order: ['updated', 'desc'],
+    order: ['created', 'desc'],
     type: 'club',
   };
   view = 'gallery';

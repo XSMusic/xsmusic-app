@@ -1,155 +1,154 @@
- <div class="relative flex items-center justify-between h-16">
-      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-        <!-- Mobile menu button-->
+<div class="relative flex items-center justify-between h-16">
+  <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+    <!-- Mobile menu button-->
+    <button
+      type="button"
+      (click)="toggleMenu.emit()"
+      class="inline-flex items-center justify-center p-2 text-black rounded-2xl hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-white hover:text-gray-900"
+      aria-controls="mobile-menu"
+      aria-expanded="false"
+    >
+      <svg
+        class="block w-6 h-6"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+        />
+      </svg>
+      <svg
+        class="hidden w-6 h-6"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6 18L18 6M6 6l12 12"
+        />
+      </svg>
+    </button>
+  </div>
+  <div
+    class="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start"
+  >
+    <div class="flex items-center flex-shrink-0">
+      <p
+        class="block w-auto text-lg font-extrabold rounded cursor-pointer hover:border-2xl lg:hidden hover:bg-gray-100 dark:hover:bg-gray-900"
+        (click)="goToHomeOrAdmin.emit()"
+      >
+        XSMusic
+        <span
+          *ngIf="offline"
+          class="relative inline-flex w-3 h-3 bg-red-500 rounded-full"
+        ></span>
+      </p>
+      <img
+        class="hidden w-auto rounded cursor-pointer hover:border-2xl h-9 lg:block hover:bg-gray-100"
+        [src]="
+          !adminPage
+            ? 'assets/images/logo-negro.png'
+            : 'assets/images/logo-rojo.png'
+        "
+        alt="XSMusic"
+        routerLink="/home"
+      />
+    </div>
+    <div class="hidden sm:ml-6 sm:block">
+      <div class="flex space-x-4">
+        <ng-template [ngxPermissionsOnly]="['ADMIN']">
+          <a
+            *ngFor="let menu of menuItemsAdmin"
+            [routerLink]="menu.route"
+            routerLinkActive="bg-gray-100 text-black"
+            class="px-3 py-2 text-sm font-medium rounded-2xl dark:text-white hover:bg-gray-100 hover:text-black"
+            aria-current="page"
+            >{{ menu.name }}
+          </a>
+        </ng-template>
+        <ng-template [ngxPermissionsExcept]="['ADMIN']">
+          <a
+            *ngFor="let menu of menuItems"
+            [routerLink]="menu.route"
+            routerLinkActive="bg-gray-100 text-black"
+            class="px-3 py-2 text-sm font-medium rounded-2xl dark:text-white hover:bg-gray-100 hover:text-black"
+            aria-current="page"
+            >{{ menu.name }}</a
+          >
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  <div
+    class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+  >
+    <div class="relative ml-3">
+      <ng-template [ngxPermissionsExcept]="['ADMIN', 'USER']">
         <button
           type="button"
-          (click)="toggleMenu.emit()"
-          class="inline-flex items-center justify-center p-2 text-black rounded-2xl hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-white hover:text-gray-900"
-          aria-controls="mobile-menu"
-          aria-expanded="false"
+          routerLink="/auth"
+          class="p-2 text-sm text-black rounded-2xl hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-900 dark:text-white"
         >
           <svg
-            class="block w-6 h-6"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            aria-hidden="true"
+            class="w-6 h-6"
           >
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
-              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-            />
-          </svg>
-          <svg
-            class="hidden w-6 h-6"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6 18L18 6M6 6l12 12"
+              d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
             />
           </svg>
         </button>
-      </div>
-      <div
-        class="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start"
-      >
-        <div class="flex items-center flex-shrink-0">
-          <p
-            class="block w-auto text-lg font-extrabold rounded cursor-pointer hover:border-2xl lg:hidden hover:bg-gray-100 dark:hover:bg-gray-900"
-            (click)="goToHomeOrAdmin.emit()"
+      </ng-template>
+
+      <ng-template [ngxPermissionsOnly]="['ADMIN', 'USER']">
+        <!-- Menu Profile -->
+        <button
+          type="button"
+          class="flex text-sm bg-gray-100 rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+          id="user-menu-button"
+          aria-expanded="false"
+          aria-haspopup="true"
+          (click)="menuProfileState = !menuProfileState"
+        >
+          <img class="w-8 h-8 rounded-full" [src]="user.image" onError alt="" />
+        </button>
+
+        <div
+          *ngIf="menuProfileState"
+          class="absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg cursor-pointer ring-1 ring-black ring-opacity-5 focus:outline-none"
+          role="menu"
+          aria-orientation="vertical"
+          aria-labelledby="user-menu-button"
+          tabindex="-1"
+        >
+          <a
+            *ngFor="let menu of menuProfileItems"
+            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            role="menuitem"
+            tabindex="-1"
+            (click)="onClickMenuProfileItem.emit(menu)"
           >
-            XSMusic
-          </p>
-          <img
-            class="hidden w-auto rounded cursor-pointer hover:border-2xl h-9 lg:block hover:bg-gray-100"
-            [src]="
-              !adminPage
-                ? 'assets/images/logo-negro.png'
-                : 'assets/images/logo-rojo.png'
-            "
-            alt="XSMusic"
-            routerLink="/home"
-          />
+            {{ menu.name }}
+          </a>
         </div>
-        <div class="hidden sm:ml-6 sm:block">
-          <div class="flex space-x-4">
-            <ng-template [ngxPermissionsOnly]="['ADMIN']">
-              <a
-                *ngFor="let menu of menuItemsAdmin"
-                [routerLink]="menu.route"
-                routerLinkActive="bg-gray-100 text-black"
-                class="px-3 py-2 text-sm font-medium rounded-2xl dark:text-white hover:bg-gray-100 hover:text-black"
-                aria-current="page"
-                >{{ menu.name }}
-              </a>
-            </ng-template>
-            <ng-template [ngxPermissionsExcept]="['ADMIN']">
-              <a
-                *ngFor="let menu of menuItems"
-                [routerLink]="menu.route"
-                routerLinkActive="bg-gray-100 text-black"
-                class="px-3 py-2 text-sm font-medium rounded-2xl dark:text-white hover:bg-gray-100 hover:text-black"
-                aria-current="page"
-                >{{ menu.name }}</a
-              >
-            </ng-template>
-          </div>
-        </div>
-      </div>
-      <div
-        class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
-      >
-        <div class="relative ml-3">
-          <ng-template [ngxPermissionsExcept]="['ADMIN', 'USER']">
-            <button
-              type="button"
-              routerLink="/auth"
-              class="p-2 text-sm text-black rounded-2xl hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-900 dark:text-white"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-6 h-6"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
-                />
-              </svg>
-            </button>
-          </ng-template>
-
-          <ng-template [ngxPermissionsOnly]="['ADMIN', 'USER']">
-            <!-- Menu Profile -->
-            <button
-              type="button"
-              class="flex text-sm bg-gray-100 rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-              id="user-menu-button"
-              aria-expanded="false"
-              aria-haspopup="true"
-              (click)="menuProfileState = !menuProfileState"
-            >
-              <img
-                class="w-8 h-8 rounded-full"
-                [src]="user.image"
-                onError
-                alt=""
-              />
-            </button>
-
-            <div
-              *ngIf="menuProfileState"
-              class="absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg cursor-pointer ring-1 ring-black ring-opacity-5 focus:outline-none"
-              role="menu"
-              aria-orientation="vertical"
-              aria-labelledby="user-menu-button"
-              tabindex="-1"
-            >
-              <a
-                *ngFor="let menu of menuProfileItems"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                role="menuitem"
-                tabindex="-1"
-                (click)="onClickMenuProfileItem.emit(menu)"
-              >
-                {{ menu.name }}
-              </a>
-            </div>
-          </ng-template>
-        </div>
-      </div>
+      </ng-template>
     </div>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { Menu, User } from '@models';
 
@@ -7,7 +7,7 @@ import { Menu, User } from '@models';
   templateUrl: './navbar-normal-menu.component.html',
   animations: [inOutAnimation],
 })
-export class NavbarNormalMenuComponent {
+export class NavbarNormalMenuComponent implements OnInit {
   @Input() adminPage = false;
   @Input() menuItemsAdmin: Menu[] = [];
   @Input() menuItems: Menu[] = [];
@@ -17,4 +17,14 @@ export class NavbarNormalMenuComponent {
   @Output() toggleMenu = new EventEmitter<void>();
   @Output() goToHomeOrAdmin = new EventEmitter<void>();
   @Output() onClickMenuProfileItem = new EventEmitter<Menu>();
+  offline = false;
+
+  ngOnInit(): void {
+    window.addEventListener('online', this.onNetworkStatusChange.bind(this));
+    window.addEventListener('offline', this.onNetworkStatusChange.bind(this));
+  }
+
+  onNetworkStatusChange(): void {
+    this.offline = !navigator.onLine;
+  }
 }

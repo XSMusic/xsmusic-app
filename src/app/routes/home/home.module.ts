@@ -3,8 +3,9 @@ import { HomePage } from './pages/home.page';
 import { RouterModule } from '@angular/router';
 import { TopCountriesComponent } from './components/top-countries/top-countries.component';
 import { SharedModule } from '@shared/shared.module';
-import { LastMediaComponent } from './components/last-media/last-media.component';
-import { LastMediaItemsComponent } from './components/last-media-items/last-media-items.component';
+import { LastMediaItemComponent } from './components/last-media-block/last-media-item/last-media-item.component';
+import { LastMediaItemsComponent } from './components/last-media-block/last-media-items/last-media-items.component';
+import { LastMediaComponent } from './components/last-media-block/last-media/last-media.component';
 
 @NgModule({
   imports: [
@@ -19,12 +20,14 @@ import { LastMediaItemsComponent } from './components/last-media-items/last-medi
   ],
   exports: [],
   declarations: [
+    LastMediaItemComponent,
     LastMediaComponent,
     HomePage,
     TopCountriesComponent,
     TopCountriesComponent,
     LastMediaComponent,
     LastMediaItemsComponent,
+    LastMediaItemComponent,
   ],
   providers: [],
 })

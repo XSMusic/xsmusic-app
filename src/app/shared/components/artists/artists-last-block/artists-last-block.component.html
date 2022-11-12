@@ -11,6 +11,7 @@
           class="object-cover w-full h-20 rounded-full shadow-lg cursor-pointer hover:filter-grayscale hover:scale-110 hover:duration-1000"
           alt="artist.name"
           (click)="goToArtistProfile(artist.slug!)"
+          onError
         />
         <p class="pt-2 text-xs font-light text-gray-500">{{ artist.name }}</p>
       </div>

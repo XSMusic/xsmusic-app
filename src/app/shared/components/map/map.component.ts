@@ -120,7 +120,6 @@ export class MapComponent implements AfterViewInit {
         { icon }
       );
       marker.addTo(this.map);
-      console.log('Current position:', coordinates);
     } catch (e) {
       console.error(e);
     }

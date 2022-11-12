@@ -1,0 +1,90 @@
+<div
+  *ngIf="media"
+  class="relative overflow-hidden shadow-xl cursor-pointer rounded-2xl"
+  (click)="goToMedia.emit(media)"
+>
+  <img
+    class="object-cover w-full h-40 hover:filter-grayscale hover:scale-105 hover:duration-1000"
+    [ngStyle]="{ height: height }"
+    [src]="media.image"
+    [alt]="media.name"
+    onError
+  />
+  <div
+    class="absolute bottom-0 left-0 w-full px-6 pt-2 text-center text-white"
+    style="background: rgba(0, 0, 0, 0.65)"
+  >
+    <!-- DESKTOP -->
+    <div class="hidden lg:justify-center lg:flex-col lg:flex">
+      <div class="flex justify-center">
+        <div class="flex justify-center gap-3">
+          <div
+            *ngIf="media.type === 'track' || media.site.name === 'Desconocido'"
+            class="mb-2 text-lg font-medium text-white"
+          >
+            {{ media.name }} @
+            <span *ngFor="let artist of media.artists">{{ artist.name }}</span>
+            <span *ngIf="media.site.name === 'Desconocido'" class="pl-1">{{
+              media.year
+            }}</span>
+          </div>
+          <ng-container
+            *ngIf="media.type === 'set' && media.site.name !== 'Desconocido'"
+          >
+            <div
+              *ngFor="let artist of media.artists"
+              class="mb-3 text-lg font-medium text-white"
+            >
+              {{ artist.name }}
+            </div>
+          </ng-container>
+        </div>
+        <div
+          *ngIf="media.type === 'set' && media.site.name !== 'Desconocido'"
+          class="text-lg font-medium text-white"
+        >
+          &nbsp;@ {{ media.site.name }}
+          {{ media.year !== 0 ? media.year : '' }}
+        </div>
+      </div>
+    </div>
+
+    <!-- ONE BLOCK MOBILE -->
+    <div class="flex flex-col justify-center lg:hidden">
+      <div class="flex justify-center">
+        <div
+          *ngIf="media.type === 'track' || media.site.name === 'Desconocido'"
+          class="mb-2 text-lg font-medium text-white"
+        >
+          {{ media.name }}
+          <div
+            *ngFor="let artist of media.artists"
+            [ngClass]="{ block: media.type === 'set' }"
+          >
+            {{ artist.name }}
+            <span *ngIf="media.site.name === 'Desconocido'" class="pl-1">{{
+              media.year
+            }}</span>
+          </div>
+        </div>
+        <div
+          *ngIf="media.type === 'set' && media.site.name !== 'Desconocido'"
+          class="flex justify-center gap-3"
+        >
+          <div
+            *ngFor="let artist of media.artists"
+            class="mb-1 text-lg font-medium text-white"
+          >
+            {{ artist.name }}
+          </div>
+        </div>
+      </div>
+      <div
+        *ngIf="media.site.name !== 'Desconocido'"
+        class="mb-2 text-xl font-semibold text-white md:text-2xl"
+      >
+        {{ media.site.name }} {{ media.year }}
+      </div>
+    </div>
+  </div>
+</div>

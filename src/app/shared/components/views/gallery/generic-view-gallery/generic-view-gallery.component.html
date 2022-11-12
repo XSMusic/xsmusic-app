@@ -2,6 +2,7 @@
   <ng-container *ngIf="items.length > 0">
     <generic-view-gallery-items
       [items]="items"
+      [type]="type"
       (goToOne)="goToOne.emit($event)"
     ></generic-view-gallery-items>
     <div

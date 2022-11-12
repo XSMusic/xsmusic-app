@@ -2,7 +2,7 @@ export class User {
   _id?: string;
   name!: string;
   email!: string;
-  image!: string;
+  image!: any;
   role!: string;
   darkMode!: string;
   created?: string;

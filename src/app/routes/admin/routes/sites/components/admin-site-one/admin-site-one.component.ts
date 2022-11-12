@@ -110,7 +110,6 @@ export class AdminSiteOneComponent {
 
   setClubFromScraping(response: ScrapingGetInfoClubResponse) {
     try {
-      console.log(response);
       if (response.address.street !== '') {
         this.site.address.street = response.address.street;
       }
@@ -146,8 +145,13 @@ export class AdminSiteOneComponent {
           `${this.site.address.street} ${this.site.address.poblation}`
         )
         .subscribe({
-          next: (response) =>
-            (this.site.address.coordinates = response.coordinates),
+          next: (response) => {
+            this.site.address.coordinates = response.coordinates;
+            this.toastService.showToast(
+              TOAST_STATE.success,
+              'Coordenadas actualizadas'
+            );
+          },
           error: (error) =>
             this.toastService.showToast(TOAST_STATE.error, error),
         });
@@ -161,9 +165,11 @@ export class AdminSiteOneComponent {
       this.geoService
         .coordinatesToAddress(this.site.address.coordinates)
         .subscribe({
-          next: (response) => {
-            console.log(response);
-          },
+          next: () =>
+            this.toastService.showToast(
+              TOAST_STATE.success,
+              'Direccion actualizada'
+            ),
           error: (error) =>
             this.toastService.showToast(TOAST_STATE.error, error),
         });

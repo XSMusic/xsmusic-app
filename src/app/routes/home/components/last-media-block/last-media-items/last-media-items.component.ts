@@ -11,7 +11,6 @@ import { Media } from '@models';
 })
 export class LastMediaItemsComponent {
   @Input() media: Media[] = [];
-  width = window.innerWidth;
   constructor(private router: Router) {}
 
   goToMedia(item: Media) {

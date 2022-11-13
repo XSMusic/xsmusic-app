@@ -31,7 +31,7 @@ export class AdminMediaEditPage implements OnInit {
   }
 
   getItem() {
-    this.mediaService.getOne({ id: this.id }).subscribe({
+    this.mediaService.getOne('id', this.id).subscribe({
       next: (response) => (this.media = response),
       error: (error: any) =>
         this.toastService.showToast(TOAST_STATE.error, error),

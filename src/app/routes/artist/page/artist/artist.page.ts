@@ -32,7 +32,7 @@ export class ArtistPage implements OnInit {
   }
 
   getArtist() {
-    this.artistService.getOne({ slug: this.slug })!.subscribe({
+    this.artistService.getOne('slug', this.slug).subscribe({
       next: (response) => {
         this.artist = response;
         this.views = [

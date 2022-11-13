@@ -32,7 +32,7 @@ export class FestivalPage implements OnInit {
   }
 
   getArtist() {
-    this.siteService.getOne({ slug: this.slug })!.subscribe({
+    this.siteService.getOne('slug', this.slug).subscribe({
       next: (response: any) => {
         this.site = response;
         this.views = [

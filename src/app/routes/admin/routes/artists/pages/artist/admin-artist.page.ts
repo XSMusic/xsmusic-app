@@ -59,7 +59,7 @@ export class AdminArtistPage {
 
   getOne() {
     this.spinner.show();
-    this.artistService.getOne({ id: this.id }).subscribe({
+    this.artistService.getOne('id', this.id).subscribe({
       next: (response) => {
         this.artist = response;
         if (!this.artist.social) {

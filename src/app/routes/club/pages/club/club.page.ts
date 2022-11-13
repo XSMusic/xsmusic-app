@@ -28,11 +28,11 @@ export class ClubPage implements OnInit {
   ngOnInit() {
     this.spinner.show();
     this.slug = this.route.snapshot.paramMap.get('slug')!;
-    this.getArtist();
+    this.getItem();
   }
 
-  getArtist() {
-    this.siteService.getOne({ slug: this.slug })!.subscribe({
+  getItem() {
+    this.siteService.getOne('slug', this.slug).subscribe({
       next: (response: any) => {
         this.site = response;
         this.views = [

@@ -27,7 +27,7 @@ export class SetPage implements OnInit {
   }
 
   getItem() {
-    this.mediaService.getOne({ slug: this.slug }).subscribe({
+    this.mediaService.getOne('slug', this.slug).subscribe({
       next: (response) => {
         this.media = response;
       },

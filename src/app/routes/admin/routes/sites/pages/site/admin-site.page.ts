@@ -36,7 +36,7 @@ export class AdminSitePage implements OnInit {
     this.getType();
     if (this.id) {
       this.title = 'Editar';
-      this.getOne();
+      this.getItem();
     } else {
       this.title = 'Nuevo';
       this.site.type = this.type;
@@ -58,9 +58,9 @@ export class AdminSitePage implements OnInit {
       });
   }
 
-  getOne() {
+  getItem() {
     this.spinner.show();
-    this.clubService.getOne({ id: this.id }).subscribe({
+    this.clubService.getOne('id', this.id).subscribe({
       next: (response) => {
         this.site = response;
         this.spinner.hide();

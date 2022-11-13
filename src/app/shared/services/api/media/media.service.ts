@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '@env/environment';
-import { GetAllDto, IdSlugDto, MessageI, PaginatorI } from '@interfaces';
+import { GetAllDto, MessageI, PaginatorI } from '@interfaces';
 import { Media } from '@models';
 
 @Injectable({ providedIn: 'root' })
@@ -11,11 +11,15 @@ export class MediaService {
   constructor(private httpClient: HttpClient) {}
 
   getAll(data: GetAllDto): Observable<PaginatorI<Media>> {
-    return this.httpClient.post<PaginatorI<Media>>(`${this.url}/getAll`, data);
+    return this.httpClient.post<PaginatorI<Media>>(
+      `${this.url}/getAll/${data.type}`,
+      data
+    );
   }
 
-  getOne(data: IdSlugDto): Observable<Media> {
-    return this.httpClient.post<Media>(`${this.url}/getOne`, data);
+  getOne(type: 'id' | 'slug', data: string): Observable<Media> {
+    const url = `${this.url}/getOne/${type}/${data}`;
+    return this.httpClient.get<Media>(url);
   }
 
   create(data: Media): Observable<MessageI> {

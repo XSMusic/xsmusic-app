@@ -22,6 +22,7 @@ export class TracksPage implements OnInit {
   loading = true;
   error = false;
   view = 'viewGallery';
+  total = 0;
   constructor(
     private mediaService: MediaService,
     private router: Router,
@@ -36,6 +37,7 @@ export class TracksPage implements OnInit {
     this.mediaService.getAll(this.body).subscribe({
       next: (response) => {
         if (!more) {
+          this.total = response.paginator.total;
           this.items = response.items;
         } else {
           this.items = this.items.concat(response.items);

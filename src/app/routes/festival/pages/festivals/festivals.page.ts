@@ -22,6 +22,7 @@ export class FestivalsPage implements OnInit {
   view = 'gallery';
   loading = true;
   error = false;
+  total = 0;
   constructor(
     private siteService: SiteService,
     private router: Router,
@@ -36,6 +37,7 @@ export class FestivalsPage implements OnInit {
     this.siteService.getAll(this.body).subscribe({
       next: (response) => {
         if (!more) {
+          this.total = response.paginator.total;
           this.items = response.items;
         } else {
           this.items = this.items.concat(response.items);

@@ -1,7 +1,13 @@
-<div class="container px-4 mx-auto sm:pb-0 max-w-7sm" style="padding-top: 4.25rem">
+<div
+  class="container px-4 mx-auto sm:pb-0 max-w-7sm"
+  style="padding-top: 4.25rem"
+>
   <div class="py-0 mx-auto border-0">
     <h1 class="text-3xl font-extrabold tracking-tight dark:text-white">
       {{ title }}
+      <span *ngIf="total > 0" class="pl-1 text-lg font-extralight">
+        {{ total }}</span
+      >
     </h1>
   </div>
 

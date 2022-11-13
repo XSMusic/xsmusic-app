@@ -17,7 +17,7 @@ import {
   animations: [inOutAnimation],
 })
 export class AdminArtistsPage {
-  artists: Artist[] = [];
+  items: Artist[] = [];
   body: GetAllDto = {
     page: 1,
     pageSize: 20,
@@ -39,9 +39,9 @@ export class AdminArtistsPage {
     this.artistService.getAll(this.body).subscribe({
       next: (response) => {
         if (!more) {
-          this.artists = response.items;
+          this.items = response.items;
         } else {
-          this.artists = this.artists.concat(response.items);
+          this.items = this.items.concat(response.items);
         }
         this.loading = false;
         this.error = false;

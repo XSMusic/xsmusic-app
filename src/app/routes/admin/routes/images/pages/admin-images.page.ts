@@ -2,47 +2,37 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { routesConfig } from '@core/config';
 import { GetAllDto } from '@interfaces';
-import { Site } from '@models';
-import { SiteService, ToastService } from '@services';
+import { Image } from '@models';
+import { ImageService, ToastService, TOAST_STATE } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
-import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 
 @Component({
-  selector: 'page-admin-sites',
-  templateUrl: 'admin-sites.page.html',
+  selector: 'page-admin-images',
+  templateUrl: 'admin-images.page.html',
 })
-export class AdminSitesPage implements OnInit {
+export class NameComponent implements OnInit {
   title = '';
-  sites: Site[] = [];
+  sites: Image[] = [];
   body: GetAllDto = {
     page: 1,
     pageSize: 20,
     order: ['updated', 'desc'],
   };
-  type = '';
   loading = true;
   error = false;
   constructor(
     private route: ActivatedRoute,
-    private siteService: SiteService,
+    private imageService: ImageService,
     private toast: ToastService,
     private router: Router
   ) {}
 
-  ngOnInit(): void {
-    this.type = this.route.snapshot.routeConfig!.path!;
-    if (this.type === 'clubs') {
-      this.title = 'Clubs';
-      this.body.type = 'club';
-    } else {
-      this.title = 'Festivales';
-      this.body.type = 'festival';
-    }
+  ngOnInit() {
     this.getItems();
   }
 
   getItems(more = false) {
-    this.siteService.getAll(this.body).subscribe({
+    this.imageService.getAll(this.body).subscribe({
       next: (response) => {
         if (!more) {
           this.sites = response.items;
@@ -59,9 +49,9 @@ export class AdminSitesPage implements OnInit {
     });
   }
 
-  goToProfile(item: Site) {
-    this.router.navigate([routesConfig.clubAdmin.replace(':id', item._id!)]);
-  }
+  // goToProfile(item: Image) {
+  //   this.router.navigate([routesConfig.clubAdmin.replace(':id', item._id!)]);
+  // }
 
   filter(event: { name: string; value: string }) {
     this.body.page = 1;
@@ -84,11 +74,7 @@ export class AdminSitesPage implements OnInit {
     if (button.action === 'order' || button.action === 'filter') {
       this.toast.showToast(TOAST_STATE.info, 'En construccion');
     } else if (button.action === 'add') {
-      if (this.type === 'clubs') {
-        this.router.navigate([routesConfig.clubAdminAdd]);
-      } else {
-        this.router.navigate([routesConfig.festivalAdminAdd]);
-      }
+      this.router.navigate([routesConfig.imageAdminAdd]);
     }
   }
 

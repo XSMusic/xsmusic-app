@@ -63,6 +63,13 @@ export class AdminTotalsComponent implements OnInit {
         route: routesConfig.festivalsAdmin,
       },
       {
+        id: 'images',
+        name: 'Imagenes',
+        value: 0,
+        percentages: [],
+        route: routesConfig.imagesAdmin,
+      },
+      {
         id: 'sets',
         name: 'Sets',
         value: 0,

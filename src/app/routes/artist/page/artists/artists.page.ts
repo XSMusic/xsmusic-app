@@ -26,6 +26,7 @@ export class ArtistsPage implements OnInit {
   filterValue?: string;
   loading = true;
   error = false;
+  total = 0;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -47,6 +48,7 @@ export class ArtistsPage implements OnInit {
       next: (response) => {
         if (!more) {
           this.items = response.items;
+          this.total = response.paginator.total;
         } else {
           this.items = this.items.concat(response.items);
         }

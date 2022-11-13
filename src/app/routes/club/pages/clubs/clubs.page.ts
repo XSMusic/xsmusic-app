@@ -12,6 +12,7 @@ import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
   templateUrl: 'clubs.page.html',
 })
 export class ClubsPage implements OnInit {
+  title = '';
   items: Site[] = [];
   body: GetAllDto = {
     page: 1,
@@ -20,6 +21,7 @@ export class ClubsPage implements OnInit {
     type: 'club',
   };
   view = 'gallery';
+  total = 0;
   loading = true;
   error = false;
   constructor(
@@ -36,6 +38,7 @@ export class ClubsPage implements OnInit {
     this.siteService.getAll(this.body).subscribe({
       next: (response) => {
         if (!more) {
+          this.total = response.paginator.total;
           this.items = response.items;
         } else {
           this.items = this.items.concat(response.items);

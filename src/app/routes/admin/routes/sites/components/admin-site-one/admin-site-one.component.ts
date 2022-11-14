@@ -33,11 +33,18 @@ export class AdminSiteOneComponent {
   @Input() site = new Site();
   @Input() styles: Style[] = [];
   countries = countries;
+  scraping: any = {
+    images: [],
+    infos: [],
+    styles: [],
+  };
   types = [
     { name: 'Club', value: 'club' },
     { name: 'Festival', value: 'festival' },
   ];
-  image = new Image();
+  image = '';
+  imageState = false;
+  tempImages: string[] = [];
   constructor(
     private siteService: SiteService,
     private fullImage: FullImageService,
@@ -51,33 +58,6 @@ export class AdminSiteOneComponent {
 
   showImage(image: string) {
     this.fullImage.showImageFull(image);
-  }
-
-  onSubmit() {
-    const observable = this.site._id
-      ? this.siteService.update(this.site)
-      : this.siteService.create(this.site);
-    observable.subscribe({
-      next: (response) => this.onSuccess(response),
-      error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
-    });
-  }
-
-  onDelete() {
-    // TODO: Añadir confirmacion por modal
-    this.siteService.deleteOne(this.site._id!).subscribe({
-      next: (response) => this.onSuccess(response),
-      error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
-    });
-  }
-
-  onSuccess(response: MessageI) {
-    this.toastService.showToast(TOAST_STATE.success, response.message);
-    this.router.navigate([
-      this.site.type === 'club'
-        ? routesConfig.clubsAdmin
-        : routesConfig.festivalsAdmin,
-    ]);
   }
 
   onClickStyleItem(item: { name: string; _id: string }) {
@@ -132,9 +112,7 @@ export class AdminSiteOneComponent {
       if (response.address.coordinates.length > 0) {
         this.site.address.coordinates = response.address.coordinates;
       }
-      // if (response.image !== '') {
-      //   this.site.image = response.image;
-      // }
+      this.scraping.images = response.images;
       this.spinner.hide();
     } catch (error) {
       this.spinner.hide();
@@ -185,20 +163,45 @@ export class AdminSiteOneComponent {
     }
   }
 
-  uploadImageByUrl() {
+  uploadImageByUrl(image: string) {
+    const temp = this.site._id ? false : true;
     const data: ImageUploadByUrlDto = {
       id: this.site._id!,
       type: 'site',
-      url: this.image.url!,
+      url: image,
     };
+    if (!temp) {
+      this.uploadImageByUrlNormal(data, temp);
+    } else {
+      this.uploadImageByUrlTemp(image);
+    }
+  }
+
+  private uploadImageByUrlTemp(image: string) {
+    this.tempImages.push(image);
+    if (this.scraping.images && this.scraping.images.length > 0) {
+      this.scraping.images = this.scraping.images.filter(
+        (img: string) => img !== image
+      );
+    }
+  }
+
+  private uploadImageByUrlNormal(data: ImageUploadByUrlDto, temp: boolean) {
+    this.spinner.show();
     this.imageService.uploadByUrl(data).subscribe({
       next: (response) => {
-        setTimeout(() => {
-          this.site.images?.push(response);
-          this.image.url = '';
-        }, 1000);
+        if (!temp) {
+          setTimeout(() => {
+            this.site.images?.push(response);
+            this.image = '';
+            this.spinner.hide();
+          }, 1000);
+        }
       },
-      error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+      error: (error) => {
+        this.spinner.hide();
+        this.toastService.showToast(TOAST_STATE.error, error);
+      },
     });
   }
 
@@ -231,6 +234,62 @@ export class AdminSiteOneComponent {
           'La imagen ha sido actualizada'
         );
       },
+      error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+    });
+  }
+
+  // onSubmit() {
+  //   const observable = this.site._id
+  //     ? this.siteService.update(this.site)
+  //     : this.siteService.create(this.site);
+  //   observable.subscribe({
+  //     next: (response) => this.onSuccess(response),
+  //     error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+  //   });
+  // }
+
+  onSubmit() {
+    if (this.site._id) {
+      this.siteService.update(this.site).subscribe({
+        next: (response) => this.onSuccessUpdate(response),
+        error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+      });
+    } else {
+      this.siteService.create(this.site).subscribe({
+        next: (response) => this.onSuccessCreate(response),
+        error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+      });
+    }
+  }
+
+  onSuccessUpdate(response: MessageI) {
+    this.toastService.showToast(TOAST_STATE.success, response.message);
+    this.router.navigate([
+      this.site.type === 'club'
+        ? routesConfig.clubsAdmin
+        : routesConfig.festivalsAdmin,
+    ]);
+  }
+
+  async onSuccessCreate(response: Site) {
+    this.site._id = response._id;
+    for (const image of this.tempImages) {
+      this.uploadImageByUrl(image);
+    }
+    setTimeout(() => {
+      this.toastService.showToast(TOAST_STATE.success, 'Sitio creado');
+      this.router.navigate([
+        this.site.type === 'club'
+          ? routesConfig.clubsAdmin
+          : routesConfig.festivalsAdmin,
+      ]);
+    }, 3000);
+  }
+
+  onDelete() {
+    // TODO: Añadir confirmacion por modal
+    this.siteService.deleteOne(this.site._id!).subscribe({
+      next: (response) => this.onSuccessUpdate(response),
       error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
     });
   }

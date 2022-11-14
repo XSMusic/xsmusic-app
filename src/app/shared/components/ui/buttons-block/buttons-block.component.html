@@ -6,7 +6,7 @@
     <ng-container *ngFor="let button of buttons">
       <div
         (click)="clickButton(button)"
-        class="text-base text-center pb-1.5 px-1.5 text-black border-b-2 cursor-pointer hover:border-gray-600 hover:border-b-2"
+        class="text-base text-center pb-1.5 px-1.5 text-black border-b-2 cursor-pointer hover:border-gray-600 hover:duration-300 hover:border-b-2"
         [ngClass]="{
           'font-extrabold border-b-gray-600 border-b-2 duration-300':
             button.isActive,

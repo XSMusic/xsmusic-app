@@ -1,5 +1,5 @@
-<form *ngIf="artist" @inOut class="grid grid-cols-1 gap-4 lg:grid-cols-2">
-  <div class="col-span-2 mb-1 md:col-span-1">
+<form *ngIf="artist" @inOut class="grid grid-cols-1 gap-4 lg:grid-cols-4">
+  <div class="col-span-2 mb-1 md:col-span-2">
     <images-edit-block
       [item]="artist"
       (showImage)="showImage($event)"
@@ -8,7 +8,7 @@
       (toggleAddImage)="imageState = !imageState"
     ></images-edit-block>
   </div>
-  <div class="grid grid-cols-2 gap-4">
+  <div class="grid grid-cols-2 gap-4 md:col-span-2">
     <div class="col-span-2 md:col-span-2">
       <label for="name" class="block mb-3 text-base font-extrabold text-black">
         Nombre
@@ -125,8 +125,7 @@
       </div>
     </div>
   </div>
-
-  <div class="col-span-2">
+  <div class="col-span-2 md:col-span-4">
     <images-upload-url
       [imageState]="imageState"
       [image]="image"
@@ -135,40 +134,6 @@
       [scraping]="scraping"
     ></images-upload-url>
   </div>
-
-  <!-- <div class="col-span-2">
-    <label for="image" class="block mb-3 text-base font-extrabold text-black">
-      Imagen
-    </label>
-    <input
-      name="image"
-      type="text"
-      [(ngModel)]="artist.images![0].url ?? ''"
-      placeholder="Introduce la imagen"
-      class="object-cover w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
-    />
-    <div class="grid grid-cols-2 mt-2 overflow-hidden cursor-pointer">
-      <div *ngFor="let image of scraping.images" class="p-2">
-        <img
-          class="object-cover w-full m-2 rounded-lg shadow-xl h-60 hover:filter-grayscale"
-          [src]="image"
-          [alt]="image"
-          (click)="showImage(image)"
-        />
-        <button
-          (click)="selectImage(image)"
-          class="w-full p-2 m-2 shadow-md rounded-xl hover:opacity-80"
-          [ngClass]="{
-            'bg-black text-white': image === artist.image,
-            'bg-gray-100 text-black': image !== artist.image
-          }"
-        >
-          Seleccionar
-        </button>
-      </div>
-    </div>
-  </div> -->
-
   <div class="col-span-2 mb-1 md:col-span-1">
     <label for="web" class="block mb-3 text-base font-extrabold text-black">
       Web
@@ -266,7 +231,7 @@
     />
   </div>
 
-  <div class="col-span-2 mb-1">
+  <div class="mb-1 md:col-span-4">
     <label for="info" class="block mb-3 text-base font-extrabold text-black">
       Info
     </label>

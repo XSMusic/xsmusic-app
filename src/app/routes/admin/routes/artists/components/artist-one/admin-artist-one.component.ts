@@ -102,18 +102,12 @@ export class ArtistOneComponent {
     if (response.birthdate !== '' && this.artist.birthdate === '') {
       this.artist.birthdate = response.birthdate;
     }
-
     this.setStylesFromScraping(response);
-    this.setImagesFromScraping(response);
-
+    this.scraping.images = response.images;
     if (response.info) {
       this.scraping.infos = response.info;
     }
     this.spinner.hide();
-  }
-
-  private setImagesFromScraping(response: ScrapingGetInfoArtistResponse) {
-    this.scraping.images = response.images;
   }
 
   private setStylesFromScraping(response: ScrapingGetInfoArtistResponse) {

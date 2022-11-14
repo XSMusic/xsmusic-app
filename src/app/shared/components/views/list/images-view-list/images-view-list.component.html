@@ -24,7 +24,20 @@
                 }}</span>
                 <span *ngIf="item.type === 'site'">{{ item.site.name }}</span>
               </p>
-              <p class="text-sm text-gray-500">{{ item.type | type }}</p>
+              <p class="text-sm text-gray-500 font-extralight">
+                <span *ngIf="item.type === 'media'">
+                  {{ item.media.type | titlecase }}
+                </span>
+                <span *ngIf="item.type === 'site'">
+                  {{ item.site.type | titlecase }}
+                </span>
+                <span *ngIf="item.type !== 'media' && item.type !== 'site'">
+                  {{ item.type | type }}
+                </span>
+                <span class="text-xs font-normal text-gray-500">
+                  {{ item.size }}
+                </span>
+              </p>
             </div>
           </div>
         </div>

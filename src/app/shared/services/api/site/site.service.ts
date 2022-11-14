@@ -22,8 +22,8 @@ export class SiteService {
     return this.httpClient.get<Site>(url);
   }
 
-  create(data: Site): Observable<MessageI> {
-    return this.httpClient.post<MessageI>(`${this.url}/create`, data);
+  create(data: Site): Observable<Site> {
+    return this.httpClient.post<Site>(`${this.url}/create`, data);
   }
 
   update(data: Site): Observable<MessageI> {

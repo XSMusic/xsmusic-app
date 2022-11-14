@@ -17,7 +17,7 @@ export interface ScrapingGetInfoArtistResponse {
 
 export interface ScrapingGetInfoClubResponse {
   name: string;
-  image: string;
+  images: string[];
   address: {
     street: string;
     town: string;

@@ -45,7 +45,7 @@
                 *ngIf="mediaItem.site.name !== 'Desconocido'"
               >
                 <img
-                  [src]="mediaItem.site.image"
+                  [src]="mediaItem.site.images | image"
                   alt=""
                   class="object-cover object-center rounded-lg cursor-pointer h-9 w-9 hover:filter-grayscale hover:scale-110 hover:duration-1000"
                   (click)="showImage(mediaItem.site.image!)"

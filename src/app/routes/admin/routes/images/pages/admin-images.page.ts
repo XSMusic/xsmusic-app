@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { GetAllDto } from '@interfaces';
@@ -17,13 +17,12 @@ export class AdminImagesPage implements OnInit {
   items: Image[] = [];
   body: GetAllDto = {
     page: 1,
-    pageSize: 30,
+    pageSize: 40,
     order: ['updated', 'desc'],
   };
   loading = true;
   error = false;
   constructor(
-    private route: ActivatedRoute,
     private imageService: ImageService,
     private toast: ToastService,
     private router: Router

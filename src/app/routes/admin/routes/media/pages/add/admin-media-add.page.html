@@ -1,47 +1,23 @@
-<header-custom [title]="'Nuevo Set/Track'"></header-custom>
+<header-custom [title]="title"></header-custom>
 
 <div class="container px-4 pt-3 mx-auto max-w-full-xl sm:pb-0 max-w-7sm">
-  <admin-media-add-search (search)="search($event)"></admin-media-add-search>
+  <admin-media-add-search
+    [source]="source"
+    (search)="search($event)"
+  ></admin-media-add-search>
+
+  <div *ngIf="media?.name === ''">
+    <admin-media-add-search-items
+      [items]="items"
+      [itemSelected]="itemSelected!"
+      (selectItem)="selectItem($event)"
+    ></admin-media-add-search-items>
+  </div>
 
   <admin-media-one
     *ngIf="media?.name !== ''"
     [media]="media"
+    [scraping]="scraping"
     (onSubmitSuccess)="onSubmitSuccess()"
   ></admin-media-one>
-
-  <!-- TODO: hacer componente -->
-  <div
-    @inOut
-    *ngIf="media?.name === ''"
-    class="grid w-full grid-cols-1 gap-4 py-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3"
-  >
-    <div *ngFor="let item of items">
-      <div
-        *ngIf="itemSelected !== item"
-        class="relative overflow-hidden shadow-xl cursor-pointer rounded-t-2xl rounded-x-2xl"
-      >
-        <img
-          class="object-cover w-full h-80 hover:filter-grayscale"
-          [src]="item.image"
-          [alt]="item.name"
-          onError
-        />
-      </div>
-      <div class="w-full px-2 py-1 border rounded-x-2xl rounded-b-2xl">
-        <div class="mb-3 font-semibold text-md">
-          {{ item.name | truncateText: 75}}
-        </div>
-
-        <div class="p-2">
-          <button
-            *ngIf="itemSelected !== item"
-            (click)="selectItem(item)"
-            class="flex justify-center w-full text-center bg-gray-100 border-2 shadow-xs hover:bg-gray-200 rounded-xl"
-          >
-            Seleccionar
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>

@@ -113,6 +113,16 @@
     </div>
   </div>
 
+  <div class="col-span-2 md:col-span-4">
+    <images-upload-url
+      [imageState]="imageState"
+      [image]="image"
+      (showImage)="showImage($event)"
+      (uploadImageByUrl)="uploadImageByUrl($event)"
+      [scraping]="scraping"
+    ></images-upload-url>
+  </div>
+
   <div
     class="col-span-2 mb-1"
     [ngClass]="{
@@ -123,7 +133,7 @@
     <label class="block mb-3 text-base font-extrabold text-black">
       <span class="text-gray-700">Artista/s</span>
     </label>
-    <div class="flex gap-2 my-3">
+    <div class="flex gap-2 my-3" *ngIf="media.artists!.length > 0">
       <div
         (click)="onClickItem('artists', artistSelected)"
         class="flex px-2 py-1 text-xs text-white bg-black border rounded-lg shadow-md cursor-pointer hover:opacity-80"

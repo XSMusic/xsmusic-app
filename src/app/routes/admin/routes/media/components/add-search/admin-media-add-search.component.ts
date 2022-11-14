@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'admin-media-add-search',
@@ -7,5 +7,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class AdminMediaAddSearchComponent {
   searchText!: string;
   @Output() search = new EventEmitter<string>();
+  @Input() source!: string;
   menu = false;
+  sources = [{ name: 'Youtube', value: 'youtube' }];
 }

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '@shared/shared.module';
+import { AdminMediaAddSearchItemsComponent } from './components/add-search-items/admin-media-add-search-items.component';
 import { AdminMediaAddSearchComponent } from './components/add-search/admin-media-add-search.component';
 import { AdminMediaOneComponent } from './components/one/admin-media-one.component';
 import { AdminMediaAddPage } from './pages/add/admin-media-add.page';
@@ -47,6 +48,7 @@ import { AdminMediaListPage } from './pages/list/admin-media-list.page';
   ],
   exports: [],
   declarations: [
+    AdminMediaAddSearchItemsComponent,
     AdminMediaAddSearchComponent,
     AdminMediaAddSearchComponent,
     AdminMediaListPage,

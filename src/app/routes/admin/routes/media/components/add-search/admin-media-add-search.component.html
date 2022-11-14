@@ -4,9 +4,13 @@
   </label>
   <div class="flex">
     <select
+      name="type"
+      [(ngModel)]="source"
       class="py-2 text-base font-bold bg-gray-100 border border-gray-200 rounded-l-lg"
     >
-      <option>Youtube</option>
+      <option *ngFor="let source of sources" [value]="source.value">
+        {{ source.name }}
+      </option>
     </select>
     <input
       type="text"

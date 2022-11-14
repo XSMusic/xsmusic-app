@@ -13,12 +13,18 @@ import { NgxSpinnerService } from 'ngx-spinner';
   animations: [inOutAnimation],
 })
 export class AdminMediaAddPage implements OnInit {
+  title = '';
   searchText = '';
   items: Youtube[] = [];
   itemSelected?: Youtube;
   media: Media = new Media();
   type = '';
-  sourceSelected = '';
+  source = 'youtube';
+  scraping: any = {
+    images: [],
+    infos: [],
+    styles: [],
+  };
   constructor(
     private youtubeService: YoutubeService,
     private route: ActivatedRoute,
@@ -28,6 +34,7 @@ export class AdminMediaAddPage implements OnInit {
 
   ngOnInit() {
     this.getType();
+    this.title = `Nuevo ${this.type}`;
   }
 
   getType() {
@@ -59,15 +66,16 @@ export class AdminMediaAddPage implements OnInit {
   }
 
   selectItem(item: Youtube) {
-    // this.itemSelected = item;
-    // this.media = new Media({
-    //   name: item.name,
-    //   image: item.image,
-    //   type: this.type,
-    //   source: this.sourceSelected,
-    //   sourceId: item.videoId,
-    //   info: item.info,
-    // });
+    this.itemSelected = item;
+    this.media = new Media({
+      name: item.name,
+      // image: item.image,
+      type: this.type,
+      source: this.source,
+      sourceId: item.videoId,
+      info: item.info,
+    });
+    this.scraping.images = [item.image];
   }
 
   onSubmitSuccess() {

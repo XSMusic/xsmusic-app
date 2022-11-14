@@ -22,8 +22,8 @@ export class MediaService {
     return this.httpClient.get<Media>(url);
   }
 
-  create(data: Media): Observable<MessageI> {
-    return this.httpClient.post<MessageI>(`${this.url}/create`, data);
+  create(data: Media): Observable<Media> {
+    return this.httpClient.post<Media>(`${this.url}/create`, data);
   }
 
   update(data: Media): Observable<MessageI> {

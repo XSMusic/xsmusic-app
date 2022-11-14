@@ -12,9 +12,13 @@ import {
   StyleService,
   ToastService,
 } from '@services';
-import { ImageSetFirstImageDto } from '@shared/services/api/image/image.dto';
+import {
+  ImageSetFirstImageDto,
+  ImageUploadByUrlDto,
+} from '@shared/services/api/image/image.dto';
 import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'admin-media-one',
@@ -23,6 +27,11 @@ import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 })
 export class AdminMediaOneComponent {
   @Input() media: Media = new Media();
+  @Input() scraping: any = {
+    images: [],
+    infos: [],
+    styles: [],
+  };
   @Output() onSubmitSuccess: EventEmitter<any> = new EventEmitter<void>();
   sources = [{ name: 'Youtube', value: 'youtube' }];
   bodyArtist: GetAllDto = {
@@ -48,6 +57,7 @@ export class AdminMediaOneComponent {
   image = '';
   imageState = false;
   tempImages: string[] = [];
+
   constructor(
     private artistService: ArtistService,
     private styleService: StyleService,
@@ -57,7 +67,8 @@ export class AdminMediaOneComponent {
     private toastService: ToastService,
     private fullImage: FullImageService,
     private router: Router,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit() {
@@ -147,21 +158,6 @@ export class AdminMediaOneComponent {
     }
   }
 
-  onSubmit() {
-    const validation = this.validationSubmit();
-    if (validation.state) {
-      const observable = this.media._id
-        ? this.mediaService.update(this.media)
-        : this.mediaService.create(this.media);
-      observable.subscribe({
-        next: (response) => this.onSuccess(response),
-        error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
-      });
-    } else {
-      this.toast.showToast(TOAST_STATE.error, validation.message);
-    }
-  }
-
   validationSubmit() {
     if (this.media.name === '') {
       return {
@@ -196,17 +192,53 @@ export class AdminMediaOneComponent {
     }
   }
 
+  onSubmit() {
+    if (this.media._id) {
+      this.mediaService.update(this.media).subscribe({
+        next: (response) => this.onSuccessUpdate(response),
+        error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+      });
+    } else {
+      this.mediaService.create(this.media).subscribe({
+        next: (response) => this.onSuccessCreate(response),
+        error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+      });
+    }
+  }
+
+  onSuccessUpdate(response: MessageI) {
+    this.toastService.showToast(TOAST_STATE.success, response.message);
+    this.router.navigate([
+      this.media.type === 'set'
+        ? routesConfig.setsAdmin
+        : routesConfig.tracksAdmin,
+    ]);
+  }
+
+  async onSuccessCreate(response: Media) {
+    this.media._id = response._id;
+    for (const image of this.tempImages) {
+      this.uploadImageByUrl(image);
+    }
+    setTimeout(() => {
+      this.toastService.showToast(
+        TOAST_STATE.success,
+        `${this.media.type === 'set' ? 'Set' : 'Track'} creado`
+      );
+      this.router.navigate([
+        this.media.type === 'set'
+          ? routesConfig.setsAdmin
+          : routesConfig.tracksAdmin,
+      ]);
+    }, 3000);
+  }
+
   onDelete() {
     // TODO: Añadir confirmacion por modal
     this.mediaService.deleteOne(this.media._id!).subscribe({
-      next: (response) => this.onSuccess(response),
+      next: (response) => this.onSuccessUpdate(response),
       error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
     });
-  }
-
-  onSuccess(response: MessageI) {
-    this.toastService.showToast(TOAST_STATE.success, response.message);
-    this.onSubmitSuccess.emit();
   }
 
   showImage(image: string) {
@@ -219,6 +251,48 @@ export class AdminMediaOneComponent {
     } else {
       this.router.navigate([routesConfig.track.replace(':slug', slug)]);
     }
+  }
+
+  uploadImageByUrl(image: string) {
+    const temp = this.media._id ? false : true;
+    const data: ImageUploadByUrlDto = {
+      id: this.media._id!,
+      type: 'media',
+      url: image,
+    };
+    if (!temp) {
+      this.uploadImageByUrlNormal(data, temp);
+    } else {
+      this.uploadImageByUrlTemp(image);
+    }
+  }
+
+  private uploadImageByUrlTemp(image: string) {
+    this.tempImages.push(image);
+    if (this.scraping.images && this.scraping.images.length > 0) {
+      this.scraping.images = this.scraping.images.filter(
+        (img: string) => img !== image
+      );
+    }
+  }
+
+  private uploadImageByUrlNormal(data: ImageUploadByUrlDto, temp: boolean) {
+    this.spinner.show();
+    this.imageService.uploadByUrl(data).subscribe({
+      next: (response) => {
+        if (!temp) {
+          setTimeout(() => {
+            this.media.images?.push(response);
+            this.image = '';
+            this.spinner.hide();
+          }, 1000);
+        }
+      },
+      error: (error) => {
+        this.spinner.hide();
+        this.toastService.showToast(TOAST_STATE.error, error);
+      },
+    });
   }
 
   removeImage(img: Image) {

@@ -7,4 +7,5 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class AdminMediaAddSearchComponent {
   searchText!: string;
   @Output() search = new EventEmitter<string>();
+  menu = false;
 }

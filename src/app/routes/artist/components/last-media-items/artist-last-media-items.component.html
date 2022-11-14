@@ -1,6 +1,6 @@
 <div
   @inOut
-  class="container grid gap-4 px-3 mx-auto text-center lg:grid-cols-1 rounded-xl"
+  class="container grid gap-4 px-3 mx-auto text-center rounded-lg lg:grid-cols-1"
 >
   <div
     @inOut
@@ -11,7 +11,7 @@
     No hay ningun {{ type }} para {{ artist.name }}
   </div>
 
-  <div class="grid justify-center grid-cols-3">
+  <div class="grid justify-center grid-cols-3 md:grid-cols-4">
     <div *ngFor="let item of items">
       <div
         class="flex flex-col p-2 py-4 overflow-hidden cursor-pointer w-100 hover:opacity-90 hover:duration-1000"
@@ -20,7 +20,7 @@
         <img
           [src]="item.images! | image"
           alt="set.name"
-          class="object-cover w-full rounded-2xl"
+          class="object-cover w-full rounded-lg"
         />
         <p class="p-2 text-xs text-center md:text-base hover:text-gray-800">
           {{ item.name }}

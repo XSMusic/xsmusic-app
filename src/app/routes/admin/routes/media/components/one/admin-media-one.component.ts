@@ -3,14 +3,16 @@ import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { GetAllDto, MessageI } from '@interfaces';
-import { Artist, Media, Site, Style } from '@models';
+import { Artist, Image, Media, Site, Style } from '@models';
 import {
   ArtistService,
+  ImageService,
   MediaService,
   SiteService,
   StyleService,
   ToastService,
 } from '@services';
+import { ImageSetFirstImageDto } from '@shared/services/api/image/image.dto';
 import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 
@@ -43,6 +45,9 @@ export class AdminMediaOneComponent {
   selectSitesState = false;
   artistSearch = null;
   siteSearch = null;
+  image = '';
+  imageState = false;
+  tempImages: string[] = [];
   constructor(
     private artistService: ArtistService,
     private styleService: StyleService,
@@ -51,7 +56,8 @@ export class AdminMediaOneComponent {
     private toast: ToastService,
     private toastService: ToastService,
     private fullImage: FullImageService,
-    private router: Router
+    private router: Router,
+    private imageService: ImageService
   ) {}
 
   ngOnInit() {
@@ -213,5 +219,38 @@ export class AdminMediaOneComponent {
     } else {
       this.router.navigate([routesConfig.track.replace(':slug', slug)]);
     }
+  }
+
+  removeImage(img: Image) {
+    this.imageService.deleteOne(img._id!).subscribe({
+      next: () => {
+        this.media.images = this.media.images?.filter(
+          (item) => item._id !== img._id
+        );
+        this.toastService.showToast(
+          TOAST_STATE.info,
+          'La imagen ha sido eliminada'
+        );
+      },
+      error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+    });
+  }
+
+  setFirstImage(img: Image) {
+    const data: ImageSetFirstImageDto = {
+      type: 'media',
+      typeId: this.media._id!,
+      imageId: img._id!,
+    };
+    this.imageService.setFirstImage(data).subscribe({
+      next: (response) => {
+        this.media.images = response;
+        this.toastService.showToast(
+          TOAST_STATE.info,
+          'La imagen ha sido actualizada'
+        );
+      },
+      error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+    });
   }
 }

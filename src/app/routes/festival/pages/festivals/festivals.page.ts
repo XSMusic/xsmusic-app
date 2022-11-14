@@ -15,7 +15,7 @@ export class FestivalsPage implements OnInit {
   items: Site[] = [];
   body: GetAllDto = {
     page: 1,
-    pageSize: 20,
+    pageSize: 30,
     order: ['updated', 'desc'],
     type: 'festival',
   };

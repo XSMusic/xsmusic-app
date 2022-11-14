@@ -1,3 +1,4 @@
+export { TypePipe } from './type/type.pipe';
 export { CountryFlagPipe } from './country-flag/country-flag.pipe';
 export { CountryNamePipe } from './country-name/country-name.pipe';
 export { FillArrayPipe } from './fill-array/fill-array.pipe';

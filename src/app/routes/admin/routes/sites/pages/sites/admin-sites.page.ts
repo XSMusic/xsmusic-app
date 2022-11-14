@@ -16,7 +16,7 @@ export class AdminSitesPage implements OnInit {
   sites: Site[] = [];
   body: GetAllDto = {
     page: 1,
-    pageSize: 20,
+    pageSize: 30,
     order: ['updated', 'desc'],
   };
   type = '';

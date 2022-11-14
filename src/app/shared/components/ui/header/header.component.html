@@ -3,9 +3,9 @@
   style="padding-top: 4.25rem"
 >
   <div class="py-0 mx-auto border-0">
-    <h1 class="text-3xl font-extrabold tracking-tight dark:text-white">
+    <h1 @inOut class="text-3xl font-extrabold tracking-tight dark:text-white">
       {{ title }}
-      <span *ngIf="total > 0" class="pl-1 text-lg font-extralight">
+      <span @inOut *ngIf="total > 0" class="pl-1 text-lg font-extralight">
         {{ total }}</span
       >
     </h1>

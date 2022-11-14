@@ -16,7 +16,7 @@ export class ClubsPage implements OnInit {
   items: Site[] = [];
   body: GetAllDto = {
     page: 1,
-    pageSize: 20,
+    pageSize: 30,
     order: ['created', 'desc'],
     type: 'club',
   };

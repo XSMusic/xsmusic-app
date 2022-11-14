@@ -10,11 +10,11 @@
             <td class="pl-3">
               <div class="flex gap-3 w-80">
                 <img
-                  [src]="mediaItem.image"
+                  [src]="mediaItem.images! | image"
                   [alt]="mediaItem.name"
                   onError
                   class="object-cover object-center w-12 h-12 rounded-lg cursor-pointer lg:h-12 lg:w-12 hover:filter-grayscale hover:scale-110 hover:duration-1000"
-                  (click)="showImage(mediaItem.image!)"
+                  (click)="showImage(mediaItem.images![0].url!)"
                 />
                 <div class="flex flex-col">
                   <p

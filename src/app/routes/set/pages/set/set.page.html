@@ -1,20 +1,26 @@
-<header-custom
-  *ngIf="media"
-  [title]="media.name!"
-  [breadcrumb]="true"
-></header-custom>
-
 <div class="container px-4 py-3 mx-auto max-w-full-xl sm:pb-0 max-w-7sm">
-  <div class="grid md:grid-cols-12">
+  <div class="" style="padding-top: 4.25rem">
     <div class="md:col-span-9">
       <iframe
-        class="w-full my-0 rounded-2xl"
+        @inOut
         *ngIf="media.source === 'youtube'"
-        height="315"
+        class="w-full my-0 rounded-2xl"
+        height="415"
         [src]="getVideoUrl()"
         allowfullscreen
         [title]="media.name"
       ></iframe>
+
+      <p
+        (click)="goToEdit()"
+        *ngxPermissionsOnly="'ADMIN'"
+        class="pt-3 text-2xl font-black cursor-pointer"
+      >
+        {{ title }}
+      </p>
+      <p *ngxPermissionsExcept="'ADMIN'" class="pt-3 text-2xl font-black">
+        {{ title }}
+      </p>
       <div class="my-2">
         <div class="flex gap-2">
           <div *ngFor="let style of media.styles">
@@ -29,7 +35,7 @@
     </div>
     <div class="md:col-span-3">
       <!-- ARTIST -->
-      <div class="flex flex-col gap-1 mx-2">
+      <div class="flex flex-row gap-3 mx-2">
         <div class="w-full mx-auto" *ngFor="let artist of media.artists">
           <div
             class="flex gap-4 px-2 py-2 my-1.5 bg-gray-100 shadow-md cursor-pointer rounded-xl hover:opacity-80"
@@ -77,14 +83,4 @@
     </div>
   </div>
   <p class="my-2">{{ media.info }}</p>
-
-  <div class="my-4">
-    <button
-      (click)="goToEdit()"
-      class="px-2 py-1 text-white bg-red-500 rounded-2xl"
-      *ngxPermissionsOnly="'ADMIN'"
-    >
-      Editar
-    </button>
-  </div>
 </div>

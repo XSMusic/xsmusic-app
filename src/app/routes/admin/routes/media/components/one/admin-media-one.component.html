@@ -1,9 +1,9 @@
 <form @inOut class="grid grid-cols-1 gap-4 lg:grid-cols-2">
   <div class="col-span-2 mb-1 md:col-span-1">
     <img
-      [src]="media.image"
+      [src]="media.images! | image"
       [alt]="media.name"
-      (click)="showImage(media.image!)"
+      (click)="showImage(media.images![0].url!)"
       class="object-cover w-full rounded-lg cursor-pointer h-80"
       onError
     />
@@ -174,7 +174,7 @@
         (click)="onSelectSite(site)"
       >
         <img
-          [src]="site.image"
+          [src]="site.images! | image"
           alt=""
           class="w-10 h-10 mr-3 rounded-full"
           onError

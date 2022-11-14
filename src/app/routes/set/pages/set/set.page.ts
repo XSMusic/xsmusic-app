@@ -13,6 +13,7 @@ import { routesConfig } from '@core/config';
 export class SetPage implements OnInit {
   slug!: string;
   media: Media = new Media();
+  title = '';
   constructor(
     private route: ActivatedRoute,
     private toastService: ToastService,
@@ -30,10 +31,28 @@ export class SetPage implements OnInit {
     this.mediaService.getOne('slug', this.slug).subscribe({
       next: (response) => {
         this.media = response;
+        this.setTitleHeader();
       },
       error: (error: any) =>
         this.toastService.showToast(TOAST_STATE.error, error),
     });
+  }
+
+  setTitleHeader() {
+    let title = '';
+    if (this.media.site.name !== 'Desconocido') {
+      this.media.artists!.forEach((artist, i) => {
+        if (i !== 0) {
+          title += ' & ';
+        }
+        title += artist.name;
+      });
+      title += ' @ ' + this.media.site.name;
+      if (this.media.year !== 0) {
+        title += ' ' + this.media.year;
+      }
+    }
+    this.title = title;
   }
 
   getVideoUrl() {

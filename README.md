@@ -21,7 +21,7 @@ Cada vez que se añada un valor en el archivo .env, hay que añadir el archivo c
 - [ ] Imagenes
   - [ ] Crear ruta
   - [ ] Guardar imagenes
-    - [ ] Eliminar image de los modelos
+    - [x] Eliminar image de los modelos
     - [ ] Guardar imagen en modo temporal
       - Cuando creamos un artista o lo que sea, aun no tenemos el id ni el tipo, abria que crear un tipo temporal, y al crear el modelo, cambiar el id y el tipo a la imagen
     - [ ] Obtener imagenes de instagram

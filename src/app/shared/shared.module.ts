@@ -4,29 +4,30 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import {
   AlertComponent,
-  BreadcrumbeComponent,
-  FullImageComponent,
-  HeaderComponent,
   ArtistsLastBlockComponent,
-  ModalComponent,
-  NavbarComponent,
-  SearchBarComponent,
-  ToastComponent,
   ArtistsViewListComponent,
+  BreadcrumbeComponent,
   ButtonsBlockComponent,
-  MediaViewListComponent,
-  UsersViewListComponent,
-  SiteViewListComponent,
-  SiteLastMediaItemsComponent,
-  SiteLastMediaComponent,
+  FullImageComponent,
   GenericViewGalleryComponent,
   GenericViewGalleryItemsComponent,
+  HeaderComponent,
+  ImagesEditBlockComponent,
+  ImagesViewListComponent,
   MapComponent,
-  OptionsItemsComponent,
-  SitesLastBlockComponent,
+  MediaViewListComponent,
+  ModalComponent,
+  NavbarComponent,
   NavbarMobileMenuComponent,
   NavbarNormalMenuComponent,
-  ImagesEditBlockComponent,
+  OptionsItemsComponent,
+  SearchBarComponent,
+  SiteLastMediaComponent,
+  SiteLastMediaItemsComponent,
+  SitesLastBlockComponent,
+  SiteViewListComponent,
+  ToastComponent,
+  UsersViewListComponent,
 } from '@components';
 import {
   CountryFlagPipe,
@@ -36,6 +37,7 @@ import {
   FillArrayPipe,
   ImagePipe,
   RandomImagePipe,
+  TypePipe,
 } from '@pipes';
 import { OnImageErrorDirective } from './directives';
 import { NgxPermissionsModule } from 'ngx-permissions';
@@ -66,6 +68,7 @@ const components = [
   GenericViewGalleryItemsComponent,
   HeaderComponent,
   ImagesEditBlockComponent,
+  ImagesViewListComponent,
   MapComponent,
   MediaViewListComponent,
   ModalComponent,
@@ -83,24 +86,25 @@ const components = [
 ];
 const directives = [OnImageErrorDirective];
 const modules = [
+  AngularSvgIconModule,
   CommonModule,
   FormsModule,
-  ReactiveFormsModule,
   InfiniteScrollModule,
   NgxPermissionsModule,
-  RouterModule,
-  AngularSvgIconModule,
   NgxSpinnerModule,
+  ReactiveFormsModule,
+  RouterModule,
   SwiperModule,
 ];
 const pipes = [
   CountryFlagPipe,
   CountryNamePipe,
   FillArrayPipe,
-  TimeAgoPipe,
-  TruncateTextPipe,
   ImagePipe,
   RandomImagePipe,
+  TimeAgoPipe,
+  TruncateTextPipe,
+  TypePipe,
 ];
 const services: any = [
   AngularSvgIconPreloaderService,

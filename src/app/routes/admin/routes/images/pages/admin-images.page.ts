@@ -12,10 +12,10 @@ import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-blo
 })
 export class AdminImagesPage implements OnInit {
   title = '';
-  sites: Image[] = [];
+  items: Image[] = [];
   body: GetAllDto = {
     page: 1,
-    pageSize: 20,
+    pageSize: 30,
     order: ['updated', 'desc'],
   };
   loading = true;
@@ -35,9 +35,9 @@ export class AdminImagesPage implements OnInit {
     this.imageService.getAll(this.body).subscribe({
       next: (response) => {
         if (!more) {
-          this.sites = response.items;
+          this.items = response.items;
         } else {
-          this.sites = this.sites.concat(response.items);
+          this.items = this.items.concat(response.items);
         }
         this.loading = false;
         this.error = false;

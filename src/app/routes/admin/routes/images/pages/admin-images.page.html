@@ -6,4 +6,11 @@
     (search)="onSearch($event)"
     (onClickButton)="onClickButton($event)"
   ></buttons-block>
+
+  <images-view-list
+    [items]="items"
+    [loading]="loading"
+    (filter)="filter($event)"
+    (onScroll)="onScroll()"
+  ></images-view-list>
 </div>

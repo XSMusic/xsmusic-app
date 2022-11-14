@@ -7,13 +7,18 @@ import {
   ScrapingGetInfoClubDto,
   ScrapingGetInfoClubResponse,
 } from '@interfaces';
-import { Site, Style } from '@models';
+import { Image, Site, Style } from '@models';
 import {
   ToastService,
   SiteService,
   ScrapingService,
   GeoService,
+  ImageService,
 } from '@services';
+import {
+  ImageSetFirstImageDto,
+  ImageUploadByUrlDto,
+} from '@shared/services/api/image/image.dto';
 import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { countries } from 'assets/data/countries';
@@ -32,6 +37,7 @@ export class AdminSiteOneComponent {
     { name: 'Club', value: 'club' },
     { name: 'Festival', value: 'festival' },
   ];
+  image = new Image();
   constructor(
     private siteService: SiteService,
     private fullImage: FullImageService,
@@ -39,7 +45,8 @@ export class AdminSiteOneComponent {
     private router: Router,
     private spinner: NgxSpinnerService,
     private scrapingService: ScrapingService,
-    private geoService: GeoService
+    private geoService: GeoService,
+    private imageService: ImageService
   ) {}
 
   showImage(image: string) {
@@ -125,9 +132,9 @@ export class AdminSiteOneComponent {
       if (response.address.coordinates.length > 0) {
         this.site.address.coordinates = response.address.coordinates;
       }
-      if (response.image !== '') {
-        this.site.image = response.image;
-      }
+      // if (response.image !== '') {
+      //   this.site.image = response.image;
+      // }
       this.spinner.hide();
     } catch (error) {
       this.spinner.hide();
@@ -176,5 +183,55 @@ export class AdminSiteOneComponent {
     } else {
       this.toastService.showToast(TOAST_STATE.error, 'Revisa las coordenadas');
     }
+  }
+
+  uploadImageByUrl() {
+    const data: ImageUploadByUrlDto = {
+      id: this.site._id!,
+      type: 'site',
+      url: this.image.url!,
+    };
+    this.imageService.uploadByUrl(data).subscribe({
+      next: (response) => {
+        setTimeout(() => {
+          this.site.images?.push(response);
+          this.image.url = '';
+        }, 1000);
+      },
+      error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+    });
+  }
+
+  removeImage(img: Image) {
+    this.imageService.deleteOne(img._id!).subscribe({
+      next: () => {
+        this.site.images = this.site.images?.filter(
+          (item) => item._id !== img._id
+        );
+        this.toastService.showToast(
+          TOAST_STATE.info,
+          'La imagen ha sido eliminada'
+        );
+      },
+      error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+    });
+  }
+
+  setFirstImage(img: Image) {
+    const data: ImageSetFirstImageDto = {
+      type: 'site',
+      typeId: this.site._id!,
+      imageId: img._id!,
+    };
+    this.imageService.setFirstImage(data).subscribe({
+      next: (response) => {
+        this.site.images = response;
+        this.toastService.showToast(
+          TOAST_STATE.info,
+          'La imagen ha sido actualizada'
+        );
+      },
+      error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+    });
   }
 }

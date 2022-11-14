@@ -1,0 +1,49 @@
+<div class="col-span-2 mb-1 md:col-span-1">
+  <div class="flex-row">
+    <div class="relative">
+      <img
+        [src]="
+          item.images && item.images.length > 0 ? (item.images! | image) : ''
+        "
+        [alt]="item.name"
+        (click)="showImage.emit(item.images![0].url ?? '')"
+        class="object-cover w-full rounded-lg cursor-pointer h-80"
+        onError
+      />
+      <div
+        *ngIf="item.images && item.images.length > 0"
+        (click)="removeImage.emit(item.images![0])"
+        class="absolute w-5 h-5 bg-gray-200 rounded-full cursor-pointer top-1 right-1 hover:opacity-90"
+      >
+        <svg-icon name="close" svgClass="w-5 h-5"></svg-icon>
+      </div>
+    </div>
+
+    <div
+      class="grid grid-cols-4 gap-2 mt-2"
+      *ngIf="item.images && item.images.length > 1"
+    >
+      <div class="relative" *ngFor="let img of item.images | slice: 1:5">
+        <img
+          [src]="[img] | image"
+          [alt]="item.name"
+          (click)="showImage.emit(img.url)"
+          class="relative object-cover w-full h-32 rounded-lg cursor-pointer"
+          onError
+        />
+        <div
+          (click)="removeImage.emit(img)"
+          class="absolute w-4 h-4 bg-gray-200 rounded-full cursor-pointer top-1 right-1"
+        >
+          <svg-icon name="close" svgClass="w-4 h-4"></svg-icon>
+        </div>
+        <div
+          (click)="setFirstImage.emit(img)"
+          class="absolute w-4 h-4 bg-gray-200 rounded-full cursor-pointer left-1 top-1"
+        >
+          <svg-icon name="star" svgClass="w-4 h-4 p-0.5"></svg-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

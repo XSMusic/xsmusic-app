@@ -1,7 +1,9 @@
+import { Image } from './image.model';
+
 export class Media {
   _id?: string;
   name? = '';
-  image? = '';
+  images?: Image[] = [];
   artists?: any[] = [];
   type? = 'set';
   site?: any;

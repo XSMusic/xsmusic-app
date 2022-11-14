@@ -22,10 +22,15 @@ Cada vez que se añada un valor en el archivo .env, hay que añadir el archivo c
   - [ ] Crear ruta
   - [ ] Guardar imagenes
     - [ ] Eliminar image de los modelos
-    - [ ] Al guardar cualquier modelo que contenga image, se comprueba si es diferente a cualquiera de los dos dominios (dev y prod) y si es asi, se subiria la imagen
+    - [ ] Guardar imagen en modo temporal
+      - Cuando creamos un artista o lo que sea, aun no tenemos el id ni el tipo, abria que crear un tipo temporal, y al crear el modelo, cambiar el id y el tipo a la imagen
+    - [ ] Obtener imagenes de instagram
+    - [ ] Confirmar al eliminar
+    - [ ] Crear pagina listado
 - [ ] Buscador de nombres en redes sociales
 
 #### Bugs
 
 - [ ] Corregir modal en version movil (con texto grande no salen botones)
 - [ ] Al guardar media, añadir validaciones de site
+- [ ] Arreglar scraping con la nueva forma de imagenes

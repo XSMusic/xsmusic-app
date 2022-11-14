@@ -59,15 +59,15 @@ export class AdminMediaAddPage implements OnInit {
   }
 
   selectItem(item: Youtube) {
-    this.itemSelected = item;
-    this.media = new Media({
-      name: item.name,
-      image: item.image,
-      type: this.type,
-      source: this.sourceSelected,
-      sourceId: item.videoId,
-      info: item.info,
-    });
+    // this.itemSelected = item;
+    // this.media = new Media({
+    //   name: item.name,
+    //   image: item.image,
+    //   type: this.type,
+    //   source: this.sourceSelected,
+    //   sourceId: item.videoId,
+    //   info: item.info,
+    // });
   }
 
   onSubmitSuccess() {

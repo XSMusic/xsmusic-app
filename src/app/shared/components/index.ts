@@ -26,3 +26,4 @@ export { SearchBarComponent } from './ui/search-bar/search-bar.component';
 export { ToastComponent } from './ui/toast/toast.component';
 export { MapComponent } from './map/map.component';
 export { OptionsItemsComponent } from './ui/alert/options-items/options-items.component';
+export { ImagesEditBlockComponent } from './ui/images-edit-block/images-edit-block.component';

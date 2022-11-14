@@ -18,7 +18,7 @@
         (click)="goTo(item)"
       >
         <img
-          [src]="item.image"
+          [src]="item.images! | image"
           alt="set.name"
           class="object-cover w-full rounded-2xl"
         />
@@ -29,7 +29,10 @@
             <span *ngIf="i !== 0">, {{ artist.name }}</span>
             <span *ngIf="i === 0">{{ artist.name }}</span>
           </div>
-          <div><span class="ml-1 font-extrabold">@</span> {{ item.name }} {{ item.year }}</div>
+          <div>
+            <span class="ml-1 font-extrabold">@</span> {{ item.name }}
+            {{ item.year }}
+          </div>
         </div>
 
         <div

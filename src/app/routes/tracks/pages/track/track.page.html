@@ -30,7 +30,7 @@
           (click)="goToArtistProfile(artist.slug)"
         >
           <img
-            [src]="artist.image"
+            [src]="artist.images! | image"
             alt="artist.name"
             class="object-cover w-6 h-6 rounded-2xl"
           />

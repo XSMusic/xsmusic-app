@@ -26,6 +26,7 @@ import {
   SitesLastBlockComponent,
   NavbarMobileMenuComponent,
   NavbarNormalMenuComponent,
+  ImagesEditBlockComponent,
 } from '@components';
 import {
   CountryFlagPipe,
@@ -61,23 +62,24 @@ const components = [
   BreadcrumbeComponent,
   ButtonsBlockComponent,
   FullImageComponent,
+  GenericViewGalleryComponent,
+  GenericViewGalleryItemsComponent,
   HeaderComponent,
+  ImagesEditBlockComponent,
+  MapComponent,
   MediaViewListComponent,
   ModalComponent,
   NavbarComponent,
   NavbarMobileMenuComponent,
   NavbarNormalMenuComponent,
+  OptionsItemsComponent,
   SearchBarComponent,
   SiteLastMediaComponent,
   SiteLastMediaItemsComponent,
-  SiteViewListComponent,
   SitesLastBlockComponent,
+  SiteViewListComponent,
   ToastComponent,
   UsersViewListComponent,
-  GenericViewGalleryComponent,
-  GenericViewGalleryItemsComponent,
-  MapComponent,
-  OptionsItemsComponent,
 ];
 const directives = [OnImageErrorDirective];
 const modules = [

@@ -1,55 +1,10 @@
 <form *ngIf="artist" @inOut class="grid grid-cols-1 gap-4 lg:grid-cols-2">
-  <div class="col-span-2 mb-1 md:col-span-1">
-    <div class="flex-row">
-      <div class="relative">
-        <img
-          [src]="
-            artist.images && artist.images.length > 0
-              ? (artist.images![0].url ?? '' | image)
-              : ''
-          "
-          [alt]="artist.name"
-          (click)="showImage(artist.images![0].url ?? '')"
-          class="object-cover w-full rounded-lg cursor-pointer h-80"
-          onError
-        />
-        <div
-          *ngIf="artist.images && artist.images.length > 0"
-          (click)="removeImage(artist.images![0])"
-          class="absolute w-5 h-5 bg-gray-200 rounded-full cursor-pointer top-1 right-1 hover:opacity-90"
-        >
-          <svg-icon name="close" svgClass="w-5 h-5"></svg-icon>
-        </div>
-      </div>
-
-      <div
-        class="grid grid-cols-4 mt-2"
-        *ngIf="artist.images && artist.images.length > 1"
-      >
-        <div class="relative" *ngFor="let img of artist.images | slice: 1:5">
-          <img
-            [src]="img.url! | image"
-            [alt]="artist.name"
-            (click)="showImage(img.url ?? '')"
-            class="relative object-cover w-full h-32 rounded-lg cursor-pointer"
-            onError
-          />
-          <div
-            (click)="removeImage(img)"
-            class="absolute w-4 h-4 bg-gray-200 rounded-full cursor-pointer top-1 right-1"
-          >
-            <svg-icon name="close" svgClass="w-4 h-4"></svg-icon>
-          </div>
-          <div
-            (click)="setFirstImage(img)"
-            class="absolute w-4 h-4 bg-gray-200 rounded-full cursor-pointer left-1 top-1"
-          >
-            <svg-icon name="star" svgClass="w-4 h-4 p-0.5"></svg-icon>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <images-edit-block
+    [item]="artist"
+    (showImage)="showImage($event)"
+    (removeImage)="removeImage($event)"
+    (setFirstImage)="setFirstImage($event)"
+  ></images-edit-block>
 
   <div class="grid grid-cols-2 gap-4">
     <div class="col-span-2 md:col-span-1">

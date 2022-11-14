@@ -1,3 +1,5 @@
+import { Image } from './image.model';
+
 export class Site {
   _id?: string;
   name? = '';
@@ -9,7 +11,7 @@ export class Site {
     coordinates: [],
   };
   type!: string;
-  image? = '';
+  images?: Image[];
   styles?: any[] = [];
   info? = '';
   slug?: string;

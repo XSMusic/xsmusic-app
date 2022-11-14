@@ -5,7 +5,7 @@
     <div *ngFor="let artist of artists">
       <div @inOut class="flex flex-col w-20 py-2 text-center hover:opacity-90">
         <img
-          [src]="artist.images![0].url ?? '' | image"
+          [src]="artist.images! | image"
           class="object-cover w-full h-20 rounded-full shadow-lg cursor-pointer hover:filter-grayscale hover:scale-110 hover:duration-1000"
           alt="artist.name"
           (click)="goToArtistProfile(artist.slug!)"

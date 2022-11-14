@@ -36,7 +36,7 @@
             (click)="goToProfile('artist',artist)"
           >
             <img
-              [src]="artist.image"
+              [src]="artist.images! | image"
               alt="artist.name"
               class="object-cover w-14 h-14 rounded-2xl"
             />
@@ -60,7 +60,7 @@
             (click)="goToProfile('site', media.site)"
           >
             <img
-              [src]="media.site.image"
+              [src]="media.site.images | image"
               alt="media.site.name"
               class="object-cover w-14 h-14 rounded-2xl"
             />

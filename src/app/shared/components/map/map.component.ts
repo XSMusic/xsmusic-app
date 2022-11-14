@@ -2,6 +2,7 @@ import { AfterViewInit, Component, Input } from '@angular/core';
 import { Site } from '@models';
 import * as L from 'leaflet';
 import { Geolocation } from '@capacitor/geolocation';
+import { environment } from '@env/environment';
 
 @Component({
   selector: 'map',
@@ -61,7 +62,9 @@ export class MapComponent implements AfterViewInit {
   addMakers() {
     for (const site of this.markers) {
       if (site.address && site.address.coordinates.length > 0) {
-        const img = `<img style="width:3rem; height:3rem" class="object-cover rounded-full border hover:scale-105 hover:duration-1000" src='${site.image}' />`;
+        const img = `<img style="width:3rem; height:3rem" class="object-cover rounded-full border hover:scale-105 hover:duration-1000" src='${
+          environment.IMAGES_URL
+        }/${site.images![0].url}' />`;
 
         const icon = L.divIcon({
           html: img,
@@ -71,9 +74,9 @@ export class MapComponent implements AfterViewInit {
 
         const customPopup = `
         <div class='flex gap-3 w-50'>
-          <img src='${
-            site.image
-          }' alt='' class="object-cover h-20 w-20 rounded-lg"/>
+          <img src='${environment.IMAGES_URL}/${
+          site.images![0].url
+        }' alt='' class="object-cover h-20 w-20 rounded-lg"/>
           <div class='flex-col gap-2'>
             <div class='text-lg font-extrabold'>${site.name}</div>
             <div class='font-light'>${site.address.street}, ${

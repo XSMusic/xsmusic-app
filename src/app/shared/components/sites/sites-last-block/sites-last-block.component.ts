@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
-import { Media } from '@models';
+import { Site } from '@models';
 import { SiteService, ToastService } from '@services';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 
@@ -12,7 +12,7 @@ import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
   animations: [inOutAnimation],
 })
 export class SitesLastBlockComponent implements OnInit {
-  @Input() sites?: Media[] = [];
+  @Input() sites?: Site[] = [];
   @Input() type = 'club';
   title = '';
   slidesPerView = 6;

@@ -34,8 +34,14 @@ export const buttonsByType = [
     name: 'artistsAdmin',
     buttons: [
       new ButtonBlockItem({
+        name: 'Listado',
+        action: 'viewList',
+        isActivatable: true,
+      }),
+      new ButtonBlockItem({
         name: 'Nuevo',
         action: 'add',
+        isActivatable: false,
       }),
       new ButtonBlockItem({
         name: 'Ordenar',
@@ -119,6 +125,11 @@ export const buttonsByType = [
   {
     name: 'sitesAdmin',
     buttons: [
+      new ButtonBlockItem({
+        name: 'Listado',
+        action: 'viewList',
+        isActivatable: true,
+      }),
       new ButtonBlockItem({
         name: 'Nuevo',
         action: 'add',

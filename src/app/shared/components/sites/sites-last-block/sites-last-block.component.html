@@ -15,6 +15,7 @@
           class="object-cover w-full h-20 shadow-lg cursor-pointer rounded-xl hover:filter-grayscale hover:scale-110 hover:duration-1000"
           alt="artist.name"
           (click)="goToProfile(site.slug!)"
+          onError
         />
         <p class="pt-2 text-xs font-light text-gray-500 cursor-pointer">
           {{ site.name }}

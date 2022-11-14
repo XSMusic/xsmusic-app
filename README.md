@@ -10,7 +10,6 @@ Cada vez que se añada un valor en el archivo .env, hay que añadir el archivo c
 
 - [ ] Obtener la fecha de nacimiento de busqueda en google (birthdate of XXX)
 - [ ] Confirmacion en eliminar
-- [x] Track: Al crear asignar sitio desconocido
 - [ ] Mapas
   - [x] Componente para mapa
         Opciones: Leatflet openstreetmap

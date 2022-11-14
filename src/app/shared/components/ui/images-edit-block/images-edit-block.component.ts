@@ -10,4 +10,5 @@ export class ImagesEditBlockComponent {
   @Output() showImage = new EventEmitter<string>();
   @Output() removeImage = new EventEmitter<Image>();
   @Output() setFirstImage = new EventEmitter<Image>();
+  @Output() toggleAddImage = new EventEmitter<void>();
 }

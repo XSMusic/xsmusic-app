@@ -13,6 +13,7 @@ import {
   GenericViewGalleryItemsComponent,
   HeaderComponent,
   ImagesEditBlockComponent,
+  ImagesUploadUrlComponent,
   ImagesViewListComponent,
   MapComponent,
   MediaViewListComponent,
@@ -83,6 +84,7 @@ const components = [
   SiteViewListComponent,
   ToastComponent,
   UsersViewListComponent,
+  ImagesUploadUrlComponent,
 ];
 const directives = [OnImageErrorDirective];
 const modules = [

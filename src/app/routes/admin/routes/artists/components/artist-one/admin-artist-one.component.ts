@@ -40,7 +40,8 @@ export class ArtistOneComponent {
     infos: [],
     styles: [],
   };
-  image = new Image();
+  image = '';
+  imageState = false;
   constructor(
     private router: Router,
     private artistService: ArtistService,
@@ -105,7 +106,7 @@ export class ArtistOneComponent {
   onKeyUpName() {
     this.spinner.show();
     const body: ScrapingGetInfoArtistDto = {
-      name: this.artist.name!,
+      name: this.artist.name,
       countryCode: this.artist.country,
     };
     this.scrapingService.getInfoArtist(body).subscribe({
@@ -119,11 +120,25 @@ export class ArtistOneComponent {
 
   private setArtistFromScraping(response: ScrapingGetInfoArtistResponse) {
     this.artist.country = response.country;
-    this.setSocial(response);
+    this.setSocialFromScraping(response);
     if (response.birthdate !== '' && this.artist.birthdate === '') {
       this.artist.birthdate = response.birthdate;
     }
 
+    this.setStylesFromScraping(response);
+    this.setImagesFromScraping(response);
+
+    if (response.info) {
+      this.scraping.infos = response.info;
+    }
+    this.spinner.hide();
+  }
+
+  private setImagesFromScraping(response: ScrapingGetInfoArtistResponse) {
+    this.scraping.images = response.images;
+  }
+
+  private setStylesFromScraping(response: ScrapingGetInfoArtistResponse) {
     if (response.styles.length > 0 && this.artist.styles!.length === 0) {
       this.artist.styles = response.styles;
     } else if (response.styles.length > 0 && this.artist.styles!.length > 0) {
@@ -134,18 +149,9 @@ export class ArtistOneComponent {
         );
       }
     }
-
-    if (response.image) {
-      this.scraping.images = response.image;
-    }
-
-    if (response.info) {
-      this.scraping.infos = response.info;
-    }
-    this.spinner.hide();
   }
 
-  private setSocial(response: ScrapingGetInfoArtistResponse) {
+  private setSocialFromScraping(response: ScrapingGetInfoArtistResponse) {
     if (response.social.web !== '' && this.artist.social.web === '') {
       this.artist.social.web = response.social.web;
     }
@@ -170,10 +176,6 @@ export class ArtistOneComponent {
     this.fullImage.showImageFull(image);
   }
 
-  selectImage(image: string) {
-    // this.artist.image = image;
-  }
-
   showInfo(info: string) {
     this.modal.showModal(MODAL_STATE.info, 'Informacion', info);
   }
@@ -182,20 +184,25 @@ export class ArtistOneComponent {
     this.artist.info = info;
   }
 
-  uploadImageByUrl() {
+  uploadImageByUrl(image: string) {
     const data: ImageUploadByUrlDto = {
       id: this.artist._id!,
       type: 'artist',
-      url: this.image.url!,
+      url: image,
     };
+    this.spinner.show();
     this.imageService.uploadByUrl(data).subscribe({
       next: (response) => {
         setTimeout(() => {
           this.artist.images?.push(response);
-          this.image.url = '';
+          this.image = '';
+          this.spinner.hide();
         }, 1000);
       },
-      error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+      error: (error) => {
+        this.spinner.hide();
+        this.toastService.showToast(TOAST_STATE.error, error);
+      },
     });
   }
 

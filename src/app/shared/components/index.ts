@@ -20,6 +20,7 @@ export { ToastComponent } from './ui/toast/toast.component';
 export { MapComponent } from './map/map.component';
 export { OptionsItemsComponent } from './ui/alert/options-items/options-items.component';
 export { ImagesEditBlockComponent } from './ui/images-edit-block/images-edit-block.component';
+export { ImagesUploadUrlComponent } from './ui/images-upload-url/images-upload-url.component';
 
 // View Gallery
 export { GenericViewGalleryComponent } from './views/gallery/generic-view-gallery/generic-view-gallery.component';

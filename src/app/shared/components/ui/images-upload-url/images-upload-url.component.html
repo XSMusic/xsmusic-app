@@ -1,0 +1,63 @@
+<div>
+  <label
+    *ngIf="imageState || scraping.images.length > 0"
+    for="image"
+    class="block mb-3 text-base font-extrabold text-black"
+  >
+    Imagen
+  </label>
+  <div @inOut class="flex" *ngIf="imageState">
+    <div class="w-12 h-12">
+      <img
+        @inOut
+        (click)="showImage.emit(image)"
+        [src]="image"
+        class="object-cover w-full h-12 cursor-pointer rounded-l-md"
+        alt=""
+        onError
+      />
+    </div>
+    <input
+      name="image"
+      type="text"
+      [(ngModel)]="image"
+      class="object-cover w-full px-6 text-base font-medium bg-white border border-gray-200"
+      placeholder="Introduce url de la imagen"
+      [ngClass]="{ 'rounded-md': image === '' }"
+    />
+    <button
+      @inOut
+      class="px-3 bg-gray-100 rounded-r-lg cursor-pointer hover:opacity-80"
+      (click)="uploadImageByUrl.emit(image); image = ''"
+    >
+      <svg-icon name="plus"></svg-icon>
+    </button>
+  </div>
+
+  <div class="flex flex-col gap-2" *ngIf="scraping.images.length > 0">
+    <div class="flex" *ngFor="let img of scraping.images">
+      <div class="w-12 h-12">
+        <img
+          (click)="showImage.emit(img)"
+          [src]="img"
+          class="object-cover w-full h-12 cursor-pointer rounded-l-md"
+          alt=""
+          onError
+        />
+      </div>
+      <input
+        name="image"
+        type="text"
+        [value]="img"
+        [disabled]="true"
+        class="object-cover w-full px-6 text-base font-medium bg-white border border-gray-200"
+      />
+      <button
+        class="px-3 bg-gray-100 rounded-r-lg cursor-pointer hover:opacity-80"
+        (click)="uploadImageByUrl.emit(img)"
+      >
+        <svg-icon name="plus"></svg-icon>
+      </button>
+    </div>
+  </div>
+</div>

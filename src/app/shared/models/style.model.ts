@@ -10,6 +10,8 @@ export class Style {
   artists?: any;
   sets?: any;
   tracks?: any;
+  clubs?: any;
+  festivals?: any;
 
   constructor(data?: Style) {
     if (data) {

@@ -1,4 +1,4 @@
-<div
+<!-- <div
   @inOut
   class="grid grid-cols-1 gap-3 pb-4 my-3 overflow-x-auto lg:grid-cols-3"
   *ngIf="!loading"
@@ -45,6 +45,106 @@
   [infiniteScrollThrottle]="50"
   (scrolled)="onScroll.emit()"
 ></div>
+
+<ng-container *ngIf="loading">
+  <div class="w-full py-2">
+    <div
+      *ngFor="let artist of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
+      class="relative h-24 my-4 overflow-hidden bg-gray-100 shadow-xl cursor-pointer animate-pulse"
+    ></div>
+  </div>
+</ng-container> -->
+
+<ng-container *ngIf="!loading">
+  <ng-container *ngIf="styles.length > 0">
+    <div @inOut class="my-2 overflow-x-auto">
+      <table class="w-full whitespace-nowrap">
+        <th></th>
+        <tbody>
+          <tr
+            *ngFor="let style of styles"
+            class="h-16 border-b border-gray-100 rounded-lg dark:border-black dark:border-0"
+          >
+            <td class="pl-3">
+              <div class="flex gap-3 w-80">
+                <div class="flex flex-col">
+                  <p
+                    (click)="goToOne(style._id!)"
+                    class="my-1 mr-2 text-lg font-extrabold leading-none text-black cursor-pointer hover:text-gray-600"
+                  >
+                    {{ style.name }}
+                  </p>
+                </div>
+              </div>
+            </td>
+
+            <td class="pl-3">
+              <p
+                class="mb-2 mr-2 text-sm font-light leading-none text-gray-700"
+              >
+                <span class="font-black">{{ style.artists?.count ?? 0 }}</span>
+                {{ style.artists?.count === 1 ? 'Artista' : 'Artistas' }}
+              </p>
+            </td>
+
+            <td class="pl-3">
+              <p
+                class="mb-2 mr-2 text-sm font-light leading-none text-gray-700"
+              >
+                <span class="font-black">{{ style.sets?.count ?? 0 }}</span>
+                {{ style.sets?.count === 1 ? 'Set' : 'Sets' }}
+              </p>
+            </td>
+
+            <td class="pl-3">
+              <p
+                class="mb-2 mr-2 text-sm font-light leading-none text-gray-700"
+              >
+                <span class="font-black">{{ style.tracks?.count ?? 0 }}</span>
+                {{ style.tracks?.count === 1 ? 'Track' : 'Tracks' }}
+              </p>
+            </td>
+
+            <td class="pl-3">
+              <p
+                class="mb-2 mr-2 text-sm font-light leading-none text-gray-700"
+              >
+                <span class="font-black">{{ style.clubs?.count ?? 0 }}</span>
+                {{ style.clubs?.count === 1 ? 'Club' : 'Clubs' }}
+              </p>
+            </td>
+
+            <td class="pl-3">
+              <p
+                class="mb-2 mr-2 text-sm font-light leading-none text-gray-700"
+              >
+                <span class="font-black">{{
+                  style.festivals?.count ?? 0
+                }}</span>
+                {{ style.festivals?.count === 1 ? 'Festival' : 'Festivales' }}
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div
+      class="search-results"
+      infiniteScroll
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="50"
+      (scrolled)="onScroll.emit()"
+    ></div>
+  </ng-container>
+
+  <div class="mt-1" *ngIf="styles.length === 0">
+    <alert
+      type="warning"
+      message="No hay estilos disponibles"
+      actionText="Quitar"
+    ></alert>
+  </div>
+</ng-container>
 
 <ng-container *ngIf="loading">
   <div class="w-full py-2">

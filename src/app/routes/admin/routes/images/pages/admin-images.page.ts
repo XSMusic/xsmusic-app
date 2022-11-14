@@ -10,7 +10,7 @@ import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-blo
   selector: 'page-admin-images',
   templateUrl: 'admin-images.page.html',
 })
-export class NameComponent implements OnInit {
+export class AdminImagesPage implements OnInit {
   title = '';
   sites: Image[] = [];
   body: GetAllDto = {

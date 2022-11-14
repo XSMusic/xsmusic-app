@@ -10,7 +10,7 @@
     >
       <img
         class="object-cover w-full h-80 hover:filter-grayscale hover:scale-105 hover:duration-1000"
-        [src]="item.image"
+        [src]="item.image ? item.image : (item.images[0].url | image)"
         [alt]="item.name"
         onError
       />

@@ -7,13 +7,18 @@ import {
   ScrapingGetInfoArtistDto,
   ScrapingGetInfoArtistResponse,
 } from '@interfaces';
-import { Artist, Style } from '@models';
+import { Artist, Image, Style } from '@models';
 import {
   ArtistService,
   ToastService,
   ScrapingService,
   ModalService,
+  ImageService,
 } from '@services';
+import {
+  ImageSetFirstImageDto,
+  ImageUploadByUrlDto,
+} from '@shared/services/api/image/image.dto';
 import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
 import { MODAL_STATE } from '@shared/services/ui/modal/modal.service';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
@@ -35,6 +40,7 @@ export class ArtistOneComponent {
     infos: [],
     styles: [],
   };
+  image = new Image();
   constructor(
     private router: Router,
     private artistService: ArtistService,
@@ -42,7 +48,8 @@ export class ArtistOneComponent {
     private scrapingService: ScrapingService,
     private fullImage: FullImageService,
     private modal: ModalService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private imageService: ImageService
   ) {}
 
   onSubmit() {
@@ -164,7 +171,7 @@ export class ArtistOneComponent {
   }
 
   selectImage(image: string) {
-    this.artist.image = image;
+    // this.artist.image = image;
   }
 
   showInfo(info: string) {
@@ -173,5 +180,55 @@ export class ArtistOneComponent {
 
   selectInfo(info: string) {
     this.artist.info = info;
+  }
+
+  uploadImageByUrl() {
+    const data: ImageUploadByUrlDto = {
+      id: this.artist._id!,
+      type: 'artist',
+      url: this.image.url!,
+    };
+    this.imageService.uploadByUrl(data).subscribe({
+      next: (response) => {
+        setTimeout(() => {
+          this.artist.images?.push(response);
+          this.image.url = '';
+        }, 1000);
+      },
+      error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+    });
+  }
+
+  removeImage(img: Image) {
+    this.imageService.deleteOne(img._id!).subscribe({
+      next: () => {
+        this.artist.images = this.artist.images?.filter(
+          (item) => item._id !== img._id
+        );
+        this.toastService.showToast(
+          TOAST_STATE.info,
+          'La imagen ha sido eliminada'
+        );
+      },
+      error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+    });
+  }
+
+  setFirstImage(img: Image) {
+    const data: ImageSetFirstImageDto = {
+      type: 'artist',
+      typeId: this.artist._id!,
+      imageId: img._id!,
+    };
+    this.imageService.setFirstImage(data).subscribe({
+      next: (response) => {
+        this.artist.images = response;
+        this.toastService.showToast(
+          TOAST_STATE.info,
+          'La imagen ha sido actualizada'
+        );
+      },
+      error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+    });
   }
 }

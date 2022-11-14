@@ -23,3 +23,20 @@ export const getYearsOld = (dateString: string) => {
 export const isEmptyObject = (obj: Record<string, any>) => {
   return Object.keys(obj).length === 0;
 };
+
+export const randomNumber = (max: number, min = 1, decimal = false): any => {
+  if (!decimal) {
+    if (min > 1) {
+      return (Math.random() * (max - min) + min).toFixed(0);
+    }
+    return (Math.random() * (max - min)).toFixed(0);
+  } else if (decimal) {
+    const maxArray = max.toString().split('.');
+    const maxOk = [Number(maxArray[0]), Number(maxArray[1])];
+    const minArray = min.toString().split('.');
+    const minOk = [Number(minArray[0]), Number(minArray[1])];
+    const dataOk = Math.random() * (max - min) + min;
+    const dataSubOk: any = randomNumber(maxOk[1], minOk[1]);
+    return dataOk.toFixed(0) + '.' + dataSubOk;
+  }
+};

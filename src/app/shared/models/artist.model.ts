@@ -1,11 +1,13 @@
+import { Image } from './image.model';
+
 export class Artist {
   _id?: string;
-  name? = '';
-  image? = '';
-  birthdate? = '';
+  name = '';
+  images?: Image[];
+  birthdate = '';
   styles?: any[] = [];
-  country? = 'es';
-  gender? = 'male';
+  country = 'es';
+  gender = 'male';
   info? = '';
   slug?: string;
   social = {

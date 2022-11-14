@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from '@env/environment';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
@@ -9,6 +10,9 @@ export class FullImageService {
   public imageFull$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   showImageFull(image: string) {
+    if (!image.includes('http') && !image.includes('data:')) {
+      image = `${environment.IMAGES_URL}/${image}`;
+    }
     this.imageFull$.next(image);
     this.showFull$.next(true);
   }

@@ -22,6 +22,14 @@ import { AdminTotalsComponent } from './components/totals/admin-totals.component
           ),
       },
       {
+        path: 'images',
+        data: { breadcrumb: 'Imagenes' },
+        loadChildren: () =>
+          import('./routes/images/admin-images.module').then(
+            (m) => m.AdminImagesModule
+          ),
+      },
+      {
         path: 'sites',
         data: { breadcrumb: 'Sitios' },
         loadChildren: () =>

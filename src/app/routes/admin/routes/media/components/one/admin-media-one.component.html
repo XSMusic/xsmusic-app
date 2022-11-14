@@ -118,7 +118,7 @@
         (click)="onSelectArtist(artistS)"
       >
         <img
-          [src]="artistS.image"
+          [src]="artistS.images![0].url ?? ''"
           alt=""
           class="w-10 h-10 mr-3 rounded-full"
           onError

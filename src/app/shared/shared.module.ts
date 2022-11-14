@@ -33,6 +33,8 @@ import {
   TruncateTextPipe,
   TimeAgoPipe,
   FillArrayPipe,
+  ImagePipe,
+  RandomImagePipe,
 } from '@pipes';
 import { OnImageErrorDirective } from './directives';
 import { NgxPermissionsModule } from 'ngx-permissions';
@@ -95,6 +97,8 @@ const pipes = [
   FillArrayPipe,
   TimeAgoPipe,
   TruncateTextPipe,
+  ImagePipe,
+  RandomImagePipe,
 ];
 const services: any = [
   AngularSvgIconPreloaderService,

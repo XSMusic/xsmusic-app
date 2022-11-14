@@ -12,17 +12,17 @@ import { AdminSitesPage } from './pages/sites/admin-sites.page';
       {
         path: 'clubs',
         component: AdminSitesPage,
-        data: { breadcrumb: '', title: 'Admin - Usuarios' },
+        data: { breadcrumb: '', title: 'Admin - Sitios' },
       },
       {
         path: 'clubs/one/:id',
         component: AdminSitePage,
-        data: { breadcrumb: '', title: 'Admin - Editar Usuario' },
+        data: { breadcrumb: '', title: 'Admin - Editar sitio' },
       },
       {
         path: 'clubs/one',
         component: AdminSitePage,
-        data: { breadcrumb: '', title: 'Admin - Nuevo Usuario' },
+        data: { breadcrumb: '', title: 'Admin - Nuevo Sitio' },
       },
       {
         path: 'festivals',

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { AdminPage } from './pages/admin.page';
+import { AdminDashboardPage } from './dashboard/admin-dashboard.page';
 import { SharedModule } from '@shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { AdminTotalsComponent } from './components/totals/admin-totals.component';
@@ -8,9 +8,11 @@ import { AdminTotalsComponent } from './components/totals/admin-totals.component
   imports: [
     SharedModule,
     RouterModule.forChild([
+      { path: '*', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       {
-        path: '',
-        component: AdminPage,
+        path: 'dashboard',
+        component: AdminDashboardPage,
         data: { breadcrumb: '', title: 'Admin' },
       },
       {
@@ -64,7 +66,7 @@ import { AdminTotalsComponent } from './components/totals/admin-totals.component
     ]),
   ],
   exports: [],
-  declarations: [AdminPage, AdminTotalsComponent],
+  declarations: [AdminDashboardPage, AdminTotalsComponent],
   providers: [],
 })
 export class AdminModule {}

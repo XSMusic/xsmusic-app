@@ -8,7 +8,9 @@ import { Menu } from '@models';
   animations: [inOutAnimation],
 })
 export class NavbarMobileMenuComponent {
-  @Input() menuItemsAdmin: Menu[] = [];
-  @Input() menuItems: Menu[] = [];
+  @Input() adminPage = false;
+  @Input() menuItemsForAdmin: Menu[] = [];
+  @Input() menuItemsForAdminInAdmin: Menu[] = [];
+  @Input() menuItemsForAny: Menu[] = [];
   @Output() toggleMenu = new EventEmitter();
 }

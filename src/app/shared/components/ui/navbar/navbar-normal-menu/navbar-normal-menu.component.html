@@ -68,24 +68,39 @@
     <div class="hidden sm:ml-6 sm:block">
       <div class="flex space-x-4">
         <ng-template [ngxPermissionsOnly]="['ADMIN']">
-          <a
-            *ngFor="let menu of menuItemsAdmin"
-            [routerLink]="menu.route"
-            routerLinkActive="bg-gray-100 text-black"
-            class="px-3 py-2 text-sm font-medium rounded-2xl dark:text-white hover:bg-gray-100 hover:text-black"
-            aria-current="page"
-            >{{ menu.name }}
-          </a>
+          <ng-container *ngIf="!adminPage">
+            <a
+              *ngFor="let menu of menuItemsForAdmin"
+              [routerLink]="menu.route"
+              routerLinkActive="bg-gray-100 text-black"
+              class="px-3 py-2 text-sm font-medium rounded-2xl dark:text-white hover:bg-gray-100 hover:text-black"
+              aria-current="page"
+            >
+              {{ menu.name }}
+            </a>
+          </ng-container>
+          <ng-container *ngIf="adminPage">
+            <a
+              *ngFor="let menu of menuItemsForAdminInAdmin"
+              [routerLink]="menu.route"
+              routerLinkActive="bg-gray-100 text-black"
+              class="px-3 py-2 text-sm font-medium rounded-2xl dark:text-white hover:bg-gray-100 hover:text-black"
+              aria-current="page"
+            >
+              {{ menu.name }}
+            </a>
+          </ng-container>
         </ng-template>
         <ng-template [ngxPermissionsExcept]="['ADMIN']">
           <a
-            *ngFor="let menu of menuItems"
+            *ngFor="let menu of menuItemsForAny"
             [routerLink]="menu.route"
             routerLinkActive="bg-gray-100 text-black"
             class="px-3 py-2 text-sm font-medium rounded-2xl dark:text-white hover:bg-gray-100 hover:text-black"
             aria-current="page"
-            >{{ menu.name }}</a
           >
+            {{ menu.name }}
+          </a>
         </ng-template>
       </div>
     </div>

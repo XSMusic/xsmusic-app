@@ -14,22 +14,35 @@
 
   <ng-template [ngxPermissionsOnly]="['ADMIN']">
     <div class="flex flex-col gap-6 text-xl font-bold text-center text-black">
-      <a
-        @inOut
-        *ngFor="let menu of menuItemsAdmin"
-        (click)="toggleMenu.emit()"
-        class="duration-300 hover:text-gray-500"
-        [routerLink]="menu.route"
-      >
-        {{ menu.name }}
-      </a>
+      <ng-container *ngIf="!adminPage">
+        <a
+          @inOut
+          *ngFor="let menu of menuItemsForAdmin"
+          (click)="toggleMenu.emit()"
+          class="duration-300 hover:text-gray-500"
+          [routerLink]="menu.route"
+        >
+          {{ menu.name }}
+        </a>
+      </ng-container>
+      <ng-container *ngIf="adminPage">
+        <a
+          @inOut
+          *ngFor="let menu of menuItemsForAdminInAdmin"
+          (click)="toggleMenu.emit()"
+          class="duration-300 hover:text-gray-500"
+          [routerLink]="menu.route"
+        >
+          {{ menu.name }}
+        </a>
+      </ng-container>
     </div>
   </ng-template>
   <ng-template [ngxPermissionsExcept]="['ADMIN']">
     <div class="flex flex-col gap-6 text-xl font-bold text-center text-black">
       <a
         @inOut
-        *ngFor="let menu of menuItems"
+        *ngFor="let menu of menuItemsForAny"
         (click)="toggleMenu.emit()"
         class="duration-300 hover:text-gray-500"
         [routerLink]="menu.route"

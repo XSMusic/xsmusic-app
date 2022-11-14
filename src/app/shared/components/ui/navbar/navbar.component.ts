@@ -5,6 +5,7 @@ import { filter, distinctUntilChanged } from 'rxjs';
 import { Menu, User } from '@models';
 import { AuthService } from '@core/auth';
 import { routesConfig } from '@core/config';
+import { NgxPermissionsService } from 'ngx-permissions';
 
 @Component({
   selector: 'navbar',
@@ -17,8 +18,9 @@ export class NavbarComponent implements OnInit {
   menuProfileState = false;
   searchBarState = false;
   searchPage = false;
-  menuItems: Menu[] = [];
-  menuItemsAdmin: Menu[] = [];
+  menuItemsForAny: Menu[] = [];
+  menuItemsForAdmin: Menu[] = [];
+  menuItemsForAdminInAdmin: Menu[] = [];
   menuProfileItems: Menu[] = [];
   user!: User;
   homePage = false;
@@ -26,11 +28,16 @@ export class NavbarComponent implements OnInit {
   hidden = false;
   onePage = false;
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private ngxPermissionsService: NgxPermissionsService
+  ) {}
 
   ngOnInit(): void {
     this.checkPageSearch();
     this.setMenuProfileItems();
+    this.setMenuAdmin();
     this.setMenuItems();
     this.authService.user().subscribe((response) => {
       this.user = response;
@@ -38,17 +45,31 @@ export class NavbarComponent implements OnInit {
   }
 
   async setMenuItems() {
-    this.menuItems = [
+    console.log(this.ngxPermissionsService.getPermissions());
+    this.menuItemsForAny = [
       { name: 'Inicio', route: 'home' },
-      { name: 'Artistas', route: 'artists' },
-      { name: 'Clubs', route: 'clubs' },
-      { name: 'Festivales', route: 'festivals' },
-      { name: 'Sets', route: 'sets' },
-      { name: 'Tracks', route: 'tracks' },
+      { name: 'Artistas', route: routesConfig.artists },
+      { name: 'Clubs', route: routesConfig.clubs },
+      { name: 'Festivales', route: routesConfig.festivals },
+      { name: 'Sets', route: routesConfig.sets },
+      { name: 'Tracks', route: routesConfig.tracks },
     ];
-    this.menuItemsAdmin = [
-      ...this.menuItems,
+    this.menuItemsForAdmin = [
+      ...this.menuItemsForAny,
       { name: 'Admin', route: 'admin' },
+    ];
+  }
+
+  setMenuAdmin() {
+    this.menuItemsForAdminInAdmin = [
+      { name: 'Dashboard', route: routesConfig.admin },
+      { name: 'Artistas', route: routesConfig.artistsAdmin },
+      { name: 'Clubs', route: routesConfig.clubsAdmin },
+      { name: 'Estilos', route: routesConfig.stylesAdmin },
+      { name: 'Festivales', route: routesConfig.festivalsAdmin },
+      { name: 'Sets', route: routesConfig.setsAdmin },
+      { name: 'Tracks', route: routesConfig.tracksAdmin },
+      { name: 'Volver', route: routesConfig.home },
     ];
   }
 

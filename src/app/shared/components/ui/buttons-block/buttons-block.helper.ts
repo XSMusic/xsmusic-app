@@ -181,6 +181,11 @@ export const buttonsByType = [
     name: 'mediaAdmin',
     buttons: [
       new ButtonBlockItem({
+        name: 'Listado',
+        action: 'viewList',
+        isActivatable: true,
+      }),
+      new ButtonBlockItem({
         name: 'Nuevo',
         action: 'add',
       }),

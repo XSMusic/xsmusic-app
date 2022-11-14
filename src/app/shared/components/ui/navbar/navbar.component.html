@@ -1,8 +1,9 @@
 <nav *ngIf="!hidden" class="fixed inset-x-0 z-50 bg-white">
-  <div class="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
+  <div class="container px-2 mx-auto sm:px-6 lg:px-8">
     <navbar-normal-menu
-      [menuItems]="menuItems"
-      [menuItemsAdmin]="menuItemsAdmin"
+      [menuItemsForAny]="menuItemsForAny"
+      [menuItemsForAdmin]="menuItemsForAdmin"
+      [menuItemsForAdminInAdmin]="menuItemsForAdminInAdmin"
       [adminPage]="adminPage"
       [menuProfileState]="menuProfileState"
       [menuProfileItems]="menuProfileItems"
@@ -11,10 +12,13 @@
       (goToHomeOrAdmin)="goToHomeOrAdmin()"
       (onClickMenuProfileItem)="onClickMenuProfileItem($event)"
     ></navbar-normal-menu>
+
     <!-- mobile menu -->
     <navbar-mobile-menu
-      [menuItems]="menuItems"
-      [menuItemsAdmin]="menuItemsAdmin"
+      [adminPage]="adminPage"
+      [menuItemsForAny]="menuItemsForAny"
+      [menuItemsForAdmin]="menuItemsForAdmin"
+      [menuItemsForAdminInAdmin]="menuItemsForAdminInAdmin"
       (toggleMenu)="toggleMenu()"
     ></navbar-mobile-menu>
   </div>

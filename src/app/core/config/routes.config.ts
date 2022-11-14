@@ -1,7 +1,7 @@
 export const routesConfig = {
   account: '/account',
   accountEdit: '/account/edit',
-  admin: '/admin',
+  admin: '/admin/dashboard',
   artist: '/artists/profile/:slug',
   artistAdmin: '/admin/artists/one/:id',
   artistAdminAdd: '/admin/artists/one',
@@ -16,6 +16,7 @@ export const routesConfig = {
   clubsAdmin: '/admin/sites/clubs',
   clubsFilter: '/clubs/filter/:filterKey/:filterValue',
   festival: '/festivals/one/:slug',
+  festivals: '/festivals',
   festivalAdmin: '/admin/sites/festivals/one/:id',
   festivalAdminAdd: '/admin/sites/festivals/one',
   festivalsAdmin: '/admin/sites/festivals',

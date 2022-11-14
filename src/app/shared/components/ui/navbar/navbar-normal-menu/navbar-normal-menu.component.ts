@@ -9,9 +9,10 @@ import { Menu, User } from '@models';
 })
 export class NavbarNormalMenuComponent implements OnInit {
   @Input() adminPage = false;
-  @Input() menuItemsAdmin: Menu[] = [];
-  @Input() menuItems: Menu[] = [];
   @Input() menuProfileItems: Menu[] = [];
+  @Input() menuItemsForAny: Menu[] = [];
+  @Input() menuItemsForAdmin: Menu[] = [];
+  @Input() menuItemsForAdminInAdmin: Menu[] = [];
   @Input() menuProfileState = false;
   @Input() user!: User;
   @Output() toggleMenu = new EventEmitter<void>();

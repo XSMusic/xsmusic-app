@@ -19,8 +19,8 @@ export class ArtistService {
     return this.httpClient.get<Artist>(url);
   }
 
-  create(data: Artist): Observable<MessageI> {
-    return this.httpClient.post<MessageI>(`${this.url}/create`, data);
+  create(data: Artist): Observable<Artist> {
+    return this.httpClient.post<Artist>(`${this.url}/create`, data);
   }
 
   update(data: Artist): Observable<MessageI> {

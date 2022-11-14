@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { GetAllDto } from '@interfaces';
 import { Image } from '@models';
@@ -9,6 +10,7 @@ import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-blo
 @Component({
   selector: 'page-admin-images',
   templateUrl: 'admin-images.page.html',
+  animations: [inOutAnimation],
 })
 export class AdminImagesPage implements OnInit {
   title = '';

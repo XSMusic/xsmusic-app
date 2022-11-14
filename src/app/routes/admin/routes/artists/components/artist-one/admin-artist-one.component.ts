@@ -42,6 +42,7 @@ export class ArtistOneComponent {
   };
   image = '';
   imageState = false;
+  tempImages: string[] = [];
   constructor(
     private router: Router,
     private artistService: ArtistService,
@@ -52,29 +53,6 @@ export class ArtistOneComponent {
     private spinner: NgxSpinnerService,
     private imageService: ImageService
   ) {}
-
-  onSubmit() {
-    const observable = this.artist._id
-      ? this.artistService.update(this.artist)
-      : this.artistService.create(this.artist);
-    observable.subscribe({
-      next: (response) => this.onSuccess(response),
-      error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
-    });
-  }
-
-  onDelete() {
-    // TODO: Añadir confirmacion por modal
-    this.artistService.deleteOne(this.artist._id!).subscribe({
-      next: (response) => this.onSuccess(response),
-      error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
-    });
-  }
-
-  onSuccess(response: MessageI) {
-    this.toastService.showToast(TOAST_STATE.success, response.message);
-    this.router.navigate([routesConfig.artistsAdmin]);
-  }
 
   onChangeStyleSelect(e: any) {
     if (this.artist.styles!.length <= 3) {
@@ -185,19 +163,39 @@ export class ArtistOneComponent {
   }
 
   uploadImageByUrl(image: string) {
+    const temp = this.artist._id ? false : true;
     const data: ImageUploadByUrlDto = {
       id: this.artist._id!,
       type: 'artist',
       url: image,
     };
+    if (!temp) {
+      this.uploadImageByUrlNormal(data, temp);
+    } else {
+      this.uploadImageByUrlTemp(image);
+    }
+  }
+
+  private uploadImageByUrlTemp(image: string) {
+    this.tempImages.push(image);
+    if (this.scraping.images && this.scraping.images.length > 0) {
+      this.scraping.images = this.scraping.images.filter(
+        (img: string) => img !== image
+      );
+    }
+  }
+
+  private uploadImageByUrlNormal(data: ImageUploadByUrlDto, temp: boolean) {
     this.spinner.show();
     this.imageService.uploadByUrl(data).subscribe({
       next: (response) => {
-        setTimeout(() => {
-          this.artist.images?.push(response);
-          this.image = '';
-          this.spinner.hide();
-        }, 1000);
+        if (!temp) {
+          setTimeout(() => {
+            this.artist.images?.push(response);
+            this.image = '';
+            this.spinner.hide();
+          }, 1000);
+        }
       },
       error: (error) => {
         this.spinner.hide();
@@ -235,6 +233,44 @@ export class ArtistOneComponent {
           'La imagen ha sido actualizada'
         );
       },
+      error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+    });
+  }
+
+  onSubmit() {
+    if (this.artist._id) {
+      this.artistService.update(this.artist).subscribe({
+        next: (response) => this.onSuccessUpdate(response),
+        error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+      });
+    } else {
+      this.artistService.create(this.artist).subscribe({
+        next: (response) => this.onSuccessCreate(response),
+        error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+      });
+    }
+  }
+
+  onSuccessUpdate(response: MessageI) {
+    this.toastService.showToast(TOAST_STATE.success, response.message);
+    this.router.navigate([routesConfig.artistsAdmin]);
+  }
+
+  async onSuccessCreate(response: Artist) {
+    this.artist._id = response._id;
+    for (const image of this.tempImages) {
+      this.uploadImageByUrl(image);
+    }
+    setTimeout(() => {
+      this.toastService.showToast(TOAST_STATE.success, 'Artista creado');
+      this.router.navigate([routesConfig.artistsAdmin]);
+    }, 3000);
+  }
+
+  onDelete() {
+    // TODO: Añadir confirmacion por modal
+    this.artistService.deleteOne(this.artist._id!).subscribe({
+      next: (response) => this.onSuccessUpdate(response),
       error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
     });
   }

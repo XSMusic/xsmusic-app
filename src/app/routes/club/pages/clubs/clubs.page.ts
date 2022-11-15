@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { routesConfig } from '@core/config';
 import { GetAllDto } from '@interfaces';
 import { Site } from '@models';
@@ -20,6 +20,8 @@ export class ClubsPage implements OnInit {
     order: ['created', 'desc'],
     type: 'club',
   };
+  filterKey?: string;
+  filterValue?: string;
   view = 'gallery';
   total = 0;
   loading = true;
@@ -27,11 +29,21 @@ export class ClubsPage implements OnInit {
   constructor(
     private siteService: SiteService,
     private router: Router,
+    private route: ActivatedRoute,
     private toast: ToastService
   ) {}
 
   ngOnInit() {
+    this.getFilter();
     this.getItems();
+  }
+
+  getFilter() {
+    this.filterKey = this.route.snapshot.paramMap.get('filterKey')!;
+    this.filterValue = this.route.snapshot.paramMap.get('filterValue')!;
+    if (this.filterKey && this.filterValue) {
+      this.body.filter = [this.filterKey, this.filterValue];
+    }
   }
 
   getItems(more = false): void {

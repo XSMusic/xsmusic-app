@@ -8,8 +8,9 @@ import { ScrapingSourceI } from '@shared/services/api/scraping/scraping-source.i
 })
 export class AdminMediaAddSearchComponent {
   @Input() searchText!: string;
-  @Output() search = new EventEmitter<string>();
   @Input() source!: string;
+  @Output() search = new EventEmitter<string>();
+  @Output() onChangeSource = new EventEmitter<string>();
   menu = false;
   sources: ScrapingSourceI[] = [];
   constructor(private scrapingService: ScrapingService) {

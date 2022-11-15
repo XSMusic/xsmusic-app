@@ -30,6 +30,7 @@ import {
   SiteViewListComponent,
   ToastComponent,
   UsersViewListComponent,
+  FilterBarComponent,
 } from '@components';
 import {
   CountryFlagPipe,
@@ -40,6 +41,8 @@ import {
   ImagePipe,
   RandomImagePipe,
   TypePipe,
+  FilterArrayPipe,
+  ImageArrayPipe,
 } from '@pipes';
 import { OnImageErrorDirective } from './directives';
 import { NgxPermissionsModule } from 'ngx-permissions';
@@ -79,6 +82,7 @@ const components = [
   NavbarNormalMenuComponent,
   OptionsItemsComponent,
   SearchBarComponent,
+  FilterBarComponent,
   SiteLastMediaComponent,
   SiteLastMediaItemsComponent,
   SitesLastBlockComponent,
@@ -109,6 +113,8 @@ const pipes = [
   TimeAgoPipe,
   TruncateTextPipe,
   TypePipe,
+  FilterArrayPipe,
+  ImageArrayPipe,
 ];
 const services: any = [
   AngularSvgIconPreloaderService,

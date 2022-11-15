@@ -38,6 +38,14 @@ export class ArtistPage implements OnInit {
         this.views = [
           { name: 'Sets', value: 'set', counter: response.sets.length },
           { name: 'Tracks', value: 'track', counter: response.tracks.length },
+          {
+            name: 'Imagenes',
+            value: 'image',
+            counter:
+              response.images!.length === 0
+                ? response.images!.length
+                : response.images!.length - 1,
+          },
         ];
         this.spinner.hide();
       },

@@ -5,7 +5,7 @@
   class="items-center hidden w-full grid-cols-2 gap-2 sm:grid md:grid-cols-4"
 >
   <div
-    class="p-3 border border-gray-100 rounded-md shadow-md cursor-pointer focus:animate-pulse hover:bg-gray-100"
+    class="p-3 border border-gray-100 rounded-lg shadow-md cursor-pointer focus:animate-pulse hover:bg-gray-100"
     *ngFor="let total of totals"
     [routerLink]="total.route"
   >
@@ -48,7 +48,7 @@
   class="grid items-center w-full grid-cols-2 gap-2 sm:hidden md:grid-cols-6"
 >
   <div
-    class="p-3 border border-gray-100 rounded-md shadow-md cursor-pointer focus:animate-pulse hover:bg-gray-100"
+    class="p-3 border border-gray-100 rounded-lg shadow-md cursor-pointer focus:animate-pulse hover:bg-gray-100"
     *ngFor="let total of totals | slice: 0:endSlice"
     [routerLink]="total.route"
   >

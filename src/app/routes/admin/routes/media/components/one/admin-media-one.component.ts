@@ -339,4 +339,11 @@ export class AdminMediaOneComponent {
       error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
     });
   }
+
+  goToYoutube() {
+    window.open(
+      `https://www.youtube.com/watch?v=${this.media.sourceId!}`,
+      '_blank'
+    );
+  }
 }

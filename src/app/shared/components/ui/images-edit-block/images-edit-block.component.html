@@ -3,7 +3,9 @@
     <div class="lg:relative w-200">
       <img
         [src]="
-          item.images && item.images.length > 0 ? (item.images! | image) : ''
+          item.images && item.images.length > 0
+            ? (item.images! | imageArray)
+            : ''
         "
         [alt]="item.name"
         (click)="showImage.emit(item.images![0].url ?? '')"
@@ -42,7 +44,7 @@
             *ngFor="let img of item.images | slice: 1:10"
           >
             <img
-              [src]="[img] | image"
+              [src]="[img] | imageArray"
               [alt]="item.name"
               (click)="showImage.emit(img.url)"
               class="relative object-cover w-full rounded-lg cursor-pointer h-28"

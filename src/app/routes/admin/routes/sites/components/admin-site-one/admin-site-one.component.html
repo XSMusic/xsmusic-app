@@ -36,7 +36,7 @@
           type="text"
           [(ngModel)]="site.name"
           placeholder="Introduce el nombre"
-          class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
+          class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-lg"
         />
         <button
           class="px-3 bg-gray-100 rounded-r-lg cursor-pointer hover:opacity-80"
@@ -83,7 +83,7 @@
         type="text"
         [(ngModel)]="site.address.town"
         placeholder="Introduce la poblacion"
-        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-lg"
       />
     </div>
 
@@ -99,7 +99,7 @@
         type="text"
         [(ngModel)]="site.address.state"
         placeholder="Introduce la ciudad"
-        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-lg"
       />
     </div>
 
@@ -119,7 +119,7 @@
         name="country"
         [(ngModel)]="site.address.country!"
         placeholder="Introduce el codigo del pais"
-        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-lg"
       >
         <option *ngFor="let countryItem of countries" [value]="countryItem.id">
           {{ countryItem.name }}
@@ -140,7 +140,7 @@
           type="text"
           [(ngModel)]="site.address.coordinates[0]"
           placeholder="Introduce el nombre"
-          class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
+          class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-lg"
         />
         <button
           class="px-3 bg-gray-100 rounded-r-lg cursor-pointer hover:opacity-70"
@@ -163,7 +163,7 @@
         type="text"
         [(ngModel)]="site.address.coordinates[1]"
         placeholder="Introduce el nombre"
-        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-lg"
       />
     </div>
 
@@ -191,7 +191,7 @@
         </span>
       </div>
       <select
-        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md form-multiselect"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-lg form-multiselect"
         (change)="onChangeStyleSelect($event)"
       >
         <option [disabled]="true">Selecciona estilo</option>
@@ -210,7 +210,7 @@
         type="text"
         [(ngModel)]="site.social.web"
         placeholder="Introduce Web"
-        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-lg"
       />
     </div>
     <div class="col-span-2 mb-1 md:col-span-1">
@@ -225,7 +225,7 @@
         type="text"
         [(ngModel)]="site.social.facebook"
         placeholder="Introduce Facebook"
-        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-lg"
       />
     </div>
     <div class="col-span-2 mb-1 md:col-span-1">
@@ -240,7 +240,7 @@
         type="text"
         [(ngModel)]="site.social.twitter"
         placeholder="Introduce Twitter"
-        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-lg"
       />
     </div>
     <div class="col-span-2 mb-1 md:col-span-1">
@@ -255,7 +255,7 @@
         type="text"
         [(ngModel)]="site.social.soundcloud"
         placeholder="Introduce Soundcloud"
-        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-lg"
       />
     </div>
 
@@ -271,7 +271,7 @@
         type="text"
         [(ngModel)]="site.social.spotify"
         placeholder="Introduce Spotify"
-        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-lg"
       />
     </div>
 
@@ -287,7 +287,7 @@
         type="text"
         [(ngModel)]="site.social.tiktok"
         placeholder="Introduce Tiktok"
-        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-lg"
       />
     </div>
 
@@ -303,7 +303,7 @@
         type="text"
         [(ngModel)]="site.social.instagram"
         placeholder="Introduce Instagram"
-        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-lg"
       />
     </div>
 
@@ -319,7 +319,7 @@
         type="text"
         [(ngModel)]="site.social.email"
         placeholder="Introduce email"
-        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-lg"
       />
     </div>
 

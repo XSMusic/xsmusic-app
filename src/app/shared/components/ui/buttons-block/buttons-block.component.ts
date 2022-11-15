@@ -42,6 +42,7 @@ export class ButtonsBlockComponent implements OnInit {
   view = 'gallery';
   viewLSKey = 'view_artist';
   searchState = false;
+  filterState = false;
 
   ngOnInit(): void {
     this.setButtons();
@@ -58,12 +59,16 @@ export class ButtonsBlockComponent implements OnInit {
   clickButton(button: ButtonBlockItem) {
     if (button.action.includes('view')) {
       this.searchState = false;
+      this.onClickViewsButtons(button);
     } else if (button.action === 'search') {
       this.searchState = !this.searchState;
+    } else if (button.action === 'filter') {
+      this.filterState = !this.filterState;
     } else {
       this.searchState = false;
+      this.filterState = false;
+      this.onClickViewsButtons(button);
     }
-    this.onClickViewsButtons(button);
   }
 
   onClickViewsButtons(button: ButtonBlockItem) {

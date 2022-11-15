@@ -3,6 +3,7 @@ export class ButtonBlockItem {
   isActive? = false;
   isActivatable? = false;
   action = '';
+  align? = 'left';
 
   constructor(data?: ButtonBlockItem) {
     if (data) {

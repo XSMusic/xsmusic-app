@@ -35,12 +35,16 @@ export class ArtistsPage implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.getFilter();
+    this.getArtists();
+  }
+
+  getFilter() {
     this.filterKey = this.route.snapshot.paramMap.get('filterKey')!;
     this.filterValue = this.route.snapshot.paramMap.get('filterValue')!;
     if (this.filterKey && this.filterValue) {
       this.body.filter = [this.filterKey, this.filterValue];
     }
-    this.getArtists();
   }
 
   getArtists(more = false) {

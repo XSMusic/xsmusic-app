@@ -21,7 +21,7 @@ export { MapComponent } from './map/map.component';
 export { OptionsItemsComponent } from './options-items/options-items.component';
 export { ImagesEditBlockComponent } from './ui/images-edit-block/images-edit-block.component';
 export { ImagesUploadUrlComponent } from './ui/images-upload-url/images-upload-url.component';
-
+export { FilterBarComponent } from './ui/filter-bar/filter-bar.component';
 // View Gallery
 export { GenericViewGalleryComponent } from './views/gallery/generic-view-gallery/generic-view-gallery.component';
 export { GenericViewGalleryItemsComponent } from './views/gallery/generic-view-gallery-items/generic-view-gallery-items.component';

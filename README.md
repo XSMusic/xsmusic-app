@@ -11,22 +11,18 @@ Cada vez que se añada un valor en el archivo .env, hay que añadir el archivo c
 - [ ] Obtener la fecha de nacimiento de busqueda en google (birthdate of XXX)
 - [ ] Confirmacion en eliminar
 - [ ] Mapas
-  - [x] Componente para mapa
-        Opciones: Leatflet openstreetmap
-  - [x] Conversor de coordenadas en direccion
-  - [x] Conversor de direccion en coordenadas
+      Opciones: Leatflet openstreetmap
   - [ ] Añadir arrastrar y devolver coordenadas (opcional)
-  - [x] Obtener localizacion del usuario
 - [ ] Imagenes
   - [ ] Crear ruta
-  - [x] Guardar imagenes
-    - [x] Eliminar image de los modelos
-    - [ ] Obtener imagenes de instagram
-    - [ ] Confirmar al eliminar
-    - [x] Crear pagina listado
+  - [ ] Obtener imagenes de instagram
+  - [ ] Confirmar al eliminar
 - [ ] Buscador de nombres en redes sociales
 - [ ] Obtener info del sitio scrapeado
 - [ ] Añadir Likes
+- [ ] Añadir modelo de Eventos
+- [ ] Mostrar los minutos de duracion de scraping youtube
+- [ ] BackButton
 
 #### Bugs
 

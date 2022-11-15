@@ -10,7 +10,7 @@
             <td class="pl-3">
               <div class="flex gap-3 w-80">
                 <img
-                  [src]="mediaItem.images! | image"
+                  [src]="mediaItem.images! | imageArray"
                   [alt]="mediaItem.name"
                   onError
                   class="object-cover object-center w-12 h-12 rounded-lg cursor-pointer lg:h-12 lg:w-12 hover:filter-grayscale hover:scale-110 hover:duration-1000"
@@ -45,7 +45,7 @@
                 *ngIf="mediaItem.site.name !== 'Desconocido'"
               >
                 <img
-                  [src]="mediaItem.site.images | image"
+                  [src]="mediaItem.site.images | imageArray"
                   alt=""
                   class="object-cover object-center rounded-lg cursor-pointer h-9 w-9 hover:filter-grayscale hover:scale-110 hover:duration-1000"
                   (click)="showImage(mediaItem.site.image!)"

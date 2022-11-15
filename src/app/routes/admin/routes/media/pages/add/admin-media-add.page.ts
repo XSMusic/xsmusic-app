@@ -54,11 +54,15 @@ export class AdminMediaAddPage implements OnInit {
   }
 
   search(searchText: string) {
-    this.spinner.show();
-    this.searchByText(searchText);
+    if (this.source === 'youtube') {
+      this.searchByYoutube(searchText);
+    } else {
+      this.toast.showToast(TOAST_STATE.warning, 'En construccion');
+    }
   }
 
-  searchByText(searchText: string) {
+  searchByYoutube(searchText: string) {
+    this.spinner.show();
     this.youtubeService.searchByText(searchText).subscribe({
       next: (response) => this.onResponseSearchSuccess(response),
       error: (error) => this.onResponseSearchError(error),

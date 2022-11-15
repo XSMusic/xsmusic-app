@@ -13,14 +13,20 @@
   </div>
 </div>
 
-<artist-last-media-items
+<artist-last-multi-items
   *ngIf="view === 'set'"
   [artist]="artist"
-  [type]="view"
-></artist-last-media-items>
+  type="set"
+></artist-last-multi-items>
 
-<artist-last-media-items
+<artist-last-multi-items
   *ngIf="view === 'track'"
   [artist]="artist"
-  [type]="view"
-></artist-last-media-items>
+  type="track"
+></artist-last-multi-items>
+
+<artist-last-multi-items
+  *ngIf="view === 'image'"
+  [artist]="artist"
+  type="image"
+></artist-last-multi-items>

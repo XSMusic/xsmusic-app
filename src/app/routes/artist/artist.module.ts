@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { ArtistBlockInfoComponent } from './components/block-info/artist-block-info.component';
-import { ArtistLastMediaItemsComponent } from './components/last-media-items/artist-last-media-items.component';
+import { ArtistLastMultiItemsComponent } from './components/last-multi-items/artist-last-multi-items.component';
 import { ArtistBlockTracksComponent } from './components/block-tracks/artist-block-tracks.component';
 import { ArtistPage } from './page/artist/artist.page';
 import { ArtistsViewGalleryComponent } from './components/view-gallery/artists-view-gallery.component';
 import { ArtistsPage } from './page/artists/artists.page';
-import { ArtistLastMediaComponent } from './components/last-media/artist-last-media.component';
+import { ArtistLastMultiComponent } from './components/last-multi/artist-last-multi.component';
 
 @NgModule({
   imports: [
@@ -32,15 +32,15 @@ import { ArtistLastMediaComponent } from './components/last-media/artist-last-me
   ],
   exports: [],
   declarations: [
-    ArtistLastMediaComponent,
+    ArtistLastMultiComponent,
     ArtistBlockTracksComponent,
-    ArtistLastMediaItemsComponent,
+    ArtistLastMultiItemsComponent,
     ArtistPage,
     ArtistBlockInfoComponent,
-    ArtistLastMediaItemsComponent,
+    ArtistLastMultiItemsComponent,
     ArtistBlockTracksComponent,
     ArtistsPage,
-    ArtistLastMediaComponent,
+    ArtistLastMultiComponent,
     ArtistsViewGalleryComponent,
   ],
   providers: [],

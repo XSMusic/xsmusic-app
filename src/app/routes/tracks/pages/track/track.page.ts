@@ -13,6 +13,7 @@ import { routesConfig } from '@core/config';
 export class TrackPage implements OnInit {
   slug!: string;
   media: Media = new Media();
+  title = '';
   constructor(
     private route: ActivatedRoute,
     private toastService: ToastService,
@@ -30,10 +31,23 @@ export class TrackPage implements OnInit {
     this.mediaService.getOne('slug', this.slug).subscribe({
       next: (response) => {
         this.media = response;
+        this.setTitleHeader();
       },
       error: (error: any) =>
         this.toastService.showToast(TOAST_STATE.error, error),
     });
+  }
+
+  setTitleHeader() {
+    let title = this.media.name! + ' @ ';
+    this.media.artists!.forEach((artist, i) => {
+      if (i !== 0) {
+        title += ' & ';
+      }
+      title += artist.name;
+    });
+
+    this.title = title;
   }
 
   getVideoUrl() {
@@ -42,7 +56,7 @@ export class TrackPage implements OnInit {
     );
   }
 
-  goToArtistProfile(slug: string) {
+  goToProfile(slug: string) {
     this.router.navigate([routesConfig.artist.replace(':slug', slug)]);
   }
 

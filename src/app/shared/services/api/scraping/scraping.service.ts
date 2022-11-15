@@ -17,7 +17,10 @@ export class ScrapingService {
 
   getSources(type: string): ScrapingSourceI[] {
     if (type === 'media') {
-      return [{ name: 'Youtube', value: 'youtube' }];
+      return [
+        { name: 'Youtube', value: 'youtube' },
+        { name: 'Soundcloud', value: 'soundcloud' },
+      ];
     } else {
       return [];
     }

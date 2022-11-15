@@ -4,6 +4,7 @@
   <admin-media-add-search
     [source]="source"
     [searchText]="searchText"
+    (onChangeSource)="source = $event"
     (search)="search($event)"
   ></admin-media-add-search>
 

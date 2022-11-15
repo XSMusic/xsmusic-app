@@ -1,4 +1,42 @@
-<div @inOut class="grid pb-2">
+<div
+  @inOut
+  class="justify-between hidden gap-3 pb-2 overflow-x-auto text-center md:flex"
+>
+  <div class="flex gap-1">
+    <ng-container *ngFor="let button of buttons | filterArray: 'align':'left'">
+      <div
+        *ngIf="button.align === 'left'"
+        (click)="clickButton(button)"
+        class="text-base text-center pb-1.5 px-1.5 text-black border-b-2 cursor-pointer hover:border-gray-600 hover:duration-300 hover:border-b-2"
+        [ngClass]="{
+          'font-extrabold border-b-gray-600 border-b-2 duration-300':
+            button.isActive,
+          'font-extralight duration-300': !button.isActive
+        }"
+      >
+        <span class="hover:text-gray-800">{{ button.name }}</span>
+      </div>
+    </ng-container>
+  </div>
+  <div class="flex gap-1">
+    <ng-container *ngFor="let button of buttons | filterArray: 'align':'right'">
+      <div
+        *ngIf="button.align === 'right'"
+        (click)="clickButton(button)"
+        class="text-base text-center pb-1.5 px-1.5 text-black border-b-2 cursor-pointer hover:border-gray-600 hover:duration-300 hover:border-b-2"
+        [ngClass]="{
+          'font-extrabold border-b-gray-600 border-b-2 duration-300':
+            button.isActive,
+          'font-extralight duration-300': !button.isActive
+        }"
+      >
+        <span class="hover:text-gray-800">{{ button.name }}</span>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<div @inOut class="grid pb-2 md:hidden">
   <div
     class="inline-flex gap-3 overflow-x-auto text-center mx-full scrollbar-hidden"
     role="group"
@@ -24,4 +62,8 @@
     (search)="search.emit($event)"
     (closeSearch)="searchState = false"
   ></search-bar>
+</div>
+
+<div *ngIf="filterState">
+  <filter-bar></filter-bar>
 </div>

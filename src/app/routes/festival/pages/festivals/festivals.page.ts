@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { routesConfig } from '@core/config';
 import { GetAllDto } from '@interfaces';
 import { Site } from '@models';
@@ -19,6 +19,8 @@ export class FestivalsPage implements OnInit {
     order: ['created', 'desc'],
     type: 'festival',
   };
+  filterKey?: string;
+  filterValue?: string;
   view = 'gallery';
   loading = true;
   error = false;
@@ -26,11 +28,21 @@ export class FestivalsPage implements OnInit {
   constructor(
     private siteService: SiteService,
     private router: Router,
+    private route: ActivatedRoute,
     private toast: ToastService
   ) {}
 
   ngOnInit() {
+    this.getFilter();
     this.getItems();
+  }
+
+  getFilter() {
+    this.filterKey = this.route.snapshot.paramMap.get('filterKey')!;
+    this.filterValue = this.route.snapshot.paramMap.get('filterValue')!;
+    if (this.filterKey && this.filterValue) {
+      this.body.filter = [this.filterKey, this.filterValue];
+    }
   }
 
   getItems(more = false): void {

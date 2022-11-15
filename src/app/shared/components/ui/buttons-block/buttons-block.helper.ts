@@ -39,21 +39,24 @@ export const buttonsByType = [
         isActivatable: true,
       }),
       new ButtonBlockItem({
-        name: 'Nuevo',
+        name: 'Nuevo Artista',
         action: 'add',
         isActivatable: false,
       }),
       new ButtonBlockItem({
         name: 'Ordenar',
         action: 'order',
+        align: 'right',
       }),
       new ButtonBlockItem({
         name: 'Filtrar',
         action: 'filter',
+        align: 'right',
       }),
       new ButtonBlockItem({
         name: 'Buscar',
         action: 'search',
+        align: 'right',
       }),
     ],
   },
@@ -108,17 +111,17 @@ export const buttonsByType = [
       new ButtonBlockItem({
         name: 'Ordenar',
         action: 'order',
-        isActivatable: true,
+        align: 'right',
       }),
       new ButtonBlockItem({
         name: 'Filtrar',
         action: 'filter',
-        isActivatable: true,
+        align: 'right',
       }),
       new ButtonBlockItem({
         name: 'Buscar',
         action: 'search',
-        isActivatable: true,
+        align: 'right',
       }),
     ],
   },
@@ -138,17 +141,17 @@ export const buttonsByType = [
       new ButtonBlockItem({
         name: 'Ordenar',
         action: 'order',
-        isActivatable: true,
+        align: 'right',
       }),
       new ButtonBlockItem({
         name: 'Filtrar',
         action: 'filter',
-        isActivatable: true,
+        align: 'right',
       }),
       new ButtonBlockItem({
         name: 'Buscar',
         action: 'search',
-        isActivatable: true,
+        align: 'right',
       }),
     ],
   },
@@ -192,6 +195,7 @@ export const buttonsByType = [
       new ButtonBlockItem({
         name: 'Buscar',
         action: 'search',
+        align: 'right',
       }),
     ],
   },

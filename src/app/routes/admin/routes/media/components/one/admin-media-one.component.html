@@ -18,7 +18,7 @@
         type="text"
         [(ngModel)]="media.name"
         placeholder="Introduce el nombre"
-        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-lg"
       />
     </div>
 
@@ -34,7 +34,7 @@
         type="text"
         [(ngModel)]="media.source"
         placeholder="Selecciona el medio"
-        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-lg"
       >
         <option [value]="null" [disabled]="true" [selected]>
           Selecciona medio
@@ -52,13 +52,21 @@
       >
         Video Id
       </label>
-      <input
-        name="sourceId"
-        type="text"
-        [(ngModel)]="media.sourceId"
-        placeholder="Introduce el id del video"
-        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
-      />
+      <div class="flex flex-row">
+        <input
+          name="sourceId"
+          type="text"
+          [(ngModel)]="media.sourceId"
+          placeholder="Introduce el id del video"
+          class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-l-md"
+        />
+        <button
+          (click)="goToYoutube()"
+          class="px-3 bg-red-500 border rounded-r-lg cursor-pointer hover:bg-red-400 border-1"
+        >
+          <svg-icon name="youtube" svgClass="w-4 h-4 fill-white"></svg-icon>
+        </button>
+      </div>
     </div>
 
     <div class="col-span-2 mb-1 md:col-span-4">
@@ -73,7 +81,7 @@
         type="number"
         [(ngModel)]="media.year"
         placeholder="Introduce el año"
-        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-lg"
       />
     </div>
 
@@ -98,7 +106,7 @@
         </span>
       </div>
       <select
-        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md form-multiselect"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-lg form-multiselect"
         (change)="onChangeStyleSelect($event)"
       >
         <option [disabled]="true">Selecciona estilo</option>
@@ -136,7 +144,7 @@
         *ngFor="let artistSelected of media.artists"
       >
         <img
-          [src]="artistSelected.images! | image"
+          [src]="artistSelected.images! | imageArray"
           alt="artistSelected.name"
           class="w-5 h-5 mr-3 rounded-full"
           onError
@@ -174,7 +182,7 @@
         (click)="onSelectArtist(artistS)"
       >
         <img
-          [src]="artistS.images! | image"
+          [src]="artistS.images! | imageArray"
           alt=""
           class="w-10 h-10 mr-3 rounded-full"
           onError
@@ -199,7 +207,7 @@
         class="flex px-2 py-1 text-xs text-white bg-black border rounded-lg shadow-md cursor-pointer hover:opacity-80"
       >
         <img
-          [src]="media.site?.images | image"
+          [src]="media.site?.images | imageArray"
           [alt]=""
           class="w-5 h-5 mr-3 rounded-full"
           onError
@@ -216,7 +224,7 @@
         "
         [(ngModel)]="siteSearch"
         placeholder="Introduce el club/festival"
-        class="w-full px-6 py-2 text-base font-medium bg-white border border-gray-200 rounded-md cursor-pointer"
+        class="w-full px-6 py-2 text-base font-medium bg-white border border-gray-200 rounded-lg cursor-pointer"
         autocomplete="off"
       />
       <button
@@ -238,7 +246,7 @@
         (click)="onSelectSite(site)"
       >
         <img
-          [src]="site.images! | image"
+          [src]="site.images! | imageArray"
           alt=""
           class="w-10 h-10 mr-3 rounded-full"
           onError

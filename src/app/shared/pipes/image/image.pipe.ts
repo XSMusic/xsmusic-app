@@ -6,9 +6,10 @@ import { Image } from '@models';
   name: 'image',
 })
 export class ImagePipe implements PipeTransform {
-  transform(images: Image[]): string {
-    if (images && images.length > 0) {
-      return `${environment.IMAGES_URL}/${images[0].url}`;
+  transform(image: Image): string {
+    console.log(image);
+    if (image) {
+      return `${environment.IMAGES_URL}/${image.url}`;
     } else {
       return 'assets/no-image.png';
     }

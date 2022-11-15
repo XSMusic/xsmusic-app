@@ -1,4 +1,4 @@
-<div @inOut class="flex justify-center gap-4">
+<div @inOut class="flex justify-center gap-4 pb-1">
   <div
     *ngFor="let v of views"
     class="px-2 pb-1 text-xl text-center cursor-pointer dark:text-white"
@@ -13,18 +13,14 @@
   </div>
 </div>
 
-<!-- <last-multi-items
-  *ngIf="view === 'set'"
-  [item]="item"
-  type="set"
-></last-multi-items> -->
-
-<generic-view-gallery-items
-  *ngIf="view === 'set'"
-  [items]="item.sets"
-  [type]="'set'"
-  (goToOne)="goToOne($event)"
-></generic-view-gallery-items>
+<div class="px-2">
+  <generic-view-gallery-items
+    *ngIf="view === 'set'"
+    [items]="item.sets"
+    [type]="'set'"
+    (goToOne)="goToOne($event)"
+  ></generic-view-gallery-items>
+</div>
 
 <generic-view-gallery-items
   *ngIf="view === 'track'"

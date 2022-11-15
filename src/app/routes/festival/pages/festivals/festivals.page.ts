@@ -16,7 +16,7 @@ export class FestivalsPage implements OnInit {
   body: GetAllDto = {
     page: 1,
     pageSize: 30,
-    order: ['updated', 'desc'],
+    order: ['created', 'desc'],
     type: 'festival',
   };
   view = 'gallery';

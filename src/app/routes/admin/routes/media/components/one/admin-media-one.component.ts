@@ -184,6 +184,11 @@ export class AdminMediaOneComponent {
         state: false,
         message: 'El id del video es obligatorio',
       };
+    } else if (!this.media._id && this.tempImages.length === 0) {
+      return {
+        state: false,
+        message: 'La imagen es obligatoria',
+      };
     } else {
       return {
         state: true,
@@ -208,6 +213,8 @@ export class AdminMediaOneComponent {
             this.toastService.showToast(TOAST_STATE.error, error),
         });
       }
+    } else {
+      this.toast.showToast(TOAST_STATE.error, validation.message);
     }
   }
 

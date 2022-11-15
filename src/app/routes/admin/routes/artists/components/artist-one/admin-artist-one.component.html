@@ -235,14 +235,11 @@
     <label for="info" class="block mb-3 text-base font-extrabold text-black">
       Info
     </label>
-    <textarea
+    <angular-editor
       name="info"
-      type="text"
+      [placeholder]="'Introduce informacion'"
       [(ngModel)]="artist.info"
-      placeholder="Introduce informacion"
-      class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md"
-      rows="5"
-    ></textarea>
+    ></angular-editor>
     <div
       class="grid grid-cols-1 mt-2 overflow-hidden rounded-lg cursor-pointer lg:grid-cols-2"
     >

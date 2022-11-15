@@ -25,9 +25,10 @@ Cada vez que se añada un valor en el archivo .env, hay que añadir el archivo c
     - [ ] Confirmar al eliminar
     - [x] Crear pagina listado
 - [ ] Buscador de nombres en redes sociales
+- [ ] Obtener info del sitio scrapeado
+- [ ] Añadir Likes
 
 #### Bugs
 
 - [ ] Corregir modal en version movil (con texto grande no salen botones)
 - [ ] Al guardar media, añadir validaciones de site
-- [x] Arreglar scraping con la nueva forma de imagenes

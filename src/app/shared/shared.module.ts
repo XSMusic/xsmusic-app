@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 import {
   AlertComponent,
   ArtistsLastBlockComponent,
@@ -89,6 +90,7 @@ const components = [
 const directives = [OnImageErrorDirective];
 const modules = [
   AngularSvgIconModule,
+  AngularEditorModule,
   CommonModule,
   FormsModule,
   InfiniteScrollModule,

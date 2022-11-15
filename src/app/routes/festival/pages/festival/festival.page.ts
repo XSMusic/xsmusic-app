@@ -42,6 +42,14 @@ export class FestivalPage implements OnInit {
             value: 'event',
             counter: response.events ? response.events.length : 0,
           },
+          {
+            name: 'Imagenes',
+            value: 'image',
+            counter:
+              response.images!.length === 0
+                ? response.images!.length
+                : response.images!.length - 1,
+          },
         ];
         this.spinner.hide();
       },

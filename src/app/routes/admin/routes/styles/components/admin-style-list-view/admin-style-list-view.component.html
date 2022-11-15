@@ -1,60 +1,3 @@
-<!-- <div
-  @inOut
-  class="grid grid-cols-1 gap-3 pb-4 my-3 overflow-x-auto lg:grid-cols-3"
-  *ngIf="!loading"
->
-  <div
-    *ngFor="let style of styles"
-    class="w-full text-center border rounded-lg shadow-md cursor-pointer px-auto hover:opacity-80"
-    [ngStyle]="{
-      background: style.colors.bg,
-      color: style.colors.text
-    }"
-    [routerLink]="['one/', style._id]"
-  >
-    <div class="px-2 mt-3 text-2xl font-semibold">
-      {{ style.name }}
-    </div>
-
-    <div class="grid w-full grid-cols-3 gap-2 px-1 pt-0">
-      <div class="p-3 text-center">
-        <div class="text-sm text-opacity-80" [class]="style.colors.text">
-          Artistas
-        </div>
-        <div class="text-xl font-bold">{{ style.artists?.count ?? 0 }}</div>
-      </div>
-      <div class="p-3 text-center">
-        <div class="text-sm text-opacity-80" [class]="style.colors.text">
-          Sets
-        </div>
-        <div class="text-xl font-bold">{{ style.sets?.count ?? 0 }}</div>
-      </div>
-      <div class="p-3 text-center">
-        <div class="text-sm text-opacity-80" [class]="style.colors.text">
-          Tracks
-        </div>
-        <div class="text-xl font-bold">{{ style.tracks?.count ?? 0 }}</div>
-      </div>
-    </div>
-  </div>
-</div>
-<div
-  class="search-results"
-  infiniteScroll
-  [infiniteScrollDistance]="2"
-  [infiniteScrollThrottle]="50"
-  (scrolled)="onScroll.emit()"
-></div>
-
-<ng-container *ngIf="loading">
-  <div class="w-full py-2">
-    <div
-      *ngFor="let artist of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
-      class="relative h-24 my-4 overflow-hidden bg-gray-100 shadow-xl cursor-pointer animate-pulse"
-    ></div>
-  </div>
-</ng-container> -->
-
 <ng-container *ngIf="!loading">
   <ng-container *ngIf="styles.length > 0">
     <div @inOut class="my-2 overflow-x-auto">
@@ -70,7 +13,7 @@
                 <div class="flex flex-col">
                   <p
                     (click)="goToOne(style._id!)"
-                    class="my-1 mr-2 text-lg font-extrabold leading-none text-black cursor-pointer hover:text-gray-600"
+                    class="my-1 mr-2 text-lg font-extrabold leading-none text-black cursor-pointer dark:text-white hover:text-gray-600"
                   >
                     {{ style.name }}
                   </p>
@@ -80,7 +23,7 @@
 
             <td class="pl-3">
               <p
-                class="mb-2 mr-2 text-sm font-light leading-none text-gray-700"
+                class="mb-2 mr-2 text-sm font-light leading-none text-gray-700 dark:text-white"
               >
                 <span class="font-black">{{ style.artists?.count ?? 0 }}</span>
                 {{ style.artists?.count === 1 ? 'Artista' : 'Artistas' }}
@@ -89,7 +32,7 @@
 
             <td class="pl-3">
               <p
-                class="mb-2 mr-2 text-sm font-light leading-none text-gray-700"
+                class="mb-2 mr-2 text-sm font-light leading-none text-gray-700 dark:text-white"
               >
                 <span class="font-black">{{ style.sets?.count ?? 0 }}</span>
                 {{ style.sets?.count === 1 ? 'Set' : 'Sets' }}
@@ -98,7 +41,7 @@
 
             <td class="pl-3">
               <p
-                class="mb-2 mr-2 text-sm font-light leading-none text-gray-700"
+                class="mb-2 mr-2 text-sm font-light leading-none text-gray-700 dark:text-white"
               >
                 <span class="font-black">{{ style.tracks?.count ?? 0 }}</span>
                 {{ style.tracks?.count === 1 ? 'Track' : 'Tracks' }}
@@ -107,7 +50,7 @@
 
             <td class="pl-3">
               <p
-                class="mb-2 mr-2 text-sm font-light leading-none text-gray-700"
+                class="mb-2 mr-2 text-sm font-light leading-none text-gray-700 dark:text-white"
               >
                 <span class="font-black">{{ style.clubs?.count ?? 0 }}</span>
                 {{ style.clubs?.count === 1 ? 'Club' : 'Clubs' }}
@@ -116,7 +59,7 @@
 
             <td class="pl-3">
               <p
-                class="mb-2 mr-2 text-sm font-light leading-none text-gray-700"
+                class="mb-2 mr-2 text-sm font-light leading-none text-gray-700 dark:text-white"
               >
                 <span class="font-black">{{
                   style.festivals?.count ?? 0

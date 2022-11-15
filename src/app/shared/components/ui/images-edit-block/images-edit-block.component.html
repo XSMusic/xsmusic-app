@@ -1,39 +1,45 @@
 <div class="">
   <div class="lg:flex-row">
     <div class="lg:relative w-200">
-      <img
-        [src]="
-          item.images && item.images.length > 0
-            ? (item.images! | imageArray)
-            : ''
-        "
-        [alt]="item.name"
-        (click)="showImage.emit(item.images![0].url ?? '')"
-        class="object-cover w-full rounded-lg cursor-pointer h-80"
-        onError
-      />
-
       <div
-        *ngIf="item.images && item.images.length > 0"
-        (click)="removeImage.emit(item.images![0])"
-        class="absolute w-5 h-5 bg-gray-200 rounded-full cursor-pointer top-1 right-1 hover:opacity-90"
+        class="w-full overflow-hidden border rounded-lg dark:p-1 dark:border-gray-700"
       >
-        <svg-icon name="close" svgClass="w-5 h-5"></svg-icon>
+        <img
+          [src]="
+            item.images && item.images.length > 0
+              ? (item.images! | imageArray)
+              : ''
+          "
+          [alt]="item.name"
+          (click)="showImage.emit(item.images![0].url ?? '')"
+          class="object-cover w-full rounded-lg cursor-pointer h-80 hover:filter-grayscale hover:scale-105 hover:duration-1000"
+          onError
+        />
+
+        <div
+          *ngIf="item.images && item.images.length > 0"
+          (click)="removeImage.emit(item.images![0])"
+          class="absolute w-5 h-5 bg-gray-200 rounded-full cursor-pointer top-1 right-1 hover:opacity-90"
+        >
+          <svg-icon name="close" svgClass="w-5 h-5"></svg-icon>
+        </div>
       </div>
 
       <!-- IMAGENES INFERIORES -->
       <div class="grid overflow-x-scroll lg:relative" style="bottom: 0rem">
-        <div class="flex gap-2 p-1 mt-2 bg-gray-100 rounded-lg">
+        <div
+          class="flex gap-2 p-1 mt-2 bg-gray-100 rounded-lg dark:bg-black dark:border dark:border-gray-700"
+        >
           <!-- BLOCK ADD -->
           <div
             (click)="toggleAddImage.emit()"
-            class="duration-500 bg-gray-200 rounded-lg h-28 w-28 hover:bg-gray-300"
+            class="duration-500 bg-gray-200 rounded-lg hover:opacity-80 dark:bg-gray-800 h-28 w-28 hover:bg-gray-300"
           >
             <div class="flex items-center justify-center cursor-pointer h-28">
               <svg-icon
                 style="zoom: 2"
                 name="plus"
-                class="rounded-full hover:bg-black hover:text-white hover:duration-500"
+                class="rounded-full hover:bg-black dark:text-white hover:text-white hover:duration-500"
               ></svg-icon>
             </div>
           </div>
@@ -43,27 +49,31 @@
             class="relative h-28 w-28"
             *ngFor="let img of item.images | slice: 1:10"
           >
-            <img
-              [src]="[img] | imageArray"
-              [alt]="item.name"
-              (click)="showImage.emit(img.url)"
-              class="relative object-cover w-full rounded-lg cursor-pointer h-28"
-              onError
-            />
             <div
-              (click)="removeImage.emit(img)"
-              class="absolute w-4 h-4 bg-gray-200 rounded-full cursor-pointer top-1 right-1"
+              class="w-full overflow-hidden rounded-lg dark:border dark:border-gray-700"
             >
-              <svg-icon name="close" svgClass="w-4 h-4"></svg-icon>
-            </div>
-            <div
-              (click)="setFirstImage.emit(img)"
-              class="absolute w-4 h-4 bg-gray-200 rounded-full cursor-pointer left-1 top-1"
-            >
-              <svg-icon
-                name="star"
-                svgClass="fill-yellow-500 text-yellow-800 w-4 h-4 p-0.5"
-              ></svg-icon>
+              <img
+                [src]="[img] | imageArray"
+                [alt]="item.name"
+                (click)="showImage.emit(img.url)"
+                class="relative object-cover w-full p-1 rounded-lg cursor-pointer h-28 hover:filter-grayscale hover:scale-105 hover:duration-1000"
+                onError
+              />
+              <div
+                (click)="removeImage.emit(img)"
+                class="absolute w-4 h-4 bg-gray-200 rounded-full cursor-pointer top-1 right-1"
+              >
+                <svg-icon name="close" svgClass="w-4 h-4"></svg-icon>
+              </div>
+              <div
+                (click)="setFirstImage.emit(img)"
+                class="absolute w-4 h-4 bg-gray-200 rounded-full cursor-pointer left-1 top-1"
+              >
+                <svg-icon
+                  name="star"
+                  svgClass="fill-yellow-500 text-yellow-800 w-4 h-4 p-0.5"
+                ></svg-icon>
+              </div>
             </div>
           </div>
         </div>

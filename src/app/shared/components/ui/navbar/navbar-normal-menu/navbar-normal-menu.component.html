@@ -55,7 +55,7 @@
         ></span>
       </p>
       <img
-        class="hidden w-auto rounded cursor-pointer hover:border-2xl h-9 lg:block hover:bg-gray-100"
+        class="hidden w-auto rounded cursor-pointer hover:border-2xl h-9 lg:block hover:bg-gray-100 hover:rounded-full dark:hover:bg-gray-800"
         [src]="
           !adminPage
             ? 'assets/images/logo-negro.png'
@@ -72,8 +72,8 @@
             <a
               *ngFor="let menu of menuItemsForAdmin"
               [routerLink]="menu.route"
-              routerLinkActive="bg-gray-100 text-black"
-              class="px-3 py-2 text-sm font-medium rounded-2xl dark:text-white hover:bg-gray-100 hover:text-black"
+              routerLinkActive=" border-b dark:border-white"
+              class="px-3 py-2 text-sm font-medium text-black dark:text-white dark:hover:border-white dark:hover:border-b dark:hover:border-b-white hover:text-black"
               aria-current="page"
             >
               {{ menu.name }}
@@ -83,8 +83,8 @@
             <a
               *ngFor="let menu of menuItemsForAdminInAdmin"
               [routerLink]="menu.route"
-              routerLinkActive="bg-gray-100 text-black"
-              class="px-3 py-2 text-sm font-medium rounded-2xl dark:text-white hover:bg-gray-100 hover:text-black"
+              routerLinkActive=" border-b dark:border-white"
+              class="px-3 py-2 text-sm font-medium text-black dark:text-white dark:hover:border-white dark:hover:border-b dark:hover:border-b-white hover:text-black"
               aria-current="page"
             >
               {{ menu.name }}
@@ -95,8 +95,8 @@
           <a
             *ngFor="let menu of menuItemsForAny"
             [routerLink]="menu.route"
-            routerLinkActive="bg-gray-100 text-black"
-            class="px-3 py-2 text-sm font-medium rounded-2xl dark:text-white hover:bg-gray-100 hover:text-black"
+            routerLinkActive=" border-b dark:border-white"
+            class="px-3 py-2 text-sm font-medium text-black dark:text-white dark:hover:border-white dark:hover:border-b dark:hover:border-b-white hover:text-black"
             aria-current="page"
           >
             {{ menu.name }}
@@ -147,7 +147,7 @@
 
         <div
           *ngIf="menuProfileState"
-          class="absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right bg-white rounded-lg shadow-lg cursor-pointer ring-1 ring-black ring-opacity-5 focus:outline-none"
+          class="absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg cursor-pointer ring-1 ring-black ring-opacity-5 focus:outline-none"
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="user-menu-button"

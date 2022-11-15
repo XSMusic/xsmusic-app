@@ -18,7 +18,7 @@
                 />
                 <div class="flex flex-col">
                   <p
-                    class="my-1 mr-2 text-lg font-extrabold leading-none text-black cursor-pointer hover:text-gray-600"
+                    class="my-1 mr-2 text-lg font-extrabold leading-none text-black cursor-pointer dark:text-white hover:text-gray-600"
                     (click)="
                       goToProfile.emit({ type: 'media', media: mediaItem })
                     "
@@ -53,7 +53,7 @@
                 />
                 <div class="flex flex-col">
                   <p
-                    class="my-0.5 mr-2 text-base font-bold leading-none text-black cursor-pointer hover:text-gray-600"
+                    class="my-0.5 mr-2 text-base font-bold leading-none text-black dark:text-white cursor-pointer hover:text-gray-600"
                     (click)="
                       goToProfile.emit({ type: 'site', media: mediaItem })
                     "
@@ -95,17 +95,21 @@
               </div>
             </td>
 
-            <td class="pl-5">
+            <td class="pl-5 text-black dark:text-white">
               {{ mediaItem.year !== 0 ? mediaItem.year : 'Año no disponible' }}
             </td>
 
             <td class="pl-5" *ngxPermissionsOnly="'ADMIN'">
               <div class="flex flex-col">
-                <div class="mr-2 text-sm font-light leading-none text-gray-700">
+                <div
+                  class="mr-2 text-sm font-light leading-none text-gray-700 dark:text-white"
+                >
                   <span class="font-semibold">Cre:</span>
                   {{ mediaItem.created! | timeAgo }}
                 </div>
-                <div class="mr-2 text-sm font-light leading-none text-gray-700">
+                <div
+                  class="mr-2 text-sm font-light leading-none text-gray-700 dark:text-white"
+                >
                   <span class="font-semibold">Act:</span>
                   {{ mediaItem.updated! | timeAgo }}
                 </div>

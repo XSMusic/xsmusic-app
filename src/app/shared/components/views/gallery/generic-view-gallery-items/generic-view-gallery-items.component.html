@@ -5,7 +5,7 @@
   <ng-container *ngFor="let item of items">
     <div
       *ngIf="item.name !== 'Desconocido'"
-      class="relative overflow-hidden shadow-xl cursor-pointer rounded-2xl"
+      class="relative overflow-hidden shadow-lg cursor-pointer rounded-2xl dark:border dark:border-gray-700"
       (click)="goToOne.emit(item)"
     >
       <img

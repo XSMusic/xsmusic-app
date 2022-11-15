@@ -12,7 +12,7 @@
   <p
     *ngxPermissionsOnly="'ADMIN'"
     (click)="goToEdit(artist._id!)"
-    class="pt-2 text-3xl font-bold text-center cursor-pointer"
+    class="pt-2 text-3xl font-bold text-center cursor-pointer dark:text-white"
   >
     {{ artist.name }}
     <span class="text-lg text-gray-600" *ngIf="artist.birthdate !== ''">
@@ -25,7 +25,10 @@
     class="pt-2 text-3xl font-bold text-center"
   >
     {{ artist.name }}
-    <span class="text-lg text-gray-600" *ngIf="artist.birthdate !== ''">
+    <span
+      class="text-lg text-gray-600 dark:text-white"
+      *ngIf="artist.birthdate !== ''"
+    >
       {{ getYearsOld(artist.birthdate!) }}
     </span>
   </p>
@@ -34,7 +37,9 @@
     class="py-1 mx-auto cursor-pointer"
     (click)="goToArtistFilter('country', artist.country!)"
   >
-    <div class="flex items-center justify-center gap-2">
+    <div
+      class="flex items-center justify-center gap-2 font-extralight dark:text-white"
+    >
       <img class="w-6" [src]="artist.country! | countryFlag" alt="item.name" />
       {{ artist.country! | countryName }}
     </div>
@@ -59,7 +64,7 @@
     >
       <svg-icon
         name="web"
-        svgClass="h-8 w-8  hover:scale-110 hover:duration-1000 cursor-pointer"
+        svgClass="h-8 w-8 dark:fill-white hover:scale-110 hover:duration-1000 cursor-pointer"
       ></svg-icon>
     </div>
     <div
@@ -127,13 +132,13 @@
   <div class="px-6 py-2 text-center" *ngIf="artist.info !== ''">
     <div
       *ngIf="!moreInfo"
-      class="lg:px-8"
+      class="lg:px-8 dark:text-white"
       [innerHTML]="artist.info! | truncateText: 150"
     ></div>
     <div *ngIf="moreInfo" class="lg:px-8" [innerHTML]="artist.info!"></div>
     <p
       *ngIf="artist.info!.length > 150"
-      class="mt-2 font-semibold cursor-pointer"
+      class="mt-2 font-semibold cursor-pointer dark:text-white"
       (click)="moreInfo = !moreInfo"
     >
       {{ !moreInfo ? 'Leer mas' : 'Leer menos' }}

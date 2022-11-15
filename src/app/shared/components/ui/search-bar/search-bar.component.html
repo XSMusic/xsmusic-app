@@ -1,34 +1,18 @@
-<div class="container sm:mx-auto">
+<div class="container my-2 sm:mx-auto">
   <div class="flex">
-    <div class="relative w-full">
-      <input
-        [(ngModel)]="searchText"
-        name="searchText"
-        class="z-20 block w-full p-2 px-3 text-sm text-gray-900 border border-gray-300 rounded-xl border-l-1 hover:bg-gray-50"
-        placeholder="¿Que buscas?"
-        (keyup)="onKeyUpSearch($event)"
-        required
-      />
-      <button
-        class="absolute top-0 right-0 p-2 text-sm font-medium text-white bg-gray-900 border dark:bg-white dark:text-black rounded-r-xl hover:bg-gray-800"
-        (click)="validationSearch()"
-      >
-        <svg
-          aria-hidden="true"
-          class="w-5 h-5"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-          ></path>
-        </svg>
-      </button>
-    </div>
+    <input
+      [(ngModel)]="searchText"
+      name="searchText"
+      placeholder="¿Que buscas?"
+      (keyup)="onKeyUpSearch($event)"
+      class="w-full p-2 px-6 text-base font-medium bg-white border border-gray-200 dark:border-gray-700 dark:text-white dark:bg-black rounded-y-md rounded-l-md ring-red-500 dark:ring-red-500"
+      required
+    />
+    <button
+      class="px-3 text-sm font-medium text-white bg-red-500 border border-red-500 rounded-r-lg dark:bg-red-500 dark:text-black hover:bg-gray-800"
+      (click)="validationSearch()"
+    >
+      <svg-icon name="search" svgClass="h-5 w-5 dark:text-white"></svg-icon>
+    </button>
   </div>
 </div>

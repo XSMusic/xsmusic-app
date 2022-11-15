@@ -1,0 +1,40 @@
+<div @inOut class="flex justify-center gap-4">
+  <div
+    *ngFor="let v of views"
+    class="px-2 pb-1 text-xl text-center cursor-pointer dark:text-white"
+    [ngClass]="{
+      'font-extrabold border-b-gray-600 dark:border-b-white border-b-2 duration-300':
+        v.value === view,
+      'font-extralight duration-300': v.value !== view
+    }"
+    (click)="view = v.value"
+  >
+    {{ v.name }} <span class="text-sm font-extralight">({{ v.counter }})</span>
+  </div>
+</div>
+
+<!-- <last-multi-items
+  *ngIf="view === 'set'"
+  [item]="item"
+  type="set"
+></last-multi-items> -->
+
+<generic-view-gallery-items
+  *ngIf="view === 'set'"
+  [items]="item.sets"
+  [type]="'set'"
+  (goToOne)="goToOne($event)"
+></generic-view-gallery-items>
+
+<generic-view-gallery-items
+  *ngIf="view === 'track'"
+  [items]="item.tracks"
+  [type]="'track'"
+  (goToOne)="goToOne($event)"
+></generic-view-gallery-items>
+
+<last-multi-items
+  *ngIf="view === 'image'"
+  [item]="item"
+  type="image"
+></last-multi-items>

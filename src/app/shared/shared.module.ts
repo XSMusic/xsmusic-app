@@ -31,6 +31,8 @@ import {
   ToastComponent,
   UsersViewListComponent,
   FilterBarComponent,
+  LastMultiItemsComponent,
+  LastMultiComponent,
 } from '@components';
 import {
   CountryFlagPipe,
@@ -90,6 +92,8 @@ const components = [
   ToastComponent,
   UsersViewListComponent,
   ImagesUploadUrlComponent,
+  LastMultiItemsComponent,
+  LastMultiComponent,
 ];
 const directives = [OnImageErrorDirective];
 const modules = [

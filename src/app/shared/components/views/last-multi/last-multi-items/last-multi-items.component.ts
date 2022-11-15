@@ -2,16 +2,16 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
-import { Artist, Image, Media } from '@models';
+import { Image, Media } from '@models';
 import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
 
 @Component({
-  selector: 'artist-last-multi-items',
-  templateUrl: './artist-last-multi-items.component.html',
+  selector: 'last-multi-items',
+  templateUrl: './last-multi-items.component.html',
   animations: [inOutAnimation],
 })
-export class ArtistLastMultiItemsComponent implements OnInit {
-  @Input() artist!: Artist;
+export class LastMultiItemsComponent implements OnInit {
+  @Input() item!: any;
   @Input() type: 'set' | 'track' | 'image' = 'set';
   items: any[] = [];
 
@@ -22,12 +22,12 @@ export class ArtistLastMultiItemsComponent implements OnInit {
 
   ngOnInit() {
     if (this.type === 'set') {
-      this.items = this.artist.sets;
+      this.items = this.item.sets;
     }
     if (this.type === 'track') {
-      this.items = this.artist.tracks;
+      this.items = this.item.tracks;
     } else if (this.type === 'image') {
-      this.items = this.artist.images!;
+      this.items = this.item.images!;
     }
   }
 

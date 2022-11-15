@@ -23,6 +23,7 @@ Cada vez que se añada un valor en el archivo .env, hay que añadir el archivo c
 - [ ] Añadir modelo de Eventos
 - [ ] Mostrar los minutos de duracion de scraping youtube
 - [ ] BackButton
+- [ ] Hacer generico block-info
 
 #### Bugs
 

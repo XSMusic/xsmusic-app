@@ -12,18 +12,18 @@
   <p
     *ngxPermissionsOnly="'ADMIN'"
     (click)="goToEdit(site._id!)"
-    class="pt-2 text-3xl font-bold text-center cursor-pointer"
+    class="pt-2 text-3xl font-bold text-center cursor-pointer dark:text-white"
   >
     {{ site.name }}
   </p>
 
   <p
     *ngxPermissionsExcept="'ADMIN'"
-    class="pt-2 text-3xl font-bold text-center"
+    class="pt-2 text-3xl font-bold text-center dark:text-white"
   >
     {{ site.name }}
   </p>
-  <div class="text-center">
+  <div class="text-center dark:text-white">
     <p *ngIf="site.address.street !== '' && site.address.town !== ''">
       {{ site.address.street }}, {{ site.address.town }}
     </p>
@@ -36,7 +36,7 @@
     class="py-1 mx-auto cursor-pointer"
     (click)="goToFilter('country', site.address.country!)"
   >
-    <div class="flex items-center justify-center gap-2">
+    <div class="flex items-center justify-center gap-2 dark:text-white">
       <img
         class="w-6"
         [src]="site.address.country! | countryFlag"

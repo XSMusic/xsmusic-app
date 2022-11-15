@@ -8,11 +8,20 @@ import {
   ScrapingGetInfoClubResponse,
 } from '@interfaces';
 import { Observable } from 'rxjs';
+import { ScrapingSourceI } from './scraping-source.interface';
 
 @Injectable({ providedIn: 'root' })
 export class ScrapingService {
   url = `${environment.API_URL}/scraping`;
   constructor(private httpClient: HttpClient) {}
+
+  getSources(type: string): ScrapingSourceI[] {
+    if (type === 'media') {
+      return [{ name: 'Youtube', value: 'youtube' }];
+    } else {
+      return [];
+    }
+  }
 
   getInfoArtist(
     data: ScrapingGetInfoArtistDto

@@ -13,6 +13,9 @@
   ></admin-site-one>
 
   <div *ngIf="view === 'viewOptions'">
-    <options-items [options]="options"></options-items>
+    <options-items
+      [options]="options"
+      (onClickOption)="onClickOptionItem($event)"
+    ></options-items>
   </div>
 </div>

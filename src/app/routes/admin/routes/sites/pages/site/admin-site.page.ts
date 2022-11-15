@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { routesConfig } from '@core/config';
 import { Site, Style } from '@models';
 import { ToastService, SiteService, StyleService } from '@services';
+import { OptionsItemI } from '@shared/components/options-items/options-items.interface';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -18,8 +20,8 @@ export class AdminSitePage implements OnInit {
   view = '';
   type = '';
   options = [
-    { name: 'Obtener coordenadas', action: 'addressToCoordinates' },
-    { name: 'Obtener direccion', action: 'coordinatesToAddress' },
+    { name: 'Añadir Set', action: 'goToAdminSetAdd' },
+    { name: 'Añadir Evento', action: 'goToAdminEventAdd' },
   ];
 
   constructor(
@@ -27,7 +29,8 @@ export class AdminSitePage implements OnInit {
     private styleService: StyleService,
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -74,5 +77,17 @@ export class AdminSitePage implements OnInit {
 
   onClickButton(event: ButtonBlockItem) {
     this.view = event.action;
+  }
+
+  onClickOptionItem(event: OptionsItemI) {
+    if (event.action === 'goToAdminSetAdd') {
+      this.router.navigate([
+        routesConfig.setAdminAddData
+          .replace(':source', 'default')
+          .replace(':value', this.site.name!),
+      ]);
+    } else if (event.action === 'goToAdminEventAdd') {
+      this.toastService.showToast(TOAST_STATE.info, 'En construccion');
+    }
   }
 }

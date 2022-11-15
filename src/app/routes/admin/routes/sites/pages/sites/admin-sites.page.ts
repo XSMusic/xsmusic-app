@@ -60,7 +60,11 @@ export class AdminSitesPage implements OnInit {
   }
 
   goToProfile(item: Site) {
-    this.router.navigate([routesConfig.clubAdmin.replace(':id', item._id!)]);
+    this.router.navigate([
+      item.type === 'club'
+        ? routesConfig.clubAdmin.replace(':id', item._id!)
+        : routesConfig.festivalAdmin.replace(':id', item._id!),
+    ]);
   }
 
   filter(event: { name: string; value: string }) {

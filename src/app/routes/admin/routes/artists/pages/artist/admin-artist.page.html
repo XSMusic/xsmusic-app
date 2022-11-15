@@ -13,7 +13,10 @@
   ></admin-artist-one>
 
   <div *ngIf="view === 'viewOptions'">
-    <options-items [options]="options"></options-items>
+    <options-items
+      [options]="options"
+      (onClickOption)="onClickOptionItem($event)"
+    ></options-items>
   </div>
 
   <ng-container *ngIf="view === 'viewSets'">

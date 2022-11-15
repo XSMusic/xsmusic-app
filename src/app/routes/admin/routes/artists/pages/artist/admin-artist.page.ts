@@ -8,6 +8,7 @@ import { countries } from 'assets/data/countries';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 import { routesConfig } from '@core/config';
+import { OptionsItemI } from '@shared/components/options-items/options-items.interface';
 
 @Component({
   selector: 'page-admin-artist',
@@ -107,6 +108,22 @@ export class AdminArtistPage {
           routesConfig.festivalAdmin.replace(':id', data.media.site._id!),
         ]);
       }
+    }
+  }
+
+  onClickOptionItem(event: OptionsItemI) {
+    if (event.action === 'goToAdminSetAdd') {
+      this.router.navigate([
+        routesConfig.setAdminAddData
+          .replace(':source', 'default')
+          .replace(':value', this.artist.name),
+      ]);
+    } else if (event.action === 'goToAdminTrackAdd') {
+      this.router.navigate([
+        routesConfig.trackAdminAddData
+          .replace(':source', 'default')
+          .replace(':value', this.artist.name),
+      ]);
     }
   }
 }

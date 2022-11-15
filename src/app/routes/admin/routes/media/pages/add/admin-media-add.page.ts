@@ -34,6 +34,7 @@ export class AdminMediaAddPage implements OnInit {
 
   ngOnInit() {
     this.getType();
+    this.getSourceAndValueWithParams();
     this.title = `Nuevo ${this.type}`;
   }
 
@@ -41,6 +42,15 @@ export class AdminMediaAddPage implements OnInit {
     this.type = this.route.snapshot.routeConfig!.path!.includes('sets')
       ? 'set'
       : 'track';
+  }
+  getSourceAndValueWithParams() {
+    const source = this.route.snapshot.paramMap.get('source');
+    const value = this.route.snapshot.paramMap.get('value');
+    if (source && value) {
+      this.source = source === 'default' ? 'youtube' : source;
+      this.searchText = value;
+    }
+    console.log(this.source, this.searchText);
   }
 
   search(searchText: string) {
@@ -69,7 +79,6 @@ export class AdminMediaAddPage implements OnInit {
     this.itemSelected = item;
     this.media = new Media({
       name: item.name,
-      // image: item.image,
       type: this.type,
       source: this.source,
       sourceId: item.videoId,

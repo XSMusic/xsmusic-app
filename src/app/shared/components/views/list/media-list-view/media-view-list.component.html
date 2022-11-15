@@ -61,14 +61,19 @@
                     {{ mediaItem.site.name }}
                   </p>
                   <div
+                    *ngIf="mediaItem.site"
                     class="flex gap-1 text-sm font-light text-gray-500 cursor-pointer"
                   >
                     <img
-                      [src]="mediaItem.site.address.country! | countryFlag"
+                      [src]="
+                        mediaItem.site.address.country
+                          ? (mediaItem.site.address.country | countryFlag)
+                          : ('es' | countryFlag)
+                      "
                       [alt]="mediaItem.site.address.country"
                       class="w-3 h-3 my-1 cursor-pointer hover:scale-110 hover:duration-1000"
                     />
-                    {{ mediaItem.site.address.country | countryName }}
+                    {{ mediaItem.site.address?.country ?? 'es' | countryName }}
                   </div>
                 </div>
               </div>

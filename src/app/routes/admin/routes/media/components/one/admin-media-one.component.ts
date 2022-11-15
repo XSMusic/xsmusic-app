@@ -103,9 +103,9 @@ export class AdminMediaOneComponent {
     }
   }
 
-  onChangeInputArtist(e: any) {
+  onChangeInputArtist(e: string) {
     if (this.media.artists!.length < 3) {
-      this.bodyArtist.filter = ['name', e.target.value];
+      this.bodyArtist.filter = ['name', e];
       this.artistService.getAll(this.bodyArtist).subscribe({
         next: (response) => {
           this.artistsSearch = response.items;
@@ -129,8 +129,8 @@ export class AdminMediaOneComponent {
     }
   }
 
-  onChangeInputSite(e: any) {
-    this.bodySite.filter = ['name', e.target.value];
+  onChangeInputSite(e: string) {
+    this.bodySite.filter = ['name', e];
     this.siteService.getAll(this.bodySite).subscribe({
       next: (response) => (this.sitesSearch = response.items),
       error: (error) => this.toast.showToast(TOAST_STATE.error, error),
@@ -193,16 +193,21 @@ export class AdminMediaOneComponent {
   }
 
   onSubmit() {
-    if (this.media._id) {
-      this.mediaService.update(this.media).subscribe({
-        next: (response) => this.onSuccessUpdate(response),
-        error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
-      });
-    } else {
-      this.mediaService.create(this.media).subscribe({
-        next: (response) => this.onSuccessCreate(response),
-        error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
-      });
+    const validation = this.validationSubmit();
+    if (validation.state) {
+      if (this.media._id) {
+        this.mediaService.update(this.media).subscribe({
+          next: (response) => this.onSuccessUpdate(response),
+          error: (error) =>
+            this.toastService.showToast(TOAST_STATE.error, error),
+        });
+      } else {
+        this.mediaService.create(this.media).subscribe({
+          next: (response) => this.onSuccessCreate(response),
+          error: (error) =>
+            this.toastService.showToast(TOAST_STATE.error, error),
+        });
+      }
     }
   }
 

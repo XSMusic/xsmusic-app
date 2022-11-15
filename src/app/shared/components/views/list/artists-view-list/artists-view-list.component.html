@@ -59,13 +59,11 @@
               </div>
             </td>
             <td class="pl-0">
-              <p
-                class="mb-2 mr-2 text-sm font-light leading-none text-gray-700"
-              >
+              <p class="mb-2 mr-2 text-sm font-light leading-none">
                 <span class="font-black">{{ artist.sets?.count ?? 0 }}</span>
                 {{ artist.sets?.count === 1 ? 'Set' : 'Sets' }}
               </p>
-              <p class="mr-2 text-sm font-light leading-none text-gray-700">
+              <p class="mr-2 text-sm font-light leading-none">
                 <span class="font-black">{{ artist.tracks?.count ?? 0 }}</span>
                 {{ artist.tracks?.count === 1 ? 'Track' : 'Tracks' }}
               </p>
@@ -156,10 +154,15 @@
             </td>
 
             <td class="pl-5" *ngxPermissionsOnly="'ADMIN'">
-              <div class="flex items-center">
-                <p class="mr-2 text-sm font-light leading-none text-gray-700">
+              <div class="flex flex-col">
+                <div class="mr-2 text-sm font-light leading-none text-gray-700">
+                  <span class="font-extrabold">Cre:</span>
+                  {{ artist.created! | timeAgo }}
+                </div>
+                <div class="mr-2 text-sm font-light leading-none text-gray-700">
+                  <span class="font-extrabold">Act:</span>
                   {{ artist.updated! | timeAgo }}
-                </p>
+                </div>
               </div>
             </td>
           </tr>

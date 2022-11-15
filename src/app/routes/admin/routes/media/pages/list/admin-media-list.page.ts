@@ -89,10 +89,18 @@ export class AdminMediaListPage implements OnInit {
   }
 
   goToProfile(data: { type: 'site' | 'media'; media: Media }) {
-    const route =
-      this.type === 'sets'
-        ? [routesConfig.setAdmin.replace(':id', data.media._id!)]
-        : [routesConfig.trackAdmin.replace(':id', data.media._id!)];
+    let route = [];
+    if (data.type === 'media') {
+      route =
+        this.type === 'sets'
+          ? [routesConfig.setAdmin.replace(':id', data.media._id!)]
+          : [routesConfig.trackAdmin.replace(':id', data.media._id!)];
+    } else {
+      route =
+        data.media.site.type === 'club'
+          ? [routesConfig.clubAdmin.replace(':id', data.media.site._id!)]
+          : [routesConfig.festivalAdmin.replace(':id', data.media.site._id!)];
+    }
     this.router.navigate(route);
   }
 

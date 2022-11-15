@@ -231,6 +231,16 @@ export const buttonsByType = [
         isActivatable: true,
         action: 'viewTracks',
       }),
+      new ButtonBlockItem({
+        name: 'Clubs',
+        isActivatable: true,
+        action: 'viewClubs',
+      }),
+      new ButtonBlockItem({
+        name: 'Festivales',
+        isActivatable: true,
+        action: 'viewFestivals',
+      }),
     ],
   },
 ];

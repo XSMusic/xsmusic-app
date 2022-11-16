@@ -45,7 +45,7 @@
   >
     <div class="flex items-center flex-shrink-0">
       <p
-        class="block w-auto text-lg font-extrabold rounded cursor-pointer hover:border-2xl lg:hidden hover:bg-gray-100 dark:hover:bg-gray-900"
+        class="block w-auto text-lg font-extrabold rounded cursor-pointer hover:border-2xl lg:hidden hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-white"
         (click)="goToHomeOrAdmin.emit()"
       >
         XSMusic
@@ -72,8 +72,8 @@
             <a
               *ngFor="let menu of menuItemsForAdmin"
               [routerLink]="menu.route"
-              routerLinkActive=" border-b dark:border-white"
-              class="px-3 py-2 text-sm font-medium text-black dark:text-white dark:hover:border-white dark:hover:border-b dark:hover:border-b-white hover:text-black"
+              routerLinkActive=" border-b-2 border-b-black dark:border-white"
+              class="px-3 py-2 text-sm font-medium text-black hover:border-b-2 hover:border-black dark:text-white dark:hover:border-white dark:hover:border-b dark:hover:border-b-white hover:text-black"
               aria-current="page"
             >
               {{ menu.name }}
@@ -83,8 +83,8 @@
             <a
               *ngFor="let menu of menuItemsForAdminInAdmin"
               [routerLink]="menu.route"
-              routerLinkActive=" border-b dark:border-white"
-              class="px-3 py-2 text-sm font-medium text-black dark:text-white dark:hover:border-white dark:hover:border-b dark:hover:border-b-white hover:text-black"
+              routerLinkActive=" border-b-2 border-b-black dark:border-white"
+              class="px-3 py-2 text-sm font-medium text-black hover:border-b-2 hover:border-black dark:text-white dark:hover:border-white dark:hover:border-b dark:hover:border-b-white hover:text-black"
               aria-current="page"
             >
               {{ menu.name }}
@@ -95,8 +95,8 @@
           <a
             *ngFor="let menu of menuItemsForAny"
             [routerLink]="menu.route"
-            routerLinkActive=" border-b dark:border-white"
-            class="px-3 py-2 text-sm font-medium text-black dark:text-white dark:hover:border-white dark:hover:border-b dark:hover:border-b-white hover:text-black"
+            routerLinkActive=" border-b-2 border-b-black dark:border-white"
+            class="px-3 py-2 text-sm font-medium text-black hover:border-b-2 hover:border-black dark:text-white dark:hover:border-white dark:hover:border-b dark:hover:border-b-white hover:text-black"
             aria-current="page"
           >
             {{ menu.name }}

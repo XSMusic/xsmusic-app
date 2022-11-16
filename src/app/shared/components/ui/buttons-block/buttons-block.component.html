@@ -32,9 +32,9 @@
           'font-extralight duration-300': !button.isActive
         }"
       >
-        <span class="hover:text-gray-800 dark:hover:text-white">{{
-          button.name
-        }}</span>
+        <span class="hover:text-gray-800 dark:hover:text-white">
+          {{ button.name }}
+        </span>
       </div>
     </ng-container>
   </div>
@@ -48,14 +48,16 @@
     <ng-container *ngFor="let button of buttons">
       <div
         (click)="clickButton(button)"
-        class="text-base text-center pb-1.5 px-1.5 text-black border-b-2 cursor-pointer hover:border-gray-600 hover:duration-300 hover:border-b-2"
+        class="text-base text-center pb-1.5 px-1.5 text-black dark:hover:text-white dark:text-white border-b-2 cursor-pointer dark:hover:border-white hover:border-gray-600 hover:duration-300 hover:border-b-2"
         [ngClass]="{
-          'font-extrabold border-b-gray-600 border-b-2 duration-300':
+          'font-extrabold border-b-gray-600 dark:border-b-white  border-b-2 duration-300':
             button.isActive,
-          'font-extralight duration-300': !button.isActive
+          'font-extralight duration-300 ': !button.isActive
         }"
       >
-        <span class="hover:text-gray-800">{{ button.name }}</span>
+        <span class="hover:text-gray-800 dark:hover:text-white">
+          {{ button.name }}
+        </span>
       </div>
     </ng-container>
   </div>

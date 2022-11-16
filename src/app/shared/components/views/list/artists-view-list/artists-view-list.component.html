@@ -1,7 +1,7 @@
 <ng-container *ngIf="!loading">
   <ng-container *ngIf="artists.length > 0">
     <div @inOut class="my-2 overflow-x-auto">
-      <table class="w-full whitespace-nowrap">
+      <table class="w-full whitespace-nowrap" aria-label="artist">
         <tbody>
           <tr
             *ngFor="let artist of artists"

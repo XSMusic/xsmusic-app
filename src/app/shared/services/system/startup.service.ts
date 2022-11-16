@@ -23,7 +23,7 @@ export class StartupService {
         .pipe(
           tap((user: any) => {
             this.setPermissions(user);
-            this.darkMode();
+            this.darkMode(user);
           })
         )
         .subscribe({
@@ -46,16 +46,15 @@ export class StartupService {
     }
   }
 
-  darkMode() {
-    const themeLS = localStorage.getItem('theme');
-    if (
-      themeLS === 'dark' ||
-      (!('theme' in localStorage) &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches)
-    ) {
+  darkMode(user: User) {
+    if (user.darkMode === 'active') {
       document.documentElement.classList.add('dark');
-    } else {
+    } else if (user.darkMode === 'desactive') {
       document.documentElement.classList.remove('dark');
+    } else if (user.darkMode === 'system') {
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.classList.add('dark');
+      }
     }
   }
 }

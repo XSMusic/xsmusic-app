@@ -1,5 +1,5 @@
 module.exports = {
   content: ['./src/**/*.{html,ts}'],
-  darkMode: 'class',
+  darkMode: 'media',
   plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
 };

@@ -13,24 +13,24 @@
   </div>
 </div>
 
-<div class="px-2">
+<div class="container px-2 md:mx-auto">
   <generic-view-gallery-items
     *ngIf="view === 'set'"
     [items]="item.sets"
     [type]="'set'"
     (goToOne)="goToOne($event)"
   ></generic-view-gallery-items>
+
+  <generic-view-gallery-items
+    *ngIf="view === 'track'"
+    [items]="item.tracks"
+    [type]="'track'"
+    (goToOne)="goToOne($event)"
+  ></generic-view-gallery-items>
+
+  <last-multi-items
+    *ngIf="view === 'image'"
+    [item]="item"
+    type="image"
+  ></last-multi-items>
 </div>
-
-<generic-view-gallery-items
-  *ngIf="view === 'track'"
-  [items]="item.tracks"
-  [type]="'track'"
-  (goToOne)="goToOne($event)"
-></generic-view-gallery-items>
-
-<last-multi-items
-  *ngIf="view === 'image'"
-  [item]="item"
-  type="image"
-></last-multi-items>

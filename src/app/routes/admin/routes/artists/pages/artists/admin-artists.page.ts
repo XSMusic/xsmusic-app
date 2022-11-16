@@ -6,10 +6,7 @@ import { GetAllDto } from '@interfaces';
 import { Artist } from '@models';
 import { ArtistService } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
-import {
-  ToastService,
-  TOAST_STATE,
-} from '@shared/services/ui/toast/toast.service';
+import { ToastService } from '@shared/services/ui/toast/toast.service';
 
 @Component({
   selector: 'page-admin-artists',

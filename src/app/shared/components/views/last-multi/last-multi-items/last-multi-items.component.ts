@@ -32,13 +32,13 @@ export class LastMultiItemsComponent implements OnInit {
   }
 
   goTo(item: Media) {
-    const route =
-      this.type === 'set'
-        ? [routesConfig.set.replace(':slug', item.slug!)]
-        : this.type === 'track'
-        ? [routesConfig.track.replace(':slug', item.slug!)]
-        : [];
-    this.router.navigate(route);
+    let route = '';
+    if (this.type === 'set') {
+      route = routesConfig.set.replace(':slug', item.slug!);
+    } else if (this.type === 'track') {
+      route = routesConfig.track.replace(':slug', item.slug!);
+    }
+    this.router.navigate([route]);
   }
 
   showFullImage(item: Image) {

@@ -8,7 +8,7 @@ import { countries } from 'assets/data/countries';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 import { routesConfig } from '@core/config';
-import { OptionsItemI } from '@shared/components/options-items/options-items.interface';
+import { OptionsItemI } from '@shared/components/ui/options-items/options-items.interface';
 
 @Component({
   selector: 'page-admin-artist',

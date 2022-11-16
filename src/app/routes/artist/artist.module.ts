@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared/shared.module';
 import { RouterModule } from '@angular/router';
-import { ArtistBlockInfoComponent } from './components/block-info/artist-block-info.component';
 import { ArtistPage } from './page/artist/artist.page';
 import { ArtistsPage } from './page/artists/artists.page';
 
@@ -27,7 +26,7 @@ import { ArtistsPage } from './page/artists/artists.page';
     ]),
   ],
   exports: [],
-  declarations: [ArtistPage, ArtistBlockInfoComponent, ArtistsPage],
+  declarations: [ArtistPage, ArtistsPage],
   providers: [],
 })
 export class ArtistModule {}

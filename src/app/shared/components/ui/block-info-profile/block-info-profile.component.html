@@ -1,0 +1,174 @@
+<div class="pt-16" @inOut>
+  <div
+    class="mx-auto mt-3 overflow-hidden border-2 w-52 h-52"
+    [ngClass]="{
+      'rounded-full': !item.address,
+      'rounded-2xl': item.address
+    }"
+  >
+    <img
+      [src]="item.images! | imageArray"
+      class="object-cover w-full h-full shadow-sm cursor-pointer hover:filter-grayscale hover:scale-105 hover:duration-1000"
+      [alt]="item.name"
+      (click)="showImage(item.images![0].url!)"
+      onError
+    />
+  </div>
+
+  <div
+    class="flex justify-center gap-2 pt-2 text-3xl font-bold text-center cursor-pointer dark:text-white"
+  >
+    <div *ngxPermissionsOnly="'ADMIN'" (click)="goToEdit(item._id!)">
+      {{ item.name }}
+    </div>
+
+    <div *ngxPermissionsExcept="'ADMIN'">
+      {{ item.name }}
+    </div>
+
+    <span
+      class="text-lg text-gray-600"
+      *ngIf="item.birthdate && item.birthdate !== ''"
+    >
+      {{ getYearsOld(item.birthdate!) }}
+    </span>
+  </div>
+
+  <div
+    *ngIf="item.country"
+    class="py-1 mx-auto cursor-pointer"
+    (click)="goToFilter('country', item.country!)"
+  >
+    <div
+      class="flex items-center justify-center gap-2 font-extralight dark:text-white"
+    >
+      <img class="w-6" [src]="item.country! | countryFlag" alt="item.name" />
+      {{ item.country! | countryName }}
+    </div>
+  </div>
+
+  <ng-container *ngIf="item.address">
+    <div class="text-center dark:text-white">
+      <p *ngIf="item.address.street !== '' && item.address.town !== ''">
+        {{ item.address.street }}, {{ item.address.town }}
+      </p>
+      <p *ngIf="item.address.street !== '' && item.address.town === ''">
+        {{ item.address.street }}, {{ item.address.state }}
+      </p>
+    </div>
+
+    <div
+      class="py-1 mx-auto cursor-pointer"
+      (click)="goToFilter('country', item.address.country!)"
+    >
+      <div class="flex items-center justify-center gap-2 dark:text-white">
+        <img
+          class="w-6"
+          [src]="item.address.country! | countryFlag"
+          alt="item.name"
+        />
+        {{ item.address.country! | countryName }}
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="p-2 text-center" *ngIf="item.styles!.length > 0">
+    <span *ngFor="let style of item.styles; index as i">
+      <a
+        (click)="goToFilter('styles', style.name)"
+        class="px-2 py-1 mr-2 text-xs bg-gray-100 border border-gray-100 shadow-md cursor-pointer rounded-2xl hover:bg-gray-200 hover:border-gray-200"
+      >
+        {{ style.name }}
+      </a>
+    </span>
+  </div>
+
+  <div class="flex justify-center gap-3">
+    <div
+      class="py-2"
+      *ngIf="item.social?.web && item.social?.web !== ''"
+      (click)="goToSocial(item.social.web)"
+    >
+      <svg-icon
+        name="web"
+        svgClass="h-8 w-8  hover:scale-110 hover:duration-1000 cursor-pointer"
+      ></svg-icon>
+    </div>
+    <div
+      class="py-2"
+      *ngIf="item.social?.facebook && item.social?.facebook !== ''"
+      (click)="goToSocial(item.social.facebook)"
+    >
+      <svg-icon
+        name="facebook"
+        svgClass="h-8 w-8 hover:scale-110 hover:duration-1000 cursor-pointer"
+      ></svg-icon>
+    </div>
+    <div
+      class="py-2"
+      *ngIf="item.social?.twitter && item.social?.twitter !== ''"
+      (click)="goToSocial(item.social.twitter)"
+    >
+      <svg-icon
+        name="twitter"
+        svgClass="h-8 w-8 hover:scale-110 hover:duration-1000 cursor-pointer"
+      ></svg-icon>
+    </div>
+    <div
+      class="py-2"
+      *ngIf="item.social?.soundcloud && item.social?.soundcloud !== ''"
+      (click)="goToSocial(item.social.soundcloud)"
+    >
+      <svg-icon
+        name="soundcloud"
+        svgClass="h-8 w-8 hover:scale-110 hover:duration-1000 cursor-pointer"
+      ></svg-icon>
+    </div>
+    <div
+      class="py-2"
+      *ngIf="item.social?.spotify && item.social?.spotify !== ''"
+      (click)="goToSocial(item.social.spotify)"
+    >
+      <svg-icon
+        name="spotify"
+        svgClass="h-8 w-8 hover:scale-110 hover:duration-1000 cursor-pointer"
+      ></svg-icon>
+    </div>
+    <div
+      class="py-2"
+      *ngIf="item.social?.tiktok && item.social?.tiktok !== ''"
+      (click)="goToSocial(item.social.tiktok)"
+    >
+      <svg-icon
+        name="tiktok"
+        svgClass="h-8 w-8 hover:scale-110 hover:duration-1000 cursor-pointer"
+      ></svg-icon>
+    </div>
+    <div
+      class="py-2"
+      *ngIf="item.social?.instagram && item.social?.instagram !== ''"
+      (click)="goToSocial(item.social.instagram)"
+    >
+      <svg-icon
+        name="instagram"
+        svgClass="h-8 w-8 hover:scale-110 hover:duration-1000 cursor-pointer"
+      ></svg-icon>
+    </div>
+  </div>
+
+  <div class="px-6 py-2 text-center" *ngIf="item.info !== ''">
+    <div
+      *ngIf="!moreInfo"
+      class="lg:px-8"
+      [innerHTML]="item.info! | truncateText: 150"
+    ></div>
+    <div *ngIf="moreInfo" class="lg:px-8" [innerHTML]="item.info!"></div>
+    <p
+      *ngIf="item.info!.length > 150"
+      class="mt-2 font-semibold cursor-pointer"
+      (click)="moreInfo = !moreInfo"
+    >
+      {{ !moreInfo ? 'Leer mas' : 'Leer menos' }}
+    </p>
+  </div>
+</div>

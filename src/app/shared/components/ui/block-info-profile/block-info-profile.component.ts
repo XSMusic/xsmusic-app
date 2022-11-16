@@ -1,21 +1,19 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
-import { Artist } from '@models';
 import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
-import { getYearsOld } from '@shared/utils/utils';
+import { getYearsOld } from '@shared/utils';
 
 @Component({
-  selector: 'artist-block-info',
-  templateUrl: 'artist-block-info.component.html',
+  selector: 'block-info-profile',
+  templateUrl: 'block-info-profile.component.html',
   animations: [inOutAnimation],
 })
-export class ArtistBlockInfoComponent {
-  @Input() artist: Artist = new Artist();
-  viewMore = false;
-  getYearsOld = getYearsOld;
+export class BlockInfoProfileComponent {
+  @Input() item: any;
   moreInfo = false;
+  getYearsOld = getYearsOld;
 
   constructor(private fullImage: FullImageService, private router: Router) {}
 
@@ -24,12 +22,12 @@ export class ArtistBlockInfoComponent {
   }
 
   goToEdit(id: string) {
-    this.router.navigate(['admin/artists/one/', id]);
+    this.router.navigate([routesConfig.clubAdmin.replace(':id', id)]);
   }
 
-  goToArtistFilter(key: string, value: string) {
+  goToFilter(key: string, value: string) {
     this.router.navigate([
-      routesConfig.artistsFilter
+      routesConfig.clubsFilter
         .replace(':filterKey', key)
         .replace(':filterValue', value),
     ]);

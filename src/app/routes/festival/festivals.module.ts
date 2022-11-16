@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '@shared/shared.module';
-import { FestivalBlockInfoComponent } from './components/block-info/festival-block-info.component';
 import { FestivalPage } from './pages/festival/festival.page';
 import { FestivalsPage } from './pages/festivals/festivals.page';
 
@@ -27,7 +26,7 @@ import { FestivalsPage } from './pages/festivals/festivals.page';
     ]),
   ],
   exports: [],
-  declarations: [FestivalsPage, FestivalPage, FestivalBlockInfoComponent],
+  declarations: [FestivalsPage, FestivalPage],
   providers: [],
 })
 export class FestivalsModule {}

@@ -1,3 +1,5 @@
+export { BlockInfoProfileComponent } from './ui/block-info-profile/block-info-profile.component';
+
 // Artist
 export { ArtistsLastBlockComponent } from './artists/artists-last-block/artists-last-block.component';
 // Site
@@ -18,7 +20,7 @@ export { NavbarMobileMenuComponent } from './ui/navbar/navbar-mobile-menu/navbar
 export { SearchBarComponent } from './ui/search-bar/search-bar.component';
 export { ToastComponent } from './ui/toast/toast.component';
 export { MapComponent } from './map/map.component';
-export { OptionsItemsComponent } from './options-items/options-items.component';
+export { OptionsItemsComponent } from './ui/options-items/options-items.component';
 export { ImagesEditBlockComponent } from './ui/images-edit-block/images-edit-block.component';
 export { ImagesUploadUrlComponent } from './ui/images-upload-url/images-upload-url.component';
 export { FilterBarComponent } from './ui/filter-bar/filter-bar.component';

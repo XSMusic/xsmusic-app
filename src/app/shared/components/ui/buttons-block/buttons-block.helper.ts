@@ -39,7 +39,7 @@ export const buttonsByType = [
         isActivatable: true,
       }),
       new ButtonBlockItem({
-        name: 'Nuevo Artista',
+        name: 'Nuevo',
         action: 'add',
         isActivatable: false,
       }),

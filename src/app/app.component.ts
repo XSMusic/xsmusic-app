@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { SwUpdate, VersionReadyEvent } from '@angular/service-worker';
 import { filter, map } from 'rxjs';
 
 @Component({
@@ -8,10 +9,40 @@ import { filter, map } from 'rxjs';
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
-  constructor(private router: Router, private titleService: Title) {}
+  modalVersion = false;
+
+  constructor(
+    private router: Router,
+    private titleService: Title,
+    private swUpdate: SwUpdate
+  ) {}
   ngOnInit(): void {
     this.preventBackButton();
     this.setTitle();
+
+    console.log(this.swUpdate);
+    if (this.swUpdate.isEnabled) {
+      this.swUpdate.versionUpdates.pipe(
+        filter(
+          (evt: any): evt is VersionReadyEvent => evt.type === 'VERSION_READY'
+        ),
+        map((evt: any) => {
+          console.info(
+            `currentVersion=[${evt.currentVersion} | latestVersion=[${evt.latestVersion}]`
+          );
+          this.modalVersion = true;
+        })
+      );
+    }
+  }
+
+  public updateVersion(): void {
+    this.modalVersion = false;
+    window.location.reload();
+  }
+
+  public closeVersion(): void {
+    this.modalVersion = false;
   }
 
   preventBackButton() {

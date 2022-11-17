@@ -32,6 +32,10 @@ export class LoginPage {
     });
   }
 
+  goToForgottenPassword() {
+    this.router.navigate([routesConfig.authForgottenPassword]);
+  }
+
   wip() {
     this.toast.showToast(TOAST_STATE.warning, 'En construccion...');
   }

@@ -4,10 +4,11 @@ import { BehaviorSubject, of } from 'rxjs';
 import { map, share, switchMap, tap } from 'rxjs/operators';
 import { TokenService } from './token.service';
 import { User } from '@models';
-import { LoginResponseI } from '@interfaces';
+import { LoginResponseI, MessageI } from '@interfaces';
 import { UserService } from '@services';
 import { NgxPermissionsService } from 'ngx-permissions';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '@env/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -77,5 +78,19 @@ export class AuthService {
       return of(this.user$.getValue()).pipe(share());
     }
     return this.me().pipe(tap((user) => this.user$.next(user)));
+  }
+
+  forgottenPassword(email: string): Observable<MessageI> {
+    return this.http.post<MessageI>(
+      `${this.urlAuth}/sendPasswordResetEmail/${email}`,
+      null
+    );
+  }
+
+  resetPassword(userId: string, token: string, password: string) {
+    return this.http.post<MessageI>(
+      `${this.urlAuth}/resetPassword/${userId}/${token}`,
+      { password }
+    );
   }
 }

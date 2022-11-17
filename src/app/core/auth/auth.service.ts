@@ -1,28 +1,29 @@
 import { Observable } from 'rxjs/internal/Observable';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, iif, of } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { map, share, switchMap, tap } from 'rxjs/operators';
 import { TokenService } from './token.service';
-import { LoginService } from './login.service';
-import { Menu, User } from '@models';
+import { User } from '@models';
 import { LoginResponseI } from '@interfaces';
 import { UserService } from '@services';
 import { NgxPermissionsService } from 'ngx-permissions';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  urlAuth = `${environment.API_URL}/auth`;
   private user$ = new BehaviorSubject({});
   private change$ = this.tokenService
     .change()
     .pipe(switchMap(() => this.assignUser()));
 
   constructor(
-    private loginService: LoginService,
     private tokenService: TokenService,
     private userService: UserService,
-    private permissionService: NgxPermissionsService
+    private permissionService: NgxPermissionsService,
+    protected http: HttpClient
   ) {}
 
   init() {
@@ -40,13 +41,18 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<boolean> {
-    return this.loginService.login(email, password).pipe(
-      tap((item: LoginResponseI) => {
-        this.tokenService.set(item.token);
-        this.userService.set(item.user);
-      }),
-      map(() => this.check())
-    );
+    return this.http
+      .post<LoginResponseI>(`${this.urlAuth}/login`, {
+        email,
+        password,
+      })
+      .pipe(
+        tap((item: LoginResponseI) => {
+          this.tokenService.set(item.token);
+          this.userService.set(item.user);
+        }),
+        map(() => this.check())
+      );
   }
 
   logout(): void {
@@ -59,8 +65,8 @@ export class AuthService {
     return this.user$.pipe(share());
   }
 
-  menu(): Observable<Menu[] | never[]> {
-    return iif(() => this.check(), this.loginService.menu(), of([]));
+  me() {
+    return this.http.post<User>(`${this.urlAuth}/me`, {});
   }
 
   private assignUser() {
@@ -70,6 +76,6 @@ export class AuthService {
     if (!this.user$.getValue()) {
       return of(this.user$.getValue()).pipe(share());
     }
-    return this.loginService.me().pipe(tap((user) => this.user$.next(user)));
+    return this.me().pipe(tap((user) => this.user$.next(user)));
   }
 }

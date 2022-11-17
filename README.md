@@ -8,13 +8,11 @@ Cada vez que se añada un valor en el archivo .env, hay que añadir el archivo c
 
 #### Mejoras
 
-- [ ] Obtener la fecha de nacimiento de busqueda en google (birthdate of XXX)
 - [ ] Confirmacion en eliminar
 - [ ] Mapas
       Opciones: Leatflet openstreetmap
   - [ ] Añadir arrastrar y devolver coordenadas (opcional)
 - [ ] Imagenes
-  - [ ] Crear ruta
   - [ ] Obtener imagenes de instagram
   - [ ] Confirmar al eliminar
 - [ ] Buscador de nombres en redes sociales
@@ -23,9 +21,13 @@ Cada vez que se añada un valor en el archivo .env, hay que añadir el archivo c
 - [ ] Añadir modelo de Eventos
 - [ ] Mostrar los minutos de duracion de scraping youtube
 - [ ] BackButton
-- [ ] Hacer generico block-info
+- [ ] Reset password
+
+#### Ideas
+
+- [ ] Obtener la fecha de nacimiento de busqueda en google (birthdate of XXX)
+- [ ]
 
 #### Bugs
 
 - [ ] Corregir modal en version movil (con texto grande no salen botones)
-- [ ] Al guardar media, añadir validaciones de site

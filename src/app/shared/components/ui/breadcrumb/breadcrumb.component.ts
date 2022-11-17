@@ -46,7 +46,7 @@ export class BreadcrumbeComponent implements OnInit {
     const lastRoutePart = path.split('/').pop() ?? '';
     const isDynamicRoute = lastRoutePart.startsWith(':');
     if (isDynamicRoute && !!route.snapshot) {
-      const paramName = lastRoutePart!.split(':')[1];
+      const paramName = lastRoutePart.split(':')[1];
       path = path.replace(lastRoutePart, route.snapshot.params[paramName]);
       label = route.snapshot.params[paramName];
     }

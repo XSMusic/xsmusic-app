@@ -102,6 +102,8 @@ export class NavbarComponent implements OnInit {
 
   checkBackButton(e: any) {
     if (!this.adminPage) {
+      this.backButton.state = false;
+      this.backButton.route = '';
       const urlSplit = e.url.split('/');
       if (urlSplit.length === 4) {
         if (e.url.includes('artist')) {

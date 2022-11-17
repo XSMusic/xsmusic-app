@@ -20,7 +20,6 @@ export class AppComponent implements OnInit {
     this.preventBackButton();
     this.setTitle();
 
-    console.log(this.swUpdate);
     if (this.swUpdate.isEnabled) {
       this.swUpdate.versionUpdates.pipe(
         filter(

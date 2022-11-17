@@ -1,9 +1,8 @@
-<navbar></navbar>
-<toast></toast>
-<modal></modal>
-<full-image></full-image>
-<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
-<div class="top-0 w-100 position-absolute" *ngIf="modalVersion">
+<div
+  class="absolute w-full py-2 text-center bg-gray-100 border-b border-b-gray-300"
+  style="z-index: 1001"
+  *ngIf="modalVersion"
+>
   <div class="m-2 alert alert-secondary">
     <button
       type="button"
@@ -12,7 +11,15 @@
       (click)="closeVersion()"
     ></button>
     Nueva version disponible.
-    <a href="" (click)="updateVersion()">Update now</a>
+    <span class="font-bold cursor-pointer" (click)="updateVersion()"
+      >Actualizar</span
+    >
   </div>
 </div>
+<navbar></navbar>
+<toast></toast>
+<modal></modal>
+<full-image></full-image>
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+
 <router-outlet></router-outlet>

@@ -5,10 +5,12 @@ import { ToastService, MediaService } from '@services';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { routesConfig } from '@core/config';
+import { inOutAnimation } from '@core/animations/enter-leave.animations';
 
 @Component({
   selector: 'page-set',
   templateUrl: 'set.page.html',
+  animations: [inOutAnimation],
 })
 export class SetPage implements OnInit {
   slug!: string;

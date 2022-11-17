@@ -8,7 +8,8 @@
       [menuProfileState]="menuProfileState"
       [menuProfileItems]="menuProfileItems"
       [user]="user"
-      (toggleMenu)="toggleMenu()"
+      [backButton]="backButton"
+      (onMenuOrBackButton)="onMenuOrBackButton()"
       (goToHomeOrAdmin)="goToHomeOrAdmin()"
       (onClickMenuProfileItem)="onClickMenuProfileItem($event)"
     ></navbar-normal-menu>

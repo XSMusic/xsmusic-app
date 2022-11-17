@@ -15,9 +15,11 @@ export class NavbarNormalMenuComponent implements OnInit {
   @Input() menuItemsForAdminInAdmin: Menu[] = [];
   @Input() menuProfileState = false;
   @Input() user!: User;
-  @Output() toggleMenu = new EventEmitter<void>();
+  @Input() backButton!: { state: boolean; route: string };
   @Output() goToHomeOrAdmin = new EventEmitter<void>();
   @Output() onClickMenuProfileItem = new EventEmitter<Menu>();
+  @Output() onMenuOrBackButton = new EventEmitter<void>();
+
   offline = false;
 
   ngOnInit(): void {

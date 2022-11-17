@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnInit, ElementRef } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { Router, NavigationEnd, Event } from '@angular/router';
+import { Router, NavigationEnd, Event, RouterEvent } from '@angular/router';
 import { filter, distinctUntilChanged } from 'rxjs';
 import { Menu, User } from '@models';
 import { AuthService } from '@core/auth';
@@ -27,6 +27,10 @@ export class NavbarComponent implements OnInit {
   adminPage = false;
   hidden = false;
   onePage = false;
+  backButton = {
+    state: false,
+    route: '',
+  };
 
   constructor(
     private router: Router,
@@ -92,7 +96,43 @@ export class NavbarComponent implements OnInit {
         this.onePage =
           e.url.indexOf('/one/') !== -1 || e.url.indexOf('/profile/') !== -1;
         this.homePage = e.url.indexOf('home') !== -1;
+        this.checkBackButton(e);
       });
+  }
+
+  checkBackButton(e: any) {
+    if (!this.adminPage) {
+      const urlSplit = e.url.split('/');
+      if (urlSplit.length === 4) {
+        if (e.url.includes('artist')) {
+          this.setBackButtonRoute(routesConfig.artists);
+        } else if (e.url.includes('club')) {
+          this.setBackButtonRoute(routesConfig.clubs);
+        } else if (e.url.includes('festival')) {
+          this.setBackButtonRoute(routesConfig.festivals);
+        } else if (e.url.includes('set')) {
+          this.setBackButtonRoute(routesConfig.sets);
+        } else if (e.url.includes('track')) {
+          this.setBackButtonRoute(routesConfig.tracks);
+        }
+      }
+    } else {
+      this.backButton.state = false;
+      this.backButton.route = '';
+    }
+  }
+
+  onMenuOrBackButton() {
+    if (!this.backButton.state) {
+      this.toggleMenu();
+    } else {
+      this.router.navigate([this.backButton.route]);
+    }
+  }
+
+  private setBackButtonRoute(route: string) {
+    this.backButton.state = true;
+    this.backButton.route = route;
   }
 
   openOrCloseMenu() {

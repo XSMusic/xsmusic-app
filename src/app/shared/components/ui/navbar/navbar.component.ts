@@ -45,7 +45,6 @@ export class NavbarComponent implements OnInit {
   }
 
   async setMenuItems() {
-    console.log(this.ngxPermissionsService.getPermissions());
     this.menuItemsForAny = [
       { name: 'Inicio', route: 'home' },
       { name: 'Artistas', route: routesConfig.artists },

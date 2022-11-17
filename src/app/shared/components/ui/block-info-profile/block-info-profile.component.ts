@@ -12,6 +12,7 @@ import { getYearsOld } from '@shared/utils';
 })
 export class BlockInfoProfileComponent {
   @Input() item: any;
+  @Input() type: 'artist' | 'club' | 'festival' = 'artist';
   moreInfo = false;
   getYearsOld = getYearsOld;
 
@@ -26,10 +27,17 @@ export class BlockInfoProfileComponent {
   }
 
   goToFilter(key: string, value: string) {
+    let route = '';
+    if (this.type === 'artist') {
+      route = routesConfig.artistsFilter;
+    } else if (this.type === 'club') {
+      route = routesConfig.clubsFilter;
+    } else if (this.type === 'festival') {
+      route = routesConfig.festivalsFilter;
+    }
+
     this.router.navigate([
-      routesConfig.clubsFilter
-        .replace(':filterKey', key)
-        .replace(':filterValue', value),
+      route.replace(':filterKey', key).replace(':filterValue', value),
     ]);
   }
 

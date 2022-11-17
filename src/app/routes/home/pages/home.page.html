@@ -12,21 +12,4 @@
     <sites-last-block type="club"></sites-last-block>
     <sites-last-block type="festival"></sites-last-block>
   </div>
-
-  <div *ngxPermissionsExcept="['ADMIN', 'USER']">
-    <div class="flex gap-2">
-      <button
-        class="px-4 py-2 text-white bg-red-500 border rounded-2xl"
-        (click)="loginAdmin()"
-      >
-        Login Admin
-      </button>
-      <button
-        class="px-4 py-2 text-white bg-blue-500 border rounded-2xl"
-        (click)="loginUser()"
-      >
-        Login User
-      </button>
-    </div>
-  </div>
 </div>

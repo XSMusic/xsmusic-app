@@ -1,3 +1,21 @@
+<div
+  class="absolute w-full py-2 text-center bg-gray-100 border-b border-b-gray-300"
+  style="z-index: 1001"
+  *ngIf="modalVersion"
+>
+  <div class="m-2 alert alert-secondary">
+    <button
+      type="button"
+      class="top-0 m-1 btn-close position-absolute end-0"
+      aria-label="Close"
+      (click)="closeVersion()"
+    ></button>
+    Nueva version disponible.
+    <span class="font-bold cursor-pointer" (click)="updateVersion()"
+      >Actualizar</span
+    >
+  </div>
+</div>
 <navbar></navbar>
 <toast></toast>
 <modal></modal>

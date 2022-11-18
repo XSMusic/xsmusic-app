@@ -1,9 +1,12 @@
 {
-  "name": "xsmusic",
-  "short_name": "xsmusic",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
-  "display": "standalone",
+  "name": "XSMusic",
+  "short_name": "XSMusic",
+  "lang": "en",
+  "theme_color": "transparent",
+  "background_color": "transparent",
+  "description": "Tu app de musica electronica",
+  "display": "fullscreen",
+  "prefer_related_applications": false,
   "scope": "./",
   "start_url": "./",
   "icons": [

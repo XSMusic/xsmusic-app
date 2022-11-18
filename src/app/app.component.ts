@@ -20,21 +20,20 @@ export class AppComponent implements OnInit {
     this.preventBackButton();
     this.setTitle();
 
-    console.log(this.swUpdate.isEnabled);
-    // if (this.swUpdate.isEnabled) {
-    this.swUpdate.versionUpdates.pipe(
-      filter(
-        (evt: any): evt is VersionReadyEvent => evt.type === 'VERSION_READY'
-      ),
-      map((evt: any) => {
-        console.log(evt);
-        console.info(
-          `currentVersion=[${evt.currentVersion} | latestVersion=[${evt.latestVersion}]`
-        );
-        this.modalVersion = true;
-      })
-    );
-    // }
+    if (this.swUpdate.isEnabled) {
+      this.swUpdate.versionUpdates.pipe(
+        filter(
+          (evt: any): evt is VersionReadyEvent => evt.type === 'VERSION_READY'
+        ),
+        map((evt: any) => {
+          console.log(evt);
+          console.info(
+            `currentVersion=[${evt.currentVersion} | latestVersion=[${evt.latestVersion}]`
+          );
+          this.modalVersion = true;
+        })
+      );
+    }
   }
 
   public updateVersion(): void {

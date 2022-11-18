@@ -6,6 +6,7 @@ import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { routesConfig } from '@core/config';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
+import { Share } from '@capacitor/share';
 
 @Component({
   selector: 'page-set',
@@ -81,5 +82,19 @@ export class SetPage implements OnInit {
     this.router.navigate([
       routesConfig.setAdmin.replace(':id', this.media._id!),
     ]);
+  }
+
+  async sharing() {
+    try {
+      await Share.share({
+        title: 'See cool stuff',
+        text: 'Really awesome thing you need to see right meow',
+        url: 'http://ionicframework.com/',
+        dialogTitle: 'Share with buddies',
+      });
+    } catch (error) {
+      console.log(error);
+      this.toastService.showToast(TOAST_STATE.error, 'Error al compartir');
+    }
   }
 }

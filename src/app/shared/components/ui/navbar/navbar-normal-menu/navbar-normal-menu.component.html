@@ -4,7 +4,7 @@
     <button
       type="button"
       (click)="onMenuOrBackButton.emit()"
-      class="inline-flex items-center justify-center p-2 text-black bg-gray-100 rounded-2xl hover:bg-gray-200 dark:hover:bg-gray-900 dark:text-white hover:text-gray-900"
+      class="inline-flex items-center justify-center p-2 text-black bg-gray-100 dark:bg-gray-800 rounded-2xl hover:bg-gray-200 dark:hover:bg-gray-900 dark:text-white hover:text-gray-900"
       aria-controls="mobile-menu"
       aria-expanded="false"
     >
@@ -17,7 +17,7 @@
   >
     <div class="flex items-center flex-shrink-0">
       <p
-        class="block w-auto text-lg font-extrabold rounded cursor-pointer hover:border-2xl lg:hidden hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-white"
+        class="block w-auto text-lg font-extrabold rounded-lg cursor-pointer dark:hover:border-lg dark:hover:bg-gray-800 hover:bg-gray-100 hover:px-2 dark:text-white"
         (click)="goToHomeOrAdmin.emit()"
       >
         XSMusic
@@ -82,7 +82,7 @@
         <button
           type="button"
           routerLink="/auth"
-          class="p-2 text-sm text-black bg-gray-100 rounded-2xl hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-900 dark:text-white"
+          class="p-2 text-sm text-black bg-gray-100 dark:bg-gray-800 rounded-2xl hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-900 dark:text-white"
         >
           <svg-icon name="login" svgClass="w-4 h-4"></svg-icon>
         </button>
@@ -92,7 +92,7 @@
         <!-- Menu Profile -->
         <button
           type="button"
-          class="flex text-sm bg-gray-100 rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+          class="flex text-sm bg-gray-100 rounded-full dark:bg-800 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
           id="user-menu-button"
           aria-expanded="false"
           aria-haspopup="true"

@@ -10,7 +10,6 @@ Cada vez que se añada un valor en el archivo .env, hay que añadir el archivo c
 
 - [ ] Confirmacion en eliminar
 - [ ] Mapas
-      Opciones: Leatflet openstreetmap
   - [ ] Añadir arrastrar y devolver coordenadas (opcional)
 - [ ] Imagenes
   - [ ] Obtener imagenes de instagram
@@ -19,7 +18,6 @@ Cada vez que se añada un valor en el archivo .env, hay que añadir el archivo c
 - [ ] Obtener info del sitio scrapeado
 - [ ] Añadir Likes
 - [ ] Añadir modelo de Eventos
-- [ ] Mostrar los minutos de duracion de scraping youtube
 
 #### Ideas
 

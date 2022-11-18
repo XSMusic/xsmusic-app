@@ -20,13 +20,13 @@ Cada vez que se añada un valor en el archivo .env, hay que añadir el archivo c
 - [ ] Añadir Likes
 - [ ] Añadir modelo de Eventos
 - [ ] Mostrar los minutos de duracion de scraping youtube
-- [ ] BackButton
+- [ ] BackButton Admin
 
 #### Ideas
 
 - [ ] Obtener la fecha de nacimiento de busqueda en google (birthdate of XXX)
-- [ ]
 
 #### Bugs
 
-- [ ] Corregir modal en version movil (con texto grande no salen botones)
+- [ ] Al hacer login, se abre el menu profile
+- [ ] Cuando el menu profile esta abierto y pinchamos en otro lado no se cierra

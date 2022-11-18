@@ -22,6 +22,11 @@ export class NavbarNormalMenuComponent implements OnInit {
 
   offline = false;
 
+  clickItem(item: Menu) {
+    this.menuProfileState = false;
+    this.onClickMenuProfileItem.emit(item);
+  }
+
   ngOnInit(): void {
     window.addEventListener('online', this.onNetworkStatusChange.bind(this));
     window.addEventListener('offline', this.onNetworkStatusChange.bind(this));

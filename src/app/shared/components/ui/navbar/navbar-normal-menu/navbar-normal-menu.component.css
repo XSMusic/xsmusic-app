@@ -1,0 +1,7 @@
+.navbar-no-active {
+  font-weight: 100;
+}
+
+.navbar-active {
+  font-weight: 900;
+}

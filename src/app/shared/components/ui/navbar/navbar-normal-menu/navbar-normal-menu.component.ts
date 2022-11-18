@@ -6,6 +6,7 @@ import { Menu, User } from '@models';
   selector: 'navbar-normal-menu',
   templateUrl: './navbar-normal-menu.component.html',
   animations: [inOutAnimation],
+  styleUrls: ['./navbar-normal-menu.component.css'],
 })
 export class NavbarNormalMenuComponent implements OnInit {
   @Input() adminPage = false;

@@ -44,9 +44,8 @@
             <a
               *ngFor="let menu of menuItemsForAdmin"
               [routerLink]="menu.route"
-              routerLinkActive=" border-b-2 border-b-black dark:border-white"
-              class="px-3 py-2 text-sm font-medium text-black hover:border-b-2 hover:border-black dark:text-white dark:hover:border-white dark:hover:border-b dark:hover:border-b-white hover:text-black"
-              aria-current="page"
+              routerLinkActive=" border-b-2 border-b-black dark:border-white navbar-active duration-400"
+              class="px-3 py-2 text-sm font-medium text-black duration-200 hover:border-b-2 navbar-no-active hover:border-black dark:text-white dark:hover:border-white dark:hover:border-b dark:hover:border-b-white hover:text-black"
             >
               {{ menu.name }}
             </a>
@@ -55,9 +54,8 @@
             <a
               *ngFor="let menu of menuItemsForAdminInAdmin"
               [routerLink]="menu.route"
-              routerLinkActive=" border-b-2 border-b-black dark:border-white"
-              class="px-3 py-2 text-sm font-medium text-black hover:border-b-2 hover:border-black dark:text-white dark:hover:border-white dark:hover:border-b dark:hover:border-b-white hover:text-black"
-              aria-current="page"
+              routerLinkActive=" border-b-2 border-b-black dark:border-white navbar-active duration-400"
+              class="px-3 py-2 text-sm font-medium text-black duration-200 hover:border-b-2 navbar-no-active hover:border-black dark:text-white dark:hover:border-white dark:hover:border-b dark:hover:border-b-white hover:text-black"
             >
               {{ menu.name }}
             </a>
@@ -67,9 +65,8 @@
           <a
             *ngFor="let menu of menuItemsForAny"
             [routerLink]="menu.route"
-            routerLinkActive=" border-b-2 border-b-black dark:border-white"
-            class="px-3 py-2 text-sm font-medium text-black hover:border-b-2 hover:border-black dark:text-white dark:hover:border-white dark:hover:border-b dark:hover:border-b-white hover:text-black"
-            aria-current="page"
+            routerLinkActive=" border-b-2 border-b-black dark:border-white navbar-active duration-400"
+            class="px-3 py-2 text-sm font-medium text-black duration-200 hover:border-b-2 navbar-no-active hover:border-black dark:text-white dark:hover:border-white dark:hover:border-b dark:hover:border-b-white hover:text-black"
           >
             {{ menu.name }}
           </a>

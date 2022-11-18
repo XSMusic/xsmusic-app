@@ -102,25 +102,51 @@ export class NavbarComponent implements OnInit {
 
   checkBackButton(e: any) {
     if (!this.adminPage) {
-      this.backButton.state = false;
-      this.backButton.route = '';
-      const urlSplit = e.url.split('/');
-      if (urlSplit.length === 4) {
-        if (e.url.includes('artist')) {
-          this.setBackButtonRoute(routesConfig.artists);
-        } else if (e.url.includes('club')) {
-          this.setBackButtonRoute(routesConfig.clubs);
-        } else if (e.url.includes('festival')) {
-          this.setBackButtonRoute(routesConfig.festivals);
-        } else if (e.url.includes('set')) {
-          this.setBackButtonRoute(routesConfig.sets);
-        } else if (e.url.includes('track')) {
-          this.setBackButtonRoute(routesConfig.tracks);
-        }
-      }
+      this.checkBackButtonNormal(e);
     } else {
-      this.backButton.state = false;
-      this.backButton.route = '';
+      this.checkBackButtonAdmin(e);
+    }
+  }
+
+  checkBackButtonNormal(e: any) {
+    this.backButton.state = false;
+    this.backButton.route = '';
+    const urlSplit = e.url.split('/');
+    if (urlSplit.length === 4) {
+      if (e.url.includes('artist')) {
+        this.setBackButtonRoute(routesConfig.artists);
+      } else if (e.url.includes('club')) {
+        this.setBackButtonRoute(routesConfig.clubs);
+      } else if (e.url.includes('festival')) {
+        this.setBackButtonRoute(routesConfig.festivals);
+      } else if (e.url.includes('set')) {
+        this.setBackButtonRoute(routesConfig.sets);
+      } else if (e.url.includes('track')) {
+        this.setBackButtonRoute(routesConfig.tracks);
+      }
+    }
+  }
+
+  checkBackButtonAdmin(e: any) {
+    this.backButton.state = false;
+    this.backButton.route = '';
+    const urlSplit = e.url.split('/');
+    if (urlSplit.length > 4) {
+      if (e.url.includes('artist')) {
+        this.setBackButtonRoute(routesConfig.artistsAdmin);
+      } else if (e.url.includes('club')) {
+        this.setBackButtonRoute(routesConfig.clubsAdmin);
+      } else if (e.url.includes('style')) {
+        this.setBackButtonRoute(routesConfig.stylesAdmin);
+      } else if (e.url.includes('festival')) {
+        this.setBackButtonRoute(routesConfig.festivalsAdmin);
+      } else if (e.url.includes('set')) {
+        this.setBackButtonRoute(routesConfig.setsAdmin);
+      } else if (e.url.includes('track')) {
+        this.setBackButtonRoute(routesConfig.tracksAdmin);
+      } else if (e.url.includes('user')) {
+        this.setBackButtonRoute(routesConfig.usersAdmin);
+      }
     }
   }
 

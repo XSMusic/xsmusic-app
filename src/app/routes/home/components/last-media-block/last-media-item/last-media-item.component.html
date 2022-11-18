@@ -18,33 +18,9 @@
     <div class="hidden lg:justify-center lg:flex-col lg:flex">
       <div class="flex justify-center">
         <div class="flex justify-center gap-3">
-          <div
-            *ngIf="media.type === 'track' || media.site.name === 'Desconocido'"
-            class="mb-2 text-lg font-medium text-white"
-          >
-            {{ media.name }} @
-            <span *ngFor="let artist of media.artists">{{ artist.name }}</span>
-            <span *ngIf="media.site.name === 'Desconocido'" class="pl-1">{{
-              media.year
-            }}</span>
+          <div class="mb-2 text-lg font-medium text-white">
+            {{ media | titleMedia }}
           </div>
-          <ng-container
-            *ngIf="media.type === 'set' && media.site.name !== 'Desconocido'"
-          >
-            <div
-              *ngFor="let artist of media.artists"
-              class="mb-3 text-lg font-medium text-white"
-            >
-              {{ artist.name }}
-            </div>
-          </ng-container>
-        </div>
-        <div
-          *ngIf="media.type === 'set' && media.site.name !== 'Desconocido'"
-          class="text-lg font-medium text-white"
-        >
-          &nbsp;@ {{ media.site.name }}
-          {{ media.year !== 0 ? media.year : '' }}
         </div>
       </div>
     </div>
@@ -52,38 +28,9 @@
     <!-- ONE BLOCK MOBILE -->
     <div class="flex flex-col justify-center lg:hidden">
       <div class="flex justify-center">
-        <div
-          *ngIf="media.type === 'track' || media.site.name === 'Desconocido'"
-          class="mb-2 text-lg font-medium text-white"
-        >
-          {{ media.name }}
-          <div
-            *ngFor="let artist of media.artists"
-            [ngClass]="{ block: media.type === 'set' }"
-          >
-            {{ artist.name }}
-            <span *ngIf="media.site.name === 'Desconocido'" class="pl-1">{{
-              media.year
-            }}</span>
-          </div>
+        <div class="mb-2 text-lg font-medium text-white">
+          {{ media | titleMedia | truncateText: 50 }}
         </div>
-        <div
-          *ngIf="media.type === 'set' && media.site.name !== 'Desconocido'"
-          class="flex justify-center gap-3"
-        >
-          <div
-            *ngFor="let artist of media.artists"
-            class="mb-1 text-lg font-medium text-white"
-          >
-            {{ artist.name }}
-          </div>
-        </div>
-      </div>
-      <div
-        *ngIf="media.site.name !== 'Desconocido'"
-        class="mb-2 text-xl font-semibold text-white md:text-2xl"
-      >
-        {{ media.site.name }} {{ media.year }}
       </div>
     </div>
   </div>

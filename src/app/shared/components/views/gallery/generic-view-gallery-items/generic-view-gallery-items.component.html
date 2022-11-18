@@ -21,35 +21,15 @@
         <div class="flex justify-center">
           <div class="mb-2 text-2xl font-extrabold text-white">
             <ng-container *ngIf="type === 'set'">
-              <div class="flex justify-center gap-1">
-                <div
-                  *ngFor="let artist of item.artists; let i = index"
-                  class="text-lg font-medium text-white"
-                  style="background: rgba(0, 0, 0, 0.5)"
-                >
-                  <span *ngIf="i !== 0">& </span> {{ artist.name }}
-                </div>
-              </div>
               <div class="text-lg font-medium text-white mb">
-                {{ item.site.name }}
-                {{ item.year !== 0 ? item.year : '' }}
+                {{ item | titleMedia }}
               </div>
             </ng-container>
 
             <ng-container *ngIf="type === 'track'">
               <div class="flex justify-center gap-1">
                 <div class="text-lg font-medium text-white mb">
-                  {{ item.name }} @
-                </div>
-                <div
-                  *ngFor="let artist of item.artists; let i = index"
-                  class="text-lg font-medium text-white"
-                  style="background: rgba(0, 0, 0, 0.5)"
-                >
-                  <span *ngIf="i !== 0">& </span> {{ artist.name }}
-                </div>
-                <div class="text-lg font-medium text-white mb">
-                  {{ item.year !== 0 ? item.year : '' }}
+                  {{ item | titleMedia }}
                 </div>
               </div>
             </ng-container>

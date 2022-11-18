@@ -13,8 +13,14 @@ export class TitleMediaPipe implements PipeTransform {
       }
       title += artist.name;
     });
-    if (item.site.name !== 'Desconocido') {
+    console.log(item.site);
+    if (typeof item.site !== 'string' && item.site.name !== 'Desconocido') {
       title += ` @  ${item.site.name}`;
+    } else if (
+      typeof item.site !== 'string' &&
+      item.site.name === 'Desconocido'
+    ) {
+      title += ` @  ${item.name}`;
     } else {
       title += ` @  ${item.name}`;
     }

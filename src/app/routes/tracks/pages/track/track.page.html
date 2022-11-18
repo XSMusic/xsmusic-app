@@ -16,13 +16,13 @@
         *ngxPermissionsOnly="'ADMIN'"
         class="pt-3 text-2xl font-black text-center cursor-pointer md:text-left"
       >
-        {{ title }}
+        {{ media | titleMedia }}
       </p>
       <p
         *ngxPermissionsExcept="'ADMIN'"
         class="pt-3 text-2xl font-black text-center md:text-left"
       >
-        {{ title }}
+        {{ media | titleMedia }}
       </p>
       <div class="my-2">
         <div class="flex justify-center gap-2 md:justify-start">

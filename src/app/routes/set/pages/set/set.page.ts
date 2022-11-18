@@ -3,10 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Media } from '@models';
 import { ToastService, MediaService } from '@services';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, Title } from '@angular/platform-browser';
 import { routesConfig } from '@core/config';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { Share } from '@capacitor/share';
+import { getTitleMedia } from '@shared/utils';
 
 @Component({
   selector: 'page-set',
@@ -21,7 +22,8 @@ export class SetPage implements OnInit {
     private toastService: ToastService,
     private router: Router,
     private mediaService: MediaService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private title: Title
   ) {}
 
   ngOnInit() {
@@ -33,10 +35,17 @@ export class SetPage implements OnInit {
     this.mediaService.getOne('slug', this.slug).subscribe({
       next: (response) => {
         this.media = response;
+        this.setTitle();
       },
       error: (error: any) =>
         this.toastService.showToast(TOAST_STATE.error, error),
     });
+  }
+
+  setTitle() {
+    this.title.setTitle(
+      `${this.title.getTitle()} - ${getTitleMedia(this.media)}`
+    );
   }
 
   getVideoUrl() {

@@ -1,3 +1,4 @@
+import { Media } from '@models';
 import { countries } from 'assets/data/countries';
 import { flags } from 'assets/data/flags';
 
@@ -39,4 +40,29 @@ export const randomNumber = (max: number, min = 1, decimal = false): any => {
     const dataSubOk: any = randomNumber(maxOk[1], minOk[1]);
     return dataOk.toFixed(0) + '.' + dataSubOk;
   }
+};
+
+export const getTitleMedia = (item: Media) => {
+  let title = '';
+  item.artists!.forEach((artist, i) => {
+    if (i !== 0) {
+      title += ' & ';
+    }
+    title += artist.name;
+  });
+  console.log(item.site);
+  if (typeof item.site !== 'string' && item.site.name !== 'Desconocido') {
+    title += ` @  ${item.site.name}`;
+  } else if (
+    typeof item.site !== 'string' &&
+    item.site.name === 'Desconocido'
+  ) {
+    title += ` @  ${item.name}`;
+  } else {
+    title += ` @  ${item.name}`;
+  }
+  if (item.year !== 0) {
+    title += ' ' + item.year;
+  }
+  return title;
 };

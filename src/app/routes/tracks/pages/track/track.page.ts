@@ -3,8 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Media } from '@models';
 import { ToastService, MediaService } from '@services';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, Title } from '@angular/platform-browser';
 import { routesConfig } from '@core/config';
+import { getTitleMedia } from '@shared/utils';
 
 @Component({
   selector: 'page-track',
@@ -13,13 +14,13 @@ import { routesConfig } from '@core/config';
 export class TrackPage implements OnInit {
   slug!: string;
   media: Media = new Media();
-  title = '';
   constructor(
     private route: ActivatedRoute,
     private toastService: ToastService,
     private router: Router,
     private mediaService: MediaService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private title: Title
   ) {}
 
   ngOnInit() {
@@ -31,23 +32,17 @@ export class TrackPage implements OnInit {
     this.mediaService.getOne('slug', this.slug).subscribe({
       next: (response) => {
         this.media = response;
-        this.setTitleHeader();
+        this.setTitle();
       },
       error: (error: any) =>
         this.toastService.showToast(TOAST_STATE.error, error),
     });
   }
 
-  setTitleHeader() {
-    let title = this.media.name! + ' @ ';
-    this.media.artists!.forEach((artist, i) => {
-      if (i !== 0) {
-        title += ' & ';
-      }
-      title += artist.name;
-    });
-
-    this.title = title;
+  setTitle() {
+    this.title.setTitle(
+      `${this.title.getTitle()} - ${getTitleMedia(this.media)}`
+    );
   }
 
   getVideoUrl() {

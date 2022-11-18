@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { Artist } from '@models';
@@ -22,7 +23,8 @@ export class ArtistPage implements OnInit {
     private route: ActivatedRoute,
     private artistService: ArtistService,
     private toast: ToastService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private title: Title
   ) {}
 
   ngOnInit() {
@@ -35,18 +37,8 @@ export class ArtistPage implements OnInit {
     this.artistService.getOne('slug', this.slug).subscribe({
       next: (response) => {
         this.artist = response;
-        this.views = [
-          { name: 'Sets', value: 'set', counter: response.sets.length },
-          { name: 'Tracks', value: 'track', counter: response.tracks.length },
-          {
-            name: 'Imagenes',
-            value: 'image',
-            counter:
-              response.images!.length === 0
-                ? response.images!.length
-                : response.images!.length - 1,
-          },
-        ];
+        this.setTitle();
+        this.setViews();
         this.spinner.hide();
       },
       error: (error) => {
@@ -54,5 +46,24 @@ export class ArtistPage implements OnInit {
         this.toast.showToast(TOAST_STATE.error, error);
       },
     });
+  }
+
+  setTitle() {
+    this.title.setTitle(`${this.title.getTitle()} - ${this.artist.name}`);
+  }
+
+  setViews() {
+    this.views = [
+      { name: 'Sets', value: 'set', counter: this.artist.sets.length },
+      { name: 'Tracks', value: 'track', counter: this.artist.tracks.length },
+      {
+        name: 'Imagenes',
+        value: 'image',
+        counter:
+          this.artist.images!.length === 0
+            ? this.artist.images!.length
+            : this.artist.images!.length - 1,
+      },
+    ];
   }
 }

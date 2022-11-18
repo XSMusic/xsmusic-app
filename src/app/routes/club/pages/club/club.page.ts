@@ -1,3 +1,4 @@
+import { Title } from '@angular/platform-browser';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
@@ -22,7 +23,8 @@ export class ClubPage implements OnInit {
     private router: Router,
     private siteService: SiteService,
     private toast: ToastService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private title: Title
   ) {}
 
   ngOnInit() {
@@ -35,22 +37,8 @@ export class ClubPage implements OnInit {
     this.siteService.getOne('slug', this.slug).subscribe({
       next: (response: any) => {
         this.site = response;
-        this.views = [
-          { name: 'Sets', value: 'set', counter: response.sets.length },
-          {
-            name: 'Eventos',
-            value: 'event',
-            counter: response.events ? response.events.length : 0,
-          },
-          {
-            name: 'Imagenes',
-            value: 'image',
-            counter:
-              response.images!.length === 0
-                ? response.images!.length
-                : response.images!.length - 1,
-          },
-        ];
+        this.setTitle();
+        this.setViews();
         this.spinner.hide();
       },
       error: (error) => {
@@ -58,6 +46,29 @@ export class ClubPage implements OnInit {
         this.toast.showToast(TOAST_STATE.error, error);
       },
     });
+  }
+
+  setTitle() {
+    this.title.setTitle(`${this.title.getTitle()} - ${this.site.name}`);
+  }
+
+  setViews() {
+    this.views = [
+      { name: 'Sets', value: 'set', counter: this.site.sets.length },
+      {
+        name: 'Eventos',
+        value: 'event',
+        counter: this.site.events ? this.site.events.length : 0,
+      },
+      {
+        name: 'Imagenes',
+        value: 'image',
+        counter:
+          this.site.images!.length === 0
+            ? this.site.images!.length
+            : this.site.images!.length - 1,
+      },
+    ];
   }
 
   goTo(club: Site) {

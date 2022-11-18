@@ -10,6 +10,8 @@ import { filter, map } from 'rxjs';
 })
 export class AppComponent implements OnInit {
   modalVersion = false;
+  installBlock = false;
+  deferredPrompt?: any;
 
   constructor(
     private router: Router,
@@ -77,5 +79,39 @@ export class AppComponent implements OnInit {
           this.titleService.setTitle(`XSMusic - ${title}`);
         }
       });
+  }
+
+  private installPwaEvent() {
+    window.addEventListener('beforeinstallprompt', (e) => {
+      // Previene a la mini barra de información que aparezca en smartphones
+      e.preventDefault();
+      // Guarda el evento para que se dispare más tarde
+      this.deferredPrompt = e;
+      // Actualizar la IU para notificarle al usuario que se puede instalar tu PWA
+      this.installBlock = true;
+      // De manera opcional, envía el evento de analíticos para saber si se mostró la promoción a a instalación del PWA
+      console.log(`'beforeinstallprompt' event was fired.`);
+    });
+
+    window.addEventListener('appinstalled', () => {
+      // Esconder la promoción de instalación de la PWA
+      this.installBlock = false;
+      // Limpiar el defferedPrompt para que pueda ser eliminado por el recolector de basura
+      this.deferredPrompt = null;
+      // De manera opcional, enviar el evento de analíticos para indicar una instalación exitosa
+      console.log('PWA was installed');
+    });
+  }
+
+  async onClickInstallPwa() {
+    // Esconde la información promotora de la instalación
+    this.installBlock = false;
+    // Muestre el mensaje de instalación
+    this.deferredPrompt.prompt();
+    // Espera a que el usuario responda al mensaje
+    const { outcome } = await this.deferredPrompt.userChoice;
+    // De manera opcional, envía analíticos del resultado que eligió el usuario
+    console.log(`User response to the install prompt: ${outcome}`);
+    // Como ya usamos el mensaje, no lo podemos usar de nuevo, este es descartado
   }
 }

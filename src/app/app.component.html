@@ -16,6 +16,17 @@
     >
   </div>
 </div>
+
+<div
+  class="absolute w-full py-2 text-center bg-gray-100 border-b border-b-gray-300 dark:bg-800"
+  style="z-index: 1001"
+  *ngIf="installBlock"
+>
+  <p (click)="onClickInstallPwa()">
+    ¡Instalate la version movil de XSMusic aqui!
+  </p>
+</div>
+
 <navbar></navbar>
 <toast></toast>
 <modal></modal>

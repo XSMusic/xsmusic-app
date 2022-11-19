@@ -80,9 +80,8 @@ export class SetPage implements OnInit {
       const shareData: ShareOptions = {
         title: getTitleMedia(this.media),
         text: 'Te recomiendo esta sesion',
-        url: environment.APP_URL,
+        url: `${environment.APP_URL}${this.router.url}`,
       };
-      console.log(shareData);
       await Share.share(shareData);
     } catch (error) {
       console.log(error);

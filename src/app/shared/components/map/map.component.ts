@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Input } from '@angular/core';
 import { Site } from '@models';
 import * as L from 'leaflet';
+import 'leaflet.markercluster';
 import { Geolocation } from '@capacitor/geolocation';
 import { environment } from '@env/environment';
 
@@ -35,31 +36,38 @@ export class MapComponent implements AfterViewInit {
       center,
       attributionControl: true,
       zoom: this.zoom,
+      layers: [this.getMapGoogleHybrid(), this.getMapGoogleNormal()],
     });
 
-    this.addTiles();
+    // this.addTiles();
+    const baseMaps = {
+      Normal: this.getMapGoogleNormal(),
+      Hibrido: this.getMapGoogleHybrid(),
+    };
+    L.control.layers(baseMaps).addTo(this.map);
+
     this.addMakers();
   }
 
-  addTiles() {
-    const tiles = L.tileLayer(
-      'https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
-      {
-        maxZoom: 20,
-        subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-      }
-    );
-    const googleHybrid = L.tileLayer(
-      'https://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',
-      {
-        maxZoom: 20,
-        subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-      }
-    );
-    tiles.addTo(this.map);
+  getMapGoogleNormal() {
+    return L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+      maxZoom: 20,
+      subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+    });
+  }
+  getMapGoogleHybrid() {
+    return L.tileLayer('https://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
+      maxZoom: 20,
+      subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+    });
   }
 
   addMakers() {
+    const markers = L.markerClusterGroup({
+      removeOutsideVisibleBounds: false,
+      showCoverageOnHover: false,
+      animate: true,
+    });
     for (const site of this.markers) {
       if (site.address && site.address.coordinates.length > 0) {
         const img = `<img style="width:3rem; height:3rem" class="object-cover rounded-full border hover:scale-105 hover:duration-1000" src='${
@@ -102,8 +110,9 @@ export class MapComponent implements AfterViewInit {
           icon,
           draggable: this.dragabble,
         }).bindPopup(customPopup, customOptions);
-        marker.addTo(this.map);
+        markers.addLayer(marker);
       }
+      markers.addTo(this.map);
     }
   }
 

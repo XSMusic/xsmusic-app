@@ -11,6 +11,7 @@ Cada vez que se añada un valor en el archivo .env, hay que añadir el archivo c
 - [ ] Confirmacion en eliminar
 - [ ] Mapas
   - [ ] Añadir arrastrar y devolver coordenadas (opcional)
+  - [ ] Mostrar popover en footer (movil)
 - [ ] Imagenes
   - [ ] Obtener imagenes de instagram
   - [ ] Confirmar al eliminar

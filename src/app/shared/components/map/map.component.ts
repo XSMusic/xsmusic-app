@@ -39,7 +39,6 @@ export class MapComponent implements AfterViewInit {
       layers: [this.getMapGoogleHybrid(), this.getMapGoogleNormal()],
     });
 
-    // this.addTiles();
     const baseMaps = {
       Normal: this.getMapGoogleNormal(),
       Hibrido: this.getMapGoogleHybrid(),

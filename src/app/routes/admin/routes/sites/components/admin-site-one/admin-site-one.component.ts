@@ -293,4 +293,12 @@ export class AdminSiteOneComponent {
       error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
     });
   }
+
+  goToSite(slug: string) {
+    if (this.site.type === 'club') {
+      this.router.navigate([routesConfig.club.replace(':slug', slug)]);
+    } else {
+      this.router.navigate([routesConfig.festival.replace(':slug', slug)]);
+    }
+  }
 }

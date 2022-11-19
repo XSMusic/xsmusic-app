@@ -16,6 +16,7 @@
   ></alert>
 
   <media-view-list
+    *ngIf="view === 'viewList'"
     [media]="items"
     [loading]="loading"
     [type]="type"
@@ -23,4 +24,28 @@
     (filter)="filter($event)"
     (onScroll)="onScroll()"
   ></media-view-list>
+
+  <ng-container *ngIf="view === 'viewAdd'">
+    <admin-media-add-search
+      [source]="source"
+      [searchText]="searchText"
+      (onChangeSource)="source = $event"
+      (search)="searchAdd($event)"
+    ></admin-media-add-search>
+
+    <div *ngIf="media?.name === ''">
+      <admin-media-add-search-items
+        [items]="itemsSearch"
+        [itemSelected]="itemSelected!"
+        (selectItem)="selectItem($event)"
+      ></admin-media-add-search-items>
+    </div>
+
+    <admin-media-one
+      *ngIf="media?.name !== ''"
+      [media]="media"
+      [scraping]="scraping"
+      (onSubmitSuccess)="onSubmitSuccess($event)"
+    ></admin-media-one>
+  </ng-container>
 </div>

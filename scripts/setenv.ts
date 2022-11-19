@@ -16,6 +16,7 @@ export const environment = {
    production: ${isProduction},
    API_URL: "${process.env['API_URL']}",
    IMAGES_URL: "${process.env['IMAGES_URL']}",
+   APP_URL: "${process.env['APP_URL']}",
 };
 `;
 // write the content to the respective file

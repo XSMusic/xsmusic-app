@@ -50,13 +50,9 @@ export const getTitleMedia = (item: Media) => {
     }
     title += artist.name;
   });
-  console.log(item.site);
-  if (typeof item.site !== 'string' && item.site.name !== 'Desconocido') {
+  if (item.site && item.site.name && item.site.name !== 'Desconocido') {
     title += ` @  ${item.site.name}`;
-  } else if (
-    typeof item.site !== 'string' &&
-    item.site.name === 'Desconocido'
-  ) {
+  } else if (item.site && item.site.name && item.site.name === 'Desconocido') {
     title += ` @  ${item.name}`;
   } else {
     title += ` @  ${item.name}`;

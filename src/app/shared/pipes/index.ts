@@ -1,3 +1,4 @@
+export { FixStatePipe } from './fix-state/fix-state.pipe';
 export { TitleMediaPipe } from './title-media/title-media.pipe';
 export { ImageArrayPipe } from './image-array/image-array.pipe';
 export { CountryFlagPipe } from './country-flag/country-flag.pipe';

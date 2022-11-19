@@ -63,10 +63,12 @@ export class AdminMediaAddPage implements OnInit {
 
   searchByYoutube(searchText: string) {
     this.spinner.show();
-    this.youtubeService.searchByText(searchText).subscribe({
-      next: (response) => this.onResponseSearchSuccess(response),
-      error: (error) => this.onResponseSearchError(error),
-    });
+    this.youtubeService
+      .searchByText({ query: searchText, maxResults: '20' })
+      .subscribe({
+        next: (response) => this.onResponseSearchSuccess(response),
+        error: (error) => this.onResponseSearchError(error),
+      });
   }
 
   onResponseSearchSuccess(response: Youtube[]) {

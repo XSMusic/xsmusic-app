@@ -28,10 +28,16 @@
         <div class="flex justify-center gap-2 md:justify-start">
           <div *ngFor="let style of media.styles">
             <div
-              class="flex gap-4 px-2 py-1 text-white bg-black border cursor-pointer rounded-xl hover:bg-gray-800 hover:text-gray-100"
+              class="flex gap-4 px-2 py-2 font-bold text-white bg-black border rounded-lg cursor-pointer hover:bg-gray-800 hover:text-gray-100"
             >
               <p class="font-semibold">{{ style.name }}</p>
             </div>
+          </div>
+          <div
+            class="px-2 py-2 text-white bg-red-700 border rounded-lg cursor-pointer hover:opacity-90 w-100"
+            (click)="sharing()"
+          >
+            Compartir Set
           </div>
         </div>
       </div>
@@ -90,6 +96,4 @@
     </div>
   </div>
   <p class="my-2">{{ media.info }}</p>
-
-  <p class="bg-gray-100" (click)="sharing()">Compartir</p>
 </div>

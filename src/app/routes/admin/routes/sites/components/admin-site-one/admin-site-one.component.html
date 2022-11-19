@@ -344,23 +344,31 @@
         ></angular-editor>
       </div>
     </div>
+  </div>
+  <div class="col-span-2 mb-2">
+    <button
+      type="submit"
+      (click)="onSubmit()"
+      class="w-full py-1 m-1 text-white bg-green-500 border-green-500 rounded-lg shadow-md md:w-32 hover:bg-green-600 hover:border-green-600'"
+    >
+      Guardar
+    </button>
+    <button
+      type="button"
+      *ngIf="site._id"
+      (click)="onDelete()"
+      class="w-full py-1 m-1 text-white bg-red-500 border-2 border-red-500 rounded-lg shadow-md hover:bg-red-600 hover:border-red-600 hover:text-white md:w-32"
+    >
+      Eliminar
+    </button>
 
-    <div class="col-span-2 mb-2">
-      <button
-        type="submit"
-        (click)="onSubmit()"
-        class="w-full py-1 m-1 text-white bg-green-500 border-green-500 rounded-lg shadow-md md:w-32 hover:bg-green-600 hover:border-green-600'"
-      >
-        Guardar
-      </button>
-      <button
-        type="button"
-        *ngIf="site._id"
-        (click)="onDelete()"
-        class="w-full py-1 m-1 text-white bg-red-500 border-2 border-red-500 rounded-lg shadow-md hover:bg-red-600 hover:border-red-600 hover:text-white md:w-32"
-      >
-        Eliminar
-      </button>
-    </div>
+    <button
+      type="button"
+      *ngIf="site._id"
+      (click)="goToSite(site.slug!)"
+      class="w-full py-1 m-1 text-white bg-blue-500 border-2 border-blue-500 rounded-lg shadow-md hover:bg-blue-600 hover:border-blue-600 hover:text-white md:w-32"
+    >
+      Ver perfil
+    </button>
   </div>
 </form>

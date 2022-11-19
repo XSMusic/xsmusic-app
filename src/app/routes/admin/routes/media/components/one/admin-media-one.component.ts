@@ -32,7 +32,7 @@ export class AdminMediaOneComponent {
     infos: [],
     styles: [],
   };
-  @Output() onSubmitSuccess: EventEmitter<any> = new EventEmitter<void>();
+  @Output() onSubmitSuccess = new EventEmitter<Media>();
   sources = [{ name: 'Youtube', value: 'youtube' }];
   bodyArtist: GetAllDto = {
     page: 1,
@@ -232,17 +232,11 @@ export class AdminMediaOneComponent {
     for (const image of this.tempImages) {
       this.uploadImageByUrl(image);
     }
-    setTimeout(() => {
-      this.toastService.showToast(
-        TOAST_STATE.success,
-        `${this.media.type === 'set' ? 'Set' : 'Track'} creado`
-      );
-      this.router.navigate([
-        this.media.type === 'set'
-          ? routesConfig.setsAdmin
-          : routesConfig.tracksAdmin,
-      ]);
-    }, 3000);
+    this.toastService.showToast(
+      TOAST_STATE.success,
+      `${this.media.type === 'set' ? 'Set' : 'Track'} creado`
+    );
+    this.onSubmitSuccess.emit(this.media);
   }
 
   onDelete() {

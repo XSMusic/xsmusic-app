@@ -47,6 +47,7 @@ import {
   FilterArrayPipe,
   ImageArrayPipe,
   TitleMediaPipe,
+  FixStatePipe,
 } from '@pipes';
 import { OnImageErrorDirective } from './directives';
 import { NgxPermissionsModule } from 'ngx-permissions';
@@ -123,6 +124,7 @@ const pipes = [
   FilterArrayPipe,
   ImageArrayPipe,
   TitleMediaPipe,
+  FixStatePipe,
 ];
 const services: any = [
   AngularSvgIconPreloaderService,

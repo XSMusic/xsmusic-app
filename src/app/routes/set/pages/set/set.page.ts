@@ -6,8 +6,9 @@ import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { DomSanitizer, Title } from '@angular/platform-browser';
 import { routesConfig } from '@core/config';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { Share } from '@capacitor/share';
+import { Share, ShareOptions } from '@capacitor/share';
 import { getTitleMedia } from '@shared/utils';
+import { environment } from '@env/environment';
 
 @Component({
   selector: 'page-set',
@@ -19,8 +20,8 @@ export class SetPage implements OnInit {
   media: Media = new Media();
   constructor(
     private route: ActivatedRoute,
-    private toastService: ToastService,
     private router: Router,
+    private toastService: ToastService,
     private mediaService: MediaService,
     private sanitizer: DomSanitizer,
     private title: Title
@@ -76,12 +77,13 @@ export class SetPage implements OnInit {
 
   async sharing() {
     try {
-      await Share.share({
-        title: 'See cool stuff',
-        text: 'Really awesome thing you need to see right meow',
-        url: 'http://ionicframework.com/',
-        dialogTitle: 'Share with buddies',
-      });
+      const shareData: ShareOptions = {
+        title: getTitleMedia(this.media),
+        text: 'Te recomiendo esta sesion',
+        url: environment.APP_URL,
+      };
+      console.log(shareData);
+      await Share.share(shareData);
     } catch (error) {
       console.log(error);
       this.toastService.showToast(TOAST_STATE.error, 'Error al compartir');

@@ -44,18 +44,21 @@ export const randomNumber = (max: number, min = 1, decimal = false): any => {
 
 export const getTitleMedia = (item: Media) => {
   let title = '';
-  item.artists!.forEach((artist, i) => {
-    if (i !== 0) {
-      title += ' & ';
-    }
-    title += artist.name;
-  });
+  if (item.artists!.length > 0 && item.artists![0].name) {
+    item.artists!.forEach((artist, i) => {
+      if (i !== 0) {
+        title += ' & ';
+      }
+      title += artist.name;
+    });
+    title += ' @ ';
+  }
   if (item.site && item.site.name && item.site.name !== 'Desconocido') {
-    title += ` @  ${item.site.name}`;
+    title += `  ${item.site.name}`;
   } else if (item.site && item.site.name && item.site.name === 'Desconocido') {
-    title += ` @  ${item.name}`;
+    title += `  ${item.name}`;
   } else {
-    title += ` @  ${item.name}`;
+    title += `  ${item.name}`;
   }
   if (item.year !== 0) {
     title += ' ' + item.year;

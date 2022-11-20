@@ -3,17 +3,17 @@ import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { GetAllDto } from '@interfaces';
-import { Artist } from '@models';
-import { ArtistService } from '@services';
+import { Event } from '@models';
+import { EventService } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 
 @Component({
-  selector: 'page-admin-artists',
-  templateUrl: 'admin-artists.page.html',
+  selector: 'page-admin-events',
+  templateUrl: 'admin-events.page.html',
   animations: [inOutAnimation],
 })
-export class AdminArtistsPage {
-  items: Artist[] = [];
+export class AdminEventsPage {
+  items: Event[] = [];
   body: GetAllDto = {
     page: 1,
     pageSize: 20,
@@ -22,14 +22,14 @@ export class AdminArtistsPage {
   loading = true;
   error = false;
   total = 0;
-  constructor(private artistService: ArtistService, private router: Router) {}
+  constructor(private eventService: EventService, private router: Router) {}
 
   ngOnInit() {
-    this.getArtists();
+    this.getEvents();
   }
 
-  getArtists(more = false) {
-    this.artistService.getAll(this.body).subscribe({
+  getEvents(more = false) {
+    this.eventService.getAll(this.body).subscribe({
       next: (response) => {
         if (!more) {
           this.items = response.items;
@@ -47,25 +47,25 @@ export class AdminArtistsPage {
     });
   }
 
-  goToProfile(item: Artist) {
+  goToProfile(item: Event) {
     this.router.navigate([routesConfig.artistAdmin.replace(':id', item._id!)]);
   }
 
   filter(event: { name: string; value: string }) {
     this.body.page = 1;
     this.body.filter = [event.name, event.value];
-    this.getArtists();
+    this.getEvents();
   }
 
   removeFilter() {
     this.body.page = 1;
     this.body.filter = [];
-    this.getArtists();
+    this.getEvents();
   }
 
   onScroll() {
     this.body.page++;
-    this.getArtists(true);
+    this.getEvents(true);
   }
 
   onClickButton(button: ButtonBlockItem) {
@@ -77,11 +77,11 @@ export class AdminArtistsPage {
   onSearch(event: { text: string; type: string }) {
     if (event.text === '') {
       this.body.page = 1;
-      this.getArtists();
+      this.getEvents();
     } else {
       this.body.page = 1;
       this.body.filter = ['name', event.text];
-      this.getArtists();
+      this.getEvents();
     }
   }
 }

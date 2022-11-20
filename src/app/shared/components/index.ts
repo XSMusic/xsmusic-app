@@ -34,6 +34,7 @@ export { ImagesViewListComponent } from './views/list/images-view-list/images-vi
 export { MediaViewListComponent } from './views/list/media-list-view/media-view-list.component';
 export { SiteViewListComponent } from './views/list/sites-view-list/sites-view-list.component';
 export { UsersViewListComponent } from './views/list/users-view-list/users-view-list.component';
+export { EventsViewListComponent } from './views/list/events-view-list/events-view-list.component';
 
 export { LastMultiItemsComponent } from './views/last-multi/last-multi-items/last-multi-items.component';
 export { LastMultiComponent } from './views/last-multi/last-multi/last-multi.component';

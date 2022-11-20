@@ -34,6 +34,7 @@ import {
   LastMultiItemsComponent,
   LastMultiComponent,
   BlockInfoProfileComponent,
+  EventsViewListComponent,
 } from '@components';
 import {
   CountryFlagPipe,
@@ -98,6 +99,7 @@ const components = [
   LastMultiItemsComponent,
   LastMultiComponent,
   BlockInfoProfileComponent,
+  EventsViewListComponent,
 ];
 const directives = [OnImageErrorDirective];
 const modules = [

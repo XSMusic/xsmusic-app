@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { AdminDashboardPage } from './dashboard/admin-dashboard.page';
+import { AdminDashboardPage } from './routes/dashboard/admin-dashboard.page';
 import { SharedModule } from '@shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { AdminTotalsComponent } from './components/totals/admin-totals.component';
@@ -21,6 +21,14 @@ import { AdminTotalsComponent } from './components/totals/admin-totals.component
         loadChildren: () =>
           import('./routes/artists/admin-artists.module').then(
             (m) => m.AdminArtistsModule
+          ),
+      },
+      {
+        path: 'events',
+        data: { breadcrumb: 'Eventos' },
+        loadChildren: () =>
+          import('./routes/events/admin-events.module').then(
+            (m) => m.AdminEventsModule
           ),
       },
       {

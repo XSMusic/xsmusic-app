@@ -1,4 +1,5 @@
 export * from './api/artist/artist.service';
+export * from './api/event/event.service';
 export * from './api/geo/geo.service';
 export * from './api/image/image.service';
 export * from './api/media/media.service';

@@ -6,11 +6,10 @@
     (onClickButton)="onClickButton($event)"
   ></buttons-block>
 
-  <!-- <admin-artist-one
+  <admin-event-one
     *ngIf="view === 'viewInfo'"
-    [artist]="artist"
-    [styles]="styles"
-  ></admin-artist-one> -->
+    [event]="event"
+  ></admin-event-one>
 
   <div *ngIf="view === 'viewOptions'">
     <options-items

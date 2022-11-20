@@ -2,8 +2,10 @@ export class Image {
   _id?: string;
   type: any;
   artist?: any;
+  event?: any;
   media?: any;
   site?: any;
+  user?: any;
   url?: string;
   firstImage?: boolean;
   position?: number;

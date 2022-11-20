@@ -51,30 +51,10 @@ export class ArtistOneComponent {
     private imageService: ImageService
   ) {}
 
-  onChangeStyleSelect(e: any) {
-    if (this.artist.styles!.length <= 3) {
-      const newStyle = this.styles.find(
-        (style) => style._id!.toString() === e.target.value.toString()
-      );
-      this.artist.styles?.push(newStyle);
-    } else {
-      this.toastService.showToast(
-        TOAST_STATE.warning,
-        'No puedes añadir mas de 3 estilos'
-      );
-    }
-  }
-
   onClickStyleScrapingItem(item: { name: string; _id: string }) {
     this.artist.styles?.push(item);
     this.scraping.styles = this.scraping.styles.filter(
       (style: { name: string; _id: string }) => style !== item
-    );
-  }
-
-  onClickStyleItem(item: { name: string; _id: string }) {
-    this.artist.styles = this.artist.styles?.filter(
-      (style) => style.name !== item.name
     );
   }
 

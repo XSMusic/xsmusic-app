@@ -40,22 +40,12 @@ export class AdminArtistPage {
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id')!;
-    this.getStyles();
     if (this.id) {
       this.title = 'Editar Artista';
       this.getOne();
     } else {
       this.title = 'Nuevo Artista';
     }
-  }
-
-  getStyles() {
-    this.styleService
-      .getAll({ page: 1, pageSize: 100, order: ['name', 'asc'] })
-      .subscribe({
-        next: (response) => (this.styles = response.items),
-        error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
-      });
   }
 
   getOne() {

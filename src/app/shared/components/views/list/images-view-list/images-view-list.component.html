@@ -18,7 +18,9 @@
                 class="my-1 mr-2 text-base font-extrabold leading-none text-black cursor-pointer dark:text-white hover:text-gray-500"
                 (click)="onDeleteImage.emit(item)"
               >
+                <span *ngIf="item.type === 'event'">{{ item.event.name }}</span>
                 <span *ngIf="item.type === 'media'">{{ item.media.name }}</span>
+                <span *ngIf="item.type === 'user'">{{ item.user.name }}</span>
                 <span *ngIf="item.type === 'artist'">{{
                   item.artist.name
                 }}</span>

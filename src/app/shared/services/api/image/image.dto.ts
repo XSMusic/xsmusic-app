@@ -6,7 +6,7 @@ export interface ImageUploadDto {
 export interface ImageUploadByUrlDto {
   id: string;
   url: string;
-  type: 'artist' | 'media' | 'site' | 'user' | 'temp';
+  type: 'artist' | 'event' | 'media' | 'site' | 'user';
 }
 
 export interface ImageSetFirstImageDto {

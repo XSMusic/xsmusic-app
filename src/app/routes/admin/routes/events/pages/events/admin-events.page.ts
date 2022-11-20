@@ -52,8 +52,17 @@ export class AdminEventsPage {
     });
   }
 
-  goToProfile(item: Event) {
-    this.router.navigate([routesConfig.eventAdmin.replace(':id', item._id!)]);
+  goToProfile(data: { type: 'site' | 'event'; event: Event }) {
+    let route = [];
+    if (data.type === 'event') {
+      route = [routesConfig.eventAdmin.replace(':id', data.event._id!)];
+    } else {
+      route =
+        data.event.site.type === 'club'
+          ? [routesConfig.clubAdmin.replace(':id', data.event.site._id!)]
+          : [routesConfig.festivalAdmin.replace(':id', data.event.site._id!)];
+    }
+    this.router.navigate(route);
   }
 
   filter(event: { name: string; value: string }) {

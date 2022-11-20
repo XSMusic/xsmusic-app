@@ -27,7 +27,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   templateUrl: 'admin-site-one.component.html',
   animations: [inOutAnimation],
 })
-export class AdminSiteOneComponent implements OnInit {
+export class AdminSiteOneComponent {
   @Input() site = new Site();
   styles: Style[] = [];
   countries = countries;
@@ -54,19 +54,6 @@ export class AdminSiteOneComponent implements OnInit {
     private imageService: ImageService,
     private styleService: StyleService
   ) {}
-
-  ngOnInit() {
-    this.getStyles();
-  }
-
-  getStyles() {
-    this.styleService
-      .getAll({ page: 1, pageSize: 100, order: ['name', 'asc'] })
-      .subscribe({
-        next: (response) => (this.styles = response.items),
-        error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
-      });
-  }
 
   showImage(image: string) {
     this.fullImage.showImageFull(image);
@@ -107,7 +94,7 @@ export class AdminSiteOneComponent implements OnInit {
     });
   }
 
-  setClubFromScraping(response: ScrapingGetInfoClubResponse) {
+  async setClubFromScraping(response: ScrapingGetInfoClubResponse) {
     try {
       if (response.address.street !== '') {
         this.site.address.street = response.address.street;

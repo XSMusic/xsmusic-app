@@ -84,7 +84,6 @@ export class SetPage implements OnInit {
       };
       await Share.share(shareData);
     } catch (error) {
-      console.log(error);
       this.toastService.showToast(TOAST_STATE.error, 'Error al compartir');
     }
   }

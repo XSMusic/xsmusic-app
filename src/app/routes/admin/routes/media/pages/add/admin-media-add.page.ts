@@ -50,7 +50,6 @@ export class AdminMediaAddPage implements OnInit {
       this.source = source === 'default' ? 'youtube' : source;
       this.searchText = value;
     }
-    console.log(this.source, this.searchText);
   }
 
   search(searchText: string) {

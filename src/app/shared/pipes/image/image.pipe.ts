@@ -7,7 +7,6 @@ import { Image } from '@models';
 })
 export class ImagePipe implements PipeTransform {
   transform(image: Image): string {
-    console.log(image);
     if (image) {
       return `${environment.IMAGES_URL}/${image.url}`;
     } else {

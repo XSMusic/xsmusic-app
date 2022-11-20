@@ -26,7 +26,6 @@ export class AppComponent implements OnInit {
           (evt: any): evt is VersionReadyEvent => evt.type === 'VERSION_READY'
         ),
         map((evt: any) => {
-          console.log(evt);
           console.info(
             `currentVersion=[${evt.currentVersion} | latestVersion=[${evt.latestVersion}]`
           );

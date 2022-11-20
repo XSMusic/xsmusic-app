@@ -169,6 +169,11 @@ export class AdminMediaOneComponent {
         state: false,
         message: 'El medio es obligatorio',
       };
+    } else if (this.media.site === '') {
+      return {
+        state: false,
+        message: 'El club/festival es obligatorio',
+      };
     } else if (this.media.artists!.length === 0) {
       return {
         state: false,

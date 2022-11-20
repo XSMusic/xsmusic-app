@@ -43,8 +43,8 @@ export const buttonsByType = [
       }),
       new ButtonBlockItem({
         name: 'Nuevo',
-        action: 'add',
-        isActivatable: false,
+        action: 'viewAdd',
+        isActivatable: true,
       }),
       new ButtonBlockItem({
         name: 'Ordenar',

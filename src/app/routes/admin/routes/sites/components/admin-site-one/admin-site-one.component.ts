@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
@@ -14,6 +14,7 @@ import {
   ScrapingService,
   GeoService,
   ImageService,
+  StyleService,
 } from '@services';
 import {
   ImageSetFirstImageDto,
@@ -29,9 +30,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
   templateUrl: 'admin-site-one.component.html',
   animations: [inOutAnimation],
 })
-export class AdminSiteOneComponent {
+export class AdminSiteOneComponent implements OnInit {
   @Input() site = new Site();
-  @Input() styles: Style[] = [];
+  styles: Style[] = [];
   countries = countries;
   scraping: any = {
     images: [],
@@ -53,8 +54,22 @@ export class AdminSiteOneComponent {
     private spinner: NgxSpinnerService,
     private scrapingService: ScrapingService,
     private geoService: GeoService,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private styleService: StyleService
   ) {}
+
+  ngOnInit() {
+    this.getStyles();
+  }
+
+  getStyles() {
+    this.styleService
+      .getAll({ page: 1, pageSize: 100, order: ['name', 'asc'] })
+      .subscribe({
+        next: (response) => (this.styles = response.items),
+        error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+      });
+  }
 
   showImage(image: string) {
     this.fullImage.showImageFull(image);
@@ -238,15 +253,34 @@ export class AdminSiteOneComponent {
     });
   }
 
-  // onSubmit() {
-  //   const observable = this.site._id
-  //     ? this.siteService.update(this.site)
-  //     : this.siteService.create(this.site);
-  //   observable.subscribe({
-  //     next: (response) => this.onSuccess(response),
-  //     error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
-  //   });
-  // }
+  validationSubmit() {
+    if (this.site.name === '') {
+      return {
+        state: false,
+        message: 'El nombre es obligatorio',
+      };
+    } else if (this.site.address.street === '') {
+      return {
+        state: false,
+        message: 'La calle es obligatorio',
+      };
+    } else if (this.site.styles!.length === 0) {
+      return {
+        state: false,
+        message: 'Minimo un estilo',
+      };
+    } else if (!this.site._id && this.tempImages.length === 0) {
+      return {
+        state: false,
+        message: 'La imagen es obligatoria',
+      };
+    } else {
+      return {
+        state: true,
+        message: '',
+      };
+    }
+  }
 
   onSubmit() {
     if (this.site._id) {

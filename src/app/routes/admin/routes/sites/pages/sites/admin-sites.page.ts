@@ -14,14 +14,17 @@ import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 export class AdminSitesPage implements OnInit {
   title = '';
   sites: Site[] = [];
+  site: Site = new Site();
   body: GetAllDto = {
     page: 1,
     pageSize: 30,
     order: ['updated', 'desc'],
   };
   type = '';
+  view = 'viewList';
   loading = true;
   error = false;
+  total = 0;
   constructor(
     private route: ActivatedRoute,
     private siteService: SiteService,
@@ -46,6 +49,7 @@ export class AdminSitesPage implements OnInit {
       next: (response) => {
         if (!more) {
           this.sites = response.items;
+          this.total = response.paginator.total;
         } else {
           this.sites = this.sites.concat(response.items);
         }
@@ -85,14 +89,10 @@ export class AdminSitesPage implements OnInit {
   }
 
   onClickButton(button: ButtonBlockItem) {
-    if (button.action === 'order' || button.action === 'filter') {
+    if (button.action.includes('view')) {
+      this.view = button.action;
+    } else if (button.action === 'order') {
       this.toast.showToast(TOAST_STATE.info, 'En construccion');
-    } else if (button.action === 'add') {
-      if (this.type === 'clubs') {
-        this.router.navigate([routesConfig.clubAdminAdd]);
-      } else {
-        this.router.navigate([routesConfig.festivalAdminAdd]);
-      }
     }
   }
 

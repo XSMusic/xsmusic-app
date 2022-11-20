@@ -15,7 +15,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class AdminSitePage implements OnInit {
   id!: string;
   site: Site = new Site();
-  styles: Style[] = [];
   title!: string;
   view = '';
   type = '';
@@ -35,7 +34,6 @@ export class AdminSitePage implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id')!;
-    this.getStyles();
     this.getType();
     if (this.id) {
       this.title = 'Editar';
@@ -50,15 +48,6 @@ export class AdminSitePage implements OnInit {
     this.type = this.route.snapshot.routeConfig!.path!.includes('clubs')
       ? 'club'
       : 'festival';
-  }
-
-  getStyles() {
-    this.styleService
-      .getAll({ page: 1, pageSize: 100, order: ['name', 'asc'] })
-      .subscribe({
-        next: (response) => (this.styles = response.items),
-        error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
-      });
   }
 
   getItem() {

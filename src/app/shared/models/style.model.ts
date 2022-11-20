@@ -12,6 +12,7 @@ export class Style {
   tracks?: any;
   clubs?: any;
   festivals?: any;
+  events?: any;
 
   constructor(data?: Style) {
     if (data) {

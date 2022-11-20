@@ -6,11 +6,7 @@
     (onClickButton)="onClickButton($event)"
   ></buttons-block>
 
-  <admin-site-one
-    *ngIf="view === 'viewInfo'"
-    [site]="site"
-    [styles]="styles"
-  ></admin-site-one>
+  <admin-site-one *ngIf="view === 'viewInfo'" [site]="site"></admin-site-one>
 
   <div *ngIf="view === 'viewOptions'">
     <options-items

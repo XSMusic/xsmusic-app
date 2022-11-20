@@ -4,7 +4,7 @@ import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { GetAllDto } from '@interfaces';
 import { Artist } from '@models';
-import { ArtistService } from '@services';
+import { ArtistService, ToastService, TOAST_STATE } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 
 @Component({
@@ -14,15 +14,21 @@ import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-blo
 })
 export class AdminArtistsPage {
   items: Artist[] = [];
+  artist: Artist = new Artist();
   body: GetAllDto = {
     page: 1,
     pageSize: 20,
     order: ['updated', 'desc'],
   };
+  view = 'viewList';
   loading = true;
   error = false;
   total = 0;
-  constructor(private artistService: ArtistService, private router: Router) {}
+  constructor(
+    private artistService: ArtistService,
+    private router: Router,
+    private toast: ToastService
+  ) {}
 
   ngOnInit() {
     this.getArtists();
@@ -69,8 +75,10 @@ export class AdminArtistsPage {
   }
 
   onClickButton(button: ButtonBlockItem) {
-    if (button.action === 'add') {
-      this.router.navigate([routesConfig.artistAdminAdd]);
+    if (button.action.includes('view')) {
+      this.view = button.action;
+    } else if (button.action === 'order') {
+      this.toast.showToast(TOAST_STATE.info, 'En construccion');
     }
   }
 

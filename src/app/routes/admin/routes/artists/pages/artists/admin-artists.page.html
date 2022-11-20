@@ -16,6 +16,7 @@
   ></alert>
 
   <artists-view-list
+    *ngIf="view === 'viewList'"
     [artists]="items"
     [loading]="loading"
     (goToProfile)="goToProfile($event)"
@@ -23,4 +24,8 @@
     (onScroll)="onScroll()"
   >
   </artists-view-list>
+
+  <ng-container *ngIf="view === 'viewAdd'">
+    <admin-artist-one [artist]="artist"></admin-artist-one>
+  </ng-container>
 </div>

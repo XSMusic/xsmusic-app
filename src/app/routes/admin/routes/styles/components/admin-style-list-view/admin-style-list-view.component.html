@@ -67,6 +67,14 @@
                 {{ style.festivals?.count === 1 ? 'Festival' : 'Festivales' }}
               </p>
             </td>
+            <td class="pl-3">
+              <p
+                class="mb-2 mr-2 text-sm font-light leading-none text-gray-700 dark:text-white"
+              >
+                <span class="font-black">{{ style.events?.count ?? 0 }}</span>
+                {{ style.events?.count === 1 ? 'Evento' : 'Eventos' }}
+              </p>
+            </td>
           </tr>
         </tbody>
       </table>

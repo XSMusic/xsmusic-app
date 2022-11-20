@@ -94,6 +94,51 @@ export const buttonsByType = [
     ],
   },
   {
+    name: 'eventsAdmin',
+    buttons: [
+      new ButtonBlockItem({
+        name: 'Listado',
+        action: 'viewList',
+        isActivatable: true,
+      }),
+      new ButtonBlockItem({
+        name: 'Nuevo',
+        action: 'viewAdd',
+        isActivatable: true,
+      }),
+      new ButtonBlockItem({
+        name: 'Ordenar',
+        action: 'order',
+        align: 'right',
+      }),
+      new ButtonBlockItem({
+        name: 'Filtrar',
+        action: 'filter',
+        align: 'right',
+      }),
+      new ButtonBlockItem({
+        name: 'Buscar',
+        action: 'search',
+        align: 'right',
+      }),
+    ],
+  },
+  {
+    name: 'eventAdmin',
+    buttons: [
+      new ButtonBlockItem({
+        name: 'Info',
+        isActivatable: true,
+        action: 'viewInfo',
+      }),
+      new ButtonBlockItem({
+        name: 'Opciones',
+        isActivatable: true,
+        action: 'viewOptions',
+      }),
+    ],
+  },
+  {
     name: 'sites',
     buttons: [
       new ButtonBlockItem({

@@ -1,0 +1,21 @@
+<header-custom [title]="title"></header-custom>
+
+<div class="container px-4 pt-3 mx-auto max-w-full-xl sm:pb-0 max-w-7sm">
+  <buttons-block
+    type="eventAdmin"
+    (onClickButton)="onClickButton($event)"
+  ></buttons-block>
+
+  <!-- <admin-artist-one
+    *ngIf="view === 'viewInfo'"
+    [artist]="artist"
+    [styles]="styles"
+  ></admin-artist-one> -->
+
+  <div *ngIf="view === 'viewOptions'">
+    <options-items
+      [options]="options"
+      (onClickOption)="onClickOptionItem($event)"
+    ></options-items>
+  </div>
+</div>

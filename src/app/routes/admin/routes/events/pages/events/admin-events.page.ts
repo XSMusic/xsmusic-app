@@ -4,7 +4,7 @@ import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { GetAllDto } from '@interfaces';
 import { Event } from '@models';
-import { EventService } from '@services';
+import { EventService, ToastService, TOAST_STATE } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 
 @Component({
@@ -22,7 +22,12 @@ export class AdminEventsPage {
   loading = true;
   error = false;
   total = 0;
-  constructor(private eventService: EventService, private router: Router) {}
+  view = 'viewList';
+  constructor(
+    private eventService: EventService,
+    private router: Router,
+    private toast: ToastService
+  ) {}
 
   ngOnInit() {
     this.getEvents();
@@ -48,7 +53,7 @@ export class AdminEventsPage {
   }
 
   goToProfile(item: Event) {
-    this.router.navigate([routesConfig.artistAdmin.replace(':id', item._id!)]);
+    this.router.navigate([routesConfig.eventAdmin.replace(':id', item._id!)]);
   }
 
   filter(event: { name: string; value: string }) {
@@ -69,8 +74,10 @@ export class AdminEventsPage {
   }
 
   onClickButton(button: ButtonBlockItem) {
-    if (button.action === 'add') {
-      this.router.navigate([routesConfig.artistAdminAdd]);
+    if (button.action.includes('view')) {
+      this.view = button.action;
+    } else if (button.action === 'order') {
+      this.toast.showToast(TOAST_STATE.info, 'En construccion');
     }
   }
 

@@ -27,6 +27,8 @@ export class ButtonsBlockComponent implements OnInit {
     | 'generic'
     | 'artistsAdmin'
     | 'artistAdmin'
+    | 'eventsAdmin'
+    | 'eventAdmin'
     | 'sites'
     | 'siteAdmin'
     | 'sitesAdmin'

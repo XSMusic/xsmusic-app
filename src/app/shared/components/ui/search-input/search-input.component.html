@@ -1,0 +1,98 @@
+<div class="col-span-2 mb-1">
+  <label class="block mb-3 text-base font-extrabold text-black dark:text-white">
+    {{ label }}
+  </label>
+
+  <!-- Artists -->
+  <div
+    class="flex gap-2 my-3"
+    *ngIf="type === 'artist' && item.artists!.length > 0"
+  >
+    <div
+      (click)="onClickItem(artistI)"
+      class="flex px-2 py-1 text-xs text-white bg-black border rounded-lg shadow-md cursor-pointer dark:border-gray-800 hover:opacity-80"
+      *ngFor="let artistI of item.artists"
+    >
+      <img
+        [src]="artistI.images! | imageArray"
+        alt="artistSelected.name"
+        class="w-5 h-5 mr-3 rounded-full"
+        onError
+      />
+      <span class="pr-1 text-sm font-medium">{{ artistI.name }}</span>
+    </div>
+  </div>
+
+  <!-- Styles -->
+  <div
+    class="flex gap-2 my-3"
+    *ngIf="type === 'style' && item.styles!.length > 0"
+  >
+    <div
+      (click)="onClickItem(styleI)"
+      class="flex px-2 py-1 text-xs text-white bg-black border rounded-lg shadow-md cursor-pointer dark:border-gray-800 hover:opacity-80"
+      *ngFor="let styleI of item.styles"
+    >
+      <span class="px-1 text-sm font-medium">{{ styleI.name }}</span>
+    </div>
+  </div>
+
+  <!-- Sites -->
+  <div class="flex gap-2 my-3" *ngIf="type === 'site' && item.site">
+    <div
+      class="flex px-2 py-1 text-xs text-white bg-black border rounded-lg shadow-md cursor-pointer dark:border-gray-800 hover:opacity-80"
+      (click)="onClickItem({ name: '', _id: '' })"
+    >
+      <img
+        [src]="item.site?.images | imageArray"
+        [alt]=""
+        class="w-5 h-5 mr-3 rounded-full"
+        onError
+      />
+      <span class="pr-1 text-sm font-medium">{{ item.site?.name }}</span>
+    </div>
+  </div>
+
+  <div class="flex">
+    <input
+      (click)="closeSelection()"
+      name="artist"
+      (keydown.enter)="$event.preventDefault(); onChangeInput(itemSearch!)"
+      [(ngModel)]="itemSearch"
+      [placeholder]="placeholder"
+      class="w-full px-6 py-2 text-base font-medium bg-white border border-gray-200 rounded-l-md dark:border-gray-700 dark:text-white dark:bg-black rounded-y-md ring-red-500 dark:ring-red-500"
+      autocomplete="off"
+    />
+    <button
+      class="px-3 bg-gray-100 rounded-r-lg cursor-pointer hover:opacity-80"
+      (click)="onChangeInput(itemSearch!)"
+    >
+      <svg-icon name="search"></svg-icon>
+    </button>
+  </div>
+  <div
+    @inOut
+    class="absolute z-10 w-48 mt-1 bg-white border rounded-lg shadow-lg"
+    *ngIf="selectState && itemsSearch.length > 0"
+  >
+    <div
+      class="flex px-3 py-2 border-b cursor-pointer hover:bg-gray-200"
+      *ngFor="let itemS of itemsSearch"
+      (click)="onSelect(itemS)"
+    >
+      <img
+        *ngIf="itemS.images"
+        [src]="itemS.images! | imageArray"
+        alt=""
+        class="w-10 h-10 mr-3 rounded-full"
+        onError
+      />
+      <div class="flex flex-col">
+        <span class="text-sm font-medium">{{ itemS?.name }}</span>
+        <span class="text-sm font-light" *ngIf="itemS.country">
+          {{ itemS?.country ?? 'es' | countryName }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

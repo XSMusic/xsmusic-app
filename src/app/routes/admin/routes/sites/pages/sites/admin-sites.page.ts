@@ -65,7 +65,7 @@ export class AdminSitesPage implements OnInit {
 
   goToProfile(item: Site) {
     this.router.navigate([
-      item.type === 'club'
+      this.body.type === 'club'
         ? routesConfig.clubAdmin.replace(':id', item._id!)
         : routesConfig.festivalAdmin.replace(':id', item._id!),
     ]);

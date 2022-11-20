@@ -4,7 +4,7 @@ import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { GetAllDto } from '@interfaces';
 import { Media, Youtube } from '@models';
-import { YoutubeService } from '@services';
+import { ScrapingService } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 import { MediaService } from '@shared/services/api/media/media.service';
 import {
@@ -46,7 +46,7 @@ export class AdminMediaListPage implements OnInit {
     private mediaService: MediaService,
     private router: Router,
     private toast: ToastService,
-    private youtubeService: YoutubeService,
+    private scrapingService: ScrapingService,
     private spinner: NgxSpinnerService
   ) {}
 
@@ -134,20 +134,20 @@ export class AdminMediaListPage implements OnInit {
 
   searchAdd(searchText: string) {
     if (this.source === 'youtube') {
-      this.searchByYoutube(searchText);
+      this.spinner.show();
+      this.scrapingService
+        .getListMedia({
+          query: searchText,
+          maxResults: '20',
+          source: this.source,
+        })
+        .subscribe({
+          next: (response) => this.onResponseSearchSuccess(response),
+          error: (error) => this.onResponseSearchError(error),
+        });
     } else {
       this.toast.showToast(TOAST_STATE.warning, 'En construccion');
     }
-  }
-
-  searchByYoutube(searchText: string) {
-    this.spinner.show();
-    this.youtubeService
-      .searchByText({ query: searchText, maxResults: '20' })
-      .subscribe({
-        next: (response) => this.onResponseSearchSuccess(response),
-        error: (error) => this.onResponseSearchError(error),
-      });
   }
 
   onResponseSearchSuccess(response: Youtube[]) {

@@ -2,11 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
-import {
-  MessageI,
-  ScrapingGetInfoClubDto,
-  ScrapingGetInfoClubResponse,
-} from '@interfaces';
+import { MessageI, ScrapingGetInfoClubResponse } from '@interfaces';
 import { Image, Site, Style } from '@models';
 import {
   ToastService,
@@ -20,6 +16,7 @@ import {
   ImageSetFirstImageDto,
   ImageUploadByUrlDto,
 } from '@shared/services/api/image/image.dto';
+import { ScrapingGetInfoClubDto } from '@shared/services/api/scraping/scraping.dto';
 import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { countries } from 'assets/data/countries';

@@ -2,11 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
-import {
-  MessageI,
-  ScrapingGetInfoArtistDto,
-  ScrapingGetInfoArtistResponse,
-} from '@interfaces';
+import { MessageI, ScrapingGetInfoArtistResponse } from '@interfaces';
 import { Artist, Image, Style } from '@models';
 import {
   ArtistService,
@@ -19,6 +15,7 @@ import {
   ImageSetFirstImageDto,
   ImageUploadByUrlDto,
 } from '@shared/services/api/image/image.dto';
+import { ScrapingGetInfoArtistDto } from '@shared/services/api/scraping/scraping.dto';
 import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
 import { MODAL_STATE } from '@shared/services/ui/modal/modal.service';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
@@ -267,5 +264,11 @@ export class ArtistOneComponent {
       next: (response) => this.onSuccessUpdate(response),
       error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
     });
+  }
+
+  goToProfile() {
+    this.router.navigate([
+      routesConfig.artist.replace(':slug', this.artist.slug!),
+    ]);
   }
 }

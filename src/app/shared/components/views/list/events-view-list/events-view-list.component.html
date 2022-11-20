@@ -23,13 +23,6 @@
                   >
                     {{ item.name }}
                   </p>
-                  <!-- <p class="mt-1 text-sm font-light leading-none text-gray-500">
-                    {{
-                      item.birthdate
-                        ? getYearsOld(item.birthdate) + ' años'
-                        : ''
-                    }}
-                  </p> -->
                 </div>
               </div>
             </td>
@@ -87,16 +80,6 @@
             <td class="px-5">
               {{ item.date }}
             </td>
-            <!-- <td class="pl-0">
-              <p class="mb-2 mr-2 text-sm font-light leading-none">
-                <span class="font-black">{{ item.sets?.count ?? 0 }}</span>
-                {{ item.sets?.count === 1 ? 'Set' : 'Sets' }}
-              </p>
-              <p class="mr-2 text-sm font-light leading-none">
-                <span class="font-black">{{ item.tracks?.count ?? 0 }}</span>
-                {{ item.tracks?.count === 1 ? 'Track' : 'Tracks' }}
-              </p>
-            </td> -->
 
             <td class="pl-5" *ngxPermissionsOnly="'ADMIN'">
               <div class="flex flex-col">

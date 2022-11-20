@@ -4,14 +4,7 @@ import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { GetAllDto, MessageI } from '@interfaces';
 import { Artist, Image, Media, Site, Style } from '@models';
-import {
-  ArtistService,
-  ImageService,
-  MediaService,
-  SiteService,
-  StyleService,
-  ToastService,
-} from '@services';
+import { ImageService, MediaService, ToastService } from '@services';
 import {
   ImageSetFirstImageDto,
   ImageUploadByUrlDto,
@@ -59,9 +52,6 @@ export class AdminMediaOneComponent {
   tempImages: string[] = [];
 
   constructor(
-    private artistService: ArtistService,
-    private styleService: StyleService,
-    private siteService: SiteService,
     private mediaService: MediaService,
     private toast: ToastService,
     private toastService: ToastService,
@@ -70,93 +60,6 @@ export class AdminMediaOneComponent {
     private imageService: ImageService,
     private spinner: NgxSpinnerService
   ) {}
-
-  ngOnInit() {
-    this.getAllStytles();
-  }
-
-  getAllStytles() {
-    this.styleService
-      .getAll({
-        page: 1,
-        pageSize: 100,
-        order: ['name', 'asc'],
-        complete: false,
-      })
-      .subscribe({
-        next: (response) => (this.styles = response.items),
-        error: (error) => this.toast.showToast(TOAST_STATE.error, error),
-      });
-  }
-
-  onClickItem(type: 'artists' | 'styles', item: { name: string; _id: string }) {
-    this.media[type] = this.media[type]?.filter(
-      (mediaItem: Media) => mediaItem.name !== item.name
-    );
-  }
-
-  closeSelection(type: string) {
-    if (type === 'artists') {
-      this.selectArtistsState = false;
-    } else {
-      this.selectSitesState = false;
-    }
-  }
-
-  onChangeInputArtist(e: string) {
-    if (this.media.artists!.length < 3) {
-      this.bodyArtist.filter = ['name', e];
-      this.artistService.getAll(this.bodyArtist).subscribe({
-        next: (response) => {
-          this.artistsSearch = response.items;
-          this.selectArtistsState = true;
-        },
-        error: (error) => this.toast.showToast(TOAST_STATE.error, error),
-      });
-    } else {
-      this.toast.showToast(TOAST_STATE.warning, '3 artistas maximo');
-    }
-  }
-
-  onSelectArtist(artist: Artist) {
-    if (this.media.artists!.length < 3) {
-      this.media.artists?.push(artist);
-      this.artistSearch = null;
-      this.selectArtistsState = false;
-    } else {
-      this.toast.showToast(TOAST_STATE.warning, '3 artistas maximo');
-      this.selectArtistsState = false;
-    }
-  }
-
-  onChangeInputSite(e: string) {
-    this.bodySite.filter = ['name', e];
-    this.siteService.getAll(this.bodySite).subscribe({
-      next: (response) => (this.sitesSearch = response.items),
-      error: (error) => this.toast.showToast(TOAST_STATE.error, error),
-    });
-    this.selectSitesState = true;
-  }
-
-  onSelectSite(site: Site) {
-    this.media.site = site;
-    this.siteSearch = null;
-    this.selectSitesState = false;
-  }
-
-  onChangeStyleSelect(e: any) {
-    if (this.media.styles!.length < 5) {
-      const netItem = this.styles.find(
-        (style) => style._id!.toString() === e.target.value.toString()
-      );
-      this.media.styles?.push(netItem);
-    } else {
-      this.toastService.showToast(
-        TOAST_STATE.warning,
-        'No puedes añadir mas de 5 estilos'
-      );
-    }
-  }
 
   validationSubmit() {
     if (this.media.name === '') {

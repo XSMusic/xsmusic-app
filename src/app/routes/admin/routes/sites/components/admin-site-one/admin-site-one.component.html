@@ -13,7 +13,7 @@
     >
       <map
         [class]="'rounded-lg overflow-hidden'"
-        [style]="'height: 27.85rem'"
+        [style]="'height: 25.6rem'"
         [markers]="[site]"
         [zoom]="14"
         [draggable]="true"
@@ -181,9 +181,16 @@
       <label
         class="block mb-3 text-base font-extrabold text-black dark:text-white"
       >
-        <span class="text-gray-700">Estilos</span>
+        <span
+          class="block mb-3 text-base font-extrabold text-black dark:text-white"
+        >
+          Estilos
+        </span>
       </label>
-      <div class="flex gap-2 my-3">
+      <div
+        *ngIf="site.styles && site.styles.length > 0"
+        class="flex gap-2 my-3"
+      >
         <span
           (click)="onClickStyleItem(styleSelected)"
           class="px-2 py-1 text-xs bg-gray-100 border rounded-lg shadow-md cursor-pointer"

@@ -8,7 +8,6 @@ export * from './api/site/site.service';
 export * from './api/stats/stats.service';
 export * from './api/style/style.service';
 export * from './api/user/user.service';
-export * from './api/youtube/youtube.service';
 export * from './system/angular-svg-icon-preloader/angular-svg-icon-preloader.service';
 export * from './system/events.service';
 export * from './system/local-storage.service';

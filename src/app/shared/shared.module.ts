@@ -35,6 +35,7 @@ import {
   LastMultiComponent,
   BlockInfoProfileComponent,
   EventsViewListComponent,
+  SearchInputComponent,
 } from '@components';
 import {
   CountryFlagPipe,
@@ -60,7 +61,6 @@ import {
   ScrapingService,
   StartupService,
   UserService,
-  YoutubeService,
 } from '@services';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { httpInterceptorProviders } from '@core/interceptors';
@@ -100,6 +100,7 @@ const components = [
   LastMultiComponent,
   BlockInfoProfileComponent,
   EventsViewListComponent,
+  SearchInputComponent,
 ];
 const directives = [OnImageErrorDirective];
 const modules = [
@@ -136,7 +137,6 @@ const services: any = [
   ScrapingService,
   StartupService,
   UserService,
-  YoutubeService,
 ];
 
 @NgModule({

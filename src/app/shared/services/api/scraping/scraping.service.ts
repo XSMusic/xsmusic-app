@@ -2,13 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import {
-  ScrapingGetInfoArtistDto,
   ScrapingGetInfoArtistResponse,
-  ScrapingGetInfoClubDto,
   ScrapingGetInfoClubResponse,
 } from '@interfaces';
+import { Youtube } from '@models';
 import { Observable } from 'rxjs';
 import { ScrapingSourceI } from './scraping-source.interface';
+import {
+  ScrapingGetInfoArtistDto,
+  ScrapingGetInfoClubDto,
+  ScrapingGetListMediaDto,
+} from './scraping.dto';
 
 @Injectable({ providedIn: 'root' })
 export class ScrapingService {
@@ -42,5 +46,9 @@ export class ScrapingService {
       `${this.url}/getInfoClub`,
       data
     );
+  }
+
+  getListMedia(body: ScrapingGetListMediaDto): Observable<Youtube[]> {
+    return this.httpClient.post<Youtube[]>(`${this.url}/getListMedia`, body);
   }
 }

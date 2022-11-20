@@ -10,7 +10,10 @@
   </div>
   <div class="grid grid-cols-4 gap-4 md:col-span-2">
     <div class="col-span-2 md:col-span-2">
-      <label for="name" class="block mb-3 text-base font-extrabold text-black">
+      <label
+        for="name"
+        class="block mb-3 text-base font-extrabold text-black dark:text-white"
+      >
         Nombre
       </label>
       <input
@@ -18,14 +21,14 @@
         type="text"
         [(ngModel)]="media.name"
         placeholder="Introduce el nombre"
-        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-lg"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-lg dark:border-gray-700 dark:text-white dark:bg-black rounded-l-md ring-red-500 dark:ring-red-500"
       />
     </div>
 
     <div class="col-span-2 md:col-span-2">
       <label
         for="source"
-        class="block mb-3 text-base font-extrabold text-black"
+        class="block mb-3 text-base font-extrabold text-black dark:text-white"
       >
         Medio
       </label>
@@ -34,7 +37,7 @@
         type="text"
         [(ngModel)]="media.source"
         placeholder="Selecciona el medio"
-        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-lg"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-lg dark:border-gray-700 dark:text-white dark:bg-black rounded-l-md ring-red-500 dark:ring-red-500"
       >
         <option [value]="null" [disabled]="true" [selected]>
           Selecciona medio
@@ -48,7 +51,7 @@
     <div class="col-span-2 mb-1 md:col-span-4">
       <label
         for="sourceId"
-        class="block mb-3 text-base font-extrabold text-black"
+        class="block mb-3 text-base font-extrabold text-black dark:text-white"
       >
         Video Id
       </label>
@@ -58,11 +61,11 @@
           type="text"
           [(ngModel)]="media.sourceId"
           placeholder="Introduce el id del video"
-          class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-l-md"
+          class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-l-lg dark:border-gray-700 dark:text-white dark:bg-black rounded-l-md ring-red-500 dark:ring-red-500"
         />
         <button
           (click)="goToYoutube()"
-          class="px-3 bg-red-500 border rounded-r-lg cursor-pointer hover:bg-red-400 border-1"
+          class="px-3 bg-red-500 border rounded-r-lg cursor-pointer dark:border-gray-800 hover:bg-red-400 border-1"
         >
           <svg-icon name="youtube" svgClass="w-4 h-4 fill-white"></svg-icon>
         </button>
@@ -72,7 +75,7 @@
     <div class="col-span-2 mb-1 md:col-span-4">
       <label
         for="sourceId"
-        class="block mb-3 text-base font-extrabold text-black"
+        class="block mb-3 text-base font-extrabold text-black dark:text-white"
       >
         Año
       </label>
@@ -81,7 +84,7 @@
         type="number"
         [(ngModel)]="media.year"
         placeholder="Introduce el año"
-        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-lg"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-lg dark:border-gray-700 dark:text-white dark:bg-black rounded-l-md ring-red-500 dark:ring-red-500"
       />
     </div>
 
@@ -93,27 +96,7 @@
         'md:col-span-2': media.type === 'set'
       }"
     >
-      <label class="block mb-3 text-base font-extrabold text-black">
-        <span class="text-gray-700">Estilo/s</span>
-      </label>
-      <div class="flex gap-2 my-3">
-        <span
-          (click)="onClickItem('styles', styleSelected)"
-          class="px-2 py-1 text-xs bg-gray-100 border rounded-lg shadow-md cursor-pointer"
-          *ngFor="let styleSelected of media.styles"
-        >
-          <span class="pr-1 text-sm font-medium">{{ styleSelected.name }}</span>
-        </span>
-      </div>
-      <select
-        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-lg form-multiselect"
-        (change)="onChangeStyleSelect($event)"
-      >
-        <option [disabled]="true">Selecciona estilo</option>
-        <option *ngFor="let style of styles" [value]="style._id">
-          {{ style.name }}
-        </option>
-      </select>
+      <search-input type="style" [item]="media"></search-input>
     </div>
   </div>
 
@@ -134,145 +117,28 @@
       'md:col-span-2': media.type === 'set'
     }"
   >
-    <label class="block mb-3 text-base font-extrabold text-black">
-      <span class="text-gray-700">Artista/s</span>
-    </label>
-    <div class="flex gap-2 my-3" *ngIf="media.artists!.length > 0">
-      <div
-        (click)="onClickItem('artists', artistSelected)"
-        class="flex px-2 py-1 text-xs text-white bg-black border rounded-lg shadow-md cursor-pointer hover:opacity-80"
-        *ngFor="let artistSelected of media.artists"
-      >
-        <img
-          [src]="artistSelected.images! | imageArray"
-          alt="artistSelected.name"
-          class="w-5 h-5 mr-3 rounded-full"
-          onError
-        />
-        <span class="pr-1 text-sm font-medium">{{ artistSelected.name }}</span>
-      </div>
-    </div>
-    <div class="flex">
-      <input
-        (click)="closeSelection('artists')"
-        name="artist"
-        (keydown.enter)="
-          $event.preventDefault(); onChangeInputArtist(artistSearch!)
-        "
-        [(ngModel)]="artistSearch"
-        placeholder="Introduce el artista"
-        class="w-full px-6 py-2 font-medium bg-white border border-gray-200 cursor-pointer rounded-l-md t ext-base"
-        autocomplete="off"
-      />
-      <button
-        class="px-3 bg-gray-100 rounded-r-lg cursor-pointer hover:opacity-80"
-        (click)="onChangeInputArtist(artistSearch!)"
-      >
-        <svg-icon name="search"></svg-icon>
-      </button>
-    </div>
-    <div
-      @inOut
-      class="absolute z-10 w-48 mt-1 bg-white border rounded-lg shadow-lg"
-      *ngIf="selectArtistsState"
-    >
-      <div
-        class="flex px-3 py-2 border-b cursor-pointer hover:bg-gray-200"
-        *ngFor="let artistS of artistsSearch"
-        (click)="onSelectArtist(artistS)"
-      >
-        <img
-          [src]="artistS.images! | imageArray"
-          alt=""
-          class="w-10 h-10 mr-3 rounded-full"
-          onError
-        />
-        <div class="flex flex-col">
-          <span class="text-sm font-medium">{{ artistS?.name }}</span>
-          <span class="text-sm font-light">
-            {{ artistS?.country ?? 'es' | countryName }}
-          </span>
-        </div>
-      </div>
-    </div>
+    <search-input type="artist" [item]="media"></search-input>
   </div>
 
   <!-- SITE -->
   <div class="col-span-2 mb-1 md:col-span-2" *ngIf="media.type === 'set'">
-    <label class="block mb-3 text-base font-extrabold text-black">
-      <span class="text-gray-700">Club/Festival</span>
-    </label>
-    <div class="flex gap-2 my-3" *ngIf="media.site">
-      <div
-        class="flex px-2 py-1 text-xs text-white bg-black border rounded-lg shadow-md cursor-pointer hover:opacity-80"
-      >
-        <img
-          [src]="media.site?.images | imageArray"
-          [alt]=""
-          class="w-5 h-5 mr-3 rounded-full"
-          onError
-        />
-        <span class="pr-1 text-sm font-medium">{{ media.site?.name }}</span>
-      </div>
-    </div>
-    <div class="flex">
-      <input
-        (click)="closeSelection('sites')"
-        name="site"
-        (keydown.enter)="
-          $event.preventDefault(); onChangeInputSite(siteSearch!)
-        "
-        [(ngModel)]="siteSearch"
-        placeholder="Introduce el club/festival"
-        class="w-full px-6 py-2 text-base font-medium bg-white border border-gray-200 rounded-lg cursor-pointer"
-        autocomplete="off"
-      />
-      <button
-        class="px-3 bg-gray-100 rounded-r-lg cursor-pointer hover:opacity-80"
-        (click)="onChangeInputSite(siteSearch!)"
-      >
-        <svg-icon name="search"></svg-icon>
-      </button>
-    </div>
-
-    <div
-      @inOut
-      class="absolute z-10 w-48 mt-1 bg-white border rounded-lg shadow-lg"
-      *ngIf="selectSitesState"
-    >
-      <div
-        class="flex px-3 py-2 border-b cursor-pointer hover:bg-gray-200"
-        *ngFor="let site of sitesSearch | slice: 0:5"
-        (click)="onSelectSite(site)"
-      >
-        <img
-          [src]="site.images! | imageArray"
-          alt=""
-          class="w-10 h-10 mr-3 rounded-full"
-          onError
-        />
-        <div class="flex flex-col">
-          <span class="text-sm font-medium">{{ site.name }}</span>
-          <span class="text-sm font-light">
-            {{ site.address.country! | countryName }}
-          </span>
-        </div>
-      </div>
-    </div>
+    <search-input type="site" [item]="media"></search-input>
   </div>
 
   <div class="col-span-2 mb-1 md:col-span-4">
     <label
       for="sourceId"
-      class="block mb-3 text-base font-extrabold text-black"
+      class="block mb-3 text-base font-extrabold text-black dark:text-white"
     >
       Info
     </label>
-    <angular-editor
-      name="info"
-      [placeholder]="'Introduce informacion'"
-      [(ngModel)]="media.info"
-    ></angular-editor>
+    <div class="w-full overflow-hidden bg-white rounded-lg">
+      <angular-editor
+        name="info"
+        [placeholder]="'Introduce informacion'"
+        [(ngModel)]="media.info"
+      ></angular-editor>
+    </div>
   </div>
 
   <!-- Actions Buttons -->

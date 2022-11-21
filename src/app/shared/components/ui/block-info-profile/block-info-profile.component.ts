@@ -23,7 +23,15 @@ export class BlockInfoProfileComponent {
   }
 
   goToEdit(id: string) {
-    this.router.navigate([routesConfig.clubAdmin.replace(':id', id)]);
+    let route = '';
+    if (this.type === 'artist') {
+      route = routesConfig.artistAdmin;
+    } else if (this.type === 'club') {
+      route = routesConfig.clubAdmin;
+    } else if (this.type === 'festival') {
+      route = routesConfig.festivalAdmin;
+    }
+    this.router.navigate([route.replace(':id', id)]);
   }
 
   goToFilter(key: string, value: string) {

@@ -1,5 +1,46 @@
-<div class="map-container" [class]="class" [style]="style">
+<div @inOut class="sticky map-container" [class]="class" [style]="style">
   <div class="map-frame">
     <div id="map"></div>
+  </div>
+
+  <div
+    @inOut
+    *ngIf="this.site.name !== ''"
+    class="relative left-0 w-full p-2 mx-auto bg-gray-100 border-2 shadow-lg dark:bg-black dark:border-gray-800"
+    style="z-index: 5000; margin-bottom: -4.6rem; bottom: 4.25rem"
+    (click)="goToSite()"
+  >
+    <div class="flex w-full gap-3">
+      <img
+        [src]="site.images! | imageArray"
+        [alt]="site.name"
+        onError
+        class="object-cover object-center w-12 h-12 cursor-pointer rounded-2xl lg:h-12 lg:w-12"
+      />
+      <div class="flex flex-col w-full">
+        <p
+          class="my-1 mr-2 text-base font-extrabold leading-none text-black cursor-pointer dark:text-white"
+        >
+          {{ site.name }}
+        </p>
+        <div class="flex items-center gap-1">
+          <img
+            [src]="site.address.country! | countryFlag"
+            [alt]="site.address.country"
+            class="w-4 h-4 my-1 cursor-pointer"
+          />
+          <p class="text-sm text-gray-500">
+            {{ site.address.state | fixState }}
+          </p>
+        </div>
+      </div>
+      <div class="col-span-1 mt-2">
+        <svg-icon
+          style="zoom: 1.25; margin-top: 0.25rem"
+          svgClass="text-gray-300"
+          name="chevron-right"
+        ></svg-icon>
+      </div>
+    </div>
   </div>
 </div>

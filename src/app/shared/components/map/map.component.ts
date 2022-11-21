@@ -4,11 +4,15 @@ import * as L from 'leaflet';
 import 'leaflet.markercluster';
 import { Geolocation } from '@capacitor/geolocation';
 import { environment } from '@env/environment';
+import { inOutAnimation } from '@core/animations/enter-leave.animations';
+import { routesConfig } from '@core/config';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'map',
   templateUrl: 'map.component.html',
   styleUrls: ['./map.component.css'],
+  animations: [inOutAnimation],
 })
 export class MapComponent implements AfterViewInit {
   private map!: L.Map;
@@ -20,11 +24,16 @@ export class MapComponent implements AfterViewInit {
   @Input() zoom = 13;
   @Input() markers: Site[] = [];
   @Input() dragabble = false;
+  @Input() one = false;
   popup = L.popup();
+  site = new Site();
+
+  constructor(private router: Router) {}
 
   ngAfterViewInit(): void {
     this.initMap();
     this.getCurrentPosition();
+    this.setEvents();
   }
 
   private initMap(): void {
@@ -79,36 +88,17 @@ export class MapComponent implements AfterViewInit {
           iconSize: [48, 48],
         });
 
-        const customPopup = `
-        <div class='flex gap-3 w-50'>
-          <img src='${environment.IMAGES_URL}/${
-          site.images![0].url
-        }' alt='' class="object-cover h-20 w-20 rounded-lg"/>
-          <div class='flex-col gap-2'>
-            <div class='text-lg font-extrabold'>${site.name}</div>
-            <div class='font-light'>${site.address.street}, ${
-          site.address.town !== '' ? site.address.town : site.address.state
-        }
-            </div>
-            <div class="text-black"><a href="clubs/one/${
-              site.slug
-            }" class="cursor-pointer text-black font-bold">
-              Ver perfil
-            </a></div>
-          </div>
-        </div>`;
-
-        // specify popup options
-        const customOptions = {
-          maxWidth: 500,
-          closeButton: true,
-          autoClose: true,
-        };
-
         const marker = L.marker(site.address.coordinates, {
           icon,
+          title: site._id,
           draggable: this.dragabble,
-        }).bindPopup(customPopup, customOptions);
+        }).on('click', (e) => {
+          if (!this.one) {
+            this.site = this.markers.find(
+              (item) => item._id === e.target.options.title
+            )!;
+          }
+        });
         markers.addLayer(marker);
       }
       markers.addTo(this.map);
@@ -135,4 +125,18 @@ export class MapComponent implements AfterViewInit {
       console.error(e);
     }
   };
+
+  setEvents() {
+    this.map.on('click', () => {
+      if (!this.dragabble) {
+        this.site = new Site();
+      }
+    });
+  }
+
+  goToSite() {
+    const route =
+      this.site.type === 'club' ? routesConfig.club : routesConfig.festival;
+    this.router.navigate([route.replace(':slug', this.site.slug!)]);
+  }
 }

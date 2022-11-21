@@ -19,14 +19,13 @@ Cada vez que se añada un valor en el archivo .env, hay que añadir el archivo c
 - [ ] Obtener info del sitio scrapeado
 - [ ] Likes
   - [ ] Crear modelo
-- [ ] Eventos
-  - [ ] Añadir modelo
 - [ ] Añadir compartir en todos los sitios
 - [ ] Youtube
   - [ ] Filtrar resultados que hay en DB al buscar en youtube
   - [ ] Añadir paginacion en busqueda de youtube
   - [ ] Añadir eliminacion permanente de resultados
     - Una tabla en DB para comparar los ids que no queramos que se muestren mas
+  - Añadir darkmode en sistema por defecto
 
 #### Ideas
 

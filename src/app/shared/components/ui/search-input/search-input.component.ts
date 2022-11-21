@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { GetAllDto } from '@interfaces';
-import { Artist } from '@models';
 import {
   ArtistService,
   SiteService,

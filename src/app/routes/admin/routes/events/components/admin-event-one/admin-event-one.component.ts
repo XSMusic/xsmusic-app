@@ -1,23 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
-import { MessageI, ScrapingGetInfoClubResponse } from '@interfaces';
-import { Event, Image, Site, Style } from '@models';
-import {
-  ToastService,
-  SiteService,
-  ScrapingService,
-  GeoService,
-  ImageService,
-  StyleService,
-  EventService,
-} from '@services';
+import { MessageI } from '@interfaces';
+import { Event, Image, Style } from '@models';
+import { ToastService, ImageService, EventService } from '@services';
 import {
   ImageSetFirstImageDto,
   ImageUploadByUrlDto,
 } from '@shared/services/api/image/image.dto';
-import { ScrapingGetInfoClubDto } from '@shared/services/api/scraping/scraping.dto';
 import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { NgxSpinnerService } from 'ngx-spinner';

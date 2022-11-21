@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { SwUpdate, VersionReadyEvent } from '@angular/service-worker';
+import { NavigationService } from '@services';
 import { filter, map } from 'rxjs';
 
 @Component({
@@ -14,9 +15,11 @@ export class AppComponent implements OnInit {
   constructor(
     private router: Router,
     private titleService: Title,
-    private swUpdate: SwUpdate
+    private swUpdate: SwUpdate,
+    private navigationService: NavigationService
   ) {}
   ngOnInit(): void {
+    this.navigationService.startSaveHistory();
     this.preventBackButton();
     this.setTitle();
 

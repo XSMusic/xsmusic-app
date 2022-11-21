@@ -1,11 +1,18 @@
-import { Component, ViewChild, OnInit, ElementRef } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  OnInit,
+  ElementRef,
+  Injector,
+} from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { Router, NavigationEnd, Event, RouterEvent } from '@angular/router';
+import { Router, NavigationEnd, Event, ActivatedRoute } from '@angular/router';
 import { filter, distinctUntilChanged } from 'rxjs';
 import { Menu, User } from '@models';
 import { AuthService } from '@core/auth';
 import { routesConfig } from '@core/config';
-import { NgxPermissionsService } from 'ngx-permissions';
+import { Location } from '@angular/common';
+import { NavigationService } from '@services';
 
 @Component({
   selector: 'navbar',
@@ -16,8 +23,6 @@ export class NavbarComponent implements OnInit {
   @ViewChild('menu') menu!: ElementRef;
   menuState = false;
   menuProfileState = false;
-  searchBarState = false;
-  searchPage = false;
   menuItemsForAny: Menu[] = [];
   menuItemsForAdmin: Menu[] = [];
   menuItemsForAdminInAdmin: Menu[] = [];
@@ -35,7 +40,10 @@ export class NavbarComponent implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private ngxPermissionsService: NgxPermissionsService
+    private location: Location,
+    private injector: Injector,
+    private activatedRoute: ActivatedRoute,
+    private navigationService: NavigationService
   ) {}
 
   ngOnInit(): void {
@@ -93,7 +101,6 @@ export class NavbarComponent implements OnInit {
       )
       .subscribe((e: any) => {
         this.adminPage = e.url.indexOf('admin') !== -1;
-        this.searchPage = e.url.indexOf('search') !== -1;
         this.onePage =
           e.url.indexOf('/one/') !== -1 || e.url.indexOf('/profile/') !== -1;
         this.homePage = e.url.indexOf('home') !== -1;
@@ -155,7 +162,11 @@ export class NavbarComponent implements OnInit {
     if (!this.backButton.state) {
       this.toggleMenu();
     } else {
-      this.router.navigate([this.backButton.route]);
+      if (this.navigationService.getPreviousUrl()) {
+        this.location.back();
+      } else {
+        this.router.navigate([this.backButton.route]);
+      }
     }
   }
 
@@ -167,14 +178,7 @@ export class NavbarComponent implements OnInit {
   openOrCloseMenu() {
     this.menuState = !this.menuState;
     if (this.menuState) {
-      this.searchBarState = false;
-    }
-  }
-
-  openOrCloseSearchBar() {
-    this.searchBarState = !this.searchBarState;
-    if (this.searchBarState) {
-      this.menuState = false;
+      this.menuProfileState = false;
     }
   }
 

@@ -14,3 +14,4 @@ export * from './system/local-storage.service';
 export * from './system/startup.service';
 export * from './ui/modal/modal.service';
 export * from './ui/toast/toast.service';
+export * from './system/navigation.service';

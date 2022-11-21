@@ -11,6 +11,7 @@
     "run:note": "npm run build && npx cap sync && npx capacitor run android --target R5CN80DTHJP",
     "prettier:list": "prettier --list-different \"./{e2e,src}/**/*.{scss,css,ts,html}\" || ECHO .",
     "prettier": "prettier --write \"./{e2e,src}/**/*.{scss,css,ts,html}\"",
+    "pretty-quick": "pretty-quick --staged",
     "lint": "eslint \"**/*.{ts,tsx}\" --fix",
     "test": "ng test",
     "prepare": "husky install"

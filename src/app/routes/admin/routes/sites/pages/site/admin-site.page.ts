@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { routesConfig } from '@core/config';
-import { Site, Style } from '@models';
+import { Site } from '@models';
 import { ToastService, SiteService, StyleService } from '@services';
 import { OptionsItemI } from '@shared/components/ui/options-items/options-items.interface';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';

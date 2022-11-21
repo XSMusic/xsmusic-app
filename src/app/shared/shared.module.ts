@@ -58,7 +58,9 @@ import {
   ArtistService,
   LocalStorageService,
   MediaService,
+  NavigationService,
   ScrapingService,
+  SiteService,
   StartupService,
   UserService,
 } from '@services';
@@ -134,7 +136,9 @@ const services: any = [
   ArtistService,
   LocalStorageService,
   MediaService,
+  NavigationService,
   ScrapingService,
+  SiteService,
   StartupService,
   UserService,
 ];

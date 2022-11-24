@@ -50,6 +50,7 @@ import {
   ImageArrayPipe,
   TitleMediaPipe,
   FixStatePipe,
+  DateToDayOrMonthPipe,
 } from '@pipes';
 import { OnImageErrorDirective } from './directives';
 import { NgxPermissionsModule } from 'ngx-permissions';
@@ -130,8 +131,9 @@ const pipes = [
   ImageArrayPipe,
   TitleMediaPipe,
   FixStatePipe,
+  DateToDayOrMonthPipe,
 ];
-const services: any = [
+const services = [
   AngularSvgIconPreloaderService,
   ArtistService,
   LocalStorageService,

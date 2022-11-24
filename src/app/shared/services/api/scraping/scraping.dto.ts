@@ -13,3 +13,10 @@ export interface ScrapingGetListMediaDto {
   maxResults: string;
   source: 'youtube' | 'soundcloud';
 }
+
+export interface ScrapingGetListEventsDto {
+  source: string;
+  maxResults: string;
+  dateFrom: string;
+  dateTo: string;
+}

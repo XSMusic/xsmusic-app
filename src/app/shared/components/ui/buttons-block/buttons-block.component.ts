@@ -28,6 +28,7 @@ export class ButtonsBlockComponent implements OnInit {
     | 'artistsAdmin'
     | 'artistAdmin'
     | 'eventsAdmin'
+    | 'eventsScraping'
     | 'eventAdmin'
     | 'sites'
     | 'siteAdmin'

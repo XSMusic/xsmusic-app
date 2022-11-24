@@ -7,10 +7,11 @@ import {
 } from '@interfaces';
 import { Youtube } from '@models';
 import { Observable } from 'rxjs';
-import { ScrapingSourceI } from './scraping-source.interface';
+import { ScrapingEventI, ScrapingEventsI, ScrapingSourceI } from './scraping-source.interface';
 import {
   ScrapingGetInfoArtistDto,
   ScrapingGetInfoClubDto,
+  ScrapingGetListEventsDto,
   ScrapingGetListMediaDto,
 } from './scraping.dto';
 
@@ -50,5 +51,12 @@ export class ScrapingService {
 
   getListMedia(body: ScrapingGetListMediaDto): Observable<Youtube[]> {
     return this.httpClient.post<Youtube[]>(`${this.url}/getListMedia`, body);
+  }
+
+  getListEvents(body: ScrapingGetListEventsDto): Observable<ScrapingEventsI> {
+    return this.httpClient.post<ScrapingEventsI>(
+      `${this.url}/getListEvents`,
+      body
+    );
   }
 }

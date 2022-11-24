@@ -23,7 +23,7 @@
                   >
                     {{ artist.name }}
                   </p>
-                  <p class="mt-1 text-sm font-light leading-none text-gray-500">
+                  <p class="mt-1 text-sm font-light leading-none text-gray-500 dark:text-gray-400">
                     {{
                       artist.birthdate
                         ? getYearsOld(artist.birthdate) + ' años'
@@ -191,7 +191,7 @@
   <div class="w-full py-2">
     <div
       *ngFor="let artist of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
-      class="relative h-24 my-4 overflow-hidden bg-gray-100 shadow-xl cursor-pointer animate-pulse"
+      class="relative h-24 my-4 overflow-hidden bg-gray-100 shadow-xl cursor-pointer dark:bg-gray-900 animate-pulse"
     ></div>
   </div>
 </ng-container>

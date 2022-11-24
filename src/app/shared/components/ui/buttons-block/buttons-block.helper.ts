@@ -34,6 +34,21 @@ export const buttonsByType = [
     ],
   },
   {
+    name: 'eventsScraping',
+    buttons: [
+      new ButtonBlockItem({
+        name: 'Completos',
+        action: 'viewCompleted',
+        isActivatable: true,
+      }),
+      new ButtonBlockItem({
+        name: 'Incompletos',
+        action: 'viewNotCompleted',
+        isActivatable: true,
+      }),
+    ],
+  },
+  {
     name: 'artistsAdmin',
     buttons: [
       new ButtonBlockItem({
@@ -104,6 +119,11 @@ export const buttonsByType = [
       new ButtonBlockItem({
         name: 'Nuevo',
         action: 'viewAdd',
+        isActivatable: true,
+      }),
+      new ButtonBlockItem({
+        name: 'Scraping',
+        action: 'viewScraping',
         isActivatable: true,
       }),
       new ButtonBlockItem({

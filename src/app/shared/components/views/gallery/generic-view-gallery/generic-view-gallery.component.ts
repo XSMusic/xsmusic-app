@@ -8,7 +8,7 @@ import { inOutAnimation } from '@core/animations/enter-leave.animations';
 })
 export class GenericViewGalleryComponent {
   @Input() items: any[] = [];
-  @Input() type: 'artist' | 'club' | 'set' | 'track' | 'festival' = 'artist';
+  @Input() type: 'artist' | 'club' | 'event' | 'eventScraping' | 'set' | 'track' | 'festival' = 'artist';
   @Input() loading = true;
   @Input() cols = [];
   @Output() goToOne = new EventEmitter<any>();
@@ -20,6 +20,8 @@ export class GenericViewGalleryComponent {
         return 'No hay artistas disponibles';
       case 'club':
         return 'No hay clubs disponibles';
+      case 'event':
+        return 'No hay eventos disponibles';
       case 'set':
         return 'No hay sets disponibles';
       case 'track':

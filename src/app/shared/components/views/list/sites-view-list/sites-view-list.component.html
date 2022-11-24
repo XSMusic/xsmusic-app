@@ -20,7 +20,7 @@
                   class="my-1 mr-2 text-base font-extrabold leading-none text-black cursor-pointer dark:text-white hover:text-gray-500"
                   (click)="goToProfile.emit(site)"
                 >
-                  {{ site.name }}
+                  {{ site.name! | truncateText: 15}}
                 </p>
                 <div class="flex items-center gap-1">
                   <img
@@ -40,19 +40,19 @@
                 </div>
               </div>
             </div>
-            <div class="flex flex-col justify-center text-xs text-center">
+            <div class="flex flex-col justify-center text-xs text-center dark:text-white">
               <div>
                 <div>Sets</div>
                 <div class="text-lg font-bold">{{ site.sets?.count ?? 0 }}</div>
               </div>
             </div>
-            <div class="flex flex-col justify-center text-xs text-center">
+            <div class="flex flex-col justify-center text-xs text-center dark:text-white">
               <div>
                 <div>Even.</div>
-                <div class="text-lg font-bold">{{ 0 }}</div>
+                <div class="text-lg font-bold">{{ site.events?.count ?? 0 }}</div>
               </div>
             </div>
-            <div class="flex flex-col justify-center text-xs text-center">
+            <div class="flex flex-col justify-center text-xs text-center dark:text-white">
               <div>
                 <div>Imag.</div>
                 <div class="text-lg font-bold">

@@ -24,7 +24,6 @@ Cada vez que se añada un valor en el archivo .env, hay que añadir el archivo c
   - [ ] Añadir paginacion en busqueda de youtube
   - [ ] Añadir eliminacion permanente de resultados
     - Una tabla en DB para comparar los ids que no queramos que se muestren mas
-  - Añadir darkmode en sistema por defecto
 
 #### Ideas
 
@@ -36,3 +35,4 @@ Cada vez que se añada un valor en el archivo .env, hay que añadir el archivo c
 - [ ] Cuando el menu profile esta abierto y pinchamos en otro lado no se cierra
 - [ ] No sale imagen al compartir
 - [ ] Cuando estas en el mapa y abres el menu, el mapa sale por encima
+- [ ] Al crear club, redirige a festivales

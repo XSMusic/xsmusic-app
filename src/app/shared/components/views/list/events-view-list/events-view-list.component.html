@@ -8,20 +8,29 @@
             class="h-16 border-b border-gray-100 rounded-lg dark:border-black dark:border-0"
           >
             <td class="pl-3">
-              <div class="flex gap-3 w-60">
-                <img
-                  [src]="item.images! | imageArray"
-                  [alt]="item.name"
-                  onError
-                  class="object-cover object-center w-12 h-12 cursor-pointer rounded-2xl lg:h-12 lg:w-12 hover:filter-grayscale hover:scale-105 hover:duration-1000"
-                  (click)="showImage(item.images![0].url ?? '')"
-                />
+              <div class="flex gap-3 max-w-80">
+                <div class="w-12">
+                  <img
+                    [src]="item.images! | imageArray"
+                    [alt]="item.name"
+                    onError
+                    class="object-cover object-center w-full h-12 cursor-pointer rounded-2xl hover:filter-grayscale hover:scale-105 hover:duration-1000"
+                    (click)="showImage(item.images![0].url ?? '')"
+                  />
+                </div>
                 <div class="flex flex-col">
                   <p
                     class="my-1 mr-2 text-lg font-extrabold leading-none text-black cursor-pointer dark:text-white hover:text-gray-600"
                     (click)="goToProfile.emit({ type: 'event', event: item })"
                   >
                     {{ item.name }}
+                  </p>
+                  <p
+                    *ngFor="let artist of item.artists! | slice:0:3; let i = index"
+                    class="text-sm dark:text-gray-400"
+                  >
+                  <span *ngIf="i !== 0"> & </span>
+                    {{ artist.name }}
                   </p>
                 </div>
               </div>
@@ -48,7 +57,7 @@
                   </p>
                   <div
                     *ngIf="item.site"
-                    class="flex gap-1 text-sm font-light text-gray-500 cursor-pointer"
+                    class="flex gap-1 text-sm font-light text-gray-400 cursor-pointer"
                   >
                     <img
                       [src]="
@@ -83,12 +92,12 @@
 
             <td class="pl-5" *ngxPermissionsOnly="'ADMIN'">
               <div class="flex flex-col">
-                <div class="mr-2 text-sm font-light leading-none text-gray-700">
-                  <span class="font-extrabold">Cre:</span>
+                <div class="mr-2 text-sm font-light leading-none text-gray-700 dark:text-gray-400">
+                  <span class="font-extrabold dark:text-white">Cre:</span>
                   {{ item.created! | timeAgo }}
                 </div>
-                <div class="mr-2 text-sm font-light leading-none text-gray-700">
-                  <span class="font-extrabold">Act:</span>
+                <div class="mr-2 text-sm font-light leading-none text-gray-700 dark:text-gray-400">
+                  <span class="font-extrabold dark:text-white">Act:</span>
                   {{ item.updated! | timeAgo }}
                 </div>
               </div>
@@ -119,7 +128,7 @@
   <div class="w-full py-2">
     <div
       *ngFor="let artist of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
-      class="relative h-24 my-4 overflow-hidden bg-gray-100 shadow-xl cursor-pointer animate-pulse"
+      class="relative h-24 my-4 overflow-hidden bg-gray-100 shadow-xl cursor-pointer dark:bg-gray-900 animate-pulse"
     ></div>
   </div>
 </ng-container>

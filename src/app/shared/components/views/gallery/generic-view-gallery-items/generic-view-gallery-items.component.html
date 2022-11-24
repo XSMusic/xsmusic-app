@@ -5,21 +5,31 @@
   <ng-container *ngFor="let item of items">
     <div
       *ngIf="item.name !== 'Desconocido'"
-      class="relative overflow-hidden shadow-lg cursor-pointer rounded-2xl dark:border dark:border-gray-700"
+      class="relative overflow-hidden rounded-lg shadow-lg dark:border dark:border-gray-700"
       (click)="goToOne.emit(item)"
     >
       <img
-        class="object-cover w-full h-80 hover:filter-grayscale hover:scale-105 hover:duration-1000"
+        *ngIf="type !== 'event' && type !== 'eventScraping'"
+        class="object-cover w-full cursor-pointer h-80 hover:filter-grayscale hover:scale-105 hover:duration-1000"
         [src]="item.images! | imageArray"
+        [alt]="item.name"
+        onError
+      />
+
+      <img
+        *ngIf="type === 'event' || type === 'eventScraping'"
+        class="object-cover w-full h-96 hover:filter-grayscale hover:scale-105 hover:duration-1000"
+        [src]="item.images![0]"
         [alt]="item.name"
         onError
       />
 
       <div
         class="absolute bottom-0 left-0 w-full px-6 pt-2 text-center text-white bg-black opacity-80"
+        *ngIf="type !== 'event' && type !== 'eventScraping'"
       >
         <div class="flex justify-center">
-          <div class="mb-2 text-2xl font-extrabold text-white">
+          <div class="mb-2 text-2xl font-extrabold text-white cursor-pointer ">
             <ng-container *ngIf="type === 'set'">
               <div class="text-lg font-medium text-white mb">
                 {{ item | titleMedia }}
@@ -52,6 +62,75 @@
             class="w-6 h-6 mx-2 mt-1.5"
             [alt]="item.country"
           />
+        </div>
+      </div>
+
+      <div *ngIf="type === 'event' || type === 'eventScraping'">
+        <p
+          class="p-2 text-xl font-bold text-center border-b dark:border-b dark:border-bg-gray-800 dark:text-white"
+        >
+          {{ item.name | truncateText: 25 }}
+        </p>
+
+        <div class="p-2 pt-3.5 flex" *ngIf="item.site && item.site.name">
+          <div class="flex w-full gap-3">
+            <img
+              [src]="item.site.images! | imageArray"
+              [alt]="item.site.name"
+              onError
+              class="object-cover object-center w-12 h-12 cursor-pointer rounded-2xl lg:h-12 lg:w-12 hover:filter-grayscale hover:scale-105 hover:duration-1000"
+            />
+
+            <div class="flex flex-col">
+              <p
+                class="my-1 mr-2 text-base font-extrabold leading-none text-black cursor-pointer dark:text-white hover:text-gray-500"
+              >
+                {{ item.site.name }}
+              </p>
+              <div class="flex items-center gap-1">
+                <img
+                  [src]="item.site.address.country! | countryFlag"
+                  [alt]="item.site.address.country"
+                  class="w-4 h-4 my-1 cursor-pointer hover:scale-110 hover:duration-1000"
+                />
+                <p class="text-sm text-gray-500">
+                  {{ item.site.address.state | fixState | truncateText: 10 }}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="flex flex-col gap-1 px-2 py-2 text-center text-white bg-black rounded-lg rounded-bl-lg dark:bg-gray-800"
+          >
+            <div class="text-xs font-light">
+              {{ item.date | dateToDayOrMonth: 'day' }}
+            </div>
+            <div class="text-xs font-bold">
+              {{ item.date | dateToDayOrMonth: 'month' | uppercase }}
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="p-2 pt-3.5 flex justify-between"
+          *ngIf="!(item.site && item.site.name)"
+        >
+          <p
+            class="p-2 pt-3 space-y-2 text-xl font-bold text-center dark:text-white"
+          >
+            {{ item.site }}
+          </p>
+          <div
+            class="flex flex-col gap-1 px-2 py-2 text-center text-white bg-black rounded-lg rounded-bl-lg dark:bg-gray-800"
+          >
+            <div class="text-xs font-light">
+              {{ item.date | dateToDayOrMonth: 'day' }}
+            </div>
+            <div class="text-xs font-bold">
+              {{ item.date | dateToDayOrMonth: 'month' | uppercase }}
+            </div>
+          </div>
         </div>
       </div>
     </div>

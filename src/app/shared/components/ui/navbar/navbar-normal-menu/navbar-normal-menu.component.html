@@ -27,13 +27,13 @@
         ></span>
       </p>
       <img
-        class="w-auto rounded cursor-pointer dark:lg:hidden hover:border-2xl h-9 lg:block hover:bg-gray-100 hover:rounded-full dark:hover:bg-gray-800"
+        class="hidden w-auto rounded cursor-pointer dark:lg:hidden hover:border-2xl h-9 lg:block hover:bg-gray-100 hover:rounded-full dark:hover:bg-gray-800"
         [src]="'assets/images/logo-light.png'"
         alt="XSMusic"
         (click)="goToHomeOrAdmin.emit()"
       />
       <img
-        class="w-auto rounded cursor-pointer lg:hidden hover:border-2xl h-9 dark:lg:block hover:bg-gray-100 hover:rounded-full dark:hover:bg-gray-800"
+        class="hidden w-auto rounded cursor-pointer lg:hidden hover:border-2xl h-9 dark:lg:block hover:bg-gray-100 hover:rounded-full dark:hover:bg-gray-800"
         [src]="'assets/images/logo-dark.png'"
         alt="XSMusic"
         (click)="goToHomeOrAdmin.emit()"

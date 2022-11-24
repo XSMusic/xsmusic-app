@@ -1,3 +1,4 @@
+export { DateToDayOrMonthPipe } from './date-to-day-or-month/date-to-day-or-month.pipe';
 export { FixStatePipe } from './fix-state/fix-state.pipe';
 export { TitleMediaPipe } from './title-media/title-media.pipe';
 export { ImageArrayPipe } from './image-array/image-array.pipe';

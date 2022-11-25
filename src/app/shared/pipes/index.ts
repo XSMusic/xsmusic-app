@@ -1,3 +1,4 @@
+export { MomentFormatAgoPipe } from './moment-format/moment-format.pipe';
 export { DateToDayOrMonthPipe } from './date-to-day-or-month/date-to-day-or-month.pipe';
 export { FixStatePipe } from './fix-state/fix-state.pipe';
 export { TitleMediaPipe } from './title-media/title-media.pipe';

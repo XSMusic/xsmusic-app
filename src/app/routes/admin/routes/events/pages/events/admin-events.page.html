@@ -3,7 +3,7 @@
 <div class="container px-4 pt-3 mx-auto max-w-full-xl sm:pb-0 max-w-7sm">
   <buttons-block
     type="eventsAdmin"
-    (search)="onSearch($event)"
+    (search)="onSearch(view === 'viewList' ? 'new' : 'old', $event)"
     (onClickButton)="onClickButton($event)"
   ></buttons-block>
 
@@ -11,7 +11,7 @@
     type="info"
     message="Filtro activado."
     actionText="Quitar"
-    (action)="removeFilter()"
+    (action)="removeFilter(view === 'viewList' ? 'new' : 'old')"
     *ngIf="body.filter && body.filter.length > 0"
   ></alert>
 
@@ -20,8 +20,17 @@
     [items]="items"
     [loading]="loading"
     (goToProfile)="goToProfile($event)"
-    (filter)="filter($event)"
-    (onScroll)="onScroll()"
+    (filter)="filter('new', $event)"
+    (onScroll)="onScroll('new')"
+  >
+  </events-view-list>
+  <events-view-list
+    *ngIf="view === 'viewListOld'"
+    [items]="itemsOld"
+    [loading]="loading"
+    (goToProfile)="goToProfile($event)"
+    (filter)="filter('old', $event)"
+    (onScroll)="onScroll('old')"
   >
   </events-view-list>
 

@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
-import { GetAllDto } from '@interfaces';
 import { Event } from '@models';
 import { EventService, ToastService, TOAST_STATE } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
+import { EventGetAllDto } from '@shared/services/api/event/event.dto';
 
 @Component({
   selector: 'page-admin-events',
@@ -14,10 +14,17 @@ import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-blo
 })
 export class AdminEventsPage {
   items: Event[] = [];
-  body: GetAllDto = {
+  itemsOld: Event[] = [];
+  body: EventGetAllDto = {
     page: 1,
     pageSize: 20,
-    order: ['updated', 'desc'],
+    order: ['date', 'asc'],
+  };
+  bodyOld: EventGetAllDto = {
+    page: 1,
+    pageSize: 20,
+    order: ['date', 'desc'],
+    old: true,
   };
   loading = true;
   error = false;
@@ -30,17 +37,20 @@ export class AdminEventsPage {
   ) {}
 
   ngOnInit() {
-    this.getEvents();
+    this.getEvents('new');
+    this.getEvents('old');
   }
 
-  getEvents(more = false) {
-    this.eventService.getAll(this.body).subscribe({
+  getEvents(type: 'new' | 'old', more = false) {
+    const body = type === 'new' ? this.body : this.bodyOld;
+    const typeItem = type === 'new' ? 'items' : 'itemsOld';
+    this.eventService.getAll(body).subscribe({
       next: (response) => {
         if (!more) {
-          this.items = response.items;
+          this[typeItem] = response.items;
           this.total = response.paginator.total;
         } else {
-          this.items = this.items.concat(response.items);
+          this[typeItem] = this.items.concat(response.items);
         }
         this.loading = false;
         this.error = false;
@@ -65,21 +75,21 @@ export class AdminEventsPage {
     this.router.navigate(route);
   }
 
-  filter(event: { name: string; value: string }) {
+  filter(type: 'new' | 'old', event: { name: string; value: string }) {
     this.body.page = 1;
     this.body.filter = [event.name, event.value];
-    this.getEvents();
+    this.getEvents(type);
   }
 
-  removeFilter() {
+  removeFilter(type: 'new' | 'old') {
     this.body.page = 1;
     this.body.filter = [];
-    this.getEvents();
+    this.getEvents(type);
   }
 
-  onScroll() {
+  onScroll(type: 'new' | 'old') {
     this.body.page++;
-    this.getEvents(true);
+    this.getEvents(type, true);
   }
 
   onClickButton(button: ButtonBlockItem) {
@@ -90,14 +100,14 @@ export class AdminEventsPage {
     }
   }
 
-  onSearch(event: { text: string; type: string }) {
+  onSearch(type: 'new' | 'old', event: { text: string; type: string }) {
     if (event.text === '') {
       this.body.page = 1;
-      this.getEvents();
+      this.getEvents(type);
     } else {
       this.body.page = 1;
       this.body.filter = ['name', event.text];
-      this.getEvents();
+      this.getEvents(type);
     }
   }
 }

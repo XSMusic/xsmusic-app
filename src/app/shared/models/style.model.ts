@@ -1,10 +1,6 @@
 export class Style {
   _id?: string;
   name? = '';
-  colors = {
-    bg: '',
-    text: '',
-  };
   created? = '';
   updated? = '';
   artists?: any;

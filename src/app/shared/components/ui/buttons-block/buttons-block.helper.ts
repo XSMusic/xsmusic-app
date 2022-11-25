@@ -160,6 +160,11 @@ export const buttonsByType = [
         isActivatable: true,
       }),
       new ButtonBlockItem({
+        name: 'Antiguo',
+        action: 'viewListOld',
+        isActivatable: true,
+      }),
+      new ButtonBlockItem({
         name: 'Nuevo',
         action: 'viewAdd',
         isActivatable: true,

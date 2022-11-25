@@ -12,7 +12,7 @@ import { getYearsOld } from '@shared/utils';
 })
 export class BlockInfoProfileComponent {
   @Input() item: any;
-  @Input() type: 'artist' | 'club' | 'festival' = 'artist';
+  @Input() type: 'artist' | 'club' | 'event' | 'festival' = 'artist';
   moreInfo = false;
   getYearsOld = getYearsOld;
 

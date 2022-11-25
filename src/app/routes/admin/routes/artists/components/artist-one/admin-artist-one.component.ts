@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
@@ -40,6 +40,7 @@ export class ArtistOneComponent {
   image = '';
   imageState = false;
   tempImages: string[] = [];
+  @Output() onCreated = new EventEmitter<void>();
   constructor(
     private router: Router,
     private artistService: ArtistService,
@@ -234,7 +235,7 @@ export class ArtistOneComponent {
     }
     setTimeout(() => {
       this.toastService.showToast(TOAST_STATE.success, 'Artista creado');
-      this.router.navigate([routesConfig.artistsAdmin]);
+      this.onCreated.emit()
     }, 3000);
   }
 

@@ -21,6 +21,7 @@ export class Artist {
   };
   sets?: any;
   tracks?: any;
+  events?: any;
   created?: string;
   updated?: string;
   constructor(data?: Artist) {

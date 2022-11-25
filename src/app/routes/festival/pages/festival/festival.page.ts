@@ -53,7 +53,7 @@ export class FestivalPage implements OnInit {
       { name: 'Sets', value: 'set', counter: this.site.sets.length },
       {
         name: 'Eventos',
-        value: 'event',
+        value: 'eventSite',
         counter: this.site.events ? this.site.events.length : 0,
       },
       {

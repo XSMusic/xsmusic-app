@@ -26,6 +26,6 @@
   </artists-view-list>
 
   <ng-container *ngIf="view === 'viewAdd'">
-    <admin-artist-one [artist]="artist"></admin-artist-one>
+    <admin-artist-one [artist]="artist" (onCreated)="onCreatedArtist()"></admin-artist-one>
   </ng-container>
 </div>

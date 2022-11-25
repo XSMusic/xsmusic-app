@@ -54,12 +54,12 @@ export class ClubPage implements OnInit {
 
   setViews() {
     this.views = [
-      { name: 'Sets', value: 'set', counter: this.site.sets.length },
       {
         name: 'Eventos',
-        value: 'event',
+        value: 'eventSite',
         counter: this.site.events ? this.site.events.length : 0,
       },
+      { name: 'Sets', value: 'set', counter: this.site.sets.length },
       {
         name: 'Imagenes',
         value: 'image',

@@ -37,12 +37,6 @@ export class AdminStylePage implements OnInit {
   getOne() {
     this.styleService.getOneById({ id: this.id }).subscribe({
       next: (response) => {
-        if (!response.colors) {
-          response.colors = {
-            bg: '',
-            text: '',
-          };
-        }
         this.style = response;
       },
       error: (error) => this.toastService.showToast(TOAST_STATE.error, error),

@@ -3,14 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { Event } from '@models';
 import { Observable } from 'rxjs';
 import { environment } from '@env/environment';
-import { GetAllDto, MessageI, PaginatorI } from '@interfaces';
+import { MessageI, PaginatorI } from '@interfaces';
+import { EventGetAllDto } from './event.dto';
 
 @Injectable({ providedIn: 'root' })
 export class EventService {
   url = `${environment.API_URL}/events`;
   constructor(private httpClient: HttpClient) {}
 
-  getAll(data: GetAllDto): Observable<PaginatorI<Event>> {
+  getAll(data: EventGetAllDto): Observable<PaginatorI<Event>> {
     return this.httpClient.post<PaginatorI<Event>>(`${this.url}/getAll`, data);
   }
 

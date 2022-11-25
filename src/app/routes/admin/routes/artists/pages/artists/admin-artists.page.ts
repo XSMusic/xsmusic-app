@@ -92,4 +92,9 @@ export class AdminArtistsPage {
       this.getArtists();
     }
   }
+
+  onCreatedArtist() {
+    this.getArtists();
+    this.view = 'viewList';
+  }
 }

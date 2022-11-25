@@ -56,6 +56,7 @@ export class ArtistPage implements OnInit {
     this.views = [
       { name: 'Sets', value: 'set', counter: this.artist.sets.length },
       { name: 'Tracks', value: 'track', counter: this.artist.tracks.length },
+      { name: 'Eventos', value: 'event', counter: this.artist.events ? this.artist.events.length : 0 },
       {
         name: 'Imagenes',
         value: 'image',

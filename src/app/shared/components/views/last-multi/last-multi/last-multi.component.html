@@ -28,6 +28,22 @@
     (goToOne)="goToOne($event)"
   ></generic-view-gallery-items>
 
+  <generic-view-gallery-items
+    *ngIf="view === 'eventSite'"
+    [items]="item.events"
+    [type]="'eventSite'"
+    (goToOne)="goToOne($event)"
+  ></generic-view-gallery-items>
+
+  <generic-view-gallery-items
+    *ngIf="view === 'event'"
+    [items]="item.events"
+    [type]="'event'"
+    (goToOne)="goToOne($event)"
+  ></generic-view-gallery-items>
+
+
+
   <last-multi-items
     *ngIf="view === 'image'"
     [item]="item"

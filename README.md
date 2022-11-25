@@ -8,22 +8,27 @@ Cada vez que se añada un valor en el archivo .env, hay que añadir el archivo c
 
 #### Mejoras
 
-- [ ] Confirmacion en eliminar
-- [ ] Mapas
+
+- Mapas
   - [ ] Añadir arrastrar y devolver coordenadas (opcional)
-- [ ] Imagenes
+- Imagenes
   - [ ] Obtener imagenes de instagram
   - [ ] Confirmar al eliminar
 - [ ] Buscador de nombres en redes sociales
 - [ ] Obtener info del sitio scrapeado
-- [ ] Likes
+- Likes
   - [ ] Crear modelo
-- [ ] Añadir compartir en todos los sitios
 - [ ] Youtube
   - [ ] Filtrar resultados que hay en DB al buscar en youtube
   - [ ] Añadir paginacion en busqueda de youtube
   - [ ] Añadir eliminacion permanente de resultados
     - Una tabla en DB para comparar los ids que no queramos que se muestren mas
+- Varios
+  - [ ] Añadir compartir en todos los sitios
+  - [ ] Confirmacion en eliminar 
+- Eventos
+  - [ ] Seleccion de dias al escrapear
+  - 
 
 #### Ideas
 

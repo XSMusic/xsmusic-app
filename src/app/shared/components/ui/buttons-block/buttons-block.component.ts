@@ -27,6 +27,7 @@ export class ButtonsBlockComponent implements OnInit {
     | 'generic'
     | 'artistsAdmin'
     | 'artistAdmin'
+    | 'events'
     | 'eventsAdmin'
     | 'eventsScraping'
     | 'eventAdmin'
@@ -64,8 +65,10 @@ export class ButtonsBlockComponent implements OnInit {
       this.searchState = false;
       this.onClickViewsButtons(button);
     } else if (button.action === 'search') {
+      this.filterState = false;
       this.searchState = !this.searchState;
     } else if (button.action === 'filter') {
+      this.searchState = false;
       this.filterState = !this.filterState;
     } else {
       this.searchState = false;

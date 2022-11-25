@@ -34,6 +34,49 @@ export const buttonsByType = [
     ],
   },
   {
+    name: 'events',
+    buttons: [
+      new ButtonBlockItem({
+        name: 'Galeria',
+        isActivatable: true,
+        action: 'viewGallery',
+      }),
+      new ButtonBlockItem({
+        name: 'Listado',
+        isActivatable: true,
+        action: 'viewList',
+      }),
+      new ButtonBlockItem({
+        name: 'Calendario',
+        isActivatable: true,
+        action: 'viewCal',
+      }),
+      new ButtonBlockItem({
+        name: 'Mapa',
+        isActivatable: true,
+        action: 'viewMap',
+      }),
+      new ButtonBlockItem({
+        name: 'Ordenar',
+        isActivatable: true,
+        align: 'right',
+        action: 'order',
+      }),
+      new ButtonBlockItem({
+        name: 'Filtrar',
+        isActivatable: true,
+        align: 'right',
+        action: 'filter',
+      }),
+      new ButtonBlockItem({
+        name: 'Buscar',
+        isActivatable: true,
+        align: 'right',
+        action: 'search',
+      }),
+    ],
+  },
+  {
     name: 'eventsScraping',
     buttons: [
       new ButtonBlockItem({

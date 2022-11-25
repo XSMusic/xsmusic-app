@@ -9,7 +9,7 @@
       (click)="goToOne.emit(item)"
     >
       <img
-        *ngIf="type !== 'event' && type !== 'eventScraping'"
+        *ngIf="type !== 'eventScraping' && type !== 'event'"
         class="object-cover w-full cursor-pointer h-80 hover:filter-grayscale hover:scale-105 hover:duration-1000"
         [src]="item.images! | imageArray"
         [alt]="item.name"
@@ -17,7 +17,15 @@
       />
 
       <img
-        *ngIf="type === 'event' || type === 'eventScraping'"
+        *ngIf="type === 'event'"
+        class="object-cover w-full cursor-pointer h-96 hover:filter-grayscale hover:scale-105 hover:duration-1000"
+        [src]="item.images! | imageArray"
+        [alt]="item.name"
+        onError
+      />
+
+      <img
+        *ngIf="type === 'eventScraping'"
         class="object-cover w-full h-96 hover:filter-grayscale hover:scale-105 hover:duration-1000"
         [src]="item.images![0]"
         [alt]="item.name"

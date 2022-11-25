@@ -25,6 +25,12 @@ const routes: Routes = [
       import('../../routes/club/club.module').then((m) => m.ClubsModule),
   },
   {
+    path: 'events',
+    data: { breadcrumb: 'Eventos' },
+    loadChildren: () =>
+      import('../../routes/event/event.module').then((m) => m.EventModule),
+  },
+  {
     path: 'festivals',
     data: { breadcrumb: 'Festivales' },
     loadChildren: () =>

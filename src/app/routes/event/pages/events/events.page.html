@@ -1,0 +1,44 @@
+<header-custom
+  [title]="'Eventos'"
+  [total]="total"
+  [breadcrumb]="false"
+></header-custom>
+
+<div class="container px-4 pt-3 mx-auto max-w-full-xl sm:pb-0 max-w-7sm">
+  <buttons-block
+    type="events"
+    (search)="onSearch($event)"
+    (onClickButton)="onClickButton($event)"
+  ></buttons-block>
+
+  <alert
+    type="info"
+    message="Filtro activado."
+    actionText="Quitar"
+    (action)="removeFilter()"
+    *ngIf="body.filter && body.filter.length > 0"
+  ></alert>
+
+  <generic-view-gallery
+    *ngIf="view === 'viewGallery'"
+    [items]="items"
+    [loading]="loading"
+    type="event"
+    (goToOne)="onClickItemViewGallery($event)"
+    (onScroll)="onScroll()"
+  ></generic-view-gallery>
+
+  <events-view-list
+    *ngIf="view === 'viewList'"
+    [items]="items"
+    [loading]="loading"
+    (goToProfile)="goToProfile($event)"
+    (filter)="filter($event)"
+    (onScroll)="onScroll()"
+  >
+  </events-view-list>
+
+  <ng-container *ngIf="view === 'viewCal' || view === 'viewMap'">
+    Proximamente...
+  </ng-container>
+</div>

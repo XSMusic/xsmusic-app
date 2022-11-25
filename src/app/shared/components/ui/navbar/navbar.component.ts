@@ -61,6 +61,7 @@ export class NavbarComponent implements OnInit {
       { name: 'Inicio', route: 'home' },
       { name: 'Artistas', route: routesConfig.artists },
       { name: 'Clubs', route: routesConfig.clubs },
+      { name: 'Eventos', route: routesConfig.events },
       { name: 'Festivales', route: routesConfig.festivals },
       { name: 'Sets', route: routesConfig.sets },
       { name: 'Tracks', route: routesConfig.tracks },
@@ -125,6 +126,8 @@ export class NavbarComponent implements OnInit {
         this.setBackButtonRoute(routesConfig.artists);
       } else if (e.url.includes('club')) {
         this.setBackButtonRoute(routesConfig.clubs);
+      } else if (e.url.includes('event')) {
+        this.setBackButtonRoute(routesConfig.events);
       } else if (e.url.includes('festival')) {
         this.setBackButtonRoute(routesConfig.festivals);
       } else if (e.url.includes('set')) {

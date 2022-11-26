@@ -20,7 +20,7 @@ export class AdminSitesPage implements OnInit {
     pageSize: 30,
     order: ['updated', 'desc'],
   };
-  type = '';
+  type!: 'club' | 'festival';
   view = 'viewList';
   loading = true;
   error = false;
@@ -33,8 +33,10 @@ export class AdminSitesPage implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.type = this.route.snapshot.routeConfig!.path!;
-    if (this.type === 'clubs') {
+    this.type = this.route.snapshot.routeConfig!.path!.includes('clubs')
+      ? 'club'
+      : 'festival';
+    if (this.type === 'club') {
       this.title = 'Clubs';
       this.body.type = 'club';
     } else {
@@ -105,5 +107,11 @@ export class AdminSitesPage implements OnInit {
       this.body.filter = ['name', event.text];
       this.getItems();
     }
+  }
+
+  onCreatedSite() {
+    this.getItems();
+    this.site = new Site();
+    this.view = 'viewList';
   }
 }

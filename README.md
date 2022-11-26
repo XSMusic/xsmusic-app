@@ -4,7 +4,7 @@ Repositorio de la PWA/APP de XSMusic realizada en **Angular - Tailwind - Capacit
 
 #### Notas
 
-Cada vez que se añada un valor en el archivo .env, hay que añadir el archivo completo al secreto ENV de Github [aqui](https://github.com/josexs/xsmusic-app/settings/secrets/actions)
+Cada vez que se añada un valor en el archivo .env, hay que añadir el archivo completo al secreto ENV de Github [aqui](https://github.com/xsmusic/xsmusic-app/settings/secrets/actions)
 
 #### Mejoras
 
@@ -26,9 +26,9 @@ Cada vez que se añada un valor en el archivo .env, hay que añadir el archivo c
 - Varios
   - [ ] Añadir compartir en todos los sitios
   - [ ] Confirmacion en eliminar 
+    - [ ] Añadir en eventos, imagenes y media      
 - Eventos
   - [ ] Seleccion de dias al escrapear
-  - 
 
 #### Ideas
 
@@ -39,5 +39,4 @@ Cada vez que se añada un valor en el archivo .env, hay que añadir el archivo c
 - [ ] Al hacer login, se abre el menu profile
 - [ ] Cuando el menu profile esta abierto y pinchamos en otro lado no se cierra
 - [ ] No sale imagen al compartir
-- [ ] Cuando estas en el mapa y abres el menu, el mapa sale por encima
-- [ ] Al crear club, redirige a festivales
+

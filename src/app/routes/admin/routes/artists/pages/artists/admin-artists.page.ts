@@ -95,6 +95,7 @@ export class AdminArtistsPage {
 
   onCreatedArtist() {
     this.getArtists();
+    this.artist = new Artist();
     this.view = 'viewList';
   }
 }

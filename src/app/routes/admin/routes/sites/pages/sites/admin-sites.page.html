@@ -26,6 +26,10 @@
   ></sites-view-list>
 
   <ng-container *ngIf="view === 'viewAdd'">
-    <admin-site-one [site]="site"></admin-site-one>
+    <admin-site-one
+      [site]="site"
+      [type]="type"
+      (onCreated)="onCreatedSite()"
+    ></admin-site-one>
   </ng-container>
 </div>

@@ -4,7 +4,7 @@ import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { GetAllDto } from '@interfaces';
 import { Image } from '@models';
-import { ImageService, ToastService, TOAST_STATE } from '@services';
+import { ImageService, ModalService, MODAL_STATE, ToastService, TOAST_STATE } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 
 @Component({
@@ -25,7 +25,8 @@ export class AdminImagesPage implements OnInit {
   constructor(
     private imageService: ImageService,
     private toast: ToastService,
-    private router: Router
+    private router: Router,
+    private modal: ModalService
   ) {}
 
   ngOnInit() {
@@ -88,5 +89,37 @@ export class AdminImagesPage implements OnInit {
       this.body.filter = ['name', event.text];
       this.getItems();
     }
+  }
+
+  onDelete(item: Image) {
+    const modal = this.modal.showModal(
+      MODAL_STATE.info,
+      'Eliminar Imagen',
+      '¿Estas seguro de eliminar la imagen?',
+      [
+        { name: 'Si', action: true },
+        { name: 'No', action: false },
+      ]
+    );
+    const sub$ = modal.subscribe({
+      next: (response) => {
+        if (response !== '') {
+          if (response === true) {
+            this.imageService.deleteOne(item._id!).subscribe({
+              next: (response) => {
+                this.toast.showToast(
+                  TOAST_STATE.success,
+                  response.message
+                );
+                this;
+              },
+              error: (error) =>
+                this.toast.showToast(TOAST_STATE.error, error),
+            });
+          }
+          sub$.unsubscribe();
+        }
+      },
+    });
   }
 }

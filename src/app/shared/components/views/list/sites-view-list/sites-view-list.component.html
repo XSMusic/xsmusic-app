@@ -34,7 +34,7 @@
                       })
                     "
                   />
-                  <p class="text-sm text-gray-500">
+                  <p class="text-sm text-gray-500 font-extralight dark:text-gray-400">
                     {{ site.address.state | fixState | truncateText: 10 }}
                   </p>
                 </div>
@@ -42,19 +42,19 @@
             </div>
             <div class="flex flex-col justify-center text-xs text-center dark:text-white">
               <div>
-                <div>Sets</div>
+                <div class="font-extralight">Sets</div>
                 <div class="text-lg font-bold">{{ site.sets?.count ?? 0 }}</div>
               </div>
             </div>
             <div class="flex flex-col justify-center text-xs text-center dark:text-white">
               <div>
-                <div>Even.</div>
+                <div class="font-extralight">Even.</div>
                 <div class="text-lg font-bold">{{ site.events?.count ?? 0 }}</div>
               </div>
             </div>
             <div class="flex flex-col justify-center text-xs text-center dark:text-white">
               <div>
-                <div>Imag.</div>
+                <div class="font-extralight">Imag.</div>
                 <div class="text-lg font-bold">
                   {{ site.images?.length! - 1 }}
                 </div>
@@ -86,7 +86,7 @@
 <ng-container *ngIf="loading">
   <div class="w-full py-2">
     <div
-      *ngFor="let artist of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
+      *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
       class="relative h-24 my-4 overflow-hidden bg-gray-100 shadow-xl cursor-pointer dark:bg-black dark:border dark:border-gray-800 animate-pulse"
     ></div>
   </div>

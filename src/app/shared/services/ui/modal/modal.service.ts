@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { ModalButtonI } from './modal.interface';
 
 export const MODAL_STATE = {
   success: 'text-green-500 bg-green-100 dark:bg-green-800 dark:text-green-200',
@@ -13,25 +14,37 @@ export const MODAL_STATE = {
   providedIn: 'root',
 })
 export class ModalService {
-  public showModal$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
-    false
-  );
-  public titleModal$: BehaviorSubject<string> = new BehaviorSubject<string>('');
-  public messageModal$: BehaviorSubject<string> = new BehaviorSubject<string>(
-    ''
-  );
-  public stateModal$: BehaviorSubject<string> = new BehaviorSubject<string>(
+  showModal$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  titleModal$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  messageModal$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  buttonsModal$: BehaviorSubject<ModalButtonI[]> = new BehaviorSubject<
+    ModalButtonI[]
+  >([]);
+  stateModal$: BehaviorSubject<string> = new BehaviorSubject<string>(
     MODAL_STATE.success
   );
 
-  showModal(modalState: string, title: string, message: string): void {
+  onDismiss = new BehaviorSubject<string | boolean>('');
+
+  showModal(
+    modalState: string,
+    title: string,
+    message: string,
+    buttons?: ModalButtonI[]
+  ): Observable<string | boolean> {
     this.stateModal$.next(modalState);
     this.titleModal$.next(title);
     this.messageModal$.next(message);
+    this.buttonsModal$.next(buttons ?? []);
     this.showModal$.next(true);
+    return this.onDismiss;
   }
 
-  dismissModal(): void {
+  dismissModal(action?: string | boolean): void {
+    if (action !== undefined) {
+      this.onDismiss.next(action);
+      this.onDismiss.next('')
+    }
     this.showModal$.next(false);
   }
 }

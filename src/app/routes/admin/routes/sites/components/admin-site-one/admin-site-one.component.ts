@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
@@ -10,7 +10,9 @@ import {
   ScrapingService,
   GeoService,
   ImageService,
-  StyleService,
+  ModalService,
+  MODAL_STATE,
+  ValidationsFormService,
 } from '@services';
 import {
   ImageSetFirstImageDto,
@@ -27,8 +29,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
   templateUrl: 'admin-site-one.component.html',
   animations: [inOutAnimation],
 })
-export class AdminSiteOneComponent {
+export class AdminSiteOneComponent implements OnInit {
   @Input() site = new Site();
+  @Input() type!: 'club' | 'festival';
   styles: Style[] = [];
   countries = countries;
   scraping: any = {
@@ -43,6 +46,7 @@ export class AdminSiteOneComponent {
   image = '';
   imageState = false;
   tempImages: string[] = [];
+  @Output() onCreated = new EventEmitter<void>();
   constructor(
     private siteService: SiteService,
     private fullImage: FullImageService,
@@ -52,8 +56,13 @@ export class AdminSiteOneComponent {
     private scrapingService: ScrapingService,
     private geoService: GeoService,
     private imageService: ImageService,
-    private styleService: StyleService
+    private modal: ModalService,
+    private validationsFormService: ValidationsFormService
   ) {}
+
+  ngOnInit() {
+    this.site.type = this.type;
+  }
 
   showImage(image: string) {
     this.fullImage.showImageFull(image);
@@ -237,46 +246,28 @@ export class AdminSiteOneComponent {
     });
   }
 
-  validationSubmit() {
-    if (this.site.name === '') {
-      return {
-        state: false,
-        message: 'El nombre es obligatorio',
-      };
-    } else if (this.site.address.street === '') {
-      return {
-        state: false,
-        message: 'La calle es obligatorio',
-      };
-    } else if (this.site.styles!.length === 0) {
-      return {
-        state: false,
-        message: 'Minimo un estilo',
-      };
-    } else if (!this.site._id && this.tempImages.length === 0) {
-      return {
-        state: false,
-        message: 'La imagen es obligatoria',
-      };
-    } else {
-      return {
-        state: true,
-        message: '',
-      };
-    }
-  }
-
   onSubmit() {
-    if (this.site._id) {
-      this.siteService.update(this.site).subscribe({
-        next: (response) => this.onSuccessUpdate(response),
-        error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
-      });
+    const validation = this.validationsFormService.validation(
+      'site',
+      this.site,
+      this.tempImages
+    );
+    if (validation.state) {
+      if (this.site._id) {
+        this.siteService.update(this.site).subscribe({
+          next: (response) => this.onSuccessUpdate(response),
+          error: (error) =>
+            this.toastService.showToast(TOAST_STATE.error, error),
+        });
+      } else {
+        this.siteService.create(this.site).subscribe({
+          next: (response) => this.onSuccessCreate(response),
+          error: (error) =>
+            this.toastService.showToast(TOAST_STATE.error, error),
+        });
+      }
     } else {
-      this.siteService.create(this.site).subscribe({
-        next: (response) => this.onSuccessCreate(response),
-        error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
-      });
+      this.toastService.showToast(TOAST_STATE.error, validation.message);
     }
   }
 
@@ -296,19 +287,34 @@ export class AdminSiteOneComponent {
     }
     setTimeout(() => {
       this.toastService.showToast(TOAST_STATE.success, 'Sitio creado');
-      this.router.navigate([
-        this.site.type === 'club'
-          ? routesConfig.clubsAdmin
-          : routesConfig.festivalsAdmin,
-      ]);
+      this.onCreated.emit();
     }, 3000);
   }
 
   onDelete() {
-    // TODO: Añadir confirmacion por modal
-    this.siteService.deleteOne(this.site._id!).subscribe({
-      next: (response) => this.onSuccessUpdate(response),
-      error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+    const itemType = `${this.site.type === 'club' ? 'Club' : 'Festival'}`;
+    const modal = this.modal.showModal(
+      MODAL_STATE.info,
+      `Eliminar ${itemType}`,
+      `¿Estas seguro de eliminar el ${itemType}?`,
+      [
+        { name: 'Si', action: true },
+        { name: 'No', action: false },
+      ]
+    );
+    const sub$ = modal.subscribe({
+      next: (response) => {
+        if (response !== '') {
+          if (response === true) {
+            this.siteService.deleteOne(this.site._id!).subscribe({
+              next: (response) => this.onSuccessUpdate(response),
+              error: (error) =>
+                this.toastService.showToast(TOAST_STATE.error, error),
+            });
+          }
+          sub$.unsubscribe();
+        }
+      },
     });
   }
 

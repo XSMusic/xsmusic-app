@@ -28,7 +28,7 @@
                   <div class="flex gap-1">
                   <p
                     *ngFor="let artist of item.artists! | slice:0:3; let i = index"
-                    class="text-sm dark:text-gray-400"
+                    class="text-sm dark:text-gray-400 font-extralight"
                   >
                   <span *ngIf="i !== 0"> & </span>
                     {{ artist.name }}
@@ -137,7 +137,7 @@
   <div class="w-full py-2">
     <div
       *ngFor="let artist of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
-      class="relative h-24 my-4 overflow-hidden bg-gray-100 shadow-xl cursor-pointer dark:bg-gray-900 animate-pulse"
+      class="relative h-24 my-4 overflow-hidden bg-gray-100 shadow-xl cursor-pointer dark:bg-black dark:border dark:border-gray-800 animate-pulse"
     ></div>
   </div>
 </ng-container>

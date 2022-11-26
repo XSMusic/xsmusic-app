@@ -4,7 +4,7 @@ import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { MessageI } from '@interfaces';
 import { Event, Image, Style } from '@models';
-import { ToastService, ImageService, EventService } from '@services';
+import { ToastService, ImageService, EventService, ValidationsFormService } from '@services';
 import {
   ImageSetFirstImageDto,
   ImageUploadByUrlDto,
@@ -39,7 +39,8 @@ export class AdminEventOneComponent {
     private toastService: ToastService,
     private router: Router,
     private spinner: NgxSpinnerService,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private validationsFormService: ValidationsFormService
   ) {}
 
   showImage(image: string) {
@@ -146,16 +147,27 @@ export class AdminEventOneComponent {
   }
 
   onSubmit() {
-    if (this.event._id) {
-      this.eventService.update(this.event).subscribe({
-        next: (response) => this.onSuccessUpdate(response),
-        error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
-      });
+    const validation = this.validationsFormService.validation(
+      'event',
+      this.event,
+      this.tempImages
+    );
+    if (validation.state) {
+      if (this.event._id) {
+        this.eventService.update(this.event).subscribe({
+          next: (response) => this.onSuccessUpdate(response),
+          error: (error) =>
+            this.toastService.showToast(TOAST_STATE.error, error),
+        });
+      } else {
+        this.eventService.create(this.event).subscribe({
+          next: (response) => this.onSuccessCreate(response),
+          error: (error) =>
+            this.toastService.showToast(TOAST_STATE.error, error),
+        });
+      }
     } else {
-      this.eventService.create(this.event).subscribe({
-        next: (response) => this.onSuccessCreate(response),
-        error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
-      });
+      this.toastService.showToast(TOAST_STATE.error, validation.message);
     }
   }
 

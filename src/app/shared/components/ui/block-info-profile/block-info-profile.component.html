@@ -16,7 +16,7 @@
   </div>
 
   <div
-    class="flex justify-center gap-2 pt-2 text-3xl font-bold text-center cursor-pointer dark:text-white"
+    class="flex justify-center gap-2 pt-2 text-3xl font-black text-center cursor-pointer dark:text-white"
   >
     <div *ngxPermissionsOnly="'ADMIN'" (click)="goToEdit(item._id!)">
       {{ item.name }}
@@ -48,7 +48,7 @@
   </div>
 
   <ng-container *ngIf="item.address">
-    <div class="text-center dark:text-white">
+    <div class="text-center dark:text-white font-extralight">
       <p *ngIf="item.address.street !== '' && item.address.town !== ''">
         {{ item.address.street }}, {{ item.address.town }}
       </p>
@@ -61,7 +61,7 @@
       class="py-1 mx-auto cursor-pointer"
       (click)="goToFilter('country', item.address.country!)"
     >
-      <div class="flex items-center justify-center gap-2 dark:text-white">
+      <div class="flex items-center justify-center gap-2 font-extralight dark:text-white">
         <img
           class="w-6"
           [src]="item.address.country! | countryFlag"

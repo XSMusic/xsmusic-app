@@ -22,7 +22,11 @@ import { ModalService } from '@services';
 export class ModalComponent {
   constructor(public modal: ModalService) {}
 
-  dismiss(): void {
-    this.modal.dismissModal();
+  dismiss(action?: string | boolean): void {
+    if (action !== undefined) {
+      this.modal.dismissModal(action);
+    } else {
+      this.modal.dismissModal();
+    }
   }
 }

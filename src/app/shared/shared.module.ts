@@ -65,6 +65,7 @@ import {
   SiteService,
   StartupService,
   UserService,
+  ValidationsFormService,
 } from '@services';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { httpInterceptorProviders } from '@core/interceptors';
@@ -145,6 +146,7 @@ const services = [
   SiteService,
   StartupService,
   UserService,
+  ValidationsFormService,
 ];
 
 @NgModule({

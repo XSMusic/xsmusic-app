@@ -10,6 +10,7 @@ import {
   ScrapingService,
   ModalService,
   ImageService,
+  ValidationsFormService,
 } from '@services';
 import {
   ImageSetFirstImageDto,
@@ -49,7 +50,8 @@ export class ArtistOneComponent {
     private fullImage: FullImageService,
     private modal: ModalService,
     private spinner: NgxSpinnerService,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private validationsFormService: ValidationsFormService
   ) {}
 
   onClickStyleScrapingItem(item: { name: string; _id: string }) {
@@ -210,16 +212,27 @@ export class ArtistOneComponent {
   }
 
   onSubmit() {
-    if (this.artist._id) {
-      this.artistService.update(this.artist).subscribe({
-        next: (response) => this.onSuccessUpdate(response),
-        error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
-      });
+    const validation = this.validationsFormService.validation(
+      'artist',
+      this.artist,
+      this.tempImages
+    );
+    if (validation.state) {
+      if (this.artist._id) {
+        this.artistService.update(this.artist).subscribe({
+          next: (response) => this.onSuccessUpdate(response),
+          error: (error) =>
+            this.toastService.showToast(TOAST_STATE.error, error),
+        });
+      } else {
+        this.artistService.create(this.artist).subscribe({
+          next: (response) => this.onSuccessCreate(response),
+          error: (error) =>
+            this.toastService.showToast(TOAST_STATE.error, error),
+        });
+      }
     } else {
-      this.artistService.create(this.artist).subscribe({
-        next: (response) => this.onSuccessCreate(response),
-        error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
-      });
+      this.toastService.showToast(TOAST_STATE.error, validation.message);
     }
   }
 
@@ -235,15 +248,33 @@ export class ArtistOneComponent {
     }
     setTimeout(() => {
       this.toastService.showToast(TOAST_STATE.success, 'Artista creado');
-      this.onCreated.emit()
+      this.onCreated.emit();
     }, 3000);
   }
 
   onDelete() {
-    // TODO: Añadir confirmacion por modal
-    this.artistService.deleteOne(this.artist._id!).subscribe({
-      next: (response) => this.onSuccessUpdate(response),
-      error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+    const modal = this.modal.showModal(
+      MODAL_STATE.info,
+      'Eliminar Artista',
+      '¿Estas seguro de eliminar el artista?',
+      [
+        { name: 'Si', action: true },
+        { name: 'No', action: false },
+      ]
+    );
+    const sub$ = modal.subscribe({
+      next: (response) => {
+        if (response !== '') {
+          if (response === true) {
+            this.artistService.deleteOne(this.artist._id!).subscribe({
+              next: (response) => this.onSuccessUpdate(response),
+              error: (error) =>
+                this.toastService.showToast(TOAST_STATE.error, error),
+            });
+          }
+          sub$.unsubscribe();
+        }
+      },
     });
   }
 

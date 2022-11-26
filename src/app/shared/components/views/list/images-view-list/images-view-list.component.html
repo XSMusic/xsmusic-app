@@ -26,7 +26,7 @@
                 }}</span>
                 <span *ngIf="item.type === 'site'">{{ item.site.name }}</span>
               </p>
-              <p class="text-sm text-gray-500 font-extralight">
+              <p class="text-sm text-gray-500 dark:text-gray-400 font-extralight">
                 <span *ngIf="item.type === 'media'">
                   {{ item.media.type | titlecase }}
                 </span>
@@ -36,7 +36,7 @@
                 <span *ngIf="item.type !== 'media' && item.type !== 'site'">
                   {{ item.type | type }}
                 </span>
-                <span class="text-xs font-normal text-gray-500">
+                <span class="text-xs font-bold text-gray-500 dark:text-gray-400">
                   {{ item.size }}
                 </span>
               </p>
@@ -65,8 +65,8 @@
 <ng-container *ngIf="loading">
   <div class="w-full py-2">
     <div
-      *ngFor="let artist of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
-      class="relative h-24 my-4 overflow-hidden bg-gray-100 shadow-xl cursor-pointer animate-pulse"
+      *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
+      class="relative h-24 my-4 overflow-hidden bg-gray-100 shadow-xl cursor-pointer dark:bg-black dark:border dark:border-gray-800 animate-pulse"
     ></div>
   </div>
 </ng-container>

@@ -28,6 +28,8 @@ export class BlockInfoProfileComponent {
       route = routesConfig.artistAdmin;
     } else if (this.type === 'club') {
       route = routesConfig.clubAdmin;
+    } else if (this.type === 'event') {
+      route = routesConfig.eventAdmin;
     } else if (this.type === 'festival') {
       route = routesConfig.festivalAdmin;
     }
@@ -40,6 +42,8 @@ export class BlockInfoProfileComponent {
       route = routesConfig.artistsFilter;
     } else if (this.type === 'club') {
       route = routesConfig.clubsFilter;
+    } else if (this.type === 'event') {
+      route = routesConfig.eventsFilter;
     } else if (this.type === 'festival') {
       route = routesConfig.festivalsFilter;
     }

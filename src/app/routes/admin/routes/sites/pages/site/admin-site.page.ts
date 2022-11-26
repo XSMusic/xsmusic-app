@@ -17,7 +17,7 @@ export class AdminSitePage implements OnInit {
   site: Site = new Site();
   title!: string;
   view = '';
-  type = '';
+  type!: 'club' | 'festival';
   options = [
     { name: 'Añadir Set', action: 'goToAdminSetAdd' },
     { name: 'Añadir Evento', action: 'goToAdminEventAdd' },

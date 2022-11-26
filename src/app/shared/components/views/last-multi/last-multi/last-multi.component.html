@@ -1,4 +1,7 @@
-<div @inOut class="flex justify-center gap-4 pb-1">
+<div
+  @inOut
+  class="flex gap-4 pb-1 mx-2 overflow-x-scroll sm:justify-center scrollbar-hidden"
+>
   <div
     *ngFor="let v of views"
     class="px-2 pb-1 text-xl text-center cursor-pointer dark:text-white"
@@ -9,7 +12,10 @@
     }"
     (click)="view = v.value"
   >
-    {{ v.name }} <span class="text-sm font-extralight">({{ v.counter }})</span>
+    <div class="flex justify-center gap-1">
+      {{ v.name }}
+      <span class="font-extralight">({{ v.counter }})</span>
+    </div>
   </div>
 </div>
 
@@ -41,8 +47,6 @@
     [type]="'event'"
     (goToOne)="goToOne($event)"
   ></generic-view-gallery-items>
-
-
 
   <last-multi-items
     *ngIf="view === 'image'"

@@ -41,15 +41,30 @@ export class ValidationsFormService {
           state: false,
           message: 'La fecha es obligatoria',
         };
+      } else if (valName === 'source' && item.source === '') {
+        return {
+          state: false,
+          message: 'El medio es obligatorio',
+        };
       } else if (valName === 'styles' && item.styles!.length === 0) {
         return {
           state: false,
           message: 'Minimo un estilo',
         };
+      } else if (valName === 'artists' && item.artists!.length === 0) {
+        return {
+          state: false,
+          message: 'Minimo un artista',
+        };
       } else if (valName === 'site' && item.site === '') {
         return {
           state: false,
           message: 'El club/festival es obligatorio',
+        };
+      } else if (valName === 'sourceId' && item.sourceId === '') {
+        return {
+          state: false,
+          message: 'El id es obligatorio',
         };
       } else if (valName === 'address.street' && item.address.street === '') {
         return {
@@ -75,6 +90,10 @@ export const validations = [
   {
     name: 'event',
     items: ['name', 'date', 'styles', 'site'],
+  },
+  {
+    name: 'media',
+    items: ['name', 'source', 'artists', 'site', 'styles', 'sourceId'],
   },
   {
     name: 'site',

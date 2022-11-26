@@ -27,7 +27,7 @@
     </div>
 
     <span
-      class="text-lg text-gray-600"
+      class="text-lg text-gray-600 dark:text-gray-400 font-extralight"
       *ngIf="item.birthdate && item.birthdate !== ''"
     >
       {{ getYearsOld(item.birthdate!) }}
@@ -61,7 +61,9 @@
       class="py-1 mx-auto cursor-pointer"
       (click)="goToFilter('country', item.address.country!)"
     >
-      <div class="flex items-center justify-center gap-2 font-extralight dark:text-white">
+      <div
+        class="flex items-center justify-center gap-2 font-extralight dark:text-white"
+      >
         <img
           class="w-6"
           [src]="item.address.country! | countryFlag"
@@ -117,7 +119,7 @@
     <span *ngFor="let style of item.styles; index as i">
       <a
         (click)="goToFilter('styles', style.name)"
-        class="px-2 py-1 mr-2 text-xs bg-gray-100 border border-gray-100 shadow-md cursor-pointer rounded-2xl hover:bg-gray-200 hover:border-gray-200"
+        class="px-2 py-1 mr-2 text-xs bg-gray-100 border border-gray-100 shadow-md cursor-pointer dark:text-white dark:bg-black dark:border-gray-800 rounded-2xl hover:opacity-80"
       >
         {{ style.name }}
       </a>
@@ -132,7 +134,7 @@
     >
       <svg-icon
         name="web"
-        svgClass="h-8 w-8  hover:scale-110 hover:duration-1000 cursor-pointer"
+        svgClass="h-8 w-8 dark:fill-white hover:scale-110 hover:duration-1000 cursor-pointer"
       ></svg-icon>
     </div>
     <div
@@ -182,7 +184,7 @@
     >
       <svg-icon
         name="tiktok"
-        svgClass="h-8 w-8 hover:scale-110 hover:duration-1000 cursor-pointer"
+        svgClass="h-8 w-8 dark:fill-white hover:scale-110 hover:duration-1000 cursor-pointer"
       ></svg-icon>
     </div>
     <div

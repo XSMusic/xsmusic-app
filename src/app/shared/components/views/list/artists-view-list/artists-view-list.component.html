@@ -1,6 +1,6 @@
 <ng-container *ngIf="!loading">
   <ng-container *ngIf="artists.length > 0">
-    <div @inOut class="my-2 overflow-x-auto">
+    <div @inOut class="my-2 overflow-x-auto scrollbar-hidden">
       <table class="w-full whitespace-nowrap" aria-label="artist">
         <tbody>
           <tr
@@ -23,7 +23,9 @@
                   >
                     {{ artist.name }}
                   </p>
-                  <p class="mt-1 text-sm leading-none text-gray-500 dark:text-gray-400 font-extralight">
+                  <p
+                    class="mt-1 text-sm leading-none text-gray-500 dark:text-gray-400 font-extralight"
+                  >
                     {{
                       artist.birthdate
                         ? getYearsOld(artist.birthdate) + ' años'
@@ -58,18 +60,35 @@
                 </span>
               </div>
             </td>
-            <td class="pl-0">
-              <p class="mb-2 mr-2 text-sm font-light leading-none">
+            <td class="pl-2">
+              <p
+                class="mb-2 mr-2 text-sm font-light leading-none dark:text-white"
+              >
                 <span class="font-black">{{ artist.sets?.count ?? 0 }}</span>
                 {{ artist.sets?.count === 1 ? 'Set' : 'Sets' }}
               </p>
-              <p class="mr-2 text-sm font-light leading-none">
+              <p class="mr-2 text-sm font-light leading-none dark:text-white">
                 <span class="font-black">{{ artist.tracks?.count ?? 0 }}</span>
                 {{ artist.tracks?.count === 1 ? 'Track' : 'Tracks' }}
               </p>
             </td>
 
-            <td class="pl-0">
+            <td class="pl-4">
+              <p
+                class="mb-2 mr-2 text-sm font-light leading-none dark:text-white"
+              >
+                <span class="font-black">{{ artist.events?.count ?? 0 }}</span>
+                {{ artist.events?.count === 1 ? 'Evento' : 'Eventos' }}
+              </p>
+              <p class="mr-2 text-sm font-light leading-none dark:text-white">
+                <span class="font-black">
+                  {{ artist.images?.length! - 1 }}
+                </span>
+                {{ artist.images?.length! - 1 === 1 ? 'Imagen' : 'Imagenes' }}
+              </p>
+            </td>
+
+            <td class="pl-2">
               <div class="py-2">
                 <div class="flex justify-center gap-3">
                   <div
@@ -78,7 +97,7 @@
                   >
                     <svg-icon
                       name="web"
-                      svgClass="h-8 w-8  hover:scale-110 hover:duration-1000 cursor-pointer"
+                      svgClass="h-8 w-8 dark:fill-white hover:scale-110 hover:duration-1000 cursor-pointer"
                     ></svg-icon>
                   </div>
                   <div
@@ -134,7 +153,7 @@
                   >
                     <svg-icon
                       name="tiktok"
-                      svgClass="h-8 w-8 hover:scale-110 hover:duration-1000 cursor-pointer"
+                      svgClass="h-8 w-8 dark:fill-white hover:scale-110 hover:duration-1000 cursor-pointer"
                     ></svg-icon>
                   </div>
                   <div

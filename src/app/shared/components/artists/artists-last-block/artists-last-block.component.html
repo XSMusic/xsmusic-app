@@ -1,7 +1,7 @@
 <ng-container *ngIf="!loading">
   <h1 @inOut class="py-3 text-lg font-extrabold">Ultimos artistas</h1>
 
-  <div class="flex gap-3 overflow-x-scroll">
+  <div class="flex gap-3 overflow-x-scroll scrollbar-hidden">
     <div *ngFor="let artist of artists">
       <div @inOut class="flex flex-col w-20 py-2 text-center hover:opacity-90">
         <img

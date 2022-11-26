@@ -4,7 +4,14 @@ import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { GetAllDto, MessageI } from '@interfaces';
 import { Artist, Image, Media, Site, Style } from '@models';
-import { ImageService, MediaService, ToastService } from '@services';
+import {
+  ImageService,
+  MediaService,
+  ModalService,
+  MODAL_STATE,
+  ToastService,
+  ValidationsFormService,
+} from '@services';
 import {
   ImageSetFirstImageDto,
   ImageUploadByUrlDto,
@@ -58,55 +65,17 @@ export class AdminMediaOneComponent {
     private fullImage: FullImageService,
     private router: Router,
     private imageService: ImageService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private modal: ModalService,
+    private validationsFormService: ValidationsFormService
   ) {}
 
-  validationSubmit() {
-    if (this.media.name === '') {
-      return {
-        state: false,
-        message: 'El nombre es obligatorio',
-      };
-    } else if (this.media.source === '') {
-      return {
-        state: false,
-        message: 'El medio es obligatorio',
-      };
-    } else if (this.media.site === '') {
-      return {
-        state: false,
-        message: 'El club/festival es obligatorio',
-      };
-    } else if (this.media.artists!.length === 0) {
-      return {
-        state: false,
-        message: 'Minimo un artista',
-      };
-    } else if (this.media.styles!.length === 0) {
-      return {
-        state: false,
-        message: 'Minimo un estilo',
-      };
-    } else if (this.media.sourceId === '') {
-      return {
-        state: false,
-        message: 'El id del video es obligatorio',
-      };
-    } else if (!this.media._id && this.tempImages.length === 0) {
-      return {
-        state: false,
-        message: 'La imagen es obligatoria',
-      };
-    } else {
-      return {
-        state: true,
-        message: '',
-      };
-    }
-  }
-
   onSubmit() {
-    const validation = this.validationSubmit();
+    const validation = this.validationsFormService.validation(
+      'media',
+      this.media,
+      this.tempImages
+    );
     if (validation.state) {
       if (this.media._id) {
         this.mediaService.update(this.media).subscribe({
@@ -148,10 +117,29 @@ export class AdminMediaOneComponent {
   }
 
   onDelete() {
-    // TODO: Añadir confirmacion por modal
-    this.mediaService.deleteOne(this.media._id!).subscribe({
-      next: (response) => this.onSuccessUpdate(response),
-      error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+    const itemType = `${this.media.type === 'set' ? 'Set' : 'Track'}`;
+    const modal = this.modal.showModal(
+      MODAL_STATE.info,
+      `Eliminar ${itemType}`,
+      `¿Estas seguro de eliminar el ${itemType}?`,
+      [
+        { name: 'Si', action: true },
+        { name: 'No', action: false },
+      ]
+    );
+    const sub$ = modal.subscribe({
+      next: (response) => {
+        if (response !== '') {
+          if (response === true) {
+            this.mediaService.deleteOne(this.media._id!).subscribe({
+              next: (response) => this.onSuccessUpdate(response),
+              error: (error) =>
+                this.toastService.showToast(TOAST_STATE.error, error),
+            });
+          }
+          sub$.unsubscribe();
+        }
+      },
     });
   }
 

@@ -55,7 +55,7 @@
     <div class="flex justify-between">
       <div>
         <div class="text-sm text-gray-500">{{ total.name }}</div>
-        <div class="text-xl font-bold">{{ total.value }}</div>
+        <div class="text-xl font-bold dark:text-white">{{ total.value }}</div>
       </div>
       <div class="flex flex-col gap-1">
         <div
@@ -86,10 +86,10 @@
 >
   <p class="mx-4 mb-0 font-semibold text-center">
     <span *ngIf="endSlice === 2">
-      <svg-icon name="plus-rounded"></svg-icon>
+      <svg-icon svgClass="dark:text-white" name="plus-rounded"></svg-icon>
     </span>
     <span *ngIf="endSlice === totals.length">
-      <svg-icon name="minus-rounded"></svg-icon>
+      <svg-icon svgClass="dark:text-white" name="minus-rounded"></svg-icon>
     </span>
   </p>
 </div>

@@ -4,7 +4,7 @@ import { ValidationsFormI } from './validations-form.interface';
 @Injectable({ providedIn: 'root' })
 export class ValidationsFormService {
   validation(
-    type: 'artist' |  'event' | 'media' | 'site' | 'style' |'user',
+    type: 'artist' | 'event' | 'media' | 'site' | 'style' | 'user',
     item: any,
     tempImages?: any[]
   ): {
@@ -20,63 +20,91 @@ export class ValidationsFormService {
       .filter((v) => v.name === type)
       .map((v) => v.items)[0];
 
-    val = this.name(val, valTypes, item, tempImages!);
+    val = this.setValidations(val, valTypes, item, tempImages!);
     return val;
   }
 
-  name(
+  setValidations(
     val: ValidationsFormI,
     valTypes: string[],
     item: any,
     tempImages: any[]
   ): ValidationsFormI {
     for (const valName of valTypes) {
-      if (valName === 'name' && item.name === '') {
-        return {
-          state: false,
-          message: 'El nombre es obligatorio',
-        };
-      } else if (valName === 'date' && item.date === '') {
-        return {
-          state: false,
-          message: 'La fecha es obligatoria',
-        };
-      } else if (valName === 'source' && item.source === '') {
-        return {
-          state: false,
-          message: 'El medio es obligatorio',
-        };
-      } else if (valName === 'styles' && item.styles!.length === 0) {
-        return {
-          state: false,
-          message: 'Minimo un estilo',
-        };
-      } else if (valName === 'artists' && item.artists!.length === 0) {
-        return {
-          state: false,
-          message: 'Minimo un artista',
-        };
-      } else if (valName === 'site' && item.site === '') {
-        return {
-          state: false,
-          message: 'El club/festival es obligatorio',
-        };
-      } else if (valName === 'sourceId' && item.sourceId === '') {
-        return {
-          state: false,
-          message: 'El id es obligatorio',
-        };
-      } else if (valName === 'address.street' && item.address.street === '') {
-        return {
-          state: false,
-          message: 'La calle es obligatoria',
-        };
-      } else if (!item._id && tempImages && tempImages.length === 0) {
-        return {
-          state: false,
-          message: 'La imagen es obligatoria',
-        };
-      }
+      val = this.validationsA(val, valName, item);
+      val = this.validationsB(val, valName, item, tempImages);
+    }
+    return val;
+  }
+
+  validationsA(
+    val: ValidationsFormI,
+    valName: string,
+    item: any
+  ): ValidationsFormI {
+    if (valName === 'name' && item.name === '') {
+      return {
+        state: false,
+        message: 'El nombre es obligatorio',
+      };
+    }
+    if (valName === 'date' && item.date === '') {
+      return {
+        state: false,
+        message: 'La fecha es obligatoria',
+      };
+    }
+    if (valName === 'source' && item.source === '') {
+      return {
+        state: false,
+        message: 'El medio es obligatorio',
+      };
+    }
+    if (valName === 'styles' && item.styles!.length === 0) {
+      return {
+        state: false,
+        message: 'Minimo un estilo',
+      };
+    }
+
+    return val;
+  }
+
+  validationsB(
+    val: ValidationsFormI,
+    valName: string,
+    item: any,
+    tempImages: any[]
+  ): ValidationsFormI {
+    if (valName === 'artists' && item.artists!.length === 0) {
+      return {
+        state: false,
+        message: 'Minimo un artista',
+      };
+    }
+    if (valName === 'site' && item.site === '') {
+      return {
+        state: false,
+        message: 'El club/festival es obligatorio',
+      };
+    }
+    if (valName === 'sourceId' && item.sourceId === '') {
+      return {
+        state: false,
+        message: 'El id es obligatorio',
+      };
+    }
+    if (valName === 'address.street' && item.address.street === '') {
+      return {
+        state: false,
+        message: 'La calle es obligatoria',
+      };
+    }
+    if (!item._id && tempImages && tempImages.length === 0) {
+      return {
+        state: false,
+        message: 'La imagen es obligatoria',
+      };
     }
     return val;
   }

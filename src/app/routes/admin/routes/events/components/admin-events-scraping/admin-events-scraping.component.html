@@ -18,8 +18,10 @@
 </div>
 
 <div class="mt-3">
-<buttons-block type="eventsScraping" (onClickButton)="onClickButton($event)"></buttons-block>
-
+  <buttons-block
+    type="eventsScraping"
+    (onClickButton)="onClickButton($event)"
+  ></buttons-block>
 </div>
 
 <ng-container *ngIf="items">
@@ -31,7 +33,7 @@
     (goToOne)="addEvent($event)"
   ></generic-view-gallery>
   <generic-view-gallery
-  *ngIf="view === 'viewNotCompleted'"
+    *ngIf="view === 'viewNotCompleted'"
     [items]="items.notCompleted!"
     [type]="'eventScraping'"
     [loading]="false"

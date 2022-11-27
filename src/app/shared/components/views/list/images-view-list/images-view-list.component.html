@@ -26,7 +26,9 @@
                 }}</span>
                 <span *ngIf="item.type === 'site'">{{ item.site.name }}</span>
               </p>
-              <p class="text-sm text-gray-500 dark:text-gray-400 font-extralight">
+              <p
+                class="text-sm text-gray-500 dark:text-gray-400 font-extralight"
+              >
                 <span *ngIf="item.type === 'media'">
                   {{ item.media.type | titlecase }}
                 </span>
@@ -36,7 +38,9 @@
                 <span *ngIf="item.type !== 'media' && item.type !== 'site'">
                   {{ item.type | type }}
                 </span>
-                <span class="text-xs font-bold text-gray-500 dark:text-gray-400">
+                <span
+                  class="text-xs font-bold text-gray-500 dark:text-gray-400"
+                >
                   {{ item.size }}
                 </span>
               </p>

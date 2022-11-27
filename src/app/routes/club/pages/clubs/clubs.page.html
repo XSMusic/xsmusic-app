@@ -8,6 +8,7 @@
   <buttons-block
     type="sites"
     (search)="onSearch($event)"
+    (onFilter)="onFilter($event)"
     (onClickButton)="onClickButton($event)"
   ></buttons-block>
 
@@ -33,7 +34,7 @@
     [sites]="items"
     [loading]="loading"
     (goToProfile)="goToProfile($event)"
-    (filter)="filter($event)"
+    (filter)="onFilter($event)"
     (onScroll)="onScroll()"
   ></sites-view-list>
 

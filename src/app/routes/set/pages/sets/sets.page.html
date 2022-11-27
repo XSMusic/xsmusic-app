@@ -2,17 +2,18 @@
 
 <div class="container px-4 pt-3 mx-auto max-w-full-xl sm:pb-0 max-w-7sm">
   <buttons-block
-    type="generic"
+    type="media"
     (search)="onSearch($event)"
+    (onFilter)="onFilter($event)"
     (onClickButton)="onClickButton($event)"
   ></buttons-block>
 
   <alert
+    *ngIf="body.filter && body.filter.length > 0"
     type="info"
     message="Filtro activado."
     actionText="Quitar"
     (action)="removeFilter()"
-    *ngIf="body.filter && body.filter.length > 0"
   ></alert>
 
   <generic-view-gallery
@@ -30,7 +31,7 @@
     [loading]="loading"
     type="sets"
     (goToProfile)="onClickItemViewList($event)"
-    (filter)="filter($event)"
+    (filter)="onFilter($event)"
     (onScroll)="onScroll()"
   ></media-view-list>
 </div>

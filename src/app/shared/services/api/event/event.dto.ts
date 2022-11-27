@@ -1,4 +1,4 @@
-import { GetAllDto } from "@interfaces";
+import { GetAllDto } from '@interfaces';
 
 export interface EventGetAllDto extends GetAllDto {
   old?: boolean;

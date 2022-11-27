@@ -75,7 +75,7 @@ export class ArtistsPage implements OnInit {
     this.router.navigate([routesConfig.artist.replace(':slug', artist.slug!)]);
   }
 
-  filter(event: { name: string; value: string }) {
+  onFilter(event: { name: string; value: string }) {
     this.body.page = 1;
     this.body.filter = [event.name, event.value];
     this.getArtists();

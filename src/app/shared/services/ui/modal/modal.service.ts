@@ -43,7 +43,7 @@ export class ModalService {
   dismissModal(action?: string | boolean): void {
     if (action !== undefined) {
       this.onDismiss.next(action);
-      this.onDismiss.next('')
+      this.onDismiss.next('');
     }
     this.showModal$.next(false);
   }

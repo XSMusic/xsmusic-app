@@ -4,7 +4,12 @@ import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { MessageI } from '@interfaces';
 import { Event, Image, Style } from '@models';
-import { ToastService, ImageService, EventService, ValidationsFormService } from '@services';
+import {
+  ToastService,
+  ImageService,
+  EventService,
+  ValidationsFormService,
+} from '@services';
 import {
   ImageSetFirstImageDto,
   ImageUploadByUrlDto,

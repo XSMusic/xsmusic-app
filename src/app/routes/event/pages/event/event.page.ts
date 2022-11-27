@@ -50,5 +50,4 @@ export class EventPage implements OnInit {
   setTitle() {
     this.title.setTitle(`${this.title.getTitle()} - ${this.event.name}`);
   }
-
 }

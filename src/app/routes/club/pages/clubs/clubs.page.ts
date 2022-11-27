@@ -88,7 +88,7 @@ export class ClubsPage implements OnInit {
     this.router.navigate([routesConfig.club.replace(':slug', site.slug!)]);
   }
 
-  filter(event: { name: string; value: string }) {
+  onFilter(event: { name: string; value: string }) {
     this.body.page = 1;
     this.body.filter = [event.name, event.value];
     this.getItems();

@@ -29,6 +29,7 @@ Cada vez que se añada un valor en el archivo .env, hay que añadir el archivo c
     - [ ] Añadir en eventos, imagenes y media      
 - Eventos
   - [ ] Seleccion de dias al escrapear
+- [ ] Añadir en media, el sitio desconocido por defecto
 
 #### Ideas
 
@@ -39,4 +40,5 @@ Cada vez que se añada un valor en el archivo .env, hay que añadir el archivo c
 - [ ] Al hacer login, se abre el menu profile
 - [ ] Cuando el menu profile esta abierto y pinchamos en otro lado no se cierra
 - [ ] No sale imagen al compartir
+- [ ] Cuando guardamos un media sin sitio, falla
 

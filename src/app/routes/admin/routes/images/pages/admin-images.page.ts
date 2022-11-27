@@ -4,7 +4,13 @@ import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { GetAllDto } from '@interfaces';
 import { Image } from '@models';
-import { ImageService, ModalService, MODAL_STATE, ToastService, TOAST_STATE } from '@services';
+import {
+  ImageService,
+  ModalService,
+  MODAL_STATE,
+  ToastService,
+  TOAST_STATE,
+} from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 
 @Component({
@@ -107,14 +113,10 @@ export class AdminImagesPage implements OnInit {
           if (response === true) {
             this.imageService.deleteOne(item._id!).subscribe({
               next: (response) => {
-                this.toast.showToast(
-                  TOAST_STATE.success,
-                  response.message
-                );
+                this.toast.showToast(TOAST_STATE.success, response.message);
                 this;
               },
-              error: (error) =>
-                this.toast.showToast(TOAST_STATE.error, error),
+              error: (error) => this.toast.showToast(TOAST_STATE.error, error),
             });
           }
           sub$.unsubscribe();

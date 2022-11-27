@@ -8,7 +8,14 @@ import { inOutAnimation } from '@core/animations/enter-leave.animations';
 })
 export class GenericViewGalleryComponent {
   @Input() items: any[] = [];
-  @Input() type: 'artist' | 'club' | 'event' | 'eventScraping' | 'set' | 'track' | 'festival' = 'artist';
+  @Input() type:
+    | 'artist'
+    | 'club'
+    | 'event'
+    | 'eventScraping'
+    | 'set'
+    | 'track'
+    | 'festival' = 'artist';
   @Input() loading = true;
   @Input() cols = [];
   @Output() goToOne = new EventEmitter<any>();

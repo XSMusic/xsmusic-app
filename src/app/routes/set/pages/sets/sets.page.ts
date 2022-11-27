@@ -93,7 +93,7 @@ export class SetsPage implements OnInit {
     }
   }
 
-  filter(event: { name: string; value: string }) {
+  onFilter(event: { name: string; value: string }) {
     this.body.page = 1;
     this.body.filter = [event.name, event.value];
     this.getItems();

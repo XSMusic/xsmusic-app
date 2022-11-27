@@ -72,12 +72,18 @@ export class EventsPage implements OnInit {
 
   goToProfile(data: { type: 'site' | 'event'; event: Event }) {
     if (data.type === 'event') {
-      this.router.navigate([routesConfig.event.replace(':slug', data.event.slug!)]);
+      this.router.navigate([
+        routesConfig.event.replace(':slug', data.event.slug!),
+      ]);
     } else {
       if (data.event.site.type === 'club') {
-        this.router.navigate([routesConfig.club.replace(':slug', data.event.slug!)]);
+        this.router.navigate([
+          routesConfig.club.replace(':slug', data.event.slug!),
+        ]);
       } else {
-        this.router.navigate([routesConfig.festival.replace(':slug', data.event.slug!)]);
+        this.router.navigate([
+          routesConfig.festival.replace(':slug', data.event.slug!),
+        ]);
       }
     }
   }

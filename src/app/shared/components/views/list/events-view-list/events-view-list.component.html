@@ -26,13 +26,16 @@
                     {{ item.name }}
                   </p>
                   <div class="flex gap-1">
-                  <p
-                    *ngFor="let artist of item.artists! | slice:0:3; let i = index"
-                    class="text-sm dark:text-gray-400 font-extralight"
-                  >
-                  <span *ngIf="i !== 0"> & </span>
-                    {{ artist.name }}
-                  </p>
+                    <p
+                      *ngFor="
+                        let artist of item.artists! | slice: 0:3;
+                        let i = index
+                      "
+                      class="text-sm dark:text-gray-400 font-extralight"
+                    >
+                      <span *ngIf="i !== 0"> & </span>
+                      {{ artist.name }}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -90,10 +93,14 @@
 
             <td class="px-5" class="dark:text-white">
               <div class="flex flex-col gap-2 text-center">
-                <div class="mr-2 text-sm font-light leading-none text-gray-700 dark:text-gray-400">
+                <div
+                  class="mr-2 text-sm font-light leading-none text-gray-700 dark:text-gray-400"
+                >
                   {{ item.date! | momentFormat: 'DD-MM-YY' }}
                 </div>
-                <div class="mr-2 text-sm font-light leading-none text-gray-700 dark:text-gray-400">
+                <div
+                  class="mr-2 text-sm font-light leading-none text-gray-700 dark:text-gray-400"
+                >
                   {{ item.date! | momentFormat: 'HH:mm' }}
                 </div>
               </div>
@@ -101,11 +108,15 @@
 
             <td class="pl-5" *ngxPermissionsOnly="'ADMIN'">
               <div class="flex flex-col">
-                <div class="mr-2 text-sm font-light leading-none text-gray-700 dark:text-gray-400">
+                <div
+                  class="mr-2 text-sm font-light leading-none text-gray-700 dark:text-gray-400"
+                >
                   <span class="font-extrabold dark:text-white">Cre:</span>
                   {{ item.created! | timeAgo }}
                 </div>
-                <div class="mr-2 text-sm font-light leading-none text-gray-700 dark:text-gray-400">
+                <div
+                  class="mr-2 text-sm font-light leading-none text-gray-700 dark:text-gray-400"
+                >
                   <span class="font-extrabold dark:text-white">Act:</span>
                   {{ item.updated! | timeAgo }}
                 </div>

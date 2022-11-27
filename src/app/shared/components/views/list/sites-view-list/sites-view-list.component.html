@@ -20,7 +20,7 @@
                   class="my-1 mr-2 text-base font-extrabold leading-none text-black cursor-pointer dark:text-white hover:text-gray-500"
                   (click)="goToProfile.emit(site)"
                 >
-                  {{ site.name! | truncateText: 15}}
+                  {{ site.name! | truncateText: 15 }}
                 </p>
                 <div class="flex items-center gap-1">
                   <img
@@ -34,25 +34,35 @@
                       })
                     "
                   />
-                  <p class="text-sm text-gray-500 font-extralight dark:text-gray-400">
+                  <p
+                    class="text-sm text-gray-500 font-extralight dark:text-gray-400"
+                  >
                     {{ site.address.state | fixState | truncateText: 10 }}
                   </p>
                 </div>
               </div>
             </div>
-            <div class="flex flex-col justify-center text-xs text-center dark:text-white">
+            <div
+              class="flex flex-col justify-center text-xs text-center dark:text-white"
+            >
               <div>
                 <div class="font-extralight">Sets</div>
                 <div class="text-lg font-bold">{{ site.sets?.count ?? 0 }}</div>
               </div>
             </div>
-            <div class="flex flex-col justify-center text-xs text-center dark:text-white">
+            <div
+              class="flex flex-col justify-center text-xs text-center dark:text-white"
+            >
               <div>
                 <div class="font-extralight">Even.</div>
-                <div class="text-lg font-bold">{{ site.events?.count ?? 0 }}</div>
+                <div class="text-lg font-bold">
+                  {{ site.events?.count ?? 0 }}
+                </div>
               </div>
             </div>
-            <div class="flex flex-col justify-center text-xs text-center dark:text-white">
+            <div
+              class="flex flex-col justify-center text-xs text-center dark:text-white"
+            >
               <div>
                 <div class="font-extralight">Imag.</div>
                 <div class="text-lg font-bold">

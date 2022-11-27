@@ -25,6 +25,7 @@ import { ButtonBlockItem } from './buttons-block.model';
 export class ButtonsBlockComponent implements OnInit {
   @Input() type:
     | 'generic'
+    | 'artists'
     | 'artistsAdmin'
     | 'artistAdmin'
     | 'events'
@@ -41,6 +42,7 @@ export class ButtonsBlockComponent implements OnInit {
   buttons: ButtonBlockItem[] = [];
   @Output() changeView = new EventEmitter<string>();
   @Output() search = new EventEmitter<{ text: string; type: string }>();
+  @Output() onFilter = new EventEmitter<{ name: string; value: string }>();
   @Output() onClickButton = new EventEmitter<ButtonBlockItem>();
 
   view = 'gallery';

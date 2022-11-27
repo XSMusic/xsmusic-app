@@ -71,5 +71,5 @@
 </div>
 
 <div *ngIf="filterState">
-  <filter-bar></filter-bar>
+  <filter-bar [type]="type" (onFilter)="onFilter.emit($event)"></filter-bar>
 </div>

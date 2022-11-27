@@ -7,7 +7,7 @@ import {
 } from '@interfaces';
 import { Youtube } from '@models';
 import { Observable } from 'rxjs';
-import { ScrapingEventI, ScrapingEventsI, ScrapingSourceI } from './scraping-source.interface';
+import { ScrapingEventsI, ScrapingSourceI } from './scraping-source.interface';
 import {
   ScrapingGetInfoArtistDto,
   ScrapingGetInfoClubDto,

@@ -13,11 +13,11 @@ export class LastMultiComponent implements OnInit {
   @Input() item!: any;
   view = '';
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   ngOnInit() {
     console.log(this.views);
-    this.view = this.views[0].value
+    this.view = this.views[0].value;
   }
 
   goToOne(event: any) {

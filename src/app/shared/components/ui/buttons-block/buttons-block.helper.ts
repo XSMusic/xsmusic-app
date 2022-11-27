@@ -1,37 +1,48 @@
 import { ButtonBlockItem } from './buttons-block.model';
+
+const genericItems = [
+  new ButtonBlockItem({
+    name: 'Galeria',
+    isActivatable: true,
+    action: 'viewGallery',
+  }),
+  new ButtonBlockItem({
+    name: 'Listado',
+    isActivatable: true,
+    action: 'viewList',
+  }),
+  new ButtonBlockItem({
+    name: 'Ordenar',
+    isActivatable: true,
+    align: 'right',
+    action: 'order',
+  }),
+  new ButtonBlockItem({
+    name: 'Filtrar',
+    isActivatable: true,
+    align: 'right',
+    action: 'filter',
+  }),
+  new ButtonBlockItem({
+    name: 'Buscar',
+    isActivatable: true,
+    align: 'right',
+    action: 'search',
+  }),
+];
+
 export const buttonsByType = [
   {
     name: 'generic',
-    buttons: [
-      new ButtonBlockItem({
-        name: 'Galeria',
-        isActivatable: true,
-        action: 'viewGallery',
-      }),
-      new ButtonBlockItem({
-        name: 'Listado',
-        isActivatable: true,
-        action: 'viewList',
-      }),
-      new ButtonBlockItem({
-        name: 'Ordenar',
-        isActivatable: true,
-        align: 'right',
-        action: 'order',
-      }),
-      new ButtonBlockItem({
-        name: 'Filtrar',
-        isActivatable: true,
-        align: 'right',
-        action: 'filter',
-      }),
-      new ButtonBlockItem({
-        name: 'Buscar',
-        isActivatable: true,
-        align: 'right',
-        action: 'search',
-      }),
-    ],
+    buttons: genericItems,
+  },
+  {
+    name: 'artists',
+    buttons: genericItems,
+  },
+  {
+    name: 'media',
+    buttons: genericItems,
   },
   {
     name: 'events',

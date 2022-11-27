@@ -56,7 +56,6 @@ export class SearchInputComponent implements OnInit {
   }
 
   onChangeInput(e: string) {
-    console.log(e);
     if (e && e.length >= 3) {
       this.body.filter = ['name', e];
       let service: any;

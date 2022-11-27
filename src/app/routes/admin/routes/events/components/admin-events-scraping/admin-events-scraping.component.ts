@@ -49,7 +49,6 @@ export class AdminEventsScrapingComponent implements OnInit {
   getEvents() {
     this.scrapingService.getListEvents(this.body).subscribe({
       next: (response) => {
-        console.log(response);
         this.items = response;
       },
       error: (error) => this.toast.showToast(TOAST_STATE.error, error),
@@ -61,7 +60,6 @@ export class AdminEventsScrapingComponent implements OnInit {
   }
 
   addEvent(item: any) {
-    console.log(item);
     const event: Event = new Event({
       name: item.name,
       info: item.info,
@@ -76,8 +74,7 @@ export class AdminEventsScrapingComponent implements OnInit {
           type: 'event',
         };
         this.imageService.uploadByUrl(data).subscribe({
-          next: (response) => {
-            console.log(response);
+          next: () => {
             this.toast.showToast(
               TOAST_STATE.success,
               'Evento añadido correctamente'
@@ -88,7 +85,6 @@ export class AdminEventsScrapingComponent implements OnInit {
       },
       error: (error) => this.toast.showToast(TOAST_STATE.error, error),
     });
-    console.log(event);
   }
 
   goToAddSite() {

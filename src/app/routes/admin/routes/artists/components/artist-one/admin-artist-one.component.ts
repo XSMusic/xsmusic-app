@@ -16,6 +16,7 @@ import {
   ImageSetFirstImageDto,
   ImageUploadByUrlDto,
 } from '@shared/services/api/image/image.dto';
+import { ScrapingSoundcloudSearchI } from '@shared/services/api/scraping/scraping-soundcloud-search.interface';
 import { ScrapingGetInfoArtistDto } from '@shared/services/api/scraping/scraping.dto';
 import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
 import { MODAL_STATE } from '@shared/services/ui/modal/modal.service';
@@ -41,6 +42,7 @@ export class ArtistOneComponent {
   image = '';
   imageState = false;
   tempImages: string[] = [];
+  soundcloudNames: ScrapingSoundcloudSearchI[] = [];
   @Output() onCreated = new EventEmitter<void>();
   constructor(
     private router: Router,
@@ -277,5 +279,27 @@ export class ArtistOneComponent {
     this.router.navigate([
       routesConfig.artist.replace(':slug', this.artist.slug!),
     ]);
+  }
+
+  searchSoundcloud() {
+    this.scrapingService
+      .searchNameSoundcloud({ name: this.artist.name })
+      .subscribe({
+        next: (response) => {
+          if (response.length > 1) {
+            this.soundcloudNames = response
+          } else if (response.length === 1) {
+            this.artist.social.soundcloud = response[0].url;
+          } else {
+            this.toastService.showToast(TOAST_STATE.warning, 'No hay ningun usuario con el nombre del artista')
+          }
+        },
+        error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+      });
+  }
+
+  onSelectSoundcloud(item: ScrapingSoundcloudSearchI) {
+    this.artist.social.soundcloud = item.url;
+    this.soundcloudNames = [];
   }
 }

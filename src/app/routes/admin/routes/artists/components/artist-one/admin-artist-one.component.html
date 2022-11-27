@@ -159,13 +159,47 @@
     >
       Soundcloud
     </label>
-    <input
-      name="soundcloud"
-      type="text"
-      [(ngModel)]="artist.social.soundcloud"
-      placeholder="Introduce Soundcloud"
-      class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-md dark:border-gray-700 dark:text-white dark:bg-black rounded-y-md ring-red-500 dark:ring-red-500"
-    />
+    <div class="flex">
+      <input
+        name="soundcloud"
+        type="text"
+        [(ngModel)]="artist.social.soundcloud"
+        placeholder="Introduce Soundcloud"
+        class="w-full px-6 text-base font-medium bg-white border border-gray-200 rounded-l-md dark:border-gray-700 dark:text-white dark:bg-black rounded-y-md ring-red-500 dark:ring-red-500"
+      />
+      <button
+        class="px-3 bg-gray-100 rounded-r-lg cursor-pointer dark:bg-gray-800 hover:opacity-80"
+        (click)="searchSoundcloud()"
+      >
+        <svg-icon class="dark:text-white" name="search"></svg-icon>
+      </button>
+    </div>
+     <div
+    @inOut
+    class="absolute z-10 w-48 mt-1 bg-white border rounded-lg shadow-lg"
+    *ngIf="soundcloudNames.length > 0"
+  >
+    <div
+      class="flex px-3 py-2 border-b cursor-pointer hover:bg-gray-200"
+      *ngFor="let itemS of soundcloudNames"
+      (click)="onSelectSoundcloud(itemS)"
+      >
+      <img
+        *ngIf="itemS.image"
+        [src]="itemS.image"
+        alt=""
+        class="w-10 h-10 mr-3 rounded-full"
+        onError
+      />
+      <div class="flex flex-col">
+        <span class="text-sm font-medium">{{ itemS?.name }}</span>
+        <span class="text-sm font-light" *ngIf="itemS.country">
+          {{ itemS?.country! | lowercase | countryName }}
+        </span>
+      </div>
+    </div>
+  </div>
+
   </div>
 
   <div class="col-span-2 mb-1 md:col-span-1">

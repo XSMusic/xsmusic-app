@@ -7,6 +7,7 @@ import {
 } from '@interfaces';
 import { Youtube } from '@models';
 import { Observable } from 'rxjs';
+import { ScrapingSoundcloudSearchI } from './scraping-soundcloud-search.interface';
 import { ScrapingEventsI, ScrapingSourceI } from './scraping-source.interface';
 import {
   ScrapingGetInfoArtistDto,
@@ -38,6 +39,10 @@ export class ScrapingService {
       `${this.url}/getInfoArtist`,
       data
     );
+  }
+
+  searchNameSoundcloud(data: { name: string }): Observable<ScrapingSoundcloudSearchI[]> {
+    return this.httpClient.post<ScrapingSoundcloudSearchI[]>(`${this.url}/searchNameSoundcloud`, data);
   }
 
   getInfoClub(

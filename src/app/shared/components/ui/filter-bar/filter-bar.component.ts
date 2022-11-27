@@ -41,7 +41,6 @@ export class FilterBarComponent implements OnInit {
   }
 
   getFilterItems() {
-    console.log(this.type);
     this.itemsA = filters
       .find((item) => item.name === this.type)!
       .items.map((item) => item);

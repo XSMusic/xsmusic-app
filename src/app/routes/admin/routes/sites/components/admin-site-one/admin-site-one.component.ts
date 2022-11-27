@@ -11,7 +11,6 @@ import {
   GeoService,
   ImageService,
   ModalService,
-  MODAL_STATE,
   ValidationsFormService,
 } from '@services';
 import {
@@ -293,14 +292,9 @@ export class AdminSiteOneComponent implements OnInit {
 
   onDelete() {
     const itemType = `${this.site.type === 'club' ? 'Club' : 'Festival'}`;
-    const modal = this.modal.showModal(
-      MODAL_STATE.info,
+    const modal = this.modal.showModalConfirm(
       `Eliminar ${itemType}`,
-      `¿Estas seguro de eliminar el ${itemType}?`,
-      [
-        { name: 'Si', action: true },
-        { name: 'No', action: false },
-      ]
+      `¿Estas seguro de eliminar el ${itemType}?`
     );
     const sub$ = modal.subscribe({
       next: (response) => {

@@ -40,6 +40,18 @@ export class ModalService {
     return this.onDismiss;
   }
 
+  showModalConfirm(title: string, message: string) {
+    this.stateModal$.next(MODAL_STATE.info);
+    this.titleModal$.next(title);
+    this.messageModal$.next(message);
+    this.buttonsModal$.next([
+      { name: 'Si', action: true },
+      { name: 'No', action: false },
+    ]);
+    this.showModal$.next(true);
+    return this.onDismiss;
+  }
+
   dismissModal(action?: string | boolean): void {
     if (action !== undefined) {
       this.onDismiss.next(action);

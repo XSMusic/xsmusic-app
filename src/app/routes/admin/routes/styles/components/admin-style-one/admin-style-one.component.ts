@@ -1,6 +1,11 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { Style } from '@models';
-import { StyleService, ToastService } from '@services';
+import {
+  ModalService,
+  StyleService,
+  ToastService,
+  ValidationsFormService,
+} from '@services';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { MessageI } from '@interfaces';
 
@@ -13,11 +18,16 @@ export class AdminStyleOneComponent {
   @Output() onSuccess = new EventEmitter<MessageI>();
   constructor(
     private styleService: StyleService,
-    private toast: ToastService
+    private toast: ToastService,
+    private modal: ModalService,
+    private validationsFormService: ValidationsFormService
   ) {}
 
   onSubmit() {
-    const validation = this.validationSubmit();
+    const validation = this.validationsFormService.validation(
+      'style',
+      this.style,
+    );
     if (validation.state) {
       const observable = this.style._id
         ? this.styleService.update(this.style)
@@ -31,25 +41,23 @@ export class AdminStyleOneComponent {
     }
   }
 
-  validationSubmit() {
-    if (this.style.name === '') {
-      return {
-        state: false,
-        message: 'El nombre es obligatorio',
-      };
-    } else {
-      return {
-        state: true,
-        message: '',
-      };
-    }
-  }
-
   onDelete() {
-    // TODO: Añadir confirmacion por modal
-    this.styleService.deleteOne(this.style._id!).subscribe({
-      next: (response) => this.onSuccess.emit(response),
-      error: (error) => this.toast.showToast(TOAST_STATE.error, error),
+    const modal = this.modal.showModalConfirm(
+      'Eliminar estilo',
+      '¿Estas seguro de eliminar el estilo?'
+    );
+    const sub$ = modal.subscribe({
+      next: (response) => {
+        if (response !== '') {
+          if (response === true) {
+            this.styleService.deleteOne(this.style._id!).subscribe({
+              next: (response) => this.onSuccess.emit(response),
+              error: (error) => this.toast.showToast(TOAST_STATE.error, error),
+            });
+          }
+          sub$.unsubscribe();
+        }
+      },
     });
   }
 }

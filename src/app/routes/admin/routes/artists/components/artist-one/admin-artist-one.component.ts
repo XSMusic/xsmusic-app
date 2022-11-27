@@ -253,14 +253,9 @@ export class ArtistOneComponent {
   }
 
   onDelete() {
-    const modal = this.modal.showModal(
-      MODAL_STATE.info,
+    const modal = this.modal.showModalConfirm(
       'Eliminar Artista',
-      '¿Estas seguro de eliminar el artista?',
-      [
-        { name: 'Si', action: true },
-        { name: 'No', action: false },
-      ]
+      '¿Estas seguro de eliminar el artista?'
     );
     const sub$ = modal.subscribe({
       next: (response) => {

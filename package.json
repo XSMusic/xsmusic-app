@@ -13,7 +13,8 @@
     "prettier": "prettier --write \"./{e2e,src}/**/*.{scss,css,ts,html}\"",
     "pretty-quick": "pretty-quick --staged",
     "lint": "eslint \"**/*.{ts,tsx}\" --fix",
-    "test": "ng test",
+    "test": "ng test --code-coverage",
+    "test:no-watch": "ng test --no-watch --code-coverage",
     "prepare": "husky install"
   },
   "description": "xsmusic-app",

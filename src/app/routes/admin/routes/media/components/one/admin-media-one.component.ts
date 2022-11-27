@@ -8,7 +8,6 @@ import {
   ImageService,
   MediaService,
   ModalService,
-  MODAL_STATE,
   ToastService,
   ValidationsFormService,
 } from '@services';
@@ -118,14 +117,9 @@ export class AdminMediaOneComponent {
 
   onDelete() {
     const itemType = `${this.media.type === 'set' ? 'Set' : 'Track'}`;
-    const modal = this.modal.showModal(
-      MODAL_STATE.info,
+    const modal = this.modal.showModalConfirm(
       `Eliminar ${itemType}`,
       `¿Estas seguro de eliminar el ${itemType}?`,
-      [
-        { name: 'Si', action: true },
-        { name: 'No', action: false },
-      ]
     );
     const sub$ = modal.subscribe({
       next: (response) => {

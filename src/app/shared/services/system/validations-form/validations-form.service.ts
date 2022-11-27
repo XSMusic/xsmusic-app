@@ -4,7 +4,7 @@ import { ValidationsFormI } from './validations-form.interface';
 @Injectable({ providedIn: 'root' })
 export class ValidationsFormService {
   validation(
-    type: 'artist' | 'site' | 'event' | 'media',
+    type: 'artist' |  'event' | 'media' | 'site' | 'style' |'user',
     item: any,
     tempImages?: any[]
   ): {
@@ -98,5 +98,13 @@ export const validations = [
   {
     name: 'site',
     items: ['name', 'address.street', 'styles'],
+  },
+  {
+    name: 'style',
+    items: ['name'],
+  },
+  {
+    name: 'user',
+    items: ['name'],
   },
 ];

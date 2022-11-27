@@ -9,6 +9,7 @@ import {
   ImageService,
   EventService,
   ValidationsFormService,
+  ModalService,
 } from '@services';
 import {
   ImageSetFirstImageDto,
@@ -45,7 +46,8 @@ export class AdminEventOneComponent {
     private router: Router,
     private spinner: NgxSpinnerService,
     private imageService: ImageService,
-    private validationsFormService: ValidationsFormService
+    private validationsFormService: ValidationsFormService,
+    private modal: ModalService
   ) {}
 
   showImage(image: string) {
@@ -193,10 +195,23 @@ export class AdminEventOneComponent {
   }
 
   onDelete() {
-    // TODO: Añadir confirmacion por modal
-    this.eventService.deleteOne(this.event._id!).subscribe({
-      next: (response) => this.onSuccessUpdate(response),
-      error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+    const modal = this.modal.showModalConfirm(
+      `Eliminar evento`,
+      `¿Estas seguro de eliminar el evento?`,
+    );
+    const sub$ = modal.subscribe({
+      next: (response) => {
+        if (response !== '') {
+          if (response === true) {
+            this.eventService.deleteOne(this.event._id!).subscribe({
+              next: (response) => this.onSuccessUpdate(response),
+              error: (error) =>
+                this.toastService.showToast(TOAST_STATE.error, error),
+            });
+          }
+          sub$.unsubscribe();
+        }
+      },
     });
   }
 

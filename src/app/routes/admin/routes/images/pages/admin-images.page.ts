@@ -7,7 +7,6 @@ import { Image } from '@models';
 import {
   ImageService,
   ModalService,
-  MODAL_STATE,
   ToastService,
   TOAST_STATE,
 } from '@services';
@@ -98,14 +97,9 @@ export class AdminImagesPage implements OnInit {
   }
 
   onDelete(item: Image) {
-    const modal = this.modal.showModal(
-      MODAL_STATE.info,
+    const modal = this.modal.showModalConfirm(
       'Eliminar Imagen',
-      '¿Estas seguro de eliminar la imagen?',
-      [
-        { name: 'Si', action: true },
-        { name: 'No', action: false },
-      ]
+      '¿Estas seguro de eliminar la imagen?'
     );
     const sub$ = modal.subscribe({
       next: (response) => {
@@ -114,7 +108,8 @@ export class AdminImagesPage implements OnInit {
             this.imageService.deleteOne(item._id!).subscribe({
               next: (response) => {
                 this.toast.showToast(TOAST_STATE.success, response.message);
-                this;
+                this.body.page = 1;
+                this.getItems();
               },
               error: (error) => this.toast.showToast(TOAST_STATE.error, error),
             });

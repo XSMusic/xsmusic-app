@@ -28,6 +28,7 @@ export const routesConfig = {
   festivals: '/festivals',
   festivalsAdmin: '/admin/sites/festivals',
   festivalsFilter: '/festivals/filter/:filterKey/:filterValue',
+  github: '/admin/github',
   home: '/home',
   imageAdminAdd: '/admin/images/one',
   imagesAdmin: '/admin/images',

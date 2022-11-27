@@ -119,7 +119,7 @@ export class AdminMediaOneComponent {
     const itemType = `${this.media.type === 'set' ? 'Set' : 'Track'}`;
     const modal = this.modal.showModalConfirm(
       `Eliminar ${itemType}`,
-      `¿Estas seguro de eliminar el ${itemType}?`,
+      `¿Estas seguro de eliminar el ${itemType}?`
     );
     const sub$ = modal.subscribe({
       next: (response) => {

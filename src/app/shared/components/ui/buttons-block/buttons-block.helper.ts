@@ -45,6 +45,26 @@ export const buttonsByType = [
     buttons: genericItems,
   },
   {
+    name: 'github',
+    buttons: [
+      new ButtonBlockItem({
+        name: 'Issues',
+        isActivatable: true,
+        action: 'viewIssues',
+      }),
+      new ButtonBlockItem({
+        name: 'Nueva',
+        isActivatable: true,
+        action: 'viewAdd',
+      }),
+      new ButtonBlockItem({
+        name: 'Actions',
+        isActivatable: true,
+        action: 'viewActions',
+      }),
+    ],
+  },
+  {
     name: 'events',
     buttons: [
       new ButtonBlockItem({

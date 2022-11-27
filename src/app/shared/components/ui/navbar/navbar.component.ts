@@ -3,10 +3,9 @@ import {
   ViewChild,
   OnInit,
   ElementRef,
-  Injector,
 } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { Router, NavigationEnd, Event, ActivatedRoute } from '@angular/router';
+import { Router, NavigationEnd, Event } from '@angular/router';
 import { filter, distinctUntilChanged } from 'rxjs';
 import { Menu, User } from '@models';
 import { AuthService } from '@core/auth';
@@ -41,8 +40,6 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private location: Location,
-    private injector: Injector,
-    private activatedRoute: ActivatedRoute,
     private navigationService: NavigationService
   ) {}
 
@@ -83,6 +80,7 @@ export class NavbarComponent implements OnInit {
       { name: 'Imagenes', route: routesConfig.imagesAdmin },
       { name: 'Sets', route: routesConfig.setsAdmin },
       { name: 'Tracks', route: routesConfig.tracksAdmin },
+      { name: 'Github', route: routesConfig.github },
       { name: 'Volver', route: routesConfig.home },
     ];
   }

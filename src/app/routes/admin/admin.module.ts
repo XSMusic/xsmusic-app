@@ -71,6 +71,12 @@ import { AdminTotalsComponent } from './components/totals/admin-totals.component
             (m) => m.AdminUsersModule
           ),
       },
+      {
+        path: 'github',
+        data: { breadcrumb: 'Github' },
+        loadChildren: () =>
+          import('./routes/github/admin-github.module').then((m) => m.AdminGithubModule),
+      },
     ]),
   ],
   exports: [],

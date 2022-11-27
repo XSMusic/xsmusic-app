@@ -197,7 +197,7 @@ export class AdminEventOneComponent {
   onDelete() {
     const modal = this.modal.showModalConfirm(
       `Eliminar evento`,
-      `¿Estas seguro de eliminar el evento?`,
+      `¿Estas seguro de eliminar el evento?`
     );
     const sub$ = modal.subscribe({
       next: (response) => {

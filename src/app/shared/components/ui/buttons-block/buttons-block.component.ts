@@ -32,6 +32,7 @@ export class ButtonsBlockComponent implements OnInit {
     | 'eventsAdmin'
     | 'eventsScraping'
     | 'eventAdmin'
+    | 'github'
     | 'sites'
     | 'siteAdmin'
     | 'sitesAdmin'

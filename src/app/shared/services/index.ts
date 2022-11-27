@@ -16,3 +16,4 @@ export * from './ui/modal/modal.service';
 export * from './ui/toast/toast.service';
 export * from './system/navigation.service';
 export * from './system/validations-form/validations-form.service';
+export * from './api/github';

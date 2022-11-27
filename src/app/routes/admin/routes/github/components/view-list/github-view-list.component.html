@@ -1,0 +1,160 @@
+<ng-container *ngIf="!loading && type === 'issues'">
+  <ng-container *ngIf="issues.length > 0">
+    <div @inOut class="my-2 overflow-x-auto scrollbar-hidden">
+      <table class="w-full whitespace-nowrap" aria-label="artist">
+        <tr>
+          <th></th>
+        </tr>
+        <tbody>
+          <tr
+            *ngFor="let issue of issues"
+            class="h-16 border-b border-gray-100 rounded-lg dark:border-black dark:border-0"
+          >
+            <td class="pr-6">
+              <p
+                class="my-1 text-lg font-extrabold leading-none text-black cursor-pointer dark:text-white hover:text-gray-600"
+                (click)="goTo(issue.url)"
+              >
+                {{ issue.title }}
+              </p>
+            </td>
+
+            <td class="pr-6">
+              <div class="flex justify-center gap-2">
+                <span
+                  *ngFor="let label of issue.labels; let i = index"
+                  class="px-2 py-1 text-xs text-center text-white border rounded-lg shadow-md cursor-pointer"
+                  [ngClass]="{
+                    'border-red-300 bg-red-500': label === 'bug',
+                    'border-green-300 bg-green-500': label === 'enhancement'
+                  }"
+                >
+                  {{ label | titlecase }}
+                </span>
+              </div>
+            </td>
+
+            <td class="pr-6">
+              <div class="flex justify-center">
+                <span
+                  class="px-2 py-1 text-xs text-center text-white border rounded-lg shadow-md cursor-pointer"
+                  [ngClass]="{
+                    'border-blue-300 bg-blue-500': issue.repo === 'xsmusic-app',
+                    'border-yellow-300 bg-yellow-500':
+                      issue.repo === 'xsmusic-backend'
+                  }"
+                >
+                  {{ issue.repo }}
+                </span>
+              </div>
+            </td>
+            <td class="pr-6">
+              <p
+                class="mb-2 mr-2 text-sm font-light leading-none dark:text-white"
+              >
+                <span class="font-black">{{ issue.comments }}</span>
+                {{ issue.comments === 1 ? 'Comentario' : 'Comentarios' }}
+              </p>
+            </td>
+
+            <td *ngxPermissionsOnly="'ADMIN'">
+              <div class="flex flex-col">
+                <div
+                  class="mr-2 text-sm font-light leading-none text-gray-700 dark:text-gray-400"
+                >
+                  <span class="font-extrabold">Creado: </span>
+                  {{ issue.created! | timeAgo }}
+                </div>
+                <div
+                  class="mr-2 text-sm font-light leading-none text-gray-700 dark:text-gray-400"
+                >
+                  <span class="font-extrabold">Editado: </span>
+                  {{ issue.updated! | timeAgo }}
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-container>
+
+  <div class="mt-1" *ngIf="issues.length === 0">
+    <alert
+      type="warning"
+      message="No hay {{ type }} disponibles"
+      actionText="Quitar"
+    ></alert>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!loading && type === 'actions'">
+  <ng-container *ngIf="actions.length > 0">
+    <div @inOut class="my-2 overflow-x-auto scrollbar-hidden">
+      <table class="w-full whitespace-nowrap" aria-label="action">
+        <tr>
+          <th></th>
+        </tr>
+        <tbody>
+          <tr
+            *ngFor="let action of actions"
+            class="h-16 border-b border-gray-100 rounded-lg dark:border-black dark:border-0"
+          >
+            <td class="pr-6">
+              <img [src]="action.badge" alt="" />
+            </td>
+            <td class="pr-6">
+              <div class="flex justify-center">
+                <span
+                  class="px-2 py-1 text-xs text-center text-white border rounded-lg shadow-md cursor-pointer"
+                  [ngClass]="{
+                    'border-blue-300 bg-blue-500':
+                      action.repo === 'xsmusic-app',
+                    'border-yellow-300 bg-yellow-500':
+                      action.repo === 'xsmusic-backend'
+                  }"
+                >
+                  {{ action.repo }}
+                </span>
+              </div>
+            </td>
+
+            <td class="pl-5" *ngxPermissionsOnly="'ADMIN'">
+              <div class="flex flex-col">
+                <div
+                  class="mr-2 text-sm font-light leading-none text-gray-700 dark:text-gray-400"
+                >
+                  <span class="font-extrabold">Creado:</span>
+                  {{ action.created! | timeAgo }}
+                </div>
+                <div
+                  class="mr-2 text-sm font-light leading-none text-gray-700 dark:text-gray-400"
+                >
+                  <span class="font-extrabold">Editado:</span>
+                  {{ action.updated! | timeAgo }}
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-container>
+
+  <div class="mt-1" *ngIf="actions.length === 0">
+    <alert
+      type="warning"
+      message="No hay {{ type }} disponibles"
+      actionText="Quitar"
+    ></alert>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="loading">
+  <div class="w-full py-2">
+    <div
+      *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
+      class="relative h-24 my-4 overflow-hidden bg-gray-100 shadow-xl cursor-pointer dark:bg-black dark:border dark:border-gray-800 animate-pulse"
+    ></div>
+  </div>
+</ng-container>

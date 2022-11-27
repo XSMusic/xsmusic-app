@@ -26,7 +26,7 @@ export class AdminStyleOneComponent {
   onSubmit() {
     const validation = this.validationsFormService.validation(
       'style',
-      this.style,
+      this.style
     );
     if (validation.state) {
       const observable = this.style._id

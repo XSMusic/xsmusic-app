@@ -7,6 +7,7 @@ import {
 } from '@shared/interfaces/responses/stats.response.interface';
 import { Observable } from 'rxjs';
 import { StatsGetTopArtistsDto } from './stats.dto';
+import { StatsArtistsI } from './stats.interface';
 
 @Injectable({ providedIn: 'root' })
 export class StatsService {
@@ -24,5 +25,9 @@ export class StatsService {
       `${this.url}/getTopArtists`,
       body
     );
+  }
+
+  getStatsArtists(): Observable<StatsArtistsI> {
+    return this.httpClient.get<StatsArtistsI>(`${this.url}/getStatsArtists`);
   }
 }

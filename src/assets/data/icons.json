@@ -27,6 +27,10 @@
     {
       "iconName": "twitter",
       "iconPath": "/assets/images/icons/twitter.svg"
+    },
+    {
+      "iconName": "mixcloud",
+      "iconPath": "/assets/images/icons/mixcloud.svg"
     }
   ],
   "customIcons": [

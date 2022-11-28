@@ -4,6 +4,7 @@ import { SharedModule } from '@shared/shared.module';
 import { AdminArtistsPage } from './pages/artists/admin-artists.page';
 import { AdminArtistPage } from './pages/artist/admin-artist.page';
 import { ArtistOneComponent } from './components/artist-one/admin-artist-one.component';
+import { AdminArtistsStatsComponent } from './components/artists-stats/admin-artists-stats.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,12 @@ import { ArtistOneComponent } from './components/artist-one/admin-artist-one.com
     ]),
   ],
   exports: [],
-  declarations: [AdminArtistsPage, AdminArtistPage, ArtistOneComponent],
+  declarations: [
+    AdminArtistsPage,
+    AdminArtistPage,
+    ArtistOneComponent,
+    AdminArtistsStatsComponent,
+  ],
   providers: [],
 })
 export class AdminArtistsModule {}

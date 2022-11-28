@@ -30,4 +30,6 @@
     [artist]="artist"
     (onCreated)="onCreatedArtist()"
   ></admin-artist-one>
+
+  <admin-artists-stats *ngIf="view === 'viewStats'"></admin-artists-stats>
 </div>

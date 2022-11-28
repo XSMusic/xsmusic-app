@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { AdminDashboardPage } from './routes/dashboard/admin-dashboard.page';
 import { SharedModule } from '@shared/shared.module';
 import { RouterModule } from '@angular/router';
-import { AdminTotalsComponent } from './components/totals/admin-totals.component';
+import { AdminTotalsComponent } from '../../shared/components/ui/totals/admin-totals.component';
 
 @NgModule({
   imports: [

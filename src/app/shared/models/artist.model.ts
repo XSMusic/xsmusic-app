@@ -17,6 +17,8 @@ export class Artist {
     spotify: '',
     soundcloud: '',
     instagram: '',
+    youtube: '',
+    mixcloud: '',
     tiktok: '',
   };
   sets?: any;

@@ -61,6 +61,8 @@ export class AdminArtistPage {
             soundcloud: '',
             spotify: '',
             tiktok: '',
+            youtube: '',
+            mixcloud: '',
             instagram: '',
           };
         }

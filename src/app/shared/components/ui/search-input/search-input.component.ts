@@ -67,12 +67,20 @@ export class SearchInputComponent implements OnInit {
         service = this.styleService;
       }
       service!.getAll(this.body).subscribe({
-        next: (response: any) => (this.itemsSearch = response.items),
+        next: (response: any) => this.onSearchResultsSuccess(response),
         error: (error: any) => this.toast.showToast(TOAST_STATE.error, error),
       });
       this.selectState = true;
     } else {
       this.toast.showToast(TOAST_STATE.warning, 'Introduce texto para buscar');
+    }
+  }
+
+  onSearchResultsSuccess(response: any) {
+    if (response.items.length > 1) {
+      this.itemsSearch = response.items;
+    } else if (response.items.length === 1) {
+      this.onSelect(response.items[0]);
     }
   }
 

@@ -23,13 +23,21 @@ export class AdminEventsScrapingComponent implements OnInit {
   sources = [{ name: 'RA', value: 'ra' }];
   dateNow = moment().format();
   body: ScrapingGetListEventsDto = {
-    source: 'ra',
+    source: '',
     maxResults: '10',
+    area: '41',
     dateFrom: moment().format('YYYY-MM-DD'),
     dateTo: moment().add(7, 'days').format('YYYY-MM-DD'),
   };
   items!: ScrapingEventsI;
   view = 'viewCompleted';
+  raAreas = [
+    { name: 'Madrid', value: '41' },
+    { name: 'Este', value: '160' },
+    { name: 'Norte', value: '170' },
+    { name: 'Sur', value: '169' },
+    { name: 'Ibiza', value: '25' },
+  ];
 
   constructor(
     private scrapingService: ScrapingService,
@@ -40,10 +48,10 @@ export class AdminEventsScrapingComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this.sources.length === 1) {
-      this.body.source = this.sources[0].value;
-    }
-    this.getEvents();
+    // if (this.sources.length === 1) {
+    //   this.body.source = this.sources[0].value;
+    // }
+    // this.getEvents();
   }
 
   getEvents() {

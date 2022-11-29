@@ -16,6 +16,7 @@ export interface ScrapingGetListMediaDto {
 
 export interface ScrapingGetListEventsDto {
   source: string;
+  area: string;
   maxResults: string;
   dateFrom: string;
   dateTo: string;

@@ -287,11 +287,14 @@ export class ArtistOneComponent {
       .subscribe({
         next: (response) => {
           if (response.length > 1) {
-            this.soundcloudNames = response
+            this.soundcloudNames = response;
           } else if (response.length === 1) {
             this.artist.social.soundcloud = response[0].url;
           } else {
-            this.toastService.showToast(TOAST_STATE.warning, 'No hay ningun usuario con el nombre del artista')
+            this.toastService.showToast(
+              TOAST_STATE.warning,
+              'No hay ningun usuario con el nombre del artista'
+            );
           }
         },
         error: (error) => this.toastService.showToast(TOAST_STATE.error, error),

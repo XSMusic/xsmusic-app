@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { routesConfig } from '@core/config';
 import { Event } from '@models';
@@ -19,9 +19,10 @@ import * as moment from 'moment';
   selector: 'admin-events-scraping',
   templateUrl: 'admin-events-scraping.component.html',
 })
-export class AdminEventsScrapingComponent implements OnInit {
+export class AdminEventsScrapingComponent {
   sources = [{ name: 'RA', value: 'ra' }];
   dateNow = moment().format();
+  daysSelected = 7;
   body: ScrapingGetListEventsDto = {
     source: '',
     maxResults: '10',
@@ -38,7 +39,12 @@ export class AdminEventsScrapingComponent implements OnInit {
     { name: 'Sur', value: '169' },
     { name: 'Ibiza', value: '25' },
   ];
-
+  days = [
+    { name: 'Proximos 7 dias', value: 7 },
+    { name: 'Proximas 14 dias', value: 14 },
+    { name: 'Proximas 30 dias', value: 30 },
+  ];
+  maxResults = ['10', '25', '50'];
   constructor(
     private scrapingService: ScrapingService,
     private eventService: EventService,
@@ -47,14 +53,10 @@ export class AdminEventsScrapingComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {
-    // if (this.sources.length === 1) {
-    //   this.body.source = this.sources[0].value;
-    // }
-    // this.getEvents();
-  }
-
   getEvents() {
+    this.body.dateTo = moment()
+      .add(this.daysSelected, 'days')
+      .format('YYYY-MM-DD');
     this.scrapingService.getListEvents(this.body).subscribe({
       next: (response) => {
         this.items = response;

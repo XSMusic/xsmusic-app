@@ -41,8 +41,13 @@ export class ScrapingService {
     );
   }
 
-  searchNameSoundcloud(data: { name: string }): Observable<ScrapingSoundcloudSearchI[]> {
-    return this.httpClient.post<ScrapingSoundcloudSearchI[]>(`${this.url}/searchNameSoundcloud`, data);
+  searchNameSoundcloud(data: {
+    name: string;
+  }): Observable<ScrapingSoundcloudSearchI[]> {
+    return this.httpClient.post<ScrapingSoundcloudSearchI[]>(
+      `${this.url}/searchNameSoundcloud`,
+      data
+    );
   }
 
   getInfoClub(

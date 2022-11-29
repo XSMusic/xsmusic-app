@@ -13,7 +13,10 @@
     [loading]="loadingIssues"
   ></github-view-list>
 
-  <github-issue-add *ngIf="view === 'viewAdd'" (onCreated)="onCreatedIssue()"></github-issue-add>
+  <github-issue-add
+    *ngIf="view === 'viewAdd'"
+    (onCreated)="onCreatedIssue()"
+  ></github-issue-add>
 
   <github-view-list
     *ngIf="view === 'viewActions'"

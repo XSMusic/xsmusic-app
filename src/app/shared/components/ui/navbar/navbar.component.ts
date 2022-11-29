@@ -1,9 +1,4 @@
-import {
-  Component,
-  ViewChild,
-  OnInit,
-  ElementRef,
-} from '@angular/core';
+import { Component, ViewChild, OnInit, ElementRef } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { Router, NavigationEnd, Event } from '@angular/router';
 import { filter, distinctUntilChanged } from 'rxjs';

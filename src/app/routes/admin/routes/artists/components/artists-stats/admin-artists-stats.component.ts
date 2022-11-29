@@ -8,9 +8,12 @@ import { StatsArtistsI } from '@shared/services/api/stats/stats.interface';
 })
 export class AdminArtistsStatsComponent implements OnInit {
   stats: StatsArtistsI = {
-    topSocial: []
-  }
-  constructor(private statsService: StatsService, private toast: ToastService) {}
+    topSocial: [],
+  };
+  constructor(
+    private statsService: StatsService,
+    private toast: ToastService
+  ) {}
 
   ngOnInit() {
     this.getStats();

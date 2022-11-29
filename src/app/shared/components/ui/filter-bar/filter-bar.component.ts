@@ -20,7 +20,7 @@ export class FilterBarComponent implements OnInit {
     | 'eventsAdmin'
     | 'eventsScraping'
     | 'eventAdmin'
-    | 'github'
+    | 'github'
     | 'sites'
     | 'siteAdmin'
     | 'sitesAdmin'

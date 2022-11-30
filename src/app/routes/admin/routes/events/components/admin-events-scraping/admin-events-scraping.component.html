@@ -72,14 +72,15 @@
 <ng-container *ngIf="items">
   <generic-view-gallery
     *ngIf="view === 'viewCompleted'"
-    [items]="items.completed!"
+    [items]="items.completed"
     [type]="'eventScraping'"
     [loading]="false"
-    (goToOne)="addEvent($event)"
+    (goToOne)="addEventConfirmation($event)"
+    (discartEvent)="discartEvent($event)"
   ></generic-view-gallery>
   <generic-view-gallery
     *ngIf="view === 'viewNotCompleted'"
-    [items]="items.notCompleted!"
+    [items]="items.notCompleted"
     [type]="'eventScraping'"
     [loading]="false"
     (goToOne)="goToAddSite()"

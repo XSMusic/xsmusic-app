@@ -56,6 +56,7 @@ export class AdminMediaOneComponent {
   image = '';
   imageState = false;
   tempImages: string[] = [];
+  defaultSite = '6367d34e5ba8b44fdf9476c2';
 
   constructor(
     private mediaService: MediaService,
@@ -68,6 +69,15 @@ export class AdminMediaOneComponent {
     private modal: ModalService,
     private validationsFormService: ValidationsFormService
   ) {}
+
+  ngOnInit() {
+    this.setDefaultSite();
+  }
+
+  setDefaultSite() {
+    // TODO: Añadir sitio por defecto 6367d34e5ba8b44fdf9476c2
+    this.media.site = { name: 'Desconocido', _id: this.defaultSite };
+  }
 
   onSubmit() {
     const validation = this.validationsFormService.validation(

@@ -20,6 +20,7 @@ export class GenericViewGalleryComponent {
   @Input() cols = [];
   @Output() goToOne = new EventEmitter<any>();
   @Output() onScroll = new EventEmitter<void>();
+  @Output() discartEvent = new EventEmitter<any>();
 
   geTextNoItems() {
     switch (this.type) {
@@ -28,6 +29,8 @@ export class GenericViewGalleryComponent {
       case 'club':
         return 'No hay clubs disponibles';
       case 'event':
+        return 'No hay eventos disponibles';
+      case 'eventScraping':
         return 'No hay eventos disponibles';
       case 'set':
         return 'No hay sets disponibles';

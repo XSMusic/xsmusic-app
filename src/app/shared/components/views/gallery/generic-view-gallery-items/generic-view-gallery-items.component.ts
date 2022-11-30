@@ -18,5 +18,5 @@ export class GenericViewGalleryItemsComponent {
     | 'track'
     | 'festival' = 'artist';
   @Output() goToOne = new EventEmitter<any>();
-  @Output() clickButtonScraping = new EventEmitter<any>();
+  @Output() discartEvent = new EventEmitter<any>();
 }

@@ -6,7 +6,7 @@
     <div
       *ngIf="item.name !== 'Desconocido'"
       class="relative overflow-hidden rounded-lg shadow-lg dark:border dark:border-gray-700"
-      (click)="goToOne.emit(item)"
+      (click)="type !== 'eventScraping' ? goToOne.emit(item) : null"
     >
       <img
         *ngIf="
@@ -26,11 +26,24 @@
         onError
       />
 
+      <div
+        *ngIf="type === 'eventScraping'"
+        class="absolute z-50 w-6 h-6 text-black bg-gray-100 rounded-lg cursor-pointer hover:opacity-80 top-2 right-2"
+        (click)="discartEvent.emit(item)"
+      >
+        <svg-icon
+          svgClass="fill-black h-4"
+          style="zoom: 1.5"
+          name="close"
+        ></svg-icon>
+      </div>
+
       <img
         *ngIf="type === 'eventScraping'"
-        class="object-cover w-full h-96 hover:filter-grayscale hover:scale-105 hover:duration-1000"
+        class="object-cover w-full h-96 "
         [src]="item.images![0]"
         [alt]="item.name"
+        (click)="goToOne.emit(item)"
         onError
       />
 

@@ -87,7 +87,7 @@ export class AdminEventsPage {
     this.getEvents(type);
   }
 
-  onScroll(type: 'new' | 'old') {
+  reloadItems(type: 'new' | 'old') {
     this.body.page++;
     this.getEvents(type, true);
   }

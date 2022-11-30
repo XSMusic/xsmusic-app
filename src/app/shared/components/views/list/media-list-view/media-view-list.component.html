@@ -63,7 +63,7 @@
                   </p>
                   <div
                     *ngIf="mediaItem.site"
-                    class="flex gap-1 text-sm font-light text-gray-500 cursor-pointer"
+                    class="flex gap-1 text-sm font-light text-gray-500 cursor-pointer dark:text-gray-400"
                   >
                     <img
                       [src]="
@@ -83,7 +83,7 @@
             <td class="pl-5">
               <span
                 *ngFor="let style of mediaItem.styles; let i = index"
-                class="gap-1 px-2 py-1 mr-1 text-xs text-center bg-gray-100 cursor-pointer rounded-2xl hover:bg-gray-200"
+                class="gap-1 px-2 py-1 mr-1 text-xs text-center bg-gray-100 cursor-pointer rounded-2xl hover:opacity-80"
                 (click)="filter.emit({ name: 'styles', value: style.name })"
               >
                 {{ style.name | titlecase }}

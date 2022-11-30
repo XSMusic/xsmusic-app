@@ -1,9 +1,10 @@
 <div class="pt-16" @inOut>
   <div
-    class="mx-auto mt-3 overflow-hidden border-2 w-52 h-52"
+    class="mx-auto mt-3 overflow-hidden border-2 w-52"
     [ngClass]="{
-      'rounded-full': !item.address,
-      'rounded-2xl': item.address
+      'rounded-full h-52': type === 'artist',
+      'rounded-2xl h-52': type === 'club' || type === 'festival' || type === 'event',
+      'h-80': type === 'event'
     }"
   >
     <img
@@ -73,6 +74,7 @@
       </div>
     </div>
   </ng-container>
+
   <div *ngIf="type === 'event'" class="flex justify-center">
     <div class="p-2 pt-3.5 flex gap-2 items-center">
       <div class="flex w-full gap-3">
@@ -115,17 +117,19 @@
     </div>
   </div>
 
-  <div class="p-2 text-center" *ngIf="item.styles!.length > 0">
-    <span *ngFor="let style of item.styles; index as i">
+  <!-- Styles -->
+  <div class="flex gap-1 px-3 py-1 my-2 overflow-x-scroll text-center md:justify-center scrollbar-hidden" *ngIf="item.styles!.length > 0">
+    <div class="" *ngFor="let style of item.styles; index as i">
       <a
         (click)="goToFilter('styles', style.name)"
-        class="px-2 py-1 mr-2 text-xs bg-gray-100 border border-gray-100 shadow-md cursor-pointer dark:text-white dark:bg-black dark:border-gray-800 rounded-2xl hover:opacity-80"
+        class="px-3 py-1 mr-2 font-medium border border-gray-300 rounded-lg cursor-pointer dark:text-white dark:bg-black dark:border-gray-800 hover:opacity-80"
       >
         {{ style.name }}
       </a>
-    </span>
+    </div>
   </div>
 
+  <!-- Social -->
   <div class="flex justify-center gap-3">
     <div
       class="py-2"
@@ -219,6 +223,22 @@
     </div>
   </div>
 
+  <!-- Compartir & Reportar -->
+  <div class="flex flex-row justify-center gap-2">
+    <button
+      class="px-3 py-1 mt-3 font-medium border border-gray-300 rounded-lg cursor-pointer hover:opacity-70 dark:bg-black dark:border-gray-800 dark:text-white"
+    >
+      Compartir
+    </button>
+
+    <button
+      class="px-3 py-1 mt-3 font-medium border border-gray-300 rounded-lg cursor-pointer hover:opacity-70 dark:bg-black dark:border-gray-800 dark:text-white"
+    >
+      Reportar
+    </button>
+  </div>
+
+  <!-- Info -->
   <div class="px-6 py-2 text-center" *ngIf="item.info !== ''">
     <div
       *ngIf="!moreInfo"
@@ -232,7 +252,7 @@
     ></div>
     <button
       *ngIf="item.info!.length > 150"
-      class="px-3 py-1 mt-2 font-bold bg-gray-100 rounded-lg cursor-pointer dark:bg-black dark:border dark:border-gray-800 dark:text-white"
+      class="px-3 py-1 mt-3 font-medium border border-gray-300 rounded-lg cursor-pointer hover:opacity-70 dark:bg-black dark:border-gray-800 dark:text-white"
       (click)="moreInfo = !moreInfo"
     >
       {{ !moreInfo ? 'Leer mas' : 'Leer menos' }}

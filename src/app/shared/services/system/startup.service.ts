@@ -44,8 +44,8 @@ export class StartupService {
     if (user.role) {
       const permissions = [user.role];
       this.permissonsService.loadPermissions(permissions);
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.classList.add('dark');
     }
   }
-
-
 }

@@ -23,10 +23,6 @@ export class AppComponent implements OnInit {
     this.preventBackButton();
     this.setTitle();
 
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      document.documentElement.classList.add('dark');
-    }
-
     if (this.swUpdate.isEnabled) {
       this.swUpdate.versionUpdates.pipe(
         filter(

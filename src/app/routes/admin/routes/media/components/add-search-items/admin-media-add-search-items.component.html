@@ -7,8 +7,14 @@
       <div
         class="relative overflow-hidden rounded-t-lg shadow-xl cursor-pointer rounded-x-lg"
       >
+        <div
+          class="absolute w-6 h-6 text-black bg-gray-100 rounded-lg hover:opacity-80 top-2 right-2"
+          (click)="createDiscart(item.videoId)"
+        >
+          <svg-icon svgClass="fill-black h-4" style="zoom: 1.5" name="close"></svg-icon>
+        </div>
         <img
-          class="object-cover w-full overflow-hidden border rounded-t-lg h-80 hover:filter-grayscale dark:border-gray-800 rounded-x-lg"
+          class="object-cover w-full overflow-hidden border rounded-t-lg h-80 dark:border-gray-800 rounded-x-lg"
           [src]="item.image"
           [alt]="item.name"
           onError

@@ -69,4 +69,14 @@ export class ScrapingService {
       body
     );
   }
+
+  createDiscart(body: {
+    value: string;
+    source: string;
+  }): Observable<{ value: string; source: string }> {
+    return this.httpClient.post<{ value: string; source: string }>(
+      `${this.url}/createDiscart`,
+      body
+    );
+  }
 }

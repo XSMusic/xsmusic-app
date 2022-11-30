@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '@core/auth';
 import { User } from '@models';
 import { ToastService, TOAST_STATE, UserService } from '@services';
+import { darkMode } from '@shared/utils';
 
 @Component({
   selector: 'page-account-edit',
@@ -31,7 +32,8 @@ export class AccountEditPage implements OnInit {
     this.userService.update(this.user).subscribe({
       next: (response) => {
         this.toast.showToast(TOAST_STATE.success, response.message);
-        window.location.reload();
+        // window.location.reload();
+        darkMode(this.user);
       },
       error: (error) => this.toast.showToast(TOAST_STATE.error, error),
     });

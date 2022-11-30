@@ -57,6 +57,9 @@ export class AuthService {
   }
 
   logout(): void {
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.classList.add('dark');
+    }
     this.tokenService.clear();
     this.userService.clear();
     this.permissionService.flushPermissions();

@@ -4,6 +4,7 @@ import { NgxPermissionsService } from 'ngx-permissions';
 import { AuthService } from '@core/auth';
 import { User } from '@models';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { darkMode } from '@shared/utils';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +24,7 @@ export class StartupService {
         .pipe(
           tap((user: any) => {
             this.setPermissions(user);
-            this.darkMode(user);
+            darkMode(user);
           })
         )
         .subscribe({
@@ -46,15 +47,5 @@ export class StartupService {
     }
   }
 
-  darkMode(user: User) {
-    if (user.darkMode === 'active') {
-      document.documentElement.classList.add('dark');
-    } else if (user.darkMode === 'desactive') {
-      document.documentElement.classList.remove('dark');
-    } else if (user.darkMode === 'system') {
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.documentElement.classList.add('dark');
-      }
-    }
-  }
+
 }

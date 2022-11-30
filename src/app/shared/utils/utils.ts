@@ -1,4 +1,4 @@
-import { Media } from '@models';
+import { Media, User } from '@models';
 import { countries } from 'assets/data/countries';
 import { flags } from 'assets/data/flags';
 
@@ -64,4 +64,16 @@ export const getTitleMedia = (item: Media) => {
     title += ' ' + item.year;
   }
   return title;
+};
+
+export const darkMode = (user: User) => {
+  if (user.darkMode === 'active') {
+    document.documentElement.classList.add('dark');
+  } else if (user.darkMode === 'desactive') {
+    document.documentElement.classList.remove('dark');
+  } else if (user.darkMode === 'system') {
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.classList.add('dark');
+    }
+  }
 };

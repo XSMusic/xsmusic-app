@@ -230,12 +230,12 @@
       class="lg:px-8 dark:text-white font-extralight"
       [innerHTML]="item.info!"
     ></div>
-    <p
+    <button
       *ngIf="item.info!.length > 150"
-      class="mt-2 font-bold cursor-pointer dark:text-white"
+      class="px-3 py-1 mt-2 font-bold bg-gray-100 rounded-lg cursor-pointer dark:bg-black dark:border dark:border-gray-800 dark:text-white"
       (click)="moreInfo = !moreInfo"
     >
       {{ !moreInfo ? 'Leer mas' : 'Leer menos' }}
-    </p>
+    </button>
   </div>
 </div>

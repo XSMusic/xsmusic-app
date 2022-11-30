@@ -2,6 +2,10 @@
   id="menu"
   class="fixed top-0 left-0 z-50 hidden px-10 py-16 bg-white dark:bg-black md:hidden w-100 md:relative"
 >
+  <div class="flex justify-center mb-6">
+    <img src="assets/images/logo-dark.png" class="hidden w-24 h-24 dark:block" />
+    <img src="assets/images/logo-light.png" class="w-24 h-24 dark:hidden" />
+  </div>
   <div class="fixed md:hidden z-90 top-4 left-6">
     <a
       @inOut
@@ -21,7 +25,7 @@
           @inOut
           *ngFor="let menu of menuItemsForAdmin"
           (click)="toggleMenu.emit()"
-          class="duration-300 hover:text-gray-500"
+          class="duration-300 dark:text-white hover:opacity-70"
           [routerLink]="menu.route"
         >
           {{ menu.name }}
@@ -32,7 +36,7 @@
           @inOut
           *ngFor="let menu of menuItemsForAdminInAdmin"
           (click)="toggleMenu.emit()"
-          class="duration-300 hover:text-gray-500"
+          class="duration-300 dark:text-white hover:opacity-70"
           [routerLink]="menu.route"
         >
           {{ menu.name }}
@@ -46,7 +50,7 @@
         @inOut
         *ngFor="let menu of menuItemsForAny"
         (click)="toggleMenu.emit()"
-        class="duration-300 hover:text-gray-500"
+        class="duration-300 dark:text-white hover:opacity-70"
         [routerLink]="menu.route"
       >
         {{ menu.name }}

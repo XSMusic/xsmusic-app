@@ -7,6 +7,7 @@ import { environment } from '@env/environment';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { Router } from '@angular/router';
+import { UserService } from '@services';
 
 @Component({
   selector: 'map',
@@ -28,7 +29,7 @@ export class MapComponent implements AfterViewInit {
   popup = L.popup();
   site = new Site();
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private userService: UserService) {}
 
   ngAfterViewInit(): void {
     this.initMap();
@@ -41,20 +42,45 @@ export class MapComponent implements AfterViewInit {
       this.markers.length === 1
         ? this.markers[0].address.coordinates
         : this.center;
+    const darkMode = this.isDarkMode();
+    const layers = !darkMode
+      ? [this.getMapGoogleNormal()]
+      : [this.getDarkMode()];
     this.map = L.map('map', {
       center,
       attributionControl: true,
       zoom: this.zoom,
-      layers: [this.getMapGoogleHybrid(), this.getMapGoogleNormal()],
+      layers,
     });
 
     const baseMaps = {
       Normal: this.getMapGoogleNormal(),
       Hibrido: this.getMapGoogleHybrid(),
+      Oscuro: this.getDarkMode(),
     };
     L.control.layers(baseMaps).addTo(this.map);
 
     this.addMakers();
+  }
+
+  isDarkMode() {
+    let darkMode = false;
+    const user = this.userService.getUser();
+    if (user && user.darkMode === 'active') {
+      darkMode = true;
+    } else if (
+      user &&
+      user.darkMode === 'system' &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches
+    ) {
+      darkMode = true;
+    } else if (
+      !user &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches
+    ) {
+      darkMode = true;
+    }
+    return darkMode;
   }
 
   getMapGoogleNormal() {
@@ -68,6 +94,13 @@ export class MapComponent implements AfterViewInit {
       maxZoom: 20,
       subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
     });
+  }
+
+  getDarkMode() {
+    return L.tileLayer(
+      'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
+      { maxZoom: 20 }
+    );
   }
 
   addMakers() {

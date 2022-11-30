@@ -22,4 +22,8 @@ export class SiteViewListComponent {
   showImage(image: string) {
     this.fullImage.showImageFull(image);
   }
+
+  goToSocial(type: string) {
+    window.open(type, '_black');
+  }
 }

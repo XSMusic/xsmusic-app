@@ -53,14 +53,14 @@
               <div class="flex gap-2">
                 <span
                   *ngFor="let style of artist.styles; let i = index"
-                  class="px-2 py-1 text-xs text-center bg-gray-100 shadow-md cursor-pointer rounded-2xl hover:bg-gray-200"
+                  class="px-3 py-1 text-sm border border-gray-300 rounded-lg cursor-pointer dark:text-white dark:bg-black dark:border-gray-800 hover:opacity-70"
                   (click)="filter.emit({ name: 'styles', value: style.name })"
                 >
                   {{ style.name | titlecase }}
                 </span>
               </div>
             </td>
-            <td class="pl-2">
+            <td class="px-4">
               <p
                 class="mb-2 mr-2 text-sm font-light leading-none dark:text-white"
               >
@@ -173,7 +173,7 @@
             </td>
 
             <td class="pl-5" *ngxPermissionsOnly="'ADMIN'">
-              <div class="flex flex-col">
+              <div class="flex flex-col gap-2">
                 <div class="mr-2 text-sm font-light leading-none text-gray-700">
                   <span class="font-extrabold">Creado:</span>
                   {{ artist.created! | timeAgo }}

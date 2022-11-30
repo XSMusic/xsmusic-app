@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { Image } from '@models';
 import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
@@ -7,6 +8,7 @@ import { FullImageService } from '@shared/services/ui/full-image/full-image.serv
 @Component({
   selector: 'images-view-list',
   templateUrl: 'images-view-list.component.html',
+  animations: [inOutAnimation]
 })
 export class ImagesViewListComponent {
   @Input() items: Image[] = [];

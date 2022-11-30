@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { HomePage } from './pages/home.page';
 import { RouterModule } from '@angular/router';
-import { TopCountriesComponent } from './components/top-countries/top-countries.component';
 import { SharedModule } from '@shared/shared.module';
 import { LastMediaItemComponent } from './components/last-media-block/last-media-item/last-media-item.component';
 import { LastMediaItemsComponent } from './components/last-media-block/last-media-items/last-media-items.component';
@@ -23,8 +22,6 @@ import { LastMediaComponent } from './components/last-media-block/last-media/las
     LastMediaItemComponent,
     LastMediaComponent,
     HomePage,
-    TopCountriesComponent,
-    TopCountriesComponent,
     LastMediaComponent,
     LastMediaItemsComponent,
     LastMediaItemComponent,

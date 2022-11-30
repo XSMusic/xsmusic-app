@@ -1,5 +1,3 @@
-export { BlockInfoProfileComponent } from './ui/block-info-profile/block-info-profile.component';
-
 // Artist
 export { ArtistsLastBlockComponent } from './artists/artists-last-block/artists-last-block.component';
 // Site
@@ -25,7 +23,8 @@ export { ImagesEditBlockComponent } from './ui/images-edit-block/images-edit-blo
 export { ImagesUploadUrlComponent } from './ui/images-upload-url/images-upload-url.component';
 export { FilterBarComponent } from './ui/filter-bar/filter-bar.component';
 export { SearchInputComponent } from './ui/search-input/search-input.component';
-
+export { BlockStatsComponent } from './ui/block-stats/block-stats.component';
+export { BlockInfoProfileComponent } from './ui/block-info-profile/block-info-profile.component';
 // View Gallery
 export { GenericViewGalleryComponent } from './views/gallery/generic-view-gallery/generic-view-gallery.component';
 export { GenericViewGalleryItemsComponent } from './views/gallery/generic-view-gallery-items/generic-view-gallery-items.component';

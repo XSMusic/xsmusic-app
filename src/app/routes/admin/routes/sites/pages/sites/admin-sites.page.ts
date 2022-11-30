@@ -3,8 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { routesConfig } from '@core/config';
 import { GetAllDto } from '@interfaces';
 import { Site } from '@models';
-import { SiteService, ToastService } from '@services';
+import { SiteService, StatsService, ToastService } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
+import { StatsGetTopStatsI } from '@shared/services/api/stats/stats.interface';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 
 @Component({
@@ -15,6 +16,10 @@ export class AdminSitesPage implements OnInit {
   title = '';
   sites: Site[] = [];
   site: Site = new Site();
+  stats: StatsGetTopStatsI = {
+    topSocial: [],
+    topCountries: [],
+  };
   body: GetAllDto = {
     page: 1,
     pageSize: 30,
@@ -28,6 +33,7 @@ export class AdminSitesPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private siteService: SiteService,
+    private statsService: StatsService,
     private toast: ToastService,
     private router: Router
   ) {}
@@ -44,6 +50,7 @@ export class AdminSitesPage implements OnInit {
       this.body.type = 'festival';
     }
     this.getItems();
+    this.getStats();
   }
 
   getItems(more = false) {
@@ -62,6 +69,15 @@ export class AdminSitesPage implements OnInit {
         this.loading = false;
         this.error = true;
       },
+    });
+  }
+
+  getStats() {
+    this.statsService.getTopStats({ type: this.type, limit: 6 }).subscribe({
+      next: (response) => {
+        this.stats = response;
+      },
+      error: (error) => this.toast.showToast(TOAST_STATE.error, error),
     });
   }
 

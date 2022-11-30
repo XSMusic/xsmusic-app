@@ -4,8 +4,14 @@ import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { GetAllDto } from '@interfaces';
 import { Artist } from '@models';
-import { ArtistService, ToastService, TOAST_STATE } from '@services';
+import {
+  ArtistService,
+  StatsService,
+  ToastService,
+  TOAST_STATE,
+} from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
+import { StatsGetTopStatsI } from '@shared/services/api/stats/stats.interface';
 
 @Component({
   selector: 'page-admin-artists',
@@ -15,6 +21,10 @@ import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-blo
 export class AdminArtistsPage {
   items: Artist[] = [];
   artist: Artist = new Artist();
+  stats: StatsGetTopStatsI = {
+    topSocial: [],
+    topCountries: [],
+  };
   body: GetAllDto = {
     page: 1,
     pageSize: 20,
@@ -26,12 +36,14 @@ export class AdminArtistsPage {
   total = 0;
   constructor(
     private artistService: ArtistService,
+    private statsService: StatsService,
     private router: Router,
     private toast: ToastService
   ) {}
 
   ngOnInit() {
     this.getArtists();
+    this.getStats();
   }
 
   getArtists(more = false) {
@@ -50,6 +62,15 @@ export class AdminArtistsPage {
         this.loading = false;
         this.error = true;
       },
+    });
+  }
+
+  getStats() {
+    this.statsService.getTopStats({ type: 'artist', limit: 10 }).subscribe({
+      next: (response) => {
+        this.stats = response;
+      },
+      error: (error) => this.toast.showToast(TOAST_STATE.error, error),
     });
   }
 

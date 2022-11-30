@@ -291,6 +291,11 @@ export const buttonsByType = [
         isActivatable: true,
       }),
       new ButtonBlockItem({
+        name: 'Estadisticas',
+        action: 'viewStats',
+        isActivatable: true,
+      }),
+      new ButtonBlockItem({
         name: 'Ordenar',
         action: 'order',
         align: 'right',

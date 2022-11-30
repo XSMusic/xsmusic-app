@@ -32,4 +32,12 @@
       (onCreated)="onCreatedSite()"
     ></admin-site-one>
   </ng-container>
+
+   <div
+    class="grid gap-2 mt-2 md:gap-4 md:grid-cols-3"
+    *ngIf="view === 'viewStats'"
+  >
+    <block-stats type="topSocial" [items]="stats.topSocial"></block-stats>
+    <block-stats type="topCountries" [items]="stats.topCountries"></block-stats>
+  </div>
 </div>

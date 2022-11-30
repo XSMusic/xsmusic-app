@@ -19,10 +19,8 @@ export class Site {
     web: '',
     facebook: '',
     twitter: '',
-    spotify: '',
-    soundcloud: '',
+    youtube: '',
     instagram: '',
-    tiktok: '',
     email: '',
   };
   sets?: any;

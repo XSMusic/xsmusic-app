@@ -4,7 +4,6 @@ import { SharedModule } from '@shared/shared.module';
 import { AdminArtistsPage } from './pages/artists/admin-artists.page';
 import { AdminArtistPage } from './pages/artist/admin-artist.page';
 import { ArtistOneComponent } from './components/artist-one/admin-artist-one.component';
-import { AdminArtistsStatsComponent } from './components/artists-stats/admin-artists-stats.component';
 
 @NgModule({
   imports: [
@@ -32,7 +31,6 @@ import { AdminArtistsStatsComponent } from './components/artists-stats/admin-art
     AdminArtistsPage,
     AdminArtistPage,
     ArtistOneComponent,
-    AdminArtistsStatsComponent,
   ],
   providers: [],
 })

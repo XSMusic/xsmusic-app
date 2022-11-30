@@ -36,6 +36,7 @@ import {
   BlockInfoProfileComponent,
   EventsViewListComponent,
   SearchInputComponent,
+  BlockStatsComponent,
 } from '@components';
 import {
   CountryFlagPipe,
@@ -106,6 +107,7 @@ const components = [
   BlockInfoProfileComponent,
   EventsViewListComponent,
   SearchInputComponent,
+  BlockStatsComponent
 ];
 const directives = [OnImageErrorDirective];
 const modules = [

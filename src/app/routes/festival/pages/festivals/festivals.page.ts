@@ -103,4 +103,8 @@ export class FestivalsPage implements OnInit {
     this.body.page++;
     this.getItems(true);
   }
+
+  goToAdmin() {
+    this.router.navigate([routesConfig.festivalsAdmin]);
+  }
 }

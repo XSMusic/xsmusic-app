@@ -130,4 +130,10 @@ export class AdminSitesPage implements OnInit {
     this.site = new Site();
     this.view = 'viewList';
   }
+
+  goToSites() {
+    const route =
+      this.type === 'club' ? routesConfig.clubs : routesConfig.festivals;
+    this.router.navigate([route]);
+  }
 }

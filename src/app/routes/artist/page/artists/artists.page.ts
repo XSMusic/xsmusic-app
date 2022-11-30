@@ -110,4 +110,8 @@ export class ArtistsPage implements OnInit {
       this.getArtists();
     }
   }
+
+  goToAdmin() {
+    this.router.navigate([routesConfig.artistsAdmin])
+  }
 }

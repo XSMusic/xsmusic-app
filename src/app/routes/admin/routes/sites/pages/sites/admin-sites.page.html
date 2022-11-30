@@ -1,4 +1,8 @@
-<header-custom [title]="title" [total]="total"></header-custom>
+<header-custom
+  [title]="title"
+  [total]="total"
+  (onClickTitle)="goToSites()"
+></header-custom>
 
 <div class="container px-4 pt-3 mx-auto max-w-full-xl sm:pb-0 max-w-7sm">
   <buttons-block
@@ -33,7 +37,7 @@
     ></admin-site-one>
   </ng-container>
 
-   <div
+  <div
     class="grid gap-2 mt-2 md:gap-4 md:grid-cols-3"
     *ngIf="view === 'viewStats'"
   >

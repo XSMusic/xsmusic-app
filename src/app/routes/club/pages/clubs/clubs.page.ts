@@ -104,4 +104,8 @@ export class ClubsPage implements OnInit {
     this.body.page++;
     this.getItems(true);
   }
+
+  goToAdmin() {
+    this.router.navigate([routesConfig.clubsAdmin]);
+  }
 }

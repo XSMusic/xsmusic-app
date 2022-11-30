@@ -4,7 +4,12 @@
 >
   <div class="py-0 mx-auto border-0">
     <h1 @inOut class="text-3xl font-extrabold tracking-tight dark:text-white">
-      {{ title }}
+      <ng-template [ngxPermissionsOnly]="['ADMIN']">
+        <span class="cursor-pointer" (click)="onClickTitle.emit()">{{ title }}</span>
+      </ng-template>
+      <ng-template [ngxPermissionsExcept]="['ADMIN']">
+        {{ title }}
+      </ng-template>
       <span @inOut *ngIf="total > 0" class="pl-1 text-lg font-extralight">
         {{ total }}</span
       >

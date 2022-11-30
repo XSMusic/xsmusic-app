@@ -123,4 +123,8 @@ export class EventsPage implements OnInit {
       this.getEvents();
     }
   }
+
+  goToAdmin() {
+    this.router.navigate([routesConfig.eventsAdmin]);
+  }
 }

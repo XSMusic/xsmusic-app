@@ -41,6 +41,7 @@ export class AdminMediaListPage implements OnInit {
     infos: [],
     styles: [],
   };
+  total = 0;
   constructor(
     private route: ActivatedRoute,
     private mediaService: MediaService,
@@ -67,6 +68,7 @@ export class AdminMediaListPage implements OnInit {
       next: (response) => {
         if (!more) {
           this.items = response.items;
+          this.total = response.paginator.total;
         } else {
           this.items = this.items.concat(response.items);
         }
@@ -175,5 +177,11 @@ export class AdminMediaListPage implements OnInit {
   onSubmitSuccess(event: Media) {
     this.media = new Media();
     this.items.unshift(event);
+  }
+
+  goToMedia() {
+    const route =
+      this.type === 'sets' ? routesConfig.sets : routesConfig.tracks;
+    this.router.navigate([route]);
   }
 }

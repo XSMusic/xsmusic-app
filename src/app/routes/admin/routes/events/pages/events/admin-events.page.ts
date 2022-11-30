@@ -110,4 +110,8 @@ export class AdminEventsPage {
       this.getEvents(type);
     }
   }
+
+  goToEvents() {
+    this.router.navigate([routesConfig.events]);
+  }
 }

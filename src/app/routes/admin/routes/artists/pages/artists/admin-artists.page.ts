@@ -119,4 +119,8 @@ export class AdminArtistsPage {
     this.artist = new Artist();
     this.view = 'viewList';
   }
+
+  goToArtists() {
+    this.router.navigate([routesConfig.artists]);
+  }
 }

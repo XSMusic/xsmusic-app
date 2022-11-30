@@ -90,7 +90,7 @@
 
             <td class="pl-2">
               <div class="py-2">
-                <div class="flex justify-center gap-3">
+                <div class="flex gap-3">
                   <div
                     *ngIf="artist.social?.web && artist.social?.web !== ''"
                     (click)="goToSocial(artist.social.web)"
@@ -168,22 +168,38 @@
                       svgClass="h-8 w-8 hover:scale-110 hover:duration-1000 cursor-pointer"
                     ></svg-icon>
                   </div>
+                  <div
+                    *ngIf="
+                      artist.social?.youtube &&
+                      artist.social?.youtube !== ''
+                    "
+                    (click)="goToSocial(artist.social.youtube)"
+                  >
+                    <svg-icon
+                      name="youtube"
+                      svgClass="h-8 w-8 fill-red-600 hover:scale-110 hover:duration-1000 cursor-pointer"
+                    ></svg-icon>
+                  </div>
                 </div>
               </div>
             </td>
 
             <td class="pl-5" *ngxPermissionsOnly="'ADMIN'">
-              <div class="flex flex-col gap-2">
-                <div class="mr-2 text-sm font-light leading-none text-gray-700">
-                  <span class="font-extrabold">Creado:</span>
-                  {{ artist.created! | timeAgo }}
+                <div class="flex flex-col gap-2">
+                  <div
+                    class="mr-2 text-sm font-light leading-none text-gray-700 dark:text-gray-300"
+                  >
+                    <span class="font-extrabold">Creado:</span>
+                    {{ artist.created! | timeAgo }}
+                  </div>
+                  <div
+                    class="mr-2 text-sm font-light leading-none text-gray-700 dark:text-gray-300"
+                  >
+                    <span class="font-extrabold">Editado:</span>
+                    {{ artist.updated! | timeAgo }}
+                  </div>
                 </div>
-                <div class="mr-2 text-sm font-light leading-none text-gray-700">
-                  <span class="font-extrabold">Editado:</span>
-                  {{ artist.updated! | timeAgo }}
-                </div>
-              </div>
-            </td>
+              </td>
           </tr>
         </tbody>
       </table>

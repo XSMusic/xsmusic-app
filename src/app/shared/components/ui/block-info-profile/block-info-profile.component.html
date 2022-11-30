@@ -1,9 +1,10 @@
 <div class="pt-16" @inOut>
   <div
-    class="mx-auto mt-3 overflow-hidden border-2 w-52"
+    class="mx-auto mt-3 overflow-hidden border-2 h-52 w-52 dark:border-2 dark:border-gray-800"
     [ngClass]="{
-      'rounded-full h-52': type === 'artist',
-      'rounded-2xl h-52': type === 'club' || type === 'festival' || type === 'event',
+      'rounded-full': type === 'artist',
+      'rounded-2xl':
+        type === 'club' || type === 'festival' || type === 'event',
       'h-80': type === 'event'
     }"
   >
@@ -17,9 +18,13 @@
   </div>
 
   <div
-    class="flex justify-center gap-2 pt-2 text-3xl font-black text-center cursor-pointer dark:text-white"
+    class="flex justify-center gap-2 pt-2 text-3xl font-black text-center dark:text-white"
   >
-    <div *ngxPermissionsOnly="'ADMIN'" (click)="goToEdit(item._id!)">
+    <div
+      class="cursor-pointer"
+      *ngxPermissionsOnly="'ADMIN'"
+      (click)="goToEdit(item._id!)"
+    >
       {{ item.name }}
     </div>
 
@@ -35,43 +40,61 @@
     </span>
   </div>
 
-  <div
-    *ngIf="item.country"
-    class="py-1 mx-auto cursor-pointer"
-    (click)="goToFilter('country', item.country!)"
-  >
+  <div *ngIf="item.country" class="py-1 mx-auto">
     <div
       class="flex items-center justify-center gap-2 font-extralight dark:text-white"
     >
-      <img class="w-6" [src]="item.country! | countryFlag" alt="item.name" />
-      {{ item.country! | countryName }}
+      <img
+        (click)="goToFilter('country', item.country!)"
+        class="w-6 cursor-pointer"
+        [src]="item.country! | countryFlag"
+        alt="item.name"
+      />
+      <span
+        class="cursor-pointer"
+        (click)="goToFilter('country', item.country!)"
+        >{{ item.country! | countryName }}</span
+      >
     </div>
   </div>
 
   <ng-container *ngIf="item.address">
     <div class="text-center dark:text-white font-extralight">
       <p *ngIf="item.address.street !== '' && item.address.town !== ''">
-        {{ item.address.street }}, {{ item.address.town }}
+        {{ item.address.street }},
+        <span
+          class="cursor-pointer"
+          (click)="goToFilter('town', item.address.town!)"
+        >
+          {{ item.address.town }}
+        </span>
       </p>
       <p *ngIf="item.address.street !== '' && item.address.town === ''">
-        {{ item.address.street }}, {{ item.address.state }}
+        {{ item.address.street }},
+        <span
+          class="cursor-pointer"
+          (click)="goToFilter('state', item.address.state!)"
+        >
+          {{ item.address.state }}
+        </span>
       </p>
     </div>
 
     <div
-      class="py-1 mx-auto cursor-pointer"
-      (click)="goToFilter('country', item.address.country!)"
+      class="flex items-center justify-center gap-2 py-1 mx-auto font-extralight dark:text-white"
     >
-      <div
-        class="flex items-center justify-center gap-2 font-extralight dark:text-white"
+      <img
+        class="w-6 cursor-pointer"
+        [src]="item.address.country! | countryFlag"
+        alt="item.name"
+        (click)="goToFilter('country', item.address.country!)"
+      />
+      <span
+        class="cursor-pointer"
+        (click)="goToFilter('country', item.address.country!)"
       >
-        <img
-          class="w-6"
-          [src]="item.address.country! | countryFlag"
-          alt="item.name"
-        />
         {{ item.address.country! | countryName }}
-      </div>
+      </span>
     </div>
   </ng-container>
 
@@ -118,8 +141,12 @@
   </div>
 
   <!-- Styles -->
-  <div class="flex gap-1 px-3 py-1 my-2 overflow-x-scroll text-center md:justify-center scrollbar-hidden" *ngIf="item.styles!.length > 0">
-    <div class="" *ngFor="let style of item.styles; index as i">
+  <div
+    class="flex gap-1 px-3 py-1 my-2 overflow-x-scroll text-center md:justify-center scrollbar-hidden"
+    *ngIf="item.styles!.length > 0"
+    [ngClass]="{'justify-center': 'items.styles.length <= 3'}"
+  >
+    <div *ngFor="let style of item.styles; index as i">
       <a
         (click)="goToFilter('styles', style.name)"
         class="px-3 py-1 mr-2 font-medium border border-gray-300 rounded-lg cursor-pointer dark:text-white dark:bg-black dark:border-gray-800 hover:opacity-80"
@@ -218,7 +245,7 @@
     >
       <svg-icon
         name="youtube"
-        svgClass="h-8 w-8 hover:scale-110 hover:duration-1000 cursor-pointer"
+        svgClass="h-8 w-8 fill-red-600 hover:scale-110 hover:duration-1000 cursor-pointer"
       ></svg-icon>
     </div>
   </div>

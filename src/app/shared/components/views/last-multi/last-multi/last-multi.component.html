@@ -19,27 +19,30 @@
   </div>
 </div>
 
-<div class="container px-4 md:mx-auto">
-  <generic-view-gallery-items
+<div class="container px-4 mt-2 md:mx-auto">
+  <generic-view-gallery
     *ngIf="view === 'artist'"
     [items]="item.artists"
     [type]="'artist'"
+    [loading]="false"
     (goToOne)="goToOne($event)"
-  ></generic-view-gallery-items>
+  ></generic-view-gallery>
 
-  <generic-view-gallery-items
+  <generic-view-gallery
     *ngIf="view === 'set'"
     [items]="item.sets"
     [type]="'set'"
+    [loading]="false"
     (goToOne)="goToOne($event)"
-  ></generic-view-gallery-items>
+  ></generic-view-gallery>
 
-  <generic-view-gallery-items
+  <generic-view-gallery
     *ngIf="view === 'track'"
     [items]="item.tracks"
     [type]="'track'"
+    [loading]="false"
     (goToOne)="goToOne($event)"
-  ></generic-view-gallery-items>
+  ></generic-view-gallery>
 
   <generic-view-gallery-items
     *ngIf="view === 'eventSite'"
@@ -48,12 +51,13 @@
     (goToOne)="goToOne($event)"
   ></generic-view-gallery-items>
 
-  <generic-view-gallery-items
+  <generic-view-gallery
     *ngIf="view === 'event'"
     [items]="item.events"
     [type]="'event'"
+    [loading]="false"
     (goToOne)="goToOne($event)"
-  ></generic-view-gallery-items>
+  ></generic-view-gallery>
 
   <last-multi-items
     *ngIf="view === 'image'"

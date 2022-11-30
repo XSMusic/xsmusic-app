@@ -5,37 +5,10 @@
   <div
     @inOut
     class="flex justify-center p-3 my-2 font-semibold bg-gray-100 rounded-lg"
-    *ngIf="items.length === 0"
+    *ngIf="items.length === 1"
   >
     <svg-icon name="info-circle" class="mr-3"></svg-icon>
     No hay ningun {{ type }} para {{ item.name }}
-  </div>
-
-  <div class="grid justify-center grid-cols-2 gap-3 pt-3 md:grid-cols-4">
-    <!-- SETs/TRACKs -->
-    <div *ngFor="let item of items">
-      <div
-        *ngIf="type === 'set' || type === 'track'"
-        class="flex flex-col overflow-hidden shadow-lg cursor-pointer dark:border dark:border-gray-700 dark:rounded-lg w-100 hover:opacity-90 hover:duration-1000"
-        (click)="goTo(item)"
-      >
-        <img
-          [src]="item.images! | imageArray"
-          alt="set.name"
-          class="object-cover w-full rounded-lg h-44 md:h-64"
-        />
-        <div
-          class="flex flex-col gap-1 p-2 text-sm text-center md:text-base hover:text-gray-800"
-        >
-          <p
-            class="dark:text-white"
-            *ngIf="item.site && item.site.name !== 'Desconocido'"
-          >
-            {{ item.site.name }} {{ item.year !== 0 ? item.year : '' }}
-          </p>
-        </div>
-      </div>
-    </div>
   </div>
 
   <!-- IMAGEs -->

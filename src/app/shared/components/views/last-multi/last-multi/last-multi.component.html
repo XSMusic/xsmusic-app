@@ -21,6 +21,13 @@
 
 <div class="container px-4 md:mx-auto">
   <generic-view-gallery-items
+    *ngIf="view === 'artist'"
+    [items]="item.artists"
+    [type]="'artist'"
+    (goToOne)="goToOne($event)"
+  ></generic-view-gallery-items>
+
+  <generic-view-gallery-items
     *ngIf="view === 'set'"
     [items]="item.sets"
     [type]="'set'"

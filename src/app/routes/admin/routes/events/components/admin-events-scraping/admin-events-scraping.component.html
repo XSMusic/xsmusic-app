@@ -4,7 +4,7 @@
     class="flex gap-2 mb-3 text-base font-extrabold text-black dark:text-white"
   >
   </label>
-  <div class="flex gap-2">
+  <div class="flex flex-col gap-2 md:flex-row">
     <select
       name="source"
       [(ngModel)]="body.source"
@@ -53,7 +53,7 @@
     </select>
 
     <button
-      class="px-3 text-white bg-red-500 rounded-lg cursor-pointer disabled:cursor-default disabled:bg-gray-100 disabled:text-black hover:opacity-90"
+      class="px-3 py-2 text-white bg-red-500 rounded-lg cursor-pointer disabled:cursor-default disabled:bg-gray-100 disabled:text-black hover:opacity-90"
       [disabled]="body.source === ''"
       (click)="getEvents()"
     >

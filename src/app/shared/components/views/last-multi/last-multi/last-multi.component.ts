@@ -25,6 +25,10 @@ export class LastMultiComponent implements OnInit {
       route = routesConfig.set.replace(':slug', event.slug);
     } else if (this.view === 'track') {
       route = routesConfig.track.replace(':slug', event.slug);
+    } else if (this.view === 'event' || this.view === 'eventSite') {
+      route = routesConfig.event.replace(':slug', event.slug);
+    } else if (this.view === 'artist') {
+      route = routesConfig.artist.replace(':slug', event.slug);
     }
 
     this.router.navigate([route]);

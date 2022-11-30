@@ -38,6 +38,7 @@ export class EventPage implements OnInit {
       next: (response) => {
         this.event = response;
         this.setTitle();
+        this.setViews();
         this.spinner.hide();
       },
       error: (error) => {
@@ -49,5 +50,11 @@ export class EventPage implements OnInit {
 
   setTitle() {
     this.title.setTitle(`${this.title.getTitle()} - ${this.event.name}`);
+  }
+
+  setViews() {
+    this.views = [
+      { name: 'Artistas', value: 'artist', counter: this.event.artists!.length },
+    ];
   }
 }

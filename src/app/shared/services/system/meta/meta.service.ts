@@ -97,7 +97,7 @@ export class MetaService {
     } else {
       this.meta.updateTag({
         property: 'og:image',
-        content: 'https://api.xsmusic.es/uploads/brand/XSMusic-light.png',
+        content: 'https://api.xsmusic.es/uploads/brand/logo.jpg',
       });
       this.meta.updateTag({
         property: 'og:image:width',
@@ -109,7 +109,7 @@ export class MetaService {
       });
       this.meta.updateTag({
         property: 'twitter:image',
-        content: 'https://api.xsmusic.es/uploads/brand/XSMusic-light.png',
+        content: 'https://api.xsmusic.es/uploads/brand/logo.jpg',
       });
     }
   }

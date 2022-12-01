@@ -5,7 +5,7 @@ import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StyleService } from '@shared/services/api/style/style.service';
 import { countries } from 'assets/data/countries';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinner.service';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 import { routesConfig } from '@core/config';
 import { OptionsItemI } from '@shared/components/ui/options-items/options-items.interface';

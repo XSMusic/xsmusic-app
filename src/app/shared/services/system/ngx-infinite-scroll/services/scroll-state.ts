@@ -1,4 +1,4 @@
-import { IScrollState, IScrollerDistance } from '../../models';
+import { IScrollState, IScrollerDistance } from '../models';
 
 export class ScrollState implements IScrollState {
   lastScrollPosition = 0;
@@ -9,7 +9,7 @@ export class ScrollState implements IScrollState {
     up: 0,
   };
 
-  constructor({ totalToScroll }) {
+  constructor({ totalToScroll }: any) {
     this.totalToScroll = totalToScroll;
   }
 
@@ -29,7 +29,7 @@ export class ScrollState implements IScrollState {
     this.updateTotalToScroll(totalToScroll);
   }
 
-  updateTriggeredFlag(scroll, isScrollingDown: boolean) {
+  updateTriggeredFlag(scroll: any, isScrollingDown: boolean) {
     if (isScrollingDown) {
       this.triggered.down = scroll;
     } else {
@@ -37,7 +37,7 @@ export class ScrollState implements IScrollState {
     }
   }
 
-  isTriggeredScroll(totalToScroll, isScrollingDown: boolean) {
+  isTriggeredScroll(totalToScroll: any, isScrollingDown: boolean) {
     return isScrollingDown
       ? this.triggered.down === totalToScroll
       : this.triggered.up === totalToScroll;

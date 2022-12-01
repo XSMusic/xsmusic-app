@@ -21,7 +21,7 @@ import { ScrapingGetInfoClubDto } from '@shared/services/api/scraping/scraping.d
 import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { countries } from 'assets/data/countries';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinner.service';
 
 @Component({
   selector: 'admin-site-one',

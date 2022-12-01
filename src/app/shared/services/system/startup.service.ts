@@ -3,8 +3,8 @@ import { tap } from 'rxjs/operators';
 import { NgxPermissionsService } from 'ngx-permissions';
 import { AuthService } from '@core/auth';
 import { User } from '@models';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { darkMode } from '@shared/utils';
+import { NgxSpinnerService } from './ngx-spinner/ngx-spinner.service';
 
 @Injectable({
   providedIn: 'root',

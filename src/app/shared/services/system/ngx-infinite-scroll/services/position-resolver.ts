@@ -5,7 +5,7 @@ import {
   IPositionElements,
   IPositionStats,
   IResolver,
-} from '../../models';
+} from '../models';
 import { AxisResolver } from './axis-resolver';
 
 export function createResolver({

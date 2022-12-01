@@ -2,11 +2,12 @@ import { ElementRef, SimpleChange } from '@angular/core';
 
 export function resolveContainerElement(
   selector: string | any,
-  scrollWindow,
-  defaultElement,
+  scrollWindow: any,
+  defaultElement: any,
   fromRoot: boolean
 ): any {
-  const hasWindow = window && !!window.document && window.document.documentElement;
+  const hasWindow =
+    window && !!window.document && window.document.documentElement;
   let container = hasWindow && scrollWindow ? window : defaultElement;
   if (selector) {
     const containerIsString =
@@ -15,7 +16,9 @@ export function resolveContainerElement(
       ? findElement(selector, defaultElement.nativeElement, fromRoot)
       : selector;
     if (!container) {
-      throw new Error('ngx-infinite-scroll {resolveContainerElement()}: selector for');
+      throw new Error(
+        'ngx-infinite-scroll {resolveContainerElement()}: selector for'
+      );
     }
   }
   return container;

@@ -6,7 +6,7 @@ import { Event } from '@models';
 import { ToastService } from '@services';
 import { EventService } from '@shared/services/api/event/event.service';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinner.service';
 
 @Component({
   selector: 'page-event',

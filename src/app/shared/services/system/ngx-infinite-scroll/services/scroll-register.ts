@@ -1,7 +1,7 @@
 import { Observable, of, fromEvent } from 'rxjs';
 import { map, mergeMap, tap, throttleTime, filter } from 'rxjs/operators';
 
-import * as Models from '../../models';
+import * as Models from '../models';
 import { AxisResolver } from './axis-resolver';
 import { shouldTriggerEvents } from './event-trigger';
 import { resolveContainerElement } from './ngx-ins-utils';
@@ -60,7 +60,7 @@ export function createScroller(config: Models.IScroller) {
 
 export function attachScrollEvent(
   options: Models.IScrollRegisterConfig
-): Observable<{}> {
+): Observable<any> {
   let obs = fromEvent(options.container, 'scroll');
   // For an unknown reason calling `sampleTime()` causes trouble for many users, even with `options.throttle = 0`.
   // Let's avoid calling the function unless needed.

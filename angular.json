@@ -36,7 +36,6 @@
             ],
             "styles": [
               "node_modules/swiper/swiper-bundle.min.css",
-              "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
               "node_modules/leaflet/dist/leaflet.css",
               "node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.css",
               "node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css",

@@ -69,7 +69,7 @@ export class NgxSpinnerComponent implements OnDestroy, OnInit, OnChanges {
    *
    * @memberof NgxSpinnerComponent
    */
-  @Input() type: string;
+  @Input() type!: string;
   /**
    * To toggle fullscreen mode
    *
@@ -93,7 +93,7 @@ export class NgxSpinnerComponent implements OnDestroy, OnInit, OnChanges {
    *
    * @memberof NgxSpinnerComponent
    */
-  @Input() template: string;
+  @Input() template: string | null;
   /**
    * Show/Hide the spinner
    *
@@ -108,13 +108,13 @@ export class NgxSpinnerComponent implements OnDestroy, OnInit, OnChanges {
    * @type {boolean}
    * @memberof NgxSpinnerComponent
    */
-  @Input() disableAnimation: boolean = false;
+  @Input() disableAnimation = false;
   /**
    * Spinner Object
    *
    * @memberof NgxSpinnerComponent
    */
-  spinner: NgxSpinner = new NgxSpinner();
+  spinner: NgxSpinner | any = new NgxSpinner();
   /**
    * Array for spinner's div
    *
@@ -145,7 +145,7 @@ export class NgxSpinnerComponent implements OnDestroy, OnInit, OnChanges {
    *
    * @memberof NgxSpinnerComponent
    */
-  @ViewChild("overlay") spinnerDOM: { nativeElement: any };
+  @ViewChild("overlay") spinnerDOM!: { nativeElement: any };
 
   @HostListener("document:keydown", ["$event"])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -243,7 +243,7 @@ export class NgxSpinnerComponent implements OnDestroy, OnInit, OnChanges {
       divCount: this.divCount,
       show: this.show,
       zIndex: this.zIndex,
-      template: this.template,
+      template: this.template!,
       showSpinner: this.showSpinner,
     });
   };

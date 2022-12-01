@@ -5,8 +5,8 @@ import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { Media, Site } from '@models';
 import { SiteService, ToastService } from '@services';
+import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinner.service';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
-import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'page-festival',

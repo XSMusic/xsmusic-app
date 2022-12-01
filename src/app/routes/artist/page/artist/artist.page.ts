@@ -6,7 +6,7 @@ import { MetaService, ToastService } from '@services';
 import { ArtistService } from '@shared/services/api/artist/artist.service';
 import { MetadataI } from '@shared/services/system/meta';
 import { TOAST_STATE } from '@services';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinner.service';
 import { environment } from '@env/environment';
 import { routesConfig } from '@core/config';
 

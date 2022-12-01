@@ -1,4 +1,4 @@
-import { IPositionStats, IScrollState, IScrollerDistance } from '../../models';
+import { IPositionStats, IScrollState, IScrollerDistance } from '../models';
 
 export function shouldFireScrollEvent(
   container: IPositionStats,

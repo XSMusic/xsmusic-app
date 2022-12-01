@@ -6,7 +6,7 @@ import { ToastService, SiteService, StyleService } from '@services';
 import { OptionsItemI } from '@shared/components/ui/options-items/options-items.interface';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinner.service';
 
 @Component({
   selector: 'page-admin-site',

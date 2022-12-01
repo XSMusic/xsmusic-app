@@ -1,4 +1,4 @@
-export const LOADERS = {
+export const LOADERS: any = {
   "ball-8bits": 16,
   "ball-atom": 4,
   "ball-beat": 3,
@@ -73,22 +73,23 @@ export interface Spinner {
   zIndex?: number;
   template?: string;
   showSpinner?: boolean;
+  name?: string;
 }
 
 export class NgxSpinner {
-  name: string;
-  bdColor: string;
-  size: Size;
-  color: string;
-  type: string;
-  class: string;
-  divCount: number;
-  divArray: Array<number>;
-  fullScreen: boolean;
-  show: boolean;
-  zIndex: number;
-  template: string;
-  showSpinner: boolean;
+  name!: string;
+  bdColor!: string;
+  size!: Size;
+  color!: string;
+  type!: string;
+  class!: string;
+  divCount!: number;
+  divArray!: Array<number>;
+  fullScreen!: boolean;
+  show!: boolean;
+  zIndex!: number;
+  template!: string;
+  showSpinner!: boolean;
 
   constructor(init?: Partial<NgxSpinner>) {
     Object.assign(this, init);

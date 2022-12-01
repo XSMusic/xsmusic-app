@@ -67,11 +67,11 @@ import {
   UserService,
   ValidationsFormService,
 } from '@services';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { httpInterceptorProviders } from '@core/interceptors';
 import { AngularSvgIconModule } from 'angular-svg-icon';
-import { NgxSpinnerModule } from 'ngx-spinner';
 import { SwiperModule } from 'swiper/angular';
+import { InfiniteScrollModule } from './services/system/ngx-infinite-scroll/ngx-infinite-scroll.module';
+import { NgxSpinnerModule } from './services/system/ngx-spinner/ngx-spinner.module';
 
 const components = [
   AlertComponent,

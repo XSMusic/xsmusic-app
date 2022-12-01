@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "set-env": "ts-node ./scripts/setenv.ts",
-    "start": "npm run set-env -- --environment=dev && ng serve",
+    "start": "npm run set-env -- --environment=dev && ng serve --host 0.0.0.0",
     "build": "npm run set-env -- --environment=prod && ng build",
     "watch": "ng build --watch --configuration development",
     "run:android": "npm run build && npx cap sync && npx capacitor run android",

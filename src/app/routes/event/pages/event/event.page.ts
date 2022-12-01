@@ -53,8 +53,12 @@ export class EventPage implements OnInit {
   }
 
   setViews() {
-    this.views = [
-      { name: 'Artistas', value: 'artist', counter: this.event.artists!.length },
-    ];
+    if (this.event.artists && this.event.artists.length > 0) {
+      this.views.push({
+        name: 'Artistas',
+        value: 'artist',
+        counter: this.event.artists!.length,
+      });
+    }
   }
 }

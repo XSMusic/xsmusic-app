@@ -53,22 +53,36 @@ export class ArtistPage implements OnInit {
   }
 
   setViews() {
-    this.views = [
-      { name: 'Sets', value: 'set', counter: this.artist.sets.length },
-      { name: 'Tracks', value: 'track', counter: this.artist.tracks.length },
-      {
+    if (this.artist.sets && this.artist.sets.length > 0) {
+      this.views.push({
+        name: 'Sets',
+        value: 'set',
+        counter: this.artist.sets.length,
+      });
+    }
+    if (this.artist.tracks && this.artist.tracks.length > 0) {
+      this.views.push({
+        name: 'Tracks',
+        value: 'track',
+        counter: this.artist.tracks.length,
+      });
+    }
+    if (this.artist.events && this.artist.events.length > 0) {
+      this.views.push({
         name: 'Eventos',
         value: 'event',
         counter: this.artist.events ? this.artist.events.length : 0,
-      },
-      {
+      });
+    }
+    if (this.artist.images && this.artist.images.length > 1) {
+      this.views.push({
         name: 'Imagenes',
         value: 'image',
         counter:
-          this.artist.images!.length === 0
-            ? this.artist.images!.length
-            : this.artist.images!.length - 1,
-      },
-    ];
+          this.artist.images.length === 0
+            ? this.artist.images.length
+            : this.artist.images.length - 1,
+      });
+    }
   }
 }

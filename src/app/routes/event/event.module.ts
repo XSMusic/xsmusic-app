@@ -11,12 +11,18 @@ import { EventPage } from './pages/event/event.page';
       {
         path: '',
         component: EventsPage,
-        data: { title: 'Eventos' },
+        data: {
+          title: 'Eventos',
+          description: 'Listado de eventos de musica electronica',
+        },
       },
       {
         path: 'filter/:filterKey/:filterValue',
         component: EventsPage,
-        data: { title: 'Eventos' },
+        data: {
+          title: 'Eventos',
+          description: 'Listado de eventos de musica electronica',
+        },
       },
       {
         path: 'one/:slug',

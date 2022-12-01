@@ -11,12 +11,18 @@ import { TrackPage } from './pages/track/track.page';
       {
         path: '',
         component: TracksPage,
-        data: { title: 'Tracks' },
+        data: {
+          title: 'Tracks',
+          description: 'Listado de tracks de musica electronica',
+        },
       },
       {
         path: 'filter/:filterKey/:filterValue',
         component: TracksPage,
-        data: { title: 'Tracks' },
+        data: {
+          title: 'Tracks',
+          description: 'Listado de tracks de musica electronica',
+        },
       },
       {
         path: 'one/:slug',

@@ -2,11 +2,9 @@ import { Injectable } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
+import { MetadataI } from '.';
 
-export interface MetaDynamicI {
-  title: string;
-  description?: string;
-}
+
 
 @Injectable({ providedIn: 'root' })
 export class MetaService {
@@ -17,8 +15,8 @@ export class MetaService {
     private titleService: Title
   ) {}
 
-  setMetaDynamic() {
-    // TODO: Hacer esto
+  setMetaDynamic(data: MetadataI) {
+    this.setAllMeta(data);
   }
 
   setMeta() {
@@ -26,75 +24,111 @@ export class MetaService {
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe(() => {
         const rt = this.getChild(this.route);
-
-        rt.data.subscribe((data: any) => {
-          console.log(data);
-          this.titleService.setTitle(data.title);
-
-          if (data.description) {
-            this.meta.updateTag({
-              name: 'description',
-              content: data.description,
-            });
-          } else {
-            this.meta.removeTag("name='description'");
-          }
-
-          if (data.robots) {
-            this.meta.updateTag({
-              name: 'robots',
-              content: data.robots,
-            });
-          } else {
-            this.meta.updateTag({
-              name: 'robots',
-              content: 'follow,index',
-            });
-          }
-
-          if (data.ogUrl) {
-            this.meta.updateTag({
-              property: 'og:url',
-              content: data.ogUrl,
-            });
-          } else {
-            this.meta.updateTag({
-              property: 'og:url',
-              content: this.router.url,
-            });
-          }
-
-          if (data.title) {
-            this.meta.updateTag({
-              property: 'og:title',
-              content: data.title,
-            });
-          } else {
-            this.meta.removeTag("property='og:title'");
-          }
-
-          if (data.description) {
-            this.meta.updateTag({
-              property: 'og:description',
-              content: data.description,
-            });
-          } else {
-            this.meta.removeTag("property='og:description'");
-          }
-
-          if (data.ogImage) {
-            this.meta.updateTag({
-              property: 'og:image',
-              content: data.ogImage,
-            });
-          } else {
-            this.meta.removeTag("property='og:image'");
-          }
+        rt.data.subscribe((data: MetadataI) => {
+          this.setAllMeta(data);
         });
       });
   }
 
-  getChild(activatedRoute: ActivatedRoute): any {
+  private setAllMeta(data: MetadataI) {
+    console.log(data);
+    this.setTitle(data);
+    this.setDescription(data);
+    this.setImage(data);
+    this.setUrl(data);
+    this.setRobots(data);
+    this.meta.updateTag({
+      property: 'twitter:site',
+      content: '@XSMusices'
+    });
+    this.meta.updateTag({
+      property: 'twitter:creator',
+      content: '@XSMusices',
+    });
+  }
+
+  private setTitle(data: MetadataI) {
+    if (data.title) {
+      this.titleService.setTitle(data.title);
+      this.meta.updateTag({
+        property: 'og:title',
+        content: data.title,
+      });
+      this.meta.updateTag({
+        property: 'twitter:title',
+        content: data.title,
+      });
+    } else {
+      this.meta.removeTag("property='og:title'");
+      this.meta.removeTag("property='twitter:title'");
+    }
+  }
+
+  private setDescription(data: MetadataI) {
+    if (data.description) {
+      this.meta.updateTag({
+        name: 'description',
+        content: data.description,
+      });
+      this.meta.updateTag({
+        property: 'og:description',
+        content: data.description,
+      });
+      this.meta.updateTag({
+        property: 'twitter:description',
+        content: data.description,
+      });
+    } else {
+      this.meta.removeTag("name='description'");
+      this.meta.removeTag("name='og:description'");
+      this.meta.removeTag("name='twitter:description'");
+    }
+  }
+
+  private setImage(data: MetadataI) {
+    if (data.image) {
+      this.meta.updateTag({
+        property: 'og:image',
+        content: data.image,
+      });
+      this.meta.updateTag({
+        property: 'twitter:image',
+        content: data.image,
+      });
+    } else {
+      this.meta.removeTag("property='og:image'");
+    }
+  }
+
+  private setUrl(data: MetadataI) {
+    if (data.url) {
+      this.meta.updateTag({
+        property: 'og:url',
+        content: data.url,
+      });
+    } else {
+      this.meta.updateTag({
+        property: 'og:url',
+        content: this.router.url,
+      });
+    }
+  }
+
+  private setRobots(data: MetadataI) {
+    if (data.robots) {
+      this.meta.updateTag({
+        name: 'robots',
+        content: data.robots,
+      });
+    } else {
+      this.meta.updateTag({
+        name: 'robots',
+        content: 'follow,index',
+      });
+    }
+  }
+
+  private getChild(activatedRoute: ActivatedRoute): any {
     if (activatedRoute.firstChild) {
       return this.getChild(activatedRoute.firstChild);
     } else {

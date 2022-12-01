@@ -9,7 +9,7 @@ const routes: Routes = [
     path: '',
     data: {
       description: 'Musica electronica, hecha para ti',
-      ogTitle: 'XSMusic',
+      title: 'XSMusic',
     },
     loadChildren: () =>
       import('../../routes/home/home.module').then((m) => m.HomeModule),
@@ -26,19 +26,11 @@ const routes: Routes = [
   },
   {
     path: 'events',
-    data: {
-      ogTitle: 'Eventos',
-      description: 'Listado de eventos de musica electronica',
-    },
     loadChildren: () =>
       import('../../routes/event/event.module').then((m) => m.EventModule),
   },
   {
     path: 'festivals',
-    data: {
-      ogTitle: 'Festivales',
-      description: 'Listado de festivales de musica electronica',
-    },
     loadChildren: () =>
       import('../../routes/festival/festivals.module').then(
         (m) => m.FestivalsModule
@@ -46,19 +38,11 @@ const routes: Routes = [
   },
   {
     path: 'tracks',
-    data: {
-      ogTitle: 'Tracks',
-      description: 'Listado de tracks de musica electronica',
-    },
     loadChildren: () =>
       import('../../routes/tracks/tracks.module').then((m) => m.TracksModule),
   },
   {
     path: 'sets',
-    data: {
-      ogTitle: 'Sets',
-      description: 'Listado de sets de musica electronica',
-    },
     loadChildren: () =>
       import('../../routes/set/set.module').then((m) => m.SetModule),
   },

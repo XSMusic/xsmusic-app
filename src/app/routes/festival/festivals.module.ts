@@ -11,12 +11,18 @@ import { FestivalsPage } from './pages/festivals/festivals.page';
       {
         path: '',
         component: FestivalsPage,
-        data: { breadcrumb: '', title: 'Festivales' },
+        data: {
+          title: 'Festivales',
+          description: 'Listado de festivales de musica electronica',
+        },
       },
       {
         path: 'filter/:filterKey/:filterValue',
         component: FestivalsPage,
-        data: { title: 'Festivales' },
+        data: {
+          title: 'Festivales',
+          description: 'Listado de festivales de musica electronica',
+        },
       },
       {
         path: 'one/:slug',

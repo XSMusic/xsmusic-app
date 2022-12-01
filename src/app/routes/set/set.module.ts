@@ -11,12 +11,18 @@ import { SetsPage } from './pages/sets/sets.page';
       {
         path: '',
         component: SetsPage,
-        data: { title: 'Sets' },
+        data: {
+          title: 'Sets',
+          description: 'Listado de sets de musica electronica',
+        },
       },
       {
         path: 'filter/:filterKey/:filterValue',
         component: SetsPage,
-        data: { title: 'Sets' },
+        data: {
+          title: 'Sets',
+          description: 'Listado de sets de musica electronica',
+        },
       },
       {
         path: 'one/:slug',

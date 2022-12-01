@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { Artist } from '@models';
-import { ToastService } from '@services';
+import { MetaService, ToastService } from '@services';
 import { ArtistService } from '@shared/services/api/artist/artist.service';
-import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
+import { MetadataI } from '@shared/services/system/meta';
+import { TOAST_STATE } from '@services';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { environment } from '@env/environment';
+import { routesConfig } from '@core/config';
 
 @Component({
   selector: 'page-artist',
@@ -24,7 +26,7 @@ export class ArtistPage implements OnInit {
     private artistService: ArtistService,
     private toast: ToastService,
     private spinner: NgxSpinnerService,
-    private title: Title
+    private metaService: MetaService
   ) {}
 
   ngOnInit() {
@@ -37,7 +39,7 @@ export class ArtistPage implements OnInit {
     this.artistService.getOne('slug', this.slug).subscribe({
       next: (response) => {
         this.artist = response;
-        this.setTitle();
+        this.setMeta();
         this.setViews();
         this.spinner.hide();
       },
@@ -48,8 +50,19 @@ export class ArtistPage implements OnInit {
     });
   }
 
-  setTitle() {
-    this.title.setTitle(`${this.title.getTitle()} - ${this.artist.name}`);
+  setMeta() {
+    const meta: MetadataI = {
+      title: this.artist.name,
+      image: `${environment.IMAGES_URL}/${this.artist.images![0].url}`,
+      url: `${environment.APP_URL}${routesConfig.artist.replace(
+        ':slug',
+        this.artist.slug!
+      )}`,
+    };
+    if (this.artist.info !== '') {
+      meta.description = this.artist.info;
+    }
+    this.metaService.setMetaDynamic(meta);
   }
 
   setViews() {

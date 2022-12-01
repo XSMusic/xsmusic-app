@@ -30,7 +30,7 @@ export class AccountEditPage implements OnInit {
     this.userService.update(this.user).subscribe({
       next: (response) => {
         this.toast.showToast(TOAST_STATE.success, response.message);
-        this.userService.set(this.user)
+        this.userService.set(this.user);
         darkMode(this.user);
       },
       error: (error) => this.toast.showToast(TOAST_STATE.error, error),

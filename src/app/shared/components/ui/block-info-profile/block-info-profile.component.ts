@@ -68,7 +68,7 @@ export class BlockInfoProfileComponent {
     try {
       let text = '';
       if (this.type === 'artist') {
-        text = 'Te recomiendo este artista'
+        text = 'Te recomiendo este artista';
       } else if (this.type === 'club') {
         text = 'Te recomiendo este club';
       } else if (this.type === 'event') {

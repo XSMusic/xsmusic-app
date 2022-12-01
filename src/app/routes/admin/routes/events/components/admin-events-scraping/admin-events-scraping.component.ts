@@ -136,6 +136,8 @@ export class AdminEventsScrapingComponent {
       })
       .subscribe();
 
-    this.items.completed = this.items.completed.filter((item) => item !== value);
+    this.items.completed = this.items.completed.filter(
+      (item) => item !== value
+    );
   }
 }

@@ -170,8 +170,7 @@
                   </div>
                   <div
                     *ngIf="
-                      artist.social?.youtube &&
-                      artist.social?.youtube !== ''
+                      artist.social?.youtube && artist.social?.youtube !== ''
                     "
                     (click)="goToSocial(artist.social.youtube)"
                   >
@@ -185,21 +184,21 @@
             </td>
 
             <td class="pl-5" *ngxPermissionsOnly="'ADMIN'">
-                <div class="flex flex-col gap-2">
-                  <div
-                    class="mr-2 text-sm font-light leading-none text-gray-700 dark:text-gray-300"
-                  >
-                    <span class="font-extrabold">Creado:</span>
-                    {{ artist.created! | timeAgo }}
-                  </div>
-                  <div
-                    class="mr-2 text-sm font-light leading-none text-gray-700 dark:text-gray-300"
-                  >
-                    <span class="font-extrabold">Editado:</span>
-                    {{ artist.updated! | timeAgo }}
-                  </div>
+              <div class="flex flex-col gap-2">
+                <div
+                  class="mr-2 text-sm font-light leading-none text-gray-700 dark:text-gray-300"
+                >
+                  <span class="font-extrabold">Creado:</span>
+                  {{ artist.created! | timeAgo }}
                 </div>
-              </td>
+                <div
+                  class="mr-2 text-sm font-light leading-none text-gray-700 dark:text-gray-300"
+                >
+                  <span class="font-extrabold">Editado:</span>
+                  {{ artist.updated! | timeAgo }}
+                </div>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>

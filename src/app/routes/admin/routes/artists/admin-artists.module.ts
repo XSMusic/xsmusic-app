@@ -27,11 +27,7 @@ import { ArtistOneComponent } from './components/artist-one/admin-artist-one.com
     ]),
   ],
   exports: [],
-  declarations: [
-    AdminArtistsPage,
-    AdminArtistPage,
-    ArtistOneComponent,
-  ],
+  declarations: [AdminArtistsPage, AdminArtistPage, ArtistOneComponent],
   providers: [],
 })
 export class AdminArtistsModule {}

@@ -64,13 +64,13 @@ const routes: Routes = [
   },
   {
     path: 'search',
-    data: {  },
+    data: {},
     loadChildren: () =>
       import('../../routes/search/search.module').then((m) => m.SearchModule),
   },
   {
     path: 'auth',
-    data: { },
+    data: {},
     loadChildren: () =>
       import('../../routes/auth/auth.module').then((m) => m.ArtistsModule),
   },

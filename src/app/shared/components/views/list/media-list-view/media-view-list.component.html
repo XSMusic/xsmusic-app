@@ -82,13 +82,13 @@
 
             <td class="pl-5">
               <div class="flex gap-2">
-              <span
-                *ngFor="let style of mediaItem.styles; let i = index"
-                class="px-3 py-1 text-sm border border-gray-300 rounded-lg cursor-pointer dark:text-white dark:bg-black dark:border-gray-800 hover:opacity-70"
-                (click)="filter.emit({ name: 'styles', value: style.name })"
-              >
-                {{ style.name | titlecase }}
-              </span>
+                <span
+                  *ngFor="let style of mediaItem.styles; let i = index"
+                  class="px-3 py-1 text-sm border border-gray-300 rounded-lg cursor-pointer dark:text-white dark:bg-black dark:border-gray-800 hover:opacity-70"
+                  (click)="filter.emit({ name: 'styles', value: style.name })"
+                >
+                  {{ style.name | titlecase }}
+                </span>
               </div>
             </td>
 

@@ -16,6 +16,9 @@ export class StatsService {
   }
 
   getTopStats(data: StatsGetTopStatsDto): Observable<StatsGetTopStatsI> {
-    return this.httpClient.post<StatsGetTopStatsI>(`${this.url}/getTopStats`, data);
+    return this.httpClient.post<StatsGetTopStatsI>(
+      `${this.url}/getTopStats`,
+      data
+    );
   }
 }

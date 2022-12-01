@@ -105,7 +105,7 @@ const components = [
   BlockInfoProfileComponent,
   EventsViewListComponent,
   SearchInputComponent,
-  BlockStatsComponent
+  BlockStatsComponent,
 ];
 const directives = [OnImageErrorDirective];
 const modules = [

@@ -13,7 +13,10 @@ export class AdminMediaAddSearchItemsComponent {
   @Input() itemSelected!: Youtube;
   @Output() selectItem = new EventEmitter<Youtube>();
 
-  constructor(private scrapingService: ScrapingService, private toast: ToastService) {}
+  constructor(
+    private scrapingService: ScrapingService,
+    private toast: ToastService
+  ) {}
 
   goToYoutube(item: Youtube) {
     window.open(`https://www.youtube.com/watch?v=${item.videoId}`, '_blank');

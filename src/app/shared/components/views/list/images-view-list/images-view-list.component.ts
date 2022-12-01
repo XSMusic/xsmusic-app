@@ -8,7 +8,7 @@ import { FullImageService } from '@shared/services/ui/full-image/full-image.serv
 @Component({
   selector: 'images-view-list',
   templateUrl: 'images-view-list.component.html',
-  animations: [inOutAnimation]
+  animations: [inOutAnimation],
 })
 export class ImagesViewListComponent {
   @Input() items: Image[] = [];

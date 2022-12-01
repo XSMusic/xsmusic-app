@@ -40,7 +40,7 @@
 
       <img
         *ngIf="type === 'eventScraping'"
-        class="object-cover w-full h-96 "
+        class="object-cover w-full h-96"
         [src]="item.images![0]"
         [alt]="item.name"
         (click)="goToOne.emit(item)"

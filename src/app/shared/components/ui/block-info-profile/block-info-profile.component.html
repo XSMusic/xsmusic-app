@@ -167,18 +167,17 @@
           (click)="goToFilter('country', item.site.address.country!)"
         />
         <span
-        class="cursor-pointer hover:opacity-70"
-        (click)="goToFilter('state', item.site.address.state!)"
-      >
-        {{ item.site.address.state }},
-      </span>
-      <span
-        class="cursor-pointer hover:opacity-70"
-        (click)="goToFilter('country', item.site.address.country!)"
-      >
-        {{ item.site.address.country! | countryName }}
-      </span>
-
+          class="cursor-pointer hover:opacity-70"
+          (click)="goToFilter('state', item.site.address.state!)"
+        >
+          {{ item.site.address.state }},
+        </span>
+        <span
+          class="cursor-pointer hover:opacity-70"
+          (click)="goToFilter('country', item.site.address.country!)"
+        >
+          {{ item.site.address.country! | countryName }}
+        </span>
       </div>
     </ng-container>
   </div>

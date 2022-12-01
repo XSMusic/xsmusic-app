@@ -4,7 +4,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 
 export interface MetaDynamicI {
-  title: string,
+  title: string;
   description?: string;
 }
 
@@ -15,7 +15,7 @@ export class MetaService {
     private route: ActivatedRoute,
     private meta: Meta,
     private titleService: Title
-  ) { }
+  ) {}
 
   setMetaDynamic() {
     // TODO: Hacer esto

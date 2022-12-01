@@ -16,7 +16,7 @@ export class LastMultiComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {
-    this.view = this.views[0].value;
+    this.view = this.views.length > 0 ? this.views[0].value : '';
   }
 
   goToOne(event: any) {

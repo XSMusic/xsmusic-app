@@ -7,7 +7,6 @@ export { SitesLastBlockComponent } from './sites/sites-last-block/sites-last-blo
 
 //UI
 export { AlertComponent } from './ui/alert/alert.component';
-export { BreadcrumbeComponent } from './ui/breadcrumb/breadcrumb.component';
 export { ButtonsBlockComponent } from './ui/buttons-block/buttons-block.component';
 export { FullImageComponent } from './ui/full-image/full-image.component';
 export { HeaderComponent } from './ui/header/header.component';

@@ -49,22 +49,31 @@ export class FestivalPage implements OnInit {
   }
 
   private setViews() {
-    this.views = [
-      { name: 'Sets', value: 'set', counter: this.site.sets.length },
-      {
+    if (this.site.sets && this.site.sets.length > 0) {
+      this.views.push({
+        name: 'Sets',
+        value: 'set',
+        counter: this.site.sets.length,
+      });
+    }
+
+    if (this.site.events && this.site.events.length > 0) {
+      this.views.push({
         name: 'Eventos',
         value: 'eventSite',
         counter: this.site.events ? this.site.events.length : 0,
-      },
-      {
+      });
+    }
+    if (this.site.images && this.site.images.length > 1) {
+      this.views.push({
         name: 'Imagenes',
         value: 'image',
         counter:
           this.site.images!.length === 0
             ? this.site.images!.length
             : this.site.images!.length - 1,
-      },
-    ];
+      });
+    }
   }
 
   setTitle() {

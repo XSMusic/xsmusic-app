@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { SwUpdate, VersionReadyEvent } from '@angular/service-worker';
 import { NavigationService } from '@services';
+import { MetaService } from '@shared/services/system/meta/meta.service';
 import { filter, map } from 'rxjs';
 
 @Component({
@@ -13,15 +12,14 @@ export class AppComponent implements OnInit {
   modalVersion = false;
 
   constructor(
-    private router: Router,
-    private titleService: Title,
     private swUpdate: SwUpdate,
-    private navigationService: NavigationService
+    private navigationService: NavigationService,
+    private metaService: MetaService
   ) {}
   ngOnInit(): void {
     this.navigationService.startSaveHistory();
     this.preventBackButton();
-    this.setTitle();
+    this.setMeta();
 
     if (this.swUpdate.isEnabled) {
       this.swUpdate.versionUpdates.pipe(
@@ -59,26 +57,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  setTitle() {
-    this.router.events
-      .pipe(
-        filter((event) => event instanceof NavigationEnd),
-        map(() => {
-          let route: ActivatedRoute = this.router.routerState.root;
-          let routeTitle = '';
-          while (route.firstChild) {
-            route = route.firstChild;
-          }
-          if (route.snapshot.data['title']) {
-            routeTitle = route.snapshot.data['title'];
-          }
-          return routeTitle;
-        })
-      )
-      .subscribe((title: string) => {
-        if (title) {
-          this.titleService.setTitle(`XSMusic - ${title}`);
-        }
-      });
+  setMeta() {
+    this.metaService.setMeta();
   }
 }

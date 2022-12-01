@@ -11,12 +11,18 @@ import { ClubsPage } from './pages/clubs/clubs.page';
       {
         path: '',
         component: ClubsPage,
-        data: { breadcrumb: '', title: 'Clubs' },
+        data: {
+          description: 'Listado de clubs de musica electronica',
+          title: 'Clubs',
+        },
       },
       {
         path: 'filter/:filterKey/:filterValue',
         component: ClubsPage,
-        data: { title: 'Clubs' },
+        data: {
+          description: 'Listado de clubs de musica electronica',
+          title: 'Clubs',
+        },
       },
       {
         path: 'one/:slug',

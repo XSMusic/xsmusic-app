@@ -11,17 +11,22 @@ import { ArtistsPage } from './page/artists/artists.page';
       {
         path: '',
         component: ArtistsPage,
-        data: { title: 'Artistas' },
+        data: {
+          title: 'Artistas',
+          description: 'Listado de artistas de musica electronica',
+        },
       },
       {
         path: 'filter/:filterKey/:filterValue',
         component: ArtistsPage,
-        data: { title: 'Artistas' },
+        data: {
+          title: 'Artistas',
+          description: 'Listado de artistas de musica electronica',
+        },
       },
       {
         path: 'profile/:slug',
         component: ArtistPage,
-        data: { title: 'Artista' },
       },
     ]),
   ],

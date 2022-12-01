@@ -7,32 +7,38 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
     path: '',
-    data: { breadcrumb: 'Inicio' },
+    data: {
+      description: 'Musica electronica, hecha para ti',
+      ogTitle: 'XSMusic',
+    },
     loadChildren: () =>
       import('../../routes/home/home.module').then((m) => m.HomeModule),
   },
   {
     path: 'artists',
-    data: { breadcrumb: 'Artistas' },
     loadChildren: () =>
       import('../../routes/artist/artist.module').then((m) => m.ArtistModule),
   },
-
   {
     path: 'clubs',
-    data: { breadcrumb: 'Clubs' },
     loadChildren: () =>
       import('../../routes/club/club.module').then((m) => m.ClubsModule),
   },
   {
     path: 'events',
-    data: { breadcrumb: 'Eventos' },
+    data: {
+      ogTitle: 'Eventos',
+      description: 'Listado de eventos de musica electronica',
+    },
     loadChildren: () =>
       import('../../routes/event/event.module').then((m) => m.EventModule),
   },
   {
     path: 'festivals',
-    data: { breadcrumb: 'Festivales' },
+    data: {
+      ogTitle: 'Festivales',
+      description: 'Listado de festivales de musica electronica',
+    },
     loadChildren: () =>
       import('../../routes/festival/festivals.module').then(
         (m) => m.FestivalsModule
@@ -40,32 +46,37 @@ const routes: Routes = [
   },
   {
     path: 'tracks',
-    data: { breadcrumb: 'Tracks' },
+    data: {
+      ogTitle: 'Tracks',
+      description: 'Listado de tracks de musica electronica',
+    },
     loadChildren: () =>
       import('../../routes/tracks/tracks.module').then((m) => m.TracksModule),
   },
   {
     path: 'sets',
-    data: { breadcrumb: 'Sets' },
+    data: {
+      ogTitle: 'Sets',
+      description: 'Listado de sets de musica electronica',
+    },
     loadChildren: () =>
       import('../../routes/set/set.module').then((m) => m.SetModule),
   },
   {
     path: 'search',
-    data: { breadcrumb: 'Buscador' },
+    data: {  },
     loadChildren: () =>
       import('../../routes/search/search.module').then((m) => m.SearchModule),
   },
   {
     path: 'auth',
-    data: { breadcrumb: '' },
+    data: { },
     loadChildren: () =>
       import('../../routes/auth/auth.module').then((m) => m.ArtistsModule),
   },
   {
     path: 'account',
     data: {
-      breadcrumb: 'auth',
       permissions: {
         only: ['USER', 'ADMIN'],
       },

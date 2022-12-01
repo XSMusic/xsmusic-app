@@ -42,7 +42,7 @@ export class FilterBarComponent implements OnInit {
 
   getFilterItems() {
     this.itemsA = filters
-      .find((item) => item.name === this.type)!
+      .find((item) => this.type.indexOf(item.name) !== -1)!
       .items.map((item) => item);
   }
 

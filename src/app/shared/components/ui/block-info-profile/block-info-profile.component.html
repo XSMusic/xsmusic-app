@@ -3,8 +3,7 @@
     class="mx-auto mt-3 overflow-hidden border-2 h-52 w-52 dark:border-2 dark:border-gray-800"
     [ngClass]="{
       'rounded-full': type === 'artist',
-      'rounded-2xl':
-        type === 'club' || type === 'festival' || type === 'event',
+      'rounded-2xl': type === 'club' || type === 'festival' || type === 'event',
       'h-80': type === 'event'
     }"
   >
@@ -144,7 +143,7 @@
   <div
     class="flex gap-1 px-3 py-1 my-2 overflow-x-scroll text-center md:justify-center scrollbar-hidden"
     *ngIf="item.styles!.length > 0"
-    [ngClass]="{'justify-center': 'items.styles.length <= 3'}"
+    [ngClass]="{ 'justify-center': 'items.styles.length <= 3' }"
   >
     <div *ngFor="let style of item.styles; index as i">
       <a
@@ -253,12 +252,14 @@
   <!-- Compartir & Reportar -->
   <div class="flex flex-row justify-center gap-2">
     <button
+      (click)="sharing()"
       class="px-3 py-1 mt-3 font-medium border border-gray-300 rounded-lg cursor-pointer hover:opacity-70 dark:bg-black dark:border-gray-800 dark:text-white"
     >
       Compartir
     </button>
 
     <button
+      (click)="report()"
       class="px-3 py-1 mt-3 font-medium border border-gray-300 rounded-lg cursor-pointer hover:opacity-70 dark:bg-black dark:border-gray-800 dark:text-white"
     >
       Reportar

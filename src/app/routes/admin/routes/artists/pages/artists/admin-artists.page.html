@@ -8,6 +8,7 @@
   <buttons-block
     type="artistsAdmin"
     (search)="onSearch($event)"
+    (onFilter)="onFilter($event)"
     (onClickButton)="onClickButton($event)"
   ></buttons-block>
 
@@ -24,7 +25,7 @@
     [artists]="items"
     [loading]="loading"
     (goToProfile)="goToProfile($event)"
-    (filter)="filter($event)"
+    (filter)="onFilter($event)"
     (onScroll)="onScroll()"
   >
   </artists-view-list>

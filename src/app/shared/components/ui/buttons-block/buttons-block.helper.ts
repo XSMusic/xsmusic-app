@@ -12,12 +12,6 @@ const genericItems = [
     action: 'viewList',
   }),
   new ButtonBlockItem({
-    name: 'Ordenar',
-    isActivatable: true,
-    align: 'right',
-    action: 'order',
-  }),
-  new ButtonBlockItem({
     name: 'Filtrar',
     isActivatable: true,
     align: 'right',
@@ -88,12 +82,6 @@ export const buttonsByType = [
         action: 'viewMap',
       }),
       new ButtonBlockItem({
-        name: 'Ordenar',
-        isActivatable: true,
-        align: 'right',
-        action: 'order',
-      }),
-      new ButtonBlockItem({
         name: 'Filtrar',
         isActivatable: true,
         align: 'right',
@@ -139,11 +127,6 @@ export const buttonsByType = [
         name: 'Estadisticas',
         action: 'viewStats',
         isActivatable: true,
-      }),
-      new ButtonBlockItem({
-        name: 'Ordenar',
-        action: 'order',
-        align: 'right',
       }),
       new ButtonBlockItem({
         name: 'Filtrar',
@@ -211,11 +194,6 @@ export const buttonsByType = [
         isActivatable: true,
       }),
       new ButtonBlockItem({
-        name: 'Ordenar',
-        action: 'order',
-        align: 'right',
-      }),
-      new ButtonBlockItem({
         name: 'Filtrar',
         action: 'filter',
         align: 'right',
@@ -261,11 +239,6 @@ export const buttonsByType = [
         isActivatable: true,
       }),
       new ButtonBlockItem({
-        name: 'Ordenar',
-        action: 'order',
-        align: 'right',
-      }),
-      new ButtonBlockItem({
         name: 'Filtrar',
         action: 'filter',
         align: 'right',
@@ -294,11 +267,6 @@ export const buttonsByType = [
         name: 'Estadisticas',
         action: 'viewStats',
         isActivatable: true,
-      }),
-      new ButtonBlockItem({
-        name: 'Ordenar',
-        action: 'order',
-        align: 'right',
       }),
       new ButtonBlockItem({
         name: 'Filtrar',
@@ -349,11 +317,6 @@ export const buttonsByType = [
         name: 'Nuevo',
         action: 'viewAdd',
         isActivatable: true,
-      }),
-      new ButtonBlockItem({
-        name: 'Ordenar',
-        action: 'order',
-        align: 'right',
       }),
       new ButtonBlockItem({
         name: 'Filtrar',

@@ -2,11 +2,10 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 export const TOAST_STATE = {
-  success: 'text-green-500 bg-green-100 dark:bg-green-800 dark:text-green-200',
-  info: 'text-blue-500 bg-blue-100 dark:bg-blue-800 dark:text-blue-200',
-  warning:
-    'text-orange-500 bg-orange-100 dark:bg-orange-800 dark:text-orange-200',
-  error: 'text-red-500 bg-red-100 dark:bg-red-800 dark:text-red-200',
+  success: 'bg-white dark:bg-black border border-green-500 text-green-500',
+  info: 'bg-white dark:bg-black border border-blue-500 text-blue-500',
+  warning: 'bg-white dark:bg-black border border-orange-500 text-orange-500',
+  error: 'bg-white dark:bg-black border border-red-500 text-red-500',
 };
 
 @Injectable({

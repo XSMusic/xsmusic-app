@@ -3,8 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgxPermissionsGuard } from 'ngx-permissions';
 
 const routes: Routes = [
-  { path: '*', redirectTo: 'home', pathMatch: 'full' },
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '*', redirectTo: '', pathMatch: 'full' },
   {
     path: '',
     data: {

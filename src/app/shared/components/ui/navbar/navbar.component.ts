@@ -50,7 +50,7 @@ export class NavbarComponent implements OnInit {
 
   async setMenuItems() {
     this.menuItemsForAny = [
-      { name: 'Inicio', route: 'home' },
+      { name: 'Inicio', route: routesConfig.home },
       { name: 'Artistas', route: routesConfig.artists },
       { name: 'Clubs', route: routesConfig.clubs },
       { name: 'Eventos', route: routesConfig.events },

@@ -4,8 +4,6 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { MetadataI } from '.';
 
-
-
 @Injectable({ providedIn: 'root' })
 export class MetaService {
   constructor(
@@ -37,14 +35,7 @@ export class MetaService {
     this.setImage(data);
     this.setUrl(data);
     this.setRobots(data);
-    this.meta.updateTag({
-      property: 'twitter:site',
-      content: '@XSMusices'
-    });
-    this.meta.updateTag({
-      property: 'twitter:creator',
-      content: '@XSMusices',
-    });
+    this.setVarious();
   }
 
   private setTitle(data: MetadataI) {
@@ -92,11 +83,34 @@ export class MetaService {
         content: data.image,
       });
       this.meta.updateTag({
+        property: 'og:image:width',
+        content: '500',
+      });
+      this.meta.updateTag({
+        property: 'og:image:height',
+        content: '500',
+      });
+      this.meta.updateTag({
         property: 'twitter:image',
         content: data.image,
       });
     } else {
-      this.meta.removeTag("property='og:image'");
+      this.meta.updateTag({
+        property: 'og:image',
+        content: 'https://api.xsmusic.es/uploads/brand/XSMusic-light.png',
+      });
+      this.meta.updateTag({
+        property: 'og:image:width',
+        content: '500',
+      });
+      this.meta.updateTag({
+        property: 'og:image:height',
+        content: '500',
+      });
+      this.meta.updateTag({
+        property: 'twitter:image',
+        content: 'https://api.xsmusic.es/uploads/brand/XSMusic-light.png',
+      });
     }
   }
 
@@ -126,6 +140,21 @@ export class MetaService {
         content: 'follow,index',
       });
     }
+  }
+
+  setVarious() {
+    this.meta.updateTag({
+      property: 'twitter:site',
+      content: '@XSMusices',
+    });
+    this.meta.updateTag({
+      property: 'twitter:creator',
+      content: '@XSMusices',
+    });
+    this.meta.updateTag({
+      property: 'og:site_name',
+      content: 'XSMusic',
+    });
   }
 
   private getChild(activatedRoute: ActivatedRoute): any {

@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
-import { Observable, BehaviorSubject } from "rxjs";
-import { filter } from "rxjs/operators";
-import { NgxSpinner, PRIMARY_SPINNER, Spinner } from "./ngx-spinner.enum";
+import { Injectable } from '@angular/core';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { filter } from 'rxjs/operators';
+import { NgxSpinner, PRIMARY_SPINNER, Spinner } from './ngx-spinner.enum';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class NgxSpinnerService {
   /**
@@ -14,7 +14,7 @@ export class NgxSpinnerService {
    */
   // private spinnerObservable = new ReplaySubject<NgxSpinner>(1);
   public spinnerObservable = new BehaviorSubject<NgxSpinner | null>(null);
-   /**
+  /**
    * Get subscription of desired spinner
    * @memberof NgxSpinnerService
    **/
@@ -32,7 +32,7 @@ export class NgxSpinnerService {
     return new Promise((resolve) => {
       setTimeout(() => {
         if (spinner && Object.keys(spinner).length) {
-          spinner["name"] = name;
+          spinner['name'] = name;
           this.spinnerObservable.next(
             new NgxSpinner({ ...spinner, show: true })
           );
@@ -50,7 +50,7 @@ export class NgxSpinnerService {
    * @memberof NgxSpinnerService
    */
   hide(name: string = PRIMARY_SPINNER, debounce = 10) {
-    return new Promise((resolve, _reject) => {
+    return new Promise((resolve) => {
       setTimeout(() => {
         this.spinnerObservable.next(new NgxSpinner({ name, show: false }));
         resolve(true);

@@ -12,36 +12,36 @@ import {
   ElementRef,
   Optional,
   Inject,
-} from "@angular/core";
-import { NgxSpinnerService } from "./ngx-spinner.service";
-import { Subject } from "rxjs";
-import { takeUntil } from "rxjs/operators";
+} from '@angular/core';
+import { NgxSpinnerService } from './ngx-spinner.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import {
   LOADERS,
   DEFAULTS,
   Size,
   NgxSpinner,
   PRIMARY_SPINNER,
-} from "./ngx-spinner.enum";
+} from './ngx-spinner.enum';
 import {
   trigger,
   state,
   style,
   transition,
   animate,
-} from "@angular/animations";
-import { NgxSpinnerConfig, NGX_SPINNER_CONFIG } from "./config";
+} from '@angular/animations';
+import { NgxSpinnerConfig, NGX_SPINNER_CONFIG } from './config';
 
 @Component({
-  selector: "ngx-spinner",
-  templateUrl: "ngx-spinner.component.html",
-  styleUrls: ["./ngx-spinner.component.css"],
+  selector: 'ngx-spinner',
+  templateUrl: 'ngx-spinner.component.html',
+  styleUrls: ['./ngx-spinner.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
-    trigger("fadeIn", [
-      state("in", style({ opacity: 1 })),
-      transition(":enter", [style({ opacity: 0 }), animate(300)]),
-      transition(":leave", animate(200, style({ opacity: 0 }))),
+    trigger('fadeIn', [
+      state('in', style({ opacity: 1 })),
+      transition(':enter', [style({ opacity: 0 }), animate(300)]),
+      transition(':leave', animate(200, style({ opacity: 0 }))),
     ]),
   ],
 })
@@ -145,9 +145,9 @@ export class NgxSpinnerComponent implements OnDestroy, OnInit, OnChanges {
    *
    * @memberof NgxSpinnerComponent
    */
-  @ViewChild("overlay") spinnerDOM!: { nativeElement: any };
+  @ViewChild('overlay') spinnerDOM!: { nativeElement: any };
 
-  @HostListener("document:keydown", ["$event"])
+  @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     if (this.spinnerDOM && this.spinnerDOM.nativeElement) {
       if (
@@ -176,7 +176,7 @@ export class NgxSpinnerComponent implements OnDestroy, OnInit, OnChanges {
     this.bdColor = DEFAULTS.BD_COLOR;
     this.zIndex = DEFAULTS.Z_INDEX;
     this.color = DEFAULTS.SPINNER_COLOR;
-    this.size = "large";
+    this.size = 'large';
     this.fullScreen = true;
     this.name = PRIMARY_SPINNER;
     this.template = null;
@@ -259,12 +259,12 @@ export class NgxSpinnerComponent implements OnDestroy, OnInit, OnChanges {
         if (changedProp.isFirstChange()) {
           return;
         } else if (
-          typeof changedProp.currentValue !== "undefined" &&
+          typeof changedProp.currentValue !== 'undefined' &&
           changedProp.currentValue !== changedProp.previousValue
         ) {
-          if (changedProp.currentValue !== "") {
+          if (changedProp.currentValue !== '') {
             this.spinner[propName] = changedProp.currentValue;
-            if (propName === "showSpinner") {
+            if (propName === 'showSpinner') {
               if (changedProp.currentValue) {
                 this.spinnerService.show(this.spinner.name, this.spinner);
               } else {
@@ -272,7 +272,7 @@ export class NgxSpinnerComponent implements OnDestroy, OnInit, OnChanges {
               }
             }
 
-            if (propName === "name") {
+            if (propName === 'name') {
               this.initObservable();
             }
           }
@@ -290,21 +290,21 @@ export class NgxSpinnerComponent implements OnDestroy, OnInit, OnChanges {
     this.spinner.divArray = Array(this.spinner.divCount)
       .fill(0)
       .map((_, i) => i);
-    let sizeClass = "";
+    let sizeClass = '';
     switch (size.toLowerCase()) {
-      case "small":
-        sizeClass = "la-sm";
+      case 'small':
+        sizeClass = 'la-sm';
         break;
-      case "medium":
-        sizeClass = "la-2x";
+      case 'medium':
+        sizeClass = 'la-2x';
         break;
-      case "large":
-        sizeClass = "la-3x";
+      case 'large':
+        sizeClass = 'la-3x';
         break;
       default:
         break;
     }
-    return "la-" + type + " " + sizeClass;
+    return 'la-' + type + ' ' + sizeClass;
   }
   /**
    * Check if input variables have changed

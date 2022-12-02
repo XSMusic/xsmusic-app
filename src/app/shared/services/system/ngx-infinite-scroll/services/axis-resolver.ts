@@ -1,21 +1,21 @@
 const VerticalProps = {
-  clientHeight: "clientHeight",
-  offsetHeight: "offsetHeight",
-  scrollHeight: "scrollHeight",
-  pageYOffset: "pageYOffset",
-  offsetTop: "offsetTop",
-  scrollTop: "scrollTop",
-  top: "top"
+  clientHeight: 'clientHeight',
+  offsetHeight: 'offsetHeight',
+  scrollHeight: 'scrollHeight',
+  pageYOffset: 'pageYOffset',
+  offsetTop: 'offsetTop',
+  scrollTop: 'scrollTop',
+  top: 'top',
 };
 
 const HorizontalProps = {
-  clientHeight: "clientWidth",
-  offsetHeight: "offsetWidth",
-  scrollHeight: "scrollWidth",
-  pageYOffset: "pageXOffset",
-  offsetTop: "offsetLeft",
-  scrollTop: "scrollLeft",
-  top: "left"
+  clientHeight: 'clientWidth',
+  offsetHeight: 'offsetWidth',
+  scrollHeight: 'scrollWidth',
+  pageYOffset: 'pageXOffset',
+  offsetTop: 'offsetLeft',
+  scrollTop: 'scrollLeft',
+  top: 'left',
 };
 
 export class AxisResolver {

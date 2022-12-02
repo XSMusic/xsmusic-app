@@ -1,2 +1,2 @@
-export * from "./meta.interface";
-export * from "./meta.service";
+export * from './meta.interface';
+export * from './meta.service';

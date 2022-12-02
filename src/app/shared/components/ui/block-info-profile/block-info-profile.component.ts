@@ -64,21 +64,22 @@ export class BlockInfoProfileComponent {
     window.open(type, '_black');
   }
 
+  goToProfile(type: string, item: any) {
+    let route = '';
+    if (type === 'site') {
+      if (item.site.type === 'club') {
+        route = routesConfig.club.replace(':slug', item.site.slug);
+      } else {
+        route = routesConfig.festival.replace(':slug', item.site.slug);
+      }
+    }
+    this.router.navigate([route]);
+  }
+
   async sharing() {
     try {
-      let text = '';
-      if (this.type === 'artist') {
-        text = 'Te recomiendo este artista';
-      } else if (this.type === 'club') {
-        text = 'Te recomiendo este club';
-      } else if (this.type === 'event') {
-        text = 'Te recomiendo este evento';
-      } else if (this.type === 'festival') {
-        text = 'Te recomiendo este festival';
-      }
       const shareData: ShareOptions = {
         title: this.item.name,
-        text,
         url: `${environment.APP_URL}${this.router.url}`,
       };
       await Share.share(shareData);

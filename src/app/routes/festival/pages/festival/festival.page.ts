@@ -79,7 +79,7 @@ export class FestivalPage implements OnInit {
 
   setMeta() {
     const meta: MetadataI = {
-      title: `Festival - ${this.site.name!}`,
+      title: this.site.name!,
       image: `${environment.IMAGES_URL}/${this.site.images![0].url}`,
       url: `${environment.APP_URL}${routesConfig.club.replace(
         ':slug',

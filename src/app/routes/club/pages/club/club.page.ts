@@ -1,4 +1,3 @@
-import { Title } from '@angular/platform-browser';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
@@ -52,7 +51,7 @@ export class ClubPage implements OnInit {
 
   setMeta() {
     const meta: MetadataI = {
-      title: `Club - ${this.site.name!}`,
+      title: this.site.name!,
       image: `${environment.IMAGES_URL}/${this.site.images![0].url}`,
       url: `${environment.APP_URL}${routesConfig.club.replace(
         ':slug',

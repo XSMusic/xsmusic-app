@@ -3,10 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Media } from '@models';
 import { ToastService, MediaService, MetaService } from '@services';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
-import { DomSanitizer } from '@angular/platform-browser';
 import { routesConfig } from '@core/config';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { Share, ShareOptions } from '@capacitor/share';
 import { getTitleMedia } from '@shared/utils';
 import { environment } from '@env/environment';
 import { MetadataI } from '@shared/services/system/meta';
@@ -19,12 +17,12 @@ import { MetadataI } from '@shared/services/system/meta';
 export class SetPage implements OnInit {
   slug!: string;
   media: Media = new Media();
+  imageVideo = '';
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private toastService: ToastService,
+    private toast: ToastService,
     private mediaService: MediaService,
-    private sanitizer: DomSanitizer,
     private metaService: MetaService
   ) {}
 
@@ -39,14 +37,13 @@ export class SetPage implements OnInit {
         this.media = response;
         this.setMeta();
       },
-      error: (error: any) =>
-        this.toastService.showToast(TOAST_STATE.error, error),
+      error: (error: any) => this.toast.showToast(TOAST_STATE.error, error),
     });
   }
 
   setMeta() {
     const meta: MetadataI = {
-      title: `Set - ${getTitleMedia(this.media)}`,
+      title: getTitleMedia(this.media),
       image: `${environment.IMAGES_URL}/${this.media.images![0].url}`,
       url: `${environment.APP_URL}${routesConfig.set.replace(
         ':slug',
@@ -57,12 +54,6 @@ export class SetPage implements OnInit {
       meta.description = this.media.info;
     }
     this.metaService.setMetaDynamic(meta);
-  }
-
-  getVideoUrl() {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(
-      `https://www.youtube.com/embed/${this.media.sourceId}`
-    );
   }
 
   goToProfile(type: 'artist' | 'site', item: any) {
@@ -85,16 +76,5 @@ export class SetPage implements OnInit {
     ]);
   }
 
-  async sharing() {
-    try {
-      const shareData: ShareOptions = {
-        title: getTitleMedia(this.media),
-        text: 'Te recomiendo esta sesion',
-        url: `${environment.APP_URL}${this.router.url}`,
-      };
-      await Share.share(shareData);
-    } catch (error) {
-      this.toastService.showToast(TOAST_STATE.error, 'Error al compartir');
-    }
-  }
+
 }

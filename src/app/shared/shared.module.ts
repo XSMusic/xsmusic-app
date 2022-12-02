@@ -36,6 +36,8 @@ import {
   EventsViewListComponent,
   SearchInputComponent,
   BlockStatsComponent,
+  VideoYoutubeComponent,
+  BlockSharingReportComponent,
 } from '@components';
 import {
   CountryFlagPipe,
@@ -106,6 +108,8 @@ const components = [
   EventsViewListComponent,
   SearchInputComponent,
   BlockStatsComponent,
+  VideoYoutubeComponent,
+  BlockSharingReportComponent,
 ];
 const directives = [OnImageErrorDirective];
 const modules = [

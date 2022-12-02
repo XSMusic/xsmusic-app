@@ -126,7 +126,10 @@
   <div *ngIf="type === 'event'" class="">
     <ng-container *ngIf="item.site.address">
       <div class="text-center dark:text-white font-extralight">
-        <p class="text-xl font-black">
+        <p
+          class="text-xl font-black cursor-pointer"
+          (click)="goToProfile('site', item)"
+        >
           {{ item.site.name }}
         </p>
         <p
@@ -277,21 +280,7 @@
   </div>
 
   <!-- Compartir & Reportar -->
-  <div class="flex flex-row justify-center gap-2">
-    <button
-      (click)="sharing()"
-      class="px-3 py-1 mt-3 font-medium border border-gray-300 rounded-lg cursor-pointer hover:opacity-70 dark:bg-black dark:border-gray-800 dark:text-white"
-    >
-      Compartir
-    </button>
-
-    <button
-      (click)="report()"
-      class="px-3 py-1 mt-3 font-medium border border-gray-300 rounded-lg cursor-pointer hover:opacity-70 dark:bg-black dark:border-gray-800 dark:text-white"
-    >
-      Reportar
-    </button>
-  </div>
+  <block-sharing-report [item]="item" [type]="type"></block-sharing-report>
 
   <!-- Info -->
   <div class="px-6 py-2 text-center" *ngIf="item.info !== ''">

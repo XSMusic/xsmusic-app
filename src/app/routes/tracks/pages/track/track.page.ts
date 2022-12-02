@@ -18,7 +18,7 @@ export class TrackPage implements OnInit {
   media: Media = new Media();
   constructor(
     private route: ActivatedRoute,
-    private toastService: ToastService,
+    private toast: ToastService,
     private router: Router,
     private mediaService: MediaService,
     private sanitizer: DomSanitizer,
@@ -37,13 +37,13 @@ export class TrackPage implements OnInit {
         this.setMeta();
       },
       error: (error: any) =>
-        this.toastService.showToast(TOAST_STATE.error, error),
+        this.toast.showToast(TOAST_STATE.error, error),
     });
   }
 
   setMeta() {
     const meta: MetadataI = {
-      title: `Track - ${getTitleMedia(this.media)}`,
+      title: getTitleMedia(this.media),
       image: `${environment.IMAGES_URL}/${this.media.images![0].url}`,
       url: `${environment.APP_URL}${routesConfig.track.replace(
         ':slug',

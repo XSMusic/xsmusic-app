@@ -38,20 +38,19 @@ export class MetaService {
   }
 
   private setTitle(data: MetadataI) {
-    if (data.title) {
-      this.titleService.setTitle(`XSMusic - ${data.title}`);
-      this.meta.updateTag({
-        property: 'og:title',
-        content: `XSMusic - ${data.title}`,
-      });
-      this.meta.updateTag({
-        property: 'twitter:title',
-        content: `XSMusic - ${data.title}`,
-      });
-    } else {
-      this.meta.removeTag("property='og:title'");
-      this.meta.removeTag("property='twitter:title'");
+    let title = 'XSMusic';
+    if (data.title !== 'XSMusic') {
+      title = `${data.title} en XSMusic`;
     }
+    this.titleService.setTitle(title);
+    this.meta.updateTag({
+      property: 'og:title',
+      content: title,
+    });
+    this.meta.updateTag({
+      property: 'twitter:title',
+      content: title,
+    });
   }
 
   private setDescription(data: MetadataI) {

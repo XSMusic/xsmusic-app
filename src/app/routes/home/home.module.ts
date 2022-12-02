@@ -13,7 +13,6 @@ import { LastMediaComponent } from './components/last-media-block/last-media/las
       {
         path: '',
         component: HomePage,
-        data: { breadcrumb: '', title: 'Inicio' },
       },
     ]),
   ],

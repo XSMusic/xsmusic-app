@@ -52,7 +52,7 @@ export class ArtistPage implements OnInit {
 
   setMeta() {
     const meta: MetadataI = {
-      title: `Artista - ${this.artist.name}`,
+      title: this.artist.name,
       image: `${environment.IMAGES_URL}/${this.artist.images![0].url}`,
       url: `${environment.APP_URL}${routesConfig.artist.replace(
         ':slug',

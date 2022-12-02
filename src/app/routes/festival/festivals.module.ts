@@ -27,7 +27,6 @@ import { FestivalsPage } from './pages/festivals/festivals.page';
       {
         path: 'one/:slug',
         component: FestivalPage,
-        data: { title: 'Festival' },
       },
     ]),
   ],

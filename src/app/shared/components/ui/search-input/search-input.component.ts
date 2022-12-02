@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { GetAllDto } from '@interfaces';
 import {
   ArtistService,
@@ -11,6 +12,7 @@ import {
 @Component({
   selector: 'search-input',
   templateUrl: 'search-input.component.html',
+  animations: [inOutAnimation]
 })
 export class SearchInputComponent implements OnInit {
   @Input() type!: 'artist' | 'site' | 'style';

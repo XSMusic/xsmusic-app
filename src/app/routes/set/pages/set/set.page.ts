@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Media } from '@models';
-import { ToastService, MediaService } from '@services';
+import { ToastService, MediaService, MetaService } from '@services';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
-import { DomSanitizer, Title } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 import { routesConfig } from '@core/config';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { Share, ShareOptions } from '@capacitor/share';
 import { getTitleMedia } from '@shared/utils';
 import { environment } from '@env/environment';
+import { MetadataI } from '@shared/services/system/meta';
 
 @Component({
   selector: 'page-set',
@@ -24,7 +25,7 @@ export class SetPage implements OnInit {
     private toastService: ToastService,
     private mediaService: MediaService,
     private sanitizer: DomSanitizer,
-    private title: Title
+    private metaService: MetaService
   ) {}
 
   ngOnInit() {
@@ -36,17 +37,26 @@ export class SetPage implements OnInit {
     this.mediaService.getOne('slug', this.slug).subscribe({
       next: (response) => {
         this.media = response;
-        this.setTitle();
+        this.setMeta();
       },
       error: (error: any) =>
         this.toastService.showToast(TOAST_STATE.error, error),
     });
   }
 
-  setTitle() {
-    this.title.setTitle(
-      `${this.title.getTitle()} - ${getTitleMedia(this.media)}`
-    );
+  setMeta() {
+    const meta: MetadataI = {
+      title: `Set - ${getTitleMedia(this.media)}`,
+      image: `${environment.IMAGES_URL}/${this.media.images![0].url}`,
+      url: `${environment.APP_URL}${routesConfig.set.replace(
+        ':slug',
+        this.media.slug!
+      )}`,
+    };
+    if (this.media.info !== '') {
+      meta.description = this.media.info;
+    }
+    this.metaService.setMetaDynamic(meta);
   }
 
   getVideoUrl() {

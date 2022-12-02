@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
+import { environment } from '@env/environment';
 import { Media, Site } from '@models';
-import { SiteService, ToastService } from '@services';
+import { MetaService, SiteService, ToastService } from '@services';
+import { MetadataI } from '@shared/services/system/meta';
 import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinner.service';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 
@@ -24,7 +25,7 @@ export class FestivalPage implements OnInit {
     private siteService: SiteService,
     private toast: ToastService,
     private spinner: NgxSpinnerService,
-    private title: Title
+    private metaService: MetaService
   ) {}
 
   ngOnInit() {
@@ -37,7 +38,7 @@ export class FestivalPage implements OnInit {
     this.siteService.getOne('slug', this.slug).subscribe({
       next: (response: any) => {
         this.site = response;
-        this.setTitle();
+        this.setMeta();
         this.setViews();
         this.spinner.hide();
       },
@@ -76,8 +77,19 @@ export class FestivalPage implements OnInit {
     }
   }
 
-  setTitle() {
-    this.title.setTitle(`${this.title.getTitle()} - ${this.site.name}`);
+  setMeta() {
+    const meta: MetadataI = {
+      title: `Festival - ${this.site.name!}`,
+      image: `${environment.IMAGES_URL}/${this.site.images![0].url}`,
+      url: `${environment.APP_URL}${routesConfig.club.replace(
+        ':slug',
+        this.site.slug!
+      )}`,
+    };
+    if (this.site.info !== '') {
+      meta.description = this.site.info;
+    }
+    this.metaService.setMetaDynamic(meta);
   }
 
   goToSet(set: Media) {

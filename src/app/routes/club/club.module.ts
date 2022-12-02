@@ -27,7 +27,6 @@ import { ClubsPage } from './pages/clubs/clubs.page';
       {
         path: 'one/:slug',
         component: ClubPage,
-        data: { title: 'Club' },
       },
     ]),
   ],

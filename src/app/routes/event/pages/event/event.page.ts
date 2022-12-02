@@ -3,10 +3,14 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { Event } from '@models';
-import { ToastService } from '@services';
+import { MetaService, ToastService } from '@services';
 import { EventService } from '@shared/services/api/event/event.service';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinner.service';
+import { routesConfig } from '@core/config';
+import { MetadataI } from '@shared/services/system/meta';
+import * as moment from 'moment';
+import { environment } from '@env/environment';
 
 @Component({
   selector: 'page-event',
@@ -24,7 +28,7 @@ export class EventPage implements OnInit {
     private eventService: EventService,
     private toast: ToastService,
     private spinner: NgxSpinnerService,
-    private title: Title
+    private metaService: MetaService
   ) {}
 
   ngOnInit() {
@@ -37,7 +41,7 @@ export class EventPage implements OnInit {
     this.eventService.getOne('slug', this.slug).subscribe({
       next: (response) => {
         this.event = response;
-        this.setTitle();
+        this.setMeta();
         this.setViews();
         this.spinner.hide();
       },
@@ -48,8 +52,19 @@ export class EventPage implements OnInit {
     });
   }
 
-  setTitle() {
-    this.title.setTitle(`${this.title.getTitle()} - ${this.event.name}`);
+  setMeta() {
+    const meta: MetadataI = {
+      title: `Evento - ${this.event.name} @ ${this.event.site.name} - ${moment(this.event.date).format('DD-MM-YYYY')}`,
+      image: `${environment.IMAGES_URL}/${this.event.images![0].url}`,
+      url: `${environment.APP_URL}${routesConfig.event.replace(
+        ':slug',
+        this.event.slug!
+      )}`,
+    };
+    if (this.event.info !== '') {
+      meta.description = this.event.info;
+    }
+    this.metaService.setMetaDynamic(meta);
   }
 
   setViews() {

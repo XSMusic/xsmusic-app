@@ -29,7 +29,6 @@ export class MetaService {
   }
 
   private setAllMeta(data: MetadataI) {
-    console.log(data);
     this.setTitle(data);
     this.setDescription(data);
     this.setImage(data);
@@ -40,14 +39,14 @@ export class MetaService {
 
   private setTitle(data: MetadataI) {
     if (data.title) {
-      this.titleService.setTitle(data.title);
+      this.titleService.setTitle(`XSMusic - ${data.title}`);
       this.meta.updateTag({
         property: 'og:title',
-        content: data.title,
+        content: `XSMusic - ${data.title}`,
       });
       this.meta.updateTag({
         property: 'twitter:title',
-        content: data.title,
+        content: `XSMusic - ${data.title}`,
       });
     } else {
       this.meta.removeTag("property='og:title'");

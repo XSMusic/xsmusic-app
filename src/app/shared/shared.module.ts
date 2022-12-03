@@ -38,6 +38,7 @@ import {
   BlockStatsComponent,
   VideoYoutubeComponent,
   BlockSharingReportComponent,
+  SocialInputsComponent,
 } from '@components';
 import {
   CountryFlagPipe,
@@ -110,6 +111,7 @@ const components = [
   BlockStatsComponent,
   VideoYoutubeComponent,
   BlockSharingReportComponent,
+  SocialInputsComponent,
 ];
 const directives = [OnImageErrorDirective];
 const modules = [

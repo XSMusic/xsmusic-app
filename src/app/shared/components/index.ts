@@ -26,6 +26,7 @@ export { BlockStatsComponent } from './ui/block-stats/block-stats.component';
 export { BlockInfoProfileComponent } from './ui/block-info-profile/block-info-profile.component';
 export { VideoYoutubeComponent } from './ui/video-youtube/video-youtube.component';
 export { BlockSharingReportComponent } from './ui/block-sharing-report/block-sharing-report.component';
+export { SocialInputsComponent } from './ui/social-inputs/social-inputs.component';
 // View Gallery
 export { GenericViewGalleryComponent } from './views/gallery/generic-view-gallery/generic-view-gallery.component';
 export { GenericViewGalleryItemsComponent } from './views/gallery/generic-view-gallery-items/generic-view-gallery-items.component';

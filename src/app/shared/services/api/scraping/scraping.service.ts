@@ -9,6 +9,7 @@ import { Youtube } from '@models';
 import { Observable } from 'rxjs';
 import { ScrapingSoundcloudSearchI } from './scraping-soundcloud-search.interface';
 import { ScrapingEventsI, ScrapingSourceI } from './scraping-source.interface';
+import { ScrapingSearchNameYoutubeI } from './scraping-youtube-search.interface';
 import {
   ScrapingGetInfoArtistDto,
   ScrapingGetInfoClubDto,
@@ -46,6 +47,15 @@ export class ScrapingService {
   }): Observable<ScrapingSoundcloudSearchI[]> {
     return this.httpClient.post<ScrapingSoundcloudSearchI[]>(
       `${this.url}/searchNameSoundcloud`,
+      data
+    );
+  }
+
+  searchNameYoutube(data: {
+    name: string;
+  }): Observable<ScrapingSearchNameYoutubeI[]> {
+    return this.httpClient.post<ScrapingSearchNameYoutubeI[]>(
+      `${this.url}/searchNameYoutube`,
       data
     );
   }

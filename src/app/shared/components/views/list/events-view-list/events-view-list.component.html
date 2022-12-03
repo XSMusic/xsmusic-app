@@ -7,8 +7,8 @@
             *ngFor="let item of items"
             class="h-16 border-b border-gray-100 rounded-lg dark:border-black dark:border-0"
           >
-            <td class="pl-3">
-              <div class="flex gap-3 max-w-80">
+            <td class="pr-8">
+              <div class="flex gap-3 ">
                 <div class="w-12">
                   <img
                     [src]="item.images! | imageArray"
@@ -41,9 +41,9 @@
               </div>
             </td>
 
-            <td class="pl-3">
+            <td class="px-8">
               <div
-                class="flex gap-3 w-60"
+                class="flex gap-3 "
                 *ngIf="item.site.name !== 'Desconocido'"
               >
                 <img
@@ -79,11 +79,12 @@
               </div>
             </td>
 
-            <td class="pl-3">
+            <td class="px-8">
               <div class="flex gap-2">
                 <span
-                  *ngFor="let style of item.styles; let i = index"
-                  class="px-2 py-1 text-xs text-center bg-gray-100 shadow-md cursor-pointer rounded-2xl hover:bg-gray-200"
+                  *ngFor="let style of item.styles | slice: 0:3;
+                      let i = index"
+                  class="px-3 py-1 text-sm border border-gray-300 rounded-lg cursor-pointer dark:text-white dark:bg-black dark:border-gray-800 hover:opacity-70"
                   (click)="filter.emit({ name: 'styles', value: style.name })"
                 >
                   {{ style.name | titlecase }}
@@ -91,7 +92,7 @@
               </div>
             </td>
 
-            <td class="px-5" class="dark:text-white">
+            <td class="px-8" class="dark:text-white">
               <div class="flex flex-col gap-2 text-center">
                 <div
                   class="mr-2 text-sm font-light leading-none text-gray-700 dark:text-gray-400"
@@ -106,7 +107,7 @@
               </div>
             </td>
 
-            <td class="pl-5" *ngxPermissionsOnly="'ADMIN'">
+            <td class="px-8" *ngxPermissionsOnly="'ADMIN'">
               <div class="flex flex-col">
                 <div
                   class="mr-2 text-sm font-light leading-none text-gray-700 dark:text-gray-400"

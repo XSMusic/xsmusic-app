@@ -6,6 +6,7 @@ import { Site } from '@models';
 import { SiteService, ToastService } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
 @Component({
   selector: 'page-clubs',
@@ -30,7 +31,8 @@ export class ClubsPage implements OnInit {
     private siteService: SiteService,
     private router: Router,
     private route: ActivatedRoute,
-    private toast: ToastService
+    private toast: ToastService,
+    private gaService: GoogleAnalyticsService
   ) {}
 
   ngOnInit() {
@@ -68,6 +70,11 @@ export class ClubsPage implements OnInit {
   onClickButton(button: ButtonBlockItem) {
     if (button.action.includes('view')) {
       this.view = button.action;
+      this.gaService.event(
+        `clubs_change_${button.action}`,
+        'clubs_filter',
+        'clubs'
+      );
     } else if (button.action === 'order') {
       this.toast.showToast(TOAST_STATE.info, 'En construccion');
     }
@@ -75,9 +82,15 @@ export class ClubsPage implements OnInit {
 
   onSearch(event: { text: string; type: string }) {
     if (event.text === '') {
+      this.gaService.event(`clubs_search_empty`, 'clubs_search', 'clubs');
       this.body.page = 1;
       this.getItems();
     } else {
+      this.gaService.event(
+        `clubs_search_${event.text}}`,
+        'clubs_search',
+        'clubs'
+      );
       this.body.page = 1;
       this.body.filter = ['name', event.text];
       this.getItems();
@@ -85,16 +98,23 @@ export class ClubsPage implements OnInit {
   }
 
   goToProfile(site: Site) {
+    this.gaService.event('clubs_link_profile', 'clubs_link', 'clubs');
     this.router.navigate([routesConfig.club.replace(':slug', site.slug!)]);
   }
 
   onFilter(event: { name: string; value: string }) {
+    this.gaService.event(
+      `clubs_filter_${event.name.toLowerCase()}_${event.value.toLowerCase()}`,
+      'clubs_filter',
+      'clubs'
+    );
     this.body.page = 1;
     this.body.filter = [event.name, event.value];
     this.getItems();
   }
 
   removeFilter() {
+    this.gaService.event('clubs_remove_filter', 'clubs_filter', 'clubs');
     this.body.page = 1;
     this.body.filter = [];
     this.getItems();
@@ -106,6 +126,7 @@ export class ClubsPage implements OnInit {
   }
 
   goToAdmin() {
+    this.gaService.event('clubs_link_admin', 'artists_link', 'artists');
     this.router.navigate([routesConfig.clubsAdmin]);
   }
 }

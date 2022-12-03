@@ -7,6 +7,7 @@ import { Event } from '@models';
 import { EventService, ToastService } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
 @Component({
   selector: 'events',
@@ -30,7 +31,8 @@ export class EventsPage implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private eventService: EventService,
-    private toast: ToastService
+    private toast: ToastService,
+    private gaService: GoogleAnalyticsService
   ) {}
 
   ngOnInit() {
@@ -66,21 +68,20 @@ export class EventsPage implements OnInit {
     });
   }
 
-  onClickItemViewGallery(item: Event) {
-    this.router.navigate([routesConfig.event.replace(':slug', item.slug!)]);
-  }
-
   goToProfile(data: { type: 'site' | 'event'; event: Event }) {
     if (data.type === 'event') {
+      this.gaService.event('events_link_profile', 'events_link', 'events');
       this.router.navigate([
         routesConfig.event.replace(':slug', data.event.slug!),
       ]);
     } else {
       if (data.event.site.type === 'club') {
+        this.gaService.event('events_link_club', 'events_link', 'events');
         this.router.navigate([
           routesConfig.club.replace(':slug', data.event.slug!),
         ]);
       } else {
+        this.gaService.event('events_link_festival', 'events_link', 'events');
         this.router.navigate([
           routesConfig.festival.replace(':slug', data.event.slug!),
         ]);
@@ -89,12 +90,18 @@ export class EventsPage implements OnInit {
   }
 
   filter(event: { name: string; value: string }) {
+    this.gaService.event(
+      `events_filter_${event.name.toLowerCase()}_${event.value.toLowerCase()}`,
+      'events_filter',
+      'events'
+    );
     this.body.page = 1;
     this.body.filter = [event.name, event.value];
     this.getEvents();
   }
 
   removeFilter() {
+    this.gaService.event('events_remove_filter', 'events_filter', 'events');
     this.body.page = 1;
     this.body.filter = [];
     this.getEvents();
@@ -115,9 +122,15 @@ export class EventsPage implements OnInit {
 
   onSearch(event: { text: string; type: string }) {
     if (event.text === '') {
+      this.gaService.event(`events_search_empty`, 'events_search', 'events');
       this.body.page = 1;
       this.getEvents();
     } else {
+      this.gaService.event(
+        `events_search_${event.text}}`,
+        'events_search',
+        'events'
+      );
       this.body.page = 1;
       this.body.filter = ['name', event.text];
       this.getEvents();
@@ -125,6 +138,7 @@ export class EventsPage implements OnInit {
   }
 
   goToAdmin() {
+    this.gaService.event('events_link_admin', 'events_link', 'events');
     this.router.navigate([routesConfig.eventsAdmin]);
   }
 }

@@ -6,6 +6,7 @@ import { Media } from '@models';
 import { MediaService, ToastService } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
 @Component({
   selector: 'page-tracks',
@@ -26,7 +27,8 @@ export class TracksPage implements OnInit {
   constructor(
     private mediaService: MediaService,
     private router: Router,
-    private toast: ToastService
+    private toast: ToastService,
+    private gaService: GoogleAnalyticsService
   ) {}
 
   ngOnInit() {
@@ -54,6 +56,11 @@ export class TracksPage implements OnInit {
 
   onClickButton(button: ButtonBlockItem) {
     if (button.action.includes('view')) {
+      this.gaService.event(
+        `tracks_change_${button.action}`,
+        'tracks_filter',
+        'tracks'
+      );
       this.view = button.action;
     } else {
       this.toast.showToast(TOAST_STATE.info, 'En construccion');
@@ -62,9 +69,11 @@ export class TracksPage implements OnInit {
 
   onSearch(event: { text: string; type: string }) {
     if (event.text === '') {
+      this.gaService.event(`tracks_search_empty`, 'tracks_search', 'tracks');
       this.body.page = 1;
       this.getItems();
     } else {
+      this.gaService.event(`tracks_search_${event.text}}`, 'tracks_search', 'tracks');
       this.body.page = 1;
       this.body.filter = ['name', event.text];
       this.getItems();
@@ -72,16 +81,23 @@ export class TracksPage implements OnInit {
   }
 
   goToProfile(media: Media) {
+    this.gaService.event('tracks_link_profile', 'tracks_link', 'tracks');
     this.router.navigate([routesConfig.track.replace(':slug', media.slug!)]);
   }
 
   onFilter(event: { name: string; value: string }) {
+    this.gaService.event(
+      `tracks_filter_${event.name.toLowerCase()}_${event.value.toLowerCase()}`,
+      'tracks_filter',
+      'tracks'
+    );
     this.body.page = 1;
     this.body.filter = [event.name, event.value];
     this.getItems();
   }
 
   removeFilter() {
+    this.gaService.event('tracks_remove_filter', 'tracks_filter', 'tracks');
     this.body.page = 1;
     this.body.filter = [];
     this.getItems();
@@ -93,6 +109,7 @@ export class TracksPage implements OnInit {
   }
 
   goToAdmin() {
+    this.gaService.event('tracks_link_admin', 'tracks_link', 'tracks');
     this.router.navigate([routesConfig.tracksAdmin]);
   }
 }

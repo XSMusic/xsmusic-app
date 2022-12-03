@@ -4,13 +4,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { AppComponent } from './app.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { initializerProviders } from '@shared/services/system/initializer.providers';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import {
+  NgxGoogleAnalyticsModule,
+  NgxGoogleAnalyticsRouterModule,
+} from 'ngx-google-analytics';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,6 +29,8 @@ import { environment } from '../environments/environment';
       enabled: environment.production,
       registrationStrategy: 'registerWhenStable:30000',
     }),
+    NgxGoogleAnalyticsModule.forRoot('G-J3E02LHVML'),
+    NgxGoogleAnalyticsRouterModule,
   ],
   providers: [initializerProviders],
   bootstrap: [AppComponent],

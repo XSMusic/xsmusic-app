@@ -8,6 +8,7 @@ import { ToastService } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 import { ArtistService } from '@shared/services/api/artist/artist.service';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
 @Component({
   selector: 'artists',
@@ -31,7 +32,8 @@ export class ArtistsPage implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private artistService: ArtistService,
-    private toast: ToastService
+    private toast: ToastService,
+    private gaService: GoogleAnalyticsService
   ) {}
 
   ngOnInit() {
@@ -67,21 +69,24 @@ export class ArtistsPage implements OnInit {
     });
   }
 
-  onClickItemViewGallery(item: Artist) {
-    this.router.navigate([routesConfig.artist.replace(':slug', item.slug!)]);
-  }
-
   goToProfile(artist: Artist) {
+    this.gaService.event('artists_link_profile', 'artists_link', 'artists');
     this.router.navigate([routesConfig.artist.replace(':slug', artist.slug!)]);
   }
 
   onFilter(event: { name: string; value: string }) {
+    this.gaService.event(
+      `artists_filter_${event.name.toLowerCase()}_${event.value.toLowerCase()}`,
+      'artists_filter',
+      'artists'
+    );
     this.body.page = 1;
     this.body.filter = [event.name, event.value];
     this.getArtists();
   }
 
   removeFilter() {
+    this.gaService.event('artists_remove_filter', 'artists_filter', 'artists');
     this.body.page = 1;
     this.body.filter = [];
     this.getArtists();
@@ -95,6 +100,11 @@ export class ArtistsPage implements OnInit {
   onClickButton(button: ButtonBlockItem) {
     if (button.action.includes('view')) {
       this.view = button.action;
+      this.gaService.event(
+        `artists_change_${button.action}`,
+        'artists_filter',
+        'artists'
+      );
     } else {
       this.toast.showToast(TOAST_STATE.info, 'En construccion');
     }
@@ -102,9 +112,19 @@ export class ArtistsPage implements OnInit {
 
   onSearch(event: { text: string; type: string }) {
     if (event.text === '') {
+      this.gaService.event(
+        `artists_search_empty`,
+        'artists_search',
+        'artists'
+      );
       this.body.page = 1;
       this.getArtists();
     } else {
+      this.gaService.event(
+        `artists_search_${event.text}}`,
+        'artists_search',
+        'artists'
+      );
       this.body.page = 1;
       this.body.filter = ['name', event.text];
       this.getArtists();
@@ -112,6 +132,7 @@ export class ArtistsPage implements OnInit {
   }
 
   goToAdmin() {
+    this.gaService.event('artists_link_admin', 'artists_link', 'artists');
     this.router.navigate([routesConfig.artistsAdmin]);
   }
 }

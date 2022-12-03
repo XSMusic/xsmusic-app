@@ -6,6 +6,7 @@ import { Media } from '@models';
 import { MediaService, ToastService } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
 @Component({
   selector: 'page-sets',
@@ -26,7 +27,8 @@ export class SetsPage implements OnInit {
   constructor(
     private mediaService: MediaService,
     private router: Router,
-    private toast: ToastService
+    private toast: ToastService,
+    private gaService: GoogleAnalyticsService
   ) {}
 
   ngOnInit() {
@@ -54,6 +56,11 @@ export class SetsPage implements OnInit {
 
   onClickButton(button: ButtonBlockItem) {
     if (button.action.includes('view')) {
+      this.gaService.event(
+        `sets_change_${button.action}`,
+        'sets_filter',
+        'sets'
+      );
       this.view = button.action;
     } else {
       this.toast.showToast(TOAST_STATE.info, 'En construccion');
@@ -62,16 +69,19 @@ export class SetsPage implements OnInit {
 
   onSearch(event: { text: string; type: string }) {
     if (event.text === '') {
+      this.gaService.event(`sets_search_empty`, 'sets_search', 'sets');
       this.body.page = 1;
       this.getItems();
     } else {
+      this.gaService.event(`sets_search_${event.text}}`, 'sets_search', 'sets');
       this.body.page = 1;
       this.body.filter = ['name', event.text];
       this.getItems();
     }
   }
 
-  onClickItemViewGallery(item: Media) {
+  goToProfile(item: Media) {
+    this.gaService.event('sets_link_profile', 'sets_link', 'sets');
     this.router.navigate([routesConfig.set.replace(':slug', item.slug!)]);
   }
 
@@ -94,12 +104,18 @@ export class SetsPage implements OnInit {
   }
 
   onFilter(event: { name: string; value: string }) {
+    this.gaService.event(
+      `sets_filter_${event.name.toLowerCase()}_${event.value.toLowerCase()}`,
+      'sets_filter',
+      'sets'
+    );
     this.body.page = 1;
     this.body.filter = [event.name, event.value];
     this.getItems();
   }
 
   removeFilter() {
+    this.gaService.event('sets_remove_filter', 'sets_filter', 'sets');
     this.body.page = 1;
     this.body.filter = [];
     this.getItems();
@@ -111,6 +127,7 @@ export class SetsPage implements OnInit {
   }
 
   goToAdmin() {
+    this.gaService.event('sets_link_admin', 'sets_link', 'sets');
     this.router.navigate([routesConfig.setsAdmin]);
   }
 }

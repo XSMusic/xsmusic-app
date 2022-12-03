@@ -24,7 +24,7 @@
     [items]="items"
     [loading]="loading"
     type="event"
-    (goToOne)="onClickItemViewGallery($event)"
+    (goToOne)="goToProfile({type: 'event', event: $event})"
     (onScroll)="onScroll()"
   ></generic-view-gallery>
 

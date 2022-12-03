@@ -6,6 +6,7 @@ import { Site } from '@models';
 import { SiteService, ToastService } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
 @Component({
   selector: 'page-festivals',
@@ -29,7 +30,8 @@ export class FestivalsPage implements OnInit {
     private siteService: SiteService,
     private router: Router,
     private route: ActivatedRoute,
-    private toast: ToastService
+    private toast: ToastService,
+    private gaService: GoogleAnalyticsService
   ) {}
 
   ngOnInit() {
@@ -66,6 +68,11 @@ export class FestivalsPage implements OnInit {
 
   onClickButton(button: ButtonBlockItem) {
     if (button.action.includes('view')) {
+      this.gaService.event(
+        `festivals_change_${button.action}`,
+        'festivals_filter',
+        'festivals'
+      );
       this.view = button.action;
     } else if (button.action === 'order' || button.action === 'filter') {
       this.toast.showToast(TOAST_STATE.info, 'En construccion');
@@ -74,9 +81,15 @@ export class FestivalsPage implements OnInit {
 
   onSearch(event: { text: string; type: string }) {
     if (event.text === '') {
+      this.gaService.event(`festivals_search_empty`, 'festivals_search', 'festivals');
       this.body.page = 1;
       this.getItems();
     } else {
+      this.gaService.event(
+        `festivals_search_${event.text}}`,
+        'festivals_search',
+        'festivals'
+      );
       this.body.page = 1;
       this.body.filter = ['name', event.text];
       this.getItems();
@@ -84,16 +97,23 @@ export class FestivalsPage implements OnInit {
   }
 
   goToProfile(site: Site) {
+    this.gaService.event('festivals_link_profile', 'festivals_link', 'festivals');
     this.router.navigate([routesConfig.festival.replace(':slug', site.slug!)]);
   }
 
   onFilter(event: { name: string; value: string }) {
+    this.gaService.event(
+      `festivals_filter_${event.name.toLowerCase()}_${event.value.toLowerCase()}`,
+      'festivals_filter',
+      'festivals'
+    );
     this.body.page = 1;
     this.body.filter = [event.name, event.value];
     this.getItems();
   }
 
   removeFilter() {
+    this.gaService.event('festivals_remove_filter', 'festivals_filter', 'festivals');
     this.body.page = 1;
     this.body.filter = [];
     this.getItems();
@@ -105,6 +125,7 @@ export class FestivalsPage implements OnInit {
   }
 
   goToAdmin() {
+    this.gaService.event('festivals_link_admin', 'artists_link', 'artists');
     this.router.navigate([routesConfig.festivalsAdmin]);
   }
 }

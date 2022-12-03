@@ -24,7 +24,7 @@
     <div
       class="cursor-pointer hover:opacity-70"
       *ngxPermissionsOnly="'ADMIN'"
-      (click)="goToEdit(item._id!)"
+      (click)="goToAdmin(item._id!)"
     >
       {{ item.name }}
     </div>
@@ -190,7 +190,7 @@
     <div
       class="py-2"
       *ngIf="item.social?.web && item.social?.web !== ''"
-      (click)="goToSocial(item.social.web)"
+      (click)="goToSocial('web', item.social.web)"
     >
       <svg-icon
         name="web"
@@ -200,7 +200,7 @@
     <div
       class="py-2"
       *ngIf="item.social?.facebook && item.social?.facebook !== ''"
-      (click)="goToSocial(item.social.facebook)"
+      (click)="goToSocial('facebook', item.social.facebook)"
     >
       <svg-icon
         name="facebook"
@@ -210,7 +210,7 @@
     <div
       class="py-2"
       *ngIf="item.social?.twitter && item.social?.twitter !== ''"
-      (click)="goToSocial(item.social.twitter)"
+      (click)="goToSocial('twitter', item.social.twitter)"
     >
       <svg-icon
         name="twitter"
@@ -220,7 +220,7 @@
     <div
       class="py-2"
       *ngIf="item.social?.soundcloud && item.social?.soundcloud !== ''"
-      (click)="goToSocial(item.social.soundcloud)"
+      (click)="goToSocial('soundcloud', item.social.soundcloud)"
     >
       <svg-icon
         name="soundcloud"
@@ -230,7 +230,7 @@
     <div
       class="py-2"
       *ngIf="item.social?.spotify && item.social?.spotify !== ''"
-      (click)="goToSocial(item.social.spotify)"
+      (click)="goToSocial('spotify', item.social.spotify)"
     >
       <svg-icon
         name="spotify"
@@ -240,7 +240,7 @@
     <div
       class="py-2"
       *ngIf="item.social?.tiktok && item.social?.tiktok !== ''"
-      (click)="goToSocial(item.social.tiktok)"
+      (click)="goToSocial('tiktok', item.social.tiktok)"
     >
       <svg-icon
         name="tiktok"
@@ -250,7 +250,7 @@
     <div
       class="py-2"
       *ngIf="item.social?.instagram && item.social?.instagram !== ''"
-      (click)="goToSocial(item.social.instagram)"
+      (click)="goToSocial('instagram', item.social.instagram)"
     >
       <svg-icon
         name="instagram"
@@ -260,7 +260,7 @@
     <div
       class="py-2"
       *ngIf="item.social?.mixcloud && item.social?.mixcloud !== ''"
-      (click)="goToSocial(item.social.mixcloud)"
+      (click)="goToSocial('mixcloud', item.social.mixcloud)"
     >
       <svg-icon
         name="mixcloud"
@@ -270,7 +270,7 @@
     <div
       class="py-2"
       *ngIf="item.social?.youtube && item.social?.youtube !== ''"
-      (click)="goToSocial(item.social.youtube)"
+      (click)="goToSocial('youtube', item.social.youtube)"
     >
       <svg-icon
         name="youtube"

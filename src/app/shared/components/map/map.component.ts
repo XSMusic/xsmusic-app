@@ -67,12 +67,11 @@ export class MapComponent implements AfterViewInit {
   isDarkMode() {
     let darkMode = false;
     const user = this.userService.getUser();
-    if (user && user.darkMode === 'active') {
-      darkMode = true;
-    } else if (
-      user &&
-      user.darkMode === 'system' &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches
+    if (
+      (user && user.darkMode === 'active') ||
+      (user &&
+        user.darkMode === 'system' &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches)
     ) {
       darkMode = true;
     } else if (

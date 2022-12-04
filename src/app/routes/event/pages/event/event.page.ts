@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { Event } from '@models';
@@ -72,7 +71,7 @@ export class EventPage implements OnInit {
       this.views.push({
         name: 'Artistas',
         value: 'artist',
-        counter: this.event.artists!.length,
+        counter: this.event.artists.length,
       });
     }
   }

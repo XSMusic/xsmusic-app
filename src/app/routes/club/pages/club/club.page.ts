@@ -88,9 +88,9 @@ export class ClubPage implements OnInit {
         name: 'Imagenes',
         value: 'image',
         counter:
-          this.site.images!.length === 0
-            ? this.site.images!.length
-            : this.site.images!.length - 1,
+          this.site.images.length === 0
+            ? this.site.images.length
+            : this.site.images.length - 1,
       });
     }
   }

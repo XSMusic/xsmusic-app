@@ -102,32 +102,38 @@ export class AdminSiteOneComponent implements OnInit {
     });
   }
 
-  async setClubFromScraping(response: ScrapingGetInfoClubResponse) {
-    try {
-      if (response.address.street !== '') {
-        this.site.address.street = response.address.street;
+  async setClubFromScraping(
+    response: ScrapingGetInfoClubResponse
+  ): Promise<void> {
+    return new Promise((resolve, reject) => {
+      try {
+        if (response.address.street !== '') {
+          this.site.address.street = response.address.street;
+        }
+        if (response.address.town !== '') {
+          this.site.address.town = response.address.town;
+        }
+        if (response.address.state !== '') {
+          this.site.address.state = response.address.state;
+        }
+        if (response.address.country !== '') {
+          this.site.address.country = response.address.country;
+        }
+        if (response.address.coordinates.length > 0) {
+          this.site.address.coordinates = response.address.coordinates;
+        }
+        this.scraping.images = response.images;
+        this.spinner.hide();
+        resolve();
+      } catch (error) {
+        this.spinner.hide();
+        this.toastService.showToast(
+          TOAST_STATE.error,
+          'No ha sido posible scrapear sitio'
+        );
+        reject();
       }
-      if (response.address.town !== '') {
-        this.site.address.town = response.address.town;
-      }
-      if (response.address.state !== '') {
-        this.site.address.state = response.address.state;
-      }
-      if (response.address.country !== '') {
-        this.site.address.country = response.address.country;
-      }
-      if (response.address.coordinates.length > 0) {
-        this.site.address.coordinates = response.address.coordinates;
-      }
-      this.scraping.images = response.images;
-      this.spinner.hide();
-    } catch (error) {
-      this.spinner.hide();
-      this.toastService.showToast(
-        TOAST_STATE.error,
-        'No ha sido posible scrapear sitio'
-      );
-    }
+    });
   }
 
   addressToCoordinates() {

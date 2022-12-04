@@ -7,7 +7,7 @@ import { Media } from '@models';
 
 @Injectable({ providedIn: 'root' })
 export class MediaService {
-  url = `${environment.API_URL}/media`;
+  url = `${environment.urls.api}/media`;
   constructor(private httpClient: HttpClient) {}
 
   getAll(data: GetAllDto): Observable<PaginatorI<Media>> {

@@ -8,7 +8,7 @@ import { Image } from '@models';
 export class ImagePipe implements PipeTransform {
   transform(image: Image): string {
     if (image) {
-      return `${environment.IMAGES_URL}/${image.url}`;
+      return `${environment.urls.images}/${image.url}`;
     } else {
       return 'assets/no-image.png';
     }

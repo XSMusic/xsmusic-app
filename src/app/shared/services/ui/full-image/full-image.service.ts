@@ -11,7 +11,7 @@ export class FullImageService {
 
   showImageFull(image: string) {
     if (!image.includes('http') && !image.includes('data:')) {
-      image = `${environment.IMAGES_URL}/${image}`;
+      image = `${environment.urls.images}/${image}`;
     }
     this.imageFull$.next(image);
     this.showFull$.next(true);

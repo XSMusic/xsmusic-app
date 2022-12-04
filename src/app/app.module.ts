@@ -14,6 +14,8 @@ import {
   NgxGoogleAnalyticsModule,
   NgxGoogleAnalyticsRouterModule,
 } from 'ngx-google-analytics';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { provideAuth,getAuth } from '@angular/fire/auth';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,6 +33,8 @@ import {
     }),
     NgxGoogleAnalyticsModule.forRoot('G-J3E02LHVML'),
     NgxGoogleAnalyticsRouterModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
   ],
   providers: [initializerProviders],
   bootstrap: [AppComponent],

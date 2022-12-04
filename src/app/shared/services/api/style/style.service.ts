@@ -8,7 +8,7 @@ import { StyleGetAllDto } from './style.dto';
 
 @Injectable({ providedIn: 'root' })
 export class StyleService {
-  url = `${environment.API_URL}/styles`;
+  url = `${environment.urls.api}/styles`;
   constructor(private httpClient: HttpClient) {}
 
   getAll(data: StyleGetAllDto): Observable<PaginatorI<Style>> {

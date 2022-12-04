@@ -8,7 +8,7 @@ import { EventGetAllDto } from './event.dto';
 
 @Injectable({ providedIn: 'root' })
 export class EventService {
-  url = `${environment.API_URL}/events`;
+  url = `${environment.urls.api}/events`;
   constructor(private httpClient: HttpClient) {}
 
   getAll(data: EventGetAllDto): Observable<PaginatorI<Event>> {

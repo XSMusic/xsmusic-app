@@ -11,10 +11,23 @@ const targetPath = isProduction
 const environmentFileContent = `
   export const environment = {
     production: ${isProduction},
-    API_URL: "${process.env['API_URL']}",
-    IMAGES_URL: "${process.env['IMAGES_URL']}",
-    APP_URL: "${process.env['APP_URL']}",
-    API_STADIAMAPS: "${process.env['API_STADIAMAPS']}"
+    urls: {
+      api: "${process.env['API_URL']}",
+      images: "${process.env['IMAGES_URL']}",
+      app: "${process.env['APP_URL']}",
+    },
+    apis: {
+      stadiaMaps: "${process.env['API_STADIAMAPS']}",
+    },
+    firebase: {
+      projectId: "${process.env['FIREBASE_PROJECT_ID']}",
+      appId: "${process.env['FIREBASE_APP_ID']}",
+      storageBucket: "${process.env['FIREBASE_STORAGE_BUCKET']}",
+      apiKey: "${process.env['FIREBASE_API_KEY']}",
+      authDomain: "${process.env['FIREBASE_AUTH_DOMAIN']}",
+      messagingSenderId: "${process.env['FIREBASE_MESSAGING_SENDER_ID']}",
+      measurementId: "${process.env['FIREBASE_MEASUREMENT_ID']}",
+    }
   };
 `;
 writeFile(targetPath, environmentFileContent, function (err: any) {

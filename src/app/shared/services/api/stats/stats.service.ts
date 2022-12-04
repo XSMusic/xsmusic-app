@@ -8,7 +8,7 @@ import { StatsGetTopStatsI } from './stats.interface';
 
 @Injectable({ providedIn: 'root' })
 export class StatsService {
-  url = `${environment.API_URL}/stats`;
+  url = `${environment.urls.api}/stats`;
   constructor(private httpClient: HttpClient) {}
 
   getForAdmin(): Observable<StatsTotalsAdminI> {

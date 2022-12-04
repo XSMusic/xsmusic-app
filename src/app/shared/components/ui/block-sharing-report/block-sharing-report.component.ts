@@ -26,7 +26,7 @@ export class BlockSharingReportComponent {
                 this.item.site.date
               ).format('DD-MM-YYYY')}`
             : this.item.name,
-        url: `${environment.APP_URL}${this.router.url}`,
+        url: `${environment.urls.app}${this.router.url}`,
       };
       await Share.share(shareData);
     } catch (error: any) {

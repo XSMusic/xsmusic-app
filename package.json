@@ -54,7 +54,6 @@
     "leaflet-routing-machine": "^3.2.12",
     "leaflet.markercluster": "^1.5.3",
     "localstorage-polyfill": "^1.0.1",
-    "mock-browser": "^0.92.14",
     "moment": "^2.29.4",
     "ngx-google-analytics": "^14.0.1",
     "ngx-permissions": "^14.0.0",

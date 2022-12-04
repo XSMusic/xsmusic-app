@@ -112,7 +112,7 @@ export class BlockInfoProfileComponent {
       );
       const shareData: ShareOptions = {
         title: this.item.name,
-        url: `${environment.APP_URL}${this.router.url}`,
+        url: `${environment.urls.app}${this.router.url}`,
       };
       await Share.share(shareData);
     } catch (error) {

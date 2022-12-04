@@ -7,7 +7,7 @@ import { GithubActionI, GithubIssue, GithubIssueListItemI } from '@services';
 
 @Injectable({ providedIn: 'root' })
 export class GithubService {
-  url = `${environment.API_URL}/github`;
+  url = `${environment.urls.api}/github`;
   constructor(private httpClient: HttpClient) {}
 
   getAllActions(): Observable<GithubActionI[]> {

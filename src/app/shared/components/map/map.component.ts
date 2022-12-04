@@ -119,7 +119,7 @@ export class MapComponent implements AfterViewInit {
     for (const site of this.markers) {
       if (site.address && site.address.coordinates.length > 0) {
         const img = `<img style="width:3rem; height:3rem" class="object-cover rounded-full border hover:scale-105 hover:duration-1000" src='${
-          environment.IMAGES_URL
+          environment.urls.images
         }/${site.images![0].url}' />`;
 
         const icon = this.leafletService.L.divIcon({

@@ -10,11 +10,11 @@ export class RandomImagePipe implements PipeTransform {
   transform(images: Image[]): string {
     if (images) {
       if (images.length > 0) {
-        return `${environment.IMAGES_URL}/${
+        return `${environment.urls.images}/${
           images[randomNumber(images.length - 1, 0)].url
         }`;
       } else {
-        return `${environment.IMAGES_URL}/${images[0].url}`;
+        return `${environment.urls.images}/${images[0].url}`;
       }
     } else {
       return 'assets/no-image.png';

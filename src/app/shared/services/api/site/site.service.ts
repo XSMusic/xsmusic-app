@@ -7,7 +7,7 @@ import { GetAllDto, MessageI, PaginatorI } from '@interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class SiteService {
-  url = `${environment.API_URL}/sites`;
+  url = `${environment.urls.api}/sites`;
   constructor(private httpClient: HttpClient) {}
 
   getAll(data: GetAllDto): Observable<PaginatorI<Site>> {

@@ -44,8 +44,8 @@ export class TrackPage implements OnInit {
   setMeta() {
     const meta: MetadataI = {
       title: getTitleMedia(this.media),
-      image: `${environment.IMAGES_URL}/${this.media.images![0].url}`,
-      url: `${environment.APP_URL}${routesConfig.track.replace(
+      image: `${environment.urls.images}/${this.media.images![0].url}`,
+      url: `${environment.urls.app}${routesConfig.track.replace(
         ':slug',
         this.media.slug!
       )}`,

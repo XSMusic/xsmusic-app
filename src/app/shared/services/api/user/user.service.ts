@@ -12,7 +12,7 @@ import { IdDto, MessageI } from '@interfaces';
 export class UserService {
   private change$ = new BehaviorSubject<User | undefined>(undefined);
   private _user?: User;
-  url = `${environment.API_URL}/users`;
+  url = `${environment.urls.api}/users`;
   constructor(
     private httpClient: HttpClient,
     private localStorageService: LocalStorageService

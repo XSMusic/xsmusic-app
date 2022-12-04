@@ -7,7 +7,7 @@ import { GetAllDto, MessageI, PaginatorI } from '@interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class ArtistService {
-  url = `${environment.API_URL}/artists`;
+  url = `${environment.urls.api}/artists`;
   constructor(private httpClient: HttpClient) {}
 
   getAll(data: GetAllDto): Observable<PaginatorI<Artist>> {

@@ -6,7 +6,7 @@ import { Observable, take } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class MenuService {
-  url = `${environment.API_URL}/menu`;
+  url = `${environment.urls.api}/menu`;
   constructor(private httpClient: HttpClient) {}
 
   getAll(): Observable<Menu[]> {

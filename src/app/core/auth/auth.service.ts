@@ -9,12 +9,13 @@ import { UserService } from '@services';
 import { NgxPermissionsService } from 'ngx-permissions';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
+import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  urlAuth = `${environment.API_URL}/auth`;
+  urlAuth = `${environment.urls.api}/auth`;
   private user$ = new BehaviorSubject({});
   private change$ = this.tokenService
     .change()
@@ -24,7 +25,8 @@ export class AuthService {
     private tokenService: TokenService,
     private userService: UserService,
     private permissionService: NgxPermissionsService,
-    protected http: HttpClient
+    private auth: Auth,
+    protected http: HttpClient,
   ) {}
 
   init() {

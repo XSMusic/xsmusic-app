@@ -19,7 +19,7 @@ import {
 
 @Injectable({ providedIn: 'root' })
 export class ScrapingService {
-  url = `${environment.API_URL}/scraping`;
+  url = `${environment.urls.api}/scraping`;
   constructor(private httpClient: HttpClient) {}
 
   getSources(type: string): ScrapingSourceI[] {

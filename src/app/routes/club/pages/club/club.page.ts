@@ -52,8 +52,8 @@ export class ClubPage implements OnInit {
   setMeta() {
     const meta: MetadataI = {
       title: this.site.name!,
-      image: `${environment.IMAGES_URL}/${this.site.images![0].url}`,
-      url: `${environment.APP_URL}${routesConfig.club.replace(
+      image: `${environment.urls.images}/${this.site.images![0].url}`,
+      url: `${environment.urls.app}${routesConfig.club.replace(
         ':slug',
         this.site.slug!
       )}`,

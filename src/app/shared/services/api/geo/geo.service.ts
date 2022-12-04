@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class GeoService {
-  url = `${environment.API_URL}/geo`;
+  url = `${environment.urls.api}/geo`;
   constructor(private httpClient: HttpClient) {}
 
   addressToCoordinates(address: string): Observable<{ coordinates: number[] }> {

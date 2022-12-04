@@ -13,7 +13,7 @@ import {
 
 @Injectable({ providedIn: 'root' })
 export class ImageService {
-  url = `${environment.API_URL}/images`;
+  url = `${environment.urls.api}/images`;
   constructor(private httpClient: HttpClient) {}
 
   getAll(data: GetAllDto): Observable<PaginatorI<Image>> {

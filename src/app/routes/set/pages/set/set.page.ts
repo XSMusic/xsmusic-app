@@ -75,6 +75,4 @@ export class SetPage implements OnInit {
       routesConfig.setAdmin.replace(':id', this.media._id!),
     ]);
   }
-
-
 }

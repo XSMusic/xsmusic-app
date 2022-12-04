@@ -53,7 +53,9 @@ export class EventPage implements OnInit {
 
   setMeta() {
     const meta: MetadataI = {
-      title: `${this.event.name} @ ${this.event.site.name} - ${moment(this.event.date).format('DD-MM-YYYY')}`,
+      title: `${this.event.name} @ ${this.event.site.name} - ${moment(
+        this.event.date
+      ).format('DD-MM-YYYY')}`,
       image: `${environment.urls.images}/${this.event.images![0].url}`,
       url: `${environment.urls.app}${routesConfig.event.replace(
         ':slug',

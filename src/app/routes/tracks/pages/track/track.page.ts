@@ -36,8 +36,7 @@ export class TrackPage implements OnInit {
         this.media = response;
         this.setMeta();
       },
-      error: (error: any) =>
-        this.toast.showToast(TOAST_STATE.error, error),
+      error: (error: any) => this.toast.showToast(TOAST_STATE.error, error),
     });
   }
 

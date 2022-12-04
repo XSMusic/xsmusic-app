@@ -12,7 +12,7 @@ import {
 @Component({
   selector: 'search-input',
   templateUrl: 'search-input.component.html',
-  animations: [inOutAnimation]
+  animations: [inOutAnimation],
 })
 export class SearchInputComponent implements OnInit {
   @Input() type!: 'artist' | 'site' | 'style';

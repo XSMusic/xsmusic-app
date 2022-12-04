@@ -8,7 +8,7 @@
             class="h-16 border-b border-gray-100 rounded-lg dark:border-black dark:border-0"
           >
             <td class="pr-8">
-              <div class="flex gap-3 ">
+              <div class="flex gap-3">
                 <div class="w-12">
                   <img
                     [src]="item.images! | imageArray"
@@ -42,10 +42,7 @@
             </td>
 
             <td class="px-8">
-              <div
-                class="flex gap-3 "
-                *ngIf="item.site.name !== 'Desconocido'"
-              >
+              <div class="flex gap-3" *ngIf="item.site.name !== 'Desconocido'">
                 <img
                   [src]="item.site.images | imageArray"
                   alt=""
@@ -82,8 +79,7 @@
             <td class="px-8">
               <div class="flex gap-2">
                 <span
-                  *ngFor="let style of item.styles | slice: 0:3;
-                      let i = index"
+                  *ngFor="let style of item.styles | slice: 0:3; let i = index"
                   class="px-3 py-1 text-sm border border-gray-300 rounded-lg cursor-pointer dark:text-white dark:bg-black dark:border-gray-800 hover:opacity-70"
                   (click)="filter.emit({ name: 'styles', value: style.name })"
                 >

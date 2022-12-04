@@ -1,25 +1,21 @@
 <div class="pt-16" @inOut>
   <!-- Image -->
-  <div
-    class="mx-auto mt-3 overflow-hidden border-2 h-52 w-52 dark:border-2 dark:border-gray-800"
-    [ngClass]="{
-      'rounded-full': type === 'artist',
-      'rounded-2xl': type === 'club' || type === 'festival' || type === 'event',
-      'h-80': type === 'event'
-    }"
+  <block-info-profile-image
+    [item]="item"
+    [type]="type"
+  ></block-info-profile-image>
+
+  <!-- Date -->
+  <p
+    *ngIf="type === 'event'"
+    class="pb-1 text-lg text-center dark:text-white font-extralight"
   >
-    <img
-      [src]="item.images! | imageArray"
-      class="object-cover w-full h-full shadow-sm cursor-pointer hover:filter-grayscale hover:scale-105 hover:duration-1000"
-      [alt]="item.name"
-      (click)="showImage(item.images![0].url!)"
-      onError
-    />
-  </div>
+    {{ getDate() }}
+  </p>
 
   <!-- Name -->
   <div
-    class="flex justify-center gap-2 pt-2 text-3xl font-black text-center dark:text-white"
+    class="flex justify-center gap-2 p-1 text-3xl font-black text-center dark:text-white"
   >
     <div
       class="cursor-pointer hover:opacity-70"
@@ -61,51 +57,28 @@
   </div>
 
   <!-- Site Address -->
-  <ng-container *ngIf="item.address">
-    <div class="text-center dark:text-white font-extralight">
-      <p *ngIf="item.address.street !== '' && item.address.town !== ''">
-        {{ item.address.street }},
-        <span
-          class="cursor-pointer hover:opacity-70"
-          (click)="goToFilter('town', item.address.town!)"
-        >
-          {{ item.address.town }}
-        </span>
-      </p>
-      <p *ngIf="item.address.street !== '' && item.address.town === ''">
-        {{ item.address.street }},
-        <span
-          class="cursor-pointer hover:opacity-70"
-          (click)="goToFilter('state', item.address.state!)"
-        >
-          {{ item.address.state }}
-        </span>
-      </p>
-    </div>
+  <block-info-profile-address
+    *ngIf="type === 'club' || type === 'festival'"
+    [item]="item"
+    [type]="type"
+  ></block-info-profile-address>
 
-    <div
-      class="flex items-center justify-center gap-2 py-1 mx-auto font-extralight dark:text-white"
+  <!-- Event Site Name -->
+  <div *ngIf="type === 'event'" class="pb-2">
+    <p class="text-base text-center dark:text-white font-extralight">@</p>
+    <p
+      class="pt-1 text-3xl font-black text-center cursor-pointer dark:text-white hover:opacity-70"
+      (click)="goToProfile('site', item)"
     >
-      <img
-        class="w-6 cursor-pointer"
-        [src]="item.address.country! | countryFlag"
-        alt="item.name"
-        (click)="goToFilter('country', item.address.country!)"
-      />
-      <span
-        class="cursor-pointer hover:opacity-70"
-        (click)="goToFilter('state', item.address.state!)"
-      >
-        {{ item.address.state }},
-      </span>
-      <span
-        class="cursor-pointer hover:opacity-70"
-        (click)="goToFilter('country', item.address.country!)"
-      >
-        {{ item.address.country! | countryName }}
-      </span>
-    </div>
-  </ng-container>
+      {{ item.site.name }}
+    </p>
+  </div>
+
+  <block-info-profile-address
+    *ngIf="type === 'event'"
+    [item]="item.site"
+    [type]="type"
+  ></block-info-profile-address>
 
   <!-- Styles -->
   <div
@@ -123,161 +96,18 @@
     </div>
   </div>
 
-  <div *ngIf="type === 'event'" class="">
-    <ng-container *ngIf="item.site.address">
-      <div class="text-center dark:text-white font-extralight">
-        <p
-          class="text-xl font-black cursor-pointer"
-          (click)="goToProfile('site', item)"
-        >
-          {{ item.site.name }}
-        </p>
-        <p
-          *ngIf="
-            item.site.address.street !== '' && item.site.address.town !== ''
-          "
-        >
-          {{ item.site.address.street }},
-          <span
-            class="cursor-pointer hover:opacity-70"
-            (click)="goToFilter('town', item.site.address.town!)"
-          >
-            {{ item.site.address.town }}
-          </span>
-        </p>
-        <p
-          *ngIf="
-            item.site.address.street !== '' && item.site.address.town === ''
-          "
-        >
-          {{ item.site.address.street }},
-          <span
-            class="cursor-pointer hover:opacity-70"
-            (click)="goToFilter('state', item.site.address.state!)"
-          >
-            {{ item.site.address.state }}
-          </span>
-        </p>
-      </div>
-
-      <div
-        class="flex items-center justify-center gap-2 py-1 mx-auto font-extralight dark:text-white"
-      >
-        <img
-          class="w-6 cursor-pointer"
-          [src]="item.site.address.country! | countryFlag"
-          alt=""
-          (click)="goToFilter('country', item.site.address.country!)"
-        />
-        <span
-          class="cursor-pointer hover:opacity-70"
-          (click)="goToFilter('state', item.site.address.state!)"
-        >
-          {{ item.site.address.state }},
-        </span>
-        <span
-          class="cursor-pointer hover:opacity-70"
-          (click)="goToFilter('country', item.site.address.country!)"
-        >
-          {{ item.site.address.country! | countryName }}
-        </span>
-      </div>
-    </ng-container>
-  </div>
-
   <!-- Social -->
-  <div class="flex justify-center gap-3">
-    <div
-      class="py-2"
-      *ngIf="item.social?.web && item.social?.web !== ''"
-      (click)="goToSocial('web', item.social.web)"
-    >
-      <svg-icon
-        name="web"
-        svgClass="h-8 w-8 dark:fill-white hover:scale-110 hover:duration-1000 cursor-pointer"
-      ></svg-icon>
-    </div>
-    <div
-      class="py-2"
-      *ngIf="item.social?.facebook && item.social?.facebook !== ''"
-      (click)="goToSocial('facebook', item.social.facebook)"
-    >
-      <svg-icon
-        name="facebook"
-        svgClass="h-8 w-8 hover:scale-110 hover:duration-1000 cursor-pointer"
-      ></svg-icon>
-    </div>
-    <div
-      class="py-2"
-      *ngIf="item.social?.twitter && item.social?.twitter !== ''"
-      (click)="goToSocial('twitter', item.social.twitter)"
-    >
-      <svg-icon
-        name="twitter"
-        svgClass="h-8 w-8 hover:scale-110 hover:duration-1000 cursor-pointer"
-      ></svg-icon>
-    </div>
-    <div
-      class="py-2"
-      *ngIf="item.social?.soundcloud && item.social?.soundcloud !== ''"
-      (click)="goToSocial('soundcloud', item.social.soundcloud)"
-    >
-      <svg-icon
-        name="soundcloud"
-        svgClass="h-8 w-8 hover:scale-110 hover:duration-1000 cursor-pointer"
-      ></svg-icon>
-    </div>
-    <div
-      class="py-2"
-      *ngIf="item.social?.spotify && item.social?.spotify !== ''"
-      (click)="goToSocial('spotify', item.social.spotify)"
-    >
-      <svg-icon
-        name="spotify"
-        svgClass="h-8 w-8 hover:scale-110 hover:duration-1000 cursor-pointer"
-      ></svg-icon>
-    </div>
-    <div
-      class="py-2"
-      *ngIf="item.social?.tiktok && item.social?.tiktok !== ''"
-      (click)="goToSocial('tiktok', item.social.tiktok)"
-    >
-      <svg-icon
-        name="tiktok"
-        svgClass="h-8 w-8 dark:fill-white hover:scale-110 hover:duration-1000 cursor-pointer"
-      ></svg-icon>
-    </div>
-    <div
-      class="py-2"
-      *ngIf="item.social?.instagram && item.social?.instagram !== ''"
-      (click)="goToSocial('instagram', item.social.instagram)"
-    >
-      <svg-icon
-        name="instagram"
-        svgClass="h-8 w-8 hover:scale-110 hover:duration-1000 cursor-pointer"
-      ></svg-icon>
-    </div>
-    <div
-      class="py-2"
-      *ngIf="item.social?.mixcloud && item.social?.mixcloud !== ''"
-      (click)="goToSocial('mixcloud', item.social.mixcloud)"
-    >
-      <svg-icon
-        name="mixcloud"
-        svgClass="h-8 w-8 hover:scale-110 hover:duration-1000 cursor-pointer"
-      ></svg-icon>
-    </div>
-    <div
-      class="py-2"
-      *ngIf="item.social?.youtube && item.social?.youtube !== ''"
-      (click)="goToSocial('youtube', item.social.youtube)"
-    >
-      <svg-icon
-        name="youtube"
-        svgClass="h-8 w-8 fill-red-600 hover:scale-110 hover:duration-1000 cursor-pointer"
-      ></svg-icon>
-    </div>
-  </div>
+  <block-social
+    *ngIf="type !== 'event'"
+    [type]="type"
+    [item]="item"
+  ></block-social>
+
+  <block-social
+    *ngIf="type === 'event'"
+    [type]="type"
+    [item]="item.site"
+  ></block-social>
 
   <!-- Compartir & Reportar -->
   <block-sharing-report [item]="item" [type]="type"></block-sharing-report>

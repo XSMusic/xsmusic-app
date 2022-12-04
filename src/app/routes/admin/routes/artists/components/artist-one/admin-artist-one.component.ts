@@ -278,6 +278,4 @@ export class ArtistOneComponent {
       routesConfig.artist.replace(':slug', this.artist.slug!),
     ]);
   }
-
-
 }

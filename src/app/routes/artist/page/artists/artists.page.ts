@@ -112,11 +112,7 @@ export class ArtistsPage implements OnInit {
 
   onSearch(event: { text: string; type: string }) {
     if (event.text === '') {
-      this.gaService.event(
-        `artists_search_empty`,
-        'artists_search',
-        'artists'
-      );
+      this.gaService.event(`artists_search_empty`, 'artists_search', 'artists');
       this.body.page = 1;
       this.getArtists();
     } else {

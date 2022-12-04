@@ -81,7 +81,11 @@ export class FestivalsPage implements OnInit {
 
   onSearch(event: { text: string; type: string }) {
     if (event.text === '') {
-      this.gaService.event(`festivals_search_empty`, 'festivals_search', 'festivals');
+      this.gaService.event(
+        `festivals_search_empty`,
+        'festivals_search',
+        'festivals'
+      );
       this.body.page = 1;
       this.getItems();
     } else {
@@ -97,7 +101,11 @@ export class FestivalsPage implements OnInit {
   }
 
   goToProfile(site: Site) {
-    this.gaService.event('festivals_link_profile', 'festivals_link', 'festivals');
+    this.gaService.event(
+      'festivals_link_profile',
+      'festivals_link',
+      'festivals'
+    );
     this.router.navigate([routesConfig.festival.replace(':slug', site.slug!)]);
   }
 
@@ -113,7 +121,11 @@ export class FestivalsPage implements OnInit {
   }
 
   removeFilter() {
-    this.gaService.event('festivals_remove_filter', 'festivals_filter', 'festivals');
+    this.gaService.event(
+      'festivals_remove_filter',
+      'festivals_filter',
+      'festivals'
+    );
     this.body.page = 1;
     this.body.filter = [];
     this.getItems();

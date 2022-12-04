@@ -39,6 +39,9 @@ import {
   VideoYoutubeComponent,
   BlockSharingReportComponent,
   SocialInputsComponent,
+  BlockSocialComponent,
+  BlockInfoProfileAddressComponent,
+  BlockInfoProfileImageComponent,
 } from '@components';
 import {
   CountryFlagPipe,
@@ -55,6 +58,7 @@ import {
   FixStatePipe,
   DateToDayOrMonthPipe,
   MomentFormatAgoPipe,
+  FirstLetterPipe,
 } from '@pipes';
 import { OnImageErrorDirective } from './directives';
 import { NgxPermissionsModule } from 'ngx-permissions';
@@ -112,6 +116,9 @@ const components = [
   VideoYoutubeComponent,
   BlockSharingReportComponent,
   SocialInputsComponent,
+  BlockSocialComponent,
+  BlockInfoProfileAddressComponent,
+  BlockInfoProfileImageComponent,
 ];
 const directives = [OnImageErrorDirective];
 const modules = [
@@ -141,6 +148,7 @@ const pipes = [
   FixStatePipe,
   DateToDayOrMonthPipe,
   MomentFormatAgoPipe,
+  FirstLetterPipe,
 ];
 const services = [
   AngularSvgIconPreloaderService,

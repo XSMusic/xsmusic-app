@@ -1,0 +1,92 @@
+<div class="flex justify-center gap-3">
+  <div
+    class="py-2"
+    *ngIf="item.social?.web && item.social?.web !== ''"
+    (click)="goToSocial('web', item.social.web)"
+  >
+    <svg-icon
+      name="web"
+      svgClass="h-8 w-8 dark:fill-white hover:scale-110 hover:duration-1000 cursor-pointer"
+    ></svg-icon>
+  </div>
+  <div
+    class="py-2"
+    *ngIf="item.social?.facebook && item.social?.facebook !== ''"
+    (click)="goToSocial('facebook', item.social.facebook)"
+  >
+    <svg-icon
+      name="facebook"
+      svgClass="h-8 w-8 hover:scale-110 hover:duration-1000 cursor-pointer"
+    ></svg-icon>
+  </div>
+  <div
+    class="py-2"
+    *ngIf="item.social?.twitter && item.social?.twitter !== ''"
+    (click)="goToSocial('twitter', item.social.twitter)"
+  >
+    <svg-icon
+      name="twitter"
+      svgClass="h-8 w-8 hover:scale-110 hover:duration-1000 cursor-pointer"
+    ></svg-icon>
+  </div>
+  <div
+    class="py-2"
+    *ngIf="item.social?.soundcloud && item.social?.soundcloud !== ''"
+    (click)="goToSocial('soundcloud', item.social.soundcloud)"
+  >
+    <svg-icon
+      name="soundcloud"
+      svgClass="h-8 w-8 hover:scale-110 hover:duration-1000 cursor-pointer"
+    ></svg-icon>
+  </div>
+  <div
+    class="py-2"
+    *ngIf="item.social?.spotify && item.social?.spotify !== ''"
+    (click)="goToSocial('spotify', item.social.spotify)"
+  >
+    <svg-icon
+      name="spotify"
+      svgClass="h-8 w-8 hover:scale-110 hover:duration-1000 cursor-pointer"
+    ></svg-icon>
+  </div>
+  <div
+    class="py-2"
+    *ngIf="item.social?.tiktok && item.social?.tiktok !== ''"
+    (click)="goToSocial('tiktok', item.social.tiktok)"
+  >
+    <svg-icon
+      name="tiktok"
+      svgClass="h-8 w-8 dark:fill-white hover:scale-110 hover:duration-1000 cursor-pointer"
+    ></svg-icon>
+  </div>
+  <div
+    class="py-2"
+    *ngIf="item.social?.instagram && item.social?.instagram !== ''"
+    (click)="goToSocial('instagram', item.social.instagram)"
+  >
+    <svg-icon
+      name="instagram"
+      svgClass="h-8 w-8 hover:scale-110 hover:duration-1000 cursor-pointer"
+    ></svg-icon>
+  </div>
+  <div
+    class="py-2"
+    *ngIf="item.social?.mixcloud && item.social?.mixcloud !== ''"
+    (click)="goToSocial('mixcloud', item.social.mixcloud)"
+  >
+    <svg-icon
+      name="mixcloud"
+      svgClass="h-8 w-8 hover:scale-110 hover:duration-1000 cursor-pointer"
+    ></svg-icon>
+  </div>
+  <div
+    class="py-2"
+    *ngIf="item.social?.youtube && item.social?.youtube !== ''"
+    (click)="goToSocial('youtube', item.social.youtube)"
+  >
+    <svg-icon
+      name="youtube"
+      svgClass="h-8 w-8 fill-red-600 hover:scale-110 hover:duration-1000 cursor-pointer"
+    ></svg-icon>
+  </div>
+</div>

@@ -73,7 +73,11 @@ export class TracksPage implements OnInit {
       this.body.page = 1;
       this.getItems();
     } else {
-      this.gaService.event(`tracks_search_${event.text}}`, 'tracks_search', 'tracks');
+      this.gaService.event(
+        `tracks_search_${event.text}}`,
+        'tracks_search',
+        'tracks'
+      );
       this.body.page = 1;
       this.body.filter = ['name', event.text];
       this.getItems();

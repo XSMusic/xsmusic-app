@@ -4,7 +4,6 @@ export { ArtistsLastBlockComponent } from './artists/artists-last-block/artists-
 export { SiteLastMediaItemsComponent } from './sites/site-last-media-items/site-last-media-items.component';
 export { SiteLastMediaComponent } from './sites/site-last-media/site-last-media.component';
 export { SitesLastBlockComponent } from './sites/sites-last-block/sites-last-block.component';
-
 //UI
 export { AlertComponent } from './ui/alert/alert.component';
 export { ButtonsBlockComponent } from './ui/buttons-block/buttons-block.component';
@@ -27,6 +26,10 @@ export { BlockInfoProfileComponent } from './ui/block-info-profile/block-info-pr
 export { VideoYoutubeComponent } from './ui/video-youtube/video-youtube.component';
 export { BlockSharingReportComponent } from './ui/block-sharing-report/block-sharing-report.component';
 export { SocialInputsComponent } from './ui/social-inputs/social-inputs.component';
+export { BlockSocialComponent } from './ui/block-social/block-social.component';
+export { BlockInfoProfileAddressComponent } from './ui/block-info-profile/block-info-profile-address/block-info-profile-address.component';
+export { BlockInfoProfileImageComponent } from './ui/block-info-profile/block-info-profile-image/block-info-profile-image.component';
+
 // View Gallery
 export { GenericViewGalleryComponent } from './views/gallery/generic-view-gallery/generic-view-gallery.component';
 export { GenericViewGalleryItemsComponent } from './views/gallery/generic-view-gallery-items/generic-view-gallery-items.component';

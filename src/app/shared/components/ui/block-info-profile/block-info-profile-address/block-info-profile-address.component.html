@@ -1,0 +1,45 @@
+<ng-container *ngIf="item.address">
+  <div class="text-center dark:text-white font-extralight">
+    <p *ngIf="item.address.street !== '' && item.address.town !== ''">
+      {{ item.address.street }},
+      <span
+        class="cursor-pointer hover:opacity-70"
+        (click)="goToFilter('town', item.address.town!)"
+      >
+        {{ item.address.town }}
+      </span>
+    </p>
+    <p *ngIf="item.address.street !== '' && item.address.town === ''">
+      {{ item.address.street }},
+      <span
+        class="cursor-pointer hover:opacity-70"
+        (click)="goToFilter('state', item.address.state!)"
+      >
+        {{ item.address.state }}
+      </span>
+    </p>
+  </div>
+
+  <div
+    class="flex items-center justify-center gap-2 py-1 mx-auto font-extralight dark:text-white"
+  >
+    <img
+      class="w-6 cursor-pointer"
+      [src]="item.address.country! | countryFlag"
+      alt="item.name"
+      (click)="goToFilter('country', item.address.country!)"
+    />
+    <span
+      class="cursor-pointer hover:opacity-70"
+      (click)="goToFilter('state', item.address.state!)"
+    >
+      {{ item.address.state }},
+    </span>
+    <span
+      class="cursor-pointer hover:opacity-70"
+      (click)="goToFilter('country', item.address.country!)"
+    >
+      {{ item.address.country! | countryName }}
+    </span>
+  </div>
+</ng-container>

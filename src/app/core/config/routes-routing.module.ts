@@ -55,13 +55,14 @@ const routes: Routes = [
     path: 'auth',
     data: {},
     loadChildren: () =>
-      import('../../routes/auth/auth.module').then((m) => m.ArtistsModule),
+      import('../../routes/auth/auth.module').then((m) => m.AuthModule),
   },
   {
     path: 'account',
     data: {
       permissions: {
         only: ['USER', 'ADMIN'],
+        redirectTo: '/',
       },
     },
     loadChildren: () =>
@@ -77,6 +78,7 @@ const routes: Routes = [
       breadcrumb: 'Admin',
       permissions: {
         only: 'ADMIN',
+        redirectTo: '/',
       },
     },
     loadChildren: () =>

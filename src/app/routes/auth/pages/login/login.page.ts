@@ -20,7 +20,25 @@ export class LoginPage {
   ) {}
 
   loginEmail() {
-    this.authService.login(this.email, this.password).subscribe({
+    this.authService
+      .loginEmail({ email: this.email, password: this.password })
+      .subscribe({
+        next: () => {
+          const user = this.userService.getUser();
+          this.router.navigate([routesConfig.home]);
+          this.toast.showToast(
+            TOAST_STATE.success,
+            `¡Bienvenid@ ${user.name}!`
+          );
+        },
+        error: (error) => {
+          this.toast.showToast(TOAST_STATE.error, error);
+        },
+      });
+  }
+
+  async loginGoogle() {
+    (await this.authService.loginGoogle()).subscribe({
       next: () => {
         const user = this.userService.getUser();
         this.router.navigate([routesConfig.home]);

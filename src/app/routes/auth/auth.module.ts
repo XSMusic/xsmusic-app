@@ -48,4 +48,4 @@ import { ResetChangePasswordPage } from './pages/reset-change-password/reset-cha
   ],
   providers: [],
 })
-export class ArtistsModule {}
+export class AuthModule {}

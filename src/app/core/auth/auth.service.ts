@@ -9,7 +9,13 @@ import { UserService } from '@services';
 import { NgxPermissionsService } from 'ngx-permissions';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
-import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
+import {
+  Auth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  UserCredential,
+} from '@angular/fire/auth';
+import { LoginEmailDto } from './login.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +32,7 @@ export class AuthService {
     private userService: UserService,
     private permissionService: NgxPermissionsService,
     private auth: Auth,
-    protected http: HttpClient,
+    protected http: HttpClient
   ) {}
 
   init() {
@@ -43,12 +49,24 @@ export class AuthService {
     return this.tokenService.valid();
   }
 
-  login(email: string, password: string): Observable<boolean> {
+  loginEmail(data: LoginEmailDto): Observable<boolean> {
+    return this.http.post<LoginResponseI>(`${this.urlAuth}/login`, data).pipe(
+      tap((item: LoginResponseI) => {
+        this.tokenService.set(item.token);
+        this.userService.set(item.user);
+      }),
+      map(() => this.check())
+    );
+  }
+
+  async loginGoogle() {
+    const data: UserCredential = await signInWithPopup(
+      this.auth,
+      new GoogleAuthProvider()
+    );
+
     return this.http
-      .post<LoginResponseI>(`${this.urlAuth}/login`, {
-        email,
-        password,
-      })
+      .post<LoginResponseI>(`${this.urlAuth}/loginGoogle`, data.user)
       .pipe(
         tap((item: LoginResponseI) => {
           this.tokenService.set(item.token);

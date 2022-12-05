@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import * as moment from 'moment';
+import { DateFunctions } from '@shared/utils/dates';
 
 @Pipe({
   name: 'dateToDayOrMonth',
@@ -7,7 +7,7 @@ import * as moment from 'moment';
 export class DateToDayOrMonthPipe implements PipeTransform {
   transform(value: string, dayOrMonth = 'day'): string {
     return dayOrMonth === 'day'
-      ? moment(value).locale('es').format('DD').substring(0, 2)
-      : moment(value).locale('es').format('MMM').substring(0, 3);
+      ? DateFunctions.new(value).locale('es').format('DD').substring(0, 2)
+      : DateFunctions.new(value).locale('es').format('MMM').substring(0, 3);
   }
 }

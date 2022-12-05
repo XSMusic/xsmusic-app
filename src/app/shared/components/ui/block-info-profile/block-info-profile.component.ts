@@ -6,7 +6,7 @@ import { routesConfig } from '@core/config';
 import { environment } from '@env/environment';
 import { ToastService, TOAST_STATE } from '@services';
 import { firstLetterCase, getYearsOld } from '@shared/utils';
-import * as moment from 'moment';
+import { DateFunctions } from '@shared/utils/dates';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
 @Component({
@@ -27,7 +27,7 @@ export class BlockInfoProfileComponent {
   ) {}
 
   getDate = () => {
-    const m = moment(this.item.date).locale('es');
+    const m = DateFunctions.new(this.item.date).locale('es');
     return `
       ${firstLetterCase(m.format('dddd D'))} de
       ${m.format('MMMM')} a las

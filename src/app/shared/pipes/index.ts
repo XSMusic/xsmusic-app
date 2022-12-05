@@ -1,5 +1,5 @@
 export { FirstLetterPipe } from './first-letter-case/fist-letter-case.pipe';
-export { MomentFormatAgoPipe } from './moment-format/moment-format.pipe';
+export { DateFormatAgoPipe } from './date-format/date-format.pipe';
 export { DateToDayOrMonthPipe } from './date-to-day-or-month/date-to-day-or-month.pipe';
 export { FixStatePipe } from './fix-state/fix-state.pipe';
 export { TitleMediaPipe } from './title-media/title-media.pipe';

@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { StyleService } from '@services';
+import { DateFunctions } from '@shared/utils/dates';
 import { countries } from 'assets/data/countries';
-import * as moment from 'moment';
 import { filters } from './filter-bar.helper';
 
 @Component({
@@ -70,7 +70,7 @@ export class FilterBarComponent implements OnInit {
         });
     } else if (this.itemFilter === 'year') {
       this.itemsB = [];
-      for (let i = 2000; i <= Number(moment().format('YYYY')); i++) {
+      for (let i = 2000; i <= Number(DateFunctions.new().format('YYYY')); i++) {
         this.itemsB.push({ name: i.toString(), value: i });
       }
     }

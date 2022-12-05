@@ -57,7 +57,7 @@ import {
   TitleMediaPipe,
   FixStatePipe,
   DateToDayOrMonthPipe,
-  MomentFormatAgoPipe,
+  DateFormatAgoPipe,
   FirstLetterPipe,
 } from '@pipes';
 import { OnImageErrorDirective } from './directives';
@@ -147,7 +147,7 @@ const pipes = [
   TitleMediaPipe,
   FixStatePipe,
   DateToDayOrMonthPipe,
-  MomentFormatAgoPipe,
+  DateFormatAgoPipe,
   FirstLetterPipe,
 ];
 const services = [

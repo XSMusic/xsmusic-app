@@ -17,7 +17,7 @@ import {
   ScrapingEventsI,
 } from '@shared/services/api/scraping/scraping-source.interface';
 import { ScrapingGetListEventsDto } from '@shared/services/api/scraping/scraping.dto';
-import * as moment from 'moment';
+import { DateFunctions } from '@shared/utils/dates';
 
 @Component({
   selector: 'admin-events-scraping',
@@ -25,14 +25,14 @@ import * as moment from 'moment';
 })
 export class AdminEventsScrapingComponent {
   sources = [{ name: 'RA', value: 'ra' }];
-  dateNow = moment().format();
+  dateNow = DateFunctions.new().format();
   daysSelected = 7;
   body: ScrapingGetListEventsDto = {
     source: '',
     maxResults: '10',
     area: '41',
-    dateFrom: moment().format('YYYY-MM-DD'),
-    dateTo: moment().add(7, 'days').format('YYYY-MM-DD'),
+    dateFrom: DateFunctions.new().format('YYYY-MM-DD'),
+    dateTo: DateFunctions.new().add(7, 'days').format('YYYY-MM-DD'),
   };
   items!: ScrapingEventsI;
   view = 'viewCompleted';
@@ -60,7 +60,7 @@ export class AdminEventsScrapingComponent {
   ) {}
 
   getEvents() {
-    this.body.dateTo = moment()
+    this.body.dateTo = DateFunctions.new()
       .add(this.daysSelected, 'days')
       .format('YYYY-MM-DD');
     this.scrapingService.getListEvents(this.body).subscribe({

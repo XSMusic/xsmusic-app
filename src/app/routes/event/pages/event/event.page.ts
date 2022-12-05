@@ -8,8 +8,8 @@ import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinner.service';
 import { routesConfig } from '@core/config';
 import { MetadataI } from '@shared/services/system/meta';
-import * as moment from 'moment';
 import { environment } from '@env/environment';
+import { DateFunctions } from '@shared/utils/dates';
 
 @Component({
   selector: 'page-event',
@@ -53,9 +53,9 @@ export class EventPage implements OnInit {
 
   setMeta() {
     const meta: MetadataI = {
-      title: `${this.event.name} @ ${this.event.site.name} - ${moment(
-        this.event.date
-      ).format('DD-MM-YYYY')}`,
+      title: `${this.event.name} @ ${
+        this.event.site.name
+      } - ${DateFunctions.new(this.event.date).format('DD-MM-YYYY')}`,
       image: `${environment.urls.images}/${this.event.images![0].url}`,
       url: `${environment.urls.app}${routesConfig.event.replace(
         ':slug',

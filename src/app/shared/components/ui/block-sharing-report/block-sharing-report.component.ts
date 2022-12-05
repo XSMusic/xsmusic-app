@@ -4,7 +4,7 @@ import { Share, ShareOptions } from '@capacitor/share';
 import { environment } from '@env/environment';
 import { ToastService, TOAST_STATE } from '@services';
 import { getTitleMedia } from '@shared/utils';
-import * as moment from 'moment';
+import { DateFunctions } from '@shared/utils/dates';
 
 @Component({
   selector: 'block-sharing-report',
@@ -22,7 +22,7 @@ export class BlockSharingReportComponent {
           this.type === 'set' || this.type === 'track'
             ? getTitleMedia(this.item)
             : this.type === 'event'
-            ? `${this.item.name} @ ${this.item.site.name} - ${moment(
+            ? `${this.item.name} @ ${this.item.site.name} - ${DateFunctions.new(
                 this.item.site.date
               ).format('DD-MM-YYYY')}`
             : this.item.name,

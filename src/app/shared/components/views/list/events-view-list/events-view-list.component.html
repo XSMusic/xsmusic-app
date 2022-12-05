@@ -11,7 +11,7 @@
               <div class="flex gap-3">
                 <div class="w-12">
                   <img
-                    [src]="item.images! | imageArray"
+                    [src]="item.images! | imageArray: 'small'"
                     [alt]="item.name"
                     onError
                     class="object-cover object-center w-full h-12 cursor-pointer rounded-2xl hover:filter-grayscale hover:scale-105 hover:duration-1000"
@@ -44,7 +44,7 @@
             <td class="px-8">
               <div class="flex gap-3" *ngIf="item.site.name !== 'Desconocido'">
                 <img
-                  [src]="item.site.images | imageArray"
+                  [src]="item.site.images | imageArray: 'small'"
                   alt=""
                   class="object-cover object-center rounded-lg cursor-pointer h-9 w-9 hover:filter-grayscale hover:scale-110 hover:duration-1000"
                   (click)="showImage(item.site.image!)"

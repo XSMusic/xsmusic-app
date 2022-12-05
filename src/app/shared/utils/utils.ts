@@ -1,4 +1,5 @@
-import { Media, User } from '@models';
+import { environment } from '@env/environment';
+import { Image, Media, User } from '@models';
 import { countries } from 'assets/data/countries';
 import { flags } from 'assets/data/flags';
 
@@ -83,5 +84,16 @@ export const firstLetterCase = (value: string) => {
     return value.charAt(0).toUpperCase() + value.slice(1);
   } else {
     return value;
+  }
+};
+
+export const imageArray = (
+  images: Image[],
+  type: 'small' | 'medium' | 'big'
+) => {
+  if (images && images.length > 0) {
+    return `${environment.urls.images}/${images[0].type}s/${type}/${images[0].url}`;
+  } else {
+    return 'assets/no-image.png';
   }
 };

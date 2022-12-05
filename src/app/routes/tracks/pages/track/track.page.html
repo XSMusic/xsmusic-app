@@ -48,7 +48,7 @@
             (click)="goToProfile(artist.slug)"
           >
             <img
-              [src]="artist.images! | imageArray"
+              [src]="artist.images! | imageArray: 'medium'"
               alt="artist.name"
               class="object-cover w-14 h-14 rounded-2xl"
             />

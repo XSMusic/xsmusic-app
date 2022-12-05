@@ -18,7 +18,7 @@
         (click)="goTo(item)"
       >
         <img
-          [src]="item.images! | imageArray"
+          [src]="item.images! | imageArray: 'medium'"
           alt="set.name"
           class="object-cover w-full rounded-2xl"
         />

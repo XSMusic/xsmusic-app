@@ -50,7 +50,7 @@ export class AdminEventOneComponent {
     private modal: ModalService
   ) {}
 
-  showImage(image: string) {
+  showImage(image: Image) {
     this.fullImage.showImageFull(image);
   }
 

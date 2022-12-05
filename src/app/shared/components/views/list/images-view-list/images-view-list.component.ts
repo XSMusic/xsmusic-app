@@ -19,7 +19,7 @@ export class ImagesViewListComponent {
   @Output() onDeleteImage = new EventEmitter<Image>();
   constructor(private fullImage: FullImageService, private router: Router) {}
 
-  showImage(image: string) {
+  showImage(image: Image) {
     this.fullImage.showImageFull(image);
   }
 

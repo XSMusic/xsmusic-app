@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
+import { Image } from '@models';
 
 @Component({
   selector: 'images-upload-url',
@@ -10,6 +11,12 @@ export class ImagesUploadUrlComponent {
   @Input() image = '';
   @Input() imageState = false;
   @Input() scraping: any;
-  @Output() showImage = new EventEmitter<string>();
+  @Output() showImage = new EventEmitter<Image>();
   @Output() uploadImageByUrl = new EventEmitter<string>();
+
+  showImageUrl(url: string) {
+    const image = new Image();
+    image.url = url;
+    this.showImage.emit(image);
+  }
 }

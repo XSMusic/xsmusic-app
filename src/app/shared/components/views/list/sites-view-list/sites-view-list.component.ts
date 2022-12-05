@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { Site } from '@models';
+import { Image, Site } from '@models';
 import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
 import { getYearsOld } from '@utils';
 
@@ -19,7 +19,7 @@ export class SiteViewListComponent {
   getYearsOld = getYearsOld;
   constructor(private fullImage: FullImageService) {}
 
-  showImage(image: string) {
+  showImage(image: Image) {
     this.fullImage.showImageFull(image);
   }
 

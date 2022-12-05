@@ -3,10 +3,10 @@
   [class]="class"
 >
   <img
-    [src]="item.images! | imageArray"
+    [src]="item.images! | imageArray:'medium'"
     class="object-cover w-full h-full shadow-sm cursor-pointer hover:filter-grayscale hover:scale-105 hover:duration-1000"
     [alt]="item.name"
-    (click)="showImage(item.images![0].url!)"
+    (click)="showImage(item.images![0])"
     onError
   />
 </div>

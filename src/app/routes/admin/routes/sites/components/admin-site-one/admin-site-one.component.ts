@@ -63,7 +63,7 @@ export class AdminSiteOneComponent implements OnInit {
     this.site.type = this.type;
   }
 
-  showImage(image: string) {
+  showImage(image: Image) {
     this.fullImage.showImageFull(image);
   }
 

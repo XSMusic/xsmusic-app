@@ -6,7 +6,7 @@
   <img
     class="object-cover w-full h-40 hover:filter-grayscale hover:scale-105 hover:duration-1000"
     [ngStyle]="{ height: height }"
-    [src]="media.images! | imageArray"
+    [src]="media.images! | imageArray: 'medium'"
     [alt]="media.name"
     onError
   />

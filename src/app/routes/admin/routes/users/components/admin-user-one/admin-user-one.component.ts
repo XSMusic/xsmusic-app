@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { MessageI } from '@interfaces';
-import { User } from '@models';
+import { Image, User } from '@models';
 import {
   ModalService,
   ToastService,
@@ -35,7 +35,7 @@ export class AdminUserOneComponent {
     private validationsFormService: ValidationsFormService
   ) {}
 
-  showImage(image: string) {
+  showImage(image: Image) {
     this.fullImage.showImageFull(image);
   }
 

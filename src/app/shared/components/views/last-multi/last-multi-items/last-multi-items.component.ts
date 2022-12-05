@@ -42,6 +42,6 @@ export class LastMultiItemsComponent implements OnInit {
   }
 
   showFullImage(item: Image) {
-    this.fullImageService.showImageFull(item.url!);
+    this.fullImageService.showImageFull(item);
   }
 }

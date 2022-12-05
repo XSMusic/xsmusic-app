@@ -20,11 +20,15 @@ const win = createWindow(indexHtml);
 import { AppServerModule } from './src/main.server';
 
 import { APP_BASE_HREF } from '@angular/common';
+import * as compression from 'compression';
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
   global['localStorage'] = localStorage;
+
   const server = express();
+  server.use(compression());
+
   const distFolder = '/home/josexs/apps/xsmusic/pwa/browser';
 
   const indexHtml = existsSync(join(distFolder, 'index.original.html'))

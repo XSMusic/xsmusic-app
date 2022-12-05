@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Image } from '@models';
 import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
@@ -26,7 +27,7 @@ export class BlockInfoProfileImageComponent implements OnInit {
     }
   }
 
-  showImage(image: string) {
+  showImage(image: Image) {
     this.gaService.event(
       `${this.type}_show_image`,
       `${this.type}_show_image`,

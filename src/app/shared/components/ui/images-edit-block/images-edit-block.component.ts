@@ -7,7 +7,7 @@ import { Artist, Image, Media, Site } from '@models';
 })
 export class ImagesEditBlockComponent {
   @Input() item!: Artist | Site | Media;
-  @Output() showImage = new EventEmitter<string>();
+  @Output() showImage = new EventEmitter<Image>();
   @Output() removeImage = new EventEmitter<Image>();
   @Output() setFirstImage = new EventEmitter<Image>();
   @Output() toggleAddImage = new EventEmitter<void>();

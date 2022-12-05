@@ -11,7 +11,7 @@
               : ''
           "
           [alt]="item.name"
-          (click)="showImage.emit(item.images![0].url ?? '')"
+          (click)="showImage.emit(item.images![0])"
           class="object-cover w-full h-64 rounded-lg cursor-pointer hover:filter-grayscale hover:scale-105 hover:duration-1000"
           onError
         />
@@ -55,7 +55,7 @@
               <img
                 [src]="[img] | imageArray"
                 [alt]="item.name"
-                (click)="showImage.emit(img.url)"
+                (click)="showImage.emit(img)"
                 class="relative object-cover w-full h-32 p-1 rounded-lg cursor-pointer hover:filter-grayscale hover:scale-105 hover:duration-1000"
                 onError
               />

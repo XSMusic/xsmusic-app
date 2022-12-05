@@ -1,5 +1,5 @@
 <ng-container *ngIf="!loading">
-  <h1 @inOut class="py-3 text-lg font-extrabold">{{ title }}</h1>
+  <h1 @inOut class="py-3 text-lg font-extrabold dark:text-white">{{ title }}</h1>
 
   <div
     class="flex gap-3 overflow-x-scroll scrollbar-hidden"
@@ -11,9 +11,9 @@
     <div *ngFor="let site of sites">
       <div @inOut class="flex flex-col w-20 py-2 text-center hover:opacity-90">
         <img
-          [src]="site.images! | imageArray"
+          [src]="site.images! | imageArray: 'small'"
           class="object-cover w-full h-20 shadow-lg cursor-pointer rounded-xl hover:filter-grayscale hover:scale-110 hover:duration-1000"
-          alt="artist.name"
+          alt=""
           (click)="goToProfile(site.slug!)"
           onError
         />

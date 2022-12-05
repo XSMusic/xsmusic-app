@@ -6,9 +6,9 @@ import { Image } from '@models';
   name: 'imageArray',
 })
 export class ImageArrayPipe implements PipeTransform {
-  transform(images: Image[]): string {
+  transform(images: Image[], type?: 'small' | 'medium' | 'big'): string {
     if (images && images.length > 0) {
-      return `${environment.urls.images}/${images[0].url}`;
+      return `${environment.urls.images}/${images[0].type}s/${type}/${images[0].url}`;
     } else {
       return 'assets/no-image.png';
     }

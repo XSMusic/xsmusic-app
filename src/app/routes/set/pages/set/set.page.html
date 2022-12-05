@@ -53,7 +53,7 @@
             (click)="goToProfile('artist',artist)"
           >
             <img
-              [src]="artist.images! | imageArray"
+              [src]="artist.images! | imageArray : 'medium'"
               alt="artist.name"
               class="object-cover w-14 h-14 rounded-2xl"
             />
@@ -79,7 +79,7 @@
             (click)="goToProfile('site', media.site)"
           >
             <img
-              [src]="media.site.images | imageArray"
+              [src]="media.site.images | imageArray: 'small'"
               alt="media.site.name"
               class="object-cover w-14 h-14 rounded-2xl"
             />

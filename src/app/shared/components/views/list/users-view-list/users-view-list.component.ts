@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { User } from '@models';
+import { Image, User } from '@models';
 import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class UsersViewListComponent {
 
   constructor(private fullImage: FullImageService) {}
 
-  showImage(image: string) {
+  showImage(image: Image) {
     this.fullImage.showImageFull(image);
   }
 }

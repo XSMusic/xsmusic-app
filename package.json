@@ -1,6 +1,6 @@
 {
   "name": "xsmusic-app",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "scripts": {
     "ng": "ng",
     "set-env": "ts-node ./scripts/setenv.ts",
@@ -20,6 +20,7 @@
     "serve:ssr": "node dist/xsmusic/server/main.js",
     "build:ssr": "npm run build && ng run xsmusic:server",
     "prerender": "ng run xsmusic:prerender",
+    "release": "standard-version",
     "bundle-report": "npm run build -- --stats-json && webpack-bundle-analyzer dist/xsmusic/browser/stats.json"
   },
   "description": "xsmusic-app",
@@ -96,6 +97,7 @@
     "lint-staged": "^13.0.3",
     "postcss": "^8.4.18",
     "pretty-quick": "^3.1.3",
+    "standard-version": "^9.5.0",
     "tailwindcss": "^3.2.1",
     "ts-node": "^10.9.1",
     "typescript": "~4.8.4",

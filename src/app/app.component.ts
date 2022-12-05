@@ -20,20 +20,7 @@ export class AppComponent implements OnInit {
     this.navigationService.startSaveHistory();
     this.preventBackButton();
     this.setMeta();
-
-    if (this.swUpdate.isEnabled) {
-      this.swUpdate.versionUpdates.pipe(
-        filter(
-          (evt: any): evt is VersionReadyEvent => evt.type === 'VERSION_READY'
-        ),
-        map((evt: any) => {
-          console.info(
-            `currentVersion=[${evt.currentVersion} | latestVersion=[${evt.latestVersion}]`
-          );
-          this.modalVersion = true;
-        })
-      );
-    }
+    this.checkUpdate();
   }
 
   public updateVersion(): void {
@@ -59,5 +46,17 @@ export class AppComponent implements OnInit {
 
   setMeta() {
     this.metaService.setMeta();
+  }
+
+  checkUpdate() {
+    if (this.swUpdate.isEnabled) {
+      this.swUpdate.versionUpdates.subscribe({
+        next: (res) => {
+          if (res.type === 'VERSION_READY') {
+            this.modalVersion = true;
+          }
+        },
+      });
+    }
   }
 }

@@ -5,7 +5,7 @@
     "ng": "ng",
     "set-env": "ts-node ./scripts/setenv.ts",
     "start": "npm run set-env -- --environment=dev && ng serve --host 0.0.0.0",
-    "build": "npm run set-env -- --environment=prod && ng build",
+    "build": "npm run set-env -- --environment=prod && ng build --stats-json",
     "watch": "ng build --watch --configuration development",
     "run:android": "npm run build && npx cap sync && npx capacitor run android",
     "run:note": "npm run build && npx cap sync && npx capacitor run android --target R5CN80DTHJP",
@@ -19,7 +19,8 @@
     "dev:ssr": "ng run xsmusic:serve-ssr",
     "serve:ssr": "node dist/xsmusic/server/main.js",
     "build:ssr": "npm run build && ng run xsmusic:server",
-    "prerender": "ng run xsmusic:prerender"
+    "prerender": "ng run xsmusic:prerender",
+    "bundle-report": "webpack-bundle-analyzer dist/xsmusic/browser/stats.json"
   },
   "description": "xsmusic-app",
   "private": true,
@@ -51,7 +52,6 @@
     "express": "^4.15.2",
     "jest": "^29.2.1",
     "leaflet": "^1.9.2",
-    "leaflet-routing-machine": "^3.2.12",
     "leaflet.markercluster": "^1.5.3",
     "localstorage-polyfill": "^1.0.1",
     "moment": "^2.29.4",
@@ -98,7 +98,8 @@
     "pretty-quick": "^3.1.3",
     "tailwindcss": "^3.2.1",
     "ts-node": "^10.9.1",
-    "typescript": "~4.8.4"
+    "typescript": "~4.8.4",
+    "webpack-bundle-analyzer": "^4.7.0"
   },
   "eslintIgnore": [
     "*.spec.ts"

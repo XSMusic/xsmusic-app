@@ -14,7 +14,7 @@ export class LeafletService {
     if (isPlatformBrowser(platformId)) {
       this.L = require('leaflet');
       require('leaflet.markercluster');
-      this.Routing = require('leaflet-routing-machine');
+      // this.Routing = require('leaflet-routing-machine');
     }
   }
 }

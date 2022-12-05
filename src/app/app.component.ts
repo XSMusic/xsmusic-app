@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SwUpdate, VersionReadyEvent } from '@angular/service-worker';
-import { NavigationService } from '@services';
+import { NavigationService, VersionUpdateService } from '@services';
 import { MetaService } from '@shared/services/system/meta/meta.service';
-import { filter, map } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +10,7 @@ export class AppComponent implements OnInit {
   modalVersion = false;
 
   constructor(
-    private swUpdate: SwUpdate,
+    public versionUpdateService: VersionUpdateService,
     private navigationService: NavigationService,
     private metaService: MetaService
   ) {}
@@ -20,7 +18,6 @@ export class AppComponent implements OnInit {
     this.navigationService.startSaveHistory();
     this.preventBackButton();
     this.setMeta();
-    this.checkUpdate();
   }
 
   public updateVersion(): void {
@@ -48,15 +45,4 @@ export class AppComponent implements OnInit {
     this.metaService.setMeta();
   }
 
-  checkUpdate() {
-    if (this.swUpdate.isEnabled) {
-      this.swUpdate.versionUpdates.subscribe({
-        next: (res) => {
-          if (res.type === 'VERSION_READY') {
-            this.modalVersion = true;
-          }
-        },
-      });
-    }
-  }
 }

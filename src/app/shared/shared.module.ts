@@ -73,6 +73,7 @@ import {
   StartupService,
   UserService,
   ValidationsFormService,
+  VersionUpdateService,
 } from '@services';
 import { httpInterceptorProviders } from '@core/interceptors';
 import { AngularSvgIconModule } from 'angular-svg-icon';
@@ -160,6 +161,7 @@ const services = [
   SiteService,
   StartupService,
   UserService,
+  VersionUpdateService,
   ValidationsFormService,
 ];
 

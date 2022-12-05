@@ -5,7 +5,7 @@
     "ng": "ng",
     "set-env": "ts-node ./scripts/setenv.ts",
     "start": "npm run set-env -- --environment=dev && ng serve --host 0.0.0.0",
-    "build": "npm run set-env -- --environment=prod && ng build --stats-json",
+    "build": "npm run set-env -- --environment=prod && ng build --build-optimizer",
     "watch": "ng build --watch --configuration development",
     "run:android": "npm run build && npx cap sync && npx capacitor run android",
     "run:note": "npm run build && npx cap sync && npx capacitor run android --target R5CN80DTHJP",
@@ -20,7 +20,7 @@
     "serve:ssr": "node dist/xsmusic/server/main.js",
     "build:ssr": "npm run build && ng run xsmusic:server",
     "prerender": "ng run xsmusic:prerender",
-    "bundle-report": "webpack-bundle-analyzer dist/xsmusic/browser/stats.json"
+    "bundle-report": "npm run build -- --stats-json && webpack-bundle-analyzer dist/xsmusic/browser/stats.json"
   },
   "description": "xsmusic-app",
   "private": true,

@@ -107,7 +107,9 @@ export const getUserLocation = async (): Promise<number[]> => {
     } else {
       try {
         const location = await Geolocation.getCurrentPosition();
-        resolve([location.coords.latitude, location.coords.longitude]);
+        const coords = [location.coords.latitude, location.coords.longitude];
+        localStorage.setItem('location', JSON.stringify(coords));
+        resolve(coords);
       } catch (error) {
         reject(error);
       }

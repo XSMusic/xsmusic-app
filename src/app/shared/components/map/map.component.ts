@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, Input } from '@angular/core';
 import { Site } from '@models';
-import { environment } from '@env/environment';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { Router } from '@angular/router';

@@ -1,28 +1,66 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Injectable } from '@angular/core';
+import { AppComponent } from 'app/app.component';
+
+class LocalStorage implements Storage {
+  [name: string]: any;
+  readonly length!: number;
+
+  clear(): void {
+    /** */
+  }
+
+  getItem(key: string): string | null {
+    return null;
+  }
+  key(index: number): string | null {
+    return null;
+  }
+  removeItem(key: string): void {
+    /** */
+  }
+  setItem(key: string, value: string): void {
+    /** */
+  }
+}
 
 @Injectable({
   providedIn: 'root',
 })
-export class LocalStorageService {
-  get(key: string) {
-    return localStorage.getItem(key);
+export class LocalStorageService implements Storage {
+  private storage: Storage;
+  [name: string]: any;
+  length!: number;
+
+  constructor() {
+    this.storage = new LocalStorage();
+    AppComponent.isBrowser.subscribe((isBrowser: boolean) => {
+      if (!isBrowser) {
+        this.storage = localStorage;
+        console.log('isBrowser');
+      } else {
+        console.log('!isBrowser');
+      }
+    });
   }
 
-  set(key: string, value: any): boolean {
-    localStorage.setItem(key, value);
-
-    return true;
+  clear(): void {
+    this.storage.clear();
   }
 
-  has(key: string): boolean {
-    return !!localStorage.getItem(key);
+  getItem(key: string): string | null {
+    return this.storage.getItem(key);
   }
 
-  remove(key: string) {
-    localStorage.removeItem(key);
+  key(index: number): string | null {
+    return this.storage.key(index);
   }
 
-  clear() {
-    localStorage.clear();
+  removeItem(key: string): void {
+    return this.storage.removeItem(key);
+  }
+
+  setItem(key: string, value: string): void {
+    return this.storage.setItem(key, value);
   }
 }

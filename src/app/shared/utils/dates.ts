@@ -1,7 +1,7 @@
 import * as dayjs from 'dayjs';
 import * as timezone from 'dayjs/plugin/timezone';
 import * as utc from 'dayjs/plugin/utc';
-import * as es from 'dayjs/locale/es'
+import * as es from 'dayjs/locale/es';
 
 dayjs.locale(es);
 dayjs.extend(utc);

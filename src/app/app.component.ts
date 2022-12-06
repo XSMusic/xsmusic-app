@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { NavigationService, VersionUpdateService } from '@services';
 import { MetaService } from '@shared/services/system/meta/meta.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -8,12 +10,17 @@ import { MetaService } from '@shared/services/system/meta/meta.service';
 })
 export class AppComponent implements OnInit {
   modalVersion = false;
+  static isBrowser = new BehaviorSubject<boolean>(false);
 
   constructor(
     public versionUpdateService: VersionUpdateService,
     private navigationService: NavigationService,
-    private metaService: MetaService
-  ) {}
+    private metaService: MetaService,
+    @Inject(PLATFORM_ID) private platformId: any
+  ) {
+    AppComponent.isBrowser.next(isPlatformBrowser(platformId));
+  }
+
   ngOnInit(): void {
     this.navigationService.startSaveHistory();
     this.preventBackButton();
@@ -44,5 +51,4 @@ export class AppComponent implements OnInit {
   setMeta() {
     this.metaService.setMeta();
   }
-
 }

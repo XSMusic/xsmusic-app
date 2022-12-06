@@ -51,8 +51,8 @@ export class UserService {
   }
 
   private get user(): User | undefined {
-    this._user = this.localStorageService.get('user')
-      ? JSON.parse(this.localStorageService.get('user')!)
+    this._user = this.localStorageService.getItem('user')
+      ? JSON.parse(this.localStorageService.getItem('user')!)
       : undefined;
     return this._user;
   }
@@ -77,9 +77,9 @@ export class UserService {
   private save(user?: User): void {
     this._user = undefined;
     if (!user) {
-      this.localStorageService.remove('user');
+      this.localStorageService.removeItem('user');
     } else {
-      this.localStorageService.set('user', JSON.stringify(user));
+      this.localStorageService.setItem('user', JSON.stringify(user));
       this._user = user;
     }
     this.change$.next(user);

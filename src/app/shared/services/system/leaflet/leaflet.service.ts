@@ -1,7 +1,7 @@
 import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { UserService } from '@services';
-import { Geolocation } from '@capacitor/geolocation';
+import { getUserLocation } from '@shared/utils';
 
 @Injectable({
   providedIn: 'root',
@@ -69,7 +69,7 @@ export class LeafletService {
 
   getCurrentPosition = async (map: any) => {
     try {
-      const coordinates = await Geolocation.getCurrentPosition();
+      const coordinates = await getUserLocation();
       const img = `<img style="width:3rem; height:3rem" class="object-cover rounded-full border-black hover:scale-105 hover:duration-1000" src='./assets/images/marker-user.png' />`;
 
       const icon = this.L.divIcon({
@@ -78,14 +78,10 @@ export class LeafletService {
         iconSize: [48, 48],
       });
 
-      const marker = this.L.marker(
-        [coordinates.coords.latitude, coordinates.coords.longitude],
-        { icon }
-      );
+      const marker = this.L.marker([coordinates[0], coordinates[1]], { icon });
       marker.addTo(map);
     } catch (e) {
       console.error(e);
     }
   };
-
 }

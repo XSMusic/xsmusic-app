@@ -39,10 +39,10 @@
   ></sites-view-list>
 
   <map
-    *ngIf="view === 'viewMap' && items.length > 0"
+    *ngIf="view === 'viewMap' && itemsMap.length > 0"
     [class]="'mt-2 rounded-lg overflow-hidden'"
     [style]="'height: calc(100vh - 175px)'"
-    [markers]="items"
+    [markers]="itemsMap"
     [zoom]="6"
   ></map>
 </div>

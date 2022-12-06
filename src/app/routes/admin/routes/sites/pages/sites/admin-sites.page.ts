@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { routesConfig } from '@core/config';
-import { GetAllDto } from '@interfaces';
 import { Site } from '@models';
 import { SiteService, StatsService, ToastService } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
+import { SiteGetAllDto } from '@shared/services/api/site/site.dto';
 import { StatsGetTopStatsI } from '@shared/services/api/stats/stats.interface';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 
@@ -20,10 +20,12 @@ export class AdminSitesPage implements OnInit {
     topSocial: [],
     topCountries: [],
   };
-  body: GetAllDto = {
+  body: SiteGetAllDto = {
     page: 1,
     pageSize: 30,
     order: ['updated', 'desc'],
+    map: false,
+    type: '',
   };
   type!: 'club' | 'festival';
   view = 'viewList';

@@ -44,7 +44,7 @@
       (click)="onClickItem({ name: '', _id: '' })"
     >
       <img
-        [src]="item.site?.images | imageArray:'small'"
+        [src]="item.site?.images | imageArray: 'small'"
         [alt]=""
         class="w-5 h-5 mr-3 rounded-full"
         onError
@@ -82,7 +82,7 @@
     >
       <img
         *ngIf="itemS.images"
-        [src]="itemS.images! | imageArray:'small'"
+        [src]="itemS.images! | imageArray: 'small'"
         alt=""
         class="w-10 h-10 mr-3 rounded-full"
         onError

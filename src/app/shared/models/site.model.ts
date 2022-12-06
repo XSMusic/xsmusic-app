@@ -23,6 +23,7 @@ export class Site {
     instagram: '',
     email: '',
   };
+  distance?: number;
   sets?: any;
   events?: any;
   created?: string;

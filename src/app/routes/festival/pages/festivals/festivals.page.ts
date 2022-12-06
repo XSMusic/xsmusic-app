@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { routesConfig } from '@core/config';
-import { GetAllDto } from '@interfaces';
 import { Site } from '@models';
 import { SiteService, ToastService } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
+import { SiteGetAllDto } from '@shared/services/api/site/site.dto';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
@@ -14,11 +14,12 @@ import { GoogleAnalyticsService } from 'ngx-google-analytics';
 })
 export class FestivalsPage implements OnInit {
   items: Site[] = [];
-  body: GetAllDto = {
+  body: SiteGetAllDto = {
     page: 1,
     pageSize: 30,
     order: ['created', 'desc'],
     type: 'festival',
+    map: false,
   };
   filterKey?: string;
   filterValue?: string;

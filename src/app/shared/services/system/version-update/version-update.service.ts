@@ -13,9 +13,7 @@ export class VersionUpdateService {
         console.log(response);
         if (response.type === 'VERSION_READY') {
           if (
-            confirm(
-              'Hay una nueva versión de XSMusic. ¿Quieres abrirla ahora?'
-            )
+            confirm('Hay una nueva versión de XSMusic. ¿Quieres abrirla ahora?')
           ) {
             updates.activateUpdate().then(() => window.location.reload());
           }

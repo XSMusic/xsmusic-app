@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { routesConfig } from '@core/config';
-import { GetAllDto } from '@interfaces';
 import { Site } from '@models';
 import { SiteService, ToastService } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
+import { SiteGetAllDto } from '@shared/services/api/site/site.dto';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
+import { getUserLocation } from '@shared/utils';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
 @Component({
@@ -15,11 +16,21 @@ import { GoogleAnalyticsService } from 'ngx-google-analytics';
 export class ClubsPage implements OnInit {
   title = '';
   items: Site[] = [];
-  body: GetAllDto = {
+  itemsMap: Site[] = [];
+  body: SiteGetAllDto = {
     page: 1,
     pageSize: 30,
     order: ['created', 'desc'],
     type: 'club',
+    map: false,
+  };
+  bodyMap: SiteGetAllDto = {
+    page: 1,
+    pageSize: 1000,
+    order: ['created', 'desc'],
+    type: 'club',
+    map: true,
+    maxDistance: 1000,
   };
   filterKey?: string;
   filterValue?: string;
@@ -38,6 +49,7 @@ export class ClubsPage implements OnInit {
   ngOnInit() {
     this.getFilter();
     this.getItems();
+    this.getItemsMap();
   }
 
   getFilter() {
@@ -59,6 +71,21 @@ export class ClubsPage implements OnInit {
         }
         this.loading = false;
         this.error = false;
+      },
+      error: () => {
+        this.loading = false;
+        this.error = true;
+      },
+    });
+  }
+
+  async getItemsMap() {
+    const userCoordinates = await getUserLocation();
+    this.bodyMap.coordinates = userCoordinates;
+    this.siteService.getAll(this.bodyMap).subscribe({
+      next: (response) => {
+        this.itemsMap = response.items;
+        this.loading = false;
       },
       error: () => {
         this.loading = false;

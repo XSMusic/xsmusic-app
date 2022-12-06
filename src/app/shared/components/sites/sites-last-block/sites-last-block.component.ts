@@ -4,6 +4,7 @@ import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { Site } from '@models';
 import { SiteService, ToastService } from '@services';
+import { SiteGetAllDto } from '@shared/services/api/site/site.dto';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 
 @Component({
@@ -17,11 +18,12 @@ export class SitesLastBlockComponent implements OnInit {
   title = '';
   slidesPerView = 6;
   loading = true;
-  body = {
+  body: SiteGetAllDto = {
     page: 1,
     pageSize: 10,
     order: ['created', 'desc'],
     type: 'club',
+    map: false,
   };
   constructor(
     private siteService: SiteService,

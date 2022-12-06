@@ -1,3 +1,4 @@
+import { Geolocation } from '@capacitor/geolocation';
 import { environment } from '@env/environment';
 import { Image, Media, User } from '@models';
 import { countries } from 'assets/data/countries';
@@ -96,4 +97,20 @@ export const imageArray = (
   } else {
     return 'assets/no-image.png';
   }
+};
+
+export const getUserLocation = async (): Promise<number[]> => {
+  return new Promise(async (resolve, reject) => {
+    const locationLS = localStorage.getItem('location');
+    if (locationLS) {
+      resolve(JSON.parse(locationLS) as number[]);
+    } else {
+      try {
+        const location = await Geolocation.getCurrentPosition();
+        resolve([location.coords.latitude, location.coords.longitude]);
+      } catch (error) {
+        reject(error);
+      }
+    }
+  });
 };

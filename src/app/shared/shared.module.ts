@@ -65,6 +65,7 @@ import { NgxPermissionsModule } from 'ngx-permissions';
 import {
   AngularSvgIconPreloaderService,
   ArtistService,
+  LeafletService,
   LocalStorageService,
   MediaService,
   NavigationService,
@@ -154,6 +155,7 @@ const pipes = [
 const services = [
   AngularSvgIconPreloaderService,
   ArtistService,
+  LeafletService,
   LocalStorageService,
   MediaService,
   NavigationService,

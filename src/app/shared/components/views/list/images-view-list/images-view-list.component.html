@@ -13,17 +13,17 @@
               class="object-cover object-center w-12 h-12 cursor-pointer rounded-2xl lg:h-12 lg:w-12 hover:filter-grayscale hover:scale-105 hover:duration-1000"
               (click)="showImage(item)"
             />
-            <div class="flex flex-col">
+            <div class="flex flex-col cursor-pointer"  (click)="onDeleteImage.emit(item)">
               <p
-                class="my-1 mr-2 text-base font-extrabold leading-none text-black cursor-pointer dark:text-white hover:text-gray-500"
-                (click)="onDeleteImage.emit(item)"
+                class="my-1 mr-2 text-base font-extrabold leading-none text-black dark:text-white hover:text-gray-500"
+
               >
-                <span *ngIf="item.type === 'event'">{{ item.event.name }}</span>
-                <span *ngIf="item.type === 'media'">{{ item.media.name }}</span>
-                <span *ngIf="item.type === 'user'">{{ item.user.name }}</span>
-                <span *ngIf="item.type === 'artist'">{{
-                  item.artist.name
-                }}</span>
+                <span *ngIf="item.type === 'event'">{{ item.event?.name }}</span>
+                <span *ngIf="item.type === 'media'">{{ item.media?.name }}</span>
+                <span *ngIf="item.type === 'user'">{{ item.user?.name }}</span>
+                <span *ngIf="item.type === 'artist'">
+                  {{ item.artist.name }}
+                </span>
                 <span *ngIf="item.type === 'site'">{{ item.site.name }}</span>
               </p>
               <p
@@ -37,11 +37,6 @@
                 </span>
                 <span *ngIf="item.type !== 'media' && item.type !== 'site'">
                   {{ item.type | type }}
-                </span>
-                <span
-                  class="text-xs font-bold text-gray-500 dark:text-gray-400"
-                >
-                  {{ item.size }}
                 </span>
               </p>
             </div>

@@ -7,6 +7,8 @@ export class TypePipe implements PipeTransform {
   transform(value: string): string {
     if (value === 'artist') {
       return 'Artista';
+    } else if (value === 'event') {
+      return 'Evento';
     } else if (value === 'media') {
       return 'Set/Track';
     } else if (value === 'site') {

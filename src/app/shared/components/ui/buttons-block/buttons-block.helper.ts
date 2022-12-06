@@ -61,16 +61,16 @@ export const buttonsByType = [
   {
     name: 'events',
     buttons: [
-      new ButtonBlockItem({
-        name: 'Galeria',
-        isActivatable: true,
-        action: 'viewGallery',
-      }),
-      new ButtonBlockItem({
-        name: 'Listado',
-        isActivatable: true,
-        action: 'viewList',
-      }),
+      // new ButtonBlockItem({
+      //   name: 'Galeria',
+      //   isActivatable: true,
+      //   action: 'viewGallery',
+      // }),
+      // new ButtonBlockItem({
+      //   name: 'Listado',
+      //   isActivatable: true,
+      //   action: 'viewList',
+      // }),
       new ButtonBlockItem({
         name: 'Calendario',
         isActivatable: true,

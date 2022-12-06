@@ -1,3 +1,4 @@
+export { CalendarComponent } from './ui/calendar/calendar.component';
 // Artist
 export { ArtistsLastBlockComponent } from './artists/artists-last-block/artists-last-block.component';
 // Site
@@ -28,7 +29,6 @@ export { SocialInputsComponent } from './ui/social-inputs/social-inputs.componen
 export { BlockSocialComponent } from './ui/block-social/block-social.component';
 export { BlockInfoProfileAddressComponent } from './ui/block-info-profile/block-info-profile-address/block-info-profile-address.component';
 export { BlockInfoProfileImageComponent } from './ui/block-info-profile/block-info-profile-image/block-info-profile-image.component';
-
 // View Gallery
 export { GenericViewGalleryComponent } from './views/gallery/generic-view-gallery/generic-view-gallery.component';
 export { GenericViewGalleryItemsComponent } from './views/gallery/generic-view-gallery-items/generic-view-gallery-items.component';

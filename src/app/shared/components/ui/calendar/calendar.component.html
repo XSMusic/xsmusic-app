@@ -1,0 +1,47 @@
+<div class="flex flex-col justify-between my-2 text-center md:flex-row">
+  <div class="col-md-4">
+    <h3 class="text-2xl font-black dark:text-white">{{ viewDate | calendarDate: view + 'ViewTitle':'es' | titlecase }}</h3>
+  </div>
+  <div class="flex justify-center gap-2">
+    <div
+      class="px-2 py-1 border border-gray-200 rounded-lg cursor-pointer hover:opacity-70 dark:border-gray-700 dark:text-white "
+      mwlCalendarPreviousView
+      [view]="view"
+      [(viewDate)]="viewDate"
+      (viewDateChange)="closeOpenMonthViewDay()"
+    >
+      Anterior
+    </div>
+    <div
+      class="px-2 py-1 border border-gray-200 rounded-lg cursor-pointer hover:opacity-70 dark:border-gray-700 dark:text-white"
+      mwlCalendarToday
+      [(viewDate)]="viewDate"
+    >
+      Hoy
+    </div>
+    <div
+      class="px-2 py-1 border border-gray-200 rounded-lg cursor-pointer hover:opacity-70 dark:border-gray-700 dark:text-white"
+      mwlCalendarNextView
+      [view]="view"
+      [(viewDate)]="viewDate"
+      (viewDateChange)="closeOpenMonthViewDay()"
+    >
+      Siguiente
+    </div>
+  </div>
+</div>
+<div [ngSwitch]="view">
+  <mwl-calendar-month-view
+    locale="es"
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    [weekendDays]="weekendDays"
+    [weekStartsOn]="weekStartsOn"
+    [activeDayIsOpen]="activeDayIsOpen"
+    (dayClicked)="dayClicked($event.day)"
+    (eventClicked)="handleEvent('Clicked', $event.event)"
+  >
+    <!-- (eventTimesChanged)="eventTimesChanged($event)" -->
+  </mwl-calendar-month-view>
+</div>

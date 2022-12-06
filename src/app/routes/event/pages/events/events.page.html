@@ -38,7 +38,9 @@
   >
   </events-view-list>
 
-  <ng-container *ngIf="view === 'viewCal' || view === 'viewMap'">
-    Proximamente...
+  <ng-container *ngIf="view === 'viewCal'  && !loading">
+    <calendar [items]="items"></calendar>
   </ng-container>
+
+  <ng-container *ngIf="view === 'viewMap'"> Proximamente... </ng-container>
 </div>

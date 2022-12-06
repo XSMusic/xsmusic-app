@@ -41,6 +41,7 @@ import {
   BlockSocialComponent,
   BlockInfoProfileAddressComponent,
   BlockInfoProfileImageComponent,
+  CalendarComponent,
 } from '@components';
 import {
   CountryFlagPipe,
@@ -81,6 +82,8 @@ import { SwiperModule } from 'swiper/angular';
 import { InfiniteScrollModule } from './services/system/ngx-infinite-scroll/ngx-infinite-scroll.module';
 import { NgxSpinnerModule } from './services/system/ngx-spinner/ngx-spinner.module';
 import { YouTubePlayerModule } from '@angular/youtube-player';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 const components = [
   AlertComponent,
@@ -120,6 +123,7 @@ const components = [
   BlockSocialComponent,
   BlockInfoProfileAddressComponent,
   BlockInfoProfileImageComponent,
+  CalendarComponent,
 ];
 const directives = [OnImageErrorDirective];
 const modules = [
@@ -134,6 +138,7 @@ const modules = [
   RouterModule,
   SwiperModule,
   YouTubePlayerModule,
+  CalendarModule,
 ];
 const pipes = [
   CountryFlagPipe,

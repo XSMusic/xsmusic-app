@@ -16,6 +16,11 @@ import {
 } from 'ngx-google-analytics';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+registerLocaleData(localeEs);
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,6 +38,10 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
     }),
     NgxGoogleAnalyticsModule.forRoot('G-J3E02LHVML'),
     NgxGoogleAnalyticsRouterModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
   ],

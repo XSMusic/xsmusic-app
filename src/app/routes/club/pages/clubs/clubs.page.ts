@@ -49,7 +49,6 @@ export class ClubsPage implements OnInit {
   ngOnInit() {
     this.getFilter();
     this.getItems();
-    this.getItemsMap();
   }
 
   getFilter() {
@@ -97,6 +96,9 @@ export class ClubsPage implements OnInit {
   onClickButton(button: ButtonBlockItem) {
     if (button.action.includes('view')) {
       this.view = button.action;
+      if (this.view === 'viewMap' && this.itemsMap.length === 0) {
+        this.getItemsMap();
+      }
       this.gaService.event(
         `clubs_change_${button.action}`,
         'clubs_filter',

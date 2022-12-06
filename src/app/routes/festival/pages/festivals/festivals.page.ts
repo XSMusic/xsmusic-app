@@ -6,6 +6,7 @@ import { SiteService, ToastService } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 import { SiteGetAllDto } from '@shared/services/api/site/site.dto';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
+import { getUserLocation } from '@shared/utils';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
 @Component({
@@ -14,12 +15,21 @@ import { GoogleAnalyticsService } from 'ngx-google-analytics';
 })
 export class FestivalsPage implements OnInit {
   items: Site[] = [];
+  itemsMap: Site[] = [];
   body: SiteGetAllDto = {
     page: 1,
     pageSize: 30,
     order: ['created', 'desc'],
     type: 'festival',
     map: false,
+  };
+  bodyMap: SiteGetAllDto = {
+    page: 1,
+    pageSize: 1000,
+    order: ['created', 'desc'],
+    type: 'festival',
+    map: true,
+    maxDistance: 5000,
   };
   filterKey?: string;
   filterValue?: string;
@@ -67,14 +77,32 @@ export class FestivalsPage implements OnInit {
     });
   }
 
+  async getItemsMap() {
+    const userCoordinates = await getUserLocation();
+    this.bodyMap.coordinates = userCoordinates;
+    this.siteService.getAll(this.bodyMap).subscribe({
+      next: (response) => {
+        this.itemsMap = response.items;
+        this.loading = false;
+      },
+      error: () => {
+        this.loading = false;
+        this.error = true;
+      },
+    });
+  }
+
   onClickButton(button: ButtonBlockItem) {
     if (button.action.includes('view')) {
+      this.view = button.action;
+      if (this.view === 'viewMap' && this.itemsMap.length === 0) {
+        this.getItemsMap();
+      }
       this.gaService.event(
         `festivals_change_${button.action}`,
         'festivals_filter',
         'festivals'
       );
-      this.view = button.action;
     } else if (button.action === 'order' || button.action === 'filter') {
       this.toast.showToast(TOAST_STATE.info, 'En construccion');
     }

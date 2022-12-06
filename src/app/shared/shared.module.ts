@@ -36,7 +36,6 @@ import {
   EventsViewListComponent,
   SearchInputComponent,
   BlockStatsComponent,
-  VideoYoutubeComponent,
   BlockSharingReportComponent,
   SocialInputsComponent,
   BlockSocialComponent,
@@ -81,6 +80,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 import { SwiperModule } from 'swiper/angular';
 import { InfiniteScrollModule } from './services/system/ngx-infinite-scroll/ngx-infinite-scroll.module';
 import { NgxSpinnerModule } from './services/system/ngx-spinner/ngx-spinner.module';
+import { YouTubePlayerModule } from '@angular/youtube-player';
 
 const components = [
   AlertComponent,
@@ -115,7 +115,6 @@ const components = [
   EventsViewListComponent,
   SearchInputComponent,
   BlockStatsComponent,
-  VideoYoutubeComponent,
   BlockSharingReportComponent,
   SocialInputsComponent,
   BlockSocialComponent,
@@ -134,6 +133,7 @@ const modules = [
   ReactiveFormsModule,
   RouterModule,
   SwiperModule,
+  YouTubePlayerModule,
 ];
 const pipes = [
   CountryFlagPipe,

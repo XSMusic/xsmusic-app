@@ -1,78 +1,81 @@
-<div class="container px-4 py-3 mx-auto max-w-full-xl sm:pb-0 max-w-7sm">
-  <div style="padding-top: 4.25rem">
-    <div class="md:col-span-9">
-      <video-youtube
-        [sourceId]="media.sourceId!"
-        title="{{ media | titleMedia }}"
-      ></video-youtube>
+<div style="padding-top: 4.25rem">
+  <youtube-player
+    [videoId]="media.sourceId"
+    suggestedQuality="highres"
+    [height]="415"
+    [width]="videoWidth"
+  >
+  </youtube-player>
+</div>
 
-      <div
-        class="flex justify-center gap-2 pt-2 font-black text-center dark:text-white"
+<div class="container px-4 mx-auto max-w-full-xl sm:pb-0 max-w-7sm">
+  <div class="md:col-span-9">
+    <div
+      class="flex justify-center gap-2 pt-2 font-black text-center dark:text-white"
+    >
+      <p
+        (click)="goToEdit()"
+        *ngxPermissionsOnly="'ADMIN'"
+        class="pt-3 text-3xl font-black text-center cursor-pointer md:text-left"
       >
-        <p
-          (click)="goToEdit()"
-          *ngxPermissionsOnly="'ADMIN'"
-          class="pt-3 text-3xl font-black text-center cursor-pointer md:text-left"
-        >
-          {{ media | titleMedia }}
-        </p>
-        <p
-          *ngxPermissionsExcept="'ADMIN'"
-          class="pt-3 text-2xl font-black text-center md:text-left"
-        >
-          {{ media | titleMedia }}
-        </p>
-      </div>
-
-      <div
-        class="flex gap-1 px-3 py-1 my-2 overflow-x-scroll text-center md:justify-center scrollbar-hidden"
-        *ngIf="media.styles!.length > 0"
-        [ngClass]="{ 'justify-center': 'items.styles.length <= 3' }"
+        {{ media | titleMedia }}
+      </p>
+      <p
+        *ngxPermissionsExcept="'ADMIN'"
+        class="pt-3 text-2xl font-black text-center md:text-left"
       >
-        <div *ngFor="let style of media.styles; index as i">
-          <a
-            class="px-3 py-1 mr-2 font-medium border border-gray-300 rounded-lg cursor-pointer dark:text-white dark:bg-black dark:border-gray-800 hover:opacity-80"
-          >
-            {{ style.name }}
-          </a>
-        </div>
-      </div>
+        {{ media | titleMedia }}
+      </p>
     </div>
 
-    <div class="md:col-span-3">
-      <div class="flex flex-col gap-3 md:flex-row">
-        <!-- ARTIST -->
-        <div class="mx-auto w-80" *ngFor="let artist of media.artists">
-          <div
-            class="flex gap-4 px-2 py-2 my-1.5 dark:border border border-gray-200 dark:border-gray-700 cursor-pointer rounded-xl hover:opacity-80"
-            (click)="goToProfile(artist.slug)"
-          >
-            <img
-              [src]="artist.images! | imageArray: 'medium'"
-              alt="artist.name"
-              class="object-cover w-14 h-14 rounded-2xl"
-            />
-            <div class="flex flex-col">
-              <p class="text-lg font-extrabold dark:text-white">
-                {{ artist.name }}
-              </p>
-              <div class="flex gap-2 text-gray-500 font-extralight">
-                <img [src]="artist.country | countryFlag" alt="" />
-                {{ artist.country | countryName }}
-              </div>
+    <div
+      class="flex gap-1 px-3 py-1 my-2 overflow-x-scroll text-center md:justify-center scrollbar-hidden"
+      *ngIf="media.styles!.length > 0"
+      [ngClass]="{ 'justify-center': 'items.styles.length <= 3' }"
+    >
+      <div *ngFor="let style of media.styles; index as i">
+        <a
+          class="px-3 py-1 mr-2 font-medium border border-gray-300 rounded-lg cursor-pointer dark:text-white dark:bg-black dark:border-gray-800 hover:opacity-80"
+        >
+          {{ style.name }}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="md:col-span-3">
+    <div class="flex flex-col gap-3 md:flex-row">
+      <!-- ARTIST -->
+      <div class="mx-auto w-80" *ngFor="let artist of media.artists">
+        <div
+          class="flex gap-4 px-2 py-2 my-1.5 dark:border border border-gray-200 dark:border-gray-700 cursor-pointer rounded-xl hover:opacity-80"
+          (click)="goToProfile(artist.slug)"
+        >
+          <img
+            [src]="artist.images! | imageArray: 'medium'"
+            alt="artist.name"
+            class="object-cover w-14 h-14 rounded-2xl"
+          />
+          <div class="flex flex-col">
+            <p class="text-lg font-extrabold dark:text-white">
+              {{ artist.name }}
+            </p>
+            <div class="flex gap-2 text-gray-500 font-extralight">
+              <img [src]="artist.country | countryFlag" alt="" />
+              {{ artist.country | countryName }}
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- Compartir & Reportar -->
-    <block-sharing-report [item]="media" type="track"></block-sharing-report>
-
-    <div
-      *ngIf="media.info && media.info !== ''"
-      class="p-2 px-3 my-2 bg-gray-100 shadow-md font-extralight rounded-xl dark:text-white dark:bg-black dark:border dark:border-gray-700"
-      [innerHTML]="media.info"
-    ></div>
   </div>
+
+  <!-- Compartir & Reportar -->
+  <block-sharing-report [item]="media" type="track"></block-sharing-report>
+
+  <div
+    *ngIf="media.info && media.info !== ''"
+    class="p-2 px-3 my-2 bg-gray-100 shadow-md font-extralight rounded-xl dark:text-white dark:bg-black dark:border dark:border-gray-700"
+    [innerHTML]="media.info"
+  ></div>
 </div>

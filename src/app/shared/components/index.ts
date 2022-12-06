@@ -23,7 +23,6 @@ export { FilterBarComponent } from './ui/filter-bar/filter-bar.component';
 export { SearchInputComponent } from './ui/search-input/search-input.component';
 export { BlockStatsComponent } from './ui/block-stats/block-stats.component';
 export { BlockInfoProfileComponent } from './ui/block-info-profile/block-info-profile.component';
-export { VideoYoutubeComponent } from './ui/video-youtube/video-youtube.component';
 export { BlockSharingReportComponent } from './ui/block-sharing-report/block-sharing-report.component';
 export { SocialInputsComponent } from './ui/social-inputs/social-inputs.component';
 export { BlockSocialComponent } from './ui/block-social/block-social.component';

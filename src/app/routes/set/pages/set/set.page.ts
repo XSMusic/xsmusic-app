@@ -17,7 +17,7 @@ import { MetadataI } from '@shared/services/system/meta';
 export class SetPage implements OnInit {
   slug!: string;
   media: Media = new Media();
-  imageVideo = '';
+  videoWidth = 0;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -27,6 +27,10 @@ export class SetPage implements OnInit {
   ) {}
 
   ngOnInit() {
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.body.appendChild(tag);
+    this.videoWidth = window.innerWidth;
     this.slug = this.route.snapshot.paramMap.get('slug')!;
     this.getItem();
   }

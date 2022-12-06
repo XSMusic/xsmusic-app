@@ -16,6 +16,7 @@ import { environment } from '@env/environment';
 export class TrackPage implements OnInit {
   slug!: string;
   media: Media = new Media();
+  videoWidth = 0;
   constructor(
     private route: ActivatedRoute,
     private toast: ToastService,
@@ -26,6 +27,10 @@ export class TrackPage implements OnInit {
   ) {}
 
   ngOnInit() {
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.body.appendChild(tag);
+    this.videoWidth = window.innerWidth;
     this.slug = this.route.snapshot.paramMap.get('slug')!;
     this.getItem();
   }

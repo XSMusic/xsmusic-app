@@ -1,11 +1,11 @@
 <div class="col-span-2 mb-1">
-  <label class="block mb-3 text-base font-extrabold text-black dark:text-white">
+  <label class="block mt-2 text-base font-extrabold text-black dark:text-white">
     {{ label }}
   </label>
 
   <!-- Artists -->
   <div
-    class="flex gap-2 my-3"
+    class="flex gap-2 my-2"
     *ngIf="type === 'artist' && item.artists!.length > 0"
   >
     <div
@@ -25,7 +25,7 @@
 
   <!-- Styles -->
   <div
-    class="flex gap-2 my-3"
+    class="flex gap-2 my-2"
     *ngIf="type === 'style' && item.styles!.length > 0"
   >
     <div
@@ -38,7 +38,7 @@
   </div>
 
   <!-- Sites -->
-  <div class="flex gap-2 my-3" *ngIf="type === 'site' && item.site">
+  <div class="flex gap-2 my-2" *ngIf="type === 'site' && item.site">
     <div
       class="flex px-2 py-1 text-xs text-white bg-black border rounded-lg shadow-md cursor-pointer dark:border-gray-800 hover:opacity-80"
       (click)="onClickItem({ name: '', _id: '' })"

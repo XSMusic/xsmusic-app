@@ -13,7 +13,7 @@ export class EventsViewListComponent {
   @Input() items: Event[] = [];
   @Input() loading = true;
   @Output() goToProfile = new EventEmitter<{
-    type: 'site' | 'event';
+    type: 'site' | 'event' | 'artist';
     event: Event;
   }>();
   @Output() filter = new EventEmitter<{ name: string; value: string }>();

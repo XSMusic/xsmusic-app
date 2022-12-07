@@ -40,7 +40,7 @@
               </div>
             </td>
 
-            <td class="pl-3">
+            <td class="pl-3" *ngIf="mediaItem.site && mediaItem.site.name">
               <div
                 class="flex gap-3 w-60"
                 *ngIf="mediaItem.site.name !== 'Desconocido'"
@@ -102,22 +102,24 @@
               {{ mediaItem.year !== 0 ? mediaItem.year : 'Año no disponible' }}
             </td>
 
-            <td class="pl-5" *ngxPermissionsOnly="'ADMIN'">
-              <div class="flex flex-col">
-                <div
-                  class="mr-2 text-sm font-light leading-none text-gray-700 dark:text-white"
-                >
-                  <span class="font-semibold">Cre:</span>
-                  {{ mediaItem.created! | timeAgo }}
+            <ng-container *ngxPermissionsOnly="'ADMIN'">
+              <td *ngIf="mediaItem.updated" class="pl-5">
+                <div class="flex flex-col">
+                  <div
+                    class="mr-2 text-sm font-light leading-none text-gray-700 dark:text-white"
+                  >
+                    <span class="font-semibold">Cre:</span>
+                    {{ mediaItem.created! | timeAgo }}
+                  </div>
+                  <div
+                    class="mr-2 text-sm font-light leading-none text-gray-700 dark:text-white"
+                  >
+                    <span class="font-semibold">Act:</span>
+                    {{ mediaItem.updated! | timeAgo }}
+                  </div>
                 </div>
-                <div
-                  class="mr-2 text-sm font-light leading-none text-gray-700 dark:text-white"
-                >
-                  <span class="font-semibold">Act:</span>
-                  {{ mediaItem.updated! | timeAgo }}
-                </div>
-              </div>
-            </td>
+              </td>
+            </ng-container>
           </tr>
         </tbody>
       </table>

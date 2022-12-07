@@ -63,7 +63,7 @@
                   >
                     <img
                       [src]="
-                        item.site.address.country
+                        item.site.address && item.site.address.country
                           ? (item.site.address.country | countryFlag)
                           : ('es' | countryFlag)
                       "

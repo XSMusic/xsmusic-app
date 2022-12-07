@@ -68,7 +68,7 @@ export class EventsPage implements OnInit {
     });
   }
 
-  goToProfile(data: { type: 'site' | 'event'; event: Event }) {
+  goToProfile(data: { type: 'site' | 'event' | 'artist', event: Event }) {
     if (data.type === 'event') {
       this.gaService.event('events_link_profile', 'events_link', 'events');
       this.router.navigate([

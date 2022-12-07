@@ -20,7 +20,7 @@
 
   <ng-container *ngIf="view === 'viewSets'">
     <media-view-list
-      [media]="artist.sets"
+      [media]="sets"
       [loading]="false"
       type="sets"
       (goToProfile)="goToProfile($event)"
@@ -28,11 +28,18 @@
   </ng-container>
   <ng-container *ngIf="view === 'viewTracks'">
     <media-view-list
-      [media]="artist.tracks"
+      [media]="tracks"
       [loading]="false"
       type="tracks"
       (goToProfile)="goToProfile($event)"
     ></media-view-list>
   </ng-container>
-  <ng-container *ngIf="view === 'viewEvents'">Events</ng-container>
+  <ng-container *ngIf="view === 'viewEvents'">
+    <events-view-list
+      [items]="events"
+      [loading]="false"
+      type="artist"
+      ></events-view-list>
+      <!-- (goToProfile)="goToProfile($event)" -->
+  </ng-container>
 </div>

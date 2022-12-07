@@ -18,4 +18,22 @@
       (onClickOption)="onClickOptionItem($event)"
     ></options-items>
   </div>
+
+  <ng-container *ngIf="view === 'viewEvents'">
+    <events-view-list
+      [items]="events"
+      [loading]="false"
+      type="event"
+      ></events-view-list>
+      <!-- (goToProfile)="goToProfile($event)" -->
+  </ng-container>
+
+  <ng-container *ngIf="view === 'viewSets'">
+    <media-view-list
+      [media]="sets"
+      [loading]="false"
+      type="sets"
+      ></media-view-list>
+      <!-- (goToProfile)="goToProfile($event)" -->
+  </ng-container>
 </div>

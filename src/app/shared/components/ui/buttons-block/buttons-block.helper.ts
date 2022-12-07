@@ -301,7 +301,7 @@ export const buttonsByType = [
       new ButtonBlockItem({
         name: 'Sets',
         isActivatable: true,
-        action: 'viewEvents',
+        action: 'viewSets',
       }),
     ],
   },

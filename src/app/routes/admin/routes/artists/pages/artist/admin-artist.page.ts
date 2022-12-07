@@ -1,14 +1,20 @@
 import { Component } from '@angular/core';
-import { Artist, Media, Style } from '@models';
-import { ArtistService, ToastService } from '@services';
+import { Artist, Event, Media, Style } from '@models';
+import {
+  ArtistService,
+  EventService,
+  MediaService,
+  ToastService,
+} from '@services';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { StyleService } from '@shared/services/api/style/style.service';
 import { countries } from 'assets/data/countries';
 import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinner.service';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 import { routesConfig } from '@core/config';
 import { OptionsItemI } from '@shared/components/ui/options-items/options-items.interface';
+import { EventGetAllForTypeDto } from '@shared/services/api/event/event.dto';
+import { MediaGetAllForTypeDto } from '@shared/services/api/media/media.dto';
 
 @Component({
   selector: 'page-admin-artist',
@@ -29,12 +35,39 @@ export class AdminArtistPage {
     { name: 'Añadir Set', action: 'goToAdminSetAdd' },
     { name: 'Añadir Track', action: 'goToAdminTrackAdd' },
   ];
+  bodyEvents: EventGetAllForTypeDto = {
+    page: 1,
+    pageSize: 10,
+    order: ['created', 'asc'],
+    id: '',
+    type: 'artists',
+  };
+  bodyMediaSet: MediaGetAllForTypeDto = {
+    page: 1,
+    pageSize: 10,
+    order: ['created', 'asc'],
+    id: '',
+    type: 'artists',
+    typeMedia: 'set',
+  };
+  bodyMediaTrack: MediaGetAllForTypeDto = {
+    page: 1,
+    pageSize: 10,
+    order: ['created', 'asc'],
+    id: '',
+    type: 'artists',
+    typeMedia: 'track',
+  };
+  sets: Media[] = [];
+  tracks: Media[] = [];
+  events: Event[] = [];
   constructor(
     private artistService: ArtistService,
-    private styleService: StyleService,
+    private eventService: EventService,
+    private mediaService: MediaService,
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
-    private toastService: ToastService,
+    private toast: ToastService,
     private router: Router
   ) {}
 
@@ -66,11 +99,44 @@ export class AdminArtistPage {
             instagram: '',
           };
         }
+        this.getEvents();
+        this.getMediaSets();
+        this.getMediaTracks();
         this.spinner.hide();
       },
       error: (error) => {
-        this.toastService.showToast(TOAST_STATE.error, error);
+        this.toast.showToast(TOAST_STATE.error, error);
         this.spinner.hide();
+      },
+    });
+  }
+
+  getEvents() {
+    this.bodyEvents.id = this.artist._id!;
+    this.eventService.getAllForType(this.bodyEvents).subscribe({
+      next: (response) => (this.events = response.items),
+      error: (err) => {
+        this.toast.showToast(TOAST_STATE.error, err);
+      },
+    });
+  }
+
+  getMediaSets() {
+    this.bodyMediaSet.id = this.artist._id!;
+    this.mediaService.getAllForType(this.bodyMediaSet).subscribe({
+      next: (response) => (this.sets = response.items),
+      error: (err) => {
+        this.toast.showToast(TOAST_STATE.error, err);
+      },
+    });
+  }
+
+  getMediaTracks() {
+    this.bodyMediaTrack.id = this.artist._id!;
+    this.mediaService.getAllForType(this.bodyMediaTrack).subscribe({
+      next: (response) => (this.tracks = response.items),
+      error: (err) => {
+        this.toast.showToast(TOAST_STATE.error, err);
       },
     });
   }

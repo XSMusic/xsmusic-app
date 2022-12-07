@@ -62,7 +62,7 @@ export class AdminEventsPage {
     });
   }
 
-  goToProfile(data: { type: 'site' | 'event'; event: Event }) {
+  goToProfile(data: { type: 'site' | 'event' | 'artist'; event: Event }) {
     let route = [];
     if (data.type === 'event') {
       route = [routesConfig.eventAdmin.replace(':id', data.event._id!)];

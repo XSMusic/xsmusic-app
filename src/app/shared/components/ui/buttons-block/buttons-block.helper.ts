@@ -71,22 +71,22 @@ export const buttonsByType = [
         isActivatable: true,
         action: 'viewList',
       }),
-      new ButtonBlockItem({
-        name: 'Calendario',
-        isActivatable: true,
-        action: 'viewCal',
-      }),
-      new ButtonBlockItem({
-        name: 'Mapa',
-        isActivatable: true,
-        action: 'viewMap',
-      }),
-      new ButtonBlockItem({
-        name: 'Filtrar',
-        isActivatable: true,
-        align: 'right',
-        action: 'filter',
-      }),
+      // new ButtonBlockItem({
+      //   name: 'Calendario',
+      //   isActivatable: true,
+      //   action: 'viewCal',
+      // }),
+      // new ButtonBlockItem({
+      //   name: 'Mapa',
+      //   isActivatable: true,
+      //   action: 'viewMap',
+      // }),
+      // new ButtonBlockItem({
+      //   name: 'Filtrar',
+      //   isActivatable: true,
+      //   align: 'right',
+      //   action: 'filter',
+      // }),
       new ButtonBlockItem({
         name: 'Buscar',
         isActivatable: true,

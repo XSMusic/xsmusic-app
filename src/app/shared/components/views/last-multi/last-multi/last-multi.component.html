@@ -27,7 +27,7 @@
 
   <generic-view-gallery
     *ngIf="view === 'set'"
-    [items]="item.sets"
+    [items]="sets"
     [type]="'set'"
     [loading]="false"
     (goToOne)="goToOne($event)"
@@ -35,7 +35,7 @@
 
   <generic-view-gallery
     *ngIf="view === 'track'"
-    [items]="item.tracks"
+    [items]="tracks"
     [type]="'track'"
     [loading]="false"
     (goToOne)="goToOne($event)"
@@ -43,7 +43,7 @@
 
   <generic-view-gallery-items
     *ngIf="view === 'eventSite'"
-    [items]="item.events"
+    [items]="events"
     [type]="'eventSite'"
     (goToOne)="goToOne($event)"
   ></generic-view-gallery-items>

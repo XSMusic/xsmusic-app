@@ -18,10 +18,10 @@ export class AppComponent implements OnInit {
     private metaService: MetaService,
     @Inject(PLATFORM_ID) private platformId: any
   ) {
-    AppComponent.isBrowser.next(isPlatformBrowser(platformId));
   }
 
   ngOnInit(): void {
+    AppComponent.isBrowser.next(isPlatformBrowser(this.platformId));
     this.navigationService.startSaveHistory();
     this.preventBackButton();
     this.setMeta();

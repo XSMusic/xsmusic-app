@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
+import { Event, Media } from '@models';
 
 @Component({
   selector: 'last-multi',
@@ -11,6 +12,9 @@ import { routesConfig } from '@core/config';
 export class LastMultiComponent implements OnInit {
   @Input() views: any[] = [];
   @Input() item!: any;
+  @Input() events: Event[] = [];
+  @Input() sets: Media[] = [];
+  @Input() tracks: Media[] = [];
   view = '';
 
   constructor(private router: Router) {}

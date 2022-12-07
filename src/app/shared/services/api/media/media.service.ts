@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '@env/environment';
 import { GetAllDto, MessageI, PaginatorI } from '@interfaces';
 import { Media } from '@models';
+import { MediaGetAllForTypeDto } from './media.dto';
 
 @Injectable({ providedIn: 'root' })
 export class MediaService {
@@ -13,6 +14,13 @@ export class MediaService {
   getAll(data: GetAllDto): Observable<PaginatorI<Media>> {
     return this.httpClient.post<PaginatorI<Media>>(
       `${this.url}/getAll/${data.type}`,
+      data
+    );
+  }
+
+  getAllForType(data: MediaGetAllForTypeDto): Observable<PaginatorI<Media>> {
+    return this.httpClient.post<PaginatorI<Media>>(
+      `${this.url}/getAllForType`,
       data
     );
   }

@@ -10,7 +10,6 @@ export class VersionUpdateService {
   constructor(app: ApplicationRef, updates: SwUpdate) {
     if (updates.isEnabled) {
       updates.versionUpdates.subscribe((response) => {
-        console.log(response);
         if (response.type === 'VERSION_READY') {
           if (
             confirm('Hay una nueva versión de XSMusic. ¿Quieres abrirla ahora?')

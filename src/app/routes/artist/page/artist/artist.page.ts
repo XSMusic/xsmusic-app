@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { Artist } from '@models';
-import { MetaService, ToastService, TOAST_STATE } from '@services';
+import { Artist, Event, Media } from '@models';
+import { EventService, MediaService, MetaService, SiteService, ToastService, TOAST_STATE } from '@services';
 import { ArtistService } from '@shared/services/api/artist/artist.service';
 import { MetadataI } from '@shared/services/system/meta';
 import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinner.service';
 import { environment } from '@env/environment';
 import { routesConfig } from '@core/config';
+import { EventGetAllForTypeDto } from '@shared/services/api/event/event.dto';
+import { MediaGetAllForTypeDto } from '@shared/services/api/media/media.dto';
 
 @Component({
   selector: 'page-artist',
@@ -19,10 +21,38 @@ export class ArtistPage implements OnInit {
   artists: Artist[] = [];
   slug!: string;
   views: any[] = [];
+  bodyEvents: EventGetAllForTypeDto = {
+    page: 1,
+    pageSize: 10,
+    order: ['created', 'asc'],
+    id: '',
+    type: 'artists',
+  };
+  bodyMediaSet: MediaGetAllForTypeDto = {
+    page: 1,
+    pageSize: 10,
+    order: ['created', 'asc'],
+    id: '',
+    type: 'artists',
+    typeMedia: 'set',
+  };
+  bodyMediaTrack: MediaGetAllForTypeDto = {
+    page: 1,
+    pageSize: 10,
+    order: ['created', 'asc'],
+    id: '',
+    type: 'artists',
+    typeMedia: 'track',
+  };
+  events: Event[] = [];
+  sets: Media[] = [];
+  tracks: Media[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private artistService: ArtistService,
+    private mediaService: MediaService,
+    private eventService: EventService,
     private toast: ToastService,
     private spinner: NgxSpinnerService,
     private metaService: MetaService
@@ -40,11 +70,53 @@ export class ArtistPage implements OnInit {
         this.artist = response;
         this.setMeta();
         this.setViews();
+        if (this.views.filter((item) => item.name === 'Sets').length > 0) {
+          this.getMediaSets();
+        }
+        if (this.views.filter((item) => item.name === 'Tracks').length > 0) {
+          this.getMediaTracks();
+        }
+        if (this.views.filter((item) => item.name === 'Eventos').length > 0) {
+          this.getEvents();
+        }
         this.spinner.hide();
       },
       error: (error) => {
         this.spinner.hide();
         this.toast.showToast(TOAST_STATE.error, error);
+      },
+    });
+  }
+
+  getEvents() {
+    this.bodyEvents.id = this.artist._id!;
+    this.eventService.getAllForType(this.bodyEvents).subscribe({
+      next: (response) => (this.events = response.items),
+      error: (err) => {
+        this.views = this.views.filter((item) => item.name !== 'Eventos');
+        this.toast.showToast(TOAST_STATE.error, err);
+      },
+    });
+  }
+
+  getMediaSets() {
+    this.bodyMediaSet.id = this.artist._id!;
+    this.mediaService.getAllForType(this.bodyMediaSet).subscribe({
+      next: (response) => (this.sets = response.items),
+      error: (err) => {
+        this.views = this.views.filter((item) => item.name !== 'Sets');
+        this.toast.showToast(TOAST_STATE.error, err);
+      },
+    });
+  }
+
+  getMediaTracks() {
+    this.bodyMediaTrack.id = this.artist._id!;
+    this.mediaService.getAllForType(this.bodyMediaTrack).subscribe({
+      next: (response) => (this.tracks = response.items),
+      error: (err) => {
+        this.views = this.views.filter((item) => item.name !== 'Sets');
+        this.toast.showToast(TOAST_STATE.error, err);
       },
     });
   }
@@ -65,25 +137,25 @@ export class ArtistPage implements OnInit {
   }
 
   setViews() {
-    if (this.artist.sets && this.artist.sets.length > 0) {
+    if (this.artist.sets && this.artist.sets.count > 0) {
       this.views.push({
         name: 'Sets',
         value: 'set',
-        counter: this.artist.sets.length,
+        counter: this.artist.sets.count,
       });
     }
-    if (this.artist.tracks && this.artist.tracks.length > 0) {
+    if (this.artist.tracks && this.artist.tracks.count > 0) {
       this.views.push({
         name: 'Tracks',
         value: 'track',
-        counter: this.artist.tracks.length,
+        counter: this.artist.tracks.count,
       });
     }
-    if (this.artist.events && this.artist.events.length > 0) {
+    if (this.artist.events && this.artist.events.count > 0) {
       this.views.push({
         name: 'Eventos',
         value: 'event',
-        counter: this.artist.events ? this.artist.events.length : 0,
+        counter: this.artist.events ? this.artist.events.count : 0,
       });
     }
     if (this.artist.images && this.artist.images.length > 1) {

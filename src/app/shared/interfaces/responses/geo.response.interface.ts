@@ -1,6 +1,6 @@
 export interface GeoCoordinatesToAddressResponseI {
   street: string;
   city: string;
-  postcode: string;
+  state: string;
   country: string;
 }

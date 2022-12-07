@@ -18,8 +18,8 @@ export class GeoService {
 
   coordinatesToAddress(
     coordinates: number[]
-  ): Observable<GeoCoordinatesToAddressResponseI[]> {
-    return this.httpClient.post<GeoCoordinatesToAddressResponseI[]>(
+  ): Observable<GeoCoordinatesToAddressResponseI> {
+    return this.httpClient.post<GeoCoordinatesToAddressResponseI>(
       `${this.url}/coordinatesToAddress`,
       { coordinates }
     );

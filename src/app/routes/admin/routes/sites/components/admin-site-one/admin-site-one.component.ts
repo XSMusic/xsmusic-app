@@ -163,11 +163,21 @@ export class AdminSiteOneComponent implements OnInit {
       this.geoService
         .coordinatesToAddress(this.site.address.coordinates)
         .subscribe({
-          next: () =>
+          next: (response) => {
+            if (response.street) {
+              this.site.address.country = response.street;
+            }
+            if (response.state) {
+              this.site.address.country = response.state;
+            }
+            if (response.country) {
+              this.site.address.country = response.country;
+            }
             this.toastService.showToast(
               TOAST_STATE.success,
               'Direccion actualizada'
-            ),
+            );
+          },
           error: (error) =>
             this.toastService.showToast(TOAST_STATE.error, error),
         });

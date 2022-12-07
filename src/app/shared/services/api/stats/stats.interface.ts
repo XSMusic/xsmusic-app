@@ -1,14 +1,13 @@
 export interface StatsGetTopStatsI {
   topSocial: StatsTopSocialI[];
-  topCountries: StatsTopCountriesI[];
+  topCountries: StatsTopSocialI[];
+  topStyles?: StatsTopSocialI[];
+  various?: StatsTopSocialI[];
 }
 
 export interface StatsTopSocialI {
+  id?: string;
   name: string;
   value: number;
   percentage: number;
-}
-
-export interface StatsTopCountriesI extends StatsTopSocialI {
-  id: string;
 }

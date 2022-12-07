@@ -84,12 +84,12 @@
   <div
     class="flex gap-1 px-3 py-1 my-2 overflow-x-scroll scrollbar-hidden"
     *ngIf="item.styles!.length > 0"
-    [class]="item.styles.length <= 3 ? 'justify-center md:justify-center' : 'justify-start md:justify-center'"
-    >
-    <!-- [ngClass]="{
-      'justify-center md:justify-center': 'item.styles.length <= 3',
-      'justify-start md:justify-center': 'item.styles.length > 3'
-    }" -->
+    [class]="
+      item.styles.length <= 3
+        ? 'justify-center md:justify-center'
+        : 'justify-start md:justify-center'
+    "
+  >
     <div *ngFor="let style of item.styles; index as i">
       <a
         (click)="goToFilter('styles', style.name)"

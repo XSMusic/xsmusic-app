@@ -47,7 +47,7 @@ export class MapComponent implements AfterViewInit {
       : [this.leafletService.getDarkMode()];
     this.map = this.leafletService.L.map('map', {
       center,
-      attributionControl: true,
+      attributionControl: false,
       zoom: this.zoom,
       layers,
     });

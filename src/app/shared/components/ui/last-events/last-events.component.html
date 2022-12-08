@@ -1,0 +1,65 @@
+<ng-container *ngIf="!loading && !error">
+  <div @inOut class="flex justify-between">
+    <h1 class="pb-2 text-lg font-extrabold dark:text-white">
+      Proximas fiestas
+    </h1>
+    <p
+      class="cursor-pointer pt-0.5 pb-2 text-sm font-extralight dark:text-white hover:opacity-70"
+      (click)="goTo.emit({ type: 'event', typeRoute: 'all' })"
+    >
+      Ver todos
+    </p>
+  </div>
+  <div class="grid gap-2 md:grid-cols-12">
+    <div class="col-span-6" *ngFor="let item of events">
+      <div
+        class="flex justify-between col-span-6 gap-1 p-2 border border-gray-200 rounded-lg cursor-pointer dark:border-gray-700"
+      >
+        <div class="flex gap-2">
+          <img
+            (click)="
+              goTo.emit({ type: 'event', typeRoute: 'one', slug: item.slug! })
+            "
+            class="w-12 h-12 rounded-lg"
+            [src]="item.images! | imageArray: 'medium'"
+          />
+          <div class="flex flex-col gap">
+            <p
+              (click)="
+                goTo.emit({ type: 'event', typeRoute: 'one', slug: item.slug! })
+              "
+              class="font-black hover:opacity-70 dark:text-white"
+            >
+              {{ item.name }}
+            </p>
+            <p
+              class="font-extralight hover:opacity-70 dark:text-white"
+              (click)="
+                goTo.emit({
+                  type: item.site.type === 'club' ? 'club' : 'festival',
+                  typeRoute: 'one',
+                  slug: item.site.slug!
+                })
+              "
+            >
+              {{ item.site.name
+              }}<span *ngIf="item.site.address.state"
+                >, {{ item.site.address.state }}
+              </span>
+            </p>
+          </div>
+        </div>
+        <div
+          class="flex flex-col gap-1 px-2 py-2 text-center text-white bg-black rounded-lg rounded-bl-lg dark:bg-gray-800"
+        >
+          <div class="text-xs font-light">
+            {{ item.date! | dateToDayOrMonth: 'day' }}
+          </div>
+          <div class="text-xs font-bold">
+            {{ item.date! | dateToDayOrMonth: 'month' | uppercase }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

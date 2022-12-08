@@ -37,9 +37,6 @@ export class LocalStorageService implements Storage {
     AppComponent.isBrowser.subscribe((isBrowser: boolean) => {
       if (!isBrowser) {
         this.storage = localStorage;
-        console.log('isBrowser');
-      } else {
-        console.log('!isBrowser');
       }
     });
   }

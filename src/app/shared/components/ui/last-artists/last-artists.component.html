@@ -1,7 +1,15 @@
-<ng-container *ngIf="!loading">
-  <h1 @inOut class="pb-2 text-lg font-extrabold dark:text-white">
-    Ultimos artistas
-  </h1>
+<ng-container *ngIf="!loading && !error">
+  <div @inOut class="flex justify-between">
+    <h1 class="pb-2 text-lg font-extrabold dark:text-white">
+      Ultimos artistas
+    </h1>
+    <p
+      class="cursor-pointer pt-0.5 pb-2 text-sm font-extralight dark:text-white hover:opacity-70"
+      (click)="goTo.emit({ type: 'artist', typeRoute: 'all' })"
+    >
+      Ver todos
+    </p>
+  </div>
 
   <div class="flex gap-3 overflow-x-scroll scrollbar-hidden">
     <div *ngFor="let artist of artists">
@@ -10,7 +18,9 @@
           [src]="artist.images! | imageArray: 'small'"
           class="object-cover w-full h-20 rounded-full shadow-lg cursor-pointer hover:filter-grayscale hover:scale-110 hover:duration-1000"
           [alt]="artist.name"
-          (click)="goToArtistProfile(artist.slug!)"
+          (click)="
+            goTo.emit({ type: 'artist', typeRoute: 'one', slug: artist.slug! })
+          "
           onError
         />
         <p

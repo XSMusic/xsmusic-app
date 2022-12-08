@@ -2,17 +2,49 @@
   class="container px-4 pt-12 mx-auto max-w-full-xl sm:pb-0 max-w-7sm"
   style="padding-top: 4.25rem"
 >
-  <artists-last-block></artists-last-block>
+  <last-artists
+    [artists]="vm.artists"
+    [loading]="vm.loading.artists"
+    [error]="vm.error.artists"
+    (goTo)="goTo($event)"
+  ></last-artists>
+
+  <last-media
+    [sets]="vm.sets"
+    [tracks]="vm.tracks"
+    [loadingSets]="vm.loading.sets"
+    [loadingTracks]="vm.loading.tracks"
+    [errorSets]="vm.error.sets"
+    [errorTracks]="vm.error.tracks"
+    (goTo)="goTo($event)"
+  ></last-media>
 
   <div class="lg:grid lg:grid-cols-12">
     <div class="my-2 lg:col-span-12">
-      <last-media></last-media>
+      <last-events
+        [events]="vm.events"
+        [loading]="vm.loading.events"
+        [error]="vm.error.events"
+        (goTo)="goTo($event)"
+      ></last-events>
     </div>
   </div>
 
   <br />
   <div class="lg:grid lg:grid-cols-2">
-    <sites-last-block type="club"></sites-last-block>
-    <sites-last-block type="festival"></sites-last-block>
+    <last-sites
+      [sites]="vm.clubs"
+      [loading]="vm.loading.clubs"
+      [error]="vm.error.clubs"
+      type="club"
+      (goTo)="goTo($event)"
+    ></last-sites>
+    <last-sites
+      [sites]="vm.festivals"
+      [loading]="vm.loading.festivals"
+      [error]="vm.error.festivals"
+      type="festival"
+      (goTo)="goTo($event)"
+    ></last-sites>
   </div>
 </div>

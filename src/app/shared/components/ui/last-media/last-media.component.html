@@ -1,0 +1,42 @@
+<ng-container *ngIf="!loadingSets && !errorSets">
+  <div @inOut class="flex justify-between">
+    <div class="flex gap-2">
+      <h1
+        @inOut
+        class="text-lg cursor-pointer dark:text-white"
+        [ngClass]="{
+          'font-extrabold': view === 'sets',
+          'font-extralight': view !== 'sets'
+        }"
+        (click)="view = 'sets'"
+      >
+        Ultimos Sets
+      </h1>
+      <h1
+        @inOut
+        class="text-lg cursor-pointer dark:text-white"
+        [ngClass]="{
+          'font-extrabold': view === 'tracks',
+          'font-extralight': view !== 'tracks'
+        }"
+        (click)="view = 'tracks'"
+      >
+        Ultimos Tracks
+      </h1>
+    </div>
+    <p
+      class="cursor-pointer pt-0.5 pb-2 text-sm font-extralight dark:text-white hover:opacity-70"
+      (click)="
+        goTo.emit({ type: view === 'sets' ? 'set' : 'track', typeRoute: 'all' })
+      "
+    >
+      Ver todos
+    </p>
+  </div>
+
+  <last-media-items *ngIf="view === 'sets'" [media]="sets"></last-media-items>
+  <last-media-items
+    *ngIf="view === 'tracks'"
+    [media]="tracks"
+  ></last-media-items>
+</ng-container>

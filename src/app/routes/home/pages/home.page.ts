@@ -106,9 +106,7 @@ export class HomePage implements OnInit {
         routesConfig[event.type].replace(':slug', event.slug!),
       ]);
     } else {
-        this.router.navigate([
-          routesConfig[`${event.type}s`],
-        ]);
+      this.router.navigate([routesConfig[`${event.type}s`]]);
     }
   }
 }

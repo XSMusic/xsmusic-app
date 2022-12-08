@@ -1,4 +1,4 @@
-import { GetAllDto } from "@interfaces";
+import { GetAllDto } from '@interfaces';
 
 export interface MediaGetAllForTypeDto extends GetAllDto {
   id: string;

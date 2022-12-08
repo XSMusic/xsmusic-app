@@ -17,8 +17,7 @@ export class AppComponent implements OnInit {
     private navigationService: NavigationService,
     private metaService: MetaService,
     @Inject(PLATFORM_ID) private platformId: any
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     AppComponent.isBrowser.next(isPlatformBrowser(this.platformId));

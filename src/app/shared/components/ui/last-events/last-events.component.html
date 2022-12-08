@@ -44,7 +44,7 @@
             >
               {{ item.site.name
               }}<span *ngIf="item.site.address.state"
-                >, {{ item.site.address.state }}
+                >, {{ item.site.address.state | fixState }}
               </span>
             </p>
           </div>

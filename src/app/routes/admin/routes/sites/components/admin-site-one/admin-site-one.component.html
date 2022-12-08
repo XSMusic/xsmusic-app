@@ -1,32 +1,29 @@
 <form *ngIf="site" @inOut>
-  <div class="grid grid-cols-1 gap-4 mt-1 lg:grid-cols-4">
-    <div class="col-span-4 mb-1 md:col-span-4">
-      <div class="grid grid-cols-2 gap-2">
-        <div class="col-span-2 md:col-span-1">
-          <images-edit-block
-            [item]="site"
-            (showImage)="showImage($event)"
-            (removeImage)="removeImage($event)"
-            (setFirstImage)="setFirstImage($event)"
-            (toggleAddImage)="imageState = !imageState"
-          ></images-edit-block>
-        </div>
-        <div
-          *ngIf="site.address.coordinates.length === 2"
-          class="col-span-2 mb-1 md:col-span-1"
-        >
-          <map
-            [class]="'rounded-lg overflow-hidden'"
-            [style]="'height: 25.6rem'"
-            [markers]="[site]"
-            [zoom]="14"
-            [draggable]="true"
-            [center]="site.address.coordinates"
-          ></map>
-        </div>
-      </div>
+  <div class="grid grid-cols-2 gap-2">
+    <div class="col-span-2 md:col-span-1">
+      <images-edit-block
+        [item]="site"
+        (showImage)="showImage($event)"
+        (removeImage)="removeImage($event)"
+        (setFirstImage)="setFirstImage($event)"
+        (toggleAddImage)="imageState = !imageState"
+      ></images-edit-block>
+    </div>
+    <div
+      *ngIf="site.address.coordinates.length === 2"
+      class="col-span-2 mb-1 md:col-span-1"
+    >
+      <map
+        [class]="'rounded-lg overflow-hidden'"
+        [style]="'height: 25.6rem'"
+        [markers]="[site]"
+        [zoom]="14"
+        [draggable]="true"
+        [center]="site.address.coordinates"
+      ></map>
     </div>
   </div>
+
   <div class="grid grid-cols-1 gap-4 mt-1 lg:grid-cols-4">
     <div class="col-span-2 md:col-span-2">
       <label

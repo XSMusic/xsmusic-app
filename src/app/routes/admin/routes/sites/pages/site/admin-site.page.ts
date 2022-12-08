@@ -2,7 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { routesConfig } from '@core/config';
 import { Event, Media, Site } from '@models';
-import { ToastService, SiteService, StyleService, MediaService, EventService } from '@services';
+import {
+  ToastService,
+  SiteService,
+  MediaService,
+  EventService,
+} from '@services';
 import { OptionsItemI } from '@shared/components/ui/options-items/options-items.interface';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';

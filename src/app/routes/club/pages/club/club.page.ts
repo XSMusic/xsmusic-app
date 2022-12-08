@@ -74,7 +74,6 @@ export class ClubPage implements OnInit {
           this.getEvents();
         }
 
-
         this.spinner.hide();
       },
       error: (error) => {

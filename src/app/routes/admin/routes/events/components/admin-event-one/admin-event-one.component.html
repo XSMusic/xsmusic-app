@@ -1,12 +1,27 @@
-<form *ngIf="event" @inOut class="grid grid-cols-1 gap-4 mt-1 lg:grid-cols-4">
-  <div class="col-span-2 mb-1 md:col-span-4">
-    <images-edit-block
-      [item]="event"
-      (showImage)="showImage($event)"
-      (removeImage)="removeImage($event)"
-      (setFirstImage)="setFirstImage($event)"
-      (toggleAddImage)="imageState = !imageState"
-    ></images-edit-block>
+<form *ngIf="event" @inOut>
+  <div class="grid grid-cols-2 gap-2">
+    <div class="col-span-2 md:col-span-1">
+      <images-edit-block
+        [item]="event"
+        (showImage)="showImage($event)"
+        (removeImage)="removeImage($event)"
+        (setFirstImage)="setFirstImage($event)"
+        (toggleAddImage)="imageState = !imageState"
+      ></images-edit-block>
+    </div>
+    <div
+      *ngIf="event.site.address.coordinates.length === 2"
+      class="col-span-2 mb-1 md:col-span-1"
+    >
+      <map
+        [class]="'rounded-lg overflow-hidden'"
+        [style]="'height: 25.6rem'"
+        [markers]="[event.site]"
+        [zoom]="14"
+        [draggable]="true"
+        [center]="event.site.address.coordinates"
+      ></map>
+    </div>
   </div>
 
   <div class="grid col-span-2 gap-4 md:grid md:col-span-2">

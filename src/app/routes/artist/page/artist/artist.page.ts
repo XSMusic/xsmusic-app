@@ -2,7 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { Artist, Event, Media } from '@models';
-import { EventService, MediaService, MetaService, SiteService, ToastService, TOAST_STATE } from '@services';
+import {
+  EventService,
+  MediaService,
+  MetaService,
+  ToastService,
+  TOAST_STATE,
+} from '@services';
 import { ArtistService } from '@shared/services/api/artist/artist.service';
 import { MetadataI } from '@shared/services/system/meta';
 import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinner.service';

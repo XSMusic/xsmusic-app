@@ -29,12 +29,8 @@ export class LeafletService {
       (user && user.darkMode === 'active') ||
       (user &&
         user.darkMode === 'system' &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches)
-    ) {
-      darkMode = true;
-    } else if (
-      !user &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches
+        window.matchMedia('(prefers-color-scheme: dark)').matches) ||
+      (!user && window.matchMedia('(prefers-color-scheme: dark)').matches)
     ) {
       darkMode = true;
     }

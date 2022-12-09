@@ -101,8 +101,4 @@ export function updateScrollState(
 ) {
   updateScrollPosition(scrolledUntilNow, scrollState);
   updateTotalToScroll(totalToScroll, scrollState);
-  // const isSameTotal = isSameTotalToScroll(scrollState);
-  // if (!isSameTotal) {
-  //   updateTriggeredFlag(scrollState, false, isScrollingDown);
-  // }
 }

@@ -20,6 +20,7 @@
             (click)="
               goTo.emit({ type: 'event', typeRoute: 'one', slug: item.slug! })
             "
+            alt=""
             class="w-12 h-12 rounded-lg"
             [src]="item.images! | imageArray: 'medium'"
           />

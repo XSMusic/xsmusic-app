@@ -1,4 +1,4 @@
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Geolocation } from '@capacitor/geolocation';
 import { environment } from '@env/environment';
 import { FilterListI } from '@interfaces';

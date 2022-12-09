@@ -130,9 +130,7 @@ export function getElementOffsetTop(
   isWindow: boolean
 ) {
   const topKey = axis.topKey();
-  // elem = elem.nativeElement;
   if (!elem.getBoundingClientRect) {
-    // || elem.css('none')) {
     return;
   }
   return (
@@ -150,7 +148,7 @@ export function getElementPageYOffset(
   const scrollTop = axis.scrollTopKey();
   const offsetTop = axis.offsetTopKey();
 
-  if (isNaN(window.pageYOffset)) {
+  if (isNaN(window.scrollY)) {
     return getDocumentElement(isWindow, elem)[scrollTop];
   } else if (elem.ownerDocument) {
     return elem.ownerDocument.defaultView[pageYOffset];

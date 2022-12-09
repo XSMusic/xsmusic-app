@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { Image, User } from '@models';
+import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { FullImageService } from '@shared/services/ui/full-image/full-image.serv
 export class UsersViewListComponent {
   @Input() users: User[] = [];
   @Input() loading = true;
-  @Output() goToProfile = new EventEmitter<User>();
+  @Output() goToPage = new EventEmitter<GoToPageI>();
   @Output() filter = new EventEmitter<{ name: string; value: string }>();
   @Output() onScroll = new EventEmitter<void>();
 

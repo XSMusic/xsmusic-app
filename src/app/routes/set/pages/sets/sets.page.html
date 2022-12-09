@@ -25,7 +25,7 @@
     [items]="items"
     [loading]="loading"
     type="set"
-    (goToOne)="goToProfile($event)"
+    (goToPage)="goToPage($event)"
     (onScroll)="onScroll()"
   ></generic-view-gallery>
 
@@ -34,7 +34,7 @@
     [media]="items"
     [loading]="loading"
     type="sets"
-    (goToProfile)="onClickItemViewList($event)"
+    (goToPage)="goToPage($event)"
     (filter)="onFilter($event)"
     (onScroll)="onScroll()"
   ></media-view-list>

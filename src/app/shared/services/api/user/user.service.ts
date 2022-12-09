@@ -83,5 +83,6 @@ export class UserService {
       this._user = user;
     }
     this.change$.next(user);
+    console.log(user);
   }
 }

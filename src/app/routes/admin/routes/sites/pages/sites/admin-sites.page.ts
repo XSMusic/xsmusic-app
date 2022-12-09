@@ -2,8 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { routesConfig } from '@core/config';
 import { Site } from '@models';
-import { SiteService, StatsService, ToastService } from '@services';
+import {
+  NavigationService,
+  SiteService,
+  StatsService,
+  ToastService,
+} from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
+import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { SiteGetAllDto } from '@shared/services/api/site/site.dto';
 import { StatsGetTopStatsI } from '@shared/services/api/stats/stats.interface';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
@@ -37,7 +43,8 @@ export class AdminSitesPage implements OnInit {
     private siteService: SiteService,
     private statsService: StatsService,
     private toast: ToastService,
-    private router: Router
+    private router: Router,
+    private navigationService: NavigationService
   ) {}
 
   ngOnInit(): void {
@@ -83,12 +90,9 @@ export class AdminSitesPage implements OnInit {
     });
   }
 
-  goToProfile(item: Site) {
-    this.router.navigate([
-      this.body.type === 'club'
-        ? routesConfig.clubAdmin.replace(':id', item._id!)
-        : routesConfig.festivalAdmin.replace(':id', item._id!),
-    ]);
+  goToPage(data: GoToPageI) {
+    data.admin = true;
+    this.navigationService.goToPage(data);
   }
 
   filter(event: { name: string; value: string }) {

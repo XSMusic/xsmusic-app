@@ -17,7 +17,7 @@ export class AdminMediaAddPage implements OnInit {
   items: Youtube[] = [];
   itemSelected?: Youtube;
   media: Media = new Media();
-  type = '';
+  type!: 'set' | 'track';
   source = 'youtube';
   scraping: any = {
     images: [],

@@ -1,9 +1,11 @@
+import { Image } from './image.model';
+
 export class User {
   _id?: string;
   name!: string;
   email!: string;
-  image!: any;
-  role!: string;
+  images?: Image[];
+  role!: 'ADMIN' | 'USER';
   darkMode!: string;
   created?: string;
   updated?: string;

@@ -21,7 +21,13 @@
                 <div class="flex flex-col">
                   <p
                     class="my-1 mr-2 text-lg font-extrabold leading-none text-black cursor-pointer dark:text-white hover:text-gray-600"
-                    (click)="goToProfile.emit({ type: 'event', event: item })"
+                    (click)="
+                      goToPage.emit({
+                        type: 'event',
+                        typeRoute: 'one',
+                        item
+                      })
+                    "
                   >
                     {{ item.name }}
                   </p>
@@ -53,7 +59,13 @@
                 <div class="flex flex-col">
                   <p
                     class="my-0.5 mr-2 text-base font-bold leading-none text-black dark:text-white cursor-pointer hover:text-gray-600"
-                    (click)="goToProfile.emit({ type: 'site', event: item })"
+                    (click)="
+                      goToPage.emit({
+                        type: item.site.type,
+                        typeRoute: 'one',
+                        item
+                      })
+                    "
                   >
                     {{ item.site.name }}
                   </p>

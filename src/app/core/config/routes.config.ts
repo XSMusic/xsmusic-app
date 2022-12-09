@@ -1,4 +1,4 @@
-export const routesConfig = {
+export const routesConfig: any = {
   account: '/account',
   accountEdit: '/account/edit',
   admin: '/admin/dashboard',

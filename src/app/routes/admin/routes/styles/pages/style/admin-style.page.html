@@ -17,7 +17,7 @@
     *ngIf="view === 'viewArtists'"
     [artists]="style.artists"
     [loading]="false"
-    (goToProfile)="goTo('artist', $event)"
+    (goToPage)="goToPage($event)"
   ></artists-view-list>
 
   <media-view-list
@@ -25,6 +25,6 @@
     [media]="style.sets"
     [loading]="false"
     type="sets"
-    (goToProfile)="goTo('set', $event)"
+    (goToPage)="goToPage($event)"
   ></media-view-list>
 </div>

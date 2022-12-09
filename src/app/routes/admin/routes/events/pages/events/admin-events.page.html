@@ -23,7 +23,7 @@
     *ngIf="view === 'viewList'"
     [items]="items"
     [loading]="loading"
-    (goToProfile)="goToProfile($event)"
+    (goToPage)="goToPage($event)"
     (filter)="filter('new', $event)"
     (onScroll)="reloadItems('new')"
   >
@@ -32,7 +32,7 @@
     *ngIf="view === 'viewListOld'"
     [items]="itemsOld"
     [loading]="loading"
-    (goToProfile)="goToProfile($event)"
+    (goToPage)="goToPage($event)"
     (filter)="filter('old', $event)"
     (onScroll)="reloadItems('old')"
   >

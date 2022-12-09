@@ -4,6 +4,7 @@ import { routesConfig } from '@core/config';
 import { Site } from '@models';
 import { SiteService, ToastService } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
+import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { SiteGetAllDto } from '@shared/services/api/site/site.dto';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { getUserLocation } from '@shared/utils';
@@ -129,13 +130,15 @@ export class FestivalsPage implements OnInit {
     }
   }
 
-  goToProfile(site: Site) {
+  goToPage(event: GoToPageI) {
     this.gaService.event(
       'festivals_link_profile',
       'festivals_link',
       'festivals'
     );
-    this.router.navigate([routesConfig.festival.replace(':slug', site.slug!)]);
+    this.router.navigate([
+      routesConfig.festival.replace(':slug', event.item.slug!),
+    ]);
   }
 
   onFilter(event: { name: string; value: string }) {

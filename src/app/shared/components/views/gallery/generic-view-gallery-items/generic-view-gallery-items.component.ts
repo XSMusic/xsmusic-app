@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
+import { GoToPageI } from '@shared/interfaces/goto.interface';
 
 @Component({
   selector: 'generic-view-gallery-items',
@@ -17,6 +18,6 @@ export class GenericViewGalleryItemsComponent {
     | 'set'
     | 'track'
     | 'festival' = 'artist';
-  @Output() goToOne = new EventEmitter<any>();
+  @Output() goToPage = new EventEmitter<GoToPageI>();
   @Output() discartEvent = new EventEmitter<any>();
 }

@@ -7,6 +7,7 @@ import {
   SiteService,
   MediaService,
   EventService,
+  NavigationService,
 } from '@services';
 import { OptionsItemI } from '@shared/components/ui/options-items/options-items.interface';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
@@ -14,6 +15,7 @@ import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinner.service';
 import { EventGetAllForTypeDto } from '@shared/services/api/event/event.dto';
 import { MediaGetAllForTypeDto } from '@shared/services/api/media/media.dto';
+import { GoToPageI } from '@shared/interfaces/goto.interface';
 
 @Component({
   selector: 'page-admin-site',
@@ -54,7 +56,8 @@ export class AdminSitePage implements OnInit {
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
     private toast: ToastService,
-    private router: Router
+    private router: Router,
+    private navigationService: NavigationService
   ) {}
 
   ngOnInit() {
@@ -125,5 +128,9 @@ export class AdminSitePage implements OnInit {
     } else if (event.action === 'goToAdminEventAdd') {
       this.toast.showToast(TOAST_STATE.info, 'En construccion');
     }
+  }
+
+  goToPage(data: GoToPageI) {
+    this.navigationService.goToPage(data);
   }
 }

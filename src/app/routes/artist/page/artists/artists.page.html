@@ -25,7 +25,7 @@
     [items]="items"
     [loading]="loading"
     type="artist"
-    (goToOne)="goToProfile($event)"
+    (goToPage)="goToPage($event)"
     (onScroll)="onScroll()"
   ></generic-view-gallery>
 
@@ -33,7 +33,7 @@
     *ngIf="view === 'viewList'"
     [artists]="items"
     [loading]="loading"
-    (goToProfile)="goToProfile($event)"
+    (goToPage)="goToPage($event)"
     (filter)="onFilter($event)"
     (onScroll)="onScroll()"
   >

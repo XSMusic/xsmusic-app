@@ -4,6 +4,7 @@ import {
   ArtistService,
   EventService,
   MediaService,
+  NavigationService,
   ToastService,
 } from '@services';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
@@ -15,6 +16,7 @@ import { routesConfig } from '@core/config';
 import { OptionsItemI } from '@shared/components/ui/options-items/options-items.interface';
 import { EventGetAllForTypeDto } from '@shared/services/api/event/event.dto';
 import { MediaGetAllForTypeDto } from '@shared/services/api/media/media.dto';
+import { GoToPageI } from '../../../../../../shared/interfaces/goto.interface';
 
 @Component({
   selector: 'page-admin-artist',
@@ -68,7 +70,8 @@ export class AdminArtistPage {
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
     private toast: ToastService,
-    private router: Router
+    private router: Router,
+    private navigationService: NavigationService
   ) {}
 
   ngOnInit() {
@@ -145,28 +148,9 @@ export class AdminArtistPage {
     this.view = event.action;
   }
 
-  goToProfile(data: { type: 'media' | 'site'; media: Media }) {
-    if (data.type === 'media') {
-      if (data.media.type === 'set') {
-        this.router.navigate([
-          routesConfig.setAdmin.replace(':id', data.media._id!),
-        ]);
-      } else {
-        this.router.navigate([
-          routesConfig.trackAdmin.replace(':id', data.media._id!),
-        ]);
-      }
-    } else {
-      if (data.media.site.type === 'club') {
-        this.router.navigate([
-          routesConfig.clubAdmin.replace(':id', data.media.site._id!),
-        ]);
-      } else if (data.media.site.type === 'festival') {
-        this.router.navigate([
-          routesConfig.festivalAdmin.replace(':id', data.media.site._id!),
-        ]);
-      }
-    }
+  goToPage(data: GoToPageI) {
+    data.admin = true;
+    this.navigationService.goToPage(data);
   }
 
   onClickOptionItem(event: OptionsItemI) {

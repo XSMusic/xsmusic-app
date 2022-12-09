@@ -3,8 +3,9 @@ import { Router } from '@angular/router';
 import { routesConfig } from '@core/config';
 import { GetAllDto } from '@interfaces';
 import { Media } from '@models';
-import { MediaService, ToastService } from '@services';
+import { MediaService, NavigationService, ToastService } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
+import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
@@ -28,7 +29,8 @@ export class SetsPage implements OnInit {
     private mediaService: MediaService,
     private router: Router,
     private toast: ToastService,
-    private gaService: GoogleAnalyticsService
+    private gaService: GoogleAnalyticsService,
+    private navigationService: NavigationService
   ) {}
 
   ngOnInit() {
@@ -80,27 +82,8 @@ export class SetsPage implements OnInit {
     }
   }
 
-  goToProfile(item: Media) {
-    this.gaService.event('sets_link_profile', 'sets_link', 'sets');
-    this.router.navigate([routesConfig.set.replace(':slug', item.slug!)]);
-  }
-
-  onClickItemViewList(data: { type: 'media' | 'site'; media: Media }) {
-    if (data.type === 'media') {
-      this.router.navigate([
-        routesConfig.set.replace(':slug', data.media.slug!),
-      ]);
-    } else {
-      if (data.media.site.type === 'club') {
-        this.router.navigate([
-          routesConfig.club.replace(':slug', data.media.site.slug!),
-        ]);
-      } else if (data.media.site.type === 'festival') {
-        this.router.navigate([
-          routesConfig.festival.replace(':slug', data.media.site.slug!),
-        ]);
-      }
-    }
+  goToPage(data: GoToPageI) {
+    this.navigationService.goToPage(data);
   }
 
   onFilter(event: { name: string; value: string }) {

@@ -4,7 +4,7 @@ import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { GetAllDto } from '@interfaces';
 import { Media, Youtube } from '@models';
-import { ScrapingService } from '@services';
+import { NavigationService, ScrapingService } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 import { MediaService } from '@shared/services/api/media/media.service';
 import {
@@ -12,6 +12,7 @@ import {
   TOAST_STATE,
 } from '@shared/services/ui/toast/toast.service';
 import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinner.service';
+import { GoToPageI } from '@shared/interfaces/goto.interface';
 
 @Component({
   selector: 'page-admin-media-list',
@@ -48,7 +49,8 @@ export class AdminMediaListPage implements OnInit {
     private router: Router,
     private toast: ToastService,
     private scrapingService: ScrapingService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private navigationService: NavigationService
   ) {}
 
   ngOnInit(): void {
@@ -101,20 +103,9 @@ export class AdminMediaListPage implements OnInit {
     }
   }
 
-  goToProfile(data: { type: 'site' | 'media'; media: Media }) {
-    let route = [];
-    if (data.type === 'media') {
-      route =
-        this.type === 'sets'
-          ? [routesConfig.setAdmin.replace(':id', data.media._id!)]
-          : [routesConfig.trackAdmin.replace(':id', data.media._id!)];
-    } else {
-      route =
-        data.media.site.type === 'club'
-          ? [routesConfig.clubAdmin.replace(':id', data.media.site._id!)]
-          : [routesConfig.festivalAdmin.replace(':id', data.media.site._id!)];
-    }
-    this.router.navigate(route);
+  goToPage(data: GoToPageI) {
+    data.admin = true;
+    this.navigationService.goToPage(data);
   }
 
   filter(event: { name: string; value: string }) {

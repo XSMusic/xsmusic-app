@@ -21,7 +21,13 @@
                   <div class="flex flex-col">
                     <p
                       class="my-1 mr-2 text-lg font-extrabold leading-none text-black cursor-pointer dark:text-white hover:text-gray-600"
-                      (click)="goToProfile.emit(site)"
+                      (click)="
+                        goToPage.emit({
+                          type: site.type,
+                          typeRoute: 'one',
+                          item: site
+                        })
+                      "
                     >
                       {{ site.name }}
                     </p>

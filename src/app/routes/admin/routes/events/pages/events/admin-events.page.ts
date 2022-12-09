@@ -3,8 +3,14 @@ import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { Event } from '@models';
-import { EventService, ToastService, TOAST_STATE } from '@services';
+import {
+  EventService,
+  NavigationService,
+  ToastService,
+  TOAST_STATE,
+} from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
+import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { EventGetAllDto } from '@shared/services/api/event/event.dto';
 
 @Component({
@@ -33,7 +39,8 @@ export class AdminEventsPage {
   constructor(
     private eventService: EventService,
     private router: Router,
-    private toast: ToastService
+    private toast: ToastService,
+    private navigationService: NavigationService
   ) {}
 
   ngOnInit() {
@@ -62,17 +69,9 @@ export class AdminEventsPage {
     });
   }
 
-  goToProfile(data: { type: 'site' | 'event' | 'artist'; event: Event }) {
-    let route = [];
-    if (data.type === 'event') {
-      route = [routesConfig.eventAdmin.replace(':id', data.event._id!)];
-    } else {
-      route =
-        data.event.site.type === 'club'
-          ? [routesConfig.clubAdmin.replace(':id', data.event.site._id!)]
-          : [routesConfig.festivalAdmin.replace(':id', data.event.site._id!)];
-    }
-    this.router.navigate(route);
+  goToPage(data: GoToPageI) {
+    data.admin = true;
+    this.navigationService.goToPage(data);
   }
 
   filter(type: 'new' | 'old', event: { name: string; value: string }) {

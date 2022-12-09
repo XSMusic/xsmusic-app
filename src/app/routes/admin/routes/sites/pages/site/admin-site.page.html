@@ -24,8 +24,8 @@
       [items]="events"
       [loading]="false"
       type="event"
+      (goToPage)="goToPage($event)"
     ></events-view-list>
-    <!-- (goToProfile)="goToProfile($event)" -->
   </ng-container>
 
   <ng-container *ngIf="view === 'viewSets'">
@@ -33,7 +33,7 @@
       [media]="sets"
       [loading]="false"
       type="sets"
+      (goToPage)="goToPage($event)"
     ></media-view-list>
-    <!-- (goToProfile)="goToProfile($event)" -->
   </ng-container>
 </div>

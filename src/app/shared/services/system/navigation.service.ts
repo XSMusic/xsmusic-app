@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
+import { GoToPageI } from '../../interfaces/goto.interface';
+import { routesConfig } from '@core/config';
 
 @Injectable()
 export class NavigationService {
@@ -36,5 +38,18 @@ export class NavigationService {
     }
 
     return '';
+  }
+
+  goToPage(data: GoToPageI) {
+    let route: any = '';
+    const typeOne = `${data.type}`;
+    const typeAll = `${data.type}s`;
+    route = `${data.typeRoute === 'one' ? typeOne : typeAll}`;
+    if (data.admin) {
+      route = routesConfig[route + 'Admin'].replace(':id', data.item._id);
+    } else {
+      route = routesConfig[route].replace(':slug', data.item.slug);
+    }
+    this.router.navigate([route]);
   }
 }

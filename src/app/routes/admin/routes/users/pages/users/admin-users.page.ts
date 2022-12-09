@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { routesConfig } from '@core/config';
 import { User } from '@models';
-import { UserService } from '@services';
+import { NavigationService, UserService } from '@services';
+import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { UserGetAllDto } from '@shared/services/api/user/dtos/user.dto';
 
 @Component({
@@ -18,7 +18,11 @@ export class AdminUsersPage implements OnInit {
   };
   loading = true;
   error = false;
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private navigationService: NavigationService
+  ) {}
 
   ngOnInit(): void {
     this.getUsers();
@@ -41,8 +45,9 @@ export class AdminUsersPage implements OnInit {
       },
     });
   }
-  goToProfile(item: User) {
-    this.router.navigate([routesConfig.userAdmin.replace(':id', item._id!)]);
+  goToPage(data: GoToPageI) {
+    data.admin = true;
+    this.navigationService.goToPage(data);
   }
 
   filter(event: { name: string; value: string }) {

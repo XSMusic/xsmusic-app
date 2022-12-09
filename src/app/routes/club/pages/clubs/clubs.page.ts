@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { routesConfig } from '@core/config';
 import { Site } from '@models';
-import { SiteService, ToastService } from '@services';
+import { NavigationService, SiteService, ToastService } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
+import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { SiteGetAllDto } from '@shared/services/api/site/site.dto';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { getUserLocation } from '@shared/utils';
@@ -43,7 +44,8 @@ export class ClubsPage implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private toast: ToastService,
-    private gaService: GoogleAnalyticsService
+    private gaService: GoogleAnalyticsService,
+    private navigationService: NavigationService
   ) {}
 
   ngOnInit() {
@@ -126,9 +128,8 @@ export class ClubsPage implements OnInit {
     }
   }
 
-  goToProfile(site: Site) {
-    this.gaService.event('clubs_link_profile', 'clubs_link', 'clubs');
-    this.router.navigate([routesConfig.club.replace(':slug', site.slug!)]);
+  goToPage(data: GoToPageI) {
+    this.navigationService.goToPage(data);
   }
 
   onFilter(event: { name: string; value: string }) {

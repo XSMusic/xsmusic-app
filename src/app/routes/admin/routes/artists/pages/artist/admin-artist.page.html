@@ -23,7 +23,7 @@
       [media]="sets"
       [loading]="false"
       type="sets"
-      (goToProfile)="goToProfile($event)"
+      (goToPage)="goToPage($event)"
     ></media-view-list>
   </ng-container>
   <ng-container *ngIf="view === 'viewTracks'">
@@ -31,7 +31,7 @@
       [media]="tracks"
       [loading]="false"
       type="tracks"
-      (goToProfile)="goToProfile($event)"
+      (goToPage)="goToPage($event)"
     ></media-view-list>
   </ng-container>
   <ng-container *ngIf="view === 'viewEvents'">
@@ -39,7 +39,7 @@
       [items]="events"
       [loading]="false"
       type="artist"
+      (goToPage)="goToPage($event)"
     ></events-view-list>
-    <!-- (goToProfile)="goToProfile($event)" -->
   </ng-container>
 </div>

@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { routesConfig } from '@core/config';
 import { MessageI } from '@interfaces';
-import { Artist, Media, Style } from '@models';
-import { ToastService } from '@services';
+import { Style } from '@models';
+import { NavigationService, ToastService } from '@services';
+import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { StyleService } from '@shared/services/api/style/style.service';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 
@@ -21,7 +22,8 @@ export class AdminStylePage implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private styleService: StyleService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private navigationService: NavigationService
   ) {}
 
   ngOnInit() {
@@ -52,15 +54,7 @@ export class AdminStylePage implements OnInit {
     this.view = event.action;
   }
 
-  goTo(type: string, item: Artist | Media): void {
-    let route = '';
-    if (type === 'artist') {
-      route = routesConfig.artistAdmin.replace(':id', item._id!);
-    } else if (type === 'set') {
-      route = routesConfig.setAdmin.replace(':id', item._id!);
-    } else if (type === 'track') {
-      route = routesConfig.setAdmin.replace(':id', item._id!);
-    }
-    this.router.navigate([route]);
+  goToPage(data: GoToPageI): void {
+    this.navigationService.goToPage(data);
   }
 }

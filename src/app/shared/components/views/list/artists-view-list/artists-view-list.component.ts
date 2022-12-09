@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { Artist, Image } from '@models';
+import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
 import { getYearsOld } from '@utils';
 
@@ -12,7 +13,7 @@ import { getYearsOld } from '@utils';
 export class ArtistsViewListComponent {
   @Input() artists: Artist[] = [];
   @Input() loading = true;
-  @Output() goToProfile = new EventEmitter<Artist>();
+  @Output() goToPage = new EventEmitter<GoToPageI>();
   @Output() filter = new EventEmitter<{ name: string; value: string }>();
   @Output() onScroll = new EventEmitter<void>();
   getYearsOld = getYearsOld;

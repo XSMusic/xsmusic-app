@@ -20,7 +20,11 @@
                   <p
                     class="my-1 mr-2 text-lg font-extrabold leading-none text-black cursor-pointer dark:text-white hover:text-gray-600"
                     (click)="
-                      goToProfile.emit({ type: 'media', media: mediaItem })
+                      goToPage.emit({
+                        type: mediaItem.type,
+                        typeRoute: 'one',
+                        item: mediaItem
+                      })
                     "
                   >
                     {{ mediaItem.name }}
@@ -56,7 +60,11 @@
                   <p
                     class="my-0.5 mr-2 text-base font-bold leading-none text-black dark:text-white cursor-pointer hover:text-gray-600"
                     (click)="
-                      goToProfile.emit({ type: 'site', media: mediaItem })
+                      goToPage.emit({
+                        type: mediaItem.site.type,
+                        typeRoute: 'one',
+                        item: mediaItem
+                      })
                     "
                   >
                     {{ mediaItem.site.name }}

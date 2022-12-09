@@ -19,7 +19,13 @@
                 <div class="flex flex-col">
                   <p
                     class="my-1 mr-2 text-lg font-extrabold leading-none text-black cursor-pointer dark:text-white hover:text-gray-600"
-                    (click)="goToProfile.emit(artist)"
+                    (click)="
+                      goToPage.emit({
+                        type: 'artist',
+                        typeRoute: 'one',
+                        item: artist
+                      })
+                    "
                   >
                     {{ artist.name }}
                   </p>

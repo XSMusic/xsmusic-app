@@ -10,7 +10,7 @@ export class Site {
     country: 'es',
     coordinates: [],
   };
-  type!: string;
+  type!: 'club' | 'festival';
   images?: Image[];
   styles?: any[] = [];
   info? = '';

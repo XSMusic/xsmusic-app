@@ -109,7 +109,12 @@
           aria-haspopup="true"
           (click)="menuProfileState = !menuProfileState"
         >
-          <img class="w-8 h-8 rounded-full" [src]="user.image" onError alt="" />
+          <img
+            class="w-8 h-8 rounded-full"
+            [src]="user.images! | imageArray: 'small'"
+            onError
+            alt=""
+          />
         </button>
 
         <div

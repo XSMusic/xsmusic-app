@@ -24,7 +24,7 @@
     [items]="items"
     [loading]="loading"
     type="event"
-    (goToOne)="goToProfile({type: 'event', event: $event})"
+    (goToPage)="goToPage($event)"
     (onScroll)="onScroll()"
   ></generic-view-gallery>
 
@@ -32,7 +32,7 @@
     *ngIf="view === 'viewList'"
     [items]="items"
     [loading]="loading"
-    (goToProfile)="goToProfile($event)"
+    (goToPage)="goToPage($event)"
     (filter)="filter($event)"
     (onScroll)="onScroll()"
   >

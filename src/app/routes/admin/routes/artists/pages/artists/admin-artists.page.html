@@ -24,7 +24,7 @@
     *ngIf="view === 'viewList'"
     [artists]="items"
     [loading]="loading"
-    (goToProfile)="goToProfile($event)"
+    (goToPage)="goToPage($event)"
     (filter)="onFilter($event)"
     (onScroll)="onScroll()"
   >

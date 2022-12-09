@@ -6,11 +6,13 @@ import { GetAllDto } from '@interfaces';
 import { Artist } from '@models';
 import {
   ArtistService,
+  NavigationService,
   StatsService,
   ToastService,
   TOAST_STATE,
 } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
+import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { StatsGetTopStatsI } from '@shared/services/api/stats/stats.interface';
 
 @Component({
@@ -38,7 +40,8 @@ export class AdminArtistsPage {
     private artistService: ArtistService,
     private statsService: StatsService,
     private router: Router,
-    private toast: ToastService
+    private toast: ToastService,
+    private navigationService: NavigationService
   ) {}
 
   ngOnInit() {
@@ -74,8 +77,9 @@ export class AdminArtistsPage {
     });
   }
 
-  goToProfile(item: Artist) {
-    this.router.navigate([routesConfig.artistAdmin.replace(':id', item._id!)]);
+  goToPage(data: GoToPageI) {
+    data.admin = true;
+    this.navigationService.goToPage(data);
   }
 
   onFilter(event: { name: string; value: string }) {

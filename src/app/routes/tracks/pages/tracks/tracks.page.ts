@@ -3,8 +3,9 @@ import { Router } from '@angular/router';
 import { routesConfig } from '@core/config';
 import { GetAllDto } from '@interfaces';
 import { Media } from '@models';
-import { MediaService, ToastService } from '@services';
+import { MediaService, NavigationService, ToastService } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
+import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
@@ -28,7 +29,8 @@ export class TracksPage implements OnInit {
     private mediaService: MediaService,
     private router: Router,
     private toast: ToastService,
-    private gaService: GoogleAnalyticsService
+    private gaService: GoogleAnalyticsService,
+    private navigationService: NavigationService
   ) {}
 
   ngOnInit() {
@@ -84,9 +86,8 @@ export class TracksPage implements OnInit {
     }
   }
 
-  goToProfile(media: Media) {
-    this.gaService.event('tracks_link_profile', 'tracks_link', 'tracks');
-    this.router.navigate([routesConfig.track.replace(':slug', media.slug!)]);
+  goToPage(data: GoToPageI) {
+    this.navigationService.goToPage(data);
   }
 
   onFilter(event: { name: string; value: string }) {

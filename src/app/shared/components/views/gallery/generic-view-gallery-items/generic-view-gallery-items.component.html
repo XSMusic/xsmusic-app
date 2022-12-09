@@ -6,7 +6,7 @@
     <div
       *ngIf="item.name !== 'Desconocido'"
       class="relative overflow-hidden rounded-lg shadow-lg dark:border dark:border-gray-700"
-      (click)="type !== 'eventScraping' ? goToOne.emit(item) : null"
+      (click)="type !== 'eventScraping' ? goToPage.emit({type, typeRoute: 'one', item}) : null"
     >
       <img
         *ngIf="
@@ -55,7 +55,7 @@
         class="object-cover w-full h-96"
         [src]="item.images![0]"
         [alt]="item.name"
-        (click)="goToOne.emit(item)"
+        (click)="goToPage.emit(item)"
         onError
       />
 

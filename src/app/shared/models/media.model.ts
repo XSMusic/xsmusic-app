@@ -5,7 +5,7 @@ export class Media {
   name? = '';
   images?: Image[] = [];
   artists?: any[] = [];
-  type? = 'set';
+  type: 'set' | 'track' = 'set';
   site?: any;
   styles?: any[] = [];
   info? = '';

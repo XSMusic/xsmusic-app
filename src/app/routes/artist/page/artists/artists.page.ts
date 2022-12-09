@@ -6,6 +6,7 @@ import { GetAllDto } from '@interfaces';
 import { Artist } from '@models';
 import { ToastService } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
+import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { ArtistService } from '@shared/services/api/artist/artist.service';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
@@ -69,9 +70,11 @@ export class ArtistsPage implements OnInit {
     });
   }
 
-  goToProfile(artist: Artist) {
+  goToPage(event: GoToPageI) {
     this.gaService.event('artists_link_profile', 'artists_link', 'artists');
-    this.router.navigate([routesConfig.artist.replace(':slug', artist.slug!)]);
+    this.router.navigate([
+      routesConfig.artist.replace(':slug', event.item.slug!),
+    ]);
   }
 
   onFilter(event: { name: string; value: string }) {

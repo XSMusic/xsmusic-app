@@ -51,10 +51,7 @@ export class AuthService {
 
   loginEmail(data: LoginEmailDto): Observable<boolean> {
     return this.http.post<LoginResponseI>(`${this.urlAuth}/login`, data).pipe(
-      tap((item: LoginResponseI) => {
-        this.tokenService.set(item.token);
-        this.userService.set(item.user);
-      }),
+      tap(this.tapOnLogin()),
       map(() => this.check())
     );
   }
@@ -68,12 +65,16 @@ export class AuthService {
     return this.http
       .post<LoginResponseI>(`${this.urlAuth}/loginGoogle`, data.user)
       .pipe(
-        tap((item: LoginResponseI) => {
-          this.tokenService.set(item.token);
-          this.userService.set(item.user);
-        }),
+        tap(this.tapOnLogin()),
         map(() => this.check())
       );
+  }
+
+  tapOnLogin() {
+    return (item: LoginResponseI) => {
+      this.tokenService.set(item.token);
+      this.userService.set(item.user);
+    };
   }
 
   logout(): void {
@@ -90,7 +91,7 @@ export class AuthService {
   }
 
   me() {
-    return this.http.post<User>(`${this.urlAuth}/me`, {});
+    return this.http.post<User>(`${this.urlAuth}/me`, null);
   }
 
   private assignUser() {

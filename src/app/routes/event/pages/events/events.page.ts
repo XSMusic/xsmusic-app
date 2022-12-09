@@ -4,8 +4,9 @@ import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { GetAllDto } from '@interfaces';
 import { Event } from '@models';
-import { EventService, ToastService } from '@services';
+import { EventService, NavigationService, ToastService } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
+import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
@@ -28,6 +29,7 @@ export class EventsPage implements OnInit {
   error = false;
   total = 0;
   constructor(
+    private navigationService: NavigationService,
     private router: Router,
     private route: ActivatedRoute,
     private eventService: EventService,
@@ -68,22 +70,24 @@ export class EventsPage implements OnInit {
     });
   }
 
-  goToProfile(data: { type: 'site' | 'event' | 'artist'; event: Event }) {
+  goToPage(data: GoToPageI) {
+    this.navigationService.goToPage(data);
     if (data.type === 'event') {
       this.gaService.event('events_link_profile', 'events_link', 'events');
       this.router.navigate([
-        routesConfig.event.replace(':slug', data.event.slug!),
+        routesConfig.event.replace(':slug', data.item.slug!),
       ]);
+    } else if (data.type === 'artist') {
     } else {
-      if (data.event.site.type === 'club') {
+      if (data.item.site.type === 'club') {
         this.gaService.event('events_link_club', 'events_link', 'events');
         this.router.navigate([
-          routesConfig.club.replace(':slug', data.event.slug!),
+          routesConfig.club.replace(':slug', data.item.slug!),
         ]);
       } else {
         this.gaService.event('events_link_festival', 'events_link', 'events');
         this.router.navigate([
-          routesConfig.festival.replace(':slug', data.event.slug!),
+          routesConfig.festival.replace(':slug', data.item.slug!),
         ]);
       }
     }

@@ -7,7 +7,6 @@ import {
   MetaService,
   NavigationService,
 } from '@services';
-import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { routesConfig } from '@core/config';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { getTitleMedia } from '@shared/utils';
@@ -50,7 +49,13 @@ export class SetPage implements OnInit {
         this.media = response;
         this.setMeta();
       },
-      error: (error: any) => this.toast.showToast(TOAST_STATE.error, error),
+      error: () =>
+        this.router.navigate(['/404'], {
+          skipLocationChange: true,
+          state: {
+            type: 'set',
+          },
+        }),
     });
   }
 

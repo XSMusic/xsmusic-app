@@ -76,9 +76,14 @@ export class ClubPage implements OnInit {
 
         this.spinner.hide();
       },
-      error: (error) => {
+      error: () => {
         this.spinner.hide();
-        this.toast.showToast(TOAST_STATE.error, error);
+        this.router.navigate(['/404'], {
+          skipLocationChange: true,
+          state: {
+            type: 'club',
+          },
+        });
       },
     });
   }

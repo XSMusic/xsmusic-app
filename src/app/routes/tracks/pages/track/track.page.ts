@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Media } from '@models';
-import { ToastService, MediaService, MetaService, NavigationService } from '@services';
-import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
+import { MediaService, MetaService, NavigationService } from '@services';
 import { routesConfig } from '@core/config';
 import { getTitleMedia } from '@shared/utils';
 import { MetadataI } from '@shared/services/system/meta';
@@ -20,7 +19,6 @@ export class TrackPage implements OnInit {
   videoWidth = 0;
   constructor(
     private route: ActivatedRoute,
-    private toast: ToastService,
     private router: Router,
     private mediaService: MediaService,
     private metaService: MetaService,
@@ -43,7 +41,13 @@ export class TrackPage implements OnInit {
         this.media = response;
         this.setMeta();
       },
-      error: (error: any) => this.toast.showToast(TOAST_STATE.error, error),
+      error: () =>
+        this.router.navigate(['/404'], {
+          skipLocationChange: true,
+          state: {
+            type: 'track',
+          },
+        }),
     });
   }
 

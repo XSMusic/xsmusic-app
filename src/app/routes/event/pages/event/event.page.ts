@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { Event } from '@models';
-import { MetaService, ToastService } from '@services';
+import { MetaService } from '@services';
 import { EventService } from '@shared/services/api/event/event.service';
-import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinner.service';
 import { routesConfig } from '@core/config';
 import { MetadataI } from '@shared/services/system/meta';
@@ -25,7 +24,7 @@ export class EventPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private eventService: EventService,
-    private toast: ToastService,
+    private router: Router,
     private spinner: NgxSpinnerService,
     private metaService: MetaService
   ) {}
@@ -44,9 +43,14 @@ export class EventPage implements OnInit {
         this.setViews();
         this.spinner.hide();
       },
-      error: (error) => {
+      error: () => {
         this.spinner.hide();
-        this.toast.showToast(TOAST_STATE.error, error);
+        this.router.navigate(['/404'], {
+          skipLocationChange: true,
+          state: {
+            type: 'event',
+          },
+        });
       },
     });
   }

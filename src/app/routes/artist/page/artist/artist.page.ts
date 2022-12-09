@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { Artist, Event, Media } from '@models';
 import {
@@ -61,7 +61,8 @@ export class ArtistPage implements OnInit {
     private eventService: EventService,
     private toast: ToastService,
     private spinner: NgxSpinnerService,
-    private metaService: MetaService
+    private metaService: MetaService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -87,9 +88,14 @@ export class ArtistPage implements OnInit {
         }
         this.spinner.hide();
       },
-      error: (error) => {
+      error: () => {
         this.spinner.hide();
-        this.toast.showToast(TOAST_STATE.error, error);
+        this.router.navigate(['/404'], {
+          skipLocationChange: true,
+          state: {
+            type: 'artist',
+          },
+        });
       },
     });
   }

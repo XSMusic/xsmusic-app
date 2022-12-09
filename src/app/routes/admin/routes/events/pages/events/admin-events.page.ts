@@ -108,5 +108,4 @@ export class AdminEventsPage {
       this.getEvents(type);
     }
   }
-
 }

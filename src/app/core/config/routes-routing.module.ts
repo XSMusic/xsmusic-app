@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgxPermissionsGuard } from 'ngx-permissions';
 
 const routes: Routes = [
-  { path: '*', redirectTo: '', pathMatch: 'full' },
   {
     path: '',
     data: {
@@ -84,6 +83,22 @@ const routes: Routes = [
     loadChildren: () =>
       import('../../routes/admin/admin.module').then((m) => m.AdminModule),
     canActivate: [NgxPermissionsGuard],
+  },
+  {
+    path: '404',
+    loadChildren: () =>
+      import('../../routes/not-found/not-found.module').then(
+        (m) => m.NotFoundModule
+      ),
+  },
+  { path: '*', redirectTo: '', pathMatch: 'full' },
+  {
+    path: '**',
+    pathMatch: 'full',
+    loadChildren: () =>
+      import('../../routes/not-found/not-found.module').then(
+        (m) => m.NotFoundModule
+      ),
   },
 ];
 

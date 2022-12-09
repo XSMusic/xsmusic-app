@@ -1,0 +1,30 @@
+<div
+  class="container px-4 mx-auto sm:pb-0 max-w-7sm"
+  style="padding-top: 4.25rem"
+>
+  <div class="text-center dark:text-white">
+    <div title="404" class="text-5xl font-black">404</div>
+    <div class="text-lg">
+      <span *ngIf="type">{{ type | type}} no encontrado</span>
+      <span *ngIf="!type">Pagina no encontrada</span>
+    </div>
+    <br />
+    <ng-container *ngIf="type">
+      <button
+        class="px-3 py-1 my-2 border border-gray-200 rounded-lg dark:border-gray-700 dark:text-white"
+        (click)="goToPage({type, typeRoute:'all'})"
+      >
+        Ir a
+        <span *ngIf="type !== 'festival'">{{ type | type}}s</span>
+        <span *ngIf="type === 'festival'">Festivales</span>
+      </button>
+      <br />
+    </ng-container>
+    <button
+      class="px-3 py-1 my-1 border border-gray-200 rounded-lg dark:border-gray-700 dark:text-white"
+      routerLink="/"
+    >
+      Ir al Inicio
+    </button>
+  </div>
+</div>

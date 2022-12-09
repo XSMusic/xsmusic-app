@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { routesConfig } from '@core/config';
 import { FilterListI, GetAllDto } from '@interfaces';
 import { Event } from '@models';
 import { EventService, NavigationService, ToastService } from '@services';
@@ -119,6 +118,4 @@ export class EventsPage implements OnInit {
       this.getEvents();
     }
   }
-
-
 }

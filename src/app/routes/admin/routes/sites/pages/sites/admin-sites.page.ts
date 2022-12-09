@@ -136,5 +136,4 @@ export class AdminSitesPage implements OnInit {
     this.site = new Site();
     this.view = 'viewList';
   }
-
 }

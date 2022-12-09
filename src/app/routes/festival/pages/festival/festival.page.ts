@@ -7,7 +7,6 @@ import { Media, Site } from '@models';
 import { MetaService, SiteService, ToastService } from '@services';
 import { MetadataI } from '@shared/services/system/meta';
 import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinner.service';
-import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 
 @Component({
   selector: 'page-festival',
@@ -42,9 +41,14 @@ export class FestivalPage implements OnInit {
         this.setViews();
         this.spinner.hide();
       },
-      error: (error) => {
+      error: () => {
         this.spinner.hide();
-        this.toast.showToast(TOAST_STATE.error, error);
+        this.router.navigate(['/404'], {
+          skipLocationChange: true,
+          state: {
+            type: 'festival',
+          },
+        });
       },
     });
   }

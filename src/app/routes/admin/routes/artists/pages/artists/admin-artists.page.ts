@@ -122,5 +122,4 @@ export class AdminArtistsPage {
     this.artist = new Artist();
     this.view = 'viewList';
   }
-
 }

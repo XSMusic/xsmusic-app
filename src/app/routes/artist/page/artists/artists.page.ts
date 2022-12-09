@@ -125,6 +125,4 @@ export class ArtistsPage implements OnInit {
       this.getArtists();
     }
   }
-
-
 }

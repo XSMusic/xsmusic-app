@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { routesConfig } from '@core/config';
+import { ActivatedRoute } from '@angular/router';
+import { FilterListI } from '@interfaces';
 import { Site } from '@models';
-import { SiteService, ToastService } from '@services';
+import { NavigationService, SiteService, ToastService } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { SiteGetAllDto } from '@shared/services/api/site/site.dto';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
-import { getUserLocation } from '@shared/utils';
+import { getFilterList, getUserLocation } from '@shared/utils';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
 @Component({
@@ -32,18 +32,17 @@ export class FestivalsPage implements OnInit {
     map: true,
     maxDistance: 5000,
   };
-  filterKey?: string;
-  filterValue?: string;
+  filterData!: FilterListI;
   view = 'gallery';
   loading = true;
   error = false;
   total = 0;
   constructor(
     private siteService: SiteService,
-    private router: Router,
     private route: ActivatedRoute,
     private toast: ToastService,
-    private gaService: GoogleAnalyticsService
+    private gaService: GoogleAnalyticsService,
+    private navigationService: NavigationService
   ) {}
 
   ngOnInit() {
@@ -52,10 +51,9 @@ export class FestivalsPage implements OnInit {
   }
 
   getFilter() {
-    this.filterKey = this.route.snapshot.paramMap.get('filterKey')!;
-    this.filterValue = this.route.snapshot.paramMap.get('filterValue')!;
-    if (this.filterKey && this.filterValue) {
-      this.body.filter = [this.filterKey, this.filterValue];
+    this.filterData = getFilterList(this.route);
+    if (this.filterData) {
+      this.body.filter = this.filterData.data;
     }
   }
 
@@ -130,15 +128,8 @@ export class FestivalsPage implements OnInit {
     }
   }
 
-  goToPage(event: GoToPageI) {
-    this.gaService.event(
-      'festivals_link_profile',
-      'festivals_link',
-      'festivals'
-    );
-    this.router.navigate([
-      routesConfig.festival.replace(':slug', event.item.slug!),
-    ]);
+  goToPage(data: GoToPageI) {
+    this.navigationService.goToPage(data);
   }
 
   onFilter(event: { name: string; value: string }) {
@@ -166,10 +157,5 @@ export class FestivalsPage implements OnInit {
   onScroll() {
     this.body.page++;
     this.getItems(true);
-  }
-
-  goToAdmin() {
-    this.gaService.event('festivals_link_admin', 'artists_link', 'artists');
-    this.router.navigate([routesConfig.festivalsAdmin]);
   }
 }

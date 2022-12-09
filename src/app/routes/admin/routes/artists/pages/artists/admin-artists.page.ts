@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { routesConfig } from '@core/config';
 import { GetAllDto } from '@interfaces';
 import { Artist } from '@models';
 import {
@@ -39,7 +37,6 @@ export class AdminArtistsPage {
   constructor(
     private artistService: ArtistService,
     private statsService: StatsService,
-    private router: Router,
     private toast: ToastService,
     private navigationService: NavigationService
   ) {}
@@ -78,7 +75,9 @@ export class AdminArtistsPage {
   }
 
   goToPage(data: GoToPageI) {
-    data.admin = true;
+    if (data.admin === undefined) {
+      data.admin = true;
+    }
     this.navigationService.goToPage(data);
   }
 
@@ -124,7 +123,4 @@ export class AdminArtistsPage {
     this.view = 'viewList';
   }
 
-  goToArtists() {
-    this.router.navigate([routesConfig.artists]);
-  }
 }

@@ -39,7 +39,7 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.checkPageSearch();
+    this.checkPages();
     this.setMenuProfileItems();
     this.setMenuAdmin();
     this.setMenuItems();
@@ -87,7 +87,7 @@ export class NavbarComponent implements OnInit {
     ];
   }
 
-  checkPageSearch() {
+  checkPages() {
     this.router.events
       .pipe(
         filter((event: Event) => event instanceof NavigationEnd),
@@ -114,7 +114,7 @@ export class NavbarComponent implements OnInit {
     this.backButton.state = false;
     this.backButton.route = '';
     const urlSplit = e.url.split('/');
-    if (urlSplit.length === 4) {
+    if (urlSplit.length === 3) {
       if (e.url.includes('artist')) {
         this.setBackButtonRoute(routesConfig.artists);
       } else if (e.url.includes('club')) {
@@ -135,7 +135,7 @@ export class NavbarComponent implements OnInit {
     this.backButton.state = false;
     this.backButton.route = '';
     const urlSplit = e.url.split('/');
-    if (urlSplit.length > 4) {
+    if (urlSplit.length >= 4) {
       if (e.url.includes('artist')) {
         this.setBackButtonRoute(routesConfig.artistsAdmin);
       } else if (e.url.includes('club')) {

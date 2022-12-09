@@ -4,7 +4,8 @@ import { Share, ShareOptions } from '@capacitor/share';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { environment } from '@env/environment';
-import { ToastService, TOAST_STATE } from '@services';
+import { NavigationService, ToastService, TOAST_STATE } from '@services';
+import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { firstLetterCase, getYearsOld } from '@shared/utils';
 import { DateFunctions } from '@shared/utils/dates';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
@@ -23,7 +24,8 @@ export class BlockInfoProfileComponent {
   constructor(
     private router: Router,
     private toastService: ToastService,
-    private gaService: GoogleAnalyticsService
+    private gaService: GoogleAnalyticsService,
+    private navigationService: NavigationService
   ) {}
 
   getDate = () => {
@@ -55,42 +57,23 @@ export class BlockInfoProfileComponent {
   }
 
   goToFilter(key: string, value: string) {
-    let route = '';
-    if (this.type === 'artist') {
-      route = routesConfig.artistsFilter;
-    } else if (this.type === 'club') {
-      route = routesConfig.clubsFilter;
-    } else if (this.type === 'event') {
-      route = routesConfig.eventsFilter;
-    } else if (this.type === 'festival') {
-      route = routesConfig.festivalsFilter;
-    }
+    const type = `${this.type}s`;
+    const route = `${routesConfig[type]}`;
+    this.router.navigate([route], {
+      queryParams: {
+        key,
+        value,
+      },
+    });
     this.gaService.event(
       `${this.type}_filter_${key.toLowerCase()}_${value.toLowerCase()}`,
       `${this.type}_link`,
       this.type
     );
-
-    this.router.navigate([
-      route.replace(':filterKey', key).replace(':filterValue', value),
-    ]);
   }
 
-  goToProfile(type: string, item: any) {
-    let route = '';
-    if (type === 'site') {
-      if (item.site.type === 'club') {
-        route = routesConfig.club.replace(':slug', item.site.slug);
-      } else {
-        route = routesConfig.festival.replace(':slug', item.site.slug);
-      }
-    }
-    this.gaService.event(
-      `${this.type}_link_${type}`,
-      `${this.type}_link`,
-      this.type
-    );
-    this.router.navigate([route]);
+  goToPage(data: GoToPageI) {
+    this.navigationService.goToPage(data);
   }
 
   async sharing() {

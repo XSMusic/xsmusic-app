@@ -17,15 +17,7 @@ import { TrackPage } from './pages/track/track.page';
         },
       },
       {
-        path: 'filter/:filterKey/:filterValue',
-        component: TracksPage,
-        data: {
-          title: 'Tracks',
-          description: 'Listado de tracks de musica electronica',
-        },
-      },
-      {
-        path: 'one/:slug',
+        path: ':slug',
         component: TrackPage,
         data: { breadcrumb: 'Track', title: 'Track' },
       },

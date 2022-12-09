@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { routesConfig } from '@core/config';
-import { GetAllDto } from '@interfaces';
+import { ActivatedRoute } from '@angular/router';
+import { FilterListI, GetAllDto } from '@interfaces';
 import { Media } from '@models';
 import { MediaService, NavigationService, ToastService } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
+import { getFilterList } from '@shared/utils';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
 @Component({
@@ -21,20 +21,29 @@ export class TracksPage implements OnInit {
     order: ['created', 'desc'],
     type: 'track',
   };
+  filterData!: FilterListI;
   loading = true;
   error = false;
   view = 'viewGallery';
   total = 0;
   constructor(
     private mediaService: MediaService,
-    private router: Router,
+    private route: ActivatedRoute,
     private toast: ToastService,
     private gaService: GoogleAnalyticsService,
     private navigationService: NavigationService
   ) {}
 
   ngOnInit() {
+    this.getFilter();
     this.getItems();
+  }
+
+  getFilter() {
+    this.filterData = getFilterList(this.route);
+    if (this.filterData) {
+      this.body.filter = this.filterData.data;
+    }
   }
 
   getItems(more = false): void {
@@ -111,10 +120,5 @@ export class TracksPage implements OnInit {
   onScroll() {
     this.body.page++;
     this.getItems(true);
-  }
-
-  goToAdmin() {
-    this.gaService.event('tracks_link_admin', 'tracks_link', 'tracks');
-    this.router.navigate([routesConfig.tracksAdmin]);
   }
 }

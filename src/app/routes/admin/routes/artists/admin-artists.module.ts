@@ -15,14 +15,9 @@ import { ArtistOneComponent } from './components/artist-one/admin-artist-one.com
         data: { breadcrumb: '', title: 'Admin - Artistas' },
       },
       {
-        path: 'one/:id',
+        path: ':id',
         component: AdminArtistPage,
         data: { breadcrumb: 'Editar Artista', title: 'Admin - Editar Artista' },
-      },
-      {
-        path: 'one',
-        component: AdminArtistPage,
-        data: { breadcrumb: 'Nuevo Artista', title: 'Admin - Nuevo Artista' },
       },
     ]),
   ],

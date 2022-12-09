@@ -13,7 +13,7 @@
       class="flex justify-center gap-2 pt-2 font-black text-center dark:text-white"
     >
       <p
-        (click)="goToEdit()"
+        (click)="goToPage({type: 'set', admin: true, typeRoute: 'one', item: media })"
         *ngxPermissionsOnly="'ADMIN'"
         class="pt-3 text-2xl font-black text-center cursor-pointer md:text-left dark:text-white"
       >
@@ -54,7 +54,7 @@
       >
         <div
           class="flex gap-4 px-2 py-2 my-1.5 dark:border border border-gray-200 dark:border-gray-700 cursor-pointer rounded-xl hover:opacity-80"
-          (click)="goToProfile('artist',artist)"
+          (click)="goToPage({type: 'artist', typeRoute: 'one', item: artist})"
         >
           <img
             [src]="artist.images! | imageArray : 'medium'"
@@ -80,7 +80,7 @@
       >
         <div
           class="flex gap-4 px-2 py-2 my-2 border border-gray-200 cursor-pointer rounded-xl hover:opacity-80 dark:bg-black dark:border dark:border-gray-700"
-          (click)="goToProfile('site', media.site)"
+          (click)="goToPage({type: media.site.type, typeRoute: 'one', item: media.site})"
         >
           <img
             [src]="media.site.images | imageArray: 'small'"

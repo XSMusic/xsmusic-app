@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { routesConfig } from '@core/config';
+import { FilterListI } from '@interfaces';
 import { Site } from '@models';
 import { NavigationService, SiteService, ToastService } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { SiteGetAllDto } from '@shared/services/api/site/site.dto';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
-import { getUserLocation } from '@shared/utils';
+import { getFilterList, getUserLocation } from '@shared/utils';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
 @Component({
@@ -33,15 +33,13 @@ export class ClubsPage implements OnInit {
     map: true,
     maxDistance: 1000,
   };
-  filterKey?: string;
-  filterValue?: string;
+  filterData!: FilterListI;
   view = 'gallery';
   total = 0;
   loading = true;
   error = false;
   constructor(
     private siteService: SiteService,
-    private router: Router,
     private route: ActivatedRoute,
     private toast: ToastService,
     private gaService: GoogleAnalyticsService,
@@ -54,10 +52,9 @@ export class ClubsPage implements OnInit {
   }
 
   getFilter() {
-    this.filterKey = this.route.snapshot.paramMap.get('filterKey')!;
-    this.filterValue = this.route.snapshot.paramMap.get('filterValue')!;
-    if (this.filterKey && this.filterValue) {
-      this.body.filter = [this.filterKey, this.filterValue];
+    this.filterData = getFilterList(this.route);
+    if (this.filterData) {
+      this.body.filter = this.filterData.data;
     }
   }
 
@@ -153,10 +150,5 @@ export class ClubsPage implements OnInit {
   onScroll() {
     this.body.page++;
     this.getItems(true);
-  }
-
-  goToAdmin() {
-    this.gaService.event('clubs_link_admin', 'artists_link', 'artists');
-    this.router.navigate([routesConfig.clubsAdmin]);
   }
 }

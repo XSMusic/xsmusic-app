@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { routesConfig } from '@core/config';
 import { GetAllDto } from '@interfaces';
 import { Media, Youtube } from '@models';
 import { NavigationService, ScrapingService } from '@services';
@@ -46,7 +45,6 @@ export class AdminMediaListPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private mediaService: MediaService,
-    private router: Router,
     private toast: ToastService,
     private scrapingService: ScrapingService,
     private spinner: NgxSpinnerService,
@@ -104,7 +102,9 @@ export class AdminMediaListPage implements OnInit {
   }
 
   goToPage(data: GoToPageI) {
-    data.admin = true;
+    if (data.admin === undefined) {
+      data.admin = true;
+    }
     this.navigationService.goToPage(data);
   }
 
@@ -157,7 +157,7 @@ export class AdminMediaListPage implements OnInit {
     this.itemSelected = item;
     this.media = new Media({
       name: item.name,
-      type: this.type === 'sets' ? 'set' : 'track',
+      type: this.body.type === 'set' ? 'set' : 'track',
       source: this.source,
       sourceId: item.videoId,
       info: item.info,
@@ -168,11 +168,5 @@ export class AdminMediaListPage implements OnInit {
   onSubmitSuccess(event: Media) {
     this.media = new Media();
     this.items.unshift(event);
-  }
-
-  goToMedia() {
-    const route =
-      this.type === 'sets' ? routesConfig.sets : routesConfig.tracks;
-    this.router.navigate([route]);
   }
 }

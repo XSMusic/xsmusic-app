@@ -10,7 +10,7 @@
       ></images-edit-block>
     </div>
     <div
-      *ngIf="event.site.address.coordinates.length === 2"
+      *ngIf="event.site?.address.coordinates.length === 2"
       class="col-span-2 mb-1 md:col-span-1"
     >
       <map

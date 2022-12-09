@@ -16,16 +16,16 @@ import { ArtistsPage } from './page/artists/artists.page';
           description: 'Listado de artistas de musica electronica',
         },
       },
+      // {
+      //   path: ':filterKey/:filterValue',
+      //   component: ArtistsPage,
+      //   data: {
+      //     title: 'Artistas',
+      //     description: 'Listado de artistas de musica electronica',
+      //   },
+      // },
       {
-        path: 'filter/:filterKey/:filterValue',
-        component: ArtistsPage,
-        data: {
-          title: 'Artistas',
-          description: 'Listado de artistas de musica electronica',
-        },
-      },
-      {
-        path: 'profile/:slug',
+        path: ':slug',
         component: ArtistPage,
       },
     ]),

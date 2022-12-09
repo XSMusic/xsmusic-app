@@ -1,13 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Media } from '@models';
-import { ToastService, MediaService, MetaService } from '@services';
+import {
+  ToastService,
+  MediaService,
+  MetaService,
+  NavigationService,
+} from '@services';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { routesConfig } from '@core/config';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { getTitleMedia } from '@shared/utils';
 import { environment } from '@env/environment';
 import { MetadataI } from '@shared/services/system/meta';
+import { GoToPageI } from '@shared/interfaces/goto.interface';
 
 @Component({
   selector: 'page-set',
@@ -20,10 +26,10 @@ export class SetPage implements OnInit {
   videoWidth = 0;
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private toast: ToastService,
     private mediaService: MediaService,
-    private metaService: MetaService
+    private metaService: MetaService,
+    private navigationService: NavigationService
   ) {}
 
   ngOnInit() {
@@ -60,23 +66,7 @@ export class SetPage implements OnInit {
     this.metaService.setMetaDynamic(meta);
   }
 
-  goToProfile(type: 'artist' | 'site', item: any) {
-    if (type === 'artist') {
-      this.router.navigate([routesConfig.artist.replace(':slug', item.slug)]);
-    } else {
-      if (item.type === 'club') {
-        this.router.navigate([routesConfig.club.replace(':slug', item.slug)]);
-      } else if (item.type === 'festival') {
-        this.router.navigate([
-          routesConfig.festival.replace(':slug', item.slug),
-        ]);
-      }
-    }
-  }
-
-  goToEdit() {
-    this.router.navigate([
-      routesConfig.setAdmin.replace(':id', this.media._id!),
-    ]);
+  goToPage(data: GoToPageI) {
+    this.navigationService.goToPage(data);
   }
 }

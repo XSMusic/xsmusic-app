@@ -16,14 +16,9 @@ import { AdminStylesPage } from './pages/styles/admin-styles.page';
         data: { breadcrumb: '', title: 'Admin - Estilos' },
       },
       {
-        path: 'one/:id',
+        path: ':id',
         component: AdminStylePage,
         data: { breadcrumb: 'Editar', title: 'Admin - Editar Estilo' },
-      },
-      {
-        path: 'one',
-        component: AdminStylePage,
-        data: { breadcrumb: 'Crear', title: 'Admin - Crear Estilo' },
       },
     ]),
   ],

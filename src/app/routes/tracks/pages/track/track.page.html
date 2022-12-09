@@ -14,7 +14,7 @@
       class="flex justify-center gap-2 pt-2 font-black text-center dark:text-white"
     >
       <p
-        (click)="goToEdit()"
+        (click)="goToPage({type: 'track', admin: true, typeRoute: 'one', item: media })"
         *ngxPermissionsOnly="'ADMIN'"
         class="pt-3 text-3xl font-black text-center cursor-pointer md:text-left"
       >
@@ -49,7 +49,7 @@
       <div class="mx-auto w-80" *ngFor="let artist of media.artists">
         <div
           class="flex gap-4 px-2 py-2 my-1.5 dark:border border border-gray-200 dark:border-gray-700 cursor-pointer rounded-xl hover:opacity-80"
-          (click)="goToProfile(artist.slug)"
+          (click)="goToPage({type: 'artist', typeRoute: 'one', item: artist})"
         >
           <img
             [src]="artist.images! | imageArray: 'medium'"

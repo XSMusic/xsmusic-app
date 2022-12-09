@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { routesConfig } from '@core/config';
 import { Event } from '@models';
 import {
   EventService,
@@ -38,7 +36,6 @@ export class AdminEventsPage {
   view = 'viewList';
   constructor(
     private eventService: EventService,
-    private router: Router,
     private toast: ToastService,
     private navigationService: NavigationService
   ) {}
@@ -70,7 +67,9 @@ export class AdminEventsPage {
   }
 
   goToPage(data: GoToPageI) {
-    data.admin = true;
+    if (data.admin === undefined) {
+      data.admin = true;
+    }
     this.navigationService.goToPage(data);
   }
 
@@ -110,7 +109,4 @@ export class AdminEventsPage {
     }
   }
 
-  goToEvents() {
-    this.router.navigate([routesConfig.events]);
-  }
 }

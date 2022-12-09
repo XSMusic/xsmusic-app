@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
-import { GetAllDto } from '@interfaces';
+import { FilterListI, GetAllDto } from '@interfaces';
 import { Event } from '@models';
 import { EventService, NavigationService, ToastService } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
+import { getFilterList } from '@shared/utils';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
 @Component({
@@ -23,14 +24,12 @@ export class EventsPage implements OnInit {
     pageSize: 20,
     order: ['date', 'asc'],
   };
-  filterKey?: string;
-  filterValue?: string;
+  filterData!: FilterListI;
   loading = true;
   error = false;
   total = 0;
   constructor(
     private navigationService: NavigationService,
-    private router: Router,
     private route: ActivatedRoute,
     private eventService: EventService,
     private toast: ToastService,
@@ -43,10 +42,9 @@ export class EventsPage implements OnInit {
   }
 
   getFilter() {
-    this.filterKey = this.route.snapshot.paramMap.get('filterKey')!;
-    this.filterValue = this.route.snapshot.paramMap.get('filterValue')!;
-    if (this.filterKey && this.filterValue) {
-      this.body.filter = [this.filterKey, this.filterValue];
+    this.filterData = getFilterList(this.route);
+    if (this.filterData) {
+      this.body.filter = this.filterData.data;
     }
   }
 
@@ -72,25 +70,6 @@ export class EventsPage implements OnInit {
 
   goToPage(data: GoToPageI) {
     this.navigationService.goToPage(data);
-    if (data.type === 'event') {
-      this.gaService.event('events_link_profile', 'events_link', 'events');
-      this.router.navigate([
-        routesConfig.event.replace(':slug', data.item.slug!),
-      ]);
-    } else if (data.type === 'artist') {
-    } else {
-      if (data.item.site.type === 'club') {
-        this.gaService.event('events_link_club', 'events_link', 'events');
-        this.router.navigate([
-          routesConfig.club.replace(':slug', data.item.slug!),
-        ]);
-      } else {
-        this.gaService.event('events_link_festival', 'events_link', 'events');
-        this.router.navigate([
-          routesConfig.festival.replace(':slug', data.item.slug!),
-        ]);
-      }
-    }
   }
 
   filter(event: { name: string; value: string }) {
@@ -141,8 +120,5 @@ export class EventsPage implements OnInit {
     }
   }
 
-  goToAdmin() {
-    this.gaService.event('events_link_admin', 'events_link', 'events');
-    this.router.navigate([routesConfig.eventsAdmin]);
-  }
+
 }

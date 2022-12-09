@@ -3,7 +3,7 @@ export interface GetAllDto {
   pageSize: number;
   order: string[];
   filter?: string[];
-  type?: string;
+  type?: any;
 }
 
 export interface IdDto {

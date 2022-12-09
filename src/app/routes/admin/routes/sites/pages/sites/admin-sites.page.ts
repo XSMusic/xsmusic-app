@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { routesConfig } from '@core/config';
+import { ActivatedRoute } from '@angular/router';
 import { Site } from '@models';
 import {
   NavigationService,
@@ -43,7 +42,6 @@ export class AdminSitesPage implements OnInit {
     private siteService: SiteService,
     private statsService: StatsService,
     private toast: ToastService,
-    private router: Router,
     private navigationService: NavigationService
   ) {}
 
@@ -91,7 +89,9 @@ export class AdminSitesPage implements OnInit {
   }
 
   goToPage(data: GoToPageI) {
-    data.admin = true;
+    if (data.admin === undefined) {
+      data.admin = true;
+    }
     this.navigationService.goToPage(data);
   }
 
@@ -137,9 +137,4 @@ export class AdminSitesPage implements OnInit {
     this.view = 'viewList';
   }
 
-  goToSites() {
-    const route =
-      this.type === 'club' ? routesConfig.clubs : routesConfig.festivals;
-    this.router.navigate([route]);
-  }
 }

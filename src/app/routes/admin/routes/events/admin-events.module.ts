@@ -16,12 +16,12 @@ import { AdminEventsPage } from './pages/events/admin-events.page';
         data: { breadcrumb: '', title: 'Admin - Eventos' },
       },
       {
-        path: 'one/:id',
+        path: ':id',
         component: AdminEventPage,
         data: { breadcrumb: 'Editar Evento', title: 'Admin - Editar Evento' },
       },
       {
-        path: 'one',
+        path: 'new',
         component: AdminEventPage,
         data: { breadcrumb: 'Nuevo Evento', title: 'Admin - Nuevo Evento' },
       },

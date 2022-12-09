@@ -17,15 +17,7 @@ import { ClubsPage } from './pages/clubs/clubs.page';
         },
       },
       {
-        path: 'filter/:filterKey/:filterValue',
-        component: ClubsPage,
-        data: {
-          description: 'Listado de clubs de musica electronica',
-          title: 'Clubs',
-        },
-      },
-      {
-        path: 'one/:slug',
+        path: ':slug',
         component: ClubPage,
       },
     ]),

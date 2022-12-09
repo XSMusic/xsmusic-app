@@ -16,7 +16,7 @@ import { routesConfig } from '@core/config';
 import { OptionsItemI } from '@shared/components/ui/options-items/options-items.interface';
 import { EventGetAllForTypeDto } from '@shared/services/api/event/event.dto';
 import { MediaGetAllForTypeDto } from '@shared/services/api/media/media.dto';
-import { GoToPageI } from '../../../../../../shared/interfaces/goto.interface';
+import { GoToPageI } from '@shared/interfaces/goto.interface';
 
 @Component({
   selector: 'page-admin-artist',

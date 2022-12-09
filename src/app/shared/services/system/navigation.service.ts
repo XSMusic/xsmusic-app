@@ -41,15 +41,27 @@ export class NavigationService {
   }
 
   goToPage(data: GoToPageI) {
-    let route: any = '';
-    const typeOne = `${data.type}`;
-    const typeAll = `${data.type}s`;
-    route = `${data.typeRoute === 'one' ? typeOne : typeAll}`;
-    if (data.admin) {
-      route = routesConfig[route + 'Admin'].replace(':id', data.item._id);
-    } else {
-      route = routesConfig[route].replace(':slug', data.item.slug);
+    try {
+      let route: any = '';
+      const typeOne = `${data.type}`;
+      const typeAll = `${data.type}s`;
+      route = `${data.typeRoute === 'one' ? typeOne : typeAll}`;
+      if (data.admin) {
+        route = routesConfig[route + 'Admin'];
+      } else {
+        route = routesConfig[route];
+      }
+
+      if (data.item) {
+        if (data.admin) {
+          route = route.replace(':id', data.item._id);
+        } else {
+          route = route.replace(':slug', data.item.slug);
+        }
+      }
+      this.router.navigate([route]);
+    } catch (error) {
+      console.error('Error en goToPage');
     }
-    this.router.navigate([route]);
   }
 }

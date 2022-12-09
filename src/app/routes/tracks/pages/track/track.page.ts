@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Media } from '@models';
-import { ToastService, MediaService, MetaService } from '@services';
+import { ToastService, MediaService, MetaService, NavigationService } from '@services';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { routesConfig } from '@core/config';
 import { getTitleMedia } from '@shared/utils';
 import { MetadataI } from '@shared/services/system/meta';
 import { environment } from '@env/environment';
+import { GoToPageI } from '@shared/interfaces/goto.interface';
 
 @Component({
   selector: 'page-track',
@@ -23,7 +24,8 @@ export class TrackPage implements OnInit {
     private router: Router,
     private mediaService: MediaService,
     private sanitizer: DomSanitizer,
-    private metaService: MetaService
+    private metaService: MetaService,
+    private navigationService: NavigationService
   ) {}
 
   ngOnInit() {
@@ -66,13 +68,7 @@ export class TrackPage implements OnInit {
     );
   }
 
-  goToProfile(slug: string) {
-    this.router.navigate([routesConfig.artist.replace(':slug', slug)]);
-  }
-
-  goToEdit() {
-    this.router.navigate([
-      routesConfig.trackAdmin.replace(':id', this.media._id!),
-    ]);
+  goToPage(data: GoToPageI) {
+    this.navigationService.goToPage(data);
   }
 }

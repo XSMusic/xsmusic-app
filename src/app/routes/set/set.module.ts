@@ -17,15 +17,7 @@ import { SetsPage } from './pages/sets/sets.page';
         },
       },
       {
-        path: 'filter/:filterKey/:filterValue',
-        component: SetsPage,
-        data: {
-          title: 'Sets',
-          description: 'Listado de sets de musica electronica',
-        },
-      },
-      {
-        path: 'one/:slug',
+        path: ':slug',
         component: SetPage,
         data: { breadcrumb: 'Set', title: 'Set' },
       },

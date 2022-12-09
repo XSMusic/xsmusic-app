@@ -13,7 +13,7 @@ import { FullImageService } from '@shared/services/ui/full-image/full-image.serv
 })
 export class MediaViewListComponent {
   @Input() media: Media[] = [];
-  @Input() type: 'sets' | 'tracks' = 'sets';
+  @Input() type: 'set' | 'track' = 'set';
   @Input() loading = true;
   @Output() goToPage = new EventEmitter<GoToPageI>();
   @Output() filter = new EventEmitter<{ name: string; value: string }>();

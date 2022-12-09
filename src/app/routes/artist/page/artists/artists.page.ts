@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { routesConfig } from '@core/config';
-import { GetAllDto } from '@interfaces';
+import { FilterListI, GetAllDto } from '@interfaces';
 import { Artist } from '@models';
-import { ToastService } from '@services';
+import { NavigationService, ToastService } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { ArtistService } from '@shared/services/api/artist/artist.service';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
+import { getFilterList } from '@shared/utils';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
 @Component({
@@ -24,17 +24,16 @@ export class ArtistsPage implements OnInit {
     pageSize: 20,
     order: ['created', 'desc'],
   };
-  filterKey?: string;
-  filterValue?: string;
+  filterData!: FilterListI;
   loading = true;
   error = false;
   total = 0;
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private artistService: ArtistService,
     private toast: ToastService,
-    private gaService: GoogleAnalyticsService
+    private gaService: GoogleAnalyticsService,
+    private navigationService: NavigationService
   ) {}
 
   ngOnInit() {
@@ -43,10 +42,9 @@ export class ArtistsPage implements OnInit {
   }
 
   getFilter() {
-    this.filterKey = this.route.snapshot.paramMap.get('filterKey')!;
-    this.filterValue = this.route.snapshot.paramMap.get('filterValue')!;
-    if (this.filterKey && this.filterValue) {
-      this.body.filter = [this.filterKey, this.filterValue];
+    this.filterData = getFilterList(this.route);
+    if (this.filterData) {
+      this.body.filter = this.filterData.data;
     }
   }
 
@@ -70,11 +68,9 @@ export class ArtistsPage implements OnInit {
     });
   }
 
-  goToPage(event: GoToPageI) {
+  goToPage(data: GoToPageI) {
     this.gaService.event('artists_link_profile', 'artists_link', 'artists');
-    this.router.navigate([
-      routesConfig.artist.replace(':slug', event.item.slug!),
-    ]);
+    this.navigationService.goToPage(data);
   }
 
   onFilter(event: { name: string; value: string }) {
@@ -130,8 +126,5 @@ export class ArtistsPage implements OnInit {
     }
   }
 
-  goToAdmin() {
-    this.gaService.event('artists_link_admin', 'artists_link', 'artists');
-    this.router.navigate([routesConfig.artistsAdmin]);
-  }
+
 }

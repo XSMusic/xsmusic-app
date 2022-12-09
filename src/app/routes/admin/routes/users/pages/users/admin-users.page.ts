@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { User } from '@models';
 import { NavigationService, UserService } from '@services';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
@@ -20,7 +19,6 @@ export class AdminUsersPage implements OnInit {
   error = false;
   constructor(
     private userService: UserService,
-    private router: Router,
     private navigationService: NavigationService
   ) {}
 

@@ -17,15 +17,7 @@ import { EventPage } from './pages/event/event.page';
         },
       },
       {
-        path: 'filter/:filterKey/:filterValue',
-        component: EventsPage,
-        data: {
-          title: 'Eventos',
-          description: 'Listado de eventos de musica electronica',
-        },
-      },
-      {
-        path: 'one/:slug',
+        path: ':slug',
         component: EventPage,
         data: { title: 'Evento' },
       },

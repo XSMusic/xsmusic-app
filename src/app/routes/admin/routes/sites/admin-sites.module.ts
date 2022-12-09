@@ -15,14 +15,9 @@ import { AdminSitesPage } from './pages/sites/admin-sites.page';
         data: { breadcrumb: '', title: 'Admin - Sitios' },
       },
       {
-        path: 'clubs/one/:id',
+        path: 'clubs/:id',
         component: AdminSitePage,
         data: { breadcrumb: '', title: 'Admin - Editar sitio' },
-      },
-      {
-        path: 'clubs/one',
-        component: AdminSitePage,
-        data: { breadcrumb: '', title: 'Admin - Nuevo Sitio' },
       },
       {
         path: 'festivals',
@@ -30,14 +25,9 @@ import { AdminSitesPage } from './pages/sites/admin-sites.page';
         data: { breadcrumb: '', title: 'Admin - Usuarios' },
       },
       {
-        path: 'festivals/one/:id',
+        path: 'festivals/:id',
         component: AdminSitePage,
         data: { breadcrumb: '', title: 'Admin - Editar Usuario' },
-      },
-      {
-        path: 'festivals/one',
-        component: AdminSitePage,
-        data: { breadcrumb: '', title: 'Admin - Nuevo Usuario' },
       },
     ]),
   ],

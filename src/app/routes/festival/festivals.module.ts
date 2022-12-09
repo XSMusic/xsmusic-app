@@ -17,15 +17,7 @@ import { FestivalsPage } from './pages/festivals/festivals.page';
         },
       },
       {
-        path: 'filter/:filterKey/:filterValue',
-        component: FestivalsPage,
-        data: {
-          title: 'Festivales',
-          description: 'Listado de festivales de musica electronica',
-        },
-      },
-      {
-        path: 'one/:slug',
+        path: ':slug',
         component: FestivalPage,
       },
     ]),

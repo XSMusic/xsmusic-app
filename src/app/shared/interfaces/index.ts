@@ -6,3 +6,4 @@ export * from './responses/geo.response.interface';
 export * from './dtos/generic.dto';
 export * from './bodys/paginator.body.interface';
 export * from './icon.interface';
+export * from './filter-list.interface';

@@ -1,5 +1,7 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { Geolocation } from '@capacitor/geolocation';
 import { environment } from '@env/environment';
+import { FilterListI } from '@interfaces';
 import { Image, Media, User } from '@models';
 import { countries } from 'assets/data/countries';
 import { flags } from 'assets/data/flags';
@@ -95,7 +97,7 @@ export const imageArray = (
   if (images && images.length > 0) {
     return `${environment.urls.images}/${images[0].type}s/${type}/${images[0].url}`;
   } else {
-    return 'assets/no-image.png';
+    return '';
   }
 };
 
@@ -115,4 +117,19 @@ export const getUserLocation = async (): Promise<number[]> => {
       }
     }
   });
+};
+
+export const getFilterList = (route: ActivatedRoute): FilterListI => {
+  const data: FilterListI = {
+    key: '',
+    value: '',
+    data: [],
+  };
+  data.key = route.snapshot.queryParams['key'];
+  data.value = route.snapshot.queryParams['value'];
+  if (data.key && data.value) {
+    data.data = [data.key, data.value];
+  }
+
+  return data;
 };

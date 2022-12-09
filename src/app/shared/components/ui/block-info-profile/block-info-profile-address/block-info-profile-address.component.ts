@@ -18,24 +18,18 @@ export class BlockInfoProfileAddressComponent {
   ) {}
 
   goToFilter(key: string, value: string) {
-    let route = '';
-    if (this.type === 'artist') {
-      route = routesConfig.artistsFilter;
-    } else if (this.type === 'club') {
-      route = routesConfig.clubsFilter;
-    } else if (this.type === 'event') {
-      route = routesConfig.eventsFilter;
-    } else if (this.type === 'festival') {
-      route = routesConfig.festivalsFilter;
-    }
+    const type = `${this.type}s`;
+    const route = `${routesConfig[type]}`;
+    this.router.navigate([route], {
+      queryParams: {
+        key,
+        value,
+      },
+    });
     this.gaService.event(
       `${this.type}_filter_${key.toLowerCase()}_${value.toLowerCase()}`,
       `${this.type}_link`,
       this.type
     );
-
-    this.router.navigate([
-      route.replace(':filterKey', key).replace(':filterValue', value),
-    ]);
   }
 }

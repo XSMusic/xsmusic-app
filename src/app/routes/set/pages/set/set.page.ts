@@ -14,6 +14,7 @@ import { getTitleMedia } from '@shared/utils';
 import { environment } from '@env/environment';
 import { MetadataI } from '@shared/services/system/meta';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
 @Component({
   selector: 'page-set',
@@ -29,7 +30,9 @@ export class SetPage implements OnInit {
     private toast: ToastService,
     private mediaService: MediaService,
     private metaService: MetaService,
-    private navigationService: NavigationService
+    private navigationService: NavigationService,
+    private router: Router,
+    private gaService: GoogleAnalyticsService
   ) {}
 
   ngOnInit() {
@@ -68,5 +71,21 @@ export class SetPage implements OnInit {
 
   goToPage(data: GoToPageI) {
     this.navigationService.goToPage(data);
+  }
+
+  goToFilter(key: string, value: string) {
+    const type = `sets`;
+    const route = `${routesConfig[type]}`;
+    this.router.navigate([route], {
+      queryParams: {
+        key,
+        value,
+      },
+    });
+    this.gaService.event(
+      `set_filter_${key.toLowerCase()}_${value.toLowerCase()}`,
+      `set_link`,
+      'set'
+    );
   }
 }

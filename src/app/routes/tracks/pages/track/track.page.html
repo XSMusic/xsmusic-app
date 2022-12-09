@@ -35,7 +35,8 @@
     >
       <div *ngFor="let style of media.styles; index as i">
         <a
-          class="px-3 py-1 mr-2 font-medium border border-gray-300 rounded-lg cursor-pointer dark:text-white dark:bg-black dark:border-gray-800 hover:opacity-80"
+        class="px-3 py-1 mr-2 font-medium border border-gray-300 rounded-lg cursor-pointer dark:text-white dark:bg-black dark:border-gray-800 hover:opacity-80"
+        (click)="goToFilter('style', style.name)"
         >
           {{ style.name }}
         </a>

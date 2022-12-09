@@ -3,12 +3,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Media } from '@models';
 import { ToastService, MediaService, MetaService, NavigationService } from '@services';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
-import { DomSanitizer } from '@angular/platform-browser';
 import { routesConfig } from '@core/config';
 import { getTitleMedia } from '@shared/utils';
 import { MetadataI } from '@shared/services/system/meta';
 import { environment } from '@env/environment';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
 @Component({
   selector: 'page-track',
@@ -23,9 +23,9 @@ export class TrackPage implements OnInit {
     private toast: ToastService,
     private router: Router,
     private mediaService: MediaService,
-    private sanitizer: DomSanitizer,
     private metaService: MetaService,
-    private navigationService: NavigationService
+    private navigationService: NavigationService,
+    private gaService: GoogleAnalyticsService
   ) {}
 
   ngOnInit() {
@@ -62,13 +62,23 @@ export class TrackPage implements OnInit {
     this.metaService.setMetaDynamic(meta);
   }
 
-  getVideoUrl() {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(
-      `https://www.youtube.com/embed/${this.media.sourceId}`
-    );
-  }
-
   goToPage(data: GoToPageI) {
     this.navigationService.goToPage(data);
+  }
+
+  goToFilter(key: string, value: string) {
+    const type = `sets`;
+    const route = `${routesConfig[type]}`;
+    this.router.navigate([route], {
+      queryParams: {
+        key,
+        value,
+      },
+    });
+    this.gaService.event(
+      `set_filter_${key.toLowerCase()}_${value.toLowerCase()}`,
+      `set_link`,
+      'set'
+    );
   }
 }

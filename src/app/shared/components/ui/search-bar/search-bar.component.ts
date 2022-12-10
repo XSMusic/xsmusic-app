@@ -17,8 +17,6 @@ export class SearchBarComponent {
   @Output() closeSearch = new EventEmitter<void>();
   @Output() search = new EventEmitter<{ text: string; type: string }>();
 
-  constructor(private router: Router, private toast: ToastService) {}
-
   onKeyUpSearch(event: any) {
     if (event.keyCode === 13) {
       this.validationSearch();

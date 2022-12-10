@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MediaListBase } from '@shared/components/base/media-list.base';
+import { MediaListBase } from '@shared/components/base/media-list/media-list.base';
 
 @Component({
   selector: 'page-sets',

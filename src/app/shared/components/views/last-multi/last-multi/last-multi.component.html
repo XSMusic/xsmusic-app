@@ -27,7 +27,7 @@
     [items]="item.artists"
     [type]="'artist'"
     [loading]="false"
-    (goToOne)="goToOne($event)"
+    (goToPage)="goToPage.emit($event)"
   ></generic-view-gallery>
 
   <generic-view-gallery
@@ -35,7 +35,7 @@
     [items]="sets"
     [type]="'set'"
     [loading]="false"
-    (goToOne)="goToOne($event)"
+    (goToPage)="goToPage.emit($event)"
   ></generic-view-gallery>
 
   <generic-view-gallery
@@ -43,22 +43,22 @@
     [items]="tracks"
     [type]="'track'"
     [loading]="false"
-    (goToOne)="goToOne($event)"
+    (goToPage)="goToPage.emit($event)"
   ></generic-view-gallery>
 
   <generic-view-gallery-items
     *ngIf="view === 'eventSite'"
     [items]="events"
     [type]="'eventSite'"
-    (goToOne)="goToOne($event)"
+    (goToPage)="goToPage.emit($event)"
   ></generic-view-gallery-items>
 
   <generic-view-gallery
     *ngIf="view === 'event'"
-    [items]="item.events"
+    [items]="events"
     [type]="'event'"
     [loading]="false"
-    (goToOne)="goToOne($event)"
+    (goToPage)="goToPage.emit($event)"
   ></generic-view-gallery>
 
   <last-multi-items

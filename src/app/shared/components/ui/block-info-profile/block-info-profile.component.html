@@ -1,4 +1,4 @@
-<div class="pt-16" @inOut>
+<div *ngIf="item" class="pt-16" @inOut>
   <!-- Image -->
   <block-info-profile-image
     [item]="item"
@@ -85,7 +85,7 @@
   <!-- Styles -->
   <div
     class="flex gap-1 px-3 py-1 my-2 overflow-x-scroll scrollbar-hidden"
-    *ngIf="item.styles!.length > 0"
+    *ngIf="item.styles && item.styles!.length > 0"
     [class]="
       item.styles.length <= 3
         ? 'justify-center md:justify-center'
@@ -131,7 +131,7 @@
       [innerHTML]="item.info!"
     ></div>
     <button
-      *ngIf="item.info!.length > 150"
+      *ngIf="item.info && item.info!.length > 150"
       class="px-3 py-1 mt-3 font-medium border border-gray-300 rounded-lg cursor-pointer hover:opacity-70 dark:bg-black dark:border-gray-800 dark:text-white"
       (click)="moreInfo = !moreInfo"
     >

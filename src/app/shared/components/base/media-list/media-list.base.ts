@@ -11,7 +11,7 @@ import {
 import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { getFilterList } from '@shared/utils';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
-import { ButtonBlockItem } from '../ui/buttons-block/buttons-block.model';
+import { ButtonBlockItem } from '../../ui/buttons-block/buttons-block.model';
 
 @Component({
   selector: 'media-list-base',

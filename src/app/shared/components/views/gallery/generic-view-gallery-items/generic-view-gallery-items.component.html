@@ -55,7 +55,7 @@
         class="object-cover w-full h-96"
         [src]="item.images![0]"
         [alt]="item.name"
-        (click)="goToPage.emit(item)"
+        (click)="goToPage.emit({type, typeRoute: 'one', item})"
         onError
       />
 

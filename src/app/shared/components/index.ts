@@ -1,6 +1,6 @@
-export { MediaOneBase } from './base/media-one.base';
-export { MediaListBase } from './base/media-list.base';
-
+export { GenericOneBase } from './base/generic-one/generic-one.base';
+export { MediaOneBase } from './base/media-one/media-one.base';
+export { MediaListBase } from './base/media-list/media-list.base';
 export { LastMediaItemsComponent } from './ui/last-media/last-media-items/last-media-items.component';
 export { LastMediaComponent } from './ui/last-media/last-media.component';
 export { LastMediaItemComponent } from './ui/last-media/last-media-item/last-media-item.component';

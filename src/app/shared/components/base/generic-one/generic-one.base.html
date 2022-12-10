@@ -1,0 +1,29 @@
+<ng-container *ngIf="artist || site">
+  <block-info-profile
+    *ngIf="artist"
+    [item]="artist"
+    type="artist"
+  ></block-info-profile>
+  <block-info-profile
+    *ngIf="site"
+    [item]="site"
+    [type]="subType"
+  ></block-info-profile>
+
+  <map
+    *ngIf="site"
+    [class]="'lg:container mx-2 h-44 m-2 lg:mx-auto rounded-lg overflow-hidden'"
+    [markers]="[site]"
+    [zoom]="15"
+    [one]="true"
+  ></map>
+
+  <last-multi
+    [item]="type === 'artist' ? artist : site"
+    [events]="events"
+    [sets]="sets"
+    [tracks]="tracks"
+    [views]="views"
+    (goToPage)="goToPage($event)"
+  ></last-multi>
+</ng-container>

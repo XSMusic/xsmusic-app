@@ -1,5 +1,6 @@
 import { environment } from '../../../../environments/environment';
 import { ImagePipe } from '@pipes';
+import { Image } from '@models';
 
 describe('ImagePipe', () => {
   it('create an instance', () => {
@@ -9,13 +10,8 @@ describe('ImagePipe', () => {
 
   it('show image', () => {
     const pipe = new ImagePipe();
-    const result = pipe.transform('loquesea');
-    expect(result).toBe(`${environment.urlImages}/loquesea`);
+    const result = pipe.transform(new Image({url: 'pepe', type: 'artist'}), 'small');
+    expect(result).toBe(`${environment.urls.images}/artists/small/pepe`);
   });
 
-  it('show image', () => {
-    const pipe = new ImagePipe();
-    const result = pipe.transform(null);
-    expect(result).toBe('assets/no-image.png');
-  });
 });

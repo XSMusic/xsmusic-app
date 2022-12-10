@@ -12,7 +12,7 @@ import { FullImageService } from '@shared/services/ui/full-image/full-image.serv
 })
 export class LastMultiItemsComponent implements OnInit {
   @Input() item!: any;
-  @Input() type: 'set' | 'event' | 'track' | 'image' = 'set';
+  @Input() type!: 'set' | 'event' | 'track' | 'image';
   items: any[] = [];
 
   constructor(

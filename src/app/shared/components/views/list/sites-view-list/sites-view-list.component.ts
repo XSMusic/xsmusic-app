@@ -10,7 +10,7 @@ import { getYearsOld } from '@utils';
   templateUrl: 'sites-view-list.component.html',
   animations: [inOutAnimation],
 })
-export class SiteViewListComponent {
+export class SitesViewListComponent {
   @Input() sites: Site[] = [];
   @Input() loading = true;
   @Input() type: 'clubs' | 'festivals' = 'clubs';

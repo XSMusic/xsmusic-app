@@ -38,7 +38,7 @@ export { GenericViewGalleryItemsComponent } from './views/gallery/generic-view-g
 export { ArtistsViewListComponent } from './views/list/artists-view-list/artists-view-list.component';
 export { ImagesViewListComponent } from './views/list/images-view-list/images-view-list.component';
 export { MediaViewListComponent } from './views/list/media-list-view/media-view-list.component';
-export { SiteViewListComponent } from './views/list/sites-view-list/sites-view-list.component';
+export { SitesViewListComponent } from './views/list/sites-view-list/sites-view-list.component';
 export { UsersViewListComponent } from './views/list/users-view-list/users-view-list.component';
 export { EventsViewListComponent } from './views/list/events-view-list/events-view-list.component';
 

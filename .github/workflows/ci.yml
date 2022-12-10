@@ -1,0 +1,21 @@
+name: App CI
+on:
+  push:
+    branches:
+      - main
+      - testing
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  codecov:
+    name: Codecov
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: codecov/codecov-action@v3
+        with:
+          files: ./coverage/ngv/lcov.info
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: true
+          verbose: true

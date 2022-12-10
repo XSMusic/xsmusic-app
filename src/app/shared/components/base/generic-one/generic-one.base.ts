@@ -83,9 +83,15 @@ export class GenericOneBase implements OnInit {
   }
 
   setTypes() {
-    this.bodyEvents.type = `${this.type}s`;
-    this.bodyMediaSet.type = `${this.type}s`;
-    this.bodyMediaTrack.type = `${this.type}s`;
+    if (this.type === 'artist') {
+      this.bodyEvents.type = `${this.type}s`;
+      this.bodyMediaSet.type = `${this.type}s`;
+      this.bodyMediaTrack.type = `${this.type}s`;
+    } else if (this.type === 'site') {
+        this.bodyEvents.type = `${this.subType}s`;
+        this.bodyMediaSet.type = `${this.subType}s`;
+        this.bodyMediaTrack.type = `${this.subType}s`;
+    }
   }
 
   getItem() {
@@ -134,7 +140,7 @@ export class GenericOneBase implements OnInit {
   }
 
   getMediaSets() {
-    this.bodyMediaSet.id = this.artist._id!;
+    this.bodyMediaSet.id = this[this.type]._id!;
     this.mediaService.getAllForType(this.bodyMediaSet).subscribe({
       next: (response) => (this.sets = response.items),
       error: (err) => {
@@ -145,7 +151,7 @@ export class GenericOneBase implements OnInit {
   }
 
   getMediaTracks() {
-    this.bodyMediaTrack.id = this.artist._id!;
+    this.bodyMediaTrack.id = this[this.type]._id!;
     this.mediaService.getAllForType(this.bodyMediaTrack).subscribe({
       next: (response) => (this.tracks = response.items),
       error: (err) => {
@@ -176,7 +182,7 @@ export class GenericOneBase implements OnInit {
       this.views.push({
         name: 'Sets',
         value: 'set',
-        counter: this.artist.sets.count,
+        counter: this[this.type].sets.count,
       });
     }
     if (

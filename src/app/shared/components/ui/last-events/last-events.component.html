@@ -31,7 +31,8 @@
               "
               class="font-black hover:opacity-70 dark:text-white"
             >
-              {{ item.name }}
+              <span class="md:hidden">{{ item.name | truncateText: 18}}</span>
+              <span class="hidden md:block">{{ item.name | truncateText: 45}}</span>
             </p>
             <p
               class="font-extralight hover:opacity-70 dark:text-white"

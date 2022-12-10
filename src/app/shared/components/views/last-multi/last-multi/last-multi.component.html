@@ -1,69 +1,71 @@
-<div
-  *ngIf="views.length > 0"
-  class="h-1 mx-2 mt-2 mb-4 border-b lg:container dark:border-gray-700 lg:mx-auto"
-></div>
-
-<div @inOut class="flex justify-center gap-3 pb-1 mx-2 scrollbar-hidden">
+<div class="mb-2">
   <div
-    *ngFor="let v of views"
-    class="py-1 text-sm font-medium text-black duration-200 cursor-pointer hover:border-b-2 navbar-no-active hover:border-black dark:text-white dark:hover:border-white dark:hover:border-b dark:hover:border-b-white hover:text-black"
-    [ngClass]="{
-      'font-black px-2 border-b-gray-600 dark:border-b-white border-b-2 duration-300':
-        v.value === view,
-      'font-extralight duration-300': v.value !== view
-    }"
-    (click)="view = v.value"
-  >
-    <div class="flex justify-center gap-1">
-      {{ v.name }}
-      <span class="font-extralight">({{ v.counter }})</span>
+    *ngIf="views.length > 0"
+    class="h-1 mx-2 mt-2 mb-4 border-b lg:container dark:border-gray-700 lg:mx-auto"
+  ></div>
+
+  <div @inOut class="flex justify-center gap-3 pb-1 mx-2 scrollbar-hidden">
+    <div
+      *ngFor="let v of views"
+      class="py-1 text-sm font-medium text-black duration-200 cursor-pointer hover:border-b-2 navbar-no-active hover:border-black dark:text-white dark:hover:border-white dark:hover:border-b dark:hover:border-b-white hover:text-black"
+      [ngClass]="{
+        'font-black px-2 border-b-gray-600 dark:border-b-white border-b-2 duration-300':
+          v.value === view,
+        'font-extralight duration-300': v.value !== view
+      }"
+      (click)="view = v.value"
+    >
+      <div class="flex justify-center gap-1">
+        {{ v.name }}
+        <span class="font-extralight">({{ v.counter }})</span>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="container px-4 mt-2 md:mx-auto">
-  <generic-view-gallery
-    *ngIf="view === 'artist'"
-    [items]="item.artists"
-    [type]="'artist'"
-    [loading]="false"
-    (goToPage)="goToPage.emit($event)"
-  ></generic-view-gallery>
+  <div class="container px-4 mt-2 md:mx-auto">
+    <generic-view-gallery
+      *ngIf="view === 'artist'"
+      [items]="item.artists"
+      [type]="'artist'"
+      [loading]="false"
+      (goToPage)="goToPage.emit($event)"
+    ></generic-view-gallery>
 
-  <generic-view-gallery
-    *ngIf="view === 'set'"
-    [items]="sets"
-    [type]="'set'"
-    [loading]="false"
-    (goToPage)="goToPage.emit($event)"
-  ></generic-view-gallery>
+    <generic-view-gallery
+      *ngIf="view === 'set'"
+      [items]="sets"
+      [type]="'set'"
+      [loading]="false"
+      (goToPage)="goToPage.emit($event)"
+    ></generic-view-gallery>
 
-  <generic-view-gallery
-    *ngIf="view === 'track'"
-    [items]="tracks"
-    [type]="'track'"
-    [loading]="false"
-    (goToPage)="goToPage.emit($event)"
-  ></generic-view-gallery>
+    <generic-view-gallery
+      *ngIf="view === 'track'"
+      [items]="tracks"
+      [type]="'track'"
+      [loading]="false"
+      (goToPage)="goToPage.emit($event)"
+    ></generic-view-gallery>
 
-  <generic-view-gallery-items
-    *ngIf="view === 'eventSite'"
-    [items]="events"
-    [type]="'eventSite'"
-    (goToPage)="goToPage.emit($event)"
-  ></generic-view-gallery-items>
+    <generic-view-gallery-items
+      *ngIf="view === 'eventSite'"
+      [items]="events"
+      [type]="'eventSite'"
+      (goToPage)="goToPage.emit($event)"
+    ></generic-view-gallery-items>
 
-  <generic-view-gallery
-    *ngIf="view === 'event'"
-    [items]="events"
-    [type]="'event'"
-    [loading]="false"
-    (goToPage)="goToPage.emit($event)"
-  ></generic-view-gallery>
+    <generic-view-gallery
+      *ngIf="view === 'event'"
+      [items]="events"
+      [type]="'event'"
+      [loading]="false"
+      (goToPage)="goToPage.emit($event)"
+    ></generic-view-gallery>
 
-  <last-multi-items
-    *ngIf="view === 'image'"
-    [item]="item"
-    type="image"
-  ></last-multi-items>
+    <last-multi-items
+      *ngIf="view === 'image'"
+      [item]="item"
+      type="image"
+    ></last-multi-items>
+  </div>
 </div>

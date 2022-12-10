@@ -1,7 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { Router } from '@angular/router';
-import { ToastService } from '@services';
 
 @Component({
   selector: 'search-bar',

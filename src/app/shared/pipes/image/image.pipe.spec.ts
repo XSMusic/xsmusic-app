@@ -10,8 +10,10 @@ describe('ImagePipe', () => {
 
   it('show image', () => {
     const pipe = new ImagePipe();
-    const result = pipe.transform(new Image({url: 'pepe', type: 'artist'}), 'small');
+    const result = pipe.transform(
+      new Image({ url: 'pepe', type: 'artist' }),
+      'small'
+    );
     expect(result).toBe(`${environment.urls.images}/artists/small/pepe`);
   });
-
 });

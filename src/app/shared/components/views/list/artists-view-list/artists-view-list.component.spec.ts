@@ -15,7 +15,10 @@ describe('ArtistsViewListComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ArtistsViewListComponent, NgxPermissionsAllowStubDirective],
+      declarations: [
+        ArtistsViewListComponent,
+        NgxPermissionsAllowStubDirective,
+      ],
       imports: [
         SharedModule,
         BrowserAnimationsModule,

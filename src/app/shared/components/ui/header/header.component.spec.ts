@@ -5,7 +5,6 @@ import { HeaderComponent } from '@components';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   NgxPermissionsAllowStubDirective,
-
   NgxPermissionsModule,
   NgxPermissionsService,
 } from 'ngx-permissions';

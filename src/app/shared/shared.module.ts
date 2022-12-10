@@ -45,6 +45,7 @@ import {
   SocialInputsComponent,
   ToastComponent,
   UsersViewListComponent,
+  MediaListBase,
 } from '@components';
 import {
   CountryFlagPipe,
@@ -128,6 +129,7 @@ const components = [
   LastMediaItemsComponent,
   LastMediaComponent,
   LastMediaItemComponent,
+  MediaListBase,
 ];
 const directives = [OnImageErrorDirective];
 const modules = [

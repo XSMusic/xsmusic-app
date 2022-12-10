@@ -15,7 +15,10 @@ describe('GenericViewGalleryItemsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [GenericViewGalleryItemsComponent, NgxPermissionsAllowStubDirective],
+      declarations: [
+        GenericViewGalleryItemsComponent,
+        NgxPermissionsAllowStubDirective,
+      ],
       imports: [
         SharedModule,
         BrowserAnimationsModule,

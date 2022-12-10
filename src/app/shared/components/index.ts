@@ -1,3 +1,5 @@
+export { MediaListBase } from './media-list.base.page';
+
 export { LastMediaItemsComponent } from './ui/last-media/last-media-items/last-media-items.component';
 export { LastMediaComponent } from './ui/last-media/last-media.component';
 export { LastMediaItemComponent } from './ui/last-media/last-media-item/last-media-item.component';

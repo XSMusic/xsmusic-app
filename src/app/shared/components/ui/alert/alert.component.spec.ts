@@ -12,10 +12,7 @@ describe('AlertComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [AlertComponent],
-      imports: [
-        SharedModule,
-        BrowserAnimationsModule,
-      ],
+      imports: [SharedModule, BrowserAnimationsModule],
       providers: [
         {
           provide: SvgIconRegistryService,

@@ -1,17 +1,19 @@
 import { Component, Input } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { GetAllDto } from '@interfaces';
-import { Artist, Site } from '@models';
+import { Artist, Event, Site } from '@models';
 import {
   ArtistService,
+  EventService,
   NavigationService,
   SiteService,
   StatsService,
   ToastService,
   TOAST_STATE,
 } from '@services';
-import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
+import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
+import { EventGetAllDto } from '@shared/services/api/event/event.dto';
 import { SiteGetAllDto } from '@shared/services/api/site/site.dto';
 import { StatsGetTopStatsI } from '@shared/services/api/stats/stats.interface';
 import { Observable } from 'rxjs';
@@ -22,15 +24,18 @@ import { Observable } from 'rxjs';
   animations: [inOutAnimation],
 })
 export class GenericAdminListBase {
-  @Input() type!: 'artist' | 'site';
+  @Input() type!: 'artist' | 'site' | 'event';
   @Input() subType!: 'club' | 'festival';
-  typeItems!: 'artists' | 'sites';
-  typeBody!: 'bodyArtist' | 'bodySite';
+  typeItems!: 'artists' | 'sites' | 'events';
+  typeBody!: 'bodyArtist' | 'bodySite' | 'bodyEvent';
+  typeTabs!: 'artistsAdmin' | 'eventsAdmin' | 'sitesAdmin';
   title!: string;
   artists: Artist[] = [];
   sites: Site[] = [];
+  events: Event[] = [];
   artist: Artist = new Artist();
   site: Site = new Site();
+  event: Event = new Event();
   stats: StatsGetTopStatsI = {
     topSocial: [],
     topCountries: [],
@@ -47,7 +52,12 @@ export class GenericAdminListBase {
     type: '',
     order: ['updated', 'desc'],
   };
-  view = 'viewList';
+  bodyEvent: EventGetAllDto = {
+    page: 1,
+    pageSize: 20,
+    order: ['date', 'asc'],
+  };
+  view!: string;
   filter = false;
   loading = true;
   error = false;
@@ -55,6 +65,7 @@ export class GenericAdminListBase {
   constructor(
     private artistService: ArtistService,
     private siteService: SiteService,
+    private eventService: EventService,
     private statsService: StatsService,
     private toast: ToastService,
     private navigationService: NavigationService
@@ -63,6 +74,7 @@ export class GenericAdminListBase {
   ngOnInit() {
     if (this.type) {
       this.setTitle();
+      this.setTypeTabs();
       this.getItems();
       this.getStats();
     }
@@ -73,6 +85,18 @@ export class GenericAdminListBase {
       this.title = 'Artistas';
     } else if (this.type === 'site') {
       this.title = this.subType === 'club' ? 'Clubs' : 'Festivales';
+    } else if (this.type === 'event') {
+      this.title = 'Eventos';
+    }
+  }
+
+  setTypeTabs() {
+    if (this.type === 'artist') {
+      this.typeTabs = 'artistsAdmin';
+    } else if (this.type === 'event') {
+      this.typeTabs = 'eventsAdmin';
+    } else if (this.type === 'site') {
+      this.typeTabs = 'sitesAdmin';
     }
   }
 
@@ -82,6 +106,10 @@ export class GenericAdminListBase {
       this.bodySite.type = this.subType;
       service = this.siteService.getAll(this.bodySite);
       this.typeItems = 'sites';
+      this.typeBody = 'bodySite';
+    } else if (this.type === 'event') {
+      service = this.eventService.getAll(this.bodyEvent);
+      this.typeItems = 'events';
       this.typeBody = 'bodySite';
     } else {
       service = this.artistService.getAll(this.bodyArtist);
@@ -110,18 +138,20 @@ export class GenericAdminListBase {
   }
 
   getStats() {
-    const type =
-      this.type === 'artist'
-        ? 'artist'
-        : this.subType === 'club'
-        ? 'club'
-        : 'festival';
-    this.statsService.getTopStats({ type: type, limit: 10 }).subscribe({
-      next: (response) => {
-        this.stats = response;
-      },
-      error: (error) => this.toast.showToast(TOAST_STATE.error, error),
-    });
+    if (this.type !== 'event') {
+      const type =
+        this.type === 'artist'
+          ? 'artist'
+          : this.subType === 'club'
+          ? 'club'
+          : 'festival';
+      this.statsService.getTopStats({ type: type, limit: 10 }).subscribe({
+        next: (response) => {
+          this.stats = response;
+        },
+        error: (error) => this.toast.showToast(TOAST_STATE.error, error),
+      });
+    }
   }
 
   goToPage(data: GoToPageI) {
@@ -129,12 +159,11 @@ export class GenericAdminListBase {
       data.admin = true;
     }
     if (!data.type) {
-      data.type =
-        this.type === 'artist'
-          ? 'artist'
-          : this.subType === 'club'
-          ? 'club'
-          : 'festival';
+      if (this.type === 'artist' || this.type === 'event') {
+        data.type = this.type;
+      } else {
+        data.type = this.subType === 'club' ? 'club' : 'festival';
+      }
     }
     this.navigationService.goToPage(data);
   }
@@ -158,10 +187,10 @@ export class GenericAdminListBase {
     this.getItems(true);
   }
 
-  onClickButton(button: ButtonBlockItem) {
-    if (button.action.includes('view')) {
-      this.view = button.action;
-    } else if (button.action === 'order') {
+  onClickTab(tab: TabsItem) {
+    if (tab.action.includes('view')) {
+      this.view = tab.action;
+    } else if (tab.action === 'order') {
       this.toast.showToast(TOAST_STATE.info, 'En construccion');
     }
   }
@@ -184,8 +213,15 @@ export class GenericAdminListBase {
       this.artist = new Artist();
     } else if (this.type === 'site') {
       this.site = new Site();
+    } else if (this.type === 'event') {
+      this.event = new Event();
     }
     this.getItems();
-    this.view = 'viewList';
+    this.view = '';
+  }
+
+  reloadItems() {
+    this.bodyEvent.page = 1;
+    this.getItems();
   }
 }

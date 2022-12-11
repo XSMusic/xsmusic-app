@@ -10,7 +10,7 @@ import {
   ToastService,
   TOAST_STATE,
 } from '@services';
-import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
+import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 
 @Component({
   selector: 'page-admin-images',
@@ -77,7 +77,7 @@ export class AdminImagesPage implements OnInit {
     this.getItems(true);
   }
 
-  onClickButton(button: ButtonBlockItem) {
+  onClickTab(button: TabsItem) {
     if (button.action === 'order' || button.action === 'filter') {
       this.toast.showToast(TOAST_STATE.info, 'En construccion');
     } else if (button.action === 'add') {

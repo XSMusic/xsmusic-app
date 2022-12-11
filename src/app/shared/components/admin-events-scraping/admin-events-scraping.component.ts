@@ -10,7 +10,7 @@ import {
   ToastService,
   TOAST_STATE,
 } from '@services';
-import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
+import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { ImageUploadByUrlDto } from '@shared/services/api/image/image.dto';
 import {
@@ -72,7 +72,7 @@ export class AdminEventsScrapingComponent {
     });
   }
 
-  onClickButton(button: ButtonBlockItem) {
+  onClickTab(button: TabsItem) {
     this.view = button.action;
   }
 

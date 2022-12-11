@@ -50,7 +50,7 @@ export class AdminStylePage implements OnInit {
     this.router.navigate([routesConfig.stylesAdmin]);
   }
 
-  onClickButton(event: any) {
+  onClickTab(event: any) {
     this.view = event.action;
   }
 

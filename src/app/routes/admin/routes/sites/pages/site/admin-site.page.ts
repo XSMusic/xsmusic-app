@@ -10,7 +10,7 @@ import {
   NavigationService,
 } from '@services';
 import { OptionsItemI } from '@shared/components/ui/options-items/options-items.interface';
-import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
+import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinner.service';
 import { EventGetAllForTypeDto } from '@shared/services/api/event/event.dto';
@@ -114,7 +114,7 @@ export class AdminSitePage implements OnInit {
     });
   }
 
-  onClickButton(event: ButtonBlockItem) {
+  onClickTab(event: TabsItem) {
     this.view = event.action;
   }
 

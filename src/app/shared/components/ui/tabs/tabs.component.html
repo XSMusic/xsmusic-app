@@ -3,37 +3,37 @@
   class="justify-between hidden gap-3 pb-2 overflow-x-auto text-center md:flex"
 >
   <div class="flex gap-1">
-    <ng-container *ngFor="let button of buttons | filterArray: 'align':'left'">
+    <ng-container *ngFor="let tab of tabs | filterArray: 'align':'left'">
       <button
-        *ngIf="button.align === 'left'"
-        (click)="clickButton(button)"
+        *ngIf="tab.align === 'left'"
+        (click)="clickTab(tab)"
         class="text-base text-center pb-1.5 px-1.5 text-black dark:text-white border-b-2 cursor-pointer dark:hover:border-white hover:border-gray-600 hover:duration-300 hover:border-b-2"
         [ngClass]="{
           'font-extrabold border-b-gray-600 dark:border-b-white border-b-2 duration-300':
-            button.isActive,
-          'font-extralight duration-300 ': !button.isActive
+            tab.isActive,
+          'font-extralight duration-300 ': !tab.isActive
         }"
       >
         <span class="hover:text-gray-800 dark:hover:text-white">{{
-          button.name
+          tab.name
         }}</span>
       </button>
     </ng-container>
   </div>
   <div class="flex gap-1">
-    <ng-container *ngFor="let button of buttons | filterArray: 'align':'right'">
+    <ng-container *ngFor="let tab of tabs | filterArray: 'align':'right'">
       <button
-        *ngIf="button.align === 'right'"
-        (click)="clickButton(button)"
+        *ngIf="tab.align === 'right'"
+        (click)="clickTab(tab)"
         class="text-base text-center pb-1.5 px-1.5 text-black dark:hover:text-white dark:text-white border-b-2 cursor-pointer dark:hover:border-white hover:border-gray-600 hover:duration-300 hover:border-b-2"
         [ngClass]="{
           'font-extrabold border-b-gray-600 dark:border-b-white border-b-2 duration-300':
-            button.isActive,
-          'font-extralight duration-300': !button.isActive
+            tab.isActive,
+          'font-extralight duration-300': !tab.isActive
         }"
       >
         <span class="hover:text-gray-800 dark:hover:text-white">
-          {{ button.name }}
+          {{ tab.name }}
         </span>
       </button>
     </ng-container>
@@ -45,18 +45,18 @@
     class="inline-flex gap-3 overflow-x-auto text-center mx-full scrollbar-hidden"
     role="group"
   >
-    <ng-container *ngFor="let button of buttons">
+    <ng-container *ngFor="let tab of tabs">
       <button
-        (click)="clickButton(button)"
+        (click)="clickTab(tab)"
         class="text-base text-center pb-1.5 px-1.5 text-black dark:hover:text-white dark:text-white border-b-2 cursor-pointer dark:hover:border-white hover:border-gray-600 hover:duration-300 hover:border-b-2"
         [ngClass]="{
           'font-extrabold border-b-gray-600 dark:border-b-white  border-b-2 duration-300':
-            button.isActive,
-          'font-extralight duration-300 ': !button.isActive
+            tab.isActive,
+          'font-extralight duration-300 ': !tab.isActive
         }"
       >
         <span class="hover:text-gray-800 dark:hover:text-white">
-          {{ button.name }}
+          {{ tab.name }}
         </span>
       </button>
     </ng-container>

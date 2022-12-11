@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FilterListI } from '@interfaces';
 import { Site } from '@models';
 import { NavigationService, SiteService, ToastService } from '@services';
-import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
+import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { SiteGetAllDto } from '@shared/services/api/site/site.dto';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
@@ -91,7 +91,7 @@ export class FestivalsPage implements OnInit {
     });
   }
 
-  onClickButton(button: ButtonBlockItem) {
+  onClickTab(button: TabsItem) {
     if (button.action.includes('view')) {
       this.view = button.action;
       if (this.view === 'viewMap' && this.itemsMap.length === 0) {

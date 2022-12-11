@@ -11,7 +11,7 @@ import {
 import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { getFilterList } from '@shared/utils';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
-import { ButtonBlockItem } from '../../ui/buttons-block/buttons-block.model';
+import { TabsItem } from '../../ui/tabs/tabs.model';
 
 @Component({
   selector: 'media-list-base',
@@ -23,12 +23,12 @@ import { ButtonBlockItem } from '../../ui/buttons-block/buttons-block.model';
     ></header-custom>
 
     <div class="container px-4 pt-3 mx-auto max-w-full-xl sm:pb-0 max-w-7sm">
-      <buttons-block
+      <tabs
         type="media"
         (search)="onSearch($event)"
         (onFilter)="onFilter($event)"
-        (onClickButton)="onClickButton($event)"
-      ></buttons-block>
+        (onClickTab)="onClickTab($event)"
+      ></tabs>
 
       <alert
         *ngIf="body.filter && body.filter.length > 0"
@@ -126,7 +126,7 @@ export class MediaListBase implements OnInit {
     });
   }
 
-  onClickButton(button: ButtonBlockItem) {
+  onClickTab(button: TabsItem) {
     if (button.action.includes('view')) {
       this.gaService.event(
         `${this.type}_change_${button.action}`,

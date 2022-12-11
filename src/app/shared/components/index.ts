@@ -1,6 +1,7 @@
+export { AdminEventsScrapingComponent } from './admin-events-scraping/admin-events-scraping.component';
+
 export { AdminArtistOneComponent } from './one/artist-one/admin-artist-one.component';
 export { AdminSiteOneComponent } from './one/admin-site-one/admin-site-one.component';
-
 export { GenericAdminListBase } from './base/generic-admin-list/generic-admin-list.base';
 export { GenericOneBase } from './base/generic-one/generic-one.base';
 export { MediaOneBase } from './base/media-one/media-one.base';
@@ -14,7 +15,7 @@ export { LastArtistsComponent } from './ui/last-artists/last-artists.component';
 export { LastSitesComponent } from './ui/last-sites/last-sites.component';
 // UI
 export { AlertComponent } from './ui/alert/alert.component';
-export { ButtonsBlockComponent } from './ui/buttons-block/buttons-block.component';
+export { TabsComponent as ButtonsBlockComponent } from './ui/tabs/tabs.component';
 export { FullImageComponent } from './ui/full-image/full-image.component';
 export { HeaderComponent } from './ui/header/header.component';
 export { ModalComponent } from './ui/modal/modal.component';

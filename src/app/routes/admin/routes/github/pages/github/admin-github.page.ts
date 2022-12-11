@@ -6,7 +6,7 @@ import {
   ToastService,
   TOAST_STATE,
 } from '@services';
-import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
+import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 
 @Component({
   selector: 'admin-github',
@@ -54,7 +54,7 @@ export class AdminGithubPage implements OnInit {
     });
   }
 
-  onClickButton(button: ButtonBlockItem) {
+  onClickTab(button: TabsItem) {
     if (button.action.includes('view')) {
       this.view = button.action;
     }

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { Style } from '@models';
-import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
+import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 import { StyleGetAllDto } from '@shared/services/api/style/style.dto';
 import { StyleService } from '@shared/services/api/style/style.service';
 
@@ -63,7 +63,7 @@ export class AdminStylesPage implements OnInit {
     this.getStyles(true);
   }
 
-  onClickButton(button: ButtonBlockItem) {
+  onClickTab(button: TabsItem) {
     if (button.action === 'add') {
       this.router.navigate([routesConfig.styleAdminAdd]);
     }

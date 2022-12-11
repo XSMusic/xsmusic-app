@@ -63,10 +63,7 @@
 </div>
 
 <div class="mt-3" *ngIf="body.source !== '' && items">
-  <buttons-block
-    type="eventsScraping"
-    (onClickButton)="onClickButton($event)"
-  ></buttons-block>
+  <tabs type="eventsScraping" (onClickTab)="onClickTab($event)"></tabs>
 </div>
 
 <ng-container *ngIf="items">

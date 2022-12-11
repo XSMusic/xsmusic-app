@@ -4,7 +4,7 @@ import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { GetAllDto } from '@interfaces';
 import { Media, Youtube } from '@models';
 import { NavigationService, ScrapingService } from '@services';
-import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
+import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 import { MediaService } from '@shared/services/api/media/media.service';
 import {
   ToastService,
@@ -82,7 +82,7 @@ export class AdminMediaListPage implements OnInit {
     });
   }
 
-  onClickButton(button: ButtonBlockItem) {
+  onClickTab(button: TabsItem) {
     if (button.action.includes('view')) {
       this.view = button.action;
     } else if (button.action === 'order') {

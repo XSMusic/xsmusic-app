@@ -4,7 +4,7 @@ import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { FilterListI, GetAllDto } from '@interfaces';
 import { Artist } from '@models';
 import { NavigationService, ToastService } from '@services';
-import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
+import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { ArtistService } from '@shared/services/api/artist/artist.service';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
@@ -96,7 +96,7 @@ export class ArtistsPage implements OnInit {
     this.getArtists(true);
   }
 
-  onClickButton(button: ButtonBlockItem) {
+  onClickTab(button: TabsItem) {
     if (button.action.includes('view')) {
       this.view = button.action;
       this.gaService.event(

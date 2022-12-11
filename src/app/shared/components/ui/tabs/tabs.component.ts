@@ -6,13 +6,15 @@ import {
   animate,
 } from '@angular/animations';
 import { Component, EventEmitter, Output, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { buttonsByType } from './buttons-block.helper';
-import { ButtonBlockItem } from './buttons-block.model';
+import { getTabByParam } from '@shared/utils';
+import { tabsByType } from './tabs.helper';
+import { TabsItem } from './tabs.model';
 
 @Component({
-  selector: 'buttons-block',
-  templateUrl: 'buttons-block.component.html',
+  selector: 'tabs',
+  templateUrl: 'tabs.component.html',
   animations: [
     trigger('searchTrigger', [
       state('close', style({ transform: 'translateY(0%)', width: '' })),
@@ -22,7 +24,7 @@ import { ButtonBlockItem } from './buttons-block.model';
     inOutAnimation,
   ],
 })
-export class ButtonsBlockComponent implements OnInit {
+export class TabsComponent implements OnInit {
   @Input() type:
     | 'generic'
     | 'artists'
@@ -40,58 +42,62 @@ export class ButtonsBlockComponent implements OnInit {
     | 'mediaAdmin'
     | 'styles'
     | 'styleAdmin' = 'generic';
-  buttons: ButtonBlockItem[] = [];
+  @Input() view = 'viewGallery';
+  tabs: TabsItem[] = [];
+  searchState = false;
+  filterState = false;
   @Output() changeView = new EventEmitter<string>();
   @Output() search = new EventEmitter<{ text: string; type: string }>();
   @Output() onFilter = new EventEmitter<{ name: string; value: string }>();
-  @Output() onClickButton = new EventEmitter<ButtonBlockItem>();
-
-  view = 'gallery';
-  viewLSKey = 'view_artist';
-  searchState = false;
-  filterState = false;
-
+  @Output() onClickTab = new EventEmitter<TabsItem>();
+  constructor(private route: ActivatedRoute) {}
   ngOnInit(): void {
-    this.setButtons();
-    if (this.buttons[0].action.includes('view')) {
-      this.clickButton(this.buttons[0]);
-    }
+    this.setTabs();
+    setTimeout(() => {
+      const tabByParam = getTabByParam(this.route, this.tabs);
+      if (tabByParam) {
+        this.onClickViewsButtons(tabByParam);
+      } else if (this.tabs[0].action.includes('view')) {
+        this.onClickViewsButtons(this.tabs[0]);
+      }
+    });
   }
 
-  setButtons() {
-    const category = buttonsByType.filter((item) => item.name === this.type)[0];
-    this.buttons = category.buttons;
+  setTabs() {
+    const category = tabsByType.filter((item) => item.name === this.type)[0];
+    this.tabs = category.buttons;
   }
 
-  clickButton(button: ButtonBlockItem) {
-    if (button.action.includes('view')) {
+  clickTab(tab: TabsItem) {
+    if (tab.action.includes('view')) {
       this.searchState = false;
-      this.onClickViewsButtons(button);
-    } else if (button.action === 'search') {
+      this.onClickViewsButtons(tab);
+    } else if (tab.action === 'search') {
       this.filterState = false;
       this.searchState = !this.searchState;
-    } else if (button.action === 'filter') {
+    } else if (tab.action === 'filter') {
       this.searchState = false;
       this.filterState = !this.filterState;
     } else {
       this.searchState = false;
       this.filterState = false;
-      this.onClickViewsButtons(button);
+      this.onClickViewsButtons(tab);
     }
   }
 
-  onClickViewsButtons(button: ButtonBlockItem) {
-    if (!button.isActive) {
+  onClickViewsButtons(tab: TabsItem) {
+    if (!tab.isActive) {
       this.setViewButtonsInactive();
-      button.isActive = true;
+      tab.isActive = true;
+      this.view = tab.action;
     }
-    this.onClickButton.emit(button);
+    this.onClickTab.emit(tab);
   }
 
   private setViewButtonsInactive(): void {
-    for (const item of this.buttons) {
-      if (item.isActivatable) {
-        item.isActive = false;
+    for (const tab of this.tabs) {
+      if (tab.isActivatable) {
+        tab.isActive = false;
       }
     }
   }

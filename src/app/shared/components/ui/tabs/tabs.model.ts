@@ -1,11 +1,11 @@
-export class ButtonBlockItem {
+export class TabsItem {
   name = '';
   isActive? = false;
   isActivatable? = false;
   action = '';
   align? = 'left';
 
-  constructor(data?: ButtonBlockItem) {
+  constructor(data?: TabsItem) {
     if (data) {
       for (const property in data) {
         if (data.hasOwnProperty(property))

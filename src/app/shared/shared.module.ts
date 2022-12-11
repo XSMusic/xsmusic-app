@@ -49,6 +49,7 @@ import {
   GenericAdminListBase,
   AdminArtistOneComponent,
   AdminSiteOneComponent,
+  AdminEventsScrapingComponent,
 } from '@components';
 import {
   CountryFlagPipe,
@@ -135,6 +136,7 @@ const components = [
   GenericAdminListBase,
   AdminArtistOneComponent,
   AdminSiteOneComponent,
+  AdminEventsScrapingComponent,
 ];
 const directives = [OnImageErrorDirective];
 const modules = [

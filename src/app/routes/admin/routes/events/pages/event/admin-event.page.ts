@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { StyleService } from '@shared/services/api/style/style.service';
 import { countries } from 'assets/data/countries';
 import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinner.service';
-import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
+import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 import { routesConfig } from '@core/config';
 import { OptionsItemI } from '@shared/components/ui/options-items/options-items.interface';
 
@@ -69,7 +69,7 @@ export class AdminEventPage {
     });
   }
 
-  onClickButton(event: ButtonBlockItem) {
+  onClickTab(event: TabsItem) {
     this.view = event.action;
   }
 

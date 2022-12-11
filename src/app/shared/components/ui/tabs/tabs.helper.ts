@@ -1,23 +1,23 @@
-import { ButtonBlockItem } from './buttons-block.model';
+import { TabsItem } from './tabs.model';
 
-const genericItems = [
-  new ButtonBlockItem({
+const genericTabs = [
+  new TabsItem({
     name: 'Galeria',
     isActivatable: true,
     action: 'viewGallery',
   }),
-  new ButtonBlockItem({
+  new TabsItem({
     name: 'Listado',
     isActivatable: true,
     action: 'viewList',
   }),
-  new ButtonBlockItem({
+  new TabsItem({
     name: 'Filtrar',
     isActivatable: true,
     align: 'right',
     action: 'filter',
   }),
-  new ButtonBlockItem({
+  new TabsItem({
     name: 'Buscar',
     isActivatable: true,
     align: 'right',
@@ -25,33 +25,33 @@ const genericItems = [
   }),
 ];
 
-export const buttonsByType = [
+export const tabsByType = [
   {
     name: 'generic',
-    buttons: genericItems,
+    buttons: genericTabs,
   },
   {
     name: 'artists',
-    buttons: genericItems,
+    buttons: genericTabs,
   },
   {
     name: 'media',
-    buttons: genericItems,
+    buttons: genericTabs,
   },
   {
     name: 'github',
     buttons: [
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Issues',
         isActivatable: true,
         action: 'viewIssues',
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Nueva',
         isActivatable: true,
         action: 'viewAdd',
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Actions',
         isActivatable: true,
         action: 'viewActions',
@@ -61,12 +61,12 @@ export const buttonsByType = [
   {
     name: 'events',
     buttons: [
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Galeria',
         isActivatable: true,
         action: 'viewGallery',
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Listado',
         isActivatable: true,
         action: 'viewList',
@@ -87,7 +87,7 @@ export const buttonsByType = [
       //   align: 'right',
       //   action: 'filter',
       // }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Buscar',
         isActivatable: true,
         align: 'right',
@@ -98,12 +98,12 @@ export const buttonsByType = [
   {
     name: 'eventsScraping',
     buttons: [
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Completos',
         action: 'viewCompleted',
         isActivatable: true,
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Incompletos',
         action: 'viewNotCompleted',
         isActivatable: true,
@@ -113,27 +113,27 @@ export const buttonsByType = [
   {
     name: 'artistsAdmin',
     buttons: [
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Listado',
         action: 'viewList',
         isActivatable: true,
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Nuevo',
         action: 'viewAdd',
         isActivatable: true,
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Estadisticas',
         action: 'viewStats',
         isActivatable: true,
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Filtrar',
         action: 'filter',
         align: 'right',
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Buscar',
         action: 'search',
         align: 'right',
@@ -143,27 +143,27 @@ export const buttonsByType = [
   {
     name: 'artistAdmin',
     buttons: [
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Info',
         isActivatable: true,
         action: 'viewInfo',
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Opciones',
         isActivatable: true,
         action: 'viewOptions',
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Sesiones',
         isActivatable: true,
         action: 'viewSets',
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Tracks',
         isActivatable: true,
         action: 'viewTracks',
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Eventos',
         isActivatable: true,
         action: 'viewEvents',
@@ -173,32 +173,27 @@ export const buttonsByType = [
   {
     name: 'eventsAdmin',
     buttons: [
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Listado',
         action: 'viewList',
         isActivatable: true,
       }),
-      new ButtonBlockItem({
-        name: 'Antiguo',
-        action: 'viewListOld',
-        isActivatable: true,
-      }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Nuevo',
         action: 'viewAdd',
         isActivatable: true,
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Scraping',
         action: 'viewScraping',
         isActivatable: true,
       }),
-      new ButtonBlockItem({
-        name: 'Filtrar',
-        action: 'filter',
-        align: 'right',
-      }),
-      new ButtonBlockItem({
+      // new ButtonBlockItem({
+      //   name: 'Filtrar',
+      //   action: 'filter',
+      //   align: 'right',
+      // }),
+      new TabsItem({
         name: 'Buscar',
         action: 'search',
         align: 'right',
@@ -208,12 +203,12 @@ export const buttonsByType = [
   {
     name: 'eventAdmin',
     buttons: [
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Info',
         isActivatable: true,
         action: 'viewInfo',
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Opciones',
         isActivatable: true,
         action: 'viewOptions',
@@ -223,27 +218,27 @@ export const buttonsByType = [
   {
     name: 'sites',
     buttons: [
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Galeria',
         action: 'viewGallery',
         isActivatable: true,
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Listado',
         action: 'viewList',
         isActivatable: true,
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Mapa',
         action: 'viewMap',
         isActivatable: true,
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Filtrar',
         action: 'filter',
         align: 'right',
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Buscar',
         action: 'search',
         align: 'right',
@@ -253,27 +248,27 @@ export const buttonsByType = [
   {
     name: 'sitesAdmin',
     buttons: [
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Listado',
         action: 'viewList',
         isActivatable: true,
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Nuevo',
         action: 'viewAdd',
         isActivatable: true,
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Estadisticas',
         action: 'viewStats',
         isActivatable: true,
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Filtrar',
         action: 'filter',
         align: 'right',
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Buscar',
         action: 'search',
         align: 'right',
@@ -283,22 +278,22 @@ export const buttonsByType = [
   {
     name: 'siteAdmin',
     buttons: [
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Info',
         isActivatable: true,
         action: 'viewInfo',
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Opciones',
         isActivatable: true,
         action: 'viewOptions',
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Eventos',
         isActivatable: true,
         action: 'viewEvents',
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Sets',
         isActivatable: true,
         action: 'viewSets',
@@ -308,22 +303,22 @@ export const buttonsByType = [
   {
     name: 'mediaAdmin',
     buttons: [
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Listado',
         action: 'viewList',
         isActivatable: true,
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Nuevo',
         action: 'viewAdd',
         isActivatable: true,
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Filtrar',
         action: 'filter',
         align: 'right',
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Buscar',
         action: 'search',
         align: 'right',
@@ -333,11 +328,11 @@ export const buttonsByType = [
   {
     name: 'styles',
     buttons: [
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Nuevo',
         action: 'add',
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Buscar',
         action: 'search',
       }),
@@ -346,32 +341,32 @@ export const buttonsByType = [
   {
     name: 'styleAdmin',
     buttons: [
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Info',
         isActivatable: true,
         action: 'viewInfo',
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Artistas',
         isActivatable: true,
         action: 'viewArtists',
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Sets',
         isActivatable: true,
         action: 'viewSets',
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Tracks',
         isActivatable: true,
         action: 'viewTracks',
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Clubs',
         isActivatable: true,
         action: 'viewClubs',
       }),
-      new ButtonBlockItem({
+      new TabsItem({
         name: 'Festivales',
         isActivatable: true,
         action: 'viewFestivals',

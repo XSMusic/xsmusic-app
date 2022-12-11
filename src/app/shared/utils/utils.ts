@@ -3,6 +3,7 @@ import { Geolocation } from '@capacitor/geolocation';
 import { environment } from '@env/environment';
 import { FilterListI } from '@interfaces';
 import { Image, Media, User } from '@models';
+import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 import { countries } from 'assets/data/countries';
 import { flags } from 'assets/data/flags';
 
@@ -117,6 +118,16 @@ export const getUserLocation = async (): Promise<number[]> => {
       }
     }
   });
+};
+
+export const getTabByParam = (
+  route: ActivatedRoute,
+  tabs: TabsItem[]
+): TabsItem | null => {
+  const tabItem = tabs.filter(
+    (tab) => tab.action === route.snapshot.queryParams['tab']
+  )[0];
+  return tabItem ? tabItem : null;
 };
 
 export const getFilterList = (route: ActivatedRoute): FilterListI => {

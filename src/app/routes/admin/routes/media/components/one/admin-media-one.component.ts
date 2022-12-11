@@ -75,7 +75,6 @@ export class AdminMediaOneComponent {
   }
 
   setDefaultSite() {
-    // TODO: Añadir sitio por defecto 6367d34e5ba8b44fdf9476c2
     this.media.site = { name: 'Desconocido', _id: this.defaultSite };
   }
 

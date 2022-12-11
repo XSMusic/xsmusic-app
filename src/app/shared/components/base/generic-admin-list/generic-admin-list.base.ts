@@ -217,7 +217,7 @@ export class GenericAdminListBase {
       this.event = new Event();
     }
     this.getItems();
-    this.view = '';
+    this.onClickTab({ name: 'Listado', action: 'viewList' });
   }
 
   reloadItems() {

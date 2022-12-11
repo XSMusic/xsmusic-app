@@ -55,18 +55,20 @@ export class MediaOneBase implements OnInit {
   }
 
   setMeta() {
-    const meta: MetadataI = {
-      title: getTitleMedia(this.media),
-      image: `${environment.urls.images}/${this.media.images![0].url}`,
-      url: `${environment.urls.app}${routesConfig[this.type].replace(
-        ':slug',
-        this.media.slug!
-      )}`,
-    };
-    if (this.media.info !== '') {
-      meta.description = this.media.info;
+    if (this.type) {
+      const meta: MetadataI = {
+        title: getTitleMedia(this.media),
+        image: `${environment.urls.images}/${this.media.images![0].url}`,
+        url: `${environment.urls.app}${routesConfig[this.type].replace(
+          ':slug',
+          this.media.slug!
+        )}`,
+      };
+      if (this.media.info !== '') {
+        meta.description = this.media.info;
+      }
+      this.metaService.setMetaDynamic(meta);
     }
-    this.metaService.setMetaDynamic(meta);
   }
 
   goToPage(data: GoToPageI) {

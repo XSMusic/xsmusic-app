@@ -103,7 +103,6 @@ export class GenericOneBase implements OnInit {
     } else {
       service = this.artistService.getOne('slug', this.slug);
     }
-    console.log(this.type);
     service.subscribe({
       next: (response: any) => {
         if (this.type === 'artist') {
@@ -228,7 +227,6 @@ export class GenericOneBase implements OnInit {
   }
 
   goToPage(data: GoToPageI) {
-    console.log(data);
     this.navigationService.goToPage(data);
   }
 }

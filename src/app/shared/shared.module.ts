@@ -46,6 +46,9 @@ import {
   MediaListBase,
   MediaOneBase,
   GenericOneBase,
+  GenericAdminListBase,
+  AdminArtistOneComponent,
+  AdminSiteOneComponent,
 } from '@components';
 import {
   CountryFlagPipe,
@@ -129,6 +132,9 @@ const components = [
   MediaListBase,
   MediaOneBase,
   GenericOneBase,
+  GenericAdminListBase,
+  AdminArtistOneComponent,
+  AdminSiteOneComponent,
 ];
 const directives = [OnImageErrorDirective];
 const modules = [

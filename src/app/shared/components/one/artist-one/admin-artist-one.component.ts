@@ -28,7 +28,7 @@ import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinn
   templateUrl: 'admin-artist-one.component.html',
   animations: [inOutAnimation],
 })
-export class ArtistOneComponent {
+export class AdminArtistOneComponent {
   @Input() artist: Artist = new Artist();
   @Input() styles: Style[] = [];
   title!: string;

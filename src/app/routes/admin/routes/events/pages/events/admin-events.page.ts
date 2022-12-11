@@ -85,9 +85,14 @@ export class AdminEventsPage {
     this.getEvents(type);
   }
 
-  reloadItems(type: 'new' | 'old') {
+  onScroll(type: 'new' | 'old') {
     this.body.page++;
     this.getEvents(type, true);
+  }
+
+  reloadItems() {
+    this.body.page = 1;
+    this.getEvents('new', true);
   }
 
   onClickButton(button: ButtonBlockItem) {

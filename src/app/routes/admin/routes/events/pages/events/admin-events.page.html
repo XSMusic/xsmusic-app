@@ -25,7 +25,7 @@
     [loading]="loading"
     (goToPage)="goToPage($event)"
     (filter)="filter('new', $event)"
-    (onScroll)="reloadItems('new')"
+    (onScroll)="onScroll('new')"
   >
   </events-view-list>
   <events-view-list
@@ -34,14 +34,14 @@
     [loading]="loading"
     (goToPage)="goToPage($event)"
     (filter)="filter('old', $event)"
-    (onScroll)="reloadItems('old')"
+    (onScroll)="onScroll('old')"
   >
   </events-view-list>
 
   <ng-container *ngIf="view === 'viewAdd'"> </ng-container>
   <ng-container *ngIf="view === 'viewScraping'">
     <admin-events-scraping
-      (onEventCreated)="reloadItems('new')"
+      (onEventCreated)="reloadItems()"
     ></admin-events-scraping>
   </ng-container>
 </div>

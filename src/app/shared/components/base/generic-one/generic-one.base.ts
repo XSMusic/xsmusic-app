@@ -96,9 +96,7 @@ export class GenericOneBase implements OnInit {
 
   getItem() {
     let service: Observable<any>;
-    if (this.type === 'artist') {
-      service = this.artistService.getOne('slug', this.slug);
-    } else if (this.type === 'site') {
+    if (this.type === 'site') {
       service = this.siteService.getOne('slug', this.slug);
     } else {
       service = this.artistService.getOne('slug', this.slug);

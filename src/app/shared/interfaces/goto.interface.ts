@@ -1,5 +1,5 @@
 export interface GoToPageI {
-  type:
+  type?:
     | 'artist'
     | 'club'
     | 'event'

@@ -133,3 +133,8 @@ export const getFilterList = (route: ActivatedRoute): FilterListI => {
 
   return data;
 };
+
+export const capitalize = (str: string): string => {
+  const lower = str.toLowerCase();
+  return str.charAt(0).toUpperCase() + lower.slice(1);
+};

@@ -11,6 +11,7 @@ import {
   TOAST_STATE,
 } from '@services';
 import { ButtonBlockItem } from '@shared/components/ui/buttons-block/buttons-block.model';
+import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { ImageUploadByUrlDto } from '@shared/services/api/image/image.dto';
 import {
   ScrapingEventI,
@@ -75,7 +76,7 @@ export class AdminEventsScrapingComponent {
     this.view = button.action;
   }
 
-  addEventConfirmation(item: any) {
+  addEventConfirmation(data: GoToPageI) {
     const modal = this.modal.showModalConfirm(
       `Añadir evento`,
       `¿Estas seguro de añadir el evento?`
@@ -84,7 +85,7 @@ export class AdminEventsScrapingComponent {
       next: (response) => {
         if (response !== '') {
           if (response === true) {
-            this.addEvent(item);
+            this.addEvent(data.item);
           }
           sub$.unsubscribe();
         }

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '@shared/shared.module';
-import { AdminSiteOneComponent } from './components/admin-site-one/admin-site-one.component';
 import { AdminSitePage } from './pages/site/admin-site.page';
 import { AdminSitesPage } from './pages/sites/admin-sites.page';
 
@@ -12,27 +11,27 @@ import { AdminSitesPage } from './pages/sites/admin-sites.page';
       {
         path: 'clubs',
         component: AdminSitesPage,
-        data: { breadcrumb: '', title: 'Admin - Sitios' },
+        data: { breadcrumb: '', title: 'Admin - Clubs' },
       },
       {
         path: 'clubs/:id',
         component: AdminSitePage,
-        data: { breadcrumb: '', title: 'Admin - Editar sitio' },
+        data: { breadcrumb: '', title: 'Admin - Editar Club' },
       },
       {
         path: 'festivals',
         component: AdminSitesPage,
-        data: { breadcrumb: '', title: 'Admin - Usuarios' },
+        data: { breadcrumb: '', title: 'Admin - Festivales' },
       },
       {
         path: 'festivals/:id',
         component: AdminSitePage,
-        data: { breadcrumb: '', title: 'Admin - Editar Usuario' },
+        data: { breadcrumb: '', title: 'Admin - Editar Festival' },
       },
     ]),
   ],
   exports: [],
-  declarations: [AdminSitesPage, AdminSitePage, AdminSiteOneComponent],
+  declarations: [AdminSitesPage, AdminSitePage],
   providers: [],
 })
 export class AdminSitesModule {}

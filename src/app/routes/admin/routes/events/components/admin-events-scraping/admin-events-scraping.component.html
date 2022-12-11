@@ -75,7 +75,7 @@
     [items]="items.completed"
     [type]="'eventScraping'"
     [loading]="false"
-    (goToOne)="addEventConfirmation($event)"
+    (goToPage)="addEventConfirmation($event)"
     (discartEvent)="discartEvent($event)"
   ></generic-view-gallery>
   <generic-view-gallery
@@ -83,6 +83,6 @@
     [items]="items.notCompleted"
     [type]="'eventScraping'"
     [loading]="false"
-    (goToOne)="goToAddSite()"
+    (goToPage)="goToAddSite()"
   ></generic-view-gallery>
 </ng-container>

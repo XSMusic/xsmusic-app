@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { MessageI, ScrapingGetInfoClubResponse } from '@interfaces';
@@ -22,6 +22,7 @@ import { FullImageService } from '@shared/services/ui/full-image/full-image.serv
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { countries } from 'assets/data/countries';
 import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinner.service';
+import { getKeyValueByParam } from '@shared/utils';
 
 @Component({
   selector: 'admin-site-one',
@@ -51,6 +52,7 @@ export class AdminSiteOneComponent implements OnInit {
     private fullImage: FullImageService,
     private toastService: ToastService,
     private router: Router,
+    private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
     private scrapingService: ScrapingService,
     private geoService: GeoService,
@@ -61,6 +63,10 @@ export class AdminSiteOneComponent implements OnInit {
 
   ngOnInit() {
     this.site.type = this.type;
+    const dataByParams = getKeyValueByParam(this.route);
+    if (dataByParams.key && dataByParams.value) {
+      this.site[dataByParams.key] = dataByParams.value;
+    }
   }
 
   showImage(image: Image) {

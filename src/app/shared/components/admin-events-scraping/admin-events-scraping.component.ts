@@ -125,8 +125,27 @@ export class AdminEventsScrapingComponent {
     });
   }
 
-  goToAddSite() {
-    this.router.navigate([routesConfig.clubAdminAdd]);
+  goToAddSite(data: GoToPageI) {
+    const modal = this.modal.showModalConfirm(
+      `Añadir club`,
+      `¿Quieres ir a añadir el club?`
+    );
+    const sub$ = modal.subscribe({
+      next: (response) => {
+        if (response !== '') {
+          if (response === true) {
+            this.router.navigate([routesConfig.clubsAdmin], {
+              queryParams: {
+                tab: 'viewAdd',
+                fieldKey: 'name',
+                fieldValue: data.item.name,
+              },
+            });
+          }
+          sub$.unsubscribe();
+        }
+      },
+    });
   }
 
   discartEvent(value: ScrapingEventI) {

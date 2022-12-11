@@ -130,6 +130,15 @@ export const getTabByParam = (
   return tabItem ? tabItem : null;
 };
 
+export const getKeyValueByParam = (
+  route: ActivatedRoute
+): { key: 'name'; value: string } => {
+  return {
+    key: route.snapshot.queryParams['fieldKey'],
+    value: route.snapshot.queryParams['fieldValue'],
+  };
+};
+
 export const getFilterList = (route: ActivatedRoute): FilterListI => {
   const data: FilterListI = {
     key: '',

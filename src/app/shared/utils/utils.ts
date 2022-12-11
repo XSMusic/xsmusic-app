@@ -58,11 +58,11 @@ export const getTitleMedia = (item: Media) => {
     title += ' @ ';
   }
   if (item.site && item.site.name && item.site.name !== 'Desconocido') {
-    title += `  ${item.site.name}`;
+    title += `${item.site.name}`;
   } else if (item.site && item.site.name && item.site.name === 'Desconocido') {
-    title += `  ${item.name}`;
+    title += `${item.name}`;
   } else {
-    title += `  ${item.name}`;
+    title += `${item.name}`;
   }
   if (item.year !== 0) {
     title += ' ' + item.year;

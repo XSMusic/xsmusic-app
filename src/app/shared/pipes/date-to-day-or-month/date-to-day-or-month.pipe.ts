@@ -5,7 +5,7 @@ import { DateFunctions } from '@shared/utils/dates';
   name: 'dateToDayOrMonth',
 })
 export class DateToDayOrMonthPipe implements PipeTransform {
-  transform(value: string, dayOrMonth = 'day'): string {
+  transform(value: string, dayOrMonth: 'day' | 'month' = 'day'): string {
     return dayOrMonth === 'day'
       ? DateFunctions.new(value).locale('es').format('DD').substring(0, 2)
       : DateFunctions.new(value).locale('es').format('MMM').substring(0, 3);

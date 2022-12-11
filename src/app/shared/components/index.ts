@@ -1,15 +1,15 @@
 export { GenericOneBase } from './base/generic-one/generic-one.base';
 export { MediaOneBase } from './base/media-one/media-one.base';
 export { MediaListBase } from './base/media-list/media-list.base';
+
+// Home
 export { LastMediaItemsComponent } from './ui/last-media/last-media-items/last-media-items.component';
 export { LastMediaComponent } from './ui/last-media/last-media.component';
 export { LastMediaItemComponent } from './ui/last-media/last-media-item/last-media-item.component';
 export { LastEventsComponent } from './ui/last-events/last-events.component';
 export { LastArtistsComponent } from './ui/last-artists/last-artists.component';
 export { LastSitesComponent } from './ui/last-sites/last-sites.component';
-export { SiteLastMediaItemsComponent } from './sites/site-last-media-items/site-last-media-items.component';
-export { SiteLastMediaComponent } from './sites/site-last-media/site-last-media.component';
-//UI
+// UI
 export { AlertComponent } from './ui/alert/alert.component';
 export { ButtonsBlockComponent } from './ui/buttons-block/buttons-block.component';
 export { FullImageComponent } from './ui/full-image/full-image.component';

@@ -6,9 +6,9 @@ export { AdminEventsScrapingComponent } from './events/admin-events-scraping/adm
 export { AdminArtistOneComponent } from './one/artist-one/admin-artist-one.component';
 export { AdminSiteOneComponent } from './one/admin-site-one/admin-site-one.component';
 export { GenericAdminListBase } from './base/generic-admin-list/generic-admin-list.base';
+export { GenericListBase } from './base/generic-list/generic-list.base';
 export { GenericOneBase } from './base/generic-one/generic-one.base';
 export { MediaOneBase } from './base/media-one/media-one.base';
-export { MediaListBase } from './base/media-list/media-list.base';
 // Home
 export { LastMediaItemsComponent } from './ui/last-media/last-media-items/last-media-items.component';
 export { LastMediaComponent } from './ui/last-media/last-media.component';

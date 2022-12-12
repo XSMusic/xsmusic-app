@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
-import { MediaListBase } from '@shared/components/base/media-list/media-list.base';
+import { GenericListBase } from '@components';
 
 @Component({
-  selector: 'page-sets',
-  template: `<media-list-base type="sets"></media-list-base>`,
+  selector: 'sets',
+  template: `<generic-list-base
+    type="media"
+    subType="set"
+  ></generic-list-base>`,
 })
-export class SetsPage extends MediaListBase {}
+export class SetsPage extends GenericListBase {}

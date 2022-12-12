@@ -1,0 +1,84 @@
+<header-custom
+  [title]="title"
+  [total]="total"
+  (onClickTitle)="goToPage({type: 'artist', admin:true, 'typeRoute': 'all'})"
+></header-custom>
+
+<div class="container px-4 pt-3 mx-auto max-w-full-xl sm:pb-0 max-w-7sm">
+  <tabs
+    [type]="typeTabs"
+    (search)="onSearch($event)"
+    (onFilter)="onFilter($event)"
+    (onClickTab)="onClickTab($event)"
+  ></tabs>
+
+  <alert
+    type="info"
+    message="Filtro activado."
+    actionText="Quitar"
+    (action)="removeFilter()"
+    *ngIf="filter"
+  ></alert>
+
+  <generic-view-gallery
+    *ngIf="view === 'viewGallery'"
+    [items]="this[this.typeItems]"
+    [loading]="loading"
+    [type]="typeForGalleryView"
+    (goToPage)="goToPage($event)"
+    (onScroll)="onScroll()"
+  ></generic-view-gallery>
+
+  <ng-container *ngIf="type==='artist'">
+    <artists-view-list
+      *ngIf="view === 'viewList'"
+      [artists]="artists"
+      [loading]="loading"
+      (goToPage)="goToPage($event)"
+      (filter)="onFilter($event)"
+      (onScroll)="onScroll()"
+    >
+    </artists-view-list>
+  </ng-container>
+
+  <ng-container *ngIf="type==='event'">
+    <events-view-list
+      *ngIf="view === 'viewList'"
+      [items]="events"
+      [loading]="loading"
+      (goToPage)="goToPage($event)"
+      (filter)="onFilter($event)"
+      (onScroll)="onScroll()"
+    ></events-view-list>
+  </ng-container>
+
+  <ng-container *ngIf="type==='media'">
+    <media-view-list
+      *ngIf="view === 'viewList'"
+      [media]="medias"
+      [loading]="loading"
+      (goToPage)="goToPage($event)"
+      (filter)="onFilter($event)"
+      (onScroll)="onScroll()"
+    ></media-view-list>
+  </ng-container>
+
+  <ng-container *ngIf="type==='site'">
+    <sites-view-list
+      *ngIf="view === 'viewList'"
+      [sites]="sites"
+      [loading]="loading"
+      (goToPage)="goToPage($event)"
+      (filter)="onFilter($event)"
+      (onScroll)="onScroll()"
+    ></sites-view-list>
+
+    <map
+      *ngIf="view === 'viewMap'"
+      [class]="'mt-2 rounded-lg overflow-hidden'"
+      [style]="'height: calc(100vh - 175px)'"
+      [markers]="sitesMap"
+      [zoom]="6"
+    ></map>
+  </ng-container>
+</div>

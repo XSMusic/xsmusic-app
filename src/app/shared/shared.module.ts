@@ -43,7 +43,6 @@ import {
   SocialInputsComponent,
   ToastComponent,
   UsersViewListComponent,
-  MediaListBase,
   MediaOneBase,
   GenericOneBase,
   GenericAdminListBase,
@@ -53,6 +52,7 @@ import {
   AdminMediaOneComponent,
   AdminMediaAddSearchComponent,
   AdminMediaAddSearchItemsComponent,
+  GenericListBase,
 } from '@components';
 import {
   CountryFlagPipe,
@@ -133,7 +133,6 @@ const components = [
   LastMediaItemsComponent,
   LastMediaComponent,
   LastMediaItemComponent,
-  MediaListBase,
   MediaOneBase,
   GenericOneBase,
   GenericAdminListBase,
@@ -143,6 +142,7 @@ const components = [
   AdminMediaAddSearchItemsComponent,
   AdminMediaAddSearchComponent,
   AdminMediaOneComponent,
+  GenericListBase,
 ];
 const directives = [OnImageErrorDirective];
 const modules = [

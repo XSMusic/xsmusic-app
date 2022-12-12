@@ -17,7 +17,12 @@ import {
 } from 'app/testing/services.mock';
 import { SetsPage } from './sets.page';
 import { ActivatedRoute } from '@angular/router';
-import { ArtistService, EventService, MediaService, SiteService } from '@services';
+import {
+  ArtistService,
+  EventService,
+  MediaService,
+  SiteService,
+} from '@services';
 
 describe('SetsPage', () => {
   let component: SetsPage;

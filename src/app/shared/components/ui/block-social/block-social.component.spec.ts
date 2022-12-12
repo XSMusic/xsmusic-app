@@ -16,7 +16,6 @@ describe('BlockSocialComponent', () => {
   let component: BlockSocialComponent;
   let fixture: ComponentFixture<BlockSocialComponent>;
 
-
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [BlockSocialComponent, NgxPermissionsAllowStubDirective],

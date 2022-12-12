@@ -17,7 +17,12 @@ import {
 } from 'app/testing/services.mock';
 import { ArtistsPage } from './artists.page';
 import { ActivatedRoute } from '@angular/router';
-import { ArtistService, EventService, MediaService, SiteService } from '@services';
+import {
+  ArtistService,
+  EventService,
+  MediaService,
+  SiteService,
+} from '@services';
 
 describe('ArtistsPage', () => {
   let component: ArtistsPage;

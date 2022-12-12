@@ -50,6 +50,9 @@ import {
   AdminArtistOneComponent,
   AdminSiteOneComponent,
   AdminEventsScrapingComponent,
+  AdminMediaOneComponent,
+  AdminMediaAddSearchComponent,
+  AdminMediaAddSearchItemsComponent,
 } from '@components';
 import {
   CountryFlagPipe,
@@ -137,6 +140,9 @@ const components = [
   AdminArtistOneComponent,
   AdminSiteOneComponent,
   AdminEventsScrapingComponent,
+  AdminMediaAddSearchItemsComponent,
+  AdminMediaAddSearchComponent,
+  AdminMediaOneComponent,
 ];
 const directives = [OnImageErrorDirective];
 const modules = [

@@ -1,4 +1,7 @@
-export { AdminEventsScrapingComponent } from './admin-events-scraping/admin-events-scraping.component';
+export { AdminMediaAddSearchItemsComponent } from './events/add-search-items/admin-media-add-search-items.component';
+export { AdminMediaAddSearchComponent } from './events/add-search/admin-media-add-search.component';
+export { AdminMediaOneComponent } from './events/one/admin-media-one.component';
+export { AdminEventsScrapingComponent } from './events/admin-events-scraping/admin-events-scraping.component';
 
 export { AdminArtistOneComponent } from './one/artist-one/admin-artist-one.component';
 export { AdminSiteOneComponent } from './one/admin-site-one/admin-site-one.component';

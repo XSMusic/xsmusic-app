@@ -1,11 +1,14 @@
 import { Component, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { GetAllDto } from '@interfaces';
-import { Artist, Event, Site } from '@models';
+import { Artist, Event, Media, Site, Youtube } from '@models';
 import {
   ArtistService,
   EventService,
+  MediaService,
   NavigationService,
+  ScrapingService,
   SiteService,
   StatsService,
   ToastService,
@@ -17,6 +20,7 @@ import { EventGetAllDto } from '@shared/services/api/event/event.dto';
 import { SiteGetAllDto } from '@shared/services/api/site/site.dto';
 import { StatsGetTopStatsI } from '@shared/services/api/stats/stats.interface';
 import { Observable } from 'rxjs';
+import { NgxSpinnerService } from '../../../services/system/ngx-spinner/ngx-spinner.service';
 
 @Component({
   selector: 'generic-admin-list-base',
@@ -24,18 +28,20 @@ import { Observable } from 'rxjs';
   animations: [inOutAnimation],
 })
 export class GenericAdminListBase {
-  @Input() type!: 'artist' | 'site' | 'event';
-  @Input() subType!: 'club' | 'festival';
-  typeItems!: 'artists' | 'sites' | 'events';
-  typeBody!: 'bodyArtist' | 'bodySite' | 'bodyEvent';
-  typeTabs!: 'artistsAdmin' | 'eventsAdmin' | 'sitesAdmin';
+  @Input() type!: 'artist' | 'site' | 'event' | 'media';
+  @Input() subType!: 'club' | 'festival' | 'set' | 'track';
+  typeItems!: 'artists' | 'sites' | 'events' | 'medias';
+  typeBody!: 'bodyArtist' | 'bodySite' | 'bodyEvent' | 'bodyMedia';
+  typeTabs!: 'artistsAdmin' | 'eventsAdmin' | 'sitesAdmin' | 'mediaAdmin';
   title!: string;
   artists: Artist[] = [];
   sites: Site[] = [];
   events: Event[] = [];
+  medias: Media[] = [];
   artist: Artist = new Artist();
   site: Site = new Site();
   event: Event = new Event();
+  media: Media = new Media();
   stats: StatsGetTopStatsI = {
     topSocial: [],
     topCountries: [],
@@ -57,18 +63,37 @@ export class GenericAdminListBase {
     pageSize: 20,
     order: ['date', 'asc'],
   };
+  bodyMedia: GetAllDto = {
+    page: 1,
+    pageSize: 20,
+    order: ['updated', 'desc'],
+    type: '',
+  };
   view!: string;
   filter = false;
   loading = true;
   error = false;
   total = 0;
+  itemsSearch: Youtube[] = [];
+  mediaSource = 'youtube';
+  searchText = '';
+  scraping: any = {
+    images: [],
+    infos: [],
+    styles: [],
+  };
+  scrapingItemSelected!: Youtube;
   constructor(
     private artistService: ArtistService,
     private siteService: SiteService,
     private eventService: EventService,
+    private mediaService: MediaService,
     private statsService: StatsService,
     private toast: ToastService,
-    private navigationService: NavigationService
+    private spinner: NgxSpinnerService,
+    private scrapingService: ScrapingService,
+    private navigationService: NavigationService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -77,6 +102,9 @@ export class GenericAdminListBase {
       this.setTypeTabs();
       this.getItems();
       this.getStats();
+      if (this.type === 'media') {
+        this.getSourceAndValueWithParams();
+      }
     }
   }
 
@@ -87,6 +115,8 @@ export class GenericAdminListBase {
       this.title = this.subType === 'club' ? 'Clubs' : 'Festivales';
     } else if (this.type === 'event') {
       this.title = 'Eventos';
+    } else if (this.type === 'media') {
+      this.title = this.subType === 'set' ? 'Sets' : 'Tracks';
     }
   }
 
@@ -97,6 +127,8 @@ export class GenericAdminListBase {
       this.typeTabs = 'eventsAdmin';
     } else if (this.type === 'site') {
       this.typeTabs = 'sitesAdmin';
+    } else if (this.type === 'media') {
+      this.typeTabs = 'mediaAdmin';
     }
   }
 
@@ -110,7 +142,12 @@ export class GenericAdminListBase {
     } else if (this.type === 'event') {
       service = this.eventService.getAll(this.bodyEvent);
       this.typeItems = 'events';
-      this.typeBody = 'bodySite';
+      this.typeBody = 'bodyEvent';
+    } else if (this.type === 'media') {
+      this.bodyMedia.type = this.subType;
+      service = this.mediaService.getAll(this.bodyMedia);
+      this.typeItems = 'medias';
+      this.typeBody = 'bodyMedia';
     } else {
       service = this.artistService.getAll(this.bodyArtist);
       this.typeItems = 'artists';
@@ -138,7 +175,7 @@ export class GenericAdminListBase {
   }
 
   getStats() {
-    if (this.type !== 'event') {
+    if (this.type !== 'event' && this.type !== 'media') {
       const type =
         this.type === 'artist'
           ? 'artist'
@@ -154,6 +191,15 @@ export class GenericAdminListBase {
     }
   }
 
+  getSourceAndValueWithParams() {
+    const source = this.route.snapshot.queryParams['source'];
+    const value = this.route.snapshot.queryParams['value'];
+    if (source && value) {
+      this.mediaSource = source === 'default' ? 'youtube' : source;
+      this.searchText = value;
+    }
+  }
+
   goToPage(data: GoToPageI) {
     if (data.admin === undefined) {
       data.admin = true;
@@ -161,8 +207,10 @@ export class GenericAdminListBase {
     if (!data.type) {
       if (this.type === 'artist' || this.type === 'event') {
         data.type = this.type;
-      } else {
-        data.type = this.subType === 'club' ? 'club' : 'festival';
+      } else if (this.type === 'site') {
+        data.type = this.subType;
+      } else if (this.type === 'media') {
+        data.type = this.subType;
       }
     }
     this.navigationService.goToPage(data);
@@ -215,6 +263,8 @@ export class GenericAdminListBase {
       this.site = new Site();
     } else if (this.type === 'event') {
       this.event = new Event();
+    } else if (this.type === 'media') {
+      this.media = new Media();
     }
     this.getItems();
     this.onClickTab({ name: 'Listado', action: 'viewList' });
@@ -223,5 +273,41 @@ export class GenericAdminListBase {
   reloadItems() {
     this.bodyEvent.page = 1;
     this.getItems();
+  }
+
+  searchAdd(searchText: string) {
+    if (this.mediaSource === 'youtube') {
+      this.spinner.show();
+      this.scrapingService
+        .getListMedia({
+          query: searchText,
+          maxResults: '20',
+          source: this.mediaSource,
+        })
+        .subscribe({
+          next: (response) => {
+            this.itemsSearch = response;
+            this.spinner.hide();
+          },
+          error: (error) => {
+            this.spinner.hide();
+            this.toast.showToast(TOAST_STATE.error, error);
+          },
+        });
+    } else {
+      this.toast.showToast(TOAST_STATE.warning, 'En construccion');
+    }
+  }
+
+  selectItem(item: Youtube) {
+    this.scrapingItemSelected = item;
+    this.media = new Media({
+      name: item.name,
+      type: this.bodyMedia.type === 'set' ? 'set' : 'track',
+      source: this.mediaSource,
+      sourceId: item.videoId,
+      info: item.info,
+    });
+    this.scraping.images = [item.image];
   }
 }

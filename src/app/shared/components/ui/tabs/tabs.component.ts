@@ -55,7 +55,7 @@ export class TabsComponent implements OnInit {
     this.setTabs();
     setTimeout(() => {
       const tabByParam = getTabByParam(this.route, this.tabs);
-      if (tabByParam) {
+        if (tabByParam) {
         this.onClickViewsButtons(tabByParam);
       } else if (this.tabs[0].action.includes('view')) {
         this.onClickViewsButtons(this.tabs[0]);

@@ -1,172 +1,142 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { GetAllDto } from '@interfaces';
-import { Media, Youtube } from '@models';
-import { NavigationService, ScrapingService } from '@services';
-import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
-import { MediaService } from '@shared/services/api/media/media.service';
-import {
-  ToastService,
-  TOAST_STATE,
-} from '@shared/services/ui/toast/toast.service';
-import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinner.service';
-import { GoToPageI } from '@shared/interfaces/goto.interface';
 
 @Component({
   selector: 'page-admin-media-list',
-  templateUrl: 'admin-media-list.page.html',
-  animations: [inOutAnimation],
+  template: `<generic-admin-list-base
+    *ngIf="!loading"
+    type="media"
+    [subType]="subType"
+  ></generic-admin-list-base>`,
 })
 export class AdminMediaListPage implements OnInit {
-  title = '';
-  items: Media[] = [];
-  itemsSearch: Youtube[] = [];
-  media: Media = new Media();
-  body: GetAllDto = {
-    page: 1,
-    pageSize: 20,
-    order: ['updated', 'desc'],
-    type: '',
-  };
-  type: 'sets' | 'tracks' = 'sets';
+  subType!: 'set' | 'track';
   loading = true;
-  error = false;
-  view = 'viewList';
-  source = 'youtube';
-  searchText = '';
-  itemSelected?: Youtube;
-  scraping: any = {
-    images: [],
-    infos: [],
-    styles: [],
-  };
-  total = 0;
-  constructor(
-    private route: ActivatedRoute,
-    private mediaService: MediaService,
-    private toast: ToastService,
-    private scrapingService: ScrapingService,
-    private spinner: NgxSpinnerService,
-    private navigationService: NavigationService
-  ) {}
+  // error = false;
+  // view = 'viewList';
+  // source = 'youtube';
+  // searchText = '';
+  // itemSelected?: Youtube;
+  // scraping: any = {
+  //   images: [],
+  //   infos: [],
+  //   styles: [],
+  // };
+  // total = 0;
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.type = this.route.snapshot.routeConfig!.path! as 'sets' | 'tracks';
-    if (this.type === 'sets') {
-      this.title = 'Sets';
-      this.body.type = 'set';
-    } else {
-      this.title = 'Tracks';
-      this.body.type = 'track';
-    }
-    this.getItems();
+    const subType = this.route.snapshot.routeConfig!.path!.includes('sets')
+      ? 'sets'
+      : 'festivals';
+    this.subType = subType === 'sets' ? 'set' : 'track';
+    this.loading = false;
   }
 
-  getItems(more = false): void {
-    this.mediaService.getAll(this.body).subscribe({
-      next: (response) => {
-        if (!more) {
-          this.items = response.items;
-          this.total = response.paginator.total;
-        } else {
-          this.items = this.items.concat(response.items);
-        }
-        this.loading = false;
-        this.error = false;
-      },
-      error: () => {
-        this.loading = false;
-        this.error = true;
-      },
-    });
-  }
+  // getItems(more = false): void {
+  //   this.mediaService.getAll(this.body).subscribe({
+  //     next: (response) => {
+  //       if (!more) {
+  //         this.items = response.items;
+  //         this.total = response.paginator.total;
+  //       } else {
+  //         this.items = this.items.concat(response.items);
+  //       }
+  //       this.loading = false;
+  //       this.error = false;
+  //     },
+  //     error: () => {
+  //       this.loading = false;
+  //       this.error = true;
+  //     },
+  //   });
+  // }
 
-  onClickTab(button: TabsItem) {
-    if (button.action.includes('view')) {
-      this.view = button.action;
-    } else if (button.action === 'order') {
-      this.toast.showToast(TOAST_STATE.info, 'En construccion');
-    }
-  }
+  // onClickTab(button: TabsItem) {
+  //   if (button.action.includes('view')) {
+  //     this.view = button.action;
+  //   } else if (button.action === 'order') {
+  //     this.toast.showToast(TOAST_STATE.info, 'En construccion');
+  //   }
+  // }
 
-  onSearch(event: { text: string; type: string }) {
-    if (event.text === '') {
-      this.body.page = 1;
-      this.getItems();
-    } else {
-      this.body.page = 1;
-      this.body.filter = ['name', event.text];
-      this.getItems();
-    }
-  }
+  // onSearch(event: { text: string; type: string }) {
+  //   if (event.text === '') {
+  //     this.body.page = 1;
+  //     this.getItems();
+  //   } else {
+  //     this.body.page = 1;
+  //     this.body.filter = ['name', event.text];
+  //     this.getItems();
+  //   }
+  // }
 
-  goToPage(data: GoToPageI) {
-    if (data.admin === undefined) {
-      data.admin = true;
-    }
-    this.navigationService.goToPage(data);
-  }
+  // goToPage(data: GoToPageI) {
+  //   if (data.admin === undefined) {
+  //     data.admin = true;
+  //   }
+  //   this.navigationService.goToPage(data);
+  // }
 
-  filter(event: { name: string; value: string }) {
-    this.body.page = 1;
-    this.body.filter = [event.name, event.value];
-    this.getItems();
-  }
+  // filter(event: { name: string; value: string }) {
+  //   this.body.page = 1;
+  //   this.body.filter = [event.name, event.value];
+  //   this.getItems();
+  // }
 
-  removeFilter() {
-    this.body.page = 1;
-    this.body.filter = [];
-    this.getItems();
-  }
+  // removeFilter() {
+  //   this.body.page = 1;
+  //   this.body.filter = [];
+  //   this.getItems();
+  // }
 
-  onScroll() {
-    this.body.page++;
-    this.getItems(true);
-  }
+  // onScroll() {
+  //   this.body.page++;
+  //   this.getItems(true);
+  // }
 
-  searchAdd(searchText: string) {
-    if (this.source === 'youtube') {
-      this.spinner.show();
-      this.scrapingService
-        .getListMedia({
-          query: searchText,
-          maxResults: '20',
-          source: this.source,
-        })
-        .subscribe({
-          next: (response) => this.onResponseSearchSuccess(response),
-          error: (error) => this.onResponseSearchError(error),
-        });
-    } else {
-      this.toast.showToast(TOAST_STATE.warning, 'En construccion');
-    }
-  }
+  // searchAdd(searchText: string) {
+  //   if (this.source === 'youtube') {
+  //     this.spinner.show();
+  //     this.scrapingService
+  //       .getListMedia({
+  //         query: searchText,
+  //         maxResults: '20',
+  //         source: this.source,
+  //       })
+  //       .subscribe({
+  //         next: (response) => this.onResponseSearchSuccess(response),
+  //         error: (error) => this.onResponseSearchError(error),
+  //       });
+  //   } else {
+  //     this.toast.showToast(TOAST_STATE.warning, 'En construccion');
+  //   }
+  // }
 
-  onResponseSearchSuccess(response: Youtube[]) {
-    this.itemsSearch = response;
-    this.spinner.hide();
-  }
+  // onResponseSearchSuccess(response: Youtube[]) {
+  //   this.itemsSearch = response;
+  //   this.spinner.hide();
+  // }
 
-  onResponseSearchError(error: string) {
-    this.spinner.hide();
-    this.toast.showToast(TOAST_STATE.error, error);
-  }
+  // onResponseSearchError(error: string) {
+  //   this.spinner.hide();
+  //   this.toast.showToast(TOAST_STATE.error, error);
+  // }
 
-  selectItem(item: Youtube) {
-    this.itemSelected = item;
-    this.media = new Media({
-      name: item.name,
-      type: this.body.type === 'set' ? 'set' : 'track',
-      source: this.source,
-      sourceId: item.videoId,
-      info: item.info,
-    });
-    this.scraping.images = [item.image];
-  }
+  // selectItem(item: Youtube) {
+  //   this.itemSelected = item;
+  //   this.media = new Media({
+  //     name: item.name,
+  //     type: this.body.type === 'set' ? 'set' : 'track',
+  //     source: this.source,
+  //     sourceId: item.videoId,
+  //     info: item.info,
+  //   });
+  //   this.scraping.images = [item.image];
+  // }
 
-  onSubmitSuccess(event: Media) {
-    this.media = new Media();
-    this.items.unshift(event);
-  }
+  // onSubmitSuccess(event: Media) {
+  //   this.media = new Media();
+  //   this.items.unshift(event);
+  // }
 }

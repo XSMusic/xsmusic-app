@@ -72,9 +72,45 @@
     <admin-site-one
       *ngIf="view === 'viewAdd'"
       [site]="site"
-      [type]="subType"
+      [type]="subType === 'club' ? 'club' : 'festival'"
       (onCreated)="onCreated()"
     ></admin-site-one>
+  </ng-container>
+
+  <ng-container *ngIf="type === 'media'">
+    <media-view-list
+      *ngIf="view === 'viewList'"
+      [media]="medias"
+      [loading]="loading"
+      [type]="subType === 'set' ? 'set' : 'track'"
+      (goToPage)="goToPage($event)"
+      (filter)="onFilter($event)"
+      (onScroll)="onScroll()"
+    ></media-view-list>
+
+    <ng-container *ngIf="view === 'viewAdd'">
+      <admin-media-add-search
+      [source]="mediaSource"
+      [searchText]="searchText"
+      (onChangeSource)="mediaSource = $event"
+      (search)="searchAdd($event)"
+    ></admin-media-add-search>
+
+    <div *ngIf="media?.name === ''">
+      <admin-media-add-search-items
+        [items]="itemsSearch"
+        [itemSelected]="scrapingItemSelected!"
+        (selectItem)="selectItem($event)"
+      ></admin-media-add-search-items>
+    </div>
+
+    <admin-media-one
+      *ngIf="media?.name !== ''"
+      [media]="media"
+      [scraping]="scraping"
+      (onSubmitSuccess)="onCreated()"
+    ></admin-media-one>
+    </ng-container>
   </ng-container>
 
   <div

@@ -79,6 +79,14 @@ import { AdminTotalsComponent } from '../../shared/components/ui/totals/admin-to
             (m) => m.AdminGithubModule
           ),
       },
+      {
+        path: '**',
+        pathMatch: 'full',
+        loadChildren: () =>
+          import('../../routes/not-found/not-found.module').then(
+            (m) => m.NotFoundModule
+          ),
+      },
     ]),
   ],
   exports: [],

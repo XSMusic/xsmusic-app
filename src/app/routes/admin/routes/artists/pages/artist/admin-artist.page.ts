@@ -155,17 +155,21 @@ export class AdminArtistPage {
 
   onClickOptionItem(event: OptionsItemI) {
     if (event.action === 'goToAdminSetAdd') {
-      this.router.navigate([
-        routesConfig.setAdminAddData
-          .replace(':source', 'default')
-          .replace(':value', this.artist.name),
-      ]);
+      this.router.navigate([routesConfig.setsAdmin], {
+        queryParams: {
+          tab: 'viewAdd',
+          source: 'default',
+          value: this.artist.name,
+        },
+      });
     } else if (event.action === 'goToAdminTrackAdd') {
-      this.router.navigate([
-        routesConfig.trackAdminAddData
-          .replace(':source', 'default')
-          .replace(':value', this.artist.name),
-      ]);
+      this.router.navigate([routesConfig.tracksAdmin], {
+        queryParams: {
+          tab: 'viewAdd',
+          source: 'default',
+          value: this.artist.name,
+        },
+      });
     }
   }
 }

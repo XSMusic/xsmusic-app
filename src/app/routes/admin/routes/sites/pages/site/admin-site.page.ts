@@ -120,13 +120,19 @@ export class AdminSitePage implements OnInit {
 
   onClickOptionItem(event: OptionsItemI) {
     if (event.action === 'goToAdminSetAdd') {
-      this.router.navigate([
-        routesConfig.setAdminAddData
-          .replace(':source', 'default')
-          .replace(':value', this.site.name!),
-      ]);
+      this.router.navigate([routesConfig.setsAdmin], {
+        queryParams: {
+          tab: 'viewAdd',
+          source: 'default',
+          value: this.site.name,
+        },
+      });
     } else if (event.action === 'goToAdminEventAdd') {
-      this.toast.showToast(TOAST_STATE.info, 'En construccion');
+      this.router.navigate([routesConfig.eventsAdmin], {
+        queryParams: {
+          tab: 'viewScraping',
+        },
+      });
     }
   }
 

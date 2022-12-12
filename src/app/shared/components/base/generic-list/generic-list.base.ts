@@ -171,25 +171,27 @@ export class GenericListBase {
   }
 
   getItems(more = false) {
-    this.service.subscribe({
-      next: (response) => {
-        if (!more) {
-          this[this.typeItems] = response.items;
-          this.total = response.paginator.total;
-        } else {
-          let data: any[] = this[this.typeItems];
-          data = data.concat(response.items);
-          this[this.typeItems] = data;
-        }
-        this.loading = false;
-        this.error = false;
-      },
-      error: (error) => {
-        this.loading = false;
-        this.error = true;
-        this.toast.showToast(TOAST_STATE.error, error);
-      },
-    });
+    if (this.service) {
+      this.service.subscribe({
+        next: (response) => {
+          if (!more) {
+            this[this.typeItems] = response.items;
+            this.total = response.paginator.total;
+          } else {
+            let data: any[] = this[this.typeItems];
+            data = data.concat(response.items);
+            this[this.typeItems] = data;
+          }
+          this.loading = false;
+          this.error = false;
+        },
+        error: (error) => {
+          this.loading = false;
+          this.error = true;
+          this.toast.showToast(TOAST_STATE.error, error);
+        },
+      });
+    }
   }
 
   async getItemsMap() {

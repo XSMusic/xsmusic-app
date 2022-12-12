@@ -13,6 +13,7 @@ import { MetaService } from '@services';
 import { AuthService } from '@core/auth';
 import { of } from 'rxjs';
 import { SvgIconRegistryService } from 'angular-svg-icon';
+import { svgIconRegistryServiceMock } from './testing/services.mock';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -33,7 +34,7 @@ describe('AppComponent', () => {
         { provide: AuthService, useValue: { user: () => of() } },
         {
           provide: SvgIconRegistryService,
-          useValue: { getSvgByName: () => {} },
+          useValue: svgIconRegistryServiceMock,
         },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],

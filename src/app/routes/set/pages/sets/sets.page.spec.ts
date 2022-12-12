@@ -1,23 +1,31 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { SharedModule } from '@shared/shared.module';
-import { TabsComponent } from '@components';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ActivatedRoute } from '@angular/router';
-import { of } from 'rxjs';
 import {
   NgxPermissionsAllowStubDirective,
   NgxPermissionsModule,
   NgxPermissionsService,
 } from 'ngx-permissions';
+import { SvgIconRegistryService } from 'angular-svg-icon';
+import {
+  artistServiceMock,
+  eventServiceMock,
+  mediaServiceMock,
+  siteServiceMock,
+  svgIconRegistryServiceMock,
+} from 'app/testing/services.mock';
+import { SetsPage } from './sets.page';
+import { ActivatedRoute } from '@angular/router';
+import { ArtistService, EventService, MediaService, SiteService } from '@services';
 
-describe('TabsComponent', () => {
-  let component: TabsComponent;
-  let fixture: ComponentFixture<TabsComponent>;
+describe('SetsPage', () => {
+  let component: SetsPage;
+  let fixture: ComponentFixture<SetsPage>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [TabsComponent, NgxPermissionsAllowStubDirective],
+      declarations: [SetsPage, NgxPermissionsAllowStubDirective],
       imports: [
         SharedModule,
         BrowserAnimationsModule,
@@ -25,6 +33,26 @@ describe('TabsComponent', () => {
       ],
       providers: [
         NgxPermissionsService,
+        {
+          provide: SvgIconRegistryService,
+          useValue: svgIconRegistryServiceMock,
+        },
+        {
+          provide: ArtistService,
+          useValue: artistServiceMock,
+        },
+        {
+          provide: SiteService,
+          useValue: siteServiceMock,
+        },
+        {
+          provide: EventService,
+          useValue: eventServiceMock,
+        },
+        {
+          provide: MediaService,
+          useValue: mediaServiceMock,
+        },
         {
           provide: ActivatedRoute,
           useValue: {
@@ -39,7 +67,7 @@ describe('TabsComponent', () => {
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TabsComponent);
+    fixture = TestBed.createComponent(SetsPage);
     component = fixture.componentInstance;
 
     fixture.detectChanges();

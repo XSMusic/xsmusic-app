@@ -4,6 +4,7 @@ import { SharedModule } from '@shared/shared.module';
 import { AlertComponent } from '@components';
 import { SvgIconRegistryService } from 'angular-svg-icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { svgIconRegistryServiceMock } from 'app/testing/services.mock';
 
 describe('AlertComponent', () => {
   let component: AlertComponent;
@@ -16,7 +17,7 @@ describe('AlertComponent', () => {
       providers: [
         {
           provide: SvgIconRegistryService,
-          useValue: { getSvgByName: () => {} },
+          useValue: svgIconRegistryServiceMock,
         },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],

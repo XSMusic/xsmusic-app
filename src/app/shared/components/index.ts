@@ -18,7 +18,7 @@ export { LastArtistsComponent } from './ui/last-artists/last-artists.component';
 export { LastSitesComponent } from './ui/last-sites/last-sites.component';
 // UI
 export { AlertComponent } from './ui/alert/alert.component';
-export { TabsComponent as ButtonsBlockComponent } from './ui/tabs/tabs.component';
+export { TabsComponent } from './ui/tabs/tabs.component';
 export { FullImageComponent } from './ui/full-image/full-image.component';
 export { HeaderComponent } from './ui/header/header.component';
 export { ModalComponent } from './ui/modal/modal.component';

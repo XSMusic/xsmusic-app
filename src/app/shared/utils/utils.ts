@@ -145,10 +145,12 @@ export const getFilterList = (route: ActivatedRoute): FilterListI => {
     value: '',
     data: [],
   };
-  data.key = route.snapshot.queryParams['key'];
-  data.value = route.snapshot.queryParams['value'];
-  if (data.key && data.value) {
-    data.data = [data.key, data.value];
+  if (route.snapshot.queryParams) {
+    data.key = route.snapshot.queryParams['key'];
+    data.value = route.snapshot.queryParams['value'];
+    if (data.key && data.value) {
+      data.data = [data.key, data.value];
+    }
   }
 
   return data;

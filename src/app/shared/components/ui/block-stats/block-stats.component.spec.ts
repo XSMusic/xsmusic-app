@@ -34,4 +34,24 @@ describe('BlockStatsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  describe('ngOnInit', () => {
+    it('title -> topCountries', () => {
+      component.type = 'topCountries';
+      component.ngOnInit();
+      expect(component.title).toEqual('Top Paises');
+    });
+
+    it('title -> topSocial', () => {
+      component.type = 'topSocial';
+      component.ngOnInit();
+      expect(component.title).toEqual('Top Redes sociales');
+    });
+
+    it('title -> topStyles', () => {
+      component.type = 'topStyles';
+      component.ngOnInit();
+      expect(component.title).toEqual('Top Estilos');
+    });
+  });
 });

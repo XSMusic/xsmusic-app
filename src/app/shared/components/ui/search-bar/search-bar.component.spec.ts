@@ -9,6 +9,7 @@ import {
   NgxPermissionsService,
 } from 'ngx-permissions';
 import { SvgIconRegistryService } from 'angular-svg-icon';
+import { svgIconRegistryServiceMock } from 'app/testing/services.mock';
 
 describe('SearchBarComponent', () => {
   let component: SearchBarComponent;
@@ -26,7 +27,7 @@ describe('SearchBarComponent', () => {
         NgxPermissionsService,
         {
           provide: SvgIconRegistryService,
-          useValue: { getSvgByName: () => {} },
+          useValue: svgIconRegistryServiceMock,
         },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],

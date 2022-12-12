@@ -1,23 +1,25 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { SharedModule } from '@shared/shared.module';
-import { TabsComponent } from '@components';
+import { BlockSocialComponent } from '@components';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ActivatedRoute } from '@angular/router';
-import { of } from 'rxjs';
 import {
   NgxPermissionsAllowStubDirective,
   NgxPermissionsModule,
   NgxPermissionsService,
 } from 'ngx-permissions';
+import { Artist } from '@models';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
+import { gaServiceMock } from 'app/testing/services.mock';
 
-describe('TabsComponent', () => {
-  let component: TabsComponent;
-  let fixture: ComponentFixture<TabsComponent>;
+describe('BlockSocialComponent', () => {
+  let component: BlockSocialComponent;
+  let fixture: ComponentFixture<BlockSocialComponent>;
+
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [TabsComponent, NgxPermissionsAllowStubDirective],
+      declarations: [BlockSocialComponent, NgxPermissionsAllowStubDirective],
       imports: [
         SharedModule,
         BrowserAnimationsModule,
@@ -26,26 +28,25 @@ describe('TabsComponent', () => {
       providers: [
         NgxPermissionsService,
         {
-          provide: ActivatedRoute,
-          useValue: {
-            snapshot: {
-              queryParamMap: {
-                get: () => '123',
-              },
-            },
-          },
+          provide: GoogleAnalyticsService,
+          useValue: gaServiceMock,
         },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TabsComponent);
+    fixture = TestBed.createComponent(BlockSocialComponent);
     component = fixture.componentInstance;
-
+    component.item = new Artist();
     fixture.detectChanges();
   }));
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('goToSocial', () => {
+    component.goToSocial('artist', 'link');
+    expect(gaServiceMock.event).toHaveBeenCalled();
   });
 });

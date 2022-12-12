@@ -62,7 +62,7 @@ export class GenericListBase {
     order: ['created', 'desc'],
     type: 'club',
     map: true,
-    maxDistance: 1000,
+    maxDistance: 10000,
   };
   bodyMedia: GetAllDto = {
     page: 1,

@@ -177,7 +177,6 @@ const pipes = [
 const services = [
   AngularSvgIconPreloaderService,
   ArtistService,
-  LeafletService,
   LocalStorageService,
   MediaService,
   NavigationService,

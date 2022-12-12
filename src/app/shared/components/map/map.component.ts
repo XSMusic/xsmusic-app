@@ -11,6 +11,7 @@ import { imageArray } from '@shared/utils';
   templateUrl: 'map.component.html',
   styleUrls: ['./map.component.css'],
   animations: [inOutAnimation],
+  providers: [LeafletService],
 })
 export class MapComponent implements AfterViewInit {
   private map!: any;

@@ -90,26 +90,26 @@
 
     <ng-container *ngIf="view === 'viewAdd'">
       <admin-media-add-search
-      [source]="mediaSource"
-      [searchText]="searchText"
-      (onChangeSource)="mediaSource = $event"
-      (search)="searchAdd($event)"
-    ></admin-media-add-search>
+        [source]="mediaSource"
+        [searchText]="searchText"
+        (onChangeSource)="mediaSource = $event"
+        (search)="searchAdd($event)"
+      ></admin-media-add-search>
 
-    <div *ngIf="media?.name === ''">
-      <admin-media-add-search-items
-        [items]="itemsSearch"
-        [itemSelected]="scrapingItemSelected!"
-        (selectItem)="selectItem($event)"
-      ></admin-media-add-search-items>
-    </div>
+      <div *ngIf="media?.name === ''">
+        <admin-media-add-search-items
+          [items]="itemsSearch"
+          [itemSelected]="scrapingItemSelected!"
+          (selectItem)="selectItem($event)"
+        ></admin-media-add-search-items>
+      </div>
 
-    <admin-media-one
-      *ngIf="media?.name !== ''"
-      [media]="media"
-      [scraping]="scraping"
-      (onSubmitSuccess)="onCreated()"
-    ></admin-media-one>
+      <admin-media-one
+        *ngIf="media?.name !== ''"
+        [media]="media"
+        [scraping]="scraping"
+        (onSubmitSuccess)="onCreated()"
+      ></admin-media-one>
     </ng-container>
   </ng-container>
 

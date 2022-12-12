@@ -34,11 +34,7 @@ import { AdminMediaListPage } from './pages/list/admin-media-list.page';
     ]),
   ],
   exports: [],
-  declarations: [
-    AdminMediaListPage,
-    AdminMediaAddPage,
-    AdminMediaEditPage,
-  ],
+  declarations: [AdminMediaListPage, AdminMediaAddPage, AdminMediaEditPage],
   providers: [],
 })
 export class AdminMediaModule {}

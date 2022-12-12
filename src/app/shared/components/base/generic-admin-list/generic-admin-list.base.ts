@@ -160,7 +160,7 @@ export class GenericAdminListBase {
           this[this.typeItems] = response.items;
           this.total = response.paginator.total;
         } else {
-          let data: any = this[this.type];
+          let data: any[] = this[this.typeItems];
           data = data.concat(response.items);
           this[this.typeItems] = data;
         }

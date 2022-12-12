@@ -20,6 +20,7 @@ import { EventGetAllForTypeDto } from '@shared/services/api/event/event.dto';
 import { MediaGetAllForTypeDto } from '@shared/services/api/media/media.dto';
 import { Observable } from 'rxjs';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
+import { DateFunctions } from '@shared/utils/dates';
 
 @Component({
   selector: 'generic-one-base',
@@ -27,10 +28,11 @@ import { GoToPageI } from '@shared/interfaces/goto.interface';
   animations: [inOutAnimation],
 })
 export class GenericOneBase implements OnInit {
-  @Input() type!: 'artist' | 'site';
+  @Input() type!: 'artist' | 'site' | 'event';
   @Input() subType!: 'club' | 'festival';
   artist!: Artist;
   site!: Site;
+  event!: Event;
   slug!: string;
   views: any[] = [];
   bodyEvents: EventGetAllForTypeDto = {
@@ -98,16 +100,14 @@ export class GenericOneBase implements OnInit {
     let service: Observable<any>;
     if (this.type === 'site') {
       service = this.siteService.getOne('slug', this.slug);
+    } else if (this.type === 'event') {
+      service = this.eventService.getOne('slug', this.slug);
     } else {
       service = this.artistService.getOne('slug', this.slug);
     }
     service.subscribe({
       next: (response: any) => {
-        if (this.type === 'artist') {
-          this.artist = response;
-        } else if (this.type === 'site') {
-          this.site = response;
-        }
+        this[this.type] = response;
         this.setMeta();
         this.setViews();
         this.checkViews();
@@ -118,7 +118,7 @@ export class GenericOneBase implements OnInit {
         this.router.navigate(['/404'], {
           skipLocationChange: true,
           state: {
-            type: this.subType,
+            type: this.type === 'site' ? this.subType : this.type,
           },
         });
       },
@@ -159,9 +159,17 @@ export class GenericOneBase implements OnInit {
   }
 
   setMeta() {
+    let title: string;
+    if (this.type === 'event') {
+      title = `${this.event.name} @ ${
+        this.event.site.name
+      } - ${DateFunctions.new(this.event.date).format('DD-MM-YYYY')}`;
+    } else {
+      title = this[this.type].name!;
+    }
     const typeRoute = this.type === 'site' ? this.subType : this.type;
     const meta: MetadataI = {
-      title: this[this.type].name!,
+      title: title,
       image: `${environment.urls.images}/${this[this.type].images![0].url}`,
       url: `${environment.urls.app}${routesConfig[typeRoute].replace(
         ':slug',
@@ -175,29 +183,39 @@ export class GenericOneBase implements OnInit {
   }
 
   setViews() {
-    if (this[this.type].sets && this[this.type].sets.count > 0) {
-      this.views.push({
-        name: 'Sets',
-        value: 'set',
-        counter: this[this.type].sets.count,
-      });
+    if (this.type === 'artist' || this.type === 'site') {
+      if (this[this.type].sets && this[this.type].sets.count > 0) {
+        this.views.push({
+          name: 'Sets',
+          value: 'set',
+          counter: this[this.type].sets.count,
+        });
+      }
+      if (
+        this.type === 'artist' &&
+        this.artist.tracks &&
+        this.artist.tracks.count > 0
+      ) {
+        this.views.push({
+          name: 'Tracks',
+          value: 'track',
+          counter: this.artist.tracks.count,
+        });
+      }
+
+      if (this[this.type].events && this[this.type].events.count > 0) {
+        this.views.push({
+          name: 'Eventos',
+          value: 'event',
+          counter: this[this.type].events ? this[this.type].events.count : 0,
+        });
+      }
     }
-    if (
-      this.type === 'artist' &&
-      this.artist.tracks &&
-      this.artist.tracks.count > 0
-    ) {
+    if (this.type === 'event') {
       this.views.push({
-        name: 'Tracks',
-        value: 'track',
-        counter: this.artist.tracks.count,
-      });
-    }
-    if (this[this.type].events && this[this.type].events.count > 0) {
-      this.views.push({
-        name: 'Eventos',
-        value: 'event',
-        counter: this[this.type].events ? this[this.type].events.count : 0,
+        name: 'Artistas',
+        value: 'artist',
+        counter: this.event.artists!.length,
       });
     }
     if (this[this.type].images && this[this.type].images!.length > 1) {
@@ -225,6 +243,7 @@ export class GenericOneBase implements OnInit {
   }
 
   goToPage(data: GoToPageI) {
+    console.log(data);
     this.navigationService.goToPage(data);
   }
 }

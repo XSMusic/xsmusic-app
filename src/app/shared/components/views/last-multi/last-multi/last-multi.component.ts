@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { Event, Media } from '@models';
+import { GoToPageI } from '@shared/interfaces/goto.interface';
 
 @Component({
   selector: 'last-multi',
@@ -14,7 +15,7 @@ export class LastMultiComponent implements OnInit {
   @Input() sets: Media[] = [];
   @Input() tracks: Media[] = [];
   view = '';
-  @Output() goToPage = new EventEmitter<any>();
+  @Output() goToPage = new EventEmitter<GoToPageI>();
 
   ngOnInit() {
     this.view = this.views.length > 0 ? this.views[0].value : '';

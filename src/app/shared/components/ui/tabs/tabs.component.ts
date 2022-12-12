@@ -50,12 +50,13 @@ export class TabsComponent implements OnInit {
   @Output() search = new EventEmitter<{ text: string; type: string }>();
   @Output() onFilter = new EventEmitter<{ name: string; value: string }>();
   @Output() onClickTab = new EventEmitter<TabsItem>();
-  constructor(private route: ActivatedRoute) {}
+  constructor(public route: ActivatedRoute) {}
+
   ngOnInit(): void {
     this.setTabs();
     setTimeout(() => {
       const tabByParam = getTabByParam(this.route, this.tabs);
-        if (tabByParam) {
+      if (tabByParam) {
         this.onClickViewsButtons(tabByParam);
       } else if (this.tabs[0].action.includes('view')) {
         this.onClickViewsButtons(this.tabs[0]);

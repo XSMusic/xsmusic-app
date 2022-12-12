@@ -3,6 +3,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { SharedModule } from '@shared/shared.module';
 import { ButtonsBlockComponent } from '@components';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 import {
   NgxPermissionsAllowStubDirective,
   NgxPermissionsModule,
@@ -21,7 +23,19 @@ describe('ButtonsBlockComponent', () => {
         BrowserAnimationsModule,
         NgxPermissionsModule.forRoot(),
       ],
-      providers: [NgxPermissionsService],
+      providers: [
+        NgxPermissionsService,
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: {
+              queryParamMap: {
+                get: () => '123',
+              },
+            },
+          },
+        },
+      ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -32,6 +46,8 @@ describe('ButtonsBlockComponent', () => {
   }));
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+      expect(component).toBeTruthy();
+
+
   });
 });

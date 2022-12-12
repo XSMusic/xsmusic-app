@@ -125,7 +125,7 @@ export const getTabByParam = (
   tabs: TabsItem[]
 ): TabsItem | null => {
   const tabItem = tabs.filter(
-    (tab) => tab.action === route.snapshot.queryParams['tab']
+    (tab) => tab.action === route.snapshot.queryParamMap.get('tab')
   )[0];
   return tabItem ? tabItem : null;
 };
@@ -134,8 +134,8 @@ export const getKeyValueByParam = (
   route: ActivatedRoute
 ): { key: 'name'; value: string } => {
   return {
-    key: route.snapshot.queryParams['fieldKey'],
-    value: route.snapshot.queryParams['fieldValue'],
+    key: route.snapshot.queryParamMap.get('fieldKey') as 'name',
+    value: route.snapshot.queryParamMap.get('fieldValue')!,
   };
 };
 

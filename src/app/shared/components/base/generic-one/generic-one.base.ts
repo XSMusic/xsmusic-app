@@ -90,8 +90,8 @@ export class GenericOneBase implements OnInit {
       this.bodyMediaSet.type = `${this.type}s`;
       this.bodyMediaTrack.type = `${this.type}s`;
     } else if (this.type === 'site') {
-      this.bodyEvents.type = `${this.subType}s`;
-      this.bodyMediaSet.type = `${this.subType}s`;
+      this.bodyEvents.type = `${this.type}`;
+      this.bodyMediaSet.type = `${this.type}`;
       this.bodyMediaTrack.type = `${this.subType}s`;
     }
   }

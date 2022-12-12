@@ -33,7 +33,7 @@
 
   <last-multi
     *ngIf="type !== 'event'"
-    [item]="type"
+    [item]="this[type]"
     [events]="events"
     [sets]="sets"
     [tracks]="tracks"

@@ -28,7 +28,6 @@ export const routesConfig: any = {
   festivals: '/festivals',
   festivalsAdmin: '/admin/sites/festivals',
   festivalsFilter: '/festivals?key=:filterKey&value=:filterValue',
-  github: '/admin/github',
   home: '/',
   imageAdminAdd: '/admin/images/one',
   imagesAdmin: '/admin/images',

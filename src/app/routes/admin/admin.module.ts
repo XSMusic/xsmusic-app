@@ -72,14 +72,6 @@ import { AdminTotalsComponent } from '../../shared/components/ui/totals/admin-to
           ),
       },
       {
-        path: 'github',
-        data: { breadcrumb: 'Github' },
-        loadChildren: () =>
-          import('./routes/github/admin-github.module').then(
-            (m) => m.AdminGithubModule
-          ),
-      },
-      {
         path: '**',
         pathMatch: 'full',
         loadChildren: () =>

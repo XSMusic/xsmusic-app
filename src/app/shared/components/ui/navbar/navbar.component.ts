@@ -75,7 +75,6 @@ export class NavbarComponent implements OnInit {
       { name: 'Imagenes', route: routesConfig.imagesAdmin },
       { name: 'Sets', route: routesConfig.setsAdmin },
       { name: 'Tracks', route: routesConfig.tracksAdmin },
-      { name: 'Github', route: routesConfig.github },
       { name: 'Volver', route: routesConfig.home },
     ];
   }

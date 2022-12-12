@@ -34,7 +34,6 @@ export class TabsComponent implements OnInit {
     | 'eventsAdmin'
     | 'eventsScraping'
     | 'eventAdmin'
-    | 'github'
     | 'sites'
     | 'siteAdmin'
     | 'sitesAdmin'

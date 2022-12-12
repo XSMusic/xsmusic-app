@@ -39,26 +39,6 @@ export const tabsByType = [
     buttons: genericTabs,
   },
   {
-    name: 'github',
-    buttons: [
-      new TabsItem({
-        name: 'Issues',
-        isActivatable: true,
-        action: 'viewIssues',
-      }),
-      new TabsItem({
-        name: 'Nueva',
-        isActivatable: true,
-        action: 'viewAdd',
-      }),
-      new TabsItem({
-        name: 'Actions',
-        isActivatable: true,
-        action: 'viewActions',
-      }),
-    ],
-  },
-  {
     name: 'events',
     buttons: [
       new TabsItem({

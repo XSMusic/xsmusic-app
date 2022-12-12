@@ -1,7 +1,6 @@
 export * from './artist/artist.service';
 export * from './event/event.service';
 export * from './geo/geo.service';
-export * from './github';
 export * from './image/image.service';
 export * from './media/media.service';
 export * from './scraping/scraping.service';

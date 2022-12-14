@@ -24,6 +24,6 @@ export class FullImageComponent {
   constructor(public fullImage: FullImageService) {}
 
   dismiss(): void {
-    this.fullImage.dismissImageFull();
+    this.fullImage.dismiss();
   }
 }

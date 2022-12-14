@@ -15,10 +15,7 @@ export class LastMultiItemsComponent implements OnInit {
   @Input() type!: 'set' | 'event' | 'track' | 'image';
   items: any[] = [];
 
-  constructor(
-    private router: Router,
-    private fullImageService: FullImageService
-  ) {}
+  constructor(private router: Router, private fullImage: FullImageService) {}
 
   ngOnInit() {
     if (this.type === 'set') {
@@ -42,6 +39,6 @@ export class LastMultiItemsComponent implements OnInit {
   }
 
   showFullImage(item: Image) {
-    this.fullImageService.showImageFull(item);
+    this.fullImage.show(item);
   }
 }

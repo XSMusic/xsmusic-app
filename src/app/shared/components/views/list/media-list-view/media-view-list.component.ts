@@ -21,7 +21,7 @@ export class MediaViewListComponent {
   constructor(private fullImage: FullImageService, private router: Router) {}
 
   showImage(image: Image) {
-    this.fullImage.showImageFull(image);
+    this.fullImage.show(image);
   }
 
   goToOne(slug: string) {

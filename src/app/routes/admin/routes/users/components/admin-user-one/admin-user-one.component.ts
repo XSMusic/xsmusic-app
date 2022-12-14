@@ -36,7 +36,7 @@ export class AdminUserOneComponent {
   ) {}
 
   showImage(image: Image) {
-    this.fullImage.showImageFull(image);
+    this.fullImage.show(image);
   }
 
   onSubmit() {

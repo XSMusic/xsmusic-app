@@ -147,7 +147,7 @@ export class AdminMediaOneComponent {
   }
 
   showImage(image: Image) {
-    this.fullImage.showImageFull(image);
+    this.fullImage.show(image);
   }
 
   goToMedia(slug: string) {

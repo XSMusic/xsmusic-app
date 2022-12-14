@@ -8,6 +8,9 @@ import {
   NgxPermissionsModule,
   NgxPermissionsService,
 } from 'ngx-permissions';
+import { Artist, Image, Media } from '@models';
+import { Router } from '@angular/router';
+import { routerMock } from 'app/testing/services.mock';
 
 describe('LastMultiItemsComponent', () => {
   let component: LastMultiItemsComponent;
@@ -21,7 +24,10 @@ describe('LastMultiItemsComponent', () => {
         BrowserAnimationsModule,
         NgxPermissionsModule.forRoot(),
       ],
-      providers: [NgxPermissionsService],
+      providers: [
+        NgxPermissionsService,
+        { provide: Router, useValue: routerMock },
+      ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -34,4 +40,52 @@ describe('LastMultiItemsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('type === set', () => {
+    component.type = 'set';
+    component.item = new Artist();
+    component.item.sets = [];
+    component.ngOnInit();
+    expect(component.items).toEqual([]);
+  });
+
+  it('type === track', () => {
+    component.type = 'track';
+    component.item = new Artist();
+    component.item.tracks = [];
+    component.ngOnInit();
+    expect(component.items).toEqual([]);
+  });
+
+  it('type === image', () => {
+    component.type = 'image';
+    component.item = new Artist();
+    component.item.images = [];
+    component.ngOnInit();
+    expect(component.items).toEqual([]);
+  });
+
+  describe('goTo', () => {
+    it('goTo -> set', () => {
+      component.type = 'set';
+      const media = new Media();
+      media.slug = 'perro';
+      component.goTo(media);
+      expect(routerMock.navigate).toHaveBeenCalled();
+    });
+
+    it('goTo -> track', () => {
+      component.type = 'track';
+      const media = new Media();
+      media.slug = 'perro';
+      component.goTo(media);
+      expect(routerMock.navigate).toHaveBeenCalled();
+    });
+  });
+
+  // it('showFullImage', () => {
+  //     const item = new Image();
+  //     component.showFullImage(item);
+  //     expect(fullImageServiceMock);
+  // })
 });

@@ -51,7 +51,7 @@ export class AdminEventOneComponent {
   ) {}
 
   showImage(image: Image) {
-    this.fullImage.showImageFull(image);
+    this.fullImage.show(image);
   }
 
   uploadImageByUrl(image: string) {

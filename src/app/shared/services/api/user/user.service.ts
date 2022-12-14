@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '@models';
-import { UserCreateFakeDto, UserGetAllDto } from './dtos/user.dto';
+import { UserGetAllDto } from './dtos/user.dto';
 import { Observable } from 'rxjs/internal/Observable';
 import { BehaviorSubject, share, take } from 'rxjs';
 import { LocalStorageService } from '@services';
@@ -29,12 +29,6 @@ export class UserService {
   create(data: User): Observable<MessageI> {
     return this.httpClient
       .post<MessageI>(`${this.url}/create`, data)
-      .pipe(take(1));
-  }
-
-  createFake(data: UserCreateFakeDto): Observable<{ message: string }> {
-    return this.httpClient
-      .post<{ message: string }>(`${this.url}/createFake`, data)
       .pipe(take(1));
   }
 

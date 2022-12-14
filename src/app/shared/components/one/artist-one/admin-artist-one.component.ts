@@ -125,7 +125,7 @@ export class AdminArtistOneComponent {
   }
 
   showImage(image: Image) {
-    this.fullImage.showImageFull(image);
+    this.fullImage.show(image);
   }
 
   showInfo(info: string) {

@@ -75,7 +75,6 @@ import { NgxPermissionsModule } from 'ngx-permissions';
 import {
   AngularSvgIconPreloaderService,
   ArtistService,
-  LeafletService,
   LocalStorageService,
   MediaService,
   NavigationService,

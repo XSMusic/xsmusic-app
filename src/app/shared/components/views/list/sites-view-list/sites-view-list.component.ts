@@ -21,7 +21,7 @@ export class SitesViewListComponent {
   constructor(private fullImage: FullImageService) {}
 
   showImage(image: Image) {
-    this.fullImage.showImageFull(image);
+    this.fullImage.show(image);
   }
 
   goToSocial(type: string) {

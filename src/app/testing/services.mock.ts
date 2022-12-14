@@ -1,17 +1,31 @@
-export const artistServiceMock = jasmine.createSpyObj('ArtistService', [
-  'getAll',
-]);
-export const siteServiceMock = jasmine.createSpyObj('SiteService', ['getAll']);
-export const eventServiceMock = jasmine.createSpyObj('EventService', [
-  'getAll',
-]);
-export const mediaServiceMock = jasmine.createSpyObj('MediaService', [
-  'getAll',
+import { getAllGeneric } from './services-helper.mock';
+
+export const artistServiceMock = {
+  getAll: () => getAllGeneric(),
+};
+
+export const siteServiceMock = {
+  getAll: () => getAllGeneric(),
+};
+
+export const mediaServiceMock = {
+  getAll: () => getAllGeneric(),
+};
+
+export const eventServiceMock = {
+  getAll: () => getAllGeneric(),
+};
+
+export const fullImageServiceMock = jasmine.createSpyObj('FullImageService', [
+  'show',
+  'dismiss',
 ]);
 
 export const gaServiceMock = jasmine.createSpyObj('GoogleAnalyticsService', [
   'event',
 ]);
+
+export const routerMock = jasmine.createSpyObj('Router', ['navigate']);
 
 export const svgIconRegistryServiceMock = jasmine.createSpyObj(
   'SvgIconRegistryService',

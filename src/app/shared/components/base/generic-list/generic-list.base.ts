@@ -26,11 +26,12 @@ import { Observable } from 'rxjs';
   animations: [inOutAnimation],
 })
 export class GenericListBase {
-  @Input() type!: 'artist' | 'event' | 'media' | 'site';
+  @Input() type!: 'artist' | 'event' | 'media' | 'site' | any;
   @Input() subType!: 'club' | 'festival' | 'set' | 'track';
   typeItems!: 'artists' | 'sites' | 'events' | 'medias';
   typeBody!: 'bodyArtist' | 'bodySite' | 'bodyEvent' | 'bodyMedia';
   typeTabs!: 'artists' | 'events' | 'sites' | 'media';
+  typeAdminRoute: any;
   title!: string;
   artists: Artist[] = [];
   sites: Site[] = [];
@@ -96,36 +97,45 @@ export class GenericListBase {
 
   ngOnInit() {
     if (this.type) {
-      this.setTitle();
-      this.setTypeTabs();
+      this.setDataByTypes();
       this.setTypeForGalleryView();
-      this.setServicesAndTypes();
       this.getFilter();
       this.getItems();
     }
   }
 
-  setTitle() {
+  setDataByTypes() {
     if (this.type === 'artist') {
       this.title = 'Artistas';
-    } else if (this.type === 'site') {
-      this.title = this.subType === 'club' ? 'Clubs' : 'Festivales';
+      this.typeTabs = 'artists';
+      this.typeAdminRoute = 'artist';
+      this.service = this.artistService.getAll(this.bodyArtist);
+      this.typeItems = 'artists';
+      this.typeBody = 'bodyArtist';
     } else if (this.type === 'event') {
       this.title = 'Eventos';
+      this.typeTabs = 'events';
+      this.typeAdminRoute = 'event';
+      this.service = this.eventService.getAll(this.bodyEvent);
+      this.typeItems = 'events';
+      this.typeBody = 'bodyEvent';
     } else if (this.type === 'media') {
       this.title = this.subType === 'set' ? 'Sets' : 'Tracks';
-    }
-  }
-
-  setTypeTabs() {
-    if (this.type === 'artist') {
-      this.typeTabs = 'artists';
-    } else if (this.type === 'event') {
-      this.typeTabs = 'events';
-    } else if (this.type === 'site') {
-      this.typeTabs = 'sites';
-    } else if (this.type === 'media') {
       this.typeTabs = 'media';
+      this.typeAdminRoute = this.subType === 'set' ? 'set' : 'track';
+      this.bodyMedia.type = this.subType;
+      this.service = this.mediaService.getAll(this.bodyMedia);
+      this.typeItems = 'medias';
+      this.typeBody = 'bodyMedia';
+    } else if (this.type === 'site') {
+      this.title = this.subType === 'club' ? 'Clubs' : 'Festivales';
+      this.typeTabs = 'sites';
+      this.typeAdminRoute = this.subType === 'club' ? 'club' : 'festival';
+      this.bodySite.type = this.subType;
+      this.service = this.siteService.getAll(this.bodySite);
+      this.typeItems = 'sites';
+      this.typeBody = 'bodySite';
+      this.getItemsMap();
     }
   }
 
@@ -144,29 +154,6 @@ export class GenericListBase {
       this.typeForGalleryView = this.subType;
     } else {
       this.typeForGalleryView = this.type;
-    }
-  }
-
-  setServicesAndTypes() {
-    if (this.type === 'site') {
-      this.bodySite.type = this.subType;
-      this.service = this.siteService.getAll(this.bodySite);
-      this.typeItems = 'sites';
-      this.typeBody = 'bodySite';
-      this.getItemsMap();
-    } else if (this.type === 'event') {
-      this.service = this.eventService.getAll(this.bodyEvent);
-      this.typeItems = 'events';
-      this.typeBody = 'bodyEvent';
-    } else if (this.type === 'media') {
-      this.bodyMedia.type = this.subType;
-      this.service = this.mediaService.getAll(this.bodyMedia);
-      this.typeItems = 'medias';
-      this.typeBody = 'bodyMedia';
-    } else {
-      this.service = this.artistService.getAll(this.bodyArtist);
-      this.typeItems = 'artists';
-      this.typeBody = 'bodyArtist';
     }
   }
 

@@ -53,6 +53,7 @@ import {
   AdminMediaAddSearchComponent,
   AdminMediaAddSearchItemsComponent,
   GenericListBase,
+  VideoYoutubeComponent,
 } from '@components';
 import {
   CountryFlagPipe,
@@ -142,6 +143,7 @@ const components = [
   AdminMediaAddSearchComponent,
   AdminMediaOneComponent,
   GenericListBase,
+  VideoYoutubeComponent,
 ];
 const directives = [OnImageErrorDirective];
 const modules = [

@@ -1,3 +1,5 @@
+export { VideoYoutubeComponent } from './ui/youtube/video-youtube.component';
+
 export { AdminMediaAddSearchItemsComponent } from './events/add-search-items/admin-media-add-search-items.component';
 export { AdminMediaAddSearchComponent } from './events/add-search/admin-media-add-search.component';
 export { AdminMediaOneComponent } from './events/one/admin-media-one.component';

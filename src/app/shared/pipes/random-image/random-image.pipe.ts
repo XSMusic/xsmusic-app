@@ -14,7 +14,7 @@ export class RandomImagePipe implements PipeTransform {
           images[randomNumber(images.length - 1, 0)].url
         }`;
       } else {
-        return `${environment.urls.images}/${images[0].url}`;
+        return 'assets/no-image.png';
       }
     } else {
       return 'assets/no-image.png';

@@ -243,7 +243,6 @@ export class GenericOneBase implements OnInit {
   }
 
   goToPage(data: GoToPageI) {
-    console.log(data);
     this.navigationService.goToPage(data);
   }
 }

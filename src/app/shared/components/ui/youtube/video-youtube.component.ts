@@ -37,7 +37,7 @@ export class VideoYoutubeComponent implements AfterViewInit, OnDestroy, OnInit {
   onResize = (): void => {
     this.width = Math.min(
       this.demoYouTubePlayer.nativeElement.clientWidth,
-      window.innerWidth!
+      window.innerWidth
     );
     this._changeDetectorRef.detectChanges();
   };

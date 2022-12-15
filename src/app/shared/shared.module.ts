@@ -53,7 +53,7 @@ import {
   AdminMediaAddSearchComponent,
   AdminMediaAddSearchItemsComponent,
   GenericListBase,
-  VideoYoutubeComponent,
+    VideoYoutubeComponent,
 } from '@components';
 import {
   CountryFlagPipe,
@@ -92,6 +92,7 @@ import { SwiperModule } from 'swiper/angular';
 import { InfiniteScrollModule } from './services/system/ngx-infinite-scroll/ngx-infinite-scroll.module';
 import { NgxSpinnerModule } from './services/system/ngx-spinner/ngx-spinner.module';
 import { YouTubePlayerModule } from '@angular/youtube-player';
+import { DynamicFormComponent, DynamicFormItemComponent } from './modules/dynamic-form';
 
 const components = [
   AlertComponent,
@@ -144,6 +145,8 @@ const components = [
   AdminMediaOneComponent,
   GenericListBase,
   VideoYoutubeComponent,
+  DynamicFormComponent,
+  DynamicFormItemComponent,
 ];
 const directives = [OnImageErrorDirective];
 const modules = [

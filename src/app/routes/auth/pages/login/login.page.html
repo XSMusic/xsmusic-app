@@ -7,29 +7,8 @@
       <img src="assets/images/login.svg" class="w-full" alt="Phone image" />
     </div>
     <div class="w-full px-1 md:w-8/12 lg:w-5/12 lg:ml-20">
-      <form>
-        <!-- Email input -->
-        <div class="mb-6">
-          <input
-            type="text"
-            name="email"
-            [(ngModel)]="email"
-            class="block w-full px-4 py-2 m-0 text-xl font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded-lg form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:border-gray-600 focus:outline-none"
-            placeholder="Email"
-          />
-        </div>
+      <!-- <form>
 
-        <!-- Password input -->
-        <div class="mb-6">
-          <input
-            type="password"
-            name="password"
-            [(ngModel)]="password"
-            autocomplete="on"
-            class="block w-full px-4 py-2 m-0 text-xl font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded-lg form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:border-border-600 focus:outline-none"
-            placeholder="Contraseña"
-          />
-        </div>
 
         <div class="flex items-center justify-between mb-6">
           <div class="form-group form-check"></div>
@@ -41,7 +20,6 @@
           </a>
         </div>
 
-        <!-- Submit button -->
         <button
           type="submit"
           (click)="loginEmail()"
@@ -70,7 +48,9 @@
           ></svg-icon>
           Entrar con Google
         </a>
-      </form>
+      </form> -->
+
+      <dynamic-form [items]="formItems$ | async" [submitButton]="{name: 'Entrar'}" (onSubmit)="loginEmail($event)"></dynamic-form>
     </div>
   </div>
 </div>

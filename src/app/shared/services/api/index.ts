@@ -8,3 +8,4 @@ export * from './site/site.service';
 export * from './stats/stats.service';
 export * from './style/style.service';
 export * from './user/user.service';
+export * from './dynamic-form/dynamic-form.service';

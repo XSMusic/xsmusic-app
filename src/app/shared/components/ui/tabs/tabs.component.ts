@@ -25,22 +25,7 @@ import { TabsItem } from './tabs.model';
   ],
 })
 export class TabsComponent implements OnInit {
-  @Input() type:
-    | 'generic'
-    | 'artists'
-    | 'artistsAdmin'
-    | 'artistAdmin'
-    | 'events'
-    | 'eventsAdmin'
-    | 'eventsScraping'
-    | 'eventAdmin'
-    | 'sites'
-    | 'siteAdmin'
-    | 'sitesAdmin'
-    | 'media'
-    | 'mediaAdmin'
-    | 'styles'
-    | 'styleAdmin' = 'generic';
+  @Input() type!: any;
   @Input() view = 'viewGallery';
   tabs: TabsItem[] = [];
   searchState = false;

@@ -1,0 +1,77 @@
+<ng-container *ngIf="!loading">
+  <ng-container *ngIf="items.length > 0">
+    <div @inOut class="my-2 overflow-x-auto scrollbar-hidden">
+      <table class="w-full whitespace-nowrap" aria-label="artist">
+        <tbody>
+          <tr
+            *ngFor="let item of items"
+            class="h-16 border-b border-gray-100 rounded-lg dark:border-black dark:border-0"
+          >
+            <td class="pl-3">
+              <p
+                class="my-1 mr-2 text-lg font-extrabold leading-none text-black cursor-pointer dark:text-white hover:text-gray-600"
+                (click)="
+                  goToPage.emit({
+                    type: 'artist',
+                    typeRoute: 'one',
+                    item: item
+                  })
+                "
+              >
+                {{ item.name }}
+              </p>
+            </td>
+            <td class="pl-3">
+              <div class="flex items-center">{{ item.info }}</div>
+            </td>
+
+            <td class="pl-3">
+              <div class="flex items-center">{{ item.items.length }} items</div>
+            </td>
+
+            <td class="pl-3" *ngxPermissionsOnly="'ADMIN'">
+              <div class="flex flex-col gap-2">
+                <div
+                  class="mr-2 text-sm font-light leading-none text-gray-700 dark:text-gray-300"
+                >
+                  <span class="font-extrabold">Creado:</span>
+                  {{ item.created! | timeAgo }}
+                </div>
+                <div
+                  class="mr-2 text-sm font-light leading-none text-gray-700 dark:text-gray-300"
+                >
+                  <span class="font-extrabold">Editado:</span>
+                  {{ item.updated! | timeAgo }}
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div
+      class="search-results"
+      infiniteScroll
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="50"
+      (scrolled)="onScroll.emit()"
+    ></div>
+  </ng-container>
+
+  <div class="mt-1" *ngIf="items.length === 0">
+    <alert
+      type="warning"
+      message="No hay formularios disponibles"
+      actionText="Quitar"
+    ></alert>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="loading">
+  <div class="w-full py-2">
+    <div
+      *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
+      class="relative h-24 my-4 overflow-hidden bg-gray-100 shadow-xl cursor-pointer dark:bg-black dark:border dark:border-gray-800 animate-pulse"
+    ></div>
+  </div>
+</ng-container>

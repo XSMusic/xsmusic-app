@@ -1,0 +1,50 @@
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+  <div *ngFor="let item of form?.items">
+    <label *ngIf="item.label !== ''">{{ item.label }}</label>
+    <input
+      *ngIf="
+        [
+          'text',
+          'password',
+          'email',
+          'number',
+          'search',
+          'tel',
+          'url'
+        ].includes(item.type)
+      "
+      [type]="item.type"
+      [formControlName]="item.name"
+      [value]="item.value"
+    >
+    <textarea
+      *ngIf="item.type === 'textarea'"
+      [formControlName]="item.name"
+      [value]="item.value"
+    ></textarea>
+    <!-- <ion-checkbox
+      *ngIf="control.type === 'checkbox'"
+      [formControlName]="control.name"
+      [checked]="control.value"
+    ></ion-checkbox>
+    <ion-toggle
+      *ngIf="control.type === 'toggle'"
+      [formControlName]="control.name"
+      [checked]="control.value"
+    ></ion-toggle>
+    <ion-range
+      *ngIf="control.type === 'range'"
+      [min]="control.options.min"
+      [max]="control.options.max"
+      [formControlName]="control.name"
+    >
+      <ion-icon
+        size="small"
+        slot="start"
+        [name]="control.options.icon"
+      ></ion-icon>
+      <ion-icon slot="end" [name]="control.options.icon"></ion-icon>
+    </ion-range> -->
+  </div>
+  <button type="submit">Enviar</button>
+</form>

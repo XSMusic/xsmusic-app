@@ -5,6 +5,7 @@ import {
   Router,
   UrlTree,
 } from '@angular/router';
+import { routesConfig } from '@core/config';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -22,6 +23,6 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   }
 
   private authenticate(): boolean | UrlTree {
-    return this.auth.check() ? true : this.router.parseUrl('/login');
+    return this.auth.check() ? true : this.router.parseUrl(routesConfig.login);
   }
 }

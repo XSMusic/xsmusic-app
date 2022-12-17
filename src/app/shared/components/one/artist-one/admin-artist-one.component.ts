@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
@@ -28,9 +28,10 @@ import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinn
   templateUrl: 'admin-artist-one.component.html',
   animations: [inOutAnimation],
 })
-export class AdminArtistOneComponent {
+export class AdminArtistOneComponent implements OnInit {
   @Input() artist: Artist = new Artist();
   @Input() styles: Style[] = [];
+  // formItems$!: Observable<DynamicFormBase<any>[]>;
   title!: string;
   countries = countries;
   scraping: any = {
@@ -52,7 +53,12 @@ export class AdminArtistOneComponent {
     private spinner: NgxSpinnerService,
     private imageService: ImageService,
     private validationsFormService: ValidationsFormService
-  ) {}
+  ) // private dinamicForm: DynamicFormService
+  {}
+
+  ngOnInit() {
+    // this.formItems$ = this.dinamicForm.getItems();
+  }
 
   onClickStyleScrapingItem(item: { name: string; _id: string }) {
     this.artist.styles?.push(item);

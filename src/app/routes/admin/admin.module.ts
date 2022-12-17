@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { AdminDashboardPage } from './routes/dashboard/admin-dashboard.page';
 import { SharedModule } from '@shared/shared.module';
 import { RouterModule } from '@angular/router';
-import { AdminTotalsComponent } from '../../shared/components/ui/totals/admin-totals.component';
+import { AdminTotalsComponent } from '@shared/components/ui/totals/admin-totals.component';
 
 @NgModule({
   imports: [
@@ -69,6 +69,14 @@ import { AdminTotalsComponent } from '../../shared/components/ui/totals/admin-to
         loadChildren: () =>
           import('./routes/users/admin-users.module').then(
             (m) => m.AdminUsersModule
+          ),
+      },
+      {
+        path: 'dynamic-forms',
+        data: { breadcrumb: 'Formularios' },
+        loadChildren: () =>
+          import('./routes/dynamic-forms/admin-dynamic-forms.module').then(
+            (m) => m.AdminDynamicFormsModule
           ),
       },
       {

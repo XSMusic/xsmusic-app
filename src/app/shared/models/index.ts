@@ -7,3 +7,5 @@ export * from './api/site.model';
 export * from './api/style.model';
 export * from './api/user.model';
 export * from './api/youtube.model';
+export * from './api/dynamic-form.model'
+export * from './api/dynamic-form-item.model'

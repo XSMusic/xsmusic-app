@@ -1,14 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '@core/auth';
 import { LoginEmailDto } from '@core/auth/login.dto';
 import { routesConfig } from '@core/config';
 import { ToastService, UserService } from '@services';
-import {
-  DynamicFormBase,
-  DynamicFormService,
-} from '@shared/modules/dynamic-form';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { Observable } from 'rxjs';
 
@@ -19,17 +14,17 @@ import { Observable } from 'rxjs';
 export class LoginPage implements OnInit {
   email!: string;
   password!: string;
-  formItems$!: Observable<DynamicFormBase<any>[]>;
+  // formItems$!: Observable<DynamicFormBase<any>[]>;
   constructor(
     private authService: AuthService,
     private router: Router,
     private toast: ToastService,
     private userService: UserService,
-    private dinamicForm: DynamicFormService
+    // private dinamicForm: DynamicFormService
   ) {}
 
   ngOnInit(): void {
-    this.formItems$ = this.dinamicForm.getQuestions();
+    // this.formItems$ = this.dinamicForm.getItems();
   }
 
   loginEmail(e: string) {
@@ -63,5 +58,14 @@ export class LoginPage implements OnInit {
 
   wip() {
     this.toast.showToast(TOAST_STATE.warning, 'En construccion...');
+  }
+
+  onSearch(e: any) {
+    const name = e.key;
+    const value = e.form.value[e.key];
+    if (value !== '') {
+      console.log(e.form.value);
+      console.log(name, value);
+    }
   }
 }

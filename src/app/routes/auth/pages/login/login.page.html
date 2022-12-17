@@ -50,7 +50,31 @@
         </a>
       </form> -->
 
-      <dynamic-form [items]="formItems$ | async" [submitButton]="{name: 'Entrar'}" (onSubmit)="loginEmail($event)"></dynamic-form>
+      <!-- <dynamic-form
+        [items]="formItems$ | async"
+        [submitButton]="{ name: 'Entrar' }"
+        type="login"
+        (onSubmit)="loginEmail($event)"
+      ></dynamic-form> -->
+
+      <div
+        class="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5"
+      >
+        <p class="mx-4 mb-0 font-semibold text-center dark:text-white">O</p>
+      </div>
+
+      <a
+        class="flex items-center justify-center w-full py-3 mb-3 text-sm font-medium leading-snug text-black uppercase transition duration-150 ease-in-out border rounded-lg shadow-md cursor-pointer before:bg-gray-300 px-7 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
+        style="background-color: #fff"
+        (click)="loginGoogle()"
+      >
+        <svg-icon
+          name="google-colors"
+          [svgStyle]="{ 'width.px': 18, 'height.px': 18 }"
+          class="pr-2 mr-2"
+        ></svg-icon>
+        Entrar con Google
+      </a>
     </div>
   </div>
 </div>

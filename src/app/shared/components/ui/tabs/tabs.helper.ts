@@ -31,12 +31,98 @@ export const tabsByType = [
     buttons: genericTabs,
   },
   {
+    name: 'artistAdmin',
+    buttons: [
+      new TabsItem({
+        name: 'Info',
+        isActivatable: true,
+        action: 'viewInfo',
+      }),
+      new TabsItem({
+        name: 'Opciones',
+        isActivatable: true,
+        action: 'viewOptions',
+      }),
+      new TabsItem({
+        name: 'Sesiones',
+        isActivatable: true,
+        action: 'viewSets',
+      }),
+      new TabsItem({
+        name: 'Tracks',
+        isActivatable: true,
+        action: 'viewTracks',
+      }),
+      new TabsItem({
+        name: 'Eventos',
+        isActivatable: true,
+        action: 'viewEvents',
+      }),
+    ],
+  },
+  {
     name: 'artists',
     buttons: genericTabs,
   },
   {
-    name: 'media',
-    buttons: genericTabs,
+    name: 'artistsAdmin',
+    buttons: [
+      new TabsItem({
+        name: 'Listado',
+        action: 'viewList',
+        isActivatable: true,
+      }),
+      new TabsItem({
+        name: 'Nuevo',
+        action: 'viewAdd',
+        isActivatable: true,
+      }),
+      new TabsItem({
+        name: 'Estadisticas',
+        action: 'viewStats',
+        isActivatable: true,
+      }),
+      new TabsItem({
+        name: 'Filtrar',
+        action: 'filter',
+        align: 'right',
+      }),
+      new TabsItem({
+        name: 'Buscar',
+        action: 'search',
+        align: 'right',
+      }),
+    ],
+  },
+  {
+    name: 'forms',
+    buttons: [
+      new TabsItem({
+        name: 'Listado',
+        action: 'viewList',
+        isActivatable: true,
+      }),
+      new TabsItem({
+        name: 'Nuevo',
+        action: 'viewAdd',
+        isActivatable: true,
+      }),
+    ],
+  },
+  {
+    name: 'eventAdmin',
+    buttons: [
+      new TabsItem({
+        name: 'Info',
+        isActivatable: true,
+        action: 'viewInfo',
+      }),
+      new TabsItem({
+        name: 'Opciones',
+        isActivatable: true,
+        action: 'viewOptions',
+      }),
+    ],
   },
   {
     name: 'events',
@@ -91,66 +177,6 @@ export const tabsByType = [
     ],
   },
   {
-    name: 'artistsAdmin',
-    buttons: [
-      new TabsItem({
-        name: 'Listado',
-        action: 'viewList',
-        isActivatable: true,
-      }),
-      new TabsItem({
-        name: 'Nuevo',
-        action: 'viewAdd',
-        isActivatable: true,
-      }),
-      new TabsItem({
-        name: 'Estadisticas',
-        action: 'viewStats',
-        isActivatable: true,
-      }),
-      new TabsItem({
-        name: 'Filtrar',
-        action: 'filter',
-        align: 'right',
-      }),
-      new TabsItem({
-        name: 'Buscar',
-        action: 'search',
-        align: 'right',
-      }),
-    ],
-  },
-  {
-    name: 'artistAdmin',
-    buttons: [
-      new TabsItem({
-        name: 'Info',
-        isActivatable: true,
-        action: 'viewInfo',
-      }),
-      new TabsItem({
-        name: 'Opciones',
-        isActivatable: true,
-        action: 'viewOptions',
-      }),
-      new TabsItem({
-        name: 'Sesiones',
-        isActivatable: true,
-        action: 'viewSets',
-      }),
-      new TabsItem({
-        name: 'Tracks',
-        isActivatable: true,
-        action: 'viewTracks',
-      }),
-      new TabsItem({
-        name: 'Eventos',
-        isActivatable: true,
-        action: 'viewEvents',
-      }),
-    ],
-  },
-  {
     name: 'eventsAdmin',
     buttons: [
       new TabsItem({
@@ -181,7 +207,36 @@ export const tabsByType = [
     ],
   },
   {
-    name: 'eventAdmin',
+    name: 'media',
+    buttons: genericTabs,
+  },
+  {
+    name: 'mediaAdmin',
+    buttons: [
+      new TabsItem({
+        name: 'Listado',
+        action: 'viewList',
+        isActivatable: true,
+      }),
+      new TabsItem({
+        name: 'Nuevo',
+        action: 'viewAdd',
+        isActivatable: true,
+      }),
+      new TabsItem({
+        name: 'Filtrar',
+        action: 'filter',
+        align: 'right',
+      }),
+      new TabsItem({
+        name: 'Buscar',
+        action: 'search',
+        align: 'right',
+      }),
+    ],
+  },
+  {
+    name: 'siteAdmin',
     buttons: [
       new TabsItem({
         name: 'Info',
@@ -192,6 +247,16 @@ export const tabsByType = [
         name: 'Opciones',
         isActivatable: true,
         action: 'viewOptions',
+      }),
+      new TabsItem({
+        name: 'Eventos',
+        isActivatable: true,
+        action: 'viewEvents',
+      }),
+      new TabsItem({
+        name: 'Sets',
+        isActivatable: true,
+        action: 'viewSets',
       }),
     ],
   },
@@ -255,56 +320,7 @@ export const tabsByType = [
       }),
     ],
   },
-  {
-    name: 'siteAdmin',
-    buttons: [
-      new TabsItem({
-        name: 'Info',
-        isActivatable: true,
-        action: 'viewInfo',
-      }),
-      new TabsItem({
-        name: 'Opciones',
-        isActivatable: true,
-        action: 'viewOptions',
-      }),
-      new TabsItem({
-        name: 'Eventos',
-        isActivatable: true,
-        action: 'viewEvents',
-      }),
-      new TabsItem({
-        name: 'Sets',
-        isActivatable: true,
-        action: 'viewSets',
-      }),
-    ],
-  },
-  {
-    name: 'mediaAdmin',
-    buttons: [
-      new TabsItem({
-        name: 'Listado',
-        action: 'viewList',
-        isActivatable: true,
-      }),
-      new TabsItem({
-        name: 'Nuevo',
-        action: 'viewAdd',
-        isActivatable: true,
-      }),
-      new TabsItem({
-        name: 'Filtrar',
-        action: 'filter',
-        align: 'right',
-      }),
-      new TabsItem({
-        name: 'Buscar',
-        action: 'search',
-        align: 'right',
-      }),
-    ],
-  },
+
   {
     name: 'styles',
     buttons: [

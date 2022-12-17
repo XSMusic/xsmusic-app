@@ -1,0 +1,9 @@
+<header-custom [title]="'Formularios'"></header-custom>
+
+<div class="container px-4 pt-3 mx-auto max-w-full-xl sm:pb-0 max-w-7sm">
+  <tabs type="forms" (onClickTab)="onClickTab($event)"></tabs>
+
+  <ng-container *ngIf="view === 'viewList'">
+    <dynamic-forms-view-list [items]="forms" [loading]="false"></dynamic-forms-view-list>
+  </ng-container>
+</div>

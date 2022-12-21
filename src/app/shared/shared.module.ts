@@ -54,6 +54,7 @@ import {
   AdminMediaAddSearchItemsComponent,
   GenericListBase,
   VideoYoutubeComponent,
+  AdminEventsScrapingSiteComponent,
 } from '@components';
 import {
   CountryFlagPipe,
@@ -142,6 +143,7 @@ const components = [
   AdminMediaAddSearchItemsComponent,
   AdminMediaAddSearchComponent,
   AdminMediaOneComponent,
+  AdminEventsScrapingSiteComponent,
   GenericListBase,
   VideoYoutubeComponent,
 ];

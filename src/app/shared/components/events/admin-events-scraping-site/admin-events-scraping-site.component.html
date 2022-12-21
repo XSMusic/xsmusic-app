@@ -1,0 +1,10 @@
+
+<ng-container *ngIf="items">
+  <generic-view-gallery
+    [items]="items"
+    [type]="'eventScraping'"
+    [loading]="false"
+    (goToPage)="addEventConfirmation($event)"
+    (discartEvent)="discartEvent($event)"
+  ></generic-view-gallery>
+ </ng-container>

@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import {
+  IdDto,
   ScrapingGetInfoArtistResponse,
   ScrapingGetInfoClubResponse,
 } from '@interfaces';
 import { Youtube } from '@models';
 import { Observable } from 'rxjs';
 import { ScrapingSoundcloudSearchI } from './scraping-soundcloud-search.interface';
-import { ScrapingEventsI, ScrapingSourceI } from './scraping-source.interface';
+import { ScrapingEventI, ScrapingEventsI, ScrapingSourceI } from './scraping-source.interface';
 import { ScrapingSearchNameYoutubeI } from './scraping-youtube-search.interface';
 import {
   ScrapingGetInfoArtistDto,
@@ -76,6 +77,13 @@ export class ScrapingService {
   getListEvents(body: ScrapingGetListEventsDto): Observable<ScrapingEventsI> {
     return this.httpClient.post<ScrapingEventsI>(
       `${this.url}/getListEvents`,
+      body
+    );
+  }
+
+  getEventsBySiteId(body: IdDto): Observable<ScrapingEventI[]> {
+    return this.httpClient.post<ScrapingEventI[]>(
+      `${this.url}/getEventsBySiteId`,
       body
     );
   }

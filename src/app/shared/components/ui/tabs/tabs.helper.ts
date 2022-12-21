@@ -269,6 +269,11 @@ export const tabsByType = [
         action: 'viewOptions',
       }),
       new TabsItem({
+        name: 'Scraping Event',
+        isActivatable: true,
+        action: 'viewScrapingEvent',
+      }),
+      new TabsItem({
         name: 'Eventos',
         isActivatable: true,
         action: 'viewEvents',

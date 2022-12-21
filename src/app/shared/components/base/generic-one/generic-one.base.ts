@@ -211,7 +211,11 @@ export class GenericOneBase implements OnInit {
         });
       }
     }
-    if (this.type === 'event') {
+    if (
+      this.type === 'event' &&
+      this.event.artists &&
+      this.event.artists!.length > 0
+    ) {
       this.views.push({
         name: 'Artistas',
         value: 'artist',

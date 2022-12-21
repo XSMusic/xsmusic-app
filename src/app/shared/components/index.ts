@@ -1,10 +1,10 @@
 export { VideoYoutubeComponent } from './ui/youtube/video-youtube.component';
 
+export { AdminEventsScrapingSiteComponent } from './events/admin-events-scraping-site/admin-events-scraping-site.component';
 export { AdminMediaAddSearchItemsComponent } from './events/add-search-items/admin-media-add-search-items.component';
 export { AdminMediaAddSearchComponent } from './events/add-search/admin-media-add-search.component';
 export { AdminMediaOneComponent } from './events/one/admin-media-one.component';
 export { AdminEventsScrapingComponent } from './events/admin-events-scraping/admin-events-scraping.component';
-
 export { AdminArtistOneComponent } from './one/artist-one/admin-artist-one.component';
 export { AdminSiteOneComponent } from './one/admin-site-one/admin-site-one.component';
 export { GenericAdminListBase } from './base/generic-admin-list/generic-admin-list.base';

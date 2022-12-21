@@ -16,6 +16,10 @@
     ></options-items>
   </div>
 
+  <ng-container *ngIf="view === 'viewScrapingEvent' && site">
+    <admin-events-scraping-site [id]="site._id!"></admin-events-scraping-site>
+  </ng-container>
+
   <ng-container *ngIf="view === 'viewEvents'">
     <events-view-list
       [items]="events"

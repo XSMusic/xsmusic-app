@@ -11,12 +11,12 @@ export class ImagesUploadUrlComponent {
   @Input() image = '';
   @Input() imageState = false;
   @Input() scraping: any;
-  @Output() showImage = new EventEmitter<Image>();
+  @Output() showImage = new EventEmitter<{ image: Image; remote: true }>();
   @Output() uploadImageByUrl = new EventEmitter<string>();
 
   showImageUrl(url: string) {
     const image = new Image();
     image.url = url;
-    this.showImage.emit(image);
+    this.showImage.emit({ image, remote: true });
   }
 }

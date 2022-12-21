@@ -3,7 +3,7 @@
     <div class="col-span-2 md:col-span-1">
       <images-edit-block
         [item]="site"
-        (showImage)="showImage($event)"
+        (showImage)="showImage({ image: $event, remote: false })"
         (removeImage)="removeImage($event)"
         (setFirstImage)="setFirstImage($event)"
         (toggleAddImage)="imageState = !imageState"

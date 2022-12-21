@@ -69,8 +69,8 @@ export class AdminSiteOneComponent implements OnInit {
     }
   }
 
-  showImage(image: Image) {
-    this.fullImage.show(image);
+  showImage(data: { image: Image; remote: boolean }) {
+    this.fullImage.show(data.image, data.remote);
   }
 
   onClickStyleItem(item: { name: string; _id: string }) {

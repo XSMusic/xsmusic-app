@@ -146,8 +146,8 @@ export class AdminMediaOneComponent {
     });
   }
 
-  showImage(image: Image) {
-    this.fullImage.show(image);
+  showImage(data: { image: Image; remote: boolean }) {
+    this.fullImage.show(data.image, data.remote);
   }
 
   goToMedia(slug: string) {

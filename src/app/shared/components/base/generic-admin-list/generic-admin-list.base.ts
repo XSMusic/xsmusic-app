@@ -62,6 +62,7 @@ export class GenericAdminListBase {
     page: 1,
     pageSize: 20,
     order: ['date', 'asc'],
+    filter: []
   };
   bodyMedia: GetAllDto = {
     page: 1,

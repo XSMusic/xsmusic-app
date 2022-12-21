@@ -10,10 +10,14 @@ export class FullImageService {
   );
   public imageFull$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  show(image: Image) {
-    this.imageFull$.next(
-      `${environment.urls.images}/${image.type}s/big/${image.url}`
-    );
+  show(image: Image, remote = false) {
+    if (!remote) {
+      this.imageFull$.next(
+        `${environment.urls.images}/${image.type}s/big/${image.url}`
+      );
+    } else {
+      this.imageFull$.next(image.url!);
+    }
     this.showFull$.next(true);
   }
 

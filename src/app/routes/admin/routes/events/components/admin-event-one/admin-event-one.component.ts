@@ -50,8 +50,8 @@ export class AdminEventOneComponent {
     private modal: ModalService
   ) {}
 
-  showImage(image: Image) {
-    this.fullImage.show(image);
+  showImage(data: { image: Image; remote: boolean }) {
+    this.fullImage.show(data.image, data.remote);
   }
 
   uploadImageByUrl(image: string) {

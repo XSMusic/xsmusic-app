@@ -37,7 +37,7 @@
     <div class="flex" *ngFor="let img of scraping.images">
       <div class="w-12 h-12">
         <img
-          (click)="showImage.emit(img)"
+          (click)="showImageUrl(img)"
           [src]="img"
           class="object-cover w-full h-12 cursor-pointer rounded-l-md"
           alt=""

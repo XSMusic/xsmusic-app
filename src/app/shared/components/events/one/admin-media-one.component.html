@@ -2,7 +2,7 @@
   <div class="col-span-2 mb-1 md:col-span-2">
     <images-edit-block
       [item]="media"
-      (showImage)="showImage($event)"
+      (showImage)="showImage({ image: $event, remote: false })"
       (removeImage)="removeImage($event)"
       (setFirstImage)="setFirstImage($event)"
       (toggleAddImage)="imageState = !imageState"

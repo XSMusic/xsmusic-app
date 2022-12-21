@@ -124,8 +124,8 @@ export class AdminArtistOneComponent {
     }
   }
 
-  showImage(image: Image) {
-    this.fullImage.show(image);
+  showImage(data: { image: Image; remote: boolean }) {
+    this.fullImage.show(data.image, data.remote);
   }
 
   showInfo(info: string) {

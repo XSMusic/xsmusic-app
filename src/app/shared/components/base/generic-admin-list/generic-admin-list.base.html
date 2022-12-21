@@ -117,8 +117,30 @@
     class="grid gap-2 mt-2 md:gap-4 md:grid-cols-3"
     *ngIf="view === 'viewStats'"
   >
-    <block-stats type="topSocial" [items]="stats.topSocial"></block-stats>
-    <block-stats type="topCountries" [items]="stats.topCountries"></block-stats>
-    <block-stats type="topStyles" [items]="stats.topStyles"></block-stats>
+    <block-stats
+      *ngIf="stats.topSocial && stats.topSocial.length > 0"
+      type="topSocial"
+      [items]="stats.topSocial"
+    ></block-stats>
+    <block-stats
+      *ngIf="stats.topCountries && stats.topCountries.length > 0"
+      type="topCountries"
+      [items]="stats.topCountries"
+    ></block-stats>
+    <block-stats
+      *ngIf="stats.topStates && stats.topStates.length > 0"
+      type="topStates"
+      [items]="stats.topStates"
+    ></block-stats>
+    <block-stats
+      *ngIf="stats.topStyles && stats.topStyles.length > 0"
+      type="topStyles"
+      [items]="stats.topStyles"
+    ></block-stats>
+    <block-stats
+      *ngIf="stats.topVarious && stats.topVarious.length > 0"
+      type="topVarious"
+      [items]="stats.topVarious"
+    ></block-stats>
   </div>
 </div>

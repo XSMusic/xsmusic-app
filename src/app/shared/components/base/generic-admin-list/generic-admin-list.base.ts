@@ -62,7 +62,7 @@ export class GenericAdminListBase {
     page: 1,
     pageSize: 20,
     order: ['date', 'asc'],
-    filter: []
+    filter: [],
   };
   bodyMedia: GetAllDto = {
     page: 1,
@@ -176,13 +176,18 @@ export class GenericAdminListBase {
   }
 
   getStats() {
-    if (this.type !== 'event' && this.type !== 'media') {
-      const type =
-        this.type === 'artist'
-          ? 'artist'
-          : this.subType === 'club'
-          ? 'club'
-          : 'festival';
+    if (this.type !== 'media') {
+      let type = '';
+
+      if (this.type === 'artist') {
+        type = 'artist';
+      } else if (this.type === 'event') {
+        type = 'event';
+      } else if (this.subType === 'club') {
+        type = 'club';
+      } else if (this.subType === 'festival') {
+        type = 'festival';
+      }
       this.statsService.getTopStats({ type: type, limit: 10 }).subscribe({
         next: (response) => {
           this.stats = response;

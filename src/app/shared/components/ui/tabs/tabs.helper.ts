@@ -168,11 +168,11 @@ export const tabsByType = [
         action: 'viewScraping',
         isActivatable: true,
       }),
-      // new ButtonBlockItem({
-      //   name: 'Filtrar',
-      //   action: 'filter',
-      //   align: 'right',
-      // }),
+      new TabsItem({
+        name: 'Estadisticas',
+        action: 'viewStats',
+        isActivatable: true,
+      }),
       new TabsItem({
         name: 'Buscar',
         action: 'search',

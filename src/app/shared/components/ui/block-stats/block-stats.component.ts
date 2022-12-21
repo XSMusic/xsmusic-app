@@ -5,7 +5,12 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: 'block-stats.component.html',
 })
 export class BlockStatsComponent implements OnInit {
-  @Input() type!: 'topCountries' | 'topSocial' | 'topStyles';
+  @Input() type!:
+    | 'topCountries'
+    | 'topSocial'
+    | 'topStates'
+    | 'topStyles'
+    | 'topVarious';
   @Input() items!: any;
   title = '';
 
@@ -16,6 +21,10 @@ export class BlockStatsComponent implements OnInit {
       this.title = 'Top Redes sociales';
     } else if (this.type === 'topStyles') {
       this.title = 'Top Estilos';
+    } else if (this.type === 'topStates') {
+      this.title = 'Top Comunidades';
+    } else if (this.type === 'topVarious') {
+      this.title = 'Varios';
     }
   }
 }

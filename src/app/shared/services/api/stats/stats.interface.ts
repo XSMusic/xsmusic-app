@@ -2,7 +2,8 @@ export interface StatsGetTopStatsI {
   topSocial: StatsTopSocialI[];
   topCountries: StatsTopSocialI[];
   topStyles?: StatsTopSocialI[];
-  various?: StatsTopSocialI[];
+  topStates?: StatsTopSocialI[];
+  topVarious?: StatsTopSocialI[];
 }
 
 export interface StatsTopSocialI {

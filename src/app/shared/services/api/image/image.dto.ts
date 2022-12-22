@@ -1,12 +1,10 @@
 export interface ImageUploadDto {
-  type: string;
+  type: 'artist' | 'event' | 'media' | 'site' | 'user';
   id: string;
 }
 
-export interface ImageUploadByUrlDto {
-  id: string;
+export interface ImageUploadByUrlDto extends ImageUploadDto {
   url: string;
-  type: 'artist' | 'event' | 'media' | 'site' | 'user';
 }
 
 export interface ImageSetFirstImageDto {

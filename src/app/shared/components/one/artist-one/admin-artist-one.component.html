@@ -10,7 +10,7 @@
       ></images-edit-block>
     </div>
 
-    <div class="col-span-4 md:col-span-2">
+    <div class="col-span-4 gap-4 md:col-span-2">
       <div class="col-span-2 md:col-span-2">
         <label
           for="name"
@@ -103,7 +103,10 @@
         <search-input type="style" [item]="artist"></search-input>
       </div>
     </div>
-    <div class="col-span-2 md:col-span-4">
+  </div>
+
+  <div class="grid grid-cols-1 gap-4 mt-1 lg:grid-cols-4">
+    <div class="col-span-4 md:col-span-4">
       <images-upload-url
         [imageState]="imageState"
         [image]="image"
@@ -112,9 +115,7 @@
         [scraping]="scraping"
       ></images-upload-url>
     </div>
-  </div>
 
-  <div class="grid grid-cols-1 gap-4 mt-1 lg:grid-cols-4">
     <div class="col-span-4">
       <social-inputs type="artist" [item]="artist"></social-inputs>
     </div>

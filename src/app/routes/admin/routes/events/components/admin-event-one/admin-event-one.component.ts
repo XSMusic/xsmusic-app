@@ -14,6 +14,7 @@ import {
 import {
   ImageSetFirstImageDto,
   ImageUploadByUrlDto,
+  ImageUploadDto,
 } from '@shared/services/api/image/image.dto';
 import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
@@ -38,7 +39,8 @@ export class AdminEventOneComponent {
   ];
   image = '';
   imageState = false;
-  tempImages: string[] = [];
+  tempImagesByUrl: string[] = [];
+  tempImagesByFile: File[] = [];
   constructor(
     private eventService: EventService,
     private fullImage: FullImageService,
@@ -54,6 +56,39 @@ export class AdminEventOneComponent {
     this.fullImage.show(data.image, data.remote);
   }
 
+  uploadImageByFile(image: File) {
+    const temp = this.event._id ? false : true;
+    const data: ImageUploadDto = {
+      type: 'event',
+      id: this.event._id!,
+    };
+    if (!temp) {
+      this.uploadImageByFileNormal(data, image);
+    } else {
+      this.uploadImageByFileTemp(image);
+    }
+  }
+
+  private uploadImageByFileNormal(data: ImageUploadDto, image: File) {
+    this.spinner.show();
+    this.imageService.upload(data, image).subscribe({
+      next: (response) => {
+        setTimeout(() => {
+          this.event.images?.push(response);
+          this.spinner.hide();
+        }, 1000);
+      },
+      error: (error) => {
+        this.spinner.hide();
+        this.toastService.showToast(TOAST_STATE.error, error);
+      },
+    });
+  }
+
+  private uploadImageByFileTemp(image: File) {
+    this.tempImagesByFile.push(image);
+  }
+
   uploadImageByUrl(image: string) {
     const temp = this.event._id ? false : true;
     const data: ImageUploadByUrlDto = {
@@ -62,38 +97,36 @@ export class AdminEventOneComponent {
       url: image,
     };
     if (!temp) {
-      this.uploadImageByUrlNormal(data, temp);
+      this.uploadImageByUrlNormal(data);
     } else {
       this.uploadImageByUrlTemp(image);
     }
   }
 
-  private uploadImageByUrlTemp(image: string) {
-    this.tempImages.push(image);
-    if (this.scraping.images && this.scraping.images.length > 0) {
-      this.scraping.images = this.scraping.images.filter(
-        (img: string) => img !== image
-      );
-    }
-  }
-
-  private uploadImageByUrlNormal(data: ImageUploadByUrlDto, temp: boolean) {
+  private uploadImageByUrlNormal(data: ImageUploadByUrlDto) {
     this.spinner.show();
     this.imageService.uploadByUrl(data).subscribe({
       next: (response) => {
-        if (!temp) {
-          setTimeout(() => {
-            this.event.images?.push(response);
-            this.image = '';
-            this.spinner.hide();
-          }, 1000);
-        }
+        setTimeout(() => {
+          this.event.images?.push(response);
+          this.image = '';
+          this.spinner.hide();
+        }, 1000);
       },
       error: (error) => {
         this.spinner.hide();
         this.toastService.showToast(TOAST_STATE.error, error);
       },
     });
+  }
+
+  private uploadImageByUrlTemp(image: string) {
+    this.tempImagesByUrl.push(image);
+    if (this.scraping.images && this.scraping.images.length > 0) {
+      this.scraping.images = this.scraping.images.filter(
+        (img: string) => img !== image
+      );
+    }
   }
 
   removeImage(img: Image) {
@@ -140,7 +173,7 @@ export class AdminEventOneComponent {
         state: false,
         message: 'Minimo un estilo',
       };
-    } else if (!this.event._id && this.tempImages.length === 0) {
+    } else if (!this.event._id && this.tempImagesByUrl.length === 0) {
       return {
         state: false,
         message: 'La imagen es obligatoria',
@@ -157,7 +190,7 @@ export class AdminEventOneComponent {
     const validation = this.validationsFormService.validation(
       'event',
       this.event,
-      this.tempImages
+      this.tempImagesByUrl
     );
     if (validation.state) {
       if (this.event._id) {
@@ -185,8 +218,11 @@ export class AdminEventOneComponent {
 
   async onSuccessCreate(response: Event) {
     this.event._id = response._id;
-    for (const image of this.tempImages) {
-      this.uploadImageByUrl(image);
+    for (const imageUrl of this.tempImagesByUrl) {
+      this.uploadImageByUrl(imageUrl);
+    }
+    for (const imageFile of this.tempImagesByFile) {
+      this.uploadImageByFile(imageFile);
     }
     setTimeout(() => {
       this.toastService.showToast(TOAST_STATE.success, 'Sitio creado');

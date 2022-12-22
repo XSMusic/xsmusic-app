@@ -13,10 +13,17 @@ export class ImagesUploadUrlComponent {
   @Input() scraping: any;
   @Output() showImage = new EventEmitter<{ image: Image; remote: true }>();
   @Output() uploadImageByUrl = new EventEmitter<string>();
+  @Output() uploadImageByFile = new EventEmitter<File>();
+  loading = false; // Flag variable
+  file!: File;
 
   showImageUrl(url: string) {
     const image = new Image();
     image.url = url;
     this.showImage.emit({ image, remote: true });
+  }
+
+  onChange(event: any) {
+    this.file = event.target.files[0];
   }
 }

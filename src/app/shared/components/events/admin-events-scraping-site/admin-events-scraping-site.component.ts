@@ -74,9 +74,7 @@ export class AdminEventsScrapingSiteComponent implements OnInit {
         };
         this.imageService.uploadByUrl(data).subscribe({
           next: () => {
-            this.items = this.items.filter(
-              (itemC) => itemC.name !== item.name
-            );
+            this.items = this.items.filter((itemC) => itemC.name !== item.name);
             this.onEventCreated.emit();
             this.toast.showToast(
               TOAST_STATE.success,
@@ -98,8 +96,6 @@ export class AdminEventsScrapingSiteComponent implements OnInit {
       })
       .subscribe();
 
-    this.items = this.items.filter(
-      (item) => item !== value
-    );
+    this.items = this.items.filter((item) => item !== value);
   }
 }

@@ -22,7 +22,7 @@ export class Site {
     youtube: '',
     instagram: '',
     email: '',
-    ra: ''
+    ra: '',
   };
   distance?: number;
   sets?: any;

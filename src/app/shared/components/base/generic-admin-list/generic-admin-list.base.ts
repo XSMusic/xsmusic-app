@@ -19,8 +19,8 @@ import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { EventGetAllDto } from '@shared/services/api/event/event.dto';
 import { SiteGetAllDto } from '@shared/services/api/site/site.dto';
 import { StatsGetTopStatsI } from '@shared/services/api/stats/stats.interface';
+import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinner.service';
 import { Observable } from 'rxjs';
-import { NgxSpinnerService } from '../../../services/system/ngx-spinner/ngx-spinner.service';
 
 @Component({
   selector: 'generic-admin-list-base',

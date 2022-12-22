@@ -170,7 +170,9 @@ export class GenericOneBase implements OnInit {
     const typeRoute = this.type === 'site' ? this.subType : this.type;
     const meta: MetadataI = {
       title: title,
-      image: `${environment.urls.images}/${this[this.type].images![0].url}`,
+      image: `${environment.urls.images}/${this.type}s/big/${
+        this[this.type].images![0].url
+      }`,
       url: `${environment.urls.app}${routesConfig[typeRoute].replace(
         ':slug',
         this[this.type].slug!

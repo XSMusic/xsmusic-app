@@ -9,7 +9,11 @@ import {
 import { Youtube } from '@models';
 import { Observable } from 'rxjs';
 import { ScrapingSoundcloudSearchI } from './scraping-soundcloud-search.interface';
-import { ScrapingEventI, ScrapingEventsI, ScrapingSourceI } from './scraping-source.interface';
+import {
+  ScrapingEventI,
+  ScrapingEventsI,
+  ScrapingSourceI,
+} from './scraping-source.interface';
 import { ScrapingSearchNameYoutubeI } from './scraping-youtube-search.interface';
 import {
   ScrapingGetInfoArtistDto,

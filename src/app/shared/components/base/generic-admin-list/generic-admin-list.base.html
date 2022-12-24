@@ -1,14 +1,14 @@
 <header-custom
-  [title]="title"
-  [total]="total"
+  [title]="vm.title"
+  [total]="vm.total"
   (onClickTitle)="goToPage({admin: false, typeRoute: 'all'})"
 ></header-custom>
 
 <div class="container px-4 pt-3 mx-auto max-w-full-xl sm:pb-0 max-w-7sm">
   <tabs
-    *ngIf="typeTabs"
-    [type]="typeTabs"
-    [view]="view"
+    *ngIf="vm.typeTabs"
+    [type]="vm.typeTabs"
+    [view]="vm.view"
     (search)="onSearch($event)"
     (onFilter)="onFilter($event)"
     (onClickTab)="onClickTab($event)"
@@ -19,14 +19,14 @@
     message="Filtro activado."
     actionText="Quitar"
     (action)="removeFilter()"
-    *ngIf="filter"
+    *ngIf="vm.filter"
   ></alert>
 
   <ng-container *ngIf="type === 'artist'">
     <artists-view-list
-      *ngIf="view === 'viewList'"
-      [artists]="artists"
-      [loading]="loading"
+      *ngIf="vm.view === 'viewList'"
+      [artists]="vm.artists"
+      [loading]="vm.loading"
       (goToPage)="goToPage($event)"
       (filter)="onFilter($event)"
       (onScroll)="onScroll()"
@@ -34,24 +34,24 @@
     </artists-view-list>
 
     <admin-artist-one
-      *ngIf="view === 'viewAdd'"
-      [artist]="artist"
+      *ngIf="vm.view === 'viewAdd'"
+      [artist]="vm.artist"
       (onCreated)="onCreated()"
     ></admin-artist-one>
   </ng-container>
 
   <ng-container *ngIf="type === 'event'">
     <events-view-list
-      *ngIf="view === 'viewList'"
-      [items]="events"
-      [loading]="loading"
+      *ngIf="vm.view === 'viewList'"
+      [items]="vm.events"
+      [loading]="vm.loading"
       (goToPage)="goToPage($event)"
       (filter)="onFilter($event)"
       (onScroll)="onScroll()"
     >
     </events-view-list>
 
-    <ng-container *ngIf="view === 'viewScraping'">
+    <ng-container *ngIf="vm.view === 'viewScraping'">
       <admin-events-scraping
         (onEventCreated)="reloadItems()"
       ></admin-events-scraping>
@@ -60,9 +60,9 @@
 
   <ng-container *ngIf="type === 'site'">
     <sites-view-list
-      *ngIf="view === 'viewList'"
-      [sites]="sites"
-      [loading]="loading"
+      *ngIf="vm.view === 'viewList'"
+      [sites]="vm.sites"
+      [loading]="vm.loading"
       subType="clubs"
       (goToPage)="goToPage($event)"
       (filter)="onFilter($event)"
@@ -70,8 +70,8 @@
     ></sites-view-list>
 
     <admin-site-one
-      *ngIf="view === 'viewAdd'"
-      [site]="site"
+      *ngIf="vm.view === 'viewAdd'"
+      [site]="vm.site"
       [type]="subType === 'club' ? 'club' : 'festival'"
       (onCreated)="onCreated()"
     ></admin-site-one>
@@ -79,35 +79,35 @@
 
   <ng-container *ngIf="type === 'media'">
     <media-view-list
-      *ngIf="view === 'viewList'"
-      [media]="medias"
-      [loading]="loading"
+      *ngIf="vm.view === 'viewList'"
+      [media]="vm.medias"
+      [loading]="vm.loading"
       [type]="subType === 'set' ? 'set' : 'track'"
       (goToPage)="goToPage($event)"
       (filter)="onFilter($event)"
       (onScroll)="onScroll()"
     ></media-view-list>
 
-    <ng-container *ngIf="view === 'viewAdd'">
+    <ng-container *ngIf="vm.view === 'viewAdd'">
       <admin-media-add-search
-        [source]="mediaSource"
-        [searchText]="searchText"
-        (onChangeSource)="mediaSource = $event"
+        [source]="vm.mediaSource"
+        [searchText]="vm.searchText"
+        (onChangeSource)="vm.mediaSource = $event"
         (search)="searchAdd($event)"
       ></admin-media-add-search>
 
-      <div *ngIf="media?.name === ''">
+      <div *ngIf="vm.media?.name === ''">
         <admin-media-add-search-items
-          [items]="itemsSearch"
-          [itemSelected]="scrapingItemSelected!"
+          [items]="vm.itemsSearch"
+          [itemSelected]="vm.scrapingItemSelected!"
           (selectItem)="selectItem($event)"
         ></admin-media-add-search-items>
       </div>
 
       <admin-media-one
-        *ngIf="media?.name !== ''"
-        [media]="media"
-        [scraping]="scraping"
+        *ngIf="vm.media?.name !== ''"
+        [media]="vm.media"
+        [scraping]="vm.scraping"
         (onSubmitSuccess)="onCreated()"
       ></admin-media-one>
     </ng-container>
@@ -115,32 +115,32 @@
 
   <div
     class="grid gap-2 mt-2 md:gap-4 md:grid-cols-3"
-    *ngIf="view === 'viewStats'"
+    *ngIf="vm.view === 'viewStats'"
   >
     <block-stats
-      *ngIf="stats.topSocial && stats.topSocial.length > 0"
+      *ngIf="vm.stats.topSocial && vm.stats.topSocial.length > 0"
       type="topSocial"
-      [items]="stats.topSocial"
+      [items]="vm.stats.topSocial"
     ></block-stats>
     <block-stats
-      *ngIf="stats.topCountries && stats.topCountries.length > 0"
+      *ngIf="vm.stats.topCountries && vm.stats.topCountries.length > 0"
       type="topCountries"
-      [items]="stats.topCountries"
+      [items]="vm.stats.topCountries"
     ></block-stats>
     <block-stats
-      *ngIf="stats.topStates && stats.topStates.length > 0"
+      *ngIf="vm.stats.topStates && vm.stats.topStates.length > 0"
       type="topStates"
-      [items]="stats.topStates"
+      [items]="vm.stats.topStates"
     ></block-stats>
     <block-stats
-      *ngIf="stats.topStyles && stats.topStyles.length > 0"
+      *ngIf="vm.stats.topStyles && vm.stats.topStyles.length > 0"
       type="topStyles"
-      [items]="stats.topStyles"
+      [items]="vm.stats.topStyles"
     ></block-stats>
     <block-stats
-      *ngIf="stats.topVarious && stats.topVarious.length > 0"
+      *ngIf="vm.stats.topVarious && vm.stats.topVarious.length > 0"
       type="topVarious"
-      [items]="stats.topVarious"
+      [items]="vm.stats.topVarious"
     ></block-stats>
   </div>
 </div>

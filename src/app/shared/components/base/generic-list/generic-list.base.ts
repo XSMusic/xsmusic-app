@@ -10,7 +10,11 @@ import {
 } from '@services';
 import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
-import { GenericSubItemType, getFilterList, getUserLocation } from '@shared/utils';
+import {
+  GenericSubItemType,
+  getFilterList,
+  getUserLocation,
+} from '@shared/utils';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
 import { GenericListBaseViewModel } from './generic-list.base.view-model';
 

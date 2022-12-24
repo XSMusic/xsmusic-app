@@ -7,17 +7,10 @@ import {
   NgxPermissionsModule,
   NgxPermissionsService,
 } from 'ngx-permissions';
-import {
-  apiServiceMock,
-  siteServiceMock,
-} from 'app/testing/services.mock';
+import { apiServiceMock, siteServiceMock } from 'app/testing/services.mock';
 import { TracksPage } from './tracks.page';
 import { ActivatedRoute } from '@angular/router';
-import {
-  ApiService,
-  MediaService,
-  SiteService,
-} from '@services';
+import { ApiService, MediaService, SiteService } from '@services';
 
 describe('TracksPage', () => {
   let component: TracksPage;

@@ -15,9 +15,7 @@ import {
 } from 'app/testing/services.mock';
 import { ArtistsPage } from './artists.page';
 import { ActivatedRoute } from '@angular/router';
-import {
-  ApiService, SiteService,
-} from '@services';
+import { ApiService, SiteService } from '@services';
 
 describe('ArtistsPage', () => {
   let component: ArtistsPage;

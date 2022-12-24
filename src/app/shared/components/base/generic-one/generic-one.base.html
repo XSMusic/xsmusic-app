@@ -1,50 +1,52 @@
-<ng-container *ngIf="artist || site || event">
+<ng-container *ngIf="vm.artist || vm.site || vm.event">
   <block-info-profile
-    *ngIf="artist"
-    [item]="artist"
+    *ngIf="vm.artist"
+    [item]="vm.artist"
     type="artist"
   ></block-info-profile>
+
   <block-info-profile
-    *ngIf="site"
-    [item]="site"
+    *ngIf="vm.site"
+    [item]="vm.site"
     [type]="subType"
   ></block-info-profile>
+
   <block-info-profile
-    *ngIf="event"
-    [item]="event"
+    *ngIf="vm.event"
+    [item]="vm.event"
     type="event"
   ></block-info-profile>
 
   <map
-    *ngIf="site"
+    *ngIf="vm.site"
     [class]="'lg:container mx-2 h-44 m-2 lg:mx-auto rounded-lg overflow-hidden'"
-    [markers]="[site]"
+    [markers]="[vm.site]"
     [zoom]="15"
     [one]="true"
   ></map>
 
   <map
-    *ngIf="event"
+    *ngIf="vm.event"
     [class]="'lg:container mx-2 h-44 m-2 lg:mx-auto rounded-lg overflow-hidden'"
-    [markers]="[event.site]"
+    [markers]="[vm.event.site]"
     [zoom]="15"
     [one]="true"
   ></map>
 
   <last-multi
     *ngIf="type !== 'event'"
-    [item]="this[type]"
-    [events]="events"
-    [sets]="sets"
-    [tracks]="tracks"
-    [views]="views"
+    [item]="this.vm[type]"
+    [events]="vm.events"
+    [sets]="vm.sets"
+    [tracks]="vm.tracks"
+    [views]="vm.views"
     (goToPage)="goToPage($event)"
   ></last-multi>
 
   <last-multi
     *ngIf="type === 'event'"
-    [item]="event"
-    [views]="views"
+    [item]="vm.event"
+    [views]="vm.views"
     (goToPage)="goToPage($event)"
   ></last-multi>
 </ng-container>

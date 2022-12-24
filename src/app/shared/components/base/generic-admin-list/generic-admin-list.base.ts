@@ -5,15 +5,13 @@ import { PaginatorI } from '@interfaces';
 import { Artist, Event, Media, Site, Youtube } from '@models';
 import {
   ApiService,
-  NavigationService,
   ScrapingService,
   StatsService,
-  ToastService,
   TOAST_STATE,
+  UIService,
 } from '@services';
 import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
-import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinner.service';
 import { GenericItemType, GenericSubItemType } from '@shared/utils';
 import { Observable } from 'rxjs';
 import { GenericAdminListBaseViewModel } from './generic-admin-list.base.view-model';
@@ -30,10 +28,8 @@ export class GenericAdminListBase {
   constructor(
     private apiService: ApiService,
     private statsService: StatsService,
-    private toast: ToastService,
-    private spinner: NgxSpinnerService,
     private scrapingService: ScrapingService,
-    private navigationService: NavigationService,
+    private ui: UIService,
     private route: ActivatedRoute
   ) {}
 
@@ -141,7 +137,7 @@ export class GenericAdminListBase {
         next: (response) => {
           this.vm.stats = response;
         },
-        error: (error) => this.toast.showToast(TOAST_STATE.error, error),
+        error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
       });
     }
   }
@@ -168,7 +164,7 @@ export class GenericAdminListBase {
         data.type = this.subType;
       }
     }
-    this.navigationService.goToPage(data);
+    this.ui.navigation.goToPage(data);
   }
 
   onFilter(event: { name: string; value: string }) {
@@ -194,7 +190,7 @@ export class GenericAdminListBase {
     if (tab.action.includes('view')) {
       this.vm.view = tab.action;
     } else if (tab.action === 'order') {
-      this.toast.showToast(TOAST_STATE.info, 'En construccion');
+      this.ui.toast.showToast(TOAST_STATE.info, 'En construccion');
     }
   }
 
@@ -232,7 +228,7 @@ export class GenericAdminListBase {
 
   searchAdd(searchText: string) {
     if (this.vm.mediaSource === 'youtube') {
-      this.spinner.show();
+      this.ui.spinner.show();
       this.scrapingService
         .getListMedia({
           query: searchText,
@@ -242,15 +238,15 @@ export class GenericAdminListBase {
         .subscribe({
           next: (response) => {
             this.vm.itemsSearch = response;
-            this.spinner.hide();
+            this.ui.spinner.hide();
           },
           error: (error) => {
-            this.spinner.hide();
-            this.toast.showToast(TOAST_STATE.error, error);
+            this.ui.spinner.hide();
+            this.ui.toast.showToast(TOAST_STATE.error, error);
           },
         });
     } else {
-      this.toast.showToast(TOAST_STATE.warning, 'En construccion');
+      this.ui.toast.showToast(TOAST_STATE.warning, 'En construccion');
     }
   }
 

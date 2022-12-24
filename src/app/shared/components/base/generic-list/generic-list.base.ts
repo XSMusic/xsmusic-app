@@ -1,13 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import {
-  ToastService,
-  NavigationService,
-  TOAST_STATE,
-  SiteService,
-  ApiService,
-} from '@services';
+import { TOAST_STATE, SiteService, ApiService, UIService } from '@services';
 import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
 import {
@@ -15,7 +9,6 @@ import {
   getFilterList,
   getUserLocation,
 } from '@shared/utils';
-import { GoogleAnalyticsService } from 'ngx-google-analytics';
 import { GenericListBaseViewModel } from './generic-list.base.view-model';
 
 @Component({
@@ -31,9 +24,7 @@ export class GenericListBase {
     private route: ActivatedRoute,
     private apiService: ApiService,
     private siteService: SiteService,
-    private toast: ToastService,
-    private gaService: GoogleAnalyticsService,
-    private navigationService: NavigationService
+    private ui: UIService
   ) {}
 
   ngOnInit() {
@@ -116,7 +107,7 @@ export class GenericListBase {
         error: (error) => {
           this.vm.loading = false;
           this.vm.error = true;
-          this.toast.showToast(TOAST_STATE.error, error);
+          this.ui.toast.showToast(TOAST_STATE.error, error);
         },
       });
     }
@@ -139,8 +130,8 @@ export class GenericListBase {
   }
 
   goToPage(data: GoToPageI) {
-    this.gaService.event('artists_link_profile', 'artists_link', 'artists');
-    this.navigationService.goToPage(data);
+    this.ui.ga.event('artists_link_profile', 'artists_link', 'artists');
+    this.ui.navigation.goToPage(data);
   }
 
   onFilter(event: { name: string; value: string }) {
@@ -151,7 +142,7 @@ export class GenericListBase {
   }
 
   removeFilter() {
-    this.gaService.event(
+    this.ui.ga.event(
       `${this.type}s_remove_filter`,
       `${this.type}s_filter`,
       `${this.type}s`
@@ -170,19 +161,19 @@ export class GenericListBase {
   onClickTab(button: TabsItem) {
     if (button.action.includes('view')) {
       this.vm.view = button.action;
-      this.gaService.event(
+      this.ui.ga.event(
         `${this.type}s_change_${button.action}`,
         `${this.type}s_filter`,
         `${this.type}s`
       );
     } else {
-      this.toast.showToast(TOAST_STATE.info, 'En construccion');
+      this.ui.toast.showToast(TOAST_STATE.info, 'En construccion');
     }
   }
 
   onSearch(event: { text: string; type: string }) {
     if (event.text === '') {
-      this.gaService.event(
+      this.ui.ga.event(
         `${this.type}s_search_empty`,
         `${this.type}s_search`,
         `${this.type}s`
@@ -191,7 +182,7 @@ export class GenericListBase {
       this.getItems();
       this.vm.filter = false;
     } else {
-      this.gaService.event(
+      this.ui.ga.event(
         `${this.type}s_search_${event.text}}`,
         `${this.type}s_search`,
         `${this.type}s`

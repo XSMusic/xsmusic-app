@@ -4,14 +4,11 @@ import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import {
   EventService,
   MediaService,
-  MetaService,
-  NavigationService,
   SiteService,
-  ToastService,
   TOAST_STATE,
+  UIService,
 } from '@services';
 import { ArtistService } from '@shared/services/api/artist/artist.service';
-import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinner.service';
 import { routesConfig } from '@core/config';
 import { Observable } from 'rxjs';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
@@ -38,15 +35,12 @@ export class GenericAdminOneBase implements OnInit {
     private siteService: SiteService,
     private mediaService: MediaService,
     private eventService: EventService,
-    private toast: ToastService,
-    private spinner: NgxSpinnerService,
-    private metaService: MetaService,
     private router: Router,
-    private navigationService: NavigationService
+    private ui: UIService
   ) {}
 
   ngOnInit() {
-    this.spinner.show();
+    this.ui.spinner.show();
     this.vm.id = this.route.snapshot.paramMap.get('id')!;
     if (this.type) {
       this.setTypes();
@@ -130,10 +124,10 @@ export class GenericAdminOneBase implements OnInit {
         this.vm[this.type] = response;
         this.setMeta();
         this.checkViews();
-        this.spinner.hide();
+        this.ui.spinner.hide();
       },
       error: () => {
-        this.spinner.hide();
+        this.ui.spinner.hide();
         this.router.navigate(['/404'], {
           skipLocationChange: true,
           state: {
@@ -156,7 +150,7 @@ export class GenericAdminOneBase implements OnInit {
     const meta: MetadataI = {
       title: title,
     };
-    this.metaService.setMetaDynamic(meta);
+    this.ui.meta.setMetaDynamic(meta);
   }
 
   checkViews() {
@@ -194,7 +188,7 @@ export class GenericAdminOneBase implements OnInit {
       next: (response) => (this.vm.events = response.items),
       error: (err) => {
         this.vm.views = this.vm.views.filter((item) => item.name !== 'Eventos');
-        this.toast.showToast(TOAST_STATE.error, err);
+        this.ui.toast.showToast(TOAST_STATE.error, err);
       },
     });
   }
@@ -205,7 +199,7 @@ export class GenericAdminOneBase implements OnInit {
       next: (response) => (this.vm.sets = response.items),
       error: (err) => {
         this.vm.views = this.vm.views.filter((item) => item.name !== 'Sets');
-        this.toast.showToast(TOAST_STATE.error, err);
+        this.ui.toast.showToast(TOAST_STATE.error, err);
       },
     });
   }
@@ -216,14 +210,14 @@ export class GenericAdminOneBase implements OnInit {
       next: (response) => (this.vm.tracks = response.items),
       error: (err) => {
         this.vm.views = this.vm.views.filter((item) => item.name !== 'Sets');
-        this.toast.showToast(TOAST_STATE.error, err);
+        this.ui.toast.showToast(TOAST_STATE.error, err);
       },
     });
   }
 
   goToPage(data: GoToPageI) {
     data.admin = true;
-    this.navigationService.goToPage(data);
+    this.ui.navigation.goToPage(data);
   }
 
   onClickTab(tab: TabsItem) {

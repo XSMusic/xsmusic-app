@@ -61,7 +61,6 @@ export class AdminMediaOneComponent {
   constructor(
     private mediaService: MediaService,
     private toast: ToastService,
-    private toastService: ToastService,
     private fullImage: FullImageService,
     private router: Router,
     private imageService: ImageService,
@@ -88,14 +87,12 @@ export class AdminMediaOneComponent {
       if (this.media._id) {
         this.mediaService.update(this.media).subscribe({
           next: (response) => this.onSuccessUpdate(response),
-          error: (error) =>
-            this.toastService.showToast(TOAST_STATE.error, error),
+          error: (error) => this.toast.showToast(TOAST_STATE.error, error),
         });
       } else {
         this.mediaService.create(this.media).subscribe({
           next: (response) => this.onSuccessCreate(response),
-          error: (error) =>
-            this.toastService.showToast(TOAST_STATE.error, error),
+          error: (error) => this.toast.showToast(TOAST_STATE.error, error),
         });
       }
     } else {
@@ -104,7 +101,7 @@ export class AdminMediaOneComponent {
   }
 
   onSuccessUpdate(response: MessageI) {
-    this.toastService.showToast(TOAST_STATE.success, response.message);
+    this.toast.showToast(TOAST_STATE.success, response.message);
     this.router.navigate([
       this.media.type === 'set'
         ? routesConfig.setsAdmin
@@ -117,7 +114,7 @@ export class AdminMediaOneComponent {
     for (const image of this.tempImages) {
       this.uploadImageByUrl(image);
     }
-    this.toastService.showToast(
+    this.toast.showToast(
       TOAST_STATE.success,
       `${this.media.type === 'set' ? 'Set' : 'Track'} creado`
     );
@@ -136,8 +133,7 @@ export class AdminMediaOneComponent {
           if (response === true) {
             this.mediaService.deleteOne(this.media._id!).subscribe({
               next: (response) => this.onSuccessUpdate(response),
-              error: (error) =>
-                this.toastService.showToast(TOAST_STATE.error, error),
+              error: (error) => this.toast.showToast(TOAST_STATE.error, error),
             });
           }
           sub$.unsubscribe();
@@ -195,7 +191,7 @@ export class AdminMediaOneComponent {
       },
       error: (error) => {
         this.spinner.hide();
-        this.toastService.showToast(TOAST_STATE.error, error);
+        this.toast.showToast(TOAST_STATE.error, error);
       },
     });
   }
@@ -206,12 +202,9 @@ export class AdminMediaOneComponent {
         this.media.images = this.media.images?.filter(
           (item) => item._id !== img._id
         );
-        this.toastService.showToast(
-          TOAST_STATE.info,
-          'La imagen ha sido eliminada'
-        );
+        this.toast.showToast(TOAST_STATE.info, 'La imagen ha sido eliminada');
       },
-      error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+      error: (error) => this.toast.showToast(TOAST_STATE.error, error),
     });
   }
 
@@ -224,12 +217,9 @@ export class AdminMediaOneComponent {
     this.imageService.setFirstImage(data).subscribe({
       next: (response) => {
         this.media.images = response;
-        this.toastService.showToast(
-          TOAST_STATE.info,
-          'La imagen ha sido actualizada'
-        );
+        this.toast.showToast(TOAST_STATE.info, 'La imagen ha sido actualizada');
       },
-      error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+      error: (error) => this.toast.showToast(TOAST_STATE.error, error),
     });
   }
 

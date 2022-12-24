@@ -1,29 +1,30 @@
 import { Artist, Site, Media, Event } from '@models';
-import { ApiGenericBody } from '@shared/services/api/api-generic-body';
+import { GetAllDto } from '@shared/services/api/api.dtos';
 
 export class GenericOneBaseViewModel {
   artist!: Artist;
   site!: Site;
   event!: Event;
+  media!: Media;
   slug!: string;
   views: any[] = [];
-  bodyEvents: ApiGenericBody;
-  bodyMediaSet: ApiGenericBody;
-  bodyMediaTrack: ApiGenericBody;
+  bodyEvents: GetAllDto;
+  bodyMediaSet: GetAllDto;
+  bodyMediaTrack: GetAllDto;
   events: Event[] = [];
   sets: Media[] = [];
   tracks: Media[] = [];
 
   constructor() {
-    this.bodyEvents = new ApiGenericBody({
+    this.bodyEvents = new GetAllDto({
       order: ['date', 'asc'],
     });
-    this.bodyMediaSet = new ApiGenericBody({
+    this.bodyMediaSet = new GetAllDto({
       id: '',
       type: '',
       typeMedia: 'set',
     });
-    this.bodyMediaTrack = new ApiGenericBody({
+    this.bodyMediaTrack = new GetAllDto({
       id: '',
       type: '',
       typeMedia: 'track',

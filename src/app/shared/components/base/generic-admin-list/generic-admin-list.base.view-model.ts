@@ -1,5 +1,5 @@
 import { Artist, Site, Media, Youtube, Event } from '@models';
-import { ApiGenericBody } from '@shared/services/api/api-generic-body';
+import { GetAllDto } from '@shared/services/api/api.dtos';
 import { StatsGetTopStatsI } from '@shared/services/api/stats/stats.interface';
 import { GenericItemsType, GenericBodyType } from '@shared/utils';
 
@@ -20,10 +20,10 @@ export class GenericAdminListBaseViewModel {
     topSocial: [],
     topCountries: [],
   };
-  bodyArtist: ApiGenericBody;
-  bodySite: ApiGenericBody;
-  bodyEvent: ApiGenericBody;
-  bodyMedia: ApiGenericBody;
+  bodyArtist: GetAllDto;
+  bodySite: GetAllDto;
+  bodyEvent: GetAllDto;
+  bodyMedia: GetAllDto;
   view!: string;
   filter = false;
   loading = true;
@@ -40,14 +40,14 @@ export class GenericAdminListBaseViewModel {
   scrapingItemSelected!: Youtube;
 
   constructor() {
-    this.bodyArtist = new ApiGenericBody({ pageSize: 20 });
-    this.bodyMedia = new ApiGenericBody({ pageSize: 20, type: '' });
-    this.bodySite = new ApiGenericBody({
+    this.bodyArtist = new GetAllDto({ pageSize: 20 });
+    this.bodyMedia = new GetAllDto({ pageSize: 20, type: '' });
+    this.bodySite = new GetAllDto({
       pageSize: 20,
       map: false,
       type: '',
     });
-    this.bodyEvent = new ApiGenericBody({
+    this.bodyEvent = new GetAllDto({
       pageSize: 20,
       order: ['date', 'asc'],
       filter: [],

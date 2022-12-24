@@ -4,7 +4,7 @@ import { routesConfig } from '@core/config';
 import { PaginatorI } from '@interfaces';
 import { ApiService, TOAST_STATE, UIService } from '@services';
 import {
-  ApiAllTypes,
+  ApiTypes,
   GenericItemsAllType,
   GoToRouteType,
   GenericItemAllType,
@@ -47,7 +47,7 @@ export class HomePage implements OnInit {
     }
   }
 
-  getItems(type: ApiAllTypes, typeItems: GenericItemsAllType) {
+  getItems(type: ApiTypes, typeItems: GenericItemsAllType) {
     this.vm.loading[typeItems] = true;
     const service = this.apiService.getAll<any>(
       type,

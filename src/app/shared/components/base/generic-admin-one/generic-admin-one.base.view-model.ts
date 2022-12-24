@@ -1,5 +1,5 @@
 import { Artist, Site, Media, Event } from '@models';
-import { ApiGenericBody } from '@shared/services/api/api-generic-body';
+import { GetAllDto } from '@shared/services/api/api.dtos';
 
 export class GenericAdminOneBaseViewModel {
   typeTabs!: 'artistAdmin' | 'eventAdmin' | 'siteAdmin' | 'mediaAdmin';
@@ -15,13 +15,13 @@ export class GenericAdminOneBaseViewModel {
   tracks: Media[] = [];
   view = 'viewList';
   options: { name: string; action: string }[] = [];
-  bodyEvents!: ApiGenericBody;
-  bodyMediaSet: ApiGenericBody;
-  bodyMediaTrack: ApiGenericBody;
+  bodyEvents!: GetAllDto;
+  bodyMediaSet: GetAllDto;
+  bodyMediaTrack: GetAllDto;
 
   constructor() {
-    this.bodyEvents = new ApiGenericBody({ order: ['date', 'asc'] });
-    this.bodyMediaSet = new ApiGenericBody({ typeMedia: 'set' });
-    this.bodyMediaTrack = new ApiGenericBody({ typeMedia: 'track' });
+    this.bodyEvents = new GetAllDto({ order: ['date', 'asc'] });
+    this.bodyMediaSet = new GetAllDto({ typeMedia: 'set' });
+    this.bodyMediaTrack = new GetAllDto({ typeMedia: 'track' });
   }
 }

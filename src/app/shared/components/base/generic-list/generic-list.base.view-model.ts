@@ -1,6 +1,6 @@
 import { FilterListI } from '@interfaces';
 import { Artist, Site, Media, Event } from '@models';
-import { ApiGenericBody } from '@shared/services/api/api-generic-body';
+import { GetAllDto } from '@shared/services/api/api.dtos';
 import { GenericBodyType, GenericItemsType } from '@shared/utils';
 import { Observable } from 'rxjs';
 
@@ -17,11 +17,11 @@ export class GenericListBaseViewModel {
   sitesMap: Site[] = [];
   view = 'gallery';
   service!: Observable<any>;
-  bodyArtist: ApiGenericBody;
-  bodyEvent: ApiGenericBody;
-  bodySite: ApiGenericBody;
-  bodySiteMap: ApiGenericBody;
-  bodyMedia: ApiGenericBody;
+  bodyArtist: GetAllDto;
+  bodyEvent: GetAllDto;
+  bodySite: GetAllDto;
+  bodySiteMap: GetAllDto;
+  bodyMedia: GetAllDto;
   filter = false;
   filterData!: FilterListI;
   loading = true;
@@ -37,25 +37,25 @@ export class GenericListBaseViewModel {
     | 'festival';
 
   constructor() {
-    this.bodyArtist = new ApiGenericBody({
+    this.bodyArtist = new GetAllDto({
       pageSize: 30,
     });
-    this.bodyEvent = new ApiGenericBody({
+    this.bodyEvent = new GetAllDto({
       pageSize: 30,
       order: ['date', 'asc'],
     });
-    this.bodySite = new ApiGenericBody({
+    this.bodySite = new GetAllDto({
       pageSize: 30,
       type: 'club',
       map: false,
     });
-    this.bodySiteMap = new ApiGenericBody({
+    this.bodySiteMap = new GetAllDto({
       pageSize: 1000,
       type: 'club',
       map: true,
       maxDistance: 10000,
     });
-    this.bodyMedia = new ApiGenericBody({
+    this.bodyMedia = new GetAllDto({
       pageSize: 30,
     });
   }

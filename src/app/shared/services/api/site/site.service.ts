@@ -4,14 +4,14 @@ import { Site } from '@models';
 import { Observable } from 'rxjs';
 import { environment } from '@env/environment';
 import { MessageI, PaginatorI } from '@interfaces';
-import { ApiGenericBody } from '../api-generic-body';
+import { GetAllDto } from '../api.dtos';
 
 @Injectable({ providedIn: 'root' })
 export class SiteService {
   url = `${environment.urls.api}/sites`;
   constructor(private httpClient: HttpClient) {}
 
-  getAll(data: ApiGenericBody): Observable<PaginatorI<Site>> {
+  getAll(data: GetAllDto): Observable<PaginatorI<Site>> {
     return this.httpClient.post<PaginatorI<Site>>(
       `${this.url}/getAll/${data.type}`,
       data

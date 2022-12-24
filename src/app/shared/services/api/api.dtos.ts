@@ -1,4 +1,4 @@
-export class ApiGenericBody {
+export class GetAllDto {
   page? = 1;
   pageSize? = 10;
   order? = ['created', 'asc'];
@@ -10,7 +10,21 @@ export class ApiGenericBody {
   filter?: any;
   coordinates?: any;
 
-  constructor(data?: ApiGenericBody) {
+  constructor(data?: GetAllDto) {
+    if (data) {
+      for (const property in data) {
+        if (data.hasOwnProperty(property))
+          (<any>this)[property] = (<any>data)[property];
+      }
+    }
+  }
+}
+
+export class GetOneDto {
+  type?: 'id' | 'slug';
+  value?: string;
+  admin?: boolean;
+  constructor(data?: GetAllDto) {
     if (data) {
       for (const property in data) {
         if (data.hasOwnProperty(property))

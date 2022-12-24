@@ -2,20 +2,20 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import {
+  ApiService,
   EventService,
   MediaService,
-  SiteService,
   TOAST_STATE,
   UIService,
 } from '@services';
-import { ArtistService } from '@shared/services/api/artist/artist.service';
 import { MetadataI } from '@shared/services/system/meta';
 import { environment } from '@env/environment';
 import { routesConfig } from '@core/config';
-import { Observable } from 'rxjs';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { DateFunctions } from '@shared/utils/dates';
 import { GenericOneBaseViewModel } from './generic-one.base.view-model';
+import { GetOneDto } from '@shared/services/api/api.dtos';
+import { ApiTypes, GenericItemType, GenericSubItemType } from '@shared/utils';
 
 @Component({
   selector: 'generic-one-base',
@@ -23,14 +23,13 @@ import { GenericOneBaseViewModel } from './generic-one.base.view-model';
   animations: [inOutAnimation],
 })
 export class GenericOneBase implements OnInit {
-  @Input() type!: 'artist' | 'site' | 'event';
-  @Input() subType!: 'club' | 'festival';
+  @Input() type!: GenericItemType;
+  @Input() subType!: GenericSubItemType;
   vm = new GenericOneBaseViewModel();
 
   constructor(
     private route: ActivatedRoute,
-    private artistService: ArtistService,
-    private siteService: SiteService,
+    private apiService: ApiService,
     private mediaService: MediaService,
     private eventService: EventService,
     private router: Router,
@@ -59,15 +58,17 @@ export class GenericOneBase implements OnInit {
   }
 
   getItem() {
-    let service: Observable<any>;
-    if (this.type === 'site') {
-      service = this.siteService.getOne('slug', this.vm.slug);
-    } else if (this.type === 'event') {
-      service = this.eventService.getOne('slug', this.vm.slug);
+    const data: GetOneDto = {
+      type: 'slug',
+      value: this.vm.slug,
+    };
+    let type!: ApiTypes;
+    if (this.type !== 'media') {
+      type = `${this.type}s`;
     } else {
-      service = this.artistService.getOne('slug', this.vm.slug);
+      type = this.type;
     }
-    service.subscribe({
+    this.apiService.getOne<any>(type, data).subscribe({
       next: (response: any) => {
         this.vm[this.type] = response;
         this.setMeta();

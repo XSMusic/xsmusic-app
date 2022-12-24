@@ -1,18 +1,22 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { EventService, MediaService, SiteService, UIService } from '@services';
-import { ArtistService } from '@shared/services/api/artist/artist.service';
+import {
+  ApiService,
+  EventService,
+  MediaService,
+  UIService,
+} from '@services';
 import { routesConfig } from '@core/config';
-import { Observable } from 'rxjs';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { OptionsItemI } from '@shared/components/ui/options-items/options-items.interface';
 import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 import { DateFunctions } from '@shared/utils/dates';
 import { MetadataI } from '@shared/services/system/meta';
-import { GenericItemType, GenericSubItemType } from '@shared/utils';
+import { ApiTypes, GenericItemType, GenericSubItemType } from '@shared/utils';
 import { GenericAdminOneBaseViewModel } from './generic-admin-one.base.view-model';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
+import { GetOneDto } from '@shared/services/api/api.dtos';
 
 @Component({
   selector: 'generic-admin-one-base',
@@ -26,8 +30,7 @@ export class GenericAdminOneBase implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private artistService: ArtistService,
-    private siteService: SiteService,
+    private apiService: ApiService,
     private mediaService: MediaService,
     private eventService: EventService,
     private router: Router,
@@ -106,15 +109,18 @@ export class GenericAdminOneBase implements OnInit {
   }
 
   getItem() {
-    let service: Observable<any>;
-    if (this.type === 'site') {
-      service = this.siteService.getOne('id', this.vm.id);
-    } else if (this.type === 'event') {
-      service = this.eventService.getOne('id', this.vm.id);
+    const data: GetOneDto = {
+      type: 'id',
+      value: this.vm.id,
+      admin: true,
+    };
+    let type!: ApiTypes;
+    if (this.type !== 'media') {
+      type = `${this.type}s`;
     } else {
-      service = this.artistService.getOne('id', this.vm.id);
+      type = this.type;
     }
-    service.subscribe({
+    this.apiService.getOne<any>(type, data).subscribe({
       next: (response: any) => {
         this.vm[this.type] = response;
         this.setMeta();

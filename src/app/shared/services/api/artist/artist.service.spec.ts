@@ -41,31 +41,6 @@ describe('ArtistService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('getAll', () => {
-    const data: GetAllDto = {
-      page: 0,
-      pageSize: 0,
-      order: [],
-    };
-    service.getAll(data).subscribe((response) => {
-      expect(JSON.stringify(response)).toEqual(JSON.stringify(responseGetAll));
-    });
-    const req = httpTestingController.expectOne(
-      `${environment.urls.api}/artists/getAll`
-    );
-    req.flush(responseGetAll);
-  });
-
-  it('getOne', () => {
-    service.getOne('id', 'perro').subscribe((response) => {
-      expect(JSON.stringify(response)).toEqual(JSON.stringify(item));
-    });
-    const req = httpTestingController.expectOne(
-      `${environment.urls.api}/artists/getOne/id/perro`
-    );
-    req.flush(item);
-  });
-
   it('create', () => {
     service.create(item).subscribe((response) => {
       expect(JSON.stringify(response)).toEqual(JSON.stringify(item));

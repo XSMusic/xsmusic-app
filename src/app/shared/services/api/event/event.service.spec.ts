@@ -42,21 +42,6 @@ describe('EventService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('getAll', () => {
-    const data: GetAllDto = {
-      page: 0,
-      pageSize: 0,
-      order: [],
-    };
-    service.getAll(data).subscribe((response) => {
-      expect(JSON.stringify(response)).toEqual(JSON.stringify(responseGetAll));
-    });
-    const req = httpTestingController.expectOne(
-      `${environment.urls.api}/events/getAll`
-    );
-    req.flush(responseGetAll);
-  });
-
   it('getAllForType', () => {
     const data: EventGetAllForTypeDto = {
       page: 0,
@@ -72,16 +57,6 @@ describe('EventService', () => {
       `${environment.urls.api}/events/getAllForType`
     );
     req.flush(responseGetAll);
-  });
-
-  it('getOne', () => {
-    service.getOne('id', 'perro').subscribe((response) => {
-      expect(JSON.stringify(response)).toEqual(JSON.stringify(item));
-    });
-    const req = httpTestingController.expectOne(
-      `${environment.urls.api}/events/getOne/id/perro`
-    );
-    req.flush(item);
   });
 
   it('create', () => {

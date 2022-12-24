@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
+import { Site } from '@models';
 import { SiteService, ApiService, UIService } from '@services';
 import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
@@ -118,7 +119,7 @@ export class GenericListBase {
     const userCoordinates = await getUserLocation();
     this.vm.bodySiteMap.coordinates = userCoordinates;
     this.vm.bodySiteMap.type = this.subType;
-    this.siteService.getAll(this.vm.bodySiteMap).subscribe({
+    this.apiService.getAll<Site>('sites', this.vm.bodySiteMap).subscribe({
       next: (response) => {
         this.vm.sitesMap = response.items;
         this.vm.loading = false;

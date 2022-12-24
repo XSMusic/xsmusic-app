@@ -1,12 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import {
-  ApiService,
-  EventService,
-  MediaService,
-  UIService,
-} from '@services';
+import { ApiService, EventService, MediaService, UIService } from '@services';
 import { routesConfig } from '@core/config';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { OptionsItemI } from '@shared/components/ui/options-items/options-items.interface';

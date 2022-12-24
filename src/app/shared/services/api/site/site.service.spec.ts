@@ -42,33 +42,6 @@ describe('SiteService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('getAll', () => {
-    const data: SiteGetAllDto = {
-      page: 0,
-      pageSize: 0,
-      order: [],
-      type: 'club',
-      map: false,
-    };
-    service.getAll(data).subscribe((response) => {
-      expect(JSON.stringify(response)).toEqual(JSON.stringify(responseGetAll));
-    });
-    const req = httpTestingController.expectOne(
-      `${environment.urls.api}/sites/getAll/club`
-    );
-    req.flush(responseGetAll);
-  });
-
-  it('getOne', () => {
-    service.getOne('id', 'perro').subscribe((response) => {
-      expect(JSON.stringify(response)).toEqual(JSON.stringify(item));
-    });
-    const req = httpTestingController.expectOne(
-      `${environment.urls.api}/sites/getOne/id/perro`
-    );
-    req.flush(item);
-  });
-
   it('create', () => {
     service.create(item).subscribe((response) => {
       expect(JSON.stringify(response)).toEqual(JSON.stringify(item));

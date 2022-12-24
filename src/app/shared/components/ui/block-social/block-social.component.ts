@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { GenericItemAllType } from '@shared/utils';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
 @Component({
@@ -7,7 +8,7 @@ import { GoogleAnalyticsService } from 'ngx-google-analytics';
 })
 export class BlockSocialComponent {
   @Input() item!: any;
-  @Input() type: 'artist' | 'club' | 'event' | 'festival' = 'artist';
+  @Input() type: GenericItemAllType = 'artist';
 
   constructor(private gaService: GoogleAnalyticsService) {}
 

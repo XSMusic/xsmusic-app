@@ -1,6 +1,5 @@
 import { Artist, Site, Media, Event } from '@models';
-import { EventGetAllForTypeDto } from '@shared/services/api/event/event.dto';
-import { MediaGetAllForTypeDto } from '@shared/services/api/media/media.dto';
+import { ApiGenericBody } from '@shared/services/api/api-generic-body';
 
 export class GenericOneBaseViewModel {
   artist!: Artist;
@@ -8,30 +7,26 @@ export class GenericOneBaseViewModel {
   event!: Event;
   slug!: string;
   views: any[] = [];
-  bodyEvents: EventGetAllForTypeDto = {
-    page: 1,
-    pageSize: 10,
-    order: ['created', 'asc'],
-    id: '',
-    type: '',
-  };
-  bodyMediaSet: MediaGetAllForTypeDto = {
-    page: 1,
-    pageSize: 10,
-    order: ['created', 'asc'],
-    id: '',
-    type: '',
-    typeMedia: 'set',
-  };
-  bodyMediaTrack: MediaGetAllForTypeDto = {
-    page: 1,
-    pageSize: 10,
-    order: ['created', 'asc'],
-    id: '',
-    type: '',
-    typeMedia: 'track',
-  };
+  bodyEvents: ApiGenericBody
+  bodyMediaSet: ApiGenericBody
+  bodyMediaTrack: ApiGenericBody
   events: Event[] = [];
   sets: Media[] = [];
   tracks: Media[] = [];
+
+  constructor() {
+    this.bodyEvents = new ApiGenericBody({
+      order: ['date', 'asc']
+    });
+    this.bodyMediaSet = new ApiGenericBody({
+      id: '',
+      type: '',
+      typeMedia: 'set',
+    });
+    this.bodyMediaTrack = new ApiGenericBody({
+      id: '',
+      type: '',
+      typeMedia: 'track',
+    });
+  }
 }

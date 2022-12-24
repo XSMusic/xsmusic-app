@@ -6,7 +6,7 @@ import { routesConfig } from '@core/config';
 import { environment } from '@env/environment';
 import { NavigationService, ToastService, TOAST_STATE } from '@services';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
-import { firstLetterCase, getYearsOld } from '@shared/utils';
+import { firstLetterCase, getYearsOld, GenericItemAllType } from '@shared/utils';
 import { DateFunctions } from '@shared/utils/dates';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
@@ -17,7 +17,7 @@ import { GoogleAnalyticsService } from 'ngx-google-analytics';
 })
 export class BlockInfoProfileComponent {
   @Input() item: any;
-  @Input() type: 'artist' | 'club' | 'event' | 'festival' = 'artist';
+  @Input() type: GenericItemAllType = 'artist';
   moreInfo = false;
   getYearsOld = getYearsOld;
 

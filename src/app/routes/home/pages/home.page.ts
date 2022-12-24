@@ -5,9 +5,9 @@ import { PaginatorI } from '@interfaces';
 import { ApiService, ToastService, TOAST_STATE } from '@services';
 import {
   ApiAllTypes,
-  GenericAllItemsType,
+  GenericItemsAllType,
   GoToRouteType,
-  GoToType,
+  GenericItemAllType,
 } from '@shared/utils';
 import { Observable } from 'rxjs';
 import { HomeViewModel } from './home.view-model';
@@ -30,7 +30,7 @@ export class HomePage implements OnInit {
     }
   }
 
-  getBodyType(type: GenericAllItemsType) {
+  getBodyType(type: GenericItemsAllType) {
     switch (type) {
       case 'events':
         return 'bodyEvents';
@@ -47,7 +47,7 @@ export class HomePage implements OnInit {
     }
   }
 
-  getItems(type: ApiAllTypes, typeItems: GenericAllItemsType) {
+  getItems(type: ApiAllTypes, typeItems: GenericItemsAllType) {
     this.vm.loading[typeItems] = true;
     const service = this.apiService.getAll<any>(
       type,
@@ -58,7 +58,7 @@ export class HomePage implements OnInit {
 
   subscription(
     service: Observable<PaginatorI<any>>,
-    typeItems: GenericAllItemsType
+    typeItems: GenericItemsAllType
   ) {
     service.subscribe({
       next: (response) => {
@@ -73,7 +73,7 @@ export class HomePage implements OnInit {
     });
   }
 
-  goTo(event: { type: GoToType; typeRoute: GoToRouteType; slug?: string }) {
+  goTo(event: { type: GenericItemAllType; typeRoute: GoToRouteType; slug?: string }) {
     if (event.typeRoute === 'one') {
       this.router.navigate([
         routesConfig[event.type].replace(':slug', event.slug!),

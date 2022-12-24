@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Image } from '@models';
 import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
+import { GenericItemAllType } from '@shared/utils';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
 @Component({
@@ -9,7 +10,7 @@ import { GoogleAnalyticsService } from 'ngx-google-analytics';
 })
 export class BlockInfoProfileImageComponent implements OnInit {
   @Input() item: any;
-  @Input() type: 'artist' | 'club' | 'event' | 'festival' = 'artist';
+  @Input() type: GenericItemAllType = 'artist';
   class!: string;
 
   constructor(

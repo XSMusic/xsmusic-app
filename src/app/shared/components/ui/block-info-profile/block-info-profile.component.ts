@@ -6,7 +6,11 @@ import { routesConfig } from '@core/config';
 import { environment } from '@env/environment';
 import { NavigationService, ToastService, TOAST_STATE } from '@services';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
-import { firstLetterCase, getYearsOld, GenericItemAllType } from '@shared/utils';
+import {
+  firstLetterCase,
+  getYearsOld,
+  GenericItemAllType,
+} from '@shared/utils';
 import { DateFunctions } from '@shared/utils/dates';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
 

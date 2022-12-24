@@ -73,7 +73,11 @@ export class HomePage implements OnInit {
     });
   }
 
-  goTo(event: { type: GenericItemAllType; typeRoute: GoToRouteType; slug?: string }) {
+  goTo(event: {
+    type: GenericItemAllType;
+    typeRoute: GoToRouteType;
+    slug?: string;
+  }) {
     if (event.typeRoute === 'one') {
       this.router.navigate([
         routesConfig[event.type].replace(':slug', event.slug!),

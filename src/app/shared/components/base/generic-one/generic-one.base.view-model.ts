@@ -7,16 +7,16 @@ export class GenericOneBaseViewModel {
   event!: Event;
   slug!: string;
   views: any[] = [];
-  bodyEvents: ApiGenericBody
-  bodyMediaSet: ApiGenericBody
-  bodyMediaTrack: ApiGenericBody
+  bodyEvents: ApiGenericBody;
+  bodyMediaSet: ApiGenericBody;
+  bodyMediaTrack: ApiGenericBody;
   events: Event[] = [];
   sets: Media[] = [];
   tracks: Media[] = [];
 
   constructor() {
     this.bodyEvents = new ApiGenericBody({
-      order: ['date', 'asc']
+      order: ['date', 'asc'],
     });
     this.bodyMediaSet = new ApiGenericBody({
       id: '',

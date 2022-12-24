@@ -1,7 +1,5 @@
-import { GetAllDto } from '@interfaces';
 import { Artist, Site, Media, Youtube, Event } from '@models';
 import { ApiGenericBody } from '@shared/services/api/api-generic-body';
-import { EventGetAllDto } from '@shared/services/api/event/event.dto';
 import { StatsGetTopStatsI } from '@shared/services/api/stats/stats.interface';
 import { GenericItemsType, GenericBodyType } from '@shared/utils';
 

@@ -10,7 +10,7 @@ import {
 } from '@services';
 import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
-import { getFilterList, getUserLocation } from '@shared/utils';
+import { GenericSubItemType, getFilterList, getUserLocation } from '@shared/utils';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
 import { GenericListBaseViewModel } from './generic-list.base.view-model';
 
@@ -21,7 +21,7 @@ import { GenericListBaseViewModel } from './generic-list.base.view-model';
 })
 export class GenericListBase {
   @Input() type!: 'artist' | 'event' | 'media' | 'site' | any;
-  @Input() subType!: 'club' | 'festival' | 'set' | 'track';
+  @Input() subType!: GenericSubItemType;
   vm = new GenericListBaseViewModel();
   constructor(
     private route: ActivatedRoute,

@@ -2,11 +2,12 @@ import { GetAllDto, FilterListI } from '@interfaces';
 import { Artist, Site, Media, Event } from '@models';
 import { EventGetAllDto } from '@shared/services/api/event/event.dto';
 import { SiteGetAllDto } from '@shared/services/api/site/site.dto';
+import { GenericBodyType, GenericItemsType } from '@shared/utils';
 import { Observable } from 'rxjs';
 
 export class GenericListBaseViewModel {
-  typeItems!: 'artists' | 'sites' | 'events' | 'medias';
-  typeBody!: 'bodyArtist' | 'bodySite' | 'bodyEvent' | 'bodyMedia';
+  typeItems!: GenericItemsType;
+  typeBody!: GenericBodyType;
   typeTabs!: 'artists' | 'events' | 'sites' | 'media';
   typeAdminRoute: any;
   title!: string;

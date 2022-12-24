@@ -22,6 +22,7 @@ import { OptionsItemI } from '@shared/components/ui/options-items/options-items.
 import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 import { DateFunctions } from '@shared/utils/dates';
 import { MetadataI } from '@shared/services/system/meta';
+import { GenericItemType, GenericSubItemType } from '@shared/utils';
 
 @Component({
   selector: 'generic-admin-one-base',
@@ -29,8 +30,8 @@ import { MetadataI } from '@shared/services/system/meta';
   animations: [inOutAnimation],
 })
 export class GenericAdminOneBase implements OnInit {
-  @Input() type!: 'artist' | 'site' | 'event' | 'media';
-  @Input() subType!: 'club' | 'festival' | 'set' | 'track';
+  @Input() type!: GenericItemType;
+  @Input() subType!: GenericSubItemType;
   typeTabs!: 'artistAdmin' | 'eventAdmin' | 'siteAdmin' | 'mediaAdmin';
   artist = new Artist();
   site = new Site();

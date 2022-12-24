@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import { GetAllDto, PaginatorI } from '@interfaces';
+import { ApiAllTypes } from '@shared/utils';
 import { Observable, of } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
@@ -10,7 +11,7 @@ export class ApiService {
   url = environment.urls.api;
   constructor(private httpClient: HttpClient) {}
 
-  getAll<T>(type: string, data: GetAllDto): Observable<PaginatorI<T>> {
+  getAll<T>(type: ApiAllTypes, data: GetAllDto): Observable<PaginatorI<T>> {
     if (this.checkType(type)) {
       return this.httpClient.post<PaginatorI<T>>(
         `${this.url}/${type}/getAll`,
@@ -21,7 +22,7 @@ export class ApiService {
     }
   }
 
-  checkType(type: string) {
+  checkType(type: ApiAllTypes) {
     if (this.types.includes(type)) {
       return type;
     } else {

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { routesConfig } from '@core/config';
 import { PaginatorI } from '@interfaces';
 import { ApiService, ToastService, TOAST_STATE } from '@services';
+import { ApiAllTypes, GenericAllItemsType, GenericItemsType, GoToRouteType, GoToType } from '@shared/utils';
 import { Observable } from 'rxjs';
 import { HomeViewModel } from './home.view-model';
 
@@ -24,9 +25,7 @@ export class HomePage implements OnInit {
     }
   }
 
-  getBodyType(
-    type: 'artists' | 'events' | 'sets' | 'tracks' | 'clubs' | 'festivals'
-  ) {
+  getBodyType(type: GenericAllItemsType) {
     switch (type) {
       case 'events':
         return 'bodyEvents';
@@ -43,10 +42,7 @@ export class HomePage implements OnInit {
     }
   }
 
-  getItems(
-    type: 'artists' | 'events' | 'media' | 'sites',
-    typeItems: 'artists' | 'events' | 'sets' | 'tracks' | 'clubs' | 'festivals'
-  ) {
+  getItems(type: ApiAllTypes, typeItems: GenericAllItemsType) {
     this.vm.loading[typeItems] = true;
     const service = this.apiService.getAll<any>(
       type,
@@ -57,7 +53,7 @@ export class HomePage implements OnInit {
 
   subscription(
     service: Observable<PaginatorI<any>>,
-    typeItems: 'artists' | 'events' | 'sets' | 'tracks' | 'clubs' | 'festivals'
+    typeItems: GenericAllItemsType
   ) {
     service.subscribe({
       next: (response) => {
@@ -72,11 +68,7 @@ export class HomePage implements OnInit {
     });
   }
 
-  goTo(event: {
-    type: 'artist' | 'club' | 'festival' | 'event' | 'set' | 'track';
-    typeRoute: 'all' | 'one';
-    slug?: string;
-  }) {
+  goTo(event: { type: GoToType; typeRoute: GoToRouteType; slug?: string }) {
     if (event.typeRoute === 'one') {
       this.router.navigate([
         routesConfig[event.type].replace(':slug', event.slug!),

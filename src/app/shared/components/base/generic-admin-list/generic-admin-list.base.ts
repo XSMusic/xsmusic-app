@@ -16,6 +16,7 @@ import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { EventGetAllDto } from '@shared/services/api/event/event.dto';
 import { StatsGetTopStatsI } from '@shared/services/api/stats/stats.interface';
 import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinner.service';
+import { GenericBodyType, GenericItemsType, GenericItemType, GenericSubItemType } from '@shared/utils';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -24,10 +25,10 @@ import { Observable } from 'rxjs';
   animations: [inOutAnimation],
 })
 export class GenericAdminListBase {
-  @Input() type!: 'artist' | 'site' | 'event' | 'media';
-  @Input() subType!: 'club' | 'festival' | 'set' | 'track';
-  typeItems!: 'artists' | 'sites' | 'events' | 'medias';
-  typeBody!: 'bodyArtist' | 'bodySite' | 'bodyEvent' | 'bodyMedia';
+  @Input() type!: GenericItemType;
+  @Input() subType!: GenericSubItemType;
+  typeItems!: GenericItemsType;
+  typeBody!: GenericBodyType;
   typeTabs!: 'artistsAdmin' | 'eventsAdmin' | 'sitesAdmin' | 'mediaAdmin';
   title!: string;
   artists: Artist[] = [];

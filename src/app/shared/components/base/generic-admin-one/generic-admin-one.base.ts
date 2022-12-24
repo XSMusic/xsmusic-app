@@ -106,16 +106,23 @@ export class GenericAdminOneBase implements OnInit {
   }
 
   setTitle() {
-    if (this.type === 'artist') {
-      this.title = `${this.id ? 'Editar' : 'Nuevo'} Artista`;
-    } else if (this.type === 'site') {
-      const title = this.subType === 'club' ? 'Clubs' : 'Festivales';
-      this.title = `${this.id ? 'Editar' : 'Nuevo'} ${title}`;
-    } else if (this.type === 'event') {
-      this.title = `${this.id ? 'Editar' : 'Nuevo'} Eventos`;
-    } else if (this.type === 'media') {
-      const title = this.subType === 'set' ? 'Sets' : 'Tracks';
-      this.title = `${this.id ? 'Editar' : 'Nuevo'} ${title}`;
+    switch (this.type) {
+      case 'artist':
+        this.title = `${this.id ? 'Editar' : 'Nuevo'} Artista`;
+        break;
+      case 'site':
+        const titleSite = this.subType === 'club' ? 'Clubs' : 'Festivales';
+        this.title = `${this.id ? 'Editar' : 'Nuevo'} ${titleSite}`;
+        break;
+      case 'site':
+        this.title = `${this.id ? 'Editar' : 'Nuevo'} Eventos`;
+        break;
+      case 'media':
+        const titleMedia = this.subType === 'set' ? 'Sets' : 'Tracks';
+        this.title = `${this.id ? 'Editar' : 'Nuevo'} ${titleMedia}`;
+        break;
+      default:
+        break;
     }
   }
 

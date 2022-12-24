@@ -1,7 +1,6 @@
 import { environment } from '@env/environment';
-import { Media } from '@models';
+import { Image } from '@models';
 import { RandomImagePipe } from '..';
-import { Image } from '../../models/image.model';
 
 describe('RandomImagePipe', () => {
   it('create an instance', () => {

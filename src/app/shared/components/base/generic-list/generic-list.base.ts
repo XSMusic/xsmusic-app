@@ -163,7 +163,7 @@ export class GenericListBase {
   }
 
   onScroll() {
-    this.vm[this.vm.typeBody].page++;
+    this.vm[this.vm.typeBody].page!++;
     this.getItems(true);
   }
 

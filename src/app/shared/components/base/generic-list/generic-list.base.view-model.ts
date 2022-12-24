@@ -1,7 +1,6 @@
-import { GetAllDto, FilterListI } from '@interfaces';
+import { FilterListI } from '@interfaces';
 import { Artist, Site, Media, Event } from '@models';
-import { EventGetAllDto } from '@shared/services/api/event/event.dto';
-import { SiteGetAllDto } from '@shared/services/api/site/site.dto';
+import { ApiGenericBody } from '@shared/services/api/api-generic-body';
 import { GenericBodyType, GenericItemsType } from '@shared/utils';
 import { Observable } from 'rxjs';
 
@@ -18,37 +17,11 @@ export class GenericListBaseViewModel {
   sitesMap: Site[] = [];
   view = 'gallery';
   service!: Observable<any>;
-  bodyArtist: GetAllDto = {
-    page: 1,
-    pageSize: 30,
-    order: ['created', 'desc'],
-  };
-  bodyEvent: EventGetAllDto = {
-    page: 1,
-    pageSize: 30,
-    order: ['date', 'asc'],
-  };
-  bodySite: SiteGetAllDto = {
-    page: 1,
-    pageSize: 30,
-    order: ['created', 'desc'],
-    type: 'club',
-    map: false,
-  };
-  bodySiteMap: SiteGetAllDto = {
-    page: 1,
-    pageSize: 1000,
-    order: ['created', 'desc'],
-    type: 'club',
-    map: true,
-    maxDistance: 10000,
-  };
-  bodyMedia: GetAllDto = {
-    page: 1,
-    pageSize: 30,
-    order: ['updated', 'desc'],
-    type: '',
-  };
+  bodyArtist: ApiGenericBody;
+  bodyEvent: ApiGenericBody;
+  bodySite: ApiGenericBody;
+  bodySiteMap: ApiGenericBody;
+  bodyMedia: ApiGenericBody;
   filter = false;
   filterData!: FilterListI;
   loading = true;
@@ -62,4 +35,28 @@ export class GenericListBaseViewModel {
     | 'set'
     | 'track'
     | 'festival';
+
+  constructor() {
+    this.bodyArtist = new ApiGenericBody({
+      pageSize: 30,
+    });
+    this.bodyEvent = new ApiGenericBody({
+      pageSize: 30,
+      order: ['date', 'asc'],
+    });
+    this.bodySite = new ApiGenericBody({
+      pageSize: 30,
+      type: 'club',
+      map: false,
+    });
+    this.bodySiteMap = new ApiGenericBody({
+      pageSize: 1000,
+      type: 'club',
+      map: true,
+      maxDistance: 10000,
+    });
+    this.bodyMedia = new ApiGenericBody({
+      pageSize: 30,
+    });
+  }
 }

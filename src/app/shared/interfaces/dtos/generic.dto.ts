@@ -5,6 +5,7 @@ export interface GetAllDto {
   filter?: string[];
   type?: any;
   map?: boolean;
+  id?: string;
 }
 
 export interface IdDto {

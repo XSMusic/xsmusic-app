@@ -4,7 +4,8 @@ import { Event } from '@models';
 import { Observable } from 'rxjs';
 import { environment } from '@env/environment';
 import { MessageI, PaginatorI } from '@interfaces';
-import { EventGetAllDto, EventGetAllForTypeDto } from './event.dto';
+import { EventGetAllDto } from './event.dto';
+import { ApiGenericBody } from '../api-generic-body';
 
 @Injectable({ providedIn: 'root' })
 export class EventService {
@@ -15,7 +16,7 @@ export class EventService {
     return this.httpClient.post<PaginatorI<Event>>(`${this.url}/getAll`, data);
   }
 
-  getAllForType(data: EventGetAllForTypeDto): Observable<PaginatorI<Event>> {
+  getAllForType(data: ApiGenericBody): Observable<PaginatorI<Event>> {
     return this.httpClient.post<PaginatorI<Event>>(
       `${this.url}/getAllForType`,
       data

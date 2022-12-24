@@ -120,7 +120,7 @@ export class GenericOneBase implements OnInit {
     this.mediaService.getAllForType(this.vm.bodyMediaTrack).subscribe({
       next: (response) => (this.vm.tracks = response.items),
       error: (err) => {
-        this.vm.views = this.vm.views.filter((item) => item.name !== 'Sets');
+        this.vm.views = this.vm.views.filter((item) => item.name !== 'Tracks');
         this.toast.showToast(TOAST_STATE.error, err);
       },
     });

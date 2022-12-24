@@ -1,6 +1,5 @@
 import { Artist, Site, Media, Event } from '@models';
-import { EventGetAllForTypeDto } from '@shared/services/api/event/event.dto';
-import { MediaGetAllForTypeDto } from '@shared/services/api/media/media.dto';
+import { ApiGenericBody } from '@shared/services/api/api-generic-body';
 
 export class GenericAdminOneBaseViewModel {
   typeTabs!: 'artistAdmin' | 'eventAdmin' | 'siteAdmin' | 'mediaAdmin';
@@ -16,27 +15,13 @@ export class GenericAdminOneBaseViewModel {
   tracks: Media[] = [];
   view = 'viewList';
   options: { name: string; action: string }[] = [];
-  bodyEvents: EventGetAllForTypeDto = {
-    page: 1,
-    pageSize: 10,
-    order: ['created', 'asc'],
-    id: '',
-    type: '',
-  };
-  bodyMediaSet: MediaGetAllForTypeDto = {
-    page: 1,
-    pageSize: 10,
-    order: ['created', 'asc'],
-    id: '',
-    type: '',
-    typeMedia: 'set',
-  };
-  bodyMediaTrack: MediaGetAllForTypeDto = {
-    page: 1,
-    pageSize: 10,
-    order: ['created', 'asc'],
-    id: '',
-    type: '',
-    typeMedia: 'track',
-  };
+  bodyEvents!: ApiGenericBody;
+  bodyMediaSet: ApiGenericBody;
+  bodyMediaTrack: ApiGenericBody;
+
+  constructor() {
+    this.bodyEvents = new ApiGenericBody({ order: ['date', 'asc'] });
+    this.bodyMediaSet = new ApiGenericBody({ typeMedia: 'set' });
+    this.bodyMediaTrack = new ApiGenericBody({ typeMedia: 'track' });
+  }
 }

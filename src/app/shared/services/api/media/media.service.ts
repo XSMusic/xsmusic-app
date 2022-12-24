@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '@env/environment';
 import { GetAllDto, MessageI, PaginatorI } from '@interfaces';
 import { Media } from '@models';
-import { MediaGetAllForTypeDto } from './media.dto';
+import { ApiGenericBody } from '../api-generic-body';
 
 @Injectable({ providedIn: 'root' })
 export class MediaService {
@@ -18,7 +18,7 @@ export class MediaService {
     );
   }
 
-  getAllForType(data: MediaGetAllForTypeDto): Observable<PaginatorI<Media>> {
+  getAllForType(data: ApiGenericBody): Observable<PaginatorI<Media>> {
     return this.httpClient.post<PaginatorI<Media>>(
       `${this.url}/getAllForType`,
       data

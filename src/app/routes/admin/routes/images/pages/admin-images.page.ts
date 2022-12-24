@@ -4,7 +4,7 @@ import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { GetAllDto } from '@interfaces';
 import { Image } from '@models';
-import { ImageService, TOAST_STATE, UIService } from '@services';
+import { ApiService, ImageService, TOAST_STATE, UIService } from '@services';
 import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 
 @Component({
@@ -24,6 +24,7 @@ export class AdminImagesPage implements OnInit {
   error = false;
   constructor(
     private imageService: ImageService,
+    private apiService: ApiService,
     private ui: UIService,
     private router: Router
   ) {}
@@ -99,7 +100,7 @@ export class AdminImagesPage implements OnInit {
       next: (response) => {
         if (response !== '') {
           if (response === true) {
-            this.imageService.deleteOne(item._id!).subscribe({
+            this.apiService.deleteOne('images', item._id!).subscribe({
               next: (response) => {
                 this.ui.toast.showToast(TOAST_STATE.success, response.message);
                 this.body.page = 1;

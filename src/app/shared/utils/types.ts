@@ -23,4 +23,10 @@ export type GenericSubItemType = 'club' | 'festival' | 'set' | 'track';
 
 export type GoToRouteType = 'all' | 'one';
 
-export type ApiTypes = 'artists' | 'events' | 'sites' | 'media' | 'users';
+export type ApiTypes =
+  | 'artists'
+  | 'events'
+  | 'images'
+  | 'sites'
+  | 'media'
+  | 'users';

@@ -17,8 +17,4 @@ export class ArtistService {
   update(data: Artist): Observable<MessageI> {
     return this.httpClient.put<MessageI>(`${this.url}/update`, data);
   }
-
-  deleteOne(id: string): Observable<MessageI> {
-    return this.httpClient.delete<MessageI>(`${this.url}/one/${id}`);
-  }
 }

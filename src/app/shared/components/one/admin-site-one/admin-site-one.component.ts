@@ -12,6 +12,7 @@ import {
   ValidationsFormService,
   UIService,
   TOAST_STATE,
+  ApiService,
 } from '@services';
 import {
   ImageSetFirstImageDto,
@@ -46,6 +47,7 @@ export class AdminSiteOneComponent implements OnInit {
   @Output() onCreated = new EventEmitter<void>();
   constructor(
     private siteService: SiteService,
+    private apiService: ApiService,
     private ui: UIService,
     private router: Router,
     private route: ActivatedRoute,
@@ -227,7 +229,7 @@ export class AdminSiteOneComponent implements OnInit {
   }
 
   removeImage(img: Image) {
-    this.imageService.deleteOne(img._id!).subscribe({
+    this.apiService.deleteOne('images', img._id!).subscribe({
       next: () => {
         this.site.images = this.site.images?.filter(
           (item) => item._id !== img._id
@@ -312,7 +314,7 @@ export class AdminSiteOneComponent implements OnInit {
       next: (response) => {
         if (response !== '') {
           if (response === true) {
-            this.siteService.deleteOne(this.site._id!).subscribe({
+            this.apiService.deleteOne('sites', this.site._id!).subscribe({
               next: (response) => this.onSuccessUpdate(response),
               error: (error) =>
                 this.ui.toast.showToast(TOAST_STATE.error, error),

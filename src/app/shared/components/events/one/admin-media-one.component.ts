@@ -5,6 +5,7 @@ import { routesConfig } from '@core/config';
 import { GetAllDto, MessageI } from '@interfaces';
 import { Artist, Image, Media, Site, Style } from '@models';
 import {
+  ApiService,
   ImageService,
   MediaService,
   TOAST_STATE,
@@ -57,6 +58,7 @@ export class AdminMediaOneComponent {
 
   constructor(
     private mediaService: MediaService,
+    private apiService: ApiService,
     private router: Router,
     private imageService: ImageService,
     private ui: UIService,
@@ -125,7 +127,7 @@ export class AdminMediaOneComponent {
       next: (response) => {
         if (response !== '') {
           if (response === true) {
-            this.mediaService.deleteOne(this.media._id!).subscribe({
+            this.apiService.deleteOne('media', this.media._id!).subscribe({
               next: (response) => this.onSuccessUpdate(response),
               error: (error) =>
                 this.ui.toast.showToast(TOAST_STATE.error, error),
@@ -192,7 +194,7 @@ export class AdminMediaOneComponent {
   }
 
   removeImage(img: Image) {
-    this.imageService.deleteOne(img._id!).subscribe({
+    this.apiService.deleteOne('images', img._id!).subscribe({
       next: () => {
         this.media.images = this.media.images?.filter(
           (item) => item._id !== img._id

@@ -12,6 +12,7 @@ import {
   UIService,
   MODAL_STATE,
   TOAST_STATE,
+  ApiService,
 } from '@services';
 import {
   ImageSetFirstImageDto,
@@ -42,6 +43,7 @@ export class AdminArtistOneComponent {
   constructor(
     private router: Router,
     private artistService: ArtistService,
+    private apiService: ApiService,
     private ui: UIService,
     private scrapingService: ScrapingService,
     private imageService: ImageService,
@@ -173,7 +175,7 @@ export class AdminArtistOneComponent {
   }
 
   removeImage(img: Image) {
-    this.imageService.deleteOne(img._id!).subscribe({
+    this.apiService.deleteOne('images', img._id!).subscribe({
       next: () => {
         this.artist.images = this.artist.images?.filter(
           (item) => item._id !== img._id
@@ -253,7 +255,7 @@ export class AdminArtistOneComponent {
       next: (response) => {
         if (response !== '') {
           if (response === true) {
-            this.artistService.deleteOne(this.artist._id!).subscribe({
+            this.apiService.deleteOne('artists', this.artist._id!).subscribe({
               next: (response) => this.onSuccessUpdate(response),
               error: (error) =>
                 this.ui.toast.showToast(TOAST_STATE.error, error),

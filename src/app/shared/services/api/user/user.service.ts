@@ -38,12 +38,6 @@ export class UserService {
       .pipe(take(1));
   }
 
-  deleteOne(id: string): Observable<MessageI> {
-    return this.httpClient
-      .delete<MessageI>(`${this.url}/one/${id}`)
-      .pipe(take(1));
-  }
-
   private get user(): User | undefined {
     this._user = this.localStorageService.getItem('user')
       ? JSON.parse(this.localStorageService.getItem('user')!)

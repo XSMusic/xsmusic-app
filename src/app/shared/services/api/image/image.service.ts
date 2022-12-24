@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
 import { Observable } from 'rxjs/internal/Observable';
 import { take } from 'rxjs';
-import { GetAllDto, MessageI, PaginatorI } from '@interfaces';
+import { GetAllDto, PaginatorI } from '@interfaces';
 import { Image } from '@models';
 import {
   ImageSetFirstImageDto,
@@ -50,9 +50,5 @@ export class ImageService {
     return this.httpClient
       .put<Image[]>(`${this.url}/setFirstImage`, data)
       .pipe(take(1));
-  }
-
-  deleteOne(id: string): Observable<MessageI> {
-    return this.httpClient.delete<MessageI>(`${this.url}/one/${id}`);
   }
 }

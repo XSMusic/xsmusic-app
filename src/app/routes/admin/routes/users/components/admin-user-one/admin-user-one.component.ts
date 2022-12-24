@@ -5,6 +5,7 @@ import { routesConfig } from '@core/config';
 import { MessageI } from '@interfaces';
 import { Image, User } from '@models';
 import {
+  ApiService,
   TOAST_STATE,
   UIService,
   UserService,
@@ -26,6 +27,7 @@ export class AdminUserOneComponent {
 
   constructor(
     private userService: UserService,
+    private apiService: ApiService,
     private router: Router,
     private ui: UIService,
     private validationsFormService: ValidationsFormService
@@ -62,7 +64,7 @@ export class AdminUserOneComponent {
       next: (response) => {
         if (response !== '') {
           if (response === true) {
-            this.userService.deleteOne(this.user._id!).subscribe({
+            this.apiService.deleteOne('users', this.user._id!).subscribe({
               next: (response) => this.onSuccess(response),
               error: (error) =>
                 this.ui.toast.showToast(TOAST_STATE.error, error),

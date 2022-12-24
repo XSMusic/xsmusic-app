@@ -60,14 +60,4 @@ describe('ArtistService', () => {
     );
     req.flush(item);
   });
-
-  it('deleteOne', () => {
-    service.deleteOne('1').subscribe((response) => {
-      expect(JSON.stringify(response)).toEqual(JSON.stringify(item));
-    });
-    const req = httpTestingController.expectOne(
-      `${environment.urls.api}/artists/one/1`
-    );
-    req.flush(item);
-  });
 });

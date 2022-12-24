@@ -1,7 +1,7 @@
 export class GetAllDto {
   page? = 1;
   pageSize? = 10;
-  order? = ['created', 'asc'];
+  order? = ['created', 'desc'];
   id?: string;
   type?: string;
   typeMedia?: string;

@@ -1,5 +1,6 @@
 import { GetAllDto } from '@interfaces';
 import { Artist, Site, Media, Youtube, Event } from '@models';
+import { ApiGenericBody } from '@shared/services/api/api-generic-body';
 import { EventGetAllDto } from '@shared/services/api/event/event.dto';
 import { StatsGetTopStatsI } from '@shared/services/api/stats/stats.interface';
 import { GenericItemsType, GenericBodyType } from '@shared/utils';
@@ -21,30 +22,10 @@ export class GenericAdminListBaseViewModel {
     topSocial: [],
     topCountries: [],
   };
-  bodyArtist: GetAllDto = {
-    page: 1,
-    pageSize: 20,
-    order: ['updated', 'desc'],
-  };
-  bodySite: GetAllDto = {
-    page: 1,
-    pageSize: 20,
-    map: false,
-    type: '',
-    order: ['updated', 'desc'],
-  };
-  bodyEvent: EventGetAllDto = {
-    page: 1,
-    pageSize: 20,
-    order: ['date', 'asc'],
-    filter: [],
-  };
-  bodyMedia: GetAllDto = {
-    page: 1,
-    pageSize: 20,
-    order: ['updated', 'desc'],
-    type: '',
-  };
+  bodyArtist: ApiGenericBody;
+  bodySite: ApiGenericBody;
+  bodyEvent: ApiGenericBody;
+  bodyMedia: ApiGenericBody;
   view!: string;
   filter = false;
   loading = true;
@@ -59,4 +40,19 @@ export class GenericAdminListBaseViewModel {
     styles: [],
   };
   scrapingItemSelected!: Youtube;
+
+  constructor() {
+    this.bodyArtist = new ApiGenericBody({ pageSize: 20 });
+    this.bodyMedia = new ApiGenericBody({ pageSize: 20, type: '' });
+    this.bodySite = new ApiGenericBody({
+      pageSize: 20,
+      map: false,
+      type: '',
+    });
+    this.bodyEvent = new ApiGenericBody({
+      pageSize: 20,
+      order: ['date', 'asc'],
+      filter: [],
+    });
+  }
 }

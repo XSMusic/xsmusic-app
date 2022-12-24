@@ -144,13 +144,11 @@ export class GenericAdminOneBase implements OnInit {
         { name: 'Añadir Set', action: 'goToAdminSetAdd' },
         { name: 'Añadir Track', action: 'goToAdminTrackAdd' }
       );
-    } else if (this.type === 'event') {
     } else if (this.type === 'site') {
       this.options.push(
         { name: 'Añadir Set', action: 'goToAdminSetAdd' },
         { name: 'Añadir Evento', action: 'goToAdminEventAdd' }
       );
-    } else if (this.type === 'media') {
     }
   }
 
@@ -199,22 +197,30 @@ export class GenericAdminOneBase implements OnInit {
 
   checkViews() {
     if (this.type === 'artist') {
-      if (this.artist.sets && this.artist.sets.count > 0) {
-        this.getMediaSets();
-      }
-      if (this.artist.tracks && this.artist.tracks.count > 0) {
-        this.getMediaTracks();
-      }
-      if (this.artist.events && this.artist.events.count > 0) {
-        this.getEvents();
-      }
+      this.checkViewsArtist();
     } else if (this.type === 'site') {
-      if (this.site.sets && this.site.sets.count > 0) {
-        this.getMediaSets();
-      }
-      if (this.site.events && this.site.events.count > 0) {
-        this.getEvents();
-      }
+      this.checkViewsSite();
+    }
+  }
+
+  checkViewsArtist() {
+    if (this.artist.sets && this.artist.sets.count > 0) {
+      this.getMediaSets();
+    }
+    if (this.artist.tracks && this.artist.tracks.count > 0) {
+      this.getMediaTracks();
+    }
+    if (this.artist.events && this.artist.events.count > 0) {
+      this.getEvents();
+    }
+  }
+
+  checkViewsSite() {
+    if (this.site.sets && this.site.sets.count > 0) {
+      this.getMediaSets();
+    }
+    if (this.site.events && this.site.events.count > 0) {
+      this.getEvents();
     }
   }
 

@@ -78,6 +78,7 @@ import { OnImageErrorDirective } from './directives';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import {
   AngularSvgIconPreloaderService,
+  ApiService,
   ArtistService,
   LocalStorageService,
   MediaService,
@@ -193,6 +194,7 @@ const services = [
   UserService,
   VersionUpdateService,
   ValidationsFormService,
+  ApiService,
 ];
 
 @NgModule({

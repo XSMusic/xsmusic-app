@@ -1,14 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { routesConfig } from '@core/config';
-import {
-  ArtistService,
-  EventService,
-  MediaService,
-  SiteService,
-  ToastService,
-  TOAST_STATE,
-} from '@services';
+import { PaginatorI } from '@interfaces';
+import { ApiService, ToastService, TOAST_STATE } from '@services';
+import { Observable } from 'rxjs';
 import { HomeViewModel } from './home.view-model';
 
 @Component({
@@ -18,79 +13,60 @@ import { HomeViewModel } from './home.view-model';
 export class HomePage implements OnInit {
   vm = new HomeViewModel();
   constructor(
-    private artistService: ArtistService,
-    private mediaService: MediaService,
-    private eventService: EventService,
-    private siteService: SiteService,
+    private apiService: ApiService,
     private toast: ToastService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.getArtists();
-    this.getEvents();
-    this.getMedia('sets');
-    this.getMedia('tracks');
-    this.getLastSites('clubs');
-    this.getLastSites('festivals');
+    for (const item of this.vm.items) {
+      this.getItems(item.type, item.typeItems);
+    }
   }
 
-  getArtists() {
-    this.vm.loading.artists = true;
-    this.artistService.getAll(this.vm.bodyArtists).subscribe({
+  getBodyType(
+    type: 'artists' | 'events' | 'sets' | 'tracks' | 'clubs' | 'festivals'
+  ) {
+    switch (type) {
+      case 'events':
+        return 'bodyEvents';
+      case 'sets':
+      case 'tracks':
+        this.vm.bodyMedia.type = type === 'sets' ? 'set' : 'track';
+        return 'bodyMedia';
+      case 'clubs':
+      case 'festivals':
+        this.vm.bodySites.type = type === 'clubs' ? 'club' : 'festival';
+        return 'bodySites';
+      default:
+        return 'bodyArtists';
+    }
+  }
+
+  getItems(
+    type: 'artists' | 'events' | 'media' | 'sites',
+    typeItems: 'artists' | 'events' | 'sets' | 'tracks' | 'clubs' | 'festivals'
+  ) {
+    this.vm.loading[typeItems] = true;
+    const service = this.apiService.getAll<any>(
+      type,
+      this.vm[this.getBodyType(typeItems)]
+    );
+    this.subscription(service, typeItems);
+  }
+
+  subscription(
+    service: Observable<PaginatorI<any>>,
+    typeItems: 'artists' | 'events' | 'sets' | 'tracks' | 'clubs' | 'festivals'
+  ) {
+    service.subscribe({
       next: (response) => {
-        this.vm.artists = response.items;
-        this.vm.loading.artists = false;
+        this.vm[typeItems] = response.items;
+        this.vm.loading[typeItems] = false;
       },
       error: (error) => {
-        this.vm.loading.artists = false;
-        this.vm.error.artists = true;
-        this.toast.showToast(TOAST_STATE.error, error);
-      },
-    });
-  }
-
-  getEvents() {
-    this.eventService.getAll(this.vm.bodyEvents).subscribe({
-      next: (response) => {
-        this.vm.events = response.items;
-        this.vm.loading.events = false;
-      },
-      error: (error: any) => {
-        this.vm.error.events = true;
-        this.vm.loading.events = false;
-        this.toast.showToast(TOAST_STATE.error, error);
-      },
-    });
-  }
-
-  getMedia(type: 'sets' | 'tracks') {
-    this.vm.loading[type] = true;
-    this.vm.bodyMedia.type = type === 'sets' ? 'set' : 'track';
-    this.mediaService.getAll(this.vm.bodyMedia).subscribe({
-      next: (response) => {
-        this.vm[type] = response.items;
-        this.vm.loading[type] = false;
-      },
-      error: (error) => {
-        this.vm.error[type] = true;
-        this.vm.loading[type] = false;
-        this.toast.showToast(TOAST_STATE.error, error);
-      },
-    });
-  }
-
-  getLastSites(type: 'clubs' | 'festivals') {
-    this.vm.loading[type] = true;
-    this.vm.bodySites.type = type === 'clubs' ? 'club' : 'festival';
-    this.siteService.getAll(this.vm.bodySites).subscribe({
-      next: (response) => {
-        this.vm[type] = response.items;
-        this.vm.loading[type] = false;
-      },
-      error: (error) => {
-        this.vm.error[type] = true;
-        this.vm.loading[type] = false;
+        this.vm.loading[typeItems] = false;
+        this.vm.error[typeItems] = true;
         this.toast.showToast(TOAST_STATE.error, error);
       },
     });

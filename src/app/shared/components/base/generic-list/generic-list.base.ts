@@ -1,24 +1,18 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { GetAllDto, FilterListI } from '@interfaces';
-import { Artist, Event, Media, Site } from '@models';
 import {
-  ArtistService,
   ToastService,
   NavigationService,
   TOAST_STATE,
-  EventService,
-  MediaService,
   SiteService,
+  ApiService,
 } from '@services';
 import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
-import { EventGetAllDto } from '@shared/services/api/event/event.dto';
-import { SiteGetAllDto } from '@shared/services/api/site/site.dto';
 import { getFilterList, getUserLocation } from '@shared/utils';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
-import { Observable } from 'rxjs';
+import { GenericListBaseViewModel } from './generic-list.base.view-model';
 
 @Component({
   selector: 'generic-list-base',
@@ -28,68 +22,11 @@ import { Observable } from 'rxjs';
 export class GenericListBase {
   @Input() type!: 'artist' | 'event' | 'media' | 'site' | any;
   @Input() subType!: 'club' | 'festival' | 'set' | 'track';
-  typeItems!: 'artists' | 'sites' | 'events' | 'medias';
-  typeBody!: 'bodyArtist' | 'bodySite' | 'bodyEvent' | 'bodyMedia';
-  typeTabs!: 'artists' | 'events' | 'sites' | 'media';
-  typeAdminRoute: any;
-  title!: string;
-  artists: Artist[] = [];
-  sites: Site[] = [];
-  events: Event[] = [];
-  medias: Media[] = [];
-  sitesMap: Site[] = [];
-  view = 'gallery';
-  service!: Observable<any>;
-  bodyArtist: GetAllDto = {
-    page: 1,
-    pageSize: 30,
-    order: ['created', 'desc'],
-  };
-  bodyEvent: EventGetAllDto = {
-    page: 1,
-    pageSize: 30,
-    order: ['date', 'asc'],
-  };
-  bodySite: SiteGetAllDto = {
-    page: 1,
-    pageSize: 30,
-    order: ['created', 'desc'],
-    type: 'club',
-    map: false,
-  };
-  bodySiteMap: SiteGetAllDto = {
-    page: 1,
-    pageSize: 1000,
-    order: ['created', 'desc'],
-    type: 'club',
-    map: true,
-    maxDistance: 10000,
-  };
-  bodyMedia: GetAllDto = {
-    page: 1,
-    pageSize: 30,
-    order: ['updated', 'desc'],
-    type: '',
-  };
-  filter = false;
-  filterData!: FilterListI;
-  loading = true;
-  error = false;
-  total = 0;
-  typeForGalleryView!:
-    | 'artist'
-    | 'club'
-    | 'event'
-    | 'eventScraping'
-    | 'set'
-    | 'track'
-    | 'festival';
+  vm = new GenericListBaseViewModel();
   constructor(
     private route: ActivatedRoute,
-    private artistService: ArtistService,
+    private apiService: ApiService,
     private siteService: SiteService,
-    private eventService: EventService,
-    private mediaService: MediaService,
     private toast: ToastService,
     private gaService: GoogleAnalyticsService,
     private navigationService: NavigationService
@@ -106,75 +43,75 @@ export class GenericListBase {
 
   setDataByTypes() {
     if (this.type === 'artist') {
-      this.title = 'Artistas';
-      this.typeTabs = 'artists';
-      this.typeAdminRoute = 'artist';
-      this.service = this.artistService.getAll(this.bodyArtist);
-      this.typeItems = 'artists';
-      this.typeBody = 'bodyArtist';
+      this.vm.title = 'Artistas';
+      this.vm.typeTabs = 'artists';
+      this.vm.typeAdminRoute = 'artist';
+      this.vm.service = this.apiService.getAll('artists', this.vm.bodyArtist);
+      this.vm.typeItems = 'artists';
+      this.vm.typeBody = 'bodyArtist';
     } else if (this.type === 'event') {
-      this.title = 'Eventos';
-      this.typeTabs = 'events';
-      this.typeAdminRoute = 'event';
-      this.service = this.eventService.getAll(this.bodyEvent);
-      this.typeItems = 'events';
-      this.typeBody = 'bodyEvent';
+      this.vm.title = 'Eventos';
+      this.vm.typeTabs = 'events';
+      this.vm.typeAdminRoute = 'event';
+      this.vm.service = this.apiService.getAll('events', this.vm.bodyEvent);
+      this.vm.typeItems = 'events';
+      this.vm.typeBody = 'bodyEvent';
     } else if (this.type === 'media') {
-      this.title = this.subType === 'set' ? 'Sets' : 'Tracks';
-      this.typeTabs = 'media';
-      this.typeAdminRoute = this.subType === 'set' ? 'set' : 'track';
-      this.bodyMedia.type = this.subType;
-      this.service = this.mediaService.getAll(this.bodyMedia);
-      this.typeItems = 'medias';
-      this.typeBody = 'bodyMedia';
+      this.vm.title = this.subType === 'set' ? 'Sets' : 'Tracks';
+      this.vm.typeTabs = 'media';
+      this.vm.typeAdminRoute = this.subType === 'set' ? 'set' : 'track';
+      this.vm.bodyMedia.type = this.subType;
+      this.vm.service = this.apiService.getAll('media', this.vm.bodyMedia);
+      this.vm.typeItems = 'medias';
+      this.vm.typeBody = 'bodyMedia';
     } else if (this.type === 'site') {
-      this.title = this.subType === 'club' ? 'Clubs' : 'Festivales';
-      this.typeTabs = 'sites';
-      this.typeAdminRoute = this.subType === 'club' ? 'club' : 'festival';
-      this.bodySite.type = this.subType;
-      this.service = this.siteService.getAll(this.bodySite);
-      this.typeItems = 'sites';
-      this.typeBody = 'bodySite';
+      this.vm.title = this.subType === 'club' ? 'Clubs' : 'Festivales';
+      this.vm.typeTabs = 'sites';
+      this.vm.typeAdminRoute = this.subType === 'club' ? 'club' : 'festival';
+      this.vm.bodySite.type = this.subType;
+      this.vm.service = this.apiService.getAll('sites', this.vm.bodySite);
+      this.vm.typeItems = 'sites';
+      this.vm.typeBody = 'bodySite';
       this.getItemsMap();
     }
   }
 
   getFilter() {
-    this.filterData = getFilterList(this.route);
-    if (this.filterData) {
-      this[this.typeBody].filter = this.filterData.data;
-      if (this.filterData.data[0] !== undefined) {
-        this.filter = true;
+    this.vm.filterData = getFilterList(this.route);
+    if (this.vm.filterData) {
+      this.vm[this.vm.typeBody].filter = this.vm.filterData.data;
+      if (this.vm.filterData.data[0] !== undefined) {
+        this.vm.filter = true;
       }
     }
   }
 
   setTypeForGalleryView() {
     if (this.type === 'site' || this.type === 'media') {
-      this.typeForGalleryView = this.subType;
+      this.vm.typeForGalleryView = this.subType;
     } else {
-      this.typeForGalleryView = this.type;
+      this.vm.typeForGalleryView = this.type;
     }
   }
 
   getItems(more = false) {
-    if (this.service) {
-      this.service.subscribe({
+    if (this.vm.service) {
+      this.vm.service.subscribe({
         next: (response) => {
           if (!more) {
-            this[this.typeItems] = response.items;
-            this.total = response.paginator.total;
+            this.vm[this.vm.typeItems] = response.items;
+            this.vm.total = response.paginator.total;
           } else {
-            let data: any[] = this[this.typeItems];
+            let data: any[] = this.vm[this.vm.typeItems];
             data = data.concat(response.items);
-            this[this.typeItems] = data;
+            this.vm[this.vm.typeItems] = data;
           }
-          this.loading = false;
-          this.error = false;
+          this.vm.loading = false;
+          this.vm.error = false;
         },
         error: (error) => {
-          this.loading = false;
-          this.error = true;
+          this.vm.loading = false;
+          this.vm.error = true;
           this.toast.showToast(TOAST_STATE.error, error);
         },
       });
@@ -183,16 +120,16 @@ export class GenericListBase {
 
   async getItemsMap() {
     const userCoordinates = await getUserLocation();
-    this.bodySiteMap.coordinates = userCoordinates;
-    this.bodySiteMap.type = this.subType;
-    this.siteService.getAll(this.bodySiteMap).subscribe({
+    this.vm.bodySiteMap.coordinates = userCoordinates;
+    this.vm.bodySiteMap.type = this.subType;
+    this.siteService.getAll(this.vm.bodySiteMap).subscribe({
       next: (response) => {
-        this.sitesMap = response.items;
-        this.loading = false;
+        this.vm.sitesMap = response.items;
+        this.vm.loading = false;
       },
       error: () => {
-        this.loading = false;
-        this.error = true;
+        this.vm.loading = false;
+        this.vm.error = true;
       },
     });
   }
@@ -203,9 +140,9 @@ export class GenericListBase {
   }
 
   onFilter(event: { name: string; value: string }) {
-    this[this.typeBody].page = 1;
-    this[this.typeBody].filter = [event.name, event.value];
-    this.filter = true;
+    this.vm[this.vm.typeBody].page = 1;
+    this.vm[this.vm.typeBody].filter = [event.name, event.value];
+    this.vm.filter = true;
     this.getItems();
   }
 
@@ -215,20 +152,20 @@ export class GenericListBase {
       `${this.type}s_filter`,
       `${this.type}s`
     );
-    this[this.typeBody].page = 1;
-    this[this.typeBody].filter = [];
-    this.filter = false;
+    this.vm[this.vm.typeBody].page = 1;
+    this.vm[this.vm.typeBody].filter = [];
+    this.vm.filter = false;
     this.getItems();
   }
 
   onScroll() {
-    this[this.typeBody].page++;
+    this.vm[this.vm.typeBody].page++;
     this.getItems(true);
   }
 
   onClickTab(button: TabsItem) {
     if (button.action.includes('view')) {
-      this.view = button.action;
+      this.vm.view = button.action;
       this.gaService.event(
         `${this.type}s_change_${button.action}`,
         `${this.type}s_filter`,
@@ -246,18 +183,18 @@ export class GenericListBase {
         `${this.type}s_search`,
         `${this.type}s`
       );
-      this[this.typeBody].page = 1;
+      this.vm[this.vm.typeBody].page = 1;
       this.getItems();
-      this.filter = false;
+      this.vm.filter = false;
     } else {
       this.gaService.event(
         `${this.type}s_search_${event.text}}`,
         `${this.type}s_search`,
         `${this.type}s`
       );
-      this[this.typeBody].page = 1;
-      this[this.typeBody].filter = ['name', event.text];
-      this.filter = true;
+      this.vm[this.vm.typeBody].page = 1;
+      this.vm[this.vm.typeBody].filter = ['name', event.text];
+      this.vm.filter = true;
       this.getItems();
     }
   }

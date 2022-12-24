@@ -9,19 +9,14 @@ import {
 } from 'ngx-permissions';
 import { SvgIconRegistryService } from 'angular-svg-icon';
 import {
-  artistServiceMock,
-  eventServiceMock,
-  mediaServiceMock,
+  apiServiceMock,
   siteServiceMock,
   svgIconRegistryServiceMock,
 } from 'app/testing/services.mock';
 import { ArtistsPage } from './artists.page';
 import { ActivatedRoute } from '@angular/router';
 import {
-  ArtistService,
-  EventService,
-  MediaService,
-  SiteService,
+  ApiService, SiteService,
 } from '@services';
 
 describe('ArtistsPage', () => {
@@ -43,20 +38,12 @@ describe('ArtistsPage', () => {
           useValue: svgIconRegistryServiceMock,
         },
         {
-          provide: ArtistService,
-          useValue: artistServiceMock,
+          provide: ApiService,
+          useValue: apiServiceMock,
         },
         {
           provide: SiteService,
           useValue: siteServiceMock,
-        },
-        {
-          provide: EventService,
-          useValue: eventServiceMock,
-        },
-        {
-          provide: MediaService,
-          useValue: mediaServiceMock,
         },
         {
           provide: ActivatedRoute,

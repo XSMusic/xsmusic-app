@@ -1,15 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { GetAllDto } from '@interfaces';
+import { GetAllDto, PaginatorI } from '@interfaces';
 import { Artist, Event, Media, Site, Youtube } from '@models';
 import {
-  ArtistService,
-  EventService,
-  MediaService,
+  ApiService,
   NavigationService,
   ScrapingService,
-  SiteService,
   StatsService,
   ToastService,
   TOAST_STATE,
@@ -17,7 +14,6 @@ import {
 import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { EventGetAllDto } from '@shared/services/api/event/event.dto';
-import { SiteGetAllDto } from '@shared/services/api/site/site.dto';
 import { StatsGetTopStatsI } from '@shared/services/api/stats/stats.interface';
 import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinner.service';
 import { Observable } from 'rxjs';
@@ -51,7 +47,7 @@ export class GenericAdminListBase {
     pageSize: 20,
     order: ['updated', 'desc'],
   };
-  bodySite: SiteGetAllDto = {
+  bodySite: GetAllDto = {
     page: 1,
     pageSize: 20,
     map: false,
@@ -85,10 +81,7 @@ export class GenericAdminListBase {
   };
   scrapingItemSelected!: Youtube;
   constructor(
-    private artistService: ArtistService,
-    private siteService: SiteService,
-    private eventService: EventService,
-    private mediaService: MediaService,
+    private apiService: ApiService,
     private statsService: StatsService,
     private toast: ToastService,
     private spinner: NgxSpinnerService,
@@ -134,25 +127,25 @@ export class GenericAdminListBase {
   }
 
   getItems(more = false) {
-    let service: Observable<any>;
+    let service: Observable<PaginatorI<any>>;
     if (this.type === 'site') {
-      this.bodySite.type = this.subType;
-      service = this.siteService.getAll(this.bodySite);
       this.typeItems = 'sites';
+      this.bodySite.type = this.subType;
+      service = this.apiService.getAll<Site>(this.typeItems, this.bodySite);
       this.typeBody = 'bodySite';
     } else if (this.type === 'event') {
-      service = this.eventService.getAll(this.bodyEvent);
       this.typeItems = 'events';
       this.typeBody = 'bodyEvent';
+      service = this.apiService.getAll<Event>(this.typeItems, this.bodyEvent);
     } else if (this.type === 'media') {
       this.bodyMedia.type = this.subType;
-      service = this.mediaService.getAll(this.bodyMedia);
       this.typeItems = 'medias';
       this.typeBody = 'bodyMedia';
+      service = this.apiService.getAll<Media>('media', this.bodyMedia);
     } else {
-      service = this.artistService.getAll(this.bodyArtist);
       this.typeItems = 'artists';
       this.typeBody = 'bodyArtist';
+      service = this.apiService.getAll<Artist>(this.typeItems, this.bodyArtist);
     }
 
     service.subscribe({

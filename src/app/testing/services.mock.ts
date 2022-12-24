@@ -1,6 +1,6 @@
 import { getAllGeneric } from './services-helper.mock';
 
-export const artistServiceMock = {
+export const apiServiceMock = {
   getAll: () => getAllGeneric(),
 };
 

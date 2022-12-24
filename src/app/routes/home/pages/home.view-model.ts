@@ -4,6 +4,32 @@ import { EventGetAllDto } from '@shared/services/api/event/event.dto';
 import { SiteGetAllDto } from '@shared/services/api/site/site.dto';
 
 export class HomeViewModel {
+  items: any[] = [
+    {
+      type: 'artists',
+      typeItems: 'artists',
+    },
+    {
+      type: 'events',
+      typeItems: 'events',
+    },
+    {
+      type: 'media',
+      typeItems: 'sets',
+    },
+    {
+      type: 'media',
+      typeItems: 'tracks',
+    },
+    {
+      type: 'sites',
+      typeItems: 'clubs',
+    },
+    {
+      type: 'sites',
+      typeItems: 'festivals',
+    },
+  ];
   bodyArtists: GetAllDto = {
     page: 1,
     pageSize: 20,

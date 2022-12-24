@@ -1,3 +1,4 @@
+import { environment } from '@env/environment';
 import { Media } from '@models';
 import { RandomImagePipe } from '..';
 import { Image } from '../../models/image.model';
@@ -28,6 +29,6 @@ describe('RandomImagePipe', () => {
     image.url = 'perro.jpg';
     const images: Image[] = [image];
     const result = pipe.transform(images);
-    expect(result).toEqual('https://api.xsmusic.es/uploads/perro.jpg');
+    expect(result).toEqual(`${environment.urls.images}/perro.jpg`);
   });
 });

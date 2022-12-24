@@ -7,19 +7,14 @@ import {
   NgxPermissionsModule,
   NgxPermissionsService,
 } from 'ngx-permissions';
-import { SvgIconRegistryService } from 'angular-svg-icon';
 import {
-  artistServiceMock,
-  eventServiceMock,
-  mediaServiceMock,
+  apiServiceMock,
   siteServiceMock,
-  svgIconRegistryServiceMock,
 } from 'app/testing/services.mock';
 import { TracksPage } from './tracks.page';
 import { ActivatedRoute } from '@angular/router';
 import {
-  ArtistService,
-  EventService,
+  ApiService,
   MediaService,
   SiteService,
 } from '@services';
@@ -39,24 +34,12 @@ describe('TracksPage', () => {
       providers: [
         NgxPermissionsService,
         {
-          provide: SvgIconRegistryService,
-          useValue: svgIconRegistryServiceMock,
-        },
-        {
-          provide: ArtistService,
-          useValue: artistServiceMock,
+          provide: ApiService,
+          useValue: apiServiceMock,
         },
         {
           provide: SiteService,
           useValue: siteServiceMock,
-        },
-        {
-          provide: EventService,
-          useValue: eventServiceMock,
-        },
-        {
-          provide: MediaService,
-          useValue: mediaServiceMock,
         },
         {
           provide: ActivatedRoute,

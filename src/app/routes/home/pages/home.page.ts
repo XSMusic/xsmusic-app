@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { routesConfig } from '@core/config';
 import { PaginatorI } from '@interfaces';
 import { ApiService, ToastService, TOAST_STATE } from '@services';
-import { ApiAllTypes, GenericAllItemsType, GenericItemsType, GoToRouteType, GoToType } from '@shared/utils';
+import { ApiAllTypes, GenericAllItemsType, GoToRouteType, GoToType } from '@shared/utils';
 import { Observable } from 'rxjs';
 import { HomeViewModel } from './home.view-model';
 

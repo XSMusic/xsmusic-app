@@ -216,12 +216,12 @@ export class GenericOneBase implements OnInit {
     if (
       this.type === 'event' &&
       this.event.artists &&
-      this.event.artists!.length > 0
+      this.event.artists.length > 0
     ) {
       this.views.push({
         name: 'Artistas',
         value: 'artist',
-        counter: this.event.artists!.length,
+        counter: this.event.artists.length,
       });
     }
     if (this[this.type].images && this[this.type].images!.length > 1) {

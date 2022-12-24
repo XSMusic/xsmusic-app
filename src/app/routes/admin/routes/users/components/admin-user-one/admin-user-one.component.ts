@@ -5,13 +5,11 @@ import { routesConfig } from '@core/config';
 import { MessageI } from '@interfaces';
 import { Image, User } from '@models';
 import {
-  ModalService,
-  ToastService,
+  TOAST_STATE,
+  UIService,
   UserService,
   ValidationsFormService,
 } from '@services';
-import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
-import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 
 @Component({
   selector: 'admin-user-one',
@@ -28,15 +26,13 @@ export class AdminUserOneComponent {
 
   constructor(
     private userService: UserService,
-    private fullImage: FullImageService,
-    private toastService: ToastService,
     private router: Router,
-    private modal: ModalService,
+    private ui: UIService,
     private validationsFormService: ValidationsFormService
   ) {}
 
   showImage(image: Image) {
-    this.fullImage.show(image);
+    this.ui.fullImage.show(image);
   }
 
   onSubmit() {
@@ -50,15 +46,15 @@ export class AdminUserOneComponent {
         : this.userService.create(this.user);
       observable.subscribe({
         next: (response) => this.onSuccess(response),
-        error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+        error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
       });
     } else {
-      this.toastService.showToast(TOAST_STATE.error, validation.message);
+      this.ui.toast.showToast(TOAST_STATE.error, validation.message);
     }
   }
 
   onDelete() {
-    const modal = this.modal.showModalConfirm(
+    const modal = this.ui.modal.showModalConfirm(
       'Eliminar usuario',
       '¿Estas seguro de eliminar el usuario?'
     );
@@ -69,7 +65,7 @@ export class AdminUserOneComponent {
             this.userService.deleteOne(this.user._id!).subscribe({
               next: (response) => this.onSuccess(response),
               error: (error) =>
-                this.toastService.showToast(TOAST_STATE.error, error),
+                this.ui.toast.showToast(TOAST_STATE.error, error),
             });
           }
           sub$.unsubscribe();
@@ -79,7 +75,7 @@ export class AdminUserOneComponent {
   }
 
   onSuccess(response: MessageI) {
-    this.toastService.showToast(TOAST_STATE.success, response.message);
+    this.ui.toast.showToast(TOAST_STATE.success, response.message);
     this.router.navigate([routesConfig.usersAdmin]);
   }
 }

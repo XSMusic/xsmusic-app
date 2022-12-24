@@ -1,12 +1,11 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { Style } from '@models';
 import {
-  ModalService,
   StyleService,
-  ToastService,
+  TOAST_STATE,
+  UIService,
   ValidationsFormService,
 } from '@services';
-import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { MessageI } from '@interfaces';
 
 @Component({
@@ -18,8 +17,7 @@ export class AdminStyleOneComponent {
   @Output() onSuccess = new EventEmitter<MessageI>();
   constructor(
     private styleService: StyleService,
-    private toast: ToastService,
-    private modal: ModalService,
+    private ui: UIService,
     private validationsFormService: ValidationsFormService
   ) {}
 
@@ -34,15 +32,15 @@ export class AdminStyleOneComponent {
         : this.styleService.create(this.style);
       observable.subscribe({
         next: (response) => this.onSuccess.emit(response),
-        error: (error) => this.toast.showToast(TOAST_STATE.error, error),
+        error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
       });
     } else {
-      this.toast.showToast(TOAST_STATE.error, validation.message);
+      this.ui.toast.showToast(TOAST_STATE.error, validation.message);
     }
   }
 
   onDelete() {
-    const modal = this.modal.showModalConfirm(
+    const modal = this.ui.modal.showModalConfirm(
       'Eliminar estilo',
       '¿Estas seguro de eliminar el estilo?'
     );
@@ -52,7 +50,8 @@ export class AdminStyleOneComponent {
           if (response === true) {
             this.styleService.deleteOne(this.style._id!).subscribe({
               next: (response) => this.onSuccess.emit(response),
-              error: (error) => this.toast.showToast(TOAST_STATE.error, error),
+              error: (error) =>
+                this.ui.toast.showToast(TOAST_STATE.error, error),
             });
           }
           sub$.unsubscribe();

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
-import { StatsService, ToastService } from '@services';
+import { StatsService, UIService } from '@services';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { AdminTotalsItemI } from './admin-totals.interface';
 
@@ -17,7 +17,7 @@ export class AdminTotalsComponent implements OnInit {
 
   constructor(
     private statsService: StatsService,
-    private toast: ToastService
+    private ui: UIService
   ) {}
 
   ngOnInit() {
@@ -103,7 +103,7 @@ export class AdminTotalsComponent implements OnInit {
           this.loading = false;
         }
       },
-      error: (error) => this.toast.showToast(TOAST_STATE.error, error),
+      error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
     });
   }
 

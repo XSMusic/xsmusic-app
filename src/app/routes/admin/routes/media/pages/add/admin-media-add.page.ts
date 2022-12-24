@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { Media, Youtube } from '@models';
-import { ScrapingService, ToastService } from '@services';
-import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
-import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinner.service';
+import { ScrapingService, TOAST_STATE, UIService } from '@services';
 
 @Component({
   selector: 'page-admin-media-add',
@@ -27,8 +25,7 @@ export class AdminMediaAddPage implements OnInit {
   constructor(
     private scrapingService: ScrapingService,
     private route: ActivatedRoute,
-    private toast: ToastService,
-    private spinner: NgxSpinnerService
+    private ui: UIService,
   ) {}
 
   ngOnInit() {
@@ -53,7 +50,7 @@ export class AdminMediaAddPage implements OnInit {
 
   search(searchText: string) {
     if (this.source === 'youtube') {
-      this.spinner.show();
+      this.ui.spinner.show();
       this.scrapingService
         .getListMedia({
           query: searchText,
@@ -65,18 +62,18 @@ export class AdminMediaAddPage implements OnInit {
           error: (error) => this.onResponseSearchError(error),
         });
     } else {
-      this.toast.showToast(TOAST_STATE.warning, 'En construccion');
+      this.ui.toast.showToast(TOAST_STATE.warning, 'En construccion');
     }
   }
 
   onResponseSearchSuccess(response: Youtube[]) {
     this.items = response;
-    this.spinner.hide();
+    this.ui.spinner.hide();
   }
 
   onResponseSearchError(error: string) {
-    this.spinner.hide();
-    this.toast.showToast(TOAST_STATE.error, error);
+    this.ui.spinner.hide();
+    this.ui.toast.showToast(TOAST_STATE.error, error);
   }
 
   selectItem(item: Youtube) {

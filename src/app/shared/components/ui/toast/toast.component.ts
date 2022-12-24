@@ -6,7 +6,7 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { ToastService } from '@services';
+import { ToastService } from '@shared/services/ui/toast/toast.service';
 
 @Component({
   selector: 'toast',

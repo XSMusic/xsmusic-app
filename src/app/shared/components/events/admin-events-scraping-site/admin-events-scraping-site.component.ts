@@ -3,10 +3,9 @@ import { Event } from '@models';
 import {
   EventService,
   ImageService,
-  ModalService,
   ScrapingService,
-  ToastService,
   TOAST_STATE,
+  UIService,
 } from '@services';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { ImageUploadByUrlDto } from '@shared/services/api/image/image.dto';
@@ -24,8 +23,7 @@ export class AdminEventsScrapingSiteComponent implements OnInit {
     private scrapingService: ScrapingService,
     private eventService: EventService,
     private imageService: ImageService,
-    private toast: ToastService,
-    private modal: ModalService
+    private ui: UIService
   ) {}
 
   ngOnInit() {
@@ -37,12 +35,12 @@ export class AdminEventsScrapingSiteComponent implements OnInit {
       next: (response) => {
         this.items = response;
       },
-      error: (error) => this.toast.showToast(TOAST_STATE.error, error),
+      error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
     });
   }
 
   addEventConfirmation(data: GoToPageI) {
-    const modal = this.modal.showModalConfirm(
+    const modal = this.ui.modal.showModalConfirm(
       `Añadir evento`,
       `¿Estas seguro de añadir el evento?`
     );
@@ -76,15 +74,15 @@ export class AdminEventsScrapingSiteComponent implements OnInit {
           next: () => {
             this.items = this.items.filter((itemC) => itemC.name !== item.name);
             this.onEventCreated.emit();
-            this.toast.showToast(
+            this.ui.toast.showToast(
               TOAST_STATE.success,
               'Evento añadido correctamente'
             );
           },
-          error: (error) => this.toast.showToast(TOAST_STATE.error, error),
+          error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
         });
       },
-      error: (error) => this.toast.showToast(TOAST_STATE.error, error),
+      error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
     });
   }
 

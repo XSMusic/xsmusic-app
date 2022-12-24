@@ -3,10 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { routesConfig } from '@core/config';
 import { MessageI } from '@interfaces';
 import { Style } from '@models';
-import { NavigationService, ToastService } from '@services';
+import { TOAST_STATE, UIService } from '@services';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { StyleService } from '@shared/services/api/style/style.service';
-import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 
 @Component({
   selector: 'page-admin-style',
@@ -22,8 +21,7 @@ export class AdminStylePage implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private styleService: StyleService,
-    private toastService: ToastService,
-    private navigationService: NavigationService
+    private ui: UIService,
   ) {}
 
   ngOnInit() {
@@ -41,12 +39,12 @@ export class AdminStylePage implements OnInit {
       next: (response) => {
         this.style = response;
       },
-      error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+      error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
     });
   }
 
   onSuccess(response: MessageI) {
-    this.toastService.showToast(TOAST_STATE.success, response.message);
+    this.ui.toast.showToast(TOAST_STATE.success, response.message);
     this.router.navigate([routesConfig.stylesAdmin]);
   }
 
@@ -55,6 +53,6 @@ export class AdminStylePage implements OnInit {
   }
 
   goToPage(data: GoToPageI): void {
-    this.navigationService.goToPage(data);
+    this.ui.navigation.goToPage(data);
   }
 }

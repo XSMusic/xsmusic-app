@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ScrapingService, ToastService, TOAST_STATE } from '@services';
+import { ScrapingService, TOAST_STATE, UIService } from '@services';
 import { ScrapingSoundcloudSearchI } from '@shared/services/api/scraping/scraping-soundcloud-search.interface';
 import { ScrapingSearchNameYoutubeI } from '@shared/services/api/scraping/scraping-youtube-search.interface';
 
@@ -14,7 +14,7 @@ export class SocialInputsComponent {
   youtubeNames: ScrapingSearchNameYoutubeI[] = [];
   constructor(
     private scrapingService: ScrapingService,
-    private toastService: ToastService
+    private ui: UIService
   ) {}
 
   searchSoundcloud() {
@@ -27,13 +27,13 @@ export class SocialInputsComponent {
           } else if (response.length === 1) {
             this.item.social.soundcloud = response[0].url;
           } else {
-            this.toastService.showToast(
+            this.ui.toast.showToast(
               TOAST_STATE.warning,
               'No hay ningun usuario con el nombre del artista'
             );
           }
         },
-        error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+        error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
       });
   }
 
@@ -45,13 +45,13 @@ export class SocialInputsComponent {
         } else if (response.length === 1) {
           this.item.social.youtube = `https://www.youtube.com/channel/${response[0].id}`;
         } else {
-          this.toastService.showToast(
+          this.ui.toast.showToast(
             TOAST_STATE.warning,
             'No hay ningun usuario con el nombre del artista'
           );
         }
       },
-      error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+      error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
     });
   }
 

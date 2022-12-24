@@ -7,8 +7,7 @@ import { Artist, Image, Media, Site, Style } from '@models';
 import {
   ImageService,
   MediaService,
-  ModalService,
-  ToastService,
+  UIService,
   ValidationsFormService,
 } from '@services';
 import {
@@ -60,12 +59,9 @@ export class AdminMediaOneComponent {
 
   constructor(
     private mediaService: MediaService,
-    private toast: ToastService,
-    private fullImage: FullImageService,
     private router: Router,
     private imageService: ImageService,
-    private spinner: NgxSpinnerService,
-    private modal: ModalService,
+    private ui: UIService,
     private validationsFormService: ValidationsFormService
   ) {}
 
@@ -87,21 +83,21 @@ export class AdminMediaOneComponent {
       if (this.media._id) {
         this.mediaService.update(this.media).subscribe({
           next: (response) => this.onSuccessUpdate(response),
-          error: (error) => this.toast.showToast(TOAST_STATE.error, error),
+          error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
         });
       } else {
         this.mediaService.create(this.media).subscribe({
           next: (response) => this.onSuccessCreate(response),
-          error: (error) => this.toast.showToast(TOAST_STATE.error, error),
+          error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
         });
       }
     } else {
-      this.toast.showToast(TOAST_STATE.error, validation.message);
+      this.ui.toast.showToast(TOAST_STATE.error, validation.message);
     }
   }
 
   onSuccessUpdate(response: MessageI) {
-    this.toast.showToast(TOAST_STATE.success, response.message);
+    this.ui.toast.showToast(TOAST_STATE.success, response.message);
     this.router.navigate([
       this.media.type === 'set'
         ? routesConfig.setsAdmin
@@ -114,7 +110,7 @@ export class AdminMediaOneComponent {
     for (const image of this.tempImages) {
       this.uploadImageByUrl(image);
     }
-    this.toast.showToast(
+    this.ui.toast.showToast(
       TOAST_STATE.success,
       `${this.media.type === 'set' ? 'Set' : 'Track'} creado`
     );
@@ -123,7 +119,7 @@ export class AdminMediaOneComponent {
 
   onDelete() {
     const itemType = `${this.media.type === 'set' ? 'Set' : 'Track'}`;
-    const modal = this.modal.showModalConfirm(
+    const modal = this.ui.modal.showModalConfirm(
       `Eliminar ${itemType}`,
       `¿Estas seguro de eliminar el ${itemType}?`
     );
@@ -133,7 +129,7 @@ export class AdminMediaOneComponent {
           if (response === true) {
             this.mediaService.deleteOne(this.media._id!).subscribe({
               next: (response) => this.onSuccessUpdate(response),
-              error: (error) => this.toast.showToast(TOAST_STATE.error, error),
+              error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
             });
           }
           sub$.unsubscribe();
@@ -143,7 +139,7 @@ export class AdminMediaOneComponent {
   }
 
   showImage(data: { image: Image; remote: boolean }) {
-    this.fullImage.show(data.image, data.remote);
+    this.ui.fullImage.show(data.image, data.remote);
   }
 
   goToMedia(slug: string) {
@@ -178,20 +174,20 @@ export class AdminMediaOneComponent {
   }
 
   private uploadImageByUrlNormal(data: ImageUploadByUrlDto, temp: boolean) {
-    this.spinner.show();
+    this.ui.spinner.show();
     this.imageService.uploadByUrl(data).subscribe({
       next: (response) => {
         if (!temp) {
           setTimeout(() => {
             this.media.images?.push(response);
             this.image = '';
-            this.spinner.hide();
+            this.ui.spinner.hide();
           }, 1000);
         }
       },
       error: (error) => {
-        this.spinner.hide();
-        this.toast.showToast(TOAST_STATE.error, error);
+        this.ui.spinner.hide();
+        this.ui.toast.showToast(TOAST_STATE.error, error);
       },
     });
   }
@@ -202,9 +198,9 @@ export class AdminMediaOneComponent {
         this.media.images = this.media.images?.filter(
           (item) => item._id !== img._id
         );
-        this.toast.showToast(TOAST_STATE.info, 'La imagen ha sido eliminada');
+        this.ui.toast.showToast(TOAST_STATE.info, 'La imagen ha sido eliminada');
       },
-      error: (error) => this.toast.showToast(TOAST_STATE.error, error),
+      error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
     });
   }
 
@@ -217,9 +213,9 @@ export class AdminMediaOneComponent {
     this.imageService.setFirstImage(data).subscribe({
       next: (response) => {
         this.media.images = response;
-        this.toast.showToast(TOAST_STATE.info, 'La imagen ha sido actualizada');
+        this.ui.toast.showToast(TOAST_STATE.info, 'La imagen ha sido actualizada');
       },
-      error: (error) => this.toast.showToast(TOAST_STATE.error, error),
+      error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
     });
   }
 

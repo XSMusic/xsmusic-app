@@ -6,22 +6,19 @@ import { MessageI, ScrapingGetInfoArtistResponse } from '@interfaces';
 import { Artist, Image, Style } from '@models';
 import {
   ArtistService,
-  ToastService,
   ScrapingService,
-  ModalService,
   ImageService,
   ValidationsFormService,
+  UIService,
+  MODAL_STATE,
+  TOAST_STATE,
 } from '@services';
 import {
   ImageSetFirstImageDto,
   ImageUploadByUrlDto,
 } from '@shared/services/api/image/image.dto';
 import { ScrapingGetInfoArtistDto } from '@shared/services/api/scraping/scraping.dto';
-import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
-import { MODAL_STATE } from '@shared/services/ui/modal/modal.service';
-import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { countries } from 'assets/data/countries';
-import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinner.service';
 
 @Component({
   selector: 'admin-artist-one',
@@ -45,11 +42,8 @@ export class AdminArtistOneComponent {
   constructor(
     private router: Router,
     private artistService: ArtistService,
-    private toastService: ToastService,
+    private ui: UIService,
     private scrapingService: ScrapingService,
-    private fullImage: FullImageService,
-    private modal: ModalService,
-    private spinner: NgxSpinnerService,
     private imageService: ImageService,
     private validationsFormService: ValidationsFormService
   ) {}
@@ -62,7 +56,7 @@ export class AdminArtistOneComponent {
   }
 
   onKeyUpName() {
-    this.spinner.show();
+    this.ui.spinner.show();
     const body: ScrapingGetInfoArtistDto = {
       name: this.artist.name,
       countryCode: this.artist.country,
@@ -70,8 +64,8 @@ export class AdminArtistOneComponent {
     this.scrapingService.getInfoArtist(body).subscribe({
       next: (response) => this.setArtistFromScraping(response),
       error: (error) => {
-        this.toastService.showToast(TOAST_STATE.error, error);
-        this.spinner.hide();
+        this.ui.toast.showToast(TOAST_STATE.error, error);
+        this.ui.spinner.hide();
       },
     });
   }
@@ -87,7 +81,7 @@ export class AdminArtistOneComponent {
     if (response.info) {
       this.scraping.infos = response.info;
     }
-    this.spinner.hide();
+    this.ui.spinner.hide();
   }
 
   private setStylesFromScraping(response: ScrapingGetInfoArtistResponse) {
@@ -125,11 +119,11 @@ export class AdminArtistOneComponent {
   }
 
   showImage(data: { image: Image; remote: boolean }) {
-    this.fullImage.show(data.image, data.remote);
+    this.ui.fullImage.show(data.image, data.remote);
   }
 
   showInfo(info: string) {
-    this.modal.showModal(MODAL_STATE.info, 'Informacion', info);
+    this.ui.modal.showModal(MODAL_STATE.info, 'Informacion', info);
   }
 
   selectInfo(info: string) {
@@ -160,20 +154,20 @@ export class AdminArtistOneComponent {
   }
 
   private uploadImageByUrlNormal(data: ImageUploadByUrlDto, temp: boolean) {
-    this.spinner.show();
+    this.ui.spinner.show();
     this.imageService.uploadByUrl(data).subscribe({
       next: (response) => {
         if (!temp) {
           setTimeout(() => {
             this.artist.images?.push(response);
             this.image = '';
-            this.spinner.hide();
+            this.ui.spinner.hide();
           }, 1000);
         }
       },
       error: (error) => {
-        this.spinner.hide();
-        this.toastService.showToast(TOAST_STATE.error, error);
+        this.ui.spinner.hide();
+        this.ui.toast.showToast(TOAST_STATE.error, error);
       },
     });
   }
@@ -184,12 +178,12 @@ export class AdminArtistOneComponent {
         this.artist.images = this.artist.images?.filter(
           (item) => item._id !== img._id
         );
-        this.toastService.showToast(
+        this.ui.toast.showToast(
           TOAST_STATE.info,
           'La imagen ha sido eliminada'
         );
       },
-      error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+      error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
     });
   }
 
@@ -202,12 +196,12 @@ export class AdminArtistOneComponent {
     this.imageService.setFirstImage(data).subscribe({
       next: (response) => {
         this.artist.images = response;
-        this.toastService.showToast(
+        this.ui.toast.showToast(
           TOAST_STATE.info,
           'La imagen ha sido actualizada'
         );
       },
-      error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+      error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
     });
   }
 
@@ -222,22 +216,22 @@ export class AdminArtistOneComponent {
         this.artistService.update(this.artist).subscribe({
           next: (response) => this.onSuccessUpdate(response),
           error: (error) =>
-            this.toastService.showToast(TOAST_STATE.error, error),
+            this.ui.toast.showToast(TOAST_STATE.error, error),
         });
       } else {
         this.artistService.create(this.artist).subscribe({
           next: (response) => this.onSuccessCreate(response),
           error: (error) =>
-            this.toastService.showToast(TOAST_STATE.error, error),
+            this.ui.toast.showToast(TOAST_STATE.error, error),
         });
       }
     } else {
-      this.toastService.showToast(TOAST_STATE.error, validation.message);
+      this.ui.toast.showToast(TOAST_STATE.error, validation.message);
     }
   }
 
   onSuccessUpdate(response: MessageI) {
-    this.toastService.showToast(TOAST_STATE.success, response.message);
+    this.ui.toast.showToast(TOAST_STATE.success, response.message);
     this.router.navigate([routesConfig.artistsAdmin]);
   }
 
@@ -247,13 +241,13 @@ export class AdminArtistOneComponent {
       this.uploadImageByUrl(image);
     }
     setTimeout(() => {
-      this.toastService.showToast(TOAST_STATE.success, 'Artista creado');
+      this.ui.toast.showToast(TOAST_STATE.success, 'Artista creado');
       this.onCreated.emit();
     }, 3000);
   }
 
   onDelete() {
-    const modal = this.modal.showModalConfirm(
+    const modal = this.ui.modal.showModalConfirm(
       'Eliminar Artista',
       '¿Estas seguro de eliminar el artista?'
     );
@@ -264,7 +258,7 @@ export class AdminArtistOneComponent {
             this.artistService.deleteOne(this.artist._id!).subscribe({
               next: (response) => this.onSuccessUpdate(response),
               error: (error) =>
-                this.toastService.showToast(TOAST_STATE.error, error),
+                this.ui.toast.showToast(TOAST_STATE.error, error),
             });
           }
           sub$.unsubscribe();

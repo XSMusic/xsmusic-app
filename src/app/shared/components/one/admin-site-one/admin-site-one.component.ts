@@ -5,13 +5,12 @@ import { routesConfig } from '@core/config';
 import { MessageI, ScrapingGetInfoClubResponse } from '@interfaces';
 import { Image, Site, Style } from '@models';
 import {
-  ToastService,
   SiteService,
   ScrapingService,
   GeoService,
   ImageService,
-  ModalService,
   ValidationsFormService,
+  UIService,
 } from '@services';
 import {
   ImageSetFirstImageDto,
@@ -49,15 +48,13 @@ export class AdminSiteOneComponent implements OnInit {
   @Output() onCreated = new EventEmitter<void>();
   constructor(
     private siteService: SiteService,
-    private fullImage: FullImageService,
-    private toastService: ToastService,
+    private ui: UIService,
     private router: Router,
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
     private scrapingService: ScrapingService,
     private geoService: GeoService,
     private imageService: ImageService,
-    private modal: ModalService,
     private validationsFormService: ValidationsFormService
   ) {}
 
@@ -70,7 +67,7 @@ export class AdminSiteOneComponent implements OnInit {
   }
 
   showImage(data: { image: Image; remote: boolean }) {
-    this.fullImage.show(data.image, data.remote);
+    this.ui.fullImage.show(data.image, data.remote);
   }
 
   onClickStyleItem(item: { name: string; _id: string }) {
@@ -86,7 +83,7 @@ export class AdminSiteOneComponent implements OnInit {
       );
       this.site.styles?.push(newStyle);
     } else {
-      this.toastService.showToast(
+      this.ui.toast.showToast(
         TOAST_STATE.warning,
         'No puedes añadir mas de 3 estilos'
       );
@@ -102,7 +99,7 @@ export class AdminSiteOneComponent implements OnInit {
     this.scrapingService.getInfoClub(body).subscribe({
       next: (response) => this.setClubFromScraping(response),
       error: (error) => {
-        this.toastService.showToast(TOAST_STATE.error, error);
+        this.ui.toast.showToast(TOAST_STATE.error, error);
         this.spinner.hide();
       },
     });
@@ -133,7 +130,7 @@ export class AdminSiteOneComponent implements OnInit {
         resolve();
       } catch (error) {
         this.spinner.hide();
-        this.toastService.showToast(
+        this.ui.toast.showToast(
           TOAST_STATE.error,
           'No ha sido posible scrapear sitio'
         );
@@ -151,16 +148,16 @@ export class AdminSiteOneComponent implements OnInit {
         .subscribe({
           next: (response) => {
             this.site.address.coordinates = response.coordinates;
-            this.toastService.showToast(
+            this.ui.toast.showToast(
               TOAST_STATE.success,
               'Coordenadas actualizadas'
             );
           },
           error: (error) =>
-            this.toastService.showToast(TOAST_STATE.error, error),
+            this.ui.toast.showToast(TOAST_STATE.error, error),
         });
     } else {
-      this.toastService.showToast(TOAST_STATE.error, 'Revisa la direccion');
+      this.ui.toast.showToast(TOAST_STATE.error, 'Revisa la direccion');
     }
   }
 
@@ -179,16 +176,16 @@ export class AdminSiteOneComponent implements OnInit {
             if (response.country) {
               this.site.address.country = response.country;
             }
-            this.toastService.showToast(
+            this.ui.toast.showToast(
               TOAST_STATE.success,
               'Direccion actualizada'
             );
           },
           error: (error) =>
-            this.toastService.showToast(TOAST_STATE.error, error),
+            this.ui.toast.showToast(TOAST_STATE.error, error),
         });
     } else {
-      this.toastService.showToast(TOAST_STATE.error, 'Revisa las coordenadas');
+      this.ui.toast.showToast(TOAST_STATE.error, 'Revisa las coordenadas');
     }
   }
 
@@ -229,7 +226,7 @@ export class AdminSiteOneComponent implements OnInit {
       },
       error: (error) => {
         this.spinner.hide();
-        this.toastService.showToast(TOAST_STATE.error, error);
+        this.ui.toast.showToast(TOAST_STATE.error, error);
       },
     });
   }
@@ -240,12 +237,12 @@ export class AdminSiteOneComponent implements OnInit {
         this.site.images = this.site.images?.filter(
           (item) => item._id !== img._id
         );
-        this.toastService.showToast(
+        this.ui.toast.showToast(
           TOAST_STATE.info,
           'La imagen ha sido eliminada'
         );
       },
-      error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+      error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
     });
   }
 
@@ -258,12 +255,12 @@ export class AdminSiteOneComponent implements OnInit {
     this.imageService.setFirstImage(data).subscribe({
       next: (response) => {
         this.site.images = response;
-        this.toastService.showToast(
+        this.ui.toast.showToast(
           TOAST_STATE.info,
           'La imagen ha sido actualizada'
         );
       },
-      error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+      error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
     });
   }
 
@@ -278,22 +275,22 @@ export class AdminSiteOneComponent implements OnInit {
         this.siteService.update(this.site).subscribe({
           next: (response) => this.onSuccessUpdate(response),
           error: (error) =>
-            this.toastService.showToast(TOAST_STATE.error, error),
+            this.ui.toast.showToast(TOAST_STATE.error, error),
         });
       } else {
         this.siteService.create(this.site).subscribe({
           next: (response) => this.onSuccessCreate(response),
           error: (error) =>
-            this.toastService.showToast(TOAST_STATE.error, error),
+            this.ui.toast.showToast(TOAST_STATE.error, error),
         });
       }
     } else {
-      this.toastService.showToast(TOAST_STATE.error, validation.message);
+      this.ui.toast.showToast(TOAST_STATE.error, validation.message);
     }
   }
 
   onSuccessUpdate(response: MessageI) {
-    this.toastService.showToast(TOAST_STATE.success, response.message);
+    this.ui.toast.showToast(TOAST_STATE.success, response.message);
     this.router.navigate([
       this.site.type === 'club'
         ? routesConfig.clubsAdmin
@@ -307,14 +304,14 @@ export class AdminSiteOneComponent implements OnInit {
       this.uploadImageByUrl(image);
     }
     setTimeout(() => {
-      this.toastService.showToast(TOAST_STATE.success, 'Sitio creado');
+      this.ui.toast.showToast(TOAST_STATE.success, 'Sitio creado');
       this.onCreated.emit();
     }, 3000);
   }
 
   onDelete() {
     const itemType = `${this.site.type === 'club' ? 'Club' : 'Festival'}`;
-    const modal = this.modal.showModalConfirm(
+    const modal = this.ui.modal.showModalConfirm(
       `Eliminar ${itemType}`,
       `¿Estas seguro de eliminar el ${itemType}?`
     );
@@ -325,7 +322,7 @@ export class AdminSiteOneComponent implements OnInit {
             this.siteService.deleteOne(this.site._id!).subscribe({
               next: (response) => this.onSuccessUpdate(response),
               error: (error) =>
-                this.toastService.showToast(TOAST_STATE.error, error),
+                this.ui.toast.showToast(TOAST_STATE.error, error),
             });
           }
           sub$.unsubscribe();

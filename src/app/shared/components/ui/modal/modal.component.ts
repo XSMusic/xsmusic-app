@@ -6,7 +6,7 @@ import {
   animate,
 } from '@angular/animations';
 import { Component } from '@angular/core';
-import { ModalService } from '@services';
+import { ModalService } from '@shared/services/ui/modal/modal.service';
 
 @Component({
   selector: 'modal',

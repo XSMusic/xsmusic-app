@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@core/auth';
 import { routesConfig } from '@core/config';
-import { ToastService, TOAST_STATE } from '@services';
+import { TOAST_STATE, UIService } from '@services';
 
 @Component({
   selector: 'page-reset-change-password',
@@ -17,7 +17,7 @@ export class ResetChangePasswordPage {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private toast: ToastService
+    private ui: UIService
   ) {}
 
   ngOnInit() {
@@ -32,16 +32,16 @@ export class ResetChangePasswordPage {
           .resetPassword(this.userId, this.token, this.password)
           .subscribe({
             next: (response) => {
-              this.toast.showToast(TOAST_STATE.info, response.message);
+              this.ui.toast.showToast(TOAST_STATE.info, response.message);
               this.router.navigate([routesConfig.authLogin]);
             },
-            error: (error) => this.toast.showToast(TOAST_STATE.error, error),
+            error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
           });
       } else {
-        this.toast.showToast(TOAST_STATE.warning, 'Introduce el email');
+        this.ui.toast.showToast(TOAST_STATE.warning, 'Introduce el email');
       }
     } else {
-      this.toast.showToast(TOAST_STATE.warning, 'Minimo 6 caracteres');
+      this.ui.toast.showToast(TOAST_STATE.warning, 'Minimo 6 caracteres');
     }
   }
 }

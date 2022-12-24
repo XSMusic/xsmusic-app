@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { TOAST_STATE, SiteService, ApiService, UIService } from '@services';
+import { SiteService, ApiService, UIService } from '@services';
 import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
+import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import {
   GenericSubItemType,
   getFilterList,

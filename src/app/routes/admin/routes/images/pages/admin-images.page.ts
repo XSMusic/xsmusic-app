@@ -4,12 +4,7 @@ import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { GetAllDto } from '@interfaces';
 import { Image } from '@models';
-import {
-  ImageService,
-  ModalService,
-  ToastService,
-  TOAST_STATE,
-} from '@services';
+import { ImageService, TOAST_STATE, UIService } from '@services';
 import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 
 @Component({
@@ -29,9 +24,8 @@ export class AdminImagesPage implements OnInit {
   error = false;
   constructor(
     private imageService: ImageService,
-    private toast: ToastService,
+    private ui: UIService,
     private router: Router,
-    private modal: ModalService
   ) {}
 
   ngOnInit() {
@@ -79,7 +73,7 @@ export class AdminImagesPage implements OnInit {
 
   onClickTab(button: TabsItem) {
     if (button.action === 'order' || button.action === 'filter') {
-      this.toast.showToast(TOAST_STATE.info, 'En construccion');
+      this.ui.toast.showToast(TOAST_STATE.info, 'En construccion');
     } else if (button.action === 'add') {
       this.router.navigate([routesConfig.imageAdminAdd]);
     }
@@ -97,7 +91,7 @@ export class AdminImagesPage implements OnInit {
   }
 
   onDelete(item: Image) {
-    const modal = this.modal.showModalConfirm(
+    const modal = this.ui.modal.showModalConfirm(
       'Eliminar Imagen',
       '¿Estas seguro de eliminar la imagen?'
     );
@@ -107,11 +101,11 @@ export class AdminImagesPage implements OnInit {
           if (response === true) {
             this.imageService.deleteOne(item._id!).subscribe({
               next: (response) => {
-                this.toast.showToast(TOAST_STATE.success, response.message);
+                this.ui.toast.showToast(TOAST_STATE.success, response.message);
                 this.body.page = 1;
                 this.getItems();
               },
-              error: (error) => this.toast.showToast(TOAST_STATE.error, error),
+              error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
             });
           }
           sub$.unsubscribe();

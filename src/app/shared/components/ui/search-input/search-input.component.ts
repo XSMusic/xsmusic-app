@@ -5,8 +5,8 @@ import {
   ArtistService,
   SiteService,
   StyleService,
-  ToastService,
   TOAST_STATE,
+  UIService,
 } from '@services';
 
 @Component({
@@ -30,7 +30,7 @@ export class SearchInputComponent implements OnInit {
   itemsSearch: any[] = [];
   itemSearch = null;
   constructor(
-    private toast: ToastService,
+    private ui: UIService,
     private artistService: ArtistService,
     private siteService: SiteService,
     private styleService: StyleService
@@ -70,11 +70,11 @@ export class SearchInputComponent implements OnInit {
       }
       service!.getAll(this.body).subscribe({
         next: (response: any) => this.onSearchResultsSuccess(response),
-        error: (error: any) => this.toast.showToast(TOAST_STATE.error, error),
+        error: (error: any) => this.ui.toast.showToast(TOAST_STATE.error, error),
       });
       this.selectState = true;
     } else {
-      this.toast.showToast(TOAST_STATE.warning, 'Introduce texto para buscar');
+      this.ui.toast.showToast(TOAST_STATE.warning, 'Introduce texto para buscar');
     }
   }
 

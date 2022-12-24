@@ -5,20 +5,17 @@ import { routesConfig } from '@core/config';
 import { MessageI } from '@interfaces';
 import { Event, Image, Style } from '@models';
 import {
-  ToastService,
   ImageService,
   EventService,
   ValidationsFormService,
-  ModalService,
+  UIService,
+  TOAST_STATE,
 } from '@services';
 import {
   ImageSetFirstImageDto,
   ImageUploadByUrlDto,
   ImageUploadDto,
 } from '@shared/services/api/image/image.dto';
-import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
-import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
-import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinner.service';
 
 @Component({
   selector: 'admin-event-one',
@@ -43,17 +40,14 @@ export class AdminEventOneComponent {
   tempImagesByFile: File[] = [];
   constructor(
     private eventService: EventService,
-    private fullImage: FullImageService,
-    private toastService: ToastService,
+    private ui: UIService,
     private router: Router,
-    private spinner: NgxSpinnerService,
     private imageService: ImageService,
     private validationsFormService: ValidationsFormService,
-    private modal: ModalService
   ) {}
 
   showImage(data: { image: Image; remote: boolean }) {
-    this.fullImage.show(data.image, data.remote);
+    this.ui.fullImage.show(data.image, data.remote);
   }
 
   uploadImageByFile(image: File) {
@@ -70,17 +64,17 @@ export class AdminEventOneComponent {
   }
 
   private uploadImageByFileNormal(data: ImageUploadDto, image: File) {
-    this.spinner.show();
+    this.ui.spinner.show();
     this.imageService.upload(data, image).subscribe({
       next: (response) => {
         setTimeout(() => {
           this.event.images?.push(response);
-          this.spinner.hide();
+          this.ui.spinner.hide();
         }, 1000);
       },
       error: (error) => {
-        this.spinner.hide();
-        this.toastService.showToast(TOAST_STATE.error, error);
+        this.ui.spinner.hide();
+        this.ui.toast.showToast(TOAST_STATE.error, error);
       },
     });
   }
@@ -104,18 +98,18 @@ export class AdminEventOneComponent {
   }
 
   private uploadImageByUrlNormal(data: ImageUploadByUrlDto) {
-    this.spinner.show();
+    this.ui.spinner.show();
     this.imageService.uploadByUrl(data).subscribe({
       next: (response) => {
         setTimeout(() => {
           this.event.images?.push(response);
           this.image = '';
-          this.spinner.hide();
+          this.ui.spinner.hide();
         }, 1000);
       },
       error: (error) => {
-        this.spinner.hide();
-        this.toastService.showToast(TOAST_STATE.error, error);
+        this.ui.spinner.hide();
+        this.ui.toast.showToast(TOAST_STATE.error, error);
       },
     });
   }
@@ -135,12 +129,12 @@ export class AdminEventOneComponent {
         this.event.images = this.event.images?.filter(
           (item) => item._id !== img._id
         );
-        this.toastService.showToast(
+        this.ui.toast.showToast(
           TOAST_STATE.info,
           'La imagen ha sido eliminada'
         );
       },
-      error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+      error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
     });
   }
 
@@ -153,12 +147,12 @@ export class AdminEventOneComponent {
     this.imageService.setFirstImage(data).subscribe({
       next: (response) => {
         this.event.images = response;
-        this.toastService.showToast(
+        this.ui.toast.showToast(
           TOAST_STATE.info,
           'La imagen ha sido actualizada'
         );
       },
-      error: (error) => this.toastService.showToast(TOAST_STATE.error, error),
+      error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
     });
   }
 
@@ -197,22 +191,22 @@ export class AdminEventOneComponent {
         this.eventService.update(this.event).subscribe({
           next: (response) => this.onSuccessUpdate(response),
           error: (error) =>
-            this.toastService.showToast(TOAST_STATE.error, error),
+            this.ui.toast.showToast(TOAST_STATE.error, error),
         });
       } else {
         this.eventService.create(this.event).subscribe({
           next: (response) => this.onSuccessCreate(response),
           error: (error) =>
-            this.toastService.showToast(TOAST_STATE.error, error),
+            this.ui.toast.showToast(TOAST_STATE.error, error),
         });
       }
     } else {
-      this.toastService.showToast(TOAST_STATE.error, validation.message);
+      this.ui.toast.showToast(TOAST_STATE.error, validation.message);
     }
   }
 
   onSuccessUpdate(response: MessageI) {
-    this.toastService.showToast(TOAST_STATE.success, response.message);
+    this.ui.toast.showToast(TOAST_STATE.success, response.message);
     this.router.navigate([routesConfig.eventsAdmin]);
   }
 
@@ -225,13 +219,13 @@ export class AdminEventOneComponent {
       this.uploadImageByFile(imageFile);
     }
     setTimeout(() => {
-      this.toastService.showToast(TOAST_STATE.success, 'Sitio creado');
+      this.ui.toast.showToast(TOAST_STATE.success, 'Sitio creado');
       this.router.navigate([routesConfig.eventsAdmin]);
     }, 3000);
   }
 
   onDelete() {
-    const modal = this.modal.showModalConfirm(
+    const modal = this.ui.modal.showModalConfirm(
       `Eliminar evento`,
       `¿Estas seguro de eliminar el evento?`
     );
@@ -242,7 +236,7 @@ export class AdminEventOneComponent {
             this.eventService.deleteOne(this.event._id!).subscribe({
               next: (response) => this.onSuccessUpdate(response),
               error: (error) =>
-                this.toastService.showToast(TOAST_STATE.error, error),
+                this.ui.toast.showToast(TOAST_STATE.error, error),
             });
           }
           sub$.unsubscribe();

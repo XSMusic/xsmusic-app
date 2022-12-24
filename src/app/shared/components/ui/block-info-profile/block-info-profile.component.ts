@@ -4,7 +4,7 @@ import { Share, ShareOptions } from '@capacitor/share';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { environment } from '@env/environment';
-import { NavigationService, ToastService, TOAST_STATE } from '@services';
+import { NavigationService, TOAST_STATE, UIService } from '@services';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
 import {
   firstLetterCase,
@@ -27,7 +27,7 @@ export class BlockInfoProfileComponent {
 
   constructor(
     private router: Router,
-    private toastService: ToastService,
+    private ui: UIService,
     private gaService: GoogleAnalyticsService,
     private navigationService: NavigationService
   ) {}
@@ -99,7 +99,7 @@ export class BlockInfoProfileComponent {
         `${this.type}_sharing`,
         this.type
       );
-      this.toastService.showToast(TOAST_STATE.error, 'Error al compartir');
+      this.ui.toast.showToast(TOAST_STATE.error, 'Error al compartir');
     }
   }
 
@@ -109,6 +109,6 @@ export class BlockInfoProfileComponent {
       `${this.type}_report`,
       this.type
     );
-    this.toastService.showToast(TOAST_STATE.info, 'Proximamente...');
+    this.ui.toast.showToast(TOAST_STATE.info, 'Proximamente...');
   }
 }

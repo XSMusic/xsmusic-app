@@ -7,11 +7,11 @@ import {
   ApiService,
   ScrapingService,
   StatsService,
-  TOAST_STATE,
   UIService,
 } from '@services';
 import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
+import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { GenericItemType, GenericSubItemType } from '@shared/utils';
 import { Observable } from 'rxjs';
 import { GenericAdminListBaseViewModel } from './generic-admin-list.base.view-model';

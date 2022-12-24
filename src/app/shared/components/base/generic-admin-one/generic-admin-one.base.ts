@@ -5,7 +5,6 @@ import {
   EventService,
   MediaService,
   SiteService,
-  TOAST_STATE,
   UIService,
 } from '@services';
 import { ArtistService } from '@shared/services/api/artist/artist.service';
@@ -18,6 +17,7 @@ import { DateFunctions } from '@shared/utils/dates';
 import { MetadataI } from '@shared/services/system/meta';
 import { GenericItemType, GenericSubItemType } from '@shared/utils';
 import { GenericAdminOneBaseViewModel } from './generic-admin-one.base.view-model';
+import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 
 @Component({
   selector: 'generic-admin-one-base',

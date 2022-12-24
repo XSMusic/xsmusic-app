@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { Youtube } from '@models';
-import { ScrapingService, ToastService, TOAST_STATE } from '@services';
+import { ScrapingService, TOAST_STATE, UIService } from '@services';
 
 @Component({
   selector: 'admin-media-add-search-items',
@@ -15,7 +15,7 @@ export class AdminMediaAddSearchItemsComponent {
 
   constructor(
     private scrapingService: ScrapingService,
-    private toast: ToastService
+    private ui: UIService
   ) {}
 
   goToYoutube(item: Youtube) {
@@ -31,7 +31,7 @@ export class AdminMediaAddSearchItemsComponent {
             (item) => item.videoId !== response.value
           );
         },
-        error: (error) => this.toast.showToast(TOAST_STATE.error, error),
+        error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
       });
   }
 }

@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@core/auth';
 import { routesConfig } from '@core/config';
-import { ToastService, UserService } from '@services';
-import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
+import { TOAST_STATE, UIService, UserService } from '@services';
 
 @Component({
   selector: 'page-login',
@@ -15,7 +14,7 @@ export class LoginPage {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private toast: ToastService,
+    private ui: UIService,
     private userService: UserService
   ) {}
 
@@ -26,13 +25,13 @@ export class LoginPage {
         next: () => {
           const user = this.userService.getUser();
           this.router.navigate([routesConfig.home]);
-          this.toast.showToast(
+          this.ui.toast.showToast(
             TOAST_STATE.success,
             `¡Bienvenid@ ${user.name}!`
           );
         },
         error: (error) => {
-          this.toast.showToast(TOAST_STATE.error, error);
+          this.ui.toast.showToast(TOAST_STATE.error, error);
         },
       });
   }
@@ -42,10 +41,10 @@ export class LoginPage {
       next: () => {
         const user = this.userService.getUser();
         this.router.navigate([routesConfig.home]);
-        this.toast.showToast(TOAST_STATE.success, `¡Bienvenid@ ${user.name}!`);
+        this.ui.toast.showToast(TOAST_STATE.success, `¡Bienvenid@ ${user.name}!`);
       },
       error: (error) => {
-        this.toast.showToast(TOAST_STATE.error, error);
+        this.ui.toast.showToast(TOAST_STATE.error, error);
       },
     });
   }
@@ -55,6 +54,6 @@ export class LoginPage {
   }
 
   wip() {
-    this.toast.showToast(TOAST_STATE.warning, 'En construccion...');
+    this.ui.toast.showToast(TOAST_STATE.warning, 'En construccion...');
   }
 }

@@ -5,10 +5,9 @@ import { Event } from '@models';
 import {
   EventService,
   ImageService,
-  ModalService,
   ScrapingService,
-  ToastService,
   TOAST_STATE,
+  UIService,
 } from '@services';
 import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
@@ -55,9 +54,8 @@ export class AdminEventsScrapingComponent {
     private scrapingService: ScrapingService,
     private eventService: EventService,
     private imageService: ImageService,
-    private toast: ToastService,
+    private ui: UIService,
     private router: Router,
-    private modal: ModalService
   ) {}
 
   getEvents() {
@@ -68,7 +66,7 @@ export class AdminEventsScrapingComponent {
       next: (response) => {
         this.items = response;
       },
-      error: (error) => this.toast.showToast(TOAST_STATE.error, error),
+      error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
     });
   }
 
@@ -77,7 +75,7 @@ export class AdminEventsScrapingComponent {
   }
 
   addEventConfirmation(data: GoToPageI) {
-    const modal = this.modal.showModalConfirm(
+    const modal = this.ui.modal.showModalConfirm(
       `Añadir evento`,
       `¿Estas seguro de añadir el evento?`
     );
@@ -113,20 +111,20 @@ export class AdminEventsScrapingComponent {
               (itemC) => itemC.name !== item.name
             );
             this.onEventCreated.emit();
-            this.toast.showToast(
+            this.ui.toast.showToast(
               TOAST_STATE.success,
               'Evento añadido correctamente'
             );
           },
-          error: (error) => this.toast.showToast(TOAST_STATE.error, error),
+          error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
         });
       },
-      error: (error) => this.toast.showToast(TOAST_STATE.error, error),
+      error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
     });
   }
 
   goToAddSite(data: GoToPageI) {
-    const modal = this.modal.showModalConfirm(
+    const modal = this.ui.modal.showModalConfirm(
       `Añadir club`,
       `¿Quieres ir a añadir el club?`
     );

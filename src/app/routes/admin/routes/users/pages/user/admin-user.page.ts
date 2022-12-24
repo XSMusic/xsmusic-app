@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '@models';
-import { ToastService, UserService } from '@services';
-import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
+import { TOAST_STATE, UIService, UserService } from '@services';
 import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinner.service';
 
 @Component({
@@ -17,7 +16,7 @@ export class AdminUserPage implements OnInit {
 
   constructor(
     private userService: UserService,
-    private toast: ToastService,
+    private ui: UIService,
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService
   ) {}
@@ -40,7 +39,7 @@ export class AdminUserPage implements OnInit {
         this.spinner.hide();
       },
       error: (error) => {
-        this.toast.showToast(TOAST_STATE.error, error);
+        this.ui.toast.showToast(TOAST_STATE.error, error);
         this.spinner.hide();
       },
     });

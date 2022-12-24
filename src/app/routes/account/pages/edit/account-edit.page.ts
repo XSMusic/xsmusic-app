@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@core/auth';
 import { User } from '@models';
-import { ToastService, TOAST_STATE, UserService } from '@services';
+import { TOAST_STATE, UIService, UserService } from '@services';
 import { darkMode } from '@shared/utils';
 
 @Component({
@@ -13,7 +13,7 @@ export class AccountEditPage implements OnInit {
   constructor(
     private authService: AuthService,
     private userService: UserService,
-    private toast: ToastService
+    private ui: UIService
   ) {}
 
   ngOnInit(): void {
@@ -29,11 +29,11 @@ export class AccountEditPage implements OnInit {
   onSubmit() {
     this.userService.update(this.user).subscribe({
       next: (response) => {
-        this.toast.showToast(TOAST_STATE.success, response.message);
+        this.ui.toast.showToast(TOAST_STATE.success, response.message);
         this.userService.set(this.user);
         darkMode(this.user);
       },
-      error: (error) => this.toast.showToast(TOAST_STATE.error, error),
+      error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
     });
   }
 }

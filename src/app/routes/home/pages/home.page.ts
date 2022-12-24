@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { routesConfig } from '@core/config';
 import { PaginatorI } from '@interfaces';
-import { ApiService, ToastService, TOAST_STATE } from '@services';
+import { ApiService, TOAST_STATE, UIService } from '@services';
 import {
   ApiAllTypes,
   GenericItemsAllType,
@@ -20,7 +20,7 @@ export class HomePage implements OnInit {
   vm = new HomeViewModel();
   constructor(
     private apiService: ApiService,
-    private toast: ToastService,
+    private ui: UIService,
     private router: Router
   ) {}
 
@@ -68,7 +68,7 @@ export class HomePage implements OnInit {
       error: (error) => {
         this.vm.loading[typeItems] = false;
         this.vm.error[typeItems] = true;
-        this.toast.showToast(TOAST_STATE.error, error);
+        this.ui.toast.showToast(TOAST_STATE.error, error);
       },
     });
   }

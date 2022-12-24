@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Share, ShareOptions } from '@capacitor/share';
 import { environment } from '@env/environment';
-import { ToastService, TOAST_STATE } from '@services';
+import { TOAST_STATE, UIService } from '@services';
 import { getTitleMedia } from '@shared/utils';
 import { DateFunctions } from '@shared/utils/dates';
 
@@ -13,7 +13,7 @@ import { DateFunctions } from '@shared/utils/dates';
 export class BlockSharingReportComponent {
   @Input() item: any;
   @Input() type!: 'artist' | 'club' | 'event' | 'festival' | 'set' | 'track';
-  constructor(private toast: ToastService, private router: Router) {}
+  constructor(private ui: UIService, private router: Router) {}
 
   async sharing() {
     try {
@@ -31,12 +31,12 @@ export class BlockSharingReportComponent {
       await Share.share(shareData);
     } catch (error: any) {
       if (error.toString().indexOf('Share API not available in this browser')) {
-        this.toast.showToast(TOAST_STATE.info, 'Proximamente...');
+        this.ui.toast.showToast(TOAST_STATE.info, 'Proximamente...');
       }
     }
   }
 
   report() {
-    this.toast.showToast(TOAST_STATE.info, 'Proximamente...');
+    this.ui.toast.showToast(TOAST_STATE.info, 'Proximamente...');
   }
 }

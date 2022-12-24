@@ -15,10 +15,7 @@ export class AdminTotalsComponent implements OnInit {
   endSlice = 2;
   loading = true;
 
-  constructor(
-    private statsService: StatsService,
-    private ui: UIService
-  ) {}
+  constructor(private statsService: StatsService, private ui: UIService) {}
 
   ngOnInit() {
     this.setInitTotals();

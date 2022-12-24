@@ -25,7 +25,7 @@ export class AdminMediaAddPage implements OnInit {
   constructor(
     private scrapingService: ScrapingService,
     private route: ActivatedRoute,
-    private ui: UIService,
+    private ui: UIService
   ) {}
 
   ngOnInit() {

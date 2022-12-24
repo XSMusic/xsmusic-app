@@ -25,7 +25,7 @@ export class AdminImagesPage implements OnInit {
   constructor(
     private imageService: ImageService,
     private ui: UIService,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -105,7 +105,8 @@ export class AdminImagesPage implements OnInit {
                 this.body.page = 1;
                 this.getItems();
               },
-              error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
+              error: (error) =>
+                this.ui.toast.showToast(TOAST_STATE.error, error),
             });
           }
           sub$.unsubscribe();

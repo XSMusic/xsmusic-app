@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  MetaService,
-  NavigationService,
-} from '@services';
+import { MetaService, NavigationService } from '@services';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
 import { NgxSpinnerService } from '../system/ngx-spinner/ngx-spinner.service';
 import { FullImageService } from './full-image/full-image.service';

@@ -7,6 +7,7 @@ import { Artist, Image, Media, Site, Style } from '@models';
 import {
   ImageService,
   MediaService,
+  TOAST_STATE,
   UIService,
   ValidationsFormService,
 } from '@services';
@@ -14,9 +15,6 @@ import {
   ImageSetFirstImageDto,
   ImageUploadByUrlDto,
 } from '@shared/services/api/image/image.dto';
-import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
-import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
-import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinner.service';
 
 @Component({
   selector: 'admin-media-one',
@@ -129,7 +127,8 @@ export class AdminMediaOneComponent {
           if (response === true) {
             this.mediaService.deleteOne(this.media._id!).subscribe({
               next: (response) => this.onSuccessUpdate(response),
-              error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
+              error: (error) =>
+                this.ui.toast.showToast(TOAST_STATE.error, error),
             });
           }
           sub$.unsubscribe();
@@ -198,7 +197,10 @@ export class AdminMediaOneComponent {
         this.media.images = this.media.images?.filter(
           (item) => item._id !== img._id
         );
-        this.ui.toast.showToast(TOAST_STATE.info, 'La imagen ha sido eliminada');
+        this.ui.toast.showToast(
+          TOAST_STATE.info,
+          'La imagen ha sido eliminada'
+        );
       },
       error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
     });
@@ -213,7 +215,10 @@ export class AdminMediaOneComponent {
     this.imageService.setFirstImage(data).subscribe({
       next: (response) => {
         this.media.images = response;
-        this.ui.toast.showToast(TOAST_STATE.info, 'La imagen ha sido actualizada');
+        this.ui.toast.showToast(
+          TOAST_STATE.info,
+          'La imagen ha sido actualizada'
+        );
       },
       error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
     });

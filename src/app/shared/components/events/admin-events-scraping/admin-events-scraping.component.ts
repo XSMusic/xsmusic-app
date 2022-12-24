@@ -55,7 +55,7 @@ export class AdminEventsScrapingComponent {
     private eventService: EventService,
     private imageService: ImageService,
     private ui: UIService,
-    private router: Router,
+    private router: Router
   ) {}
 
   getEvents() {

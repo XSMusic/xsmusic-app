@@ -43,7 +43,7 @@ export class AdminEventOneComponent {
     private ui: UIService,
     private router: Router,
     private imageService: ImageService,
-    private validationsFormService: ValidationsFormService,
+    private validationsFormService: ValidationsFormService
   ) {}
 
   showImage(data: { image: Image; remote: boolean }) {
@@ -190,14 +190,12 @@ export class AdminEventOneComponent {
       if (this.event._id) {
         this.eventService.update(this.event).subscribe({
           next: (response) => this.onSuccessUpdate(response),
-          error: (error) =>
-            this.ui.toast.showToast(TOAST_STATE.error, error),
+          error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
         });
       } else {
         this.eventService.create(this.event).subscribe({
           next: (response) => this.onSuccessCreate(response),
-          error: (error) =>
-            this.ui.toast.showToast(TOAST_STATE.error, error),
+          error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
         });
       }
     } else {

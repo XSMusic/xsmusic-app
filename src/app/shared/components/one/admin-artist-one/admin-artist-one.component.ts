@@ -215,14 +215,12 @@ export class AdminArtistOneComponent {
       if (this.artist._id) {
         this.artistService.update(this.artist).subscribe({
           next: (response) => this.onSuccessUpdate(response),
-          error: (error) =>
-            this.ui.toast.showToast(TOAST_STATE.error, error),
+          error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
         });
       } else {
         this.artistService.create(this.artist).subscribe({
           next: (response) => this.onSuccessCreate(response),
-          error: (error) =>
-            this.ui.toast.showToast(TOAST_STATE.error, error),
+          error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
         });
       }
     } else {

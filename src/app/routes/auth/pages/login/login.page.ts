@@ -41,7 +41,10 @@ export class LoginPage {
       next: () => {
         const user = this.userService.getUser();
         this.router.navigate([routesConfig.home]);
-        this.ui.toast.showToast(TOAST_STATE.success, `¡Bienvenid@ ${user.name}!`);
+        this.ui.toast.showToast(
+          TOAST_STATE.success,
+          `¡Bienvenid@ ${user.name}!`
+        );
       },
       error: (error) => {
         this.ui.toast.showToast(TOAST_STATE.error, error);

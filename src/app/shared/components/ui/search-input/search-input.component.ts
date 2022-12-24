@@ -70,11 +70,15 @@ export class SearchInputComponent implements OnInit {
       }
       service!.getAll(this.body).subscribe({
         next: (response: any) => this.onSearchResultsSuccess(response),
-        error: (error: any) => this.ui.toast.showToast(TOAST_STATE.error, error),
+        error: (error: any) =>
+          this.ui.toast.showToast(TOAST_STATE.error, error),
       });
       this.selectState = true;
     } else {
-      this.ui.toast.showToast(TOAST_STATE.warning, 'Introduce texto para buscar');
+      this.ui.toast.showToast(
+        TOAST_STATE.warning,
+        'Introduce texto para buscar'
+      );
     }
   }
 

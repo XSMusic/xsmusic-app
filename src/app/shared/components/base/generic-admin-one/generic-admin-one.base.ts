@@ -1,12 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import {
-  EventService,
-  MediaService,
-  SiteService,
-  UIService,
-} from '@services';
+import { EventService, MediaService, SiteService, UIService } from '@services';
 import { ArtistService } from '@shared/services/api/artist/artist.service';
 import { routesConfig } from '@core/config';
 import { Observable } from 'rxjs';

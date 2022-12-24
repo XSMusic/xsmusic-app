@@ -11,16 +11,14 @@ import {
   ImageService,
   ValidationsFormService,
   UIService,
+  TOAST_STATE,
 } from '@services';
 import {
   ImageSetFirstImageDto,
   ImageUploadByUrlDto,
 } from '@shared/services/api/image/image.dto';
 import { ScrapingGetInfoClubDto } from '@shared/services/api/scraping/scraping.dto';
-import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
-import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { countries } from 'assets/data/countries';
-import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinner.service';
 import { getKeyValueByParam } from '@shared/utils';
 
 @Component({
@@ -51,7 +49,6 @@ export class AdminSiteOneComponent implements OnInit {
     private ui: UIService,
     private router: Router,
     private route: ActivatedRoute,
-    private spinner: NgxSpinnerService,
     private scrapingService: ScrapingService,
     private geoService: GeoService,
     private imageService: ImageService,
@@ -91,7 +88,7 @@ export class AdminSiteOneComponent implements OnInit {
   }
 
   onKeyUpName() {
-    this.spinner.show();
+    this.ui.spinner.show();
     const body: ScrapingGetInfoClubDto = {
       name: this.site.name!,
       poblation: this.site.address.poblation,
@@ -100,7 +97,7 @@ export class AdminSiteOneComponent implements OnInit {
       next: (response) => this.setClubFromScraping(response),
       error: (error) => {
         this.ui.toast.showToast(TOAST_STATE.error, error);
-        this.spinner.hide();
+        this.ui.spinner.hide();
       },
     });
   }
@@ -126,10 +123,10 @@ export class AdminSiteOneComponent implements OnInit {
           this.site.address.coordinates = response.address.coordinates;
         }
         this.scraping.images = response.images;
-        this.spinner.hide();
+        this.ui.spinner.hide();
         resolve();
       } catch (error) {
-        this.spinner.hide();
+        this.ui.spinner.hide();
         this.ui.toast.showToast(
           TOAST_STATE.error,
           'No ha sido posible scrapear sitio'
@@ -153,8 +150,7 @@ export class AdminSiteOneComponent implements OnInit {
               'Coordenadas actualizadas'
             );
           },
-          error: (error) =>
-            this.ui.toast.showToast(TOAST_STATE.error, error),
+          error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
         });
     } else {
       this.ui.toast.showToast(TOAST_STATE.error, 'Revisa la direccion');
@@ -181,8 +177,7 @@ export class AdminSiteOneComponent implements OnInit {
               'Direccion actualizada'
             );
           },
-          error: (error) =>
-            this.ui.toast.showToast(TOAST_STATE.error, error),
+          error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
         });
     } else {
       this.ui.toast.showToast(TOAST_STATE.error, 'Revisa las coordenadas');
@@ -213,19 +208,19 @@ export class AdminSiteOneComponent implements OnInit {
   }
 
   private uploadImageByUrlNormal(data: ImageUploadByUrlDto, temp: boolean) {
-    this.spinner.show();
+    this.ui.spinner.show();
     this.imageService.uploadByUrl(data).subscribe({
       next: (response) => {
         if (!temp) {
           setTimeout(() => {
             this.site.images?.push(response);
             this.image = '';
-            this.spinner.hide();
+            this.ui.spinner.hide();
           }, 1000);
         }
       },
       error: (error) => {
-        this.spinner.hide();
+        this.ui.spinner.hide();
         this.ui.toast.showToast(TOAST_STATE.error, error);
       },
     });
@@ -274,14 +269,12 @@ export class AdminSiteOneComponent implements OnInit {
       if (this.site._id) {
         this.siteService.update(this.site).subscribe({
           next: (response) => this.onSuccessUpdate(response),
-          error: (error) =>
-            this.ui.toast.showToast(TOAST_STATE.error, error),
+          error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
         });
       } else {
         this.siteService.create(this.site).subscribe({
           next: (response) => this.onSuccessCreate(response),
-          error: (error) =>
-            this.ui.toast.showToast(TOAST_STATE.error, error),
+          error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
         });
       }
     } else {

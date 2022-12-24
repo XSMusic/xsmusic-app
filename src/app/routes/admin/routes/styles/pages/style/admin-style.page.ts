@@ -21,7 +21,7 @@ export class AdminStylePage implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private styleService: StyleService,
-    private ui: UIService,
+    private ui: UIService
   ) {}
 
   ngOnInit() {

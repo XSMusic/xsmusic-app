@@ -79,6 +79,19 @@
     </ng-container>
   </div>
 
+  <div *ngIf="type === 'user'">
+    <admin-user-one
+      *ngIf="vm.view === 'viewInfo'"
+      [user]="vm.user"
+      (onSubmit)="onSubmit($event)"
+      (showImage)="showImage($event)"
+      (removeImage)="removeImage($event)"
+      (setFirstImage)="setFirstImage($event)"
+      (uploadImageByUrl)="uploadImageByUrl($event)"
+      (uploadImageByFile)="uploadImageByFile($event)"
+    ></admin-user-one>
+  </div>
+
   <div *ngIf="vm.view === 'viewOptions'">
     <options-items
       [options]="vm.options"

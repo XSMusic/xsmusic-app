@@ -91,6 +91,16 @@ export const tabsByType = [
     ],
   },
   {
+    name: 'userAdmin',
+    buttons: [
+      new TabsItem({
+        name: 'Info',
+        action: 'viewInfo',
+        isActivatable: true,
+      }),
+    ],
+  },
+  {
     name: 'artistsAdmin',
     buttons: [
       new TabsItem({

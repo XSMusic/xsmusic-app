@@ -15,15 +15,22 @@
           />
           <div class="flex flex-col gap-1">
             <p
-              class="my-1 mr-2 text-base font-extrabold leading-none text-black cursor-pointer hover:text-gray-500"
+              class="my-1 mr-2 text-base font-extrabold leading-none text-black cursor-pointer dark:text-white hover:text-gray-500"
               (click)="
                 goToPage.emit({ type: 'user', typeRoute: 'one', item: user })
               "
             >
               {{ user.name }}
+              <span
+                class="px-2 text-sm text-black bg-gray-100 border rounded-lg font-extralight"
+              >
+                {{ user.role }}</span
+              >
             </p>
             <div class="flex items-center gap-2">
-              <p class="mr-2 text-sm font-light leading-none text-gray-700">
+              <p
+                class="mr-2 text-sm font-light leading-none text-gray-700 dark:text-gray-400"
+              >
                 {{ user.email }}
               </p>
             </div>

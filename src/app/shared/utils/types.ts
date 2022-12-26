@@ -42,3 +42,21 @@ export type ApiTypes =
   | 'sites'
   | 'styles'
   | 'users';
+
+export type TabsType =
+  | 'generic'
+  | 'artists'
+  | 'artistsAdmin'
+  | 'artistAdmin'
+  | 'events'
+  | 'eventsAdmin'
+  | 'eventsScraping'
+  | 'eventAdmin'
+  | 'sites'
+  | 'siteAdmin'
+  | 'sitesAdmin'
+  | 'media'
+  | 'mediaAdmin'
+  | 'styles'
+  | 'styleAdmin'
+  | 'userAdmin';

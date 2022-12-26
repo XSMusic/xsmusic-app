@@ -57,6 +57,7 @@ import {
   AdminEventsScrapingSiteComponent,
   GenericAdminOneBase,
   AdminEventOneComponent,
+  AdminUserOneComponent,
 } from '@components';
 import {
   CountryFlagPipe,
@@ -148,6 +149,7 @@ const components = [
   VideoYoutubeComponent,
   GenericAdminOneBase,
   AdminEventOneComponent,
+  AdminUserOneComponent,
 ];
 const directives = [OnImageErrorDirective];
 const modules = [

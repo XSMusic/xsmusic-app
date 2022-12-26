@@ -3,7 +3,12 @@ import { GetAllDto } from '@shared/services/api/api.dtos';
 import { ApiTypes } from '@shared/utils';
 
 export class GenericAdminOneBaseViewModel {
-  typeTabs!: 'artistAdmin' | 'eventAdmin' | 'siteAdmin' | 'mediaAdmin';
+  typeTabs!:
+    | 'artistAdmin'
+    | 'eventAdmin'
+    | 'siteAdmin'
+    | 'mediaAdmin'
+    | 'userAdmin';
   apiType!: ApiTypes;
   artist = new Artist();
   event = new Event();

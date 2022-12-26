@@ -109,6 +109,8 @@ export class GenericAdminOneBase implements OnInit {
       this.vm.typeTabs = 'siteAdmin';
     } else if (this.type === 'media') {
       this.vm.typeTabs = 'mediaAdmin';
+    } else if (this.type === 'user') {
+      this.vm.typeTabs = 'userAdmin';
     }
   }
 

@@ -8,7 +8,7 @@ import {
 import { Component, EventEmitter, Output, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { getTabByParam } from '@shared/utils';
+import { getTabByParam, TabsType } from '@shared/utils';
 import { tabsByType } from './tabs.helper';
 import { TabsItem } from './tabs.model';
 
@@ -25,22 +25,7 @@ import { TabsItem } from './tabs.model';
   ],
 })
 export class TabsComponent implements OnInit {
-  @Input() type:
-    | 'generic'
-    | 'artists'
-    | 'artistsAdmin'
-    | 'artistAdmin'
-    | 'events'
-    | 'eventsAdmin'
-    | 'eventsScraping'
-    | 'eventAdmin'
-    | 'sites'
-    | 'siteAdmin'
-    | 'sitesAdmin'
-    | 'media'
-    | 'mediaAdmin'
-    | 'styles'
-    | 'styleAdmin' = 'generic';
+  @Input() type: TabsType = 'generic';
   @Input() view = 'viewGallery';
   tabs: TabsItem[] = [];
   searchState = false;

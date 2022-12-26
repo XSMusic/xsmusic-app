@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { Style } from '@models';
 import { ApiService } from '@services';
+import { TabsType } from '@shared/utils';
 import { DateFunctions } from '@shared/utils/dates';
 import { countries } from 'assets/data/countries';
 import { filters } from './filter-bar.helper';
@@ -12,22 +13,7 @@ import { filters } from './filter-bar.helper';
   animations: [inOutAnimation],
 })
 export class FilterBarComponent implements OnInit {
-  @Input() type:
-    | 'generic'
-    | 'artists'
-    | 'artistsAdmin'
-    | 'artistAdmin'
-    | 'events'
-    | 'eventsAdmin'
-    | 'eventsScraping'
-    | 'eventAdmin'
-    | 'sites'
-    | 'siteAdmin'
-    | 'sitesAdmin'
-    | 'media'
-    | 'mediaAdmin'
-    | 'styles'
-    | 'styleAdmin' = 'generic';
+  @Input() type: TabsType = 'generic';
   itemsA: { name: string; value: any }[] = [];
   itemsB: { name: string; value: any }[] = [];
   itemFilter = '';

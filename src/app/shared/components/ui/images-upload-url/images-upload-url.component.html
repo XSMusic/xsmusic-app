@@ -1,7 +1,7 @@
 <div class="grid grid-cols-1 gap-4 mt-1 lg:grid-cols-4">
   <div class="col-span-2">
     <label
-      *ngIf="imageState || scraping.images.length > 0"
+      *ngIf="imageState || (scraping && scraping.images.length > 0)"
       for="image"
       class="block mb-3 text-base font-extrabold text-black dark:text-white"
     >
@@ -34,7 +34,10 @@
       </button>
     </div>
 
-    <div class="flex flex-col gap-2" *ngIf="scraping.images.length > 0">
+    <div
+      class="flex flex-col gap-2"
+      *ngIf="scraping && scraping.images.length > 0"
+    >
       <div class="flex" *ngFor="let img of scraping.images">
         <div class="w-12 h-12">
           <img

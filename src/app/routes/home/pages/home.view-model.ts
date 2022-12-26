@@ -29,10 +29,10 @@ export class HomeViewModel {
     },
   ];
   bodyArtists: GetAllDto = new GetAllDto({
-    pageSize: 10,
+    pageSize: 20,
   });
   bodyEvents: GetAllDto = new GetAllDto({
-    pageSize: 6,
+    pageSize: 8,
     order: ['date', 'asc'],
   });
   bodyMedia: GetAllDto = new GetAllDto({
@@ -40,7 +40,7 @@ export class HomeViewModel {
     type: 'set',
   });
   bodySites: GetAllDto = new GetAllDto({
-    pageSize: 10,
+    pageSize: 15,
     type: 'club',
     map: false,
   });

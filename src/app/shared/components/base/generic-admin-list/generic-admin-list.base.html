@@ -63,7 +63,7 @@
       *ngIf="vm.view === 'viewList'"
       [sites]="vm.sites"
       [loading]="vm.loading"
-      subType="clubs"
+      [type]="subType === 'club' ? 'clubs' : 'festivals'"
       (goToPage)="goToPage($event)"
       (filter)="onFilter($event)"
       (onScroll)="onScroll()"

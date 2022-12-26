@@ -30,7 +30,7 @@ export class ApiService {
   }
 
   create<T>(type: ApiTypes, data: T): Observable<T> {
-    return this.httpClient.post<T>(`${this.url}/${type}create`, data);
+    return this.httpClient.post<T>(`${this.url}/${type}/create`, data);
   }
 
   update<T>(type: ApiTypes, data: T): Observable<T> {

@@ -189,7 +189,9 @@
   <div class="mt-1" *ngIf="sites.length === 0">
     <alert
       type="warning"
-      message="No hay artistas disponibles"
+      message="No hay {{
+        type === 'festivals' ? 'festivales' : type
+      }} disponibles"
       actionText="Quitar"
     ></alert>
   </div>

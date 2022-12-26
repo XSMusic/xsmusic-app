@@ -48,10 +48,6 @@ export class AdminImagesPage implements OnInit {
     });
   }
 
-  // goToProfile(item: Image) {
-  //   this.router.navigate([routesConfig.clubAdmin.replace(':id', item._id!)]);
-  // }
-
   filter(event: { name: string; value: string }) {
     this.body.page = 1;
     this.body.filter = [event.name, event.value];

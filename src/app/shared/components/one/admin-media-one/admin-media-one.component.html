@@ -2,9 +2,9 @@
   <div class="col-span-2 mb-1 md:col-span-2">
     <images-edit-block
       [item]="media"
-      (showImage)="showImage({ image: $event, remote: false })"
-      (removeImage)="removeImage($event)"
-      (setFirstImage)="setFirstImage($event)"
+      (showImage)="showImage.emit({ image: $event, remote: false })"
+      (removeImage)="removeImage.emit($event)"
+      (setFirstImage)="setFirstImage.emit($event)"
       (toggleAddImage)="imageState = !imageState"
     ></images-edit-block>
   </div>
@@ -104,8 +104,9 @@
     <images-upload-url
       [imageState]="imageState"
       [image]="image"
-      (showImage)="showImage($event)"
-      (uploadImageByUrl)="uploadImageByUrl($event)"
+      (showImage)="showImage.emit($event)"
+      (uploadImageByUrl)="uploadImageByUrl.emit($event)"
+      (uploadImageByFile)="uploadImageByFile.emit($event)"
       [scraping]="scraping"
     ></images-upload-url>
   </div>
@@ -145,7 +146,7 @@
   <div class="col-span-2 mb-2">
     <button
       type="submit"
-      (click)="onSubmit()"
+      (click)="onSubmit.emit({scraping})"
       class="w-full py-1 m-1 text-white bg-green-500 border-green-500 rounded-lg shadow-md md:w-32 hover:bg-green-600 hover:border-green-600'"
     >
       Guardar
@@ -153,7 +154,7 @@
     <button
       type="button"
       *ngIf="media._id"
-      (click)="onDelete()"
+      (click)="delete.emit()"
       class="w-full py-1 m-1 text-white bg-red-500 border-2 border-red-500 rounded-lg shadow-md hover:bg-red-600 hover:border-red-600 hover:text-white md:w-32"
     >
       Eliminar

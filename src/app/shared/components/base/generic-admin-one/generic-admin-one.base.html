@@ -44,6 +44,12 @@
     <admin-event-one
       *ngIf="vm.view === 'viewInfo'"
       [event]="vm.event"
+      (onSubmit)="onSubmit($event)"
+      (showImage)="showImage($event)"
+      (removeImage)="removeImage($event)"
+      (setFirstImage)="setFirstImage($event)"
+      (uploadImageByUrl)="uploadImageByUrl($event)"
+      (uploadImageByFile)="uploadImageByFile($event)"
     ></admin-event-one>
   </div>
 
@@ -52,6 +58,12 @@
       *ngIf="vm.view === 'viewInfo'"
       [site]="vm.site"
       [type]="vm.subType === 'club' ? vm.subType : 'festival'"
+      (onSubmit)="onSubmit($event)"
+      (showImage)="showImage($event)"
+      (removeImage)="removeImage($event)"
+      (setFirstImage)="setFirstImage($event)"
+      (uploadImageByUrl)="uploadImageByUrl($event)"
+      (uploadImageByFile)="uploadImageByFile($event)"
     ></admin-site-one>
 
     <ng-container *ngIf="vm.view === 'viewScrapingEvent'">

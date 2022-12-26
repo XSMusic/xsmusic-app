@@ -16,14 +16,16 @@ export class GenericAdminListBaseViewModel {
   site: Site = new Site();
   event: Event = new Event();
   media: Media = new Media();
-  stats: StatsGetTopStatsI = {
-    topSocial: [],
-    topCountries: [],
-  };
-  bodyArtist: GetAllDto;
-  bodySite: GetAllDto;
-  bodyEvent: GetAllDto;
-  bodyMedia: GetAllDto;
+  stats: StatsGetTopStatsI = { topSocial: [], topCountries: [] };
+  bodyArtist = new GetAllDto();
+  bodySite = new GetAllDto({
+    map: false,
+    type: '',
+  });
+  bodyEvent = new GetAllDto({
+    order: ['date', 'asc'],
+  });
+  bodyMedia = new GetAllDto({ type: '' });
   view!: string;
   filter = false;
   loading = true;
@@ -38,19 +40,4 @@ export class GenericAdminListBaseViewModel {
     styles: [],
   };
   scrapingItemSelected!: Youtube;
-
-  constructor() {
-    this.bodyArtist = new GetAllDto({ pageSize: 20 });
-    this.bodyMedia = new GetAllDto({ pageSize: 20, type: '' });
-    this.bodySite = new GetAllDto({
-      pageSize: 20,
-      map: false,
-      type: '',
-    });
-    this.bodyEvent = new GetAllDto({
-      pageSize: 20,
-      order: ['date', 'asc'],
-      filter: [],
-    });
-  }
 }

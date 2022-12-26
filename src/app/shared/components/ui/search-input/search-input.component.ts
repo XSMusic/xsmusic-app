@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { ApiService, StyleService, TOAST_STATE, UIService } from '@services';
+import { ApiService, TOAST_STATE, UIService } from '@services';
 import { GetAllDto } from '@shared/services/api/api.dtos';
 
 @Component({
@@ -22,11 +22,7 @@ export class SearchInputComponent implements OnInit {
   selectState = false;
   itemsSearch: any[] = [];
   itemSearch = null;
-  constructor(
-    private ui: UIService,
-    private apiService: ApiService,
-    private styleService: StyleService
-  ) {}
+  constructor(private ui: UIService, private apiService: ApiService) {}
 
   ngOnInit() {
     this.setInfo();
@@ -52,13 +48,7 @@ export class SearchInputComponent implements OnInit {
   onChangeInput(e: string) {
     if (e && e.length >= 3) {
       this.body.filter = ['name', e];
-      let service: any;
-      if (this.type !== 'style') {
-        service = this.apiService;
-      } else {
-        service = this.styleService;
-      }
-      service!.getAll(this.body).subscribe({
+      this.apiService.getAll(`${this.type}s`, this.body).subscribe({
         next: (response: any) => this.onSearchResultsSuccess(response),
         error: (error: any) =>
           this.ui.toast.showToast(TOAST_STATE.error, error),

@@ -1,7 +1,7 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { Style } from '@models';
 import {
-  StyleService,
+  ApiService,
   TOAST_STATE,
   UIService,
   ValidationsFormService,
@@ -16,7 +16,7 @@ export class AdminStyleOneComponent {
   @Input() style!: Style;
   @Output() onSuccess = new EventEmitter<MessageI>();
   constructor(
-    private styleService: StyleService,
+    private apiService: ApiService,
     private ui: UIService,
     private validationsFormService: ValidationsFormService
   ) {}
@@ -28,10 +28,13 @@ export class AdminStyleOneComponent {
     );
     if (validation.state) {
       const observable = this.style._id
-        ? this.styleService.update(this.style)
-        : this.styleService.create(this.style);
+        ? this.apiService.update<Style>('styles', this.style)
+        : this.apiService.create<Style>('styles', this.style);
       observable.subscribe({
-        next: (response) => this.onSuccess.emit(response),
+        next: () =>
+          this.onSuccess.emit({
+            message: this.style._id ? 'Estilo actualizado' : 'Estilo creado',
+          }),
         error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
       });
     } else {
@@ -48,7 +51,7 @@ export class AdminStyleOneComponent {
       next: (response) => {
         if (response !== '') {
           if (response === true) {
-            this.styleService.deleteOne(this.style._id!).subscribe({
+            this.apiService.deleteOne('styles', this.style._id!).subscribe({
               next: (response) => this.onSuccess.emit(response),
               error: (error) =>
                 this.ui.toast.showToast(TOAST_STATE.error, error),

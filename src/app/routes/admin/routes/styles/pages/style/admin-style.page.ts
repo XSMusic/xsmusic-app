@@ -3,9 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { routesConfig } from '@core/config';
 import { MessageI } from '@interfaces';
 import { Style } from '@models';
-import { TOAST_STATE, UIService } from '@services';
+import { ApiService, TOAST_STATE, UIService } from '@services';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
-import { StyleService } from '@shared/services/api/style/style.service';
 
 @Component({
   selector: 'page-admin-style',
@@ -20,7 +19,7 @@ export class AdminStylePage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private styleService: StyleService,
+    private apiService: ApiService,
     private ui: UIService
   ) {}
 
@@ -35,12 +34,12 @@ export class AdminStylePage implements OnInit {
   }
 
   getOne() {
-    this.styleService.getOneById({ id: this.id }).subscribe({
-      next: (response) => {
-        this.style = response;
-      },
-      error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
-    });
+    this.apiService
+      .getOne<Style>('styles', { type: 'id', value: this.id })
+      .subscribe({
+        next: (response) => (this.style = response),
+        error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
+      });
   }
 
   onSuccess(response: MessageI) {

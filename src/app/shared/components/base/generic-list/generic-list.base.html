@@ -29,7 +29,7 @@
     (onScroll)="onScroll()"
   ></generic-view-gallery>
 
-  <ng-container *ngIf="type==='artist'">
+  <ng-container *ngIf="type === 'artist'">
     <artists-view-list
       *ngIf="vm.view === 'viewList'"
       [artists]="vm.artists"
@@ -41,7 +41,7 @@
     </artists-view-list>
   </ng-container>
 
-  <ng-container *ngIf="type==='event'">
+  <ng-container *ngIf="type === 'event'">
     <events-view-list
       *ngIf="vm.view === 'viewList'"
       [items]="vm.events"
@@ -52,7 +52,7 @@
     ></events-view-list>
   </ng-container>
 
-  <ng-container *ngIf="type==='media'">
+  <ng-container *ngIf="type === 'media'">
     <media-view-list
       *ngIf="vm.view === 'viewList'"
       [media]="vm.medias"
@@ -63,7 +63,7 @@
     ></media-view-list>
   </ng-container>
 
-  <ng-container *ngIf="type==='site'">
+  <ng-container *ngIf="type === 'site'">
     <sites-view-list
       *ngIf="vm.view === 'viewList'"
       [sites]="vm.sites"

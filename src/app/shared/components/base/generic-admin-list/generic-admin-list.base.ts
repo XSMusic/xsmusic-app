@@ -217,6 +217,7 @@ export class GenericAdminListBase {
     } else if (this.type === 'media') {
       this.vm.media = new Media();
     }
+    this.vm[this.vm.typeBody].page! = 1;
     this.getItems();
     this.onClickTab({ name: 'Listado', action: 'viewList' });
   }

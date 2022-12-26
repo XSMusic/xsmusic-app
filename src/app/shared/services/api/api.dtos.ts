@@ -1,6 +1,6 @@
 export class GetAllDto {
   page? = 1;
-  pageSize? = 10;
+  pageSize? = 20;
   order? = ['created', 'desc'];
   id?: string;
   type?: string;

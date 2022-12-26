@@ -27,6 +27,7 @@ export type ApiTypes =
   | 'artists'
   | 'events'
   | 'images'
-  | 'sites'
   | 'media'
+  | 'sites'
+  | 'styles'
   | 'users';

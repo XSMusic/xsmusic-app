@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { Style } from '@models';
+import { ApiService } from '@services';
 import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 import { GetAllDto } from '@shared/services/api/api.dtos';
-import { StyleService } from '@shared/services/api/style/style.service';
 
 @Component({
   selector: 'page-admin-styles',
@@ -20,14 +20,14 @@ export class AdminStylesPage implements OnInit {
   });
   loading = true;
   error = false;
-  constructor(private router: Router, private styleService: StyleService) {}
+  constructor(private router: Router, private apiService: ApiService) {}
 
   ngOnInit() {
     this.getStyles();
   }
 
   getStyles(more = false) {
-    this.styleService.getAll(this.body).subscribe({
+    this.apiService.getAll<Style>('styles', this.body).subscribe({
       next: (response) => {
         if (!more) {
           this.styles = response.items;

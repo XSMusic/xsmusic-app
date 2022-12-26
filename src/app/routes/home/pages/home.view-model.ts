@@ -28,9 +28,7 @@ export class HomeViewModel {
       typeItems: 'festivals',
     },
   ];
-  bodyArtists: GetAllDto = new GetAllDto({
-    pageSize: 20,
-  });
+  bodyArtists: GetAllDto = new GetAllDto();
   bodyEvents: GetAllDto = new GetAllDto({
     pageSize: 8,
     order: ['date', 'asc'],

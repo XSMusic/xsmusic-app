@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { StyleService } from '@services';
+import { Style } from '@models';
+import { ApiService } from '@services';
 import { DateFunctions } from '@shared/utils/dates';
 import { countries } from 'assets/data/countries';
 import { filters } from './filter-bar.helper';
@@ -33,7 +34,7 @@ export class FilterBarComponent implements OnInit {
   itemValue = '';
   @Output() onFilter = new EventEmitter<{ name: string; value: any }>();
 
-  constructor(private styleService: StyleService) {}
+  constructor(private apiService: ApiService) {}
 
   ngOnInit() {
     this.getFilterItems();
@@ -54,8 +55,8 @@ export class FilterBarComponent implements OnInit {
         };
       });
     } else if (this.itemFilter === 'styles') {
-      this.styleService
-        .getAll({
+      this.apiService
+        .getAll<Style>('styles', {
           page: 1,
           pageSize: 100,
           order: ['name', 'asc'],

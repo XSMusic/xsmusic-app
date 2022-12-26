@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { ApiService, EventService, MediaService, UIService } from '@services';
+import { ApiService, UIService } from '@services';
 import { routesConfig } from '@core/config';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { OptionsItemI } from '@shared/components/ui/options-items/options-items.interface';
@@ -12,6 +12,7 @@ import { ApiTypes, GenericItemType, GenericSubItemType } from '@shared/utils';
 import { GenericAdminOneBaseViewModel } from './generic-admin-one.base.view-model';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { GetOneDto } from '@shared/services/api/api.dtos';
+import { Event, Media } from '@models';
 
 @Component({
   selector: 'generic-admin-one-base',
@@ -26,8 +27,6 @@ export class GenericAdminOneBase implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private apiService: ApiService,
-    private mediaService: MediaService,
-    private eventService: EventService,
     private router: Router,
     private ui: UIService
   ) {}
@@ -180,35 +179,43 @@ export class GenericAdminOneBase implements OnInit {
 
   getEvents() {
     this.vm.bodyEvents.id = this.vm[this.type]._id!;
-    this.eventService.getAllForType(this.vm.bodyEvents).subscribe({
-      next: (response) => (this.vm.events = response.items),
-      error: (err) => {
-        this.vm.views = this.vm.views.filter((item) => item.name !== 'Eventos');
-        this.ui.toast.showToast(TOAST_STATE.error, err);
-      },
-    });
+    this.apiService
+      .getAllForType<Event>('events', this.vm.bodyEvents)
+      .subscribe({
+        next: (response) => (this.vm.events = response.items),
+        error: (err) => {
+          this.vm.views = this.vm.views.filter(
+            (item) => item.name !== 'Eventos'
+          );
+          this.ui.toast.showToast(TOAST_STATE.error, err);
+        },
+      });
   }
 
   getMediaSets() {
     this.vm.bodyMediaSet.id = this.vm[this.type]._id!;
-    this.mediaService.getAllForType(this.vm.bodyMediaSet).subscribe({
-      next: (response) => (this.vm.sets = response.items),
-      error: (err) => {
-        this.vm.views = this.vm.views.filter((item) => item.name !== 'Sets');
-        this.ui.toast.showToast(TOAST_STATE.error, err);
-      },
-    });
+    this.apiService
+      .getAllForType<Media>('media', this.vm.bodyMediaSet)
+      .subscribe({
+        next: (response) => (this.vm.sets = response.items),
+        error: (err) => {
+          this.vm.views = this.vm.views.filter((item) => item.name !== 'Sets');
+          this.ui.toast.showToast(TOAST_STATE.error, err);
+        },
+      });
   }
 
   getMediaTracks() {
     this.vm.bodyMediaTrack.id = this.vm[this.type]._id!;
-    this.mediaService.getAllForType(this.vm.bodyMediaTrack).subscribe({
-      next: (response) => (this.vm.tracks = response.items),
-      error: (err) => {
-        this.vm.views = this.vm.views.filter((item) => item.name !== 'Sets');
-        this.ui.toast.showToast(TOAST_STATE.error, err);
-      },
-    });
+    this.apiService
+      .getAllForType<Media>('media', this.vm.bodyMediaTrack)
+      .subscribe({
+        next: (response) => (this.vm.tracks = response.items),
+        error: (err) => {
+          this.vm.views = this.vm.views.filter((item) => item.name !== 'Sets');
+          this.ui.toast.showToast(TOAST_STATE.error, err);
+        },
+      });
   }
 
   goToPage(data: GoToPageI) {

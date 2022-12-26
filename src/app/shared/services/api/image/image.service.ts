@@ -3,29 +3,17 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
 import { Observable } from 'rxjs/internal/Observable';
 import { take } from 'rxjs';
-import { PaginatorI } from '@interfaces';
 import { Image } from '@models';
 import {
   ImageSetFirstImageDto,
   ImageUploadByUrlDto,
   ImageUploadDto,
 } from './image.dto';
-import { GetAllDto } from '../api.dtos';
 
 @Injectable({ providedIn: 'root' })
 export class ImageService {
   url = `${environment.urls.api}/images`;
   constructor(private httpClient: HttpClient) {}
-
-  getAll(data: GetAllDto): Observable<PaginatorI<Image>> {
-    const url = `${this.url}/getAll`;
-    return this.httpClient.post<PaginatorI<Image>>(url, data).pipe(take(1));
-  }
-
-  getOne(id: string): Observable<Image> {
-    const url = `${this.url}/${id}`;
-    return this.httpClient.get<Image>(url).pipe(take(1));
-  }
 
   upload(data: ImageUploadDto, file: File): Observable<Image> {
     const url = `${this.url}/upload`;
@@ -40,11 +28,6 @@ export class ImageService {
     return this.httpClient
       .post<Image>(`${this.url}/uploadByUrl`, data)
       .pipe(take(1));
-  }
-
-  update(data: Image): Observable<any> {
-    const url = `${this.url}/update`;
-    return this.httpClient.post<any>(url, data).pipe(take(1));
   }
 
   setFirstImage(data: ImageSetFirstImageDto): Observable<Image[]> {

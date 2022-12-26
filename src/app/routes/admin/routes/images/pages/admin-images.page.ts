@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { Image } from '@models';
-import { ApiService, ImageService, TOAST_STATE, UIService } from '@services';
+import { ApiService, TOAST_STATE, UIService } from '@services';
 import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 import { GetAllDto } from '@shared/services/api/api.dtos';
 
@@ -21,7 +21,6 @@ export class AdminImagesPage implements OnInit {
   loading = true;
   error = false;
   constructor(
-    private imageService: ImageService,
     private apiService: ApiService,
     private ui: UIService,
     private router: Router
@@ -32,7 +31,7 @@ export class AdminImagesPage implements OnInit {
   }
 
   getItems(more = false) {
-    this.imageService.getAll(this.body).subscribe({
+    this.apiService.getAll<Image>('images', this.body).subscribe({
       next: (response) => {
         if (!more) {
           this.items = response.items;

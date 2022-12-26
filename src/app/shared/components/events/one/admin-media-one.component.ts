@@ -7,7 +7,6 @@ import { Artist, Image, Media, Site, Style } from '@models';
 import {
   ApiService,
   ImageService,
-  MediaService,
   TOAST_STATE,
   UIService,
   ValidationsFormService,
@@ -54,7 +53,6 @@ export class AdminMediaOneComponent {
   defaultSite = '6367d34e5ba8b44fdf9476c2';
 
   constructor(
-    private mediaService: MediaService,
     private apiService: ApiService,
     private router: Router,
     private imageService: ImageService,

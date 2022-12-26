@@ -6,7 +6,6 @@ import { MessageI } from '@interfaces';
 import { Event, Image, Style } from '@models';
 import {
   ImageService,
-  EventService,
   ValidationsFormService,
   UIService,
   TOAST_STATE,
@@ -40,7 +39,6 @@ export class AdminEventOneComponent {
   tempImagesByUrl: string[] = [];
   tempImagesByFile: File[] = [];
   constructor(
-    private eventService: EventService,
     private apiService: ApiService,
     private ui: UIService,
     private router: Router,

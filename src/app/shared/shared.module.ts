@@ -80,7 +80,6 @@ import {
   AngularSvgIconPreloaderService,
   ApiService,
   LocalStorageService,
-  MediaService,
   NavigationService,
   ScrapingService,
   StartupService,
@@ -183,7 +182,6 @@ const pipes = [
 const services = [
   AngularSvgIconPreloaderService,
   LocalStorageService,
-  MediaService,
   NavigationService,
   ScrapingService,
   StartupService,

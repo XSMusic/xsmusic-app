@@ -17,6 +17,12 @@ export class ApiService {
       .pipe(take(1));
   }
 
+  getAllForType<T>(type: ApiTypes, data: GetAllDto): Observable<PaginatorI<T>> {
+    return this.httpClient
+      .post<PaginatorI<T>>(`${this.url}/${type}/getAllForType`, data)
+      .pipe(take(1));
+  }
+
   getOne<T>(type: ApiTypes, data: GetOneDto): Observable<T> {
     return this.httpClient
       .post<T>(`${this.url}/${type}/getOne`, data)

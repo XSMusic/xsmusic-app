@@ -101,11 +101,31 @@ export const tabsByType = [
     ],
   },
   {
+    name: 'usersAdmin',
+    buttons: [
+      new TabsItem({
+        name: 'Listado',
+        action: 'viewList',
+        isActivatable: true,
+      }),
+    ],
+  },
+  {
     name: 'styleAdmin',
     buttons: [
       new TabsItem({
         name: 'Info',
         action: 'viewInfo',
+        isActivatable: true,
+      }),
+    ],
+  },
+  {
+    name: 'stylesAdmin',
+    buttons: [
+      new TabsItem({
+        name: 'Listado',
+        action: 'viewList',
         isActivatable: true,
       }),
     ],

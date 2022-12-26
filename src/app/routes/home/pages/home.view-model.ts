@@ -1,4 +1,4 @@
-import { Artist, Event, Media, Site } from '@models';
+import { Artist, Event, Media, Site, Style } from '@models';
 import { GetAllDto } from '@shared/services/api/api.dtos';
 
 export class HomeViewModel {
@@ -48,7 +48,9 @@ export class HomeViewModel {
   tracks: Media[] = [];
   clubs: Site[] = [];
   festivals: Site[] = [];
-  loading = {
+  styles: Style[] = [];
+  users: Style[] = [];
+  loading: any = {
     artists: true,
     events: true,
     sets: true,
@@ -56,7 +58,7 @@ export class HomeViewModel {
     clubs: true,
     festivals: true,
   };
-  error = {
+  error: any = {
     artists: false,
     events: false,
     sets: false,

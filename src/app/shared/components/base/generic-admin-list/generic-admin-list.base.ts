@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { PaginatorI } from '@interfaces';
-import { Artist, Event, Media, Site, Youtube } from '@models';
+import { Artist, Event, Media, Site, Style, Youtube } from '@models';
 import {
   ApiService,
   ScrapingService,
@@ -48,12 +48,16 @@ export class GenericAdminListBase {
   setTitle() {
     if (this.type === 'artist') {
       this.vm.title = 'Artistas';
-    } else if (this.type === 'site') {
-      this.vm.title = this.subType === 'club' ? 'Clubs' : 'Festivales';
     } else if (this.type === 'event') {
       this.vm.title = 'Eventos';
     } else if (this.type === 'media') {
       this.vm.title = this.subType === 'set' ? 'Sets' : 'Tracks';
+    } else if (this.type === 'site') {
+      this.vm.title = this.subType === 'club' ? 'Clubs' : 'Festivales';
+    } else if (this.type === 'style') {
+      this.vm.title = 'Estilos';
+    } else if (this.type === 'user') {
+      this.vm.title = 'Usuarios';
     }
   }
 
@@ -62,10 +66,14 @@ export class GenericAdminListBase {
       this.vm.typeTabs = 'artistsAdmin';
     } else if (this.type === 'event') {
       this.vm.typeTabs = 'eventsAdmin';
-    } else if (this.type === 'site') {
-      this.vm.typeTabs = 'sitesAdmin';
     } else if (this.type === 'media') {
       this.vm.typeTabs = 'mediaAdmin';
+    } else if (this.type === 'site') {
+      this.vm.typeTabs = 'sitesAdmin';
+    } else if (this.type === 'style') {
+      this.vm.typeTabs = 'stylesAdmin';
+    } else if (this.type === 'user') {
+      this.vm.typeTabs = 'usersAdmin';
     }
   }
 
@@ -91,6 +99,14 @@ export class GenericAdminListBase {
       this.vm.typeItems = 'medias';
       this.vm.typeBody = 'bodyMedia';
       service = this.apiService.getAll<Media>('media', this.vm.bodyMedia);
+    } else if (this.type === 'style') {
+      this.vm.typeItems = 'styles';
+      this.vm.typeBody = 'bodyStyle';
+      service = this.apiService.getAll<Style>('styles', this.vm.bodyStyle);
+    } else if (this.type === 'user') {
+      this.vm.typeItems = 'users';
+      this.vm.typeBody = 'bodyUser';
+      service = this.apiService.getAll<Style>('users', this.vm.bodyUser);
     } else {
       this.vm.typeItems = 'artists';
       this.vm.typeBody = 'bodyArtist';
@@ -121,9 +137,12 @@ export class GenericAdminListBase {
   }
 
   getStats() {
-    if (this.type !== 'media') {
+    if (
+      this.type !== 'media' &&
+      this.type !== 'style' &&
+      this.type !== 'user'
+    ) {
       let type = '';
-
       if (this.type === 'artist') {
         type = 'artist';
       } else if (this.type === 'event') {

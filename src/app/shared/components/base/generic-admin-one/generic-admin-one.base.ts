@@ -13,12 +13,7 @@ import { OptionsItemI } from '@shared/components/ui/options-items/options-items.
 import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 import { DateFunctions } from '@shared/utils/dates';
 import { MetadataI } from '@shared/services/system/meta';
-import {
-  ApiTypes,
-  GenericItemType,
-  GenericSubItemType,
-  GoToType,
-} from '@shared/utils';
+import { ApiTypes, GenericItemType, GoToType } from '@shared/utils';
 import { GenericAdminOneBaseViewModel } from './generic-admin-one.base.view-model';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { GetOneDto } from '@shared/services/api/api.dtos';
@@ -37,7 +32,6 @@ import {
 })
 export class GenericAdminOneBase implements OnInit {
   @Input() type!: GenericItemType;
-  @Input() subType!: GenericSubItemType;
   vm = new GenericAdminOneBaseViewModel();
 
   constructor(
@@ -69,12 +63,18 @@ export class GenericAdminOneBase implements OnInit {
       this.vm.apiType = `${this.type}s`;
     } else if (this.type === 'media') {
       this.vm.apiType = `${this.type}`;
+      this.vm.subType = this.route.snapshot.routeConfig!.path!.includes('sets')
+        ? 'set'
+        : 'track';
     } else if (this.type === 'event') {
       this.vm.apiType = `${this.type}s`;
     } else if (this.type === 'site') {
       this.vm.bodyEvents.type = `${this.type}`;
       this.vm.bodyMediaSet.type = `${this.type}`;
-      this.vm.bodyMediaTrack.type = `${this.subType}s`;
+      this.vm.subType = this.route.snapshot.routeConfig!.path!.includes('clubs')
+        ? 'club'
+        : 'festival';
+      this.vm.bodyMediaTrack.type = `${this.vm.subType}s`;
       this.vm.apiType = `${this.type}s`;
     } else if (this.type === 'style') {
       this.vm.apiType = `${this.type}s`;
@@ -97,10 +97,10 @@ export class GenericAdminOneBase implements OnInit {
 
   private setTitleSub() {
     if (this.type === 'media') {
-      const titleMedia = this.subType === 'set' ? 'Set' : 'Track';
+      const titleMedia = this.vm.subType === 'set' ? 'Set' : 'Track';
       this.vm.title = `${this.vm.id ? 'Editar' : 'Nuevo'} ${titleMedia}`;
     } else {
-      const titleSite = this.subType === 'club' ? 'Club' : 'Festivale';
+      const titleSite = this.vm.subType === 'club' ? 'Club' : 'Festival';
       this.vm.title = `${this.vm.id ? 'Editar' : 'Nuevo'} ${titleSite}`;
     }
   }
@@ -159,7 +159,10 @@ export class GenericAdminOneBase implements OnInit {
         this.router.navigate(['/404'], {
           skipLocationChange: true,
           state: {
-            type: this.type === 'site' ? this.subType : this.type,
+            type:
+              this.type === 'site' || this.type === 'media'
+                ? this.vm.subType
+                : this.type,
           },
         });
       },
@@ -290,7 +293,7 @@ export class GenericAdminOneBase implements OnInit {
       this.type === 'media' ||
       this.type === 'site'
     ) {
-      type = this.subType;
+      type = this.vm.subType;
     } else {
       type = this.type;
     }

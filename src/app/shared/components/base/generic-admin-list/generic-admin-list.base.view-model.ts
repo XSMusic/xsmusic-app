@@ -1,31 +1,36 @@
-import { Artist, Site, Media, Youtube, Event } from '@models';
+import { Artist, Site, Media, Youtube, Event, Style, User } from '@models';
 import { GetAllDto } from '@shared/services/api/api.dtos';
 import { StatsGetTopStatsI } from '@shared/services/api/stats/stats.interface';
-import { GenericItemsType, GenericBodyType } from '@shared/utils';
+import { GenericItemsType, GenericBodyType, TabsType } from '@shared/utils';
 
 export class GenericAdminListBaseViewModel {
   typeItems!: GenericItemsType;
   typeBody!: GenericBodyType;
-  typeTabs!: 'artistsAdmin' | 'eventsAdmin' | 'sitesAdmin' | 'mediaAdmin';
+  typeTabs!: TabsType;
   title!: string;
   artists: Artist[] = [];
   sites: Site[] = [];
   events: Event[] = [];
   medias: Media[] = [];
-  artist: Artist = new Artist();
-  site: Site = new Site();
-  event: Event = new Event();
-  media: Media = new Media();
+  styles: Style[] = [];
+  users: User[] = [];
+  artist = new Artist();
+  event = new Event();
+  media = new Media();
+  site = new Site();
+  style = new Style();
   stats: StatsGetTopStatsI = { topSocial: [], topCountries: [] };
   bodyArtist = new GetAllDto();
-  bodySite = new GetAllDto({
-    map: false,
-    type: '',
-  });
   bodyEvent = new GetAllDto({
     order: ['date', 'asc'],
   });
   bodyMedia = new GetAllDto({ type: '' });
+  bodySite = new GetAllDto({
+    map: false,
+    type: '',
+  });
+  bodyStyle = new GetAllDto({ type: '' });
+  bodyUser = new GetAllDto({ type: '' });
   view!: string;
   filter = false;
   loading = true;

@@ -58,26 +58,7 @@
     </ng-container>
   </ng-container>
 
-  <ng-container *ngIf="type === 'site'">
-    <sites-view-list
-      *ngIf="vm.view === 'viewList'"
-      [sites]="vm.sites"
-      [loading]="vm.loading"
-      [type]="subType === 'club' ? 'clubs' : 'festivals'"
-      (goToPage)="goToPage($event)"
-      (filter)="onFilter($event)"
-      (onScroll)="onScroll()"
-    ></sites-view-list>
-
-    <admin-site-one
-      *ngIf="vm.view === 'viewAdd'"
-      [site]="vm.site"
-      [type]="subType === 'club' ? 'club' : 'festival'"
-      (onCreated)="onCreated()"
-    ></admin-site-one>
-  </ng-container>
-
-  <ng-container *ngIf="type === 'media'">
+    <ng-container *ngIf="type === 'media'">
     <media-view-list
       *ngIf="vm.view === 'viewList'"
       [media]="vm.medias"
@@ -112,6 +93,46 @@
       ></admin-media-one>
     </ng-container>
   </ng-container>
+
+  <ng-container *ngIf="type === 'site'">
+    <sites-view-list
+      *ngIf="vm.view === 'viewList'"
+      [sites]="vm.sites"
+      [loading]="vm.loading"
+      [type]="subType === 'club' ? 'clubs' : 'festivals'"
+      (goToPage)="goToPage($event)"
+      (filter)="onFilter($event)"
+      (onScroll)="onScroll()"
+    ></sites-view-list>
+
+    <admin-site-one
+      *ngIf="vm.view === 'viewAdd'"
+      [site]="vm.site"
+      [type]="subType === 'club' ? 'club' : 'festival'"
+      (onCreated)="onCreated()"
+    ></admin-site-one>
+  </ng-container>
+
+  <ng-container *ngIf="type === 'style'">
+     <styles-view-list
+      *ngIf="vm.view === 'viewList'"
+      [styles]="vm.styles"
+      [loading]="vm.loading"
+      (onScroll)="onScroll()"
+    ></styles-view-list>
+  </ng-container>
+
+  <ng-container *ngIf="type === 'user'">
+     <users-view-list
+      *ngIf="vm.view === 'viewList'"
+      [users]="vm.users"
+      [loading]="vm.loading"
+      (onScroll)="onScroll()"
+    ></users-view-list>
+  </ng-container>
+
+  <ng-container *ngIf="type === 'user'"></ng-container>
+
 
   <div
     class="grid gap-2 mt-2 md:gap-4 md:grid-cols-3"

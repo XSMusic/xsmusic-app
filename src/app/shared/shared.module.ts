@@ -58,7 +58,7 @@ import {
   GenericAdminOneBase,
   AdminEventOneComponent,
   AdminUserOneComponent,
-  StyleListViewComponent,
+  StylesListViewComponent,
   AdminStyleOneComponent,
 } from '@components';
 import {
@@ -153,7 +153,7 @@ const components = [
   AdminEventOneComponent,
   AdminUserOneComponent,
   AdminStyleOneComponent,
-  StyleListViewComponent,
+  StylesListViewComponent,
 ];
 const directives = [OnImageErrorDirective];
 const modules = [

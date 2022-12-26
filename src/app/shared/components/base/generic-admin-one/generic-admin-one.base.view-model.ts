@@ -1,8 +1,9 @@
 import { Artist, Site, Media, Event, User, Style } from '@models';
 import { GetAllDto } from '@shared/services/api/api.dtos';
-import { ApiTypes } from '@shared/utils';
+import { ApiTypes, GenericSubItemType } from '@shared/utils';
 
 export class GenericAdminOneBaseViewModel {
+  subType!: GenericSubItemType;
   typeTabs!:
     | 'artistAdmin'
     | 'eventAdmin'

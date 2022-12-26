@@ -1,11 +1,19 @@
-export type GenericItemsType = 'artists' | 'sites' | 'events' | 'medias';
+export type GenericItemsType =
+  | 'artists'
+  | 'sites'
+  | 'events'
+  | 'medias'
+  | 'styles'
+  | 'users';
 export type GenericItemsAllType =
   | 'artists'
   | 'events'
   | 'sets'
   | 'tracks'
   | 'clubs'
-  | 'festivals';
+  | 'festivals'
+  | 'styles'
+  | 'users';
 export type GenericItemType =
   | 'artist'
   | 'event'
@@ -19,13 +27,16 @@ export type GenericItemAllType =
   | 'festival'
   | 'event'
   | 'set'
+  | 'style'
   | 'track'
   | 'user';
 export type GenericBodyType =
   | 'bodyArtist'
-  | 'bodySite'
   | 'bodyEvent'
-  | 'bodyMedia';
+  | 'bodyMedia'
+  | 'bodySite'
+  | 'bodyStyle'
+  | 'bodyUser';
 export type GenericSubItemType = 'club' | 'festival' | 'set' | 'track';
 
 export type GoToType =
@@ -64,6 +75,7 @@ export type TabsType =
   | 'sitesAdmin'
   | 'media'
   | 'mediaAdmin'
-  | 'styles'
   | 'styleAdmin'
-  | 'userAdmin';
+  | 'stylesAdmin'
+  | 'userAdmin'
+  | 'usersAdmin';

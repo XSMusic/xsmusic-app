@@ -5,11 +5,11 @@ import { routesConfig } from '@core/config';
 import { Style } from '@models';
 
 @Component({
-  selector: 'style-list-view',
-  templateUrl: 'style-list-view.component.html',
+  selector: 'styles-view-list',
+  templateUrl: 'styles-view-list.component.html',
   animations: [inOutAnimation],
 })
-export class StyleListViewComponent {
+export class StylesListViewComponent {
   @Input() styles: Style[] = [];
   @Input() loading = true;
   @Output() onScroll = new EventEmitter<void>();

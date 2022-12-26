@@ -51,7 +51,7 @@
     <admin-site-one
       *ngIf="vm.view === 'viewInfo'"
       [site]="vm.site"
-      [type]="subType === 'club' ? subType : 'festival'"
+      [type]="vm.subType === 'club' ? vm.subType : 'festival'"
     ></admin-site-one>
 
     <ng-container *ngIf="vm.view === 'viewScrapingEvent'">

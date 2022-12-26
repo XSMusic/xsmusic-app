@@ -1,5 +1,5 @@
 import { FilterListI } from '@interfaces';
-import { Artist, Site, Media, Event } from '@models';
+import { Artist, Site, Media, Event, User, Style } from '@models';
 import { GetAllDto } from '@shared/services/api/api.dtos';
 import { GenericBodyType, GenericItemsType } from '@shared/utils';
 import { Observable } from 'rxjs';
@@ -15,13 +15,33 @@ export class GenericListBaseViewModel {
   events: Event[] = [];
   medias: Media[] = [];
   sitesMap: Site[] = [];
+  styles: Style[] = [];
+  users: User[] = [];
   view = 'gallery';
   service!: Observable<any>;
-  bodyArtist: GetAllDto;
-  bodyEvent: GetAllDto;
-  bodySite: GetAllDto;
-  bodySiteMap: GetAllDto;
-  bodyMedia: GetAllDto;
+  bodyArtist = new GetAllDto({
+    pageSize: 30,
+  });
+  bodyEvent = new GetAllDto({
+    pageSize: 30,
+    order: ['date', 'asc'],
+  });
+  bodySite = new GetAllDto({
+    pageSize: 30,
+    type: 'club',
+    map: false,
+  });
+  bodySiteMap = new GetAllDto({
+    pageSize: 1000,
+    type: 'club',
+    map: true,
+    maxDistance: 10000,
+  });
+  bodyMedia = new GetAllDto({
+    pageSize: 30,
+  });
+  bodyUser = new GetAllDto();
+  bodyStyle = new GetAllDto();
   filter = false;
   filterData!: FilterListI;
   loading = true;
@@ -35,28 +55,4 @@ export class GenericListBaseViewModel {
     | 'set'
     | 'track'
     | 'festival';
-
-  constructor() {
-    this.bodyArtist = new GetAllDto({
-      pageSize: 30,
-    });
-    this.bodyEvent = new GetAllDto({
-      pageSize: 30,
-      order: ['date', 'asc'],
-    });
-    this.bodySite = new GetAllDto({
-      pageSize: 30,
-      type: 'club',
-      map: false,
-    });
-    this.bodySiteMap = new GetAllDto({
-      pageSize: 1000,
-      type: 'club',
-      map: true,
-      maxDistance: 10000,
-    });
-    this.bodyMedia = new GetAllDto({
-      pageSize: 30,
-    });
-  }
 }

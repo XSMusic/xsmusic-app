@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { ScrapingService, TOAST_STATE, UIService } from '@services';
 import { ScrapingSoundcloudSearchI } from '@shared/services/api/scraping/scraping-soundcloud-search.interface';
 import { ScrapingSearchNameYoutubeI } from '@shared/services/api/scraping/scraping-youtube-search.interface';
@@ -6,6 +7,7 @@ import { ScrapingSearchNameYoutubeI } from '@shared/services/api/scraping/scrapi
 @Component({
   selector: 'social-inputs',
   templateUrl: 'social-inputs.component.html',
+  animations: [inOutAnimation],
 })
 export class SocialInputsComponent {
   @Input() type!: 'artist' | 'site';

@@ -7,6 +7,7 @@ export class User {
   images?: Image[];
   role!: 'ADMIN' | 'USER';
   darkMode!: string;
+  slug!: string;
   created?: string;
   updated?: string;
 

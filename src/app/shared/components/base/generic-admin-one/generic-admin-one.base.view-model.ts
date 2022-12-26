@@ -1,12 +1,16 @@
-import { Artist, Site, Media, Event } from '@models';
+import { Artist, Site, Media, Event, User, Style } from '@models';
 import { GetAllDto } from '@shared/services/api/api.dtos';
+import { ApiTypes } from '@shared/utils';
 
 export class GenericAdminOneBaseViewModel {
   typeTabs!: 'artistAdmin' | 'eventAdmin' | 'siteAdmin' | 'mediaAdmin';
+  apiType!: ApiTypes;
   artist = new Artist();
-  site = new Site();
   event = new Event();
   media = new Media();
+  site = new Site();
+  style = new Style();
+  user = new User();
   id!: string;
   views: any[] = [];
   title!: string;
@@ -18,6 +22,13 @@ export class GenericAdminOneBaseViewModel {
   bodyEvents!: GetAllDto;
   bodyMediaSet: GetAllDto;
   bodyMediaTrack: GetAllDto;
+  tempImagesByUrl: string[] = [];
+  tempImagesByFile: File[] = [];
+  scraping: any = {
+    images: [],
+    infos: [],
+    styles: [],
+  };
 
   constructor() {
     this.bodyEvents = new GetAllDto({ order: ['date', 'asc'] });

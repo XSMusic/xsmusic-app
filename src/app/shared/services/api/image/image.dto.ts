@@ -1,5 +1,7 @@
+import { GenericItemType } from '@shared/utils';
+
 export interface ImageUploadDto {
-  type: 'artist' | 'event' | 'media' | 'site' | 'user';
+  type: GenericItemType;
   id: string;
 }
 

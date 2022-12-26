@@ -1,14 +1,7 @@
+import { GoToType } from '@shared/utils';
+
 export interface GoToPageI {
-  type?:
-    | 'artist'
-    | 'club'
-    | 'event'
-    | 'eventSite'
-    | 'eventScraping'
-    | 'set'
-    | 'track'
-    | 'festival'
-    | 'user';
+  type?: GoToType;
   typeRoute: 'all' | 'one';
   admin?: boolean;
   item?: any;

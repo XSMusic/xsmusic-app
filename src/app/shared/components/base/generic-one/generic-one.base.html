@@ -1,32 +1,29 @@
-<ng-container *ngIf="vm.artist || vm.site || vm.event">
+<ng-container *ngIf="vm.artist || vm.site || vm.event || vm.media">
   <block-info-profile
-    *ngIf="vm.artist"
-    [item]="vm.artist"
-    type="artist"
+    *ngIf="type !== 'site' && type !== 'media'"
+    [item]="vm[this.type]"
+    [type]="type"
   ></block-info-profile>
 
   <block-info-profile
-    *ngIf="vm.site"
+    *ngIf="type === 'site' || type === 'media'"
     [item]="vm.site"
     [type]="subType"
   ></block-info-profile>
 
-  <block-info-profile
-    *ngIf="vm.event"
-    [item]="vm.event"
-    type="event"
-  ></block-info-profile>
+  <ng-container
+    *ngIf="type === 'site' && vm.site && vm.site.address && vm.site.address.coordinates"
+  >
+    <map
+      [class]="'lg:container mx-2 h-44 m-2 lg:mx-auto rounded-lg overflow-hidden'"
+      [markers]="[vm.site]"
+      [zoom]="15"
+      [one]="true"
+    ></map>
+  </ng-container>
 
   <map
-    *ngIf="vm.site"
-    [class]="'lg:container mx-2 h-44 m-2 lg:mx-auto rounded-lg overflow-hidden'"
-    [markers]="[vm.site]"
-    [zoom]="15"
-    [one]="true"
-  ></map>
-
-  <map
-    *ngIf="vm.event"
+    *ngIf="type === 'event' && vm.event && vm.event.site && vm.event.site.address"
     [class]="'lg:container mx-2 h-44 m-2 lg:mx-auto rounded-lg overflow-hidden'"
     [markers]="[vm.event.site]"
     [zoom]="15"
@@ -34,7 +31,7 @@
   ></map>
 
   <last-multi
-    *ngIf="type !== 'event'"
+    *ngIf="type !== 'event' && vm.views.length > 0"
     [item]="this.vm[type]"
     [events]="vm.events"
     [sets]="vm.sets"
@@ -44,7 +41,7 @@
   ></last-multi>
 
   <last-multi
-    *ngIf="type === 'event'"
+    *ngIf="type === 'event'  && vm.views.length > 0"
     [item]="vm.event"
     [views]="vm.views"
     (goToPage)="goToPage($event)"

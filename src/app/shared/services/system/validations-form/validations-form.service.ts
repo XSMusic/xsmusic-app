@@ -6,7 +6,8 @@ export class ValidationsFormService {
   validation(
     type: 'artist' | 'event' | 'media' | 'site' | 'style' | 'user',
     item: any,
-    tempImages?: any[]
+    tempImagesByUrl?: any[],
+    tempImagesByFile?: any[]
   ): {
     state: boolean;
     message: string;
@@ -20,7 +21,13 @@ export class ValidationsFormService {
       .filter((v) => v.name === type)
       .map((v) => v.items)[0];
 
-    val = this.setValidations(val, valTypes, item, tempImages!);
+    val = this.setValidations(
+      val,
+      valTypes,
+      item,
+      tempImagesByUrl!,
+      tempImagesByFile!
+    );
     return val;
   }
 
@@ -28,11 +35,18 @@ export class ValidationsFormService {
     val: ValidationsFormI,
     valTypes: string[],
     item: any,
-    tempImages: any[]
+    tempImagesByUrl: string[],
+    tempImagesByFile: File[]
   ): ValidationsFormI {
     for (const valName of valTypes) {
       val = this.validationsA(val, valName, item);
-      val = this.validationsB(val, valName, item, tempImages);
+      val = this.validationsB(
+        val,
+        valName,
+        item,
+        tempImagesByUrl,
+        tempImagesByFile
+      );
     }
     return val;
   }
@@ -74,7 +88,8 @@ export class ValidationsFormService {
     val: ValidationsFormI,
     valName: string,
     item: any,
-    tempImages: any[]
+    tempImagesByUrl: string[],
+    tempImagesByFile: File[]
   ): ValidationsFormI {
     if (valName === 'artists' && item.artists!.length === 0) {
       return {
@@ -100,7 +115,13 @@ export class ValidationsFormService {
         message: 'La calle es obligatoria',
       };
     }
-    if (!item._id && tempImages && tempImages.length === 0) {
+    if (
+      !item._id &&
+      tempImagesByUrl &&
+      tempImagesByUrl.length === 0 &&
+      tempImagesByFile &&
+      tempImagesByFile.length === 0
+    ) {
       return {
         state: false,
         message: 'La imagen es obligatoria',

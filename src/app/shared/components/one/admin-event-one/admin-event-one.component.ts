@@ -156,35 +156,12 @@ export class AdminEventOneComponent {
     });
   }
 
-  validationSubmit() {
-    if (this.event.name === '') {
-      return {
-        state: false,
-        message: 'El nombre es obligatorio',
-      };
-    } else if (this.event.styles!.length === 0) {
-      return {
-        state: false,
-        message: 'Minimo un estilo',
-      };
-    } else if (!this.event._id && this.tempImagesByUrl.length === 0) {
-      return {
-        state: false,
-        message: 'La imagen es obligatoria',
-      };
-    } else {
-      return {
-        state: true,
-        message: '',
-      };
-    }
-  }
-
   onSubmit() {
     const validation = this.validationsFormService.validation(
       'event',
       this.event,
-      this.tempImagesByUrl
+      this.tempImagesByUrl,
+      this.tempImagesByFile
     );
     if (validation.state) {
       if (this.event._id) {

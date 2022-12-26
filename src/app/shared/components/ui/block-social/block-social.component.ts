@@ -8,7 +8,7 @@ import { GoogleAnalyticsService } from 'ngx-google-analytics';
 })
 export class BlockSocialComponent {
   @Input() item!: any;
-  @Input() type: GenericItemAllType = 'artist';
+  @Input() type!: GenericItemAllType;
 
   constructor(private gaService: GoogleAnalyticsService) {}
 

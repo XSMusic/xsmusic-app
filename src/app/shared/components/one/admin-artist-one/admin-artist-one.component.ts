@@ -2,21 +2,14 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
-import { MessageI, ScrapingGetInfoArtistResponse } from '@interfaces';
+import { ScrapingGetInfoArtistResponse } from '@interfaces';
 import { Artist, Image, Style } from '@models';
 import {
   ScrapingService,
-  ImageService,
-  ValidationsFormService,
   UIService,
   MODAL_STATE,
   TOAST_STATE,
-  ApiService,
 } from '@services';
-import {
-  ImageSetFirstImageDto,
-  ImageUploadByUrlDto,
-} from '@shared/services/api/image/image.dto';
 import { ScrapingGetInfoArtistDto } from '@shared/services/api/scraping/scraping.dto';
 import { countries } from 'assets/data/countries';
 
@@ -38,14 +31,17 @@ export class AdminArtistOneComponent {
   image = '';
   imageState = false;
   tempImages: string[] = [];
-  @Output() onCreated = new EventEmitter<void>();
+  @Output() onSubmit = new EventEmitter<{ scraping: any }>();
+  @Output() showImage = new EventEmitter<{ image: Image; remote: boolean }>();
+  @Output() uploadImageByUrl = new EventEmitter<string>();
+  @Output() uploadImageByFile = new EventEmitter<File>();
+  @Output() removeImage = new EventEmitter<Image>();
+  @Output() setFirstImage = new EventEmitter<Image>();
+  @Output() delete = new EventEmitter<Image>();
   constructor(
     private router: Router,
-    private apiService: ApiService,
     private ui: UIService,
-    private scrapingService: ScrapingService,
-    private imageService: ImageService,
-    private validationsFormService: ValidationsFormService
+    private scrapingService: ScrapingService
   ) {}
 
   onClickStyleScrapingItem(item: { name: string; _id: string }) {
@@ -56,18 +52,22 @@ export class AdminArtistOneComponent {
   }
 
   onKeyUpName() {
-    this.ui.spinner.show();
-    const body: ScrapingGetInfoArtistDto = {
-      name: this.artist.name,
-      countryCode: this.artist.country,
-    };
-    this.scrapingService.getInfoArtist(body).subscribe({
-      next: (response) => this.setArtistFromScraping(response),
-      error: (error) => {
-        this.ui.toast.showToast(TOAST_STATE.error, error);
-        this.ui.spinner.hide();
-      },
-    });
+    try {
+      this.ui.spinner.show();
+      const body: ScrapingGetInfoArtistDto = {
+        name: this.artist.name,
+        countryCode: this.artist.country,
+      };
+      this.scrapingService.getInfoArtist(body).subscribe({
+        next: (response) => this.setArtistFromScraping(response),
+        error: (error) => {
+          this.ui.toast.showToast(TOAST_STATE.error, error);
+          this.ui.spinner.hide();
+        },
+      });
+    } catch (error) {
+      this.ui.spinner.hide();
+    }
   }
 
   private setArtistFromScraping(response: ScrapingGetInfoArtistResponse) {
@@ -118,151 +118,12 @@ export class AdminArtistOneComponent {
     }
   }
 
-  showImage(data: { image: Image; remote: boolean }) {
-    this.ui.fullImage.show(data.image, data.remote);
-  }
-
   showInfo(info: string) {
     this.ui.modal.showModal(MODAL_STATE.info, 'Informacion', info);
   }
 
   selectInfo(info: string) {
     this.artist.info = info;
-  }
-
-  uploadImageByUrl(image: string) {
-    const temp = this.artist._id ? false : true;
-    const data: ImageUploadByUrlDto = {
-      id: this.artist._id!,
-      type: 'artist',
-      url: image,
-    };
-    if (!temp) {
-      this.uploadImageByUrlNormal(data, temp);
-    } else {
-      this.uploadImageByUrlTemp(image);
-    }
-  }
-
-  private uploadImageByUrlTemp(image: string) {
-    this.tempImages.push(image);
-    if (this.scraping.images && this.scraping.images.length > 0) {
-      this.scraping.images = this.scraping.images.filter(
-        (img: string) => img !== image
-      );
-    }
-  }
-
-  private uploadImageByUrlNormal(data: ImageUploadByUrlDto, temp: boolean) {
-    this.ui.spinner.show();
-    this.imageService.uploadByUrl(data).subscribe({
-      next: (response) => {
-        if (!temp) {
-          setTimeout(() => {
-            this.artist.images?.push(response);
-            this.image = '';
-            this.ui.spinner.hide();
-          }, 1000);
-        }
-      },
-      error: (error) => {
-        this.ui.spinner.hide();
-        this.ui.toast.showToast(TOAST_STATE.error, error);
-      },
-    });
-  }
-
-  removeImage(img: Image) {
-    this.apiService.deleteOne('images', img._id!).subscribe({
-      next: () => {
-        this.artist.images = this.artist.images?.filter(
-          (item) => item._id !== img._id
-        );
-        this.ui.toast.showToast(
-          TOAST_STATE.info,
-          'La imagen ha sido eliminada'
-        );
-      },
-      error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
-    });
-  }
-
-  setFirstImage(img: Image) {
-    const data: ImageSetFirstImageDto = {
-      type: 'artist',
-      typeId: this.artist._id!,
-      imageId: img._id!,
-    };
-    this.imageService.setFirstImage(data).subscribe({
-      next: (response) => {
-        this.artist.images = response;
-        this.ui.toast.showToast(
-          TOAST_STATE.info,
-          'La imagen ha sido actualizada'
-        );
-      },
-      error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
-    });
-  }
-
-  onSubmit() {
-    const validation = this.validationsFormService.validation(
-      'artist',
-      this.artist,
-      this.tempImages
-    );
-    if (validation.state) {
-      if (this.artist._id) {
-        this.apiService.update<Artist>('artists', this.artist).subscribe({
-          next: () => this.onSuccessUpdate({ message: 'Artista actualizado' }),
-          error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
-        });
-      } else {
-        this.apiService.create<Artist>('artists', this.artist).subscribe({
-          next: (response) => this.onSuccessCreate(response),
-          error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
-        });
-      }
-    } else {
-      this.ui.toast.showToast(TOAST_STATE.error, validation.message);
-    }
-  }
-
-  onSuccessUpdate(response: MessageI) {
-    this.ui.toast.showToast(TOAST_STATE.success, response.message);
-    this.router.navigate([routesConfig.artistsAdmin]);
-  }
-
-  async onSuccessCreate(response: Artist) {
-    this.artist._id = response._id;
-    for (const image of this.tempImages) {
-      this.uploadImageByUrl(image);
-    }
-    setTimeout(() => {
-      this.ui.toast.showToast(TOAST_STATE.success, 'Artista creado');
-      this.onCreated.emit();
-    }, 3000);
-  }
-
-  onDelete() {
-    const modal = this.ui.modal.showModalConfirm(
-      'Eliminar Artista',
-      '¿Estas seguro de eliminar el artista?'
-    );
-    const sub$ = modal.subscribe({
-      next: (response) => {
-        if (response !== '') {
-          if (response === true) {
-            this.apiService.deleteOne('artists', this.artist._id!).subscribe({
-              next: (response) => this.onSuccessUpdate(response),
-              error: (error) =>
-                this.ui.toast.showToast(TOAST_STATE.error, error),
-            });
-          }
-          sub$.unsubscribe();
-        }
-      },
-    });
   }
 
   goToProfile() {

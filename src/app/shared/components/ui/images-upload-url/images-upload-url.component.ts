@@ -14,7 +14,7 @@ export class ImagesUploadUrlComponent {
   @Output() showImage = new EventEmitter<{ image: Image; remote: true }>();
   @Output() uploadImageByUrl = new EventEmitter<string>();
   @Output() uploadImageByFile = new EventEmitter<File>();
-  loading = false; // Flag variable
+  loading = false;
   file!: File;
 
   showImageUrl(url: string) {

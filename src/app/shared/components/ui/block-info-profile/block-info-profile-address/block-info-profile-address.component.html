@@ -1,4 +1,4 @@
-<ng-container *ngIf="item.address">
+<ng-container *ngIf="item && item.address">
   <div class="text-center dark:text-white font-extralight">
     <p *ngIf="item.address.street !== '' && item.address.town !== ''">
       {{ item.address.street }},

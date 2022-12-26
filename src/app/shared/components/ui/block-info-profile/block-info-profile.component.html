@@ -64,9 +64,10 @@
   ></block-info-profile-address>
 
   <!-- Event Site Name -->
-  <div *ngIf="type === 'event'" class="pb-2">
+  <div *ngIf="type === 'event' && item" class="pb-2">
     <p class="text-base text-center dark:text-white font-extralight">@</p>
     <p
+      *ngIf="item.site"
       class="pt-1 text-3xl font-black text-center cursor-pointer dark:text-white hover:opacity-70"
       (click)="
         goToPage({ type: item.site.type, typeRoute: 'one', item: item.site })

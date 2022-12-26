@@ -25,11 +25,7 @@ export class MapComponent implements AfterViewInit {
   popup: any;
   site = new Site();
 
-  constructor(
-    private router: Router,
-
-    private leafletService: LeafletService
-  ) {}
+  constructor(private router: Router, private leafletService: LeafletService) {}
 
   ngAfterViewInit(): void {
     this.initMap();

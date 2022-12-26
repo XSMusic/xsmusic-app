@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Share, ShareOptions } from '@capacitor/share';
 import { environment } from '@env/environment';
 import { TOAST_STATE, UIService } from '@services';
-import { getTitleMedia } from '@shared/utils';
+import { GenericItemAllType, getTitleMedia } from '@shared/utils';
 import { DateFunctions } from '@shared/utils/dates';
 
 @Component({
@@ -12,7 +12,7 @@ import { DateFunctions } from '@shared/utils/dates';
 })
 export class BlockSharingReportComponent {
   @Input() item: any;
-  @Input() type!: 'artist' | 'club' | 'event' | 'festival' | 'set' | 'track';
+  @Input() type!: GenericItemAllType;
   constructor(private ui: UIService, private router: Router) {}
 
   async sharing() {

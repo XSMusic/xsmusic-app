@@ -3,9 +3,11 @@ import { GetAllDto } from '@shared/services/api/api.dtos';
 
 export class GenericOneBaseViewModel {
   artist!: Artist;
-  site!: Site;
   event!: Event;
   media!: Media;
+  site!: Site;
+  style!: Site;
+  user!: Site;
   slug!: string;
   views: any[] = [];
   bodyEvents: GetAllDto;

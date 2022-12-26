@@ -58,7 +58,7 @@ describe('ApiService', () => {
   });
 
   it('getOne', () => {
-    const data = new GetOneDto()
+    const data = new GetOneDto();
     service.getOne('artists', data).subscribe((response) => {
       expect(JSON.stringify(response)).toEqual(JSON.stringify(responseGetAll));
     });
@@ -69,7 +69,7 @@ describe('ApiService', () => {
   });
 
   it('create', () => {
-    const data = new Artist()
+    const data = new Artist();
     service.create<Artist>('artists', data).subscribe((response) => {
       expect(JSON.stringify(response)).toEqual(JSON.stringify(data));
     });
@@ -80,7 +80,7 @@ describe('ApiService', () => {
   });
 
   it('create', () => {
-    const data = new Artist()
+    const data = new Artist();
     service.update<Artist>('artists', data).subscribe((response) => {
       expect(JSON.stringify(response)).toEqual(JSON.stringify(data));
     });
@@ -91,7 +91,7 @@ describe('ApiService', () => {
   });
 
   it('deleteOne', () => {
-    const response = {message: 'ok'}
+    const response = { message: 'ok' };
     service.deleteOne('artists', 'id').subscribe((response) => {
       expect(JSON.stringify(response)).toEqual(JSON.stringify(response));
     });

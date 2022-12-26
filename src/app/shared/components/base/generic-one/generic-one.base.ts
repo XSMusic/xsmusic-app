@@ -144,7 +144,7 @@ export class GenericOneBase implements OnInit {
         this.vm[this.type].slug!
       )}`,
     };
-    if (this.vm[this.type].info !== '') {
+    if (this.type !== 'user' && this.vm[this.type].info !== '') {
       meta.description = this.vm[this.type].info;
     }
     this.ui.meta.setMetaDynamic(meta);

@@ -1,57 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { routesConfig } from '@core/config';
-import { MessageI } from '@interfaces';
-import { Style } from '@models';
-import { ApiService, TOAST_STATE, UIService } from '@services';
-import { GoToPageI } from '@shared/interfaces/goto.interface';
+import { Component } from '@angular/core';
+import { GenericAdminOneBase } from '@components';
 
 @Component({
   selector: 'page-admin-style',
-  templateUrl: 'admin-style.page.html',
+  template: `<generic-admin-one-base type="style"></generic-admin-one-base>`,
 })
-export class AdminStylePage implements OnInit {
-  id!: string;
-  style = new Style();
-  title!: string;
-  view = 'viewInfo';
-
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private apiService: ApiService,
-    private ui: UIService
-  ) {}
-
-  ngOnInit() {
-    this.id = this.route.snapshot.paramMap.get('id')!;
-    if (this.id) {
-      this.getOne();
-      this.title = 'Editar Estilo';
-    } else {
-      this.title = 'Nuevo Estilo';
-    }
-  }
-
-  getOne() {
-    this.apiService
-      .getOne<Style>('styles', { type: 'id', value: this.id })
-      .subscribe({
-        next: (response) => (this.style = response),
-        error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
-      });
-  }
-
-  onSuccess(response: MessageI) {
-    this.ui.toast.showToast(TOAST_STATE.success, response.message);
-    this.router.navigate([routesConfig.stylesAdmin]);
-  }
-
-  onClickTab(event: any) {
-    this.view = event.action;
-  }
-
-  goToPage(data: GoToPageI): void {
-    this.ui.navigation.goToPage(data);
-  }
-}
+export class AdminStylePage extends GenericAdminOneBase {}

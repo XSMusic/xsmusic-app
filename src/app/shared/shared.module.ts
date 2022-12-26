@@ -58,6 +58,8 @@ import {
   GenericAdminOneBase,
   AdminEventOneComponent,
   AdminUserOneComponent,
+  StyleListViewComponent,
+  AdminStyleOneComponent,
 } from '@components';
 import {
   CountryFlagPipe,
@@ -150,6 +152,8 @@ const components = [
   GenericAdminOneBase,
   AdminEventOneComponent,
   AdminUserOneComponent,
+  AdminStyleOneComponent,
+  StyleListViewComponent,
 ];
 const directives = [OnImageErrorDirective];
 const modules = [

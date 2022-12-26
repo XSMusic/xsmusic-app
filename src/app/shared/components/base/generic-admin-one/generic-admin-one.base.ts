@@ -61,7 +61,7 @@ export class GenericAdminOneBase implements OnInit {
     }
   }
 
-  setTypes() {
+  private setTypes() {
     if (this.type === 'artist') {
       this.vm.bodyEvents.type = `${this.type}s`;
       this.vm.bodyMediaSet.type = `${this.type}s`;
@@ -76,31 +76,36 @@ export class GenericAdminOneBase implements OnInit {
       this.vm.bodyMediaSet.type = `${this.type}`;
       this.vm.bodyMediaTrack.type = `${this.subType}s`;
       this.vm.apiType = `${this.type}s`;
+    } else if (this.type === 'style') {
+      this.vm.apiType = `${this.type}s`;
     }
   }
 
-  setTitle() {
-    switch (this.type) {
-      case 'artist':
-        this.vm.title = `${this.vm.id ? 'Editar' : 'Nuevo'} Artista`;
-        break;
-      case 'site':
-        const titleSite = this.subType === 'club' ? 'Clubs' : 'Festivales';
-        this.vm.title = `${this.vm.id ? 'Editar' : 'Nuevo'} ${titleSite}`;
-        break;
-      case 'site':
-        this.vm.title = `${this.vm.id ? 'Editar' : 'Nuevo'} Eventos`;
-        break;
-      case 'media':
-        const titleMedia = this.subType === 'set' ? 'Sets' : 'Tracks';
-        this.vm.title = `${this.vm.id ? 'Editar' : 'Nuevo'} ${titleMedia}`;
-        break;
-      default:
-        break;
+  private setTitle() {
+    if (this.type === 'artist') {
+      this.vm.title = `${this.vm.id ? 'Editar' : 'Nuevo'} Artista`;
+    } else if (this.type === 'event') {
+      this.vm.title = `${this.vm.id ? 'Editar' : 'Nuevo'} Eventos`;
+    } else if (this.type === 'media' || this.type === 'site') {
+      this.setTitleSub();
+    } else if (this.type === 'style') {
+      this.vm.title = `${this.vm.id ? 'Editar' : 'Nuevo'} Estilo`;
+    } else if (this.type === 'user') {
+      this.vm.title = `${this.vm.id ? 'Editar' : 'Nuevo'} Usuario`;
     }
   }
 
-  setTypeTabs() {
+  private setTitleSub() {
+    if (this.type === 'media') {
+      const titleMedia = this.subType === 'set' ? 'Set' : 'Track';
+      this.vm.title = `${this.vm.id ? 'Editar' : 'Nuevo'} ${titleMedia}`;
+    } else {
+      const titleSite = this.subType === 'club' ? 'Club' : 'Festivale';
+      this.vm.title = `${this.vm.id ? 'Editar' : 'Nuevo'} ${titleSite}`;
+    }
+  }
+
+  private setTypeTabs() {
     if (this.type === 'artist') {
       this.vm.typeTabs = 'artistAdmin';
     } else if (this.type === 'event') {
@@ -109,12 +114,14 @@ export class GenericAdminOneBase implements OnInit {
       this.vm.typeTabs = 'siteAdmin';
     } else if (this.type === 'media') {
       this.vm.typeTabs = 'mediaAdmin';
+    } else if (this.type === 'style') {
+      this.vm.typeTabs = 'styleAdmin';
     } else if (this.type === 'user') {
       this.vm.typeTabs = 'userAdmin';
     }
   }
 
-  setOptions() {
+  private setOptions() {
     if (this.type === 'artist') {
       this.vm.options.push(
         { name: 'Añadir Set', action: 'goToAdminSetAdd' },
@@ -159,7 +166,7 @@ export class GenericAdminOneBase implements OnInit {
     });
   }
 
-  setMeta() {
+  private setMeta() {
     let title: string;
     if (this.type === 'event') {
       title = `${this.vm.event.name} @ ${
@@ -174,7 +181,7 @@ export class GenericAdminOneBase implements OnInit {
     this.ui.meta.setMetaDynamic(meta);
   }
 
-  checkViews() {
+  private checkViews() {
     if (this.type === 'artist') {
       this.checkViewsArtist();
     } else if (this.type === 'site') {
@@ -182,7 +189,7 @@ export class GenericAdminOneBase implements OnInit {
     }
   }
 
-  checkViewsArtist() {
+  private checkViewsArtist() {
     if (this.vm.artist.sets && this.vm.artist.sets.count > 0) {
       this.getMediaSets();
     }
@@ -194,7 +201,7 @@ export class GenericAdminOneBase implements OnInit {
     }
   }
 
-  checkViewsSite() {
+  private checkViewsSite() {
     if (this.vm.site.sets && this.vm.site.sets.count > 0) {
       this.getMediaSets();
     }
@@ -203,7 +210,7 @@ export class GenericAdminOneBase implements OnInit {
     }
   }
 
-  getEvents() {
+  private getEvents() {
     this.vm.bodyEvents.id = this.vm[this.type]._id!;
     this.apiService
       .getAllForType<Event>('events', this.vm.bodyEvents)
@@ -218,7 +225,7 @@ export class GenericAdminOneBase implements OnInit {
       });
   }
 
-  getMediaSets() {
+  private getMediaSets() {
     this.vm.bodyMediaSet.id = this.vm[this.type]._id!;
     this.apiService
       .getAllForType<Media>('media', this.vm.bodyMediaSet)
@@ -231,7 +238,7 @@ export class GenericAdminOneBase implements OnInit {
       });
   }
 
-  getMediaTracks() {
+  private getMediaTracks() {
     this.vm.bodyMediaTrack.id = this.vm[this.type]._id!;
     this.apiService
       .getAllForType<Media>('media', this.vm.bodyMediaTrack)
@@ -249,7 +256,7 @@ export class GenericAdminOneBase implements OnInit {
   }
 
   onSubmit(data: { scraping: any }): void {
-    if (data.scraping) {
+    if (data && data.scraping) {
       this.vm.scraping = data.scraping;
     }
     const validation = this.validationsFormService.validation(
@@ -261,7 +268,7 @@ export class GenericAdminOneBase implements OnInit {
     if (validation.state) {
       if (this.vm[this.type]._id) {
         this.apiService.update(this.vm.apiType, this.vm[this.type]).subscribe({
-          next: () => this.onSuccessUpdate({ message: 'Artista actualizado' }),
+          next: () => this.onSuccessUpdate({ message: 'Item actualizado' }),
           error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
         });
       } else {
@@ -277,7 +284,7 @@ export class GenericAdminOneBase implements OnInit {
 
   onSuccessUpdate(response: MessageI) {
     this.ui.toast.showToast(TOAST_STATE.success, response.message);
-    let type: GoToType = 'artist';
+    let type!: GoToType;
     if (
       this.type === 'event' ||
       this.type === 'media' ||
@@ -288,7 +295,7 @@ export class GenericAdminOneBase implements OnInit {
       type = this.type;
     }
     this.goToPage({
-      type: type,
+      type,
       typeRoute: 'all',
       admin: true,
     });
@@ -326,7 +333,9 @@ export class GenericAdminOneBase implements OnInit {
     this.imageService.upload(data, image).subscribe({
       next: (response) => {
         setTimeout(() => {
-          this.vm[this.type].images?.push(response);
+          if (this.type !== 'style') {
+            this.vm[this.type].images?.push(response);
+          }
           this.ui.spinner.hide();
         }, 1000);
       },
@@ -360,7 +369,9 @@ export class GenericAdminOneBase implements OnInit {
     this.imageService.uploadByUrl(data).subscribe({
       next: (response) => {
         setTimeout(() => {
-          this.vm[this.type].images?.push(response);
+          if (this.type !== 'style') {
+            this.vm[this.type].images?.push(response);
+          }
           this.ui.spinner.hide();
         }, 1000);
       },
@@ -383,13 +394,15 @@ export class GenericAdminOneBase implements OnInit {
   removeImage(img: Image) {
     this.apiService.deleteOne('images', img._id!).subscribe({
       next: () => {
-        this.vm[this.type].images = this.vm[this.type].images?.filter(
-          (item) => item._id !== img._id
-        );
-        this.ui.toast.showToast(
-          TOAST_STATE.info,
-          'La imagen ha sido eliminada'
-        );
+        if (this.type !== 'style') {
+          this.vm[this.type].images = this.vm[this.type].images?.filter(
+            (item) => item._id !== img._id
+          );
+          this.ui.toast.showToast(
+            TOAST_STATE.info,
+            'La imagen ha sido eliminada'
+          );
+        }
       },
       error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
     });
@@ -403,11 +416,13 @@ export class GenericAdminOneBase implements OnInit {
     };
     this.imageService.setFirstImage(data).subscribe({
       next: (response) => {
-        this.vm[this.type].images = response;
-        this.ui.toast.showToast(
-          TOAST_STATE.info,
-          'La imagen ha sido actualizada'
-        );
+        if (this.type !== 'style') {
+          this.vm[this.type].images = response;
+          this.ui.toast.showToast(
+            TOAST_STATE.info,
+            'La imagen ha sido actualizada'
+          );
+        }
       },
       error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
     });

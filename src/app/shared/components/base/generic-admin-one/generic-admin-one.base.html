@@ -79,6 +79,14 @@
     </ng-container>
   </div>
 
+  <div *ngIf="type === 'style'">
+    <admin-style-one
+      *ngIf="vm.view === 'viewInfo'"
+      [style]="vm.style"
+      (onSubmit)="onSubmit($event)"
+    ></admin-style-one>
+  </div>
+
   <div *ngIf="type === 'user'">
     <admin-user-one
       *ngIf="vm.view === 'viewInfo'"

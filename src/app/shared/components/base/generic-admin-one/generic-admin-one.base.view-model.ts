@@ -8,7 +8,8 @@ export class GenericAdminOneBaseViewModel {
     | 'eventAdmin'
     | 'siteAdmin'
     | 'mediaAdmin'
-    | 'userAdmin';
+    | 'userAdmin'
+    | 'styleAdmin';
   apiType!: ApiTypes;
   artist = new Artist();
   event = new Event();

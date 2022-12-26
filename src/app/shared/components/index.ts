@@ -1,3 +1,5 @@
+export { AdminStyleOneComponent } from './one/admin-style-one/admin-style-one.component';
+export { StyleListViewComponent } from './views/list/style-list-view/style-list-view.component';
 export { VideoYoutubeComponent } from './ui/youtube/video-youtube.component';
 export { AdminEventsScrapingSiteComponent } from './events/admin-events-scraping-site/admin-events-scraping-site.component';
 export { AdminMediaAddSearchItemsComponent } from './events/add-search-items/admin-media-add-search-items.component';

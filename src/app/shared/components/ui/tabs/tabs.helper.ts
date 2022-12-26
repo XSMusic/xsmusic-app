@@ -101,6 +101,16 @@ export const tabsByType = [
     ],
   },
   {
+    name: 'styleAdmin',
+    buttons: [
+      new TabsItem({
+        name: 'Info',
+        action: 'viewInfo',
+        isActivatable: true,
+      }),
+    ],
+  },
+  {
     name: 'artistsAdmin',
     buttons: [
       new TabsItem({

@@ -6,7 +6,13 @@ export type GenericItemsAllType =
   | 'tracks'
   | 'clubs'
   | 'festivals';
-export type GenericItemType = 'artist' | 'site' | 'event' | 'media' | 'user';
+export type GenericItemType =
+  | 'artist'
+  | 'event'
+  | 'media'
+  | 'site'
+  | 'style'
+  | 'user';
 export type GenericItemAllType =
   | 'artist'
   | 'club'
@@ -31,6 +37,7 @@ export type GoToType =
   | 'set'
   | 'track'
   | 'festival'
+  | 'style'
   | 'user';
 export type GoToRouteType = 'all' | 'one';
 

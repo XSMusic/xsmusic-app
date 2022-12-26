@@ -10,7 +10,7 @@ import {
 import { apiServiceMock, siteServiceMock } from 'app/testing/services.mock';
 import { TracksPage } from './tracks.page';
 import { ActivatedRoute } from '@angular/router';
-import { ApiService, MediaService, SiteService } from '@services';
+import { ApiService } from '@services';
 
 describe('TracksPage', () => {
   let component: TracksPage;
@@ -30,10 +30,7 @@ describe('TracksPage', () => {
           provide: ApiService,
           useValue: apiServiceMock,
         },
-        {
-          provide: SiteService,
-          useValue: siteServiceMock,
-        },
+
         {
           provide: ActivatedRoute,
           useValue: {

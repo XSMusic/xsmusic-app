@@ -16,7 +16,6 @@ const responseGetAll: PaginatorI<User> = {
 };
 
 describe('UserService', () => {
-  let httpTestingController: HttpTestingController;
   let service: UserService;
 
   beforeEach(() => {
@@ -26,10 +25,6 @@ describe('UserService', () => {
     });
 
     service = TestBed.inject(UserService);
-  });
-
-  afterEach(() => {
-    httpTestingController.verify();
   });
 
   it('should be created', () => {

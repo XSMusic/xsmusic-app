@@ -4,10 +4,10 @@ import {
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { environment } from '@env/environment';
-import { GetAllDto, PaginatorI } from '@interfaces';
+import { PaginatorI } from '@interfaces';
 import { Event } from '@models';
 import { EventService } from '@services';
-import { EventGetAllForTypeDto } from './event.dto';
+import { GetAllDto } from '../api.dtos';
 
 const item = new Event();
 const responseGetAll: PaginatorI<Event> = {
@@ -43,7 +43,7 @@ describe('EventService', () => {
   });
 
   it('getAllForType', () => {
-    const data: EventGetAllForTypeDto = {
+    const data: GetAllDto = {
       page: 0,
       pageSize: 0,
       order: [],

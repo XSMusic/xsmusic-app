@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { routesConfig } from '@core/config';
 import { Media } from '@models';
-import { MediaService, TOAST_STATE, UIService } from '@services';
+import { ApiService, TOAST_STATE, UIService } from '@services';
 
 @Component({
   selector: 'page-admin-media-edit',
@@ -17,7 +17,7 @@ export class AdminMediaEditPage implements OnInit {
     private route: ActivatedRoute,
     private ui: UIService,
     private router: Router,
-    private mediaService: MediaService
+    private apiService: ApiService
   ) {}
 
   ngOnInit() {
@@ -30,10 +30,13 @@ export class AdminMediaEditPage implements OnInit {
   }
 
   getItem() {
-    this.mediaService.getOne('id', this.id).subscribe({
-      next: (response) => (this.media = response),
-      error: (error: any) => this.ui.toast.showToast(TOAST_STATE.error, error),
-    });
+    this.apiService
+      .getOne<Media>('media', { type: 'id', value: this.id })
+      .subscribe({
+        next: (response) => (this.media = response),
+        error: (error: any) =>
+          this.ui.toast.showToast(TOAST_STATE.error, error),
+      });
   }
 
   onSubmitSuccess() {

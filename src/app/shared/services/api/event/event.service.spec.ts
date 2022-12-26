@@ -58,24 +58,4 @@ describe('EventService', () => {
     );
     req.flush(responseGetAll);
   });
-
-  it('create', () => {
-    service.create(item).subscribe((response) => {
-      expect(JSON.stringify(response)).toEqual(JSON.stringify(item));
-    });
-    const req = httpTestingController.expectOne(
-      `${environment.urls.api}/events/create`
-    );
-    req.flush(item);
-  });
-
-  it('update', () => {
-    service.update(item).subscribe((response) => {
-      expect(JSON.stringify(response)).toEqual(JSON.stringify(item));
-    });
-    const req = httpTestingController.expectOne(
-      `${environment.urls.api}/events/update`
-    );
-    req.flush(item);
-  });
 });

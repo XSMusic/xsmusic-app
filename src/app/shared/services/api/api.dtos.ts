@@ -10,6 +10,7 @@ export class GetAllDto {
   filter?: any;
   coordinates?: any;
   complete?: boolean;
+  old?: boolean;
 
   constructor(data?: GetAllDto) {
     if (data) {

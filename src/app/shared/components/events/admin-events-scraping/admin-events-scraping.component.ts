@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { routesConfig } from '@core/config';
 import { Event } from '@models';
 import {
-  EventService,
+  ApiService,
   ImageService,
   ScrapingService,
   TOAST_STATE,
@@ -52,7 +52,7 @@ export class AdminEventsScrapingComponent {
   @Output() onEventCreated = new EventEmitter<void>();
   constructor(
     private scrapingService: ScrapingService,
-    private eventService: EventService,
+    private apiService: ApiService,
     private imageService: ImageService,
     private ui: UIService,
     private router: Router
@@ -98,7 +98,7 @@ export class AdminEventsScrapingComponent {
       date: item.date,
       site: item.site._id,
     });
-    this.eventService.create(event).subscribe({
+    this.apiService.create<Event>('events', event).subscribe({
       next: (response) => {
         const data: ImageUploadByUrlDto = {
           id: response._id!,

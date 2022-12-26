@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Event } from '@models';
 import {
-  EventService,
+  ApiService,
   ImageService,
   ScrapingService,
   TOAST_STATE,
@@ -21,7 +21,7 @@ export class AdminEventsScrapingSiteComponent implements OnInit {
   @Output() onEventCreated = new EventEmitter<void>();
   constructor(
     private scrapingService: ScrapingService,
-    private eventService: EventService,
+    private apiService: ApiService,
     private imageService: ImageService,
     private ui: UIService
   ) {}
@@ -63,7 +63,7 @@ export class AdminEventsScrapingSiteComponent implements OnInit {
       date: item.date,
       site: item.site._id,
     });
-    this.eventService.create(event).subscribe({
+    this.apiService.create<Event>('events', event).subscribe({
       next: (response) => {
         const data: ImageUploadByUrlDto = {
           id: response._id!,

@@ -4,7 +4,7 @@ import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { environment } from '@env/environment';
 import { Media } from '@models';
-import { MediaService, MetaService, NavigationService } from '@services';
+import { ApiService, MetaService, NavigationService } from '@services';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { MetadataI } from '@shared/services/system/meta';
 import { getTitleMedia } from '@shared/utils';
@@ -23,7 +23,7 @@ export class MediaOneBase implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private mediaService: MediaService,
+    private apiService: ApiService,
     private metaService: MetaService,
     private navigationService: NavigationService,
     private gaService: GoogleAnalyticsService
@@ -39,19 +39,21 @@ export class MediaOneBase implements OnInit {
   }
 
   getItem() {
-    this.mediaService.getOne('slug', this.slug).subscribe({
-      next: (response) => {
-        this.media = response;
-        this.setMeta();
-      },
-      error: () =>
-        this.router.navigate(['/404'], {
-          skipLocationChange: true,
-          state: {
-            type: this.type,
-          },
-        }),
-    });
+    this.apiService
+      .getOne<Media>('media', { type: 'slug', value: this.slug })
+      .subscribe({
+        next: (response) => {
+          this.media = response;
+          this.setMeta();
+        },
+        error: () =>
+          this.router.navigate(['/404'], {
+            skipLocationChange: true,
+            state: {
+              type: this.type,
+            },
+          }),
+      });
   }
 
   setMeta() {

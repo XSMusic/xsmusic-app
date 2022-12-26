@@ -78,12 +78,12 @@ export class AdminMediaOneComponent {
     );
     if (validation.state) {
       if (this.media._id) {
-        this.mediaService.update(this.media).subscribe({
-          next: (response) => this.onSuccessUpdate(response),
+        this.apiService.update<Media>('media', this.media).subscribe({
+          next: () => this.onSuccessUpdate({ message: 'Media actualizado' }),
           error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
         });
       } else {
-        this.mediaService.create(this.media).subscribe({
+        this.apiService.create<Media>('media', this.media).subscribe({
           next: (response) => this.onSuccessCreate(response),
           error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
         });

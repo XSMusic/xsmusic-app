@@ -190,12 +190,12 @@ export class AdminEventOneComponent {
     );
     if (validation.state) {
       if (this.event._id) {
-        this.eventService.update(this.event).subscribe({
-          next: (response) => this.onSuccessUpdate(response),
+        this.apiService.update<Event>('events', this.event).subscribe({
+          next: () => this.onSuccessUpdate({ message: 'Evento actualizado' }),
           error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
         });
       } else {
-        this.eventService.create(this.event).subscribe({
+        this.apiService.create<Event>('events', this.event).subscribe({
           next: (response) => this.onSuccessCreate(response),
           error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
         });

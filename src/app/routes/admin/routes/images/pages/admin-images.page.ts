@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
-import { GetAllDto } from '@interfaces';
 import { Image } from '@models';
 import { ApiService, ImageService, TOAST_STATE, UIService } from '@services';
 import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
+import { GetAllDto } from '@shared/services/api/api.dtos';
 
 @Component({
   selector: 'page-admin-images',
@@ -15,11 +15,9 @@ import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 export class AdminImagesPage implements OnInit {
   title = '';
   items: Image[] = [];
-  body: GetAllDto = {
-    page: 1,
+  body = new GetAllDto({
     pageSize: 40,
-    order: ['updated', 'desc'],
-  };
+  });
   loading = true;
   error = false;
   constructor(
@@ -68,7 +66,7 @@ export class AdminImagesPage implements OnInit {
   }
 
   onScroll() {
-    this.body.page++;
+    this.body.page!++;
     this.getItems(true);
   }
 

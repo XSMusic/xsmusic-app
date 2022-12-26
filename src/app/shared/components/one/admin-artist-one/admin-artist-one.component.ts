@@ -5,7 +5,6 @@ import { routesConfig } from '@core/config';
 import { MessageI, ScrapingGetInfoArtistResponse } from '@interfaces';
 import { Artist, Image, Style } from '@models';
 import {
-  ArtistService,
   ScrapingService,
   ImageService,
   ValidationsFormService,
@@ -42,7 +41,6 @@ export class AdminArtistOneComponent {
   @Output() onCreated = new EventEmitter<void>();
   constructor(
     private router: Router,
-    private artistService: ArtistService,
     private apiService: ApiService,
     private ui: UIService,
     private scrapingService: ScrapingService,
@@ -215,12 +213,12 @@ export class AdminArtistOneComponent {
     );
     if (validation.state) {
       if (this.artist._id) {
-        this.artistService.update(this.artist).subscribe({
-          next: (response) => this.onSuccessUpdate(response),
+        this.apiService.update<Artist>('artists', this.artist).subscribe({
+          next: () => this.onSuccessUpdate({ message: 'Artista actualizado' }),
           error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
         });
       } else {
-        this.artistService.create(this.artist).subscribe({
+        this.apiService.create<Artist>('artists', this.artist).subscribe({
           next: (response) => this.onSuccessCreate(response),
           error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
         });

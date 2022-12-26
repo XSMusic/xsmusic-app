@@ -5,7 +5,6 @@ import { routesConfig } from '@core/config';
 import { MessageI, ScrapingGetInfoClubResponse } from '@interfaces';
 import { Image, Site, Style } from '@models';
 import {
-  SiteService,
   ScrapingService,
   GeoService,
   ImageService,
@@ -46,7 +45,6 @@ export class AdminSiteOneComponent implements OnInit {
   tempImages: string[] = [];
   @Output() onCreated = new EventEmitter<void>();
   constructor(
-    private siteService: SiteService,
     private apiService: ApiService,
     private ui: UIService,
     private router: Router,
@@ -269,12 +267,12 @@ export class AdminSiteOneComponent implements OnInit {
     );
     if (validation.state) {
       if (this.site._id) {
-        this.siteService.update(this.site).subscribe({
-          next: (response) => this.onSuccessUpdate(response),
+        this.apiService.update<Site>('sites', this.site).subscribe({
+          next: () => this.onSuccessUpdate({ message: 'Sitio actualizado' }),
           error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
         });
       } else {
-        this.siteService.create(this.site).subscribe({
+        this.apiService.create<Site>('sites', this.site).subscribe({
           next: (response) => this.onSuccessCreate(response),
           error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
         });

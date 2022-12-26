@@ -1,13 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { GetAllDto } from '@interfaces';
-import {
-  ArtistService,
-  SiteService,
-  StyleService,
-  TOAST_STATE,
-  UIService,
-} from '@services';
+import { ApiService, StyleService, TOAST_STATE, UIService } from '@services';
+import { GetAllDto } from '@shared/services/api/api.dtos';
 
 @Component({
   selector: 'search-input',
@@ -19,20 +13,18 @@ export class SearchInputComponent implements OnInit {
   @Input() item?: any;
   label = '';
   placeholder = '';
-  body: GetAllDto = {
-    page: 1,
+  body: GetAllDto = new GetAllDto({
     pageSize: 5,
     order: ['name', 'asc'],
     filter: [],
     type: 'all',
-  };
+  });
   selectState = false;
   itemsSearch: any[] = [];
   itemSearch = null;
   constructor(
     private ui: UIService,
-    private artistService: ArtistService,
-    private siteService: SiteService,
+    private apiService: ApiService,
     private styleService: StyleService
   ) {}
 
@@ -61,11 +53,9 @@ export class SearchInputComponent implements OnInit {
     if (e && e.length >= 3) {
       this.body.filter = ['name', e];
       let service: any;
-      if (this.type === 'artist') {
-        service = this.artistService;
-      } else if (this.type === 'site') {
-        service = this.siteService;
-      } else if (this.type === 'style') {
+      if (this.type !== 'style') {
+        service = this.apiService;
+      } else {
         service = this.styleService;
       }
       service!.getAll(this.body).subscribe({

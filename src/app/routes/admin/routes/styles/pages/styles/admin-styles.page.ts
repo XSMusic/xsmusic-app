@@ -4,7 +4,7 @@ import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { Style } from '@models';
 import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
-import { StyleGetAllDto } from '@shared/services/api/style/style.dto';
+import { GetAllDto } from '@shared/services/api/api.dtos';
 import { StyleService } from '@shared/services/api/style/style.service';
 
 @Component({
@@ -14,12 +14,10 @@ import { StyleService } from '@shared/services/api/style/style.service';
 })
 export class AdminStylesPage implements OnInit {
   styles: Style[] = [];
-  body: StyleGetAllDto = {
-    page: 1,
-    pageSize: 20,
+  body = new GetAllDto({
     order: ['name', 'asc'],
     complete: true,
-  };
+  });
   loading = true;
   error = false;
   constructor(private router: Router, private styleService: StyleService) {}
@@ -59,7 +57,7 @@ export class AdminStylesPage implements OnInit {
   }
 
   onScroll() {
-    this.body.page++;
+    this.body.page!++;
     this.getStyles(true);
   }
 

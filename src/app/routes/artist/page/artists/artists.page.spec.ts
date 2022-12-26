@@ -10,12 +10,11 @@ import {
 import { SvgIconRegistryService } from 'angular-svg-icon';
 import {
   apiServiceMock,
-  siteServiceMock,
   svgIconRegistryServiceMock,
 } from 'app/testing/services.mock';
 import { ArtistsPage } from './artists.page';
 import { ActivatedRoute } from '@angular/router';
-import { ApiService, SiteService } from '@services';
+import { ApiService } from '@services';
 
 describe('ArtistsPage', () => {
   let component: ArtistsPage;
@@ -38,10 +37,6 @@ describe('ArtistsPage', () => {
         {
           provide: ApiService,
           useValue: apiServiceMock,
-        },
-        {
-          provide: SiteService,
-          useValue: siteServiceMock,
         },
         {
           provide: ActivatedRoute,

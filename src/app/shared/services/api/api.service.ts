@@ -23,6 +23,14 @@ export class ApiService {
       .pipe(take(1));
   }
 
+  create<T>(type: ApiTypes, data: T): Observable<T> {
+    return this.httpClient.post<T>(`${this.url}/${type}create`, data);
+  }
+
+  update<T>(type: ApiTypes, data: T): Observable<T> {
+    return this.httpClient.put<T>(`${this.url}/${type}/update`, data);
+  }
+
   deleteOne(type: ApiTypes, id: string): Observable<MessageI> {
     return this.httpClient
       .delete<MessageI>(`${this.url}/${type}/one/${id}`)

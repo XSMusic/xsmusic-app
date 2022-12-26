@@ -1,13 +1,3 @@
-export interface GetAllDto {
-  page: number;
-  pageSize: number;
-  order: string[];
-  filter?: string[];
-  type?: any;
-  map?: boolean;
-  id?: string;
-}
-
 export interface IdDto {
   id: string;
 }

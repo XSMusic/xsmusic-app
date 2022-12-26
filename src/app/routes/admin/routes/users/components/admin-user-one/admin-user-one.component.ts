@@ -8,7 +8,6 @@ import {
   ApiService,
   TOAST_STATE,
   UIService,
-  UserService,
   ValidationsFormService,
 } from '@services';
 
@@ -26,7 +25,6 @@ export class AdminUserOneComponent {
   ];
 
   constructor(
-    private userService: UserService,
     private apiService: ApiService,
     private router: Router,
     private ui: UIService,
@@ -44,10 +42,15 @@ export class AdminUserOneComponent {
     );
     if (validation.state) {
       const observable = this.user._id
-        ? this.userService.update(this.user)
-        : this.userService.create(this.user);
+        ? this.apiService.update<User>('artists', this.user)
+        : this.apiService.create<User>('artists', this.user);
       observable.subscribe({
-        next: (response) => this.onSuccess(response),
+        next: () =>
+          this.onSuccess(
+            this.user._id
+              ? { message: 'Usuario Actualizado' }
+              : { message: 'Usuario Creado' }
+          ),
         error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
       });
     } else {

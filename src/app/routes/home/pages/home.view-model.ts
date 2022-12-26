@@ -1,7 +1,5 @@
-import { GetAllDto } from '@interfaces';
 import { Artist, Event, Media, Site } from '@models';
-import { EventGetAllDto } from '@shared/services/api/event/event.dto';
-import { SiteGetAllDto } from '@shared/services/api/site/site.dto';
+import { GetAllDto } from '@shared/services/api/api.dtos';
 
 export class HomeViewModel {
   items: any[] = [
@@ -30,29 +28,22 @@ export class HomeViewModel {
       typeItems: 'festivals',
     },
   ];
-  bodyArtists: GetAllDto = {
-    page: 1,
-    pageSize: 20,
-    order: ['created', 'desc'],
-  };
-  bodyEvents: EventGetAllDto = {
-    page: 1,
+  bodyArtists: GetAllDto = new GetAllDto({
+    pageSize: 10,
+  });
+  bodyEvents: GetAllDto = new GetAllDto({
     pageSize: 6,
     order: ['date', 'asc'],
-  };
-  bodyMedia: GetAllDto = {
-    page: 1,
+  });
+  bodyMedia: GetAllDto = new GetAllDto({
     pageSize: 4,
-    order: ['created', 'desc'],
     type: 'set',
-  };
-  bodySites: SiteGetAllDto = {
-    page: 1,
+  });
+  bodySites: GetAllDto = new GetAllDto({
     pageSize: 10,
-    order: ['created', 'desc'],
     type: 'club',
     map: false,
-  };
+  });
   artists!: Artist[];
   events!: Event[];
   sets: Media[] = [];

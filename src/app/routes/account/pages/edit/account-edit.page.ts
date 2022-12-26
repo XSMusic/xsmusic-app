@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@core/auth';
 import { User } from '@models';
-import { TOAST_STATE, UIService, UserService } from '@services';
+import { ApiService, TOAST_STATE, UIService, UserService } from '@services';
 import { darkMode } from '@shared/utils';
 
 @Component({
@@ -12,6 +12,7 @@ export class AccountEditPage implements OnInit {
   user!: User;
   constructor(
     private authService: AuthService,
+    private apiService: ApiService,
     private userService: UserService,
     private ui: UIService
   ) {}
@@ -27,9 +28,12 @@ export class AccountEditPage implements OnInit {
   }
 
   onSubmit() {
-    this.userService.update(this.user).subscribe({
-      next: (response) => {
-        this.ui.toast.showToast(TOAST_STATE.success, response.message);
+    this.apiService.update('users', this.user).subscribe({
+      next: () => {
+        this.ui.toast.showToast(
+          TOAST_STATE.success,
+          'Los datos han sido actualizados'
+        );
         this.userService.set(this.user);
         darkMode(this.user);
       },

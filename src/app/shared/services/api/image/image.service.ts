@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
 import { Observable } from 'rxjs/internal/Observable';
 import { take } from 'rxjs';
-import { GetAllDto, PaginatorI } from '@interfaces';
+import { PaginatorI } from '@interfaces';
 import { Image } from '@models';
 import {
   ImageSetFirstImageDto,
   ImageUploadByUrlDto,
   ImageUploadDto,
 } from './image.dto';
+import { GetAllDto } from '../api.dtos';
 
 @Injectable({ providedIn: 'root' })
 export class ImageService {

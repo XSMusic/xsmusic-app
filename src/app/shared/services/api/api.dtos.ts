@@ -9,6 +9,7 @@ export class GetAllDto {
   maxDistance?: number;
   filter?: any;
   coordinates?: any;
+  complete?: boolean;
 
   constructor(data?: GetAllDto) {
     if (data) {

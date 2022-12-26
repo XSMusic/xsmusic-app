@@ -79,12 +79,10 @@ import { NgxPermissionsModule } from 'ngx-permissions';
 import {
   AngularSvgIconPreloaderService,
   ApiService,
-  ArtistService,
   LocalStorageService,
   MediaService,
   NavigationService,
   ScrapingService,
-  SiteService,
   StartupService,
   UserService,
   ValidationsFormService,
@@ -184,12 +182,10 @@ const pipes = [
 ];
 const services = [
   AngularSvgIconPreloaderService,
-  ArtistService,
   LocalStorageService,
   MediaService,
   NavigationService,
   ScrapingService,
-  SiteService,
   StartupService,
   UserService,
   VersionUpdateService,

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '@models';
-import { NavigationService, UserService } from '@services';
+import { ApiService, NavigationService } from '@services';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
-import { UserGetAllDto } from '@shared/services/api/user/dtos/user.dto';
+import { GetAllDto } from '@shared/services/api/api.dtos';
 
 @Component({
   selector: 'page-admin-users',
@@ -10,15 +10,11 @@ import { UserGetAllDto } from '@shared/services/api/user/dtos/user.dto';
 })
 export class AdminUsersPage implements OnInit {
   users: User[] = [];
-  body: UserGetAllDto = {
-    page: 1,
-    pageSize: 20,
-    order: ['updated', 'desc'],
-  };
+  body = new GetAllDto();
   loading = true;
   error = false;
   constructor(
-    private userService: UserService,
+    private apiService: ApiService,
     private navigationService: NavigationService
   ) {}
 
@@ -27,7 +23,7 @@ export class AdminUsersPage implements OnInit {
   }
 
   getUsers(more = false) {
-    this.userService.getAll(this.body).subscribe({
+    this.apiService.getAll<User>('users', this.body).subscribe({
       next: (response) => {
         if (!more) {
           this.users = response.items;
@@ -61,7 +57,7 @@ export class AdminUsersPage implements OnInit {
   }
 
   onScroll() {
-    this.body.page++;
+    this.body.page!++;
     this.getUsers(true);
   }
 }

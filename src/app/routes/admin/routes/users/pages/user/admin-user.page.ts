@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '@models';
-import { TOAST_STATE, UIService, UserService } from '@services';
+import { ApiService, TOAST_STATE, UIService } from '@services';
 import { NgxSpinnerService } from '@shared/services/system/ngx-spinner/ngx-spinner.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class AdminUserPage implements OnInit {
   view = 'viewInfo';
 
   constructor(
-    private userService: UserService,
+    private apiService: ApiService,
     private ui: UIService,
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService
@@ -33,15 +33,17 @@ export class AdminUserPage implements OnInit {
 
   getOne() {
     this.spinner.show();
-    this.userService.getOne({ id: this.id }).subscribe({
-      next: (response) => {
-        this.user = response;
-        this.spinner.hide();
-      },
-      error: (error) => {
-        this.ui.toast.showToast(TOAST_STATE.error, error);
-        this.spinner.hide();
-      },
-    });
+    this.apiService
+      .getOne<User>('users', { type: 'id', value: this.id })
+      .subscribe({
+        next: (response) => {
+          this.user = response;
+          this.spinner.hide();
+        },
+        error: (error) => {
+          this.ui.toast.showToast(TOAST_STATE.error, error);
+          this.spinner.hide();
+        },
+      });
   }
 }

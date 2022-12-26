@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
-import { GetAllDto, MessageI } from '@interfaces';
+import { MessageI } from '@interfaces';
 import { Artist, Image, Media, Site, Style } from '@models';
 import {
   ApiService,
@@ -12,6 +12,7 @@ import {
   UIService,
   ValidationsFormService,
 } from '@services';
+import { GetAllDto } from '@shared/services/api/api.dtos';
 import {
   ImageSetFirstImageDto,
   ImageUploadByUrlDto,
@@ -31,19 +32,15 @@ export class AdminMediaOneComponent {
   };
   @Output() onSubmitSuccess = new EventEmitter<Media>();
   sources = [{ name: 'Youtube', value: 'youtube' }];
-  bodyArtist: GetAllDto = {
-    page: 1,
+  bodyArtist = new GetAllDto({
     pageSize: 5,
     order: ['name', 'asc'],
-    filter: [],
-  };
-  bodySite: GetAllDto = {
-    page: 1,
+  });
+  bodySite = new GetAllDto({
     pageSize: 5,
     order: ['name', 'asc'],
-    filter: [],
     type: 'all',
-  };
+  });
   artistsSearch: Artist[] = [];
   sitesSearch: Site[] = [];
   styles: Style[] = [];

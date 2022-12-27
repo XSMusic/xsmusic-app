@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
-import { ScrapingGetInfoClubResponse } from '@interfaces';
+import { ScrapingGetInfoClubResponse, ShowImageI } from '@interfaces';
 import { Image, Site, Style } from '@models';
 import { ScrapingService, GeoService, UIService, TOAST_STATE } from '@services';
 import { ScrapingGetInfoClubDto } from '@shared/services/api/scraping/scraping.dto';
@@ -17,13 +17,13 @@ import { getKeyValueByParam } from '@shared/utils';
 export class AdminSiteOneComponent implements OnInit {
   @Input() site = new Site();
   @Input() type!: 'club' | 'festival';
-  styles: Style[] = [];
-  countries = countries;
-  scraping: any = {
+  @Input() scraping: any = {
     images: [],
     infos: [],
     styles: [],
   };
+  styles: Style[] = [];
+  countries = countries;
   types = [
     { name: 'Club', value: 'club' },
     { name: 'Festival', value: 'festival' },
@@ -32,7 +32,7 @@ export class AdminSiteOneComponent implements OnInit {
   imageState = false;
   tempImages: string[] = [];
   @Output() onSubmit = new EventEmitter<{ scraping: any }>();
-  @Output() showImage = new EventEmitter<{ image: Image; remote: boolean }>();
+  @Output() showImage = new EventEmitter<ShowImageI>();
   @Output() uploadImageByUrl = new EventEmitter<string>();
   @Output() uploadImageByFile = new EventEmitter<File>();
   @Output() removeImage = new EventEmitter<Image>();

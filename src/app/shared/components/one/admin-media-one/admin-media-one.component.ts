@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
+import { ShowImageI } from '@interfaces';
 import { Artist, Image, Media, Site, Style } from '@models';
 import { GetAllDto } from '@shared/services/api/api.dtos';
 
@@ -40,7 +41,7 @@ export class AdminMediaOneComponent {
   tempImages: string[] = [];
   defaultSite = '6367d34e5ba8b44fdf9476c2';
   @Output() onSubmit = new EventEmitter<{ scraping: any }>();
-  @Output() showImage = new EventEmitter<{ image: Image; remote: boolean }>();
+  @Output() showImage = new EventEmitter<ShowImageI>();
   @Output() uploadImageByUrl = new EventEmitter<string>();
   @Output() uploadImageByFile = new EventEmitter<File>();
   @Output() removeImage = new EventEmitter<Image>();

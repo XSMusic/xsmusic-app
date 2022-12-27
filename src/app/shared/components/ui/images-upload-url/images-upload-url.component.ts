@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
+import { ShowImageI } from '@interfaces';
 import { Image } from '@models';
 
 @Component({
@@ -11,7 +12,7 @@ export class ImagesUploadUrlComponent {
   @Input() image = '';
   @Input() imageState = false;
   @Input() scraping: any;
-  @Output() showImage = new EventEmitter<{ image: Image; remote: true }>();
+  @Output() showImage = new EventEmitter<ShowImageI>();
   @Output() uploadImageByUrl = new EventEmitter<string>();
   @Output() uploadImageByFile = new EventEmitter<File>();
   loading = false;

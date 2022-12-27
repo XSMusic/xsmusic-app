@@ -40,11 +40,13 @@ export type GenericBodyType =
 export type GenericSubItemType = 'club' | 'festival' | 'set' | 'track';
 
 export type GoToType =
+  | 'admin'
   | 'artist'
   | 'club'
   | 'event'
   | 'eventSite'
   | 'eventScraping'
+  | 'home'
   | 'set'
   | 'track'
   | 'festival'

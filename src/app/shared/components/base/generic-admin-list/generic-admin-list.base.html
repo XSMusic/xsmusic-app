@@ -36,7 +36,11 @@
     <admin-artist-one
       *ngIf="vm.view === 'viewAdd'"
       [artist]="vm.artist"
-      (onCreated)="onCreated()"
+      [scraping]="vm.scraping"
+      (onSubmit)="onSubmit()"
+      (showImage)="showImage($event)"
+      (uploadImageByUrl)="uploadImageByUrl($event)"
+      (uploadImageByFile)="uploadImageByFile($event)"
     ></admin-artist-one>
   </ng-container>
 
@@ -109,7 +113,11 @@
       *ngIf="vm.view === 'viewAdd'"
       [site]="vm.site"
       [type]="subType === 'club' ? 'club' : 'festival'"
-      (onCreated)="onCreated()"
+      [scraping]="vm.scraping"
+      (onSubmit)="onSubmit()"
+      (showImage)="showImage($event)"
+      (uploadImageByUrl)="uploadImageByUrl($event)"
+      (uploadImageByFile)="uploadImageByFile($event)"
     ></admin-site-one>
   </ng-container>
 

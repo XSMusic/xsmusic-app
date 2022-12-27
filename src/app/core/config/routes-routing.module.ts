@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '@core/auth';
 import { NgxPermissionsGuard } from 'ngx-permissions';
 
 const routes: Routes = [
@@ -75,14 +76,10 @@ const routes: Routes = [
     path: 'admin',
     data: {
       breadcrumb: 'Admin',
-      permissions: {
-        only: 'ADMIN',
-        redirectTo: '/',
-      },
     },
     loadChildren: () =>
       import('../../routes/admin/admin.module').then((m) => m.AdminModule),
-    canActivate: [NgxPermissionsGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: '404',

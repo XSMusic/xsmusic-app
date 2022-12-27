@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
+import { ShowImageI } from '@interfaces';
 import { Image, User } from '@models';
 
 @Component({
@@ -18,7 +19,7 @@ export class AdminUserOneComponent {
   image = '';
   imageState = false;
   @Output() onSubmit = new EventEmitter<{ scraping: any }>();
-  @Output() showImage = new EventEmitter<{ image: Image; remote: boolean }>();
+  @Output() showImage = new EventEmitter<ShowImageI>();
   @Output() uploadImageByUrl = new EventEmitter<string>();
   @Output() uploadImageByFile = new EventEmitter<File>();
   @Output() removeImage = new EventEmitter<Image>();

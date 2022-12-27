@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
-import { ScrapingGetInfoArtistResponse } from '@interfaces';
+import { ScrapingGetInfoArtistResponse, ShowImageI } from '@interfaces';
 import { Artist, Image, Style } from '@models';
 import {
   ScrapingService,
@@ -21,18 +21,18 @@ import { countries } from 'assets/data/countries';
 export class AdminArtistOneComponent {
   @Input() artist: Artist = new Artist();
   @Input() styles: Style[] = [];
-  title!: string;
-  countries = countries;
-  scraping: any = {
+  @Input() scraping: any = {
     images: [],
     infos: [],
     styles: [],
   };
+  title!: string;
+  countries = countries;
   image = '';
   imageState = false;
   tempImages: string[] = [];
   @Output() onSubmit = new EventEmitter<{ scraping: any }>();
-  @Output() showImage = new EventEmitter<{ image: Image; remote: boolean }>();
+  @Output() showImage = new EventEmitter<ShowImageI>();
   @Output() uploadImageByUrl = new EventEmitter<string>();
   @Output() uploadImageByFile = new EventEmitter<File>();
   @Output() removeImage = new EventEmitter<Image>();

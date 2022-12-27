@@ -21,28 +21,32 @@
                 class="my-1 mr-2 text-base font-extrabold leading-none text-black dark:text-white hover:text-gray-500"
               >
                 <span *ngIf="item.type === 'event'">{{
-                  item.event?.name
+                  item.event?.name ?? 'Elemento eliminado'
                 }}</span>
                 <span *ngIf="item.type === 'media'">{{
-                  item.media?.name
+                  item.media?.name ?? 'Elemento eliminado'
                 }}</span>
-                <span *ngIf="item.type === 'user'">{{ item.user?.name }}</span>
+                <span *ngIf="item.type === 'user'">{{
+                  item.user?.name ?? 'Elemento eliminado'
+                }}</span>
                 <span *ngIf="item.type === 'artist'">
-                  {{ item.artist.name }}
+                  {{ item.artist?.name ?? 'Elemento eliminado' }}
                 </span>
-                <span *ngIf="item.type === 'site'">{{ item.site.name }}</span>
+                <span *ngIf="item.type === 'site'">{{
+                  item.site?.name ?? 'Elemento eliminado'
+                }}</span>
               </p>
               <p
                 class="text-sm text-gray-500 dark:text-gray-400 font-extralight"
               >
                 <span *ngIf="item.type === 'media'">
-                  {{ item.media.type | titlecase }}
+                  {{ item.media?.type | titlecase }}
                 </span>
                 <span *ngIf="item.type === 'site'">
-                  {{ item.site.type | titlecase }}
+                  {{ item.site?.type | titlecase }}
                 </span>
                 <span *ngIf="item.type !== 'media' && item.type !== 'site'">
-                  {{ item.type | type }}
+                  {{ item?.type | type }}
                 </span>
               </p>
             </div>

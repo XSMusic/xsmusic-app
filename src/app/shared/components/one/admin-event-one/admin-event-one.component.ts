@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
+import { ShowImageI } from '@interfaces';
 import { Event, Image, Style } from '@models';
 
 @Component({
@@ -26,7 +27,7 @@ export class AdminEventOneComponent {
   tempImagesByUrl: string[] = [];
   tempImagesByFile: File[] = [];
   @Output() onSubmit = new EventEmitter<{ scraping: any }>();
-  @Output() showImage = new EventEmitter<{ image: Image; remote: boolean }>();
+  @Output() showImage = new EventEmitter<ShowImageI>();
   @Output() uploadImageByUrl = new EventEmitter<string>();
   @Output() uploadImageByFile = new EventEmitter<File>();
   @Output() removeImage = new EventEmitter<Image>();

@@ -1,34 +1,27 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import {
-  ApiService,
-  ImageService,
-  UIService,
-  ValidationsFormService,
-} from '@services';
+import { ApiService, ImageService, UIService } from '@services';
 import { routesConfig } from '@core/config';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { OptionsItemI } from '@shared/components/ui/options-items/options-items.interface';
 import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 import { DateFunctions } from '@shared/utils/dates';
 import { MetadataI } from '@shared/services/system/meta';
-import { ApiTypes, GenericItemType, GoToType } from '@shared/utils';
+import { GenericItemType, GoToType } from '@shared/utils';
 import { GenericAdminOneBaseViewModel } from './generic-admin-one.base.view-model';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import { GetOneDto } from '@shared/services/api/api.dtos';
 import { Event, Image, Media } from '@models';
-import { MessageI } from '@interfaces';
-import {
-  ImageSetFirstImageDto,
-  ImageUploadByUrlDto,
-  ImageUploadDto,
-} from '@shared/services/api/image/image.dto';
+import { MessageI, ShowImageI } from '@interfaces';
+import { ImageSetFirstImageDto } from '@shared/services/api/image/image.dto';
+import { BaseHelper } from '../base.helper';
 
 @Component({
   selector: 'generic-admin-one-base',
   templateUrl: './generic-admin-one.base.html',
   animations: [inOutAnimation],
+  providers: [BaseHelper],
 })
 export class GenericAdminOneBase implements OnInit {
   @Input() type!: GenericItemType;
@@ -40,7 +33,7 @@ export class GenericAdminOneBase implements OnInit {
     private imageService: ImageService,
     private router: Router,
     private ui: UIService,
-    private validationsFormService: ValidationsFormService
+    private baseHelper: BaseHelper
   ) {}
 
   ngOnInit() {
@@ -141,13 +134,7 @@ export class GenericAdminOneBase implements OnInit {
       value: this.vm.id,
       admin: true,
     };
-    let type!: ApiTypes;
-    if (this.type !== 'media') {
-      type = `${this.type}s`;
-    } else {
-      type = this.type;
-    }
-    this.apiService.getOne<any>(type, data).subscribe({
+    this.apiService.getOne<any>(this.vm.apiType, data).subscribe({
       next: (response: any) => {
         this.vm[this.type] = response;
         this.setMeta();
@@ -254,45 +241,24 @@ export class GenericAdminOneBase implements OnInit {
       });
   }
 
-  showImage(data: { image: Image; remote: boolean }) {
+  showImage(data: ShowImageI) {
     this.ui.fullImage.show(data.image, data.remote);
   }
 
-  onSubmit(data: { scraping: any }): void {
-    if (data && data.scraping) {
-      this.vm.scraping = data.scraping;
-    }
-    const validation = this.validationsFormService.validation(
+  onSubmit() {
+    this.baseHelper.onSubmit(
+      this.vm.apiType,
       this.type,
+      this.vm.subType,
       this.vm[this.type],
-      this.vm.tempImagesByUrl,
-      this.vm.tempImagesByFile
+      this.vm.scraping
     );
-    if (validation.state) {
-      if (this.vm[this.type]._id) {
-        this.apiService.update(this.vm.apiType, this.vm[this.type]).subscribe({
-          next: () => this.onSuccessUpdate({ message: 'Item actualizado' }),
-          error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
-        });
-      } else {
-        this.apiService.create(this.vm.apiType, this.vm[this.type]).subscribe({
-          next: (response) => this.onSuccessCreate(response),
-          error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
-        });
-      }
-    } else {
-      this.ui.toast.showToast(TOAST_STATE.error, validation.message);
-    }
   }
 
   onSuccessUpdate(response: MessageI) {
     this.ui.toast.showToast(TOAST_STATE.success, response.message);
     let type!: GoToType;
-    if (
-      this.type === 'event' ||
-      this.type === 'media' ||
-      this.type === 'site'
-    ) {
+    if (this.type === 'media' || this.type === 'site') {
       type = this.vm.subType;
     } else {
       type = this.type;
@@ -319,79 +285,16 @@ export class GenericAdminOneBase implements OnInit {
   }
 
   uploadImageByFile(image: File) {
-    const temp = this.vm[this.type]._id ? false : true;
-    const data: ImageUploadDto = {
-      type: this.type,
-      id: this.vm[this.type]._id!,
-    };
-    if (!temp) {
-      this.uploadImageByFileNormal(data, image);
-    } else {
-      this.uploadImageByFileTemp(image);
-    }
-  }
-
-  private uploadImageByFileNormal(data: ImageUploadDto, image: File) {
-    this.ui.spinner.show();
-    this.imageService.upload(data, image).subscribe({
-      next: (response) => {
-        setTimeout(() => {
-          if (this.type !== 'style') {
-            this.vm[this.type].images?.push(response);
-          }
-          this.ui.spinner.hide();
-        }, 1000);
-      },
-      error: (error) => {
-        this.ui.spinner.hide();
-        this.ui.toast.showToast(TOAST_STATE.error, error);
-      },
-    });
-  }
-
-  private uploadImageByFileTemp(image: File) {
-    this.vm.tempImagesByFile.push(image);
+    this.baseHelper.uploadImageByFile(this.vm[this.type], this.type, image);
   }
 
   uploadImageByUrl(image: string) {
-    const temp = this.vm[this.type]._id ? false : true;
-    const data: ImageUploadByUrlDto = {
-      id: this.vm[this.type]._id!,
-      type: 'event',
-      url: image,
-    };
-    if (!temp) {
-      this.uploadImageByUrlNormal(data);
-    } else {
-      this.uploadImageByUrlTemp(image);
-    }
-  }
-
-  private uploadImageByUrlNormal(data: ImageUploadByUrlDto) {
-    this.ui.spinner.show();
-    this.imageService.uploadByUrl(data).subscribe({
-      next: (response) => {
-        setTimeout(() => {
-          if (this.type !== 'style') {
-            this.vm[this.type].images?.push(response);
-          }
-          this.ui.spinner.hide();
-        }, 1000);
-      },
-      error: (error) => {
-        this.ui.spinner.hide();
-        this.ui.toast.showToast(TOAST_STATE.error, error);
-      },
-    });
-  }
-
-  private uploadImageByUrlTemp(image: string) {
-    this.vm.tempImagesByUrl.push(image);
-    if (this.vm.scraping.images && this.vm.scraping.images.length > 0) {
-      this.vm.scraping.images = this.vm.scraping.images.filter(
-        (img: string) => img !== image
-      );
-    }
+    this.baseHelper.uploadImageByUrl(
+      this.vm[this.type],
+      this.type,
+      this.vm.scraping,
+      image
+    );
   }
 
   removeImage(img: Image) {

@@ -1,12 +1,18 @@
 import { Artist, Site, Media, Youtube, Event, Style, User } from '@models';
 import { GetAllDto } from '@shared/services/api/api.dtos';
 import { StatsGetTopStatsI } from '@shared/services/api/stats/stats.interface';
-import { GenericItemsType, GenericBodyType, TabsType } from '@shared/utils';
+import {
+  GenericItemsType,
+  GenericBodyType,
+  TabsType,
+  ApiTypes,
+} from '@shared/utils';
 
 export class GenericAdminListBaseViewModel {
   typeItems!: GenericItemsType;
   typeBody!: GenericBodyType;
   typeTabs!: TabsType;
+  apiType!: ApiTypes;
   title!: string;
   artists: Artist[] = [];
   sites: Site[] = [];
@@ -19,6 +25,9 @@ export class GenericAdminListBaseViewModel {
   media = new Media();
   site = new Site();
   style = new Style();
+  user = new User();
+  tempImagesByUrl: string[] = [];
+  tempImagesByFile: File[] = [];
   stats: StatsGetTopStatsI = { topSocial: [], topCountries: [] };
   bodyArtist = new GetAllDto();
   bodyEvent = new GetAllDto({

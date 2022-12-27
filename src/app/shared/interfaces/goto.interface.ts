@@ -5,4 +5,9 @@ export interface GoToPageI {
   typeRoute: 'all' | 'one';
   admin?: boolean;
   item?: any;
+  queryParams?: {
+    tab?: string;
+    source?: string;
+    value?: string;
+  };
 }

@@ -6,12 +6,14 @@
     <admin-artist-one
       *ngIf="vm.view === 'viewInfo'"
       [artist]="vm.artist"
-      (onSubmit)="onSubmit($event)"
+      [scraping]="vm.scraping"
+      (onSubmit)="onSubmit()"
       (showImage)="showImage($event)"
       (removeImage)="removeImage($event)"
       (setFirstImage)="setFirstImage($event)"
       (uploadImageByUrl)="uploadImageByUrl($event)"
       (uploadImageByFile)="uploadImageByFile($event)"
+      (delete)="onDelete()"
     ></admin-artist-one>
 
     <ng-container *ngIf="vm.view === 'viewSets'">
@@ -44,12 +46,13 @@
     <admin-event-one
       *ngIf="vm.view === 'viewInfo'"
       [event]="vm.event"
-      (onSubmit)="onSubmit($event)"
+      (onSubmit)="onSubmit()"
       (showImage)="showImage($event)"
       (removeImage)="removeImage($event)"
       (setFirstImage)="setFirstImage($event)"
       (uploadImageByUrl)="uploadImageByUrl($event)"
       (uploadImageByFile)="uploadImageByFile($event)"
+      (delete)="onDelete()"
     ></admin-event-one>
   </div>
 
@@ -58,12 +61,14 @@
       *ngIf="vm.view === 'viewInfo'"
       [site]="vm.site"
       [type]="vm.subType === 'club' ? vm.subType : 'festival'"
-      (onSubmit)="onSubmit($event)"
+      [scraping]="vm.scraping"
+      (onSubmit)="onSubmit()"
       (showImage)="showImage($event)"
       (removeImage)="removeImage($event)"
       (setFirstImage)="setFirstImage($event)"
       (uploadImageByUrl)="uploadImageByUrl($event)"
       (uploadImageByFile)="uploadImageByFile($event)"
+      (delete)="onDelete()"
     ></admin-site-one>
 
     <ng-container *ngIf="vm.view === 'viewScrapingEvent'">
@@ -95,7 +100,7 @@
     <admin-style-one
       *ngIf="vm.view === 'viewInfo'"
       [style]="vm.style"
-      (onSubmit)="onSubmit($event)"
+      (onSubmit)="onSubmit()"
     ></admin-style-one>
   </div>
 
@@ -103,7 +108,7 @@
     <admin-user-one
       *ngIf="vm.view === 'viewInfo'"
       [user]="vm.user"
-      (onSubmit)="onSubmit($event)"
+      (onSubmit)="onSubmit()"
       (showImage)="showImage($event)"
       (removeImage)="removeImage($event)"
       (setFirstImage)="setFirstImage($event)"

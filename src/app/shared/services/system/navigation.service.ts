@@ -43,23 +43,31 @@ export class NavigationService {
   goToPage(data: GoToPageI) {
     try {
       let route: any = '';
-      const typeOne = `${data.type}`;
-      const typeAll = `${data.type}s`;
-      route = `${data.typeRoute === 'one' ? typeOne : typeAll}`;
-      if (data.admin) {
-        route = routesConfig[route + 'Admin'];
+      if (data.type === 'admin' || data.type === 'home') {
+        this.router.navigate(routesConfig[data.type]);
       } else {
-        route = routesConfig[route];
-      }
-
-      if (data.item) {
+        const typeOne = `${data.type}`;
+        const typeAll = `${data.type}s`;
+        route = `${data.typeRoute === 'one' ? typeOne : typeAll}`;
         if (data.admin) {
-          route = route.replace(':id', data.item._id);
+          route = routesConfig[route + 'Admin'];
         } else {
-          route = route.replace(':slug', data.item.slug);
+          route = routesConfig[route];
+        }
+
+        if (data.item) {
+          if (data.admin) {
+            route = route.replace(':id', data.item._id);
+          } else {
+            route = route.replace(':slug', data.item.slug);
+          }
+        }
+        if (!data.queryParams) {
+          this.router.navigate([route]);
+        } else {
+          this.router.navigate([route], { queryParams: data.queryParams });
         }
       }
-      this.router.navigate([route]);
     } catch (error) {
       console.error('Error en goToPage');
     }

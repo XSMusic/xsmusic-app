@@ -22,17 +22,8 @@ export class LoginPage {
     this.authService
       .loginEmail({ email: this.email, password: this.password })
       .subscribe({
-        next: () => {
-          const user = this.userService.getUser();
-          this.router.navigate([routesConfig.home]);
-          this.ui.toast.showToast(
-            TOAST_STATE.success,
-            `¡Bienvenid@ ${user.name}!`
-          );
-        },
-        error: (error) => {
-          this.ui.toast.showToast(TOAST_STATE.error, error);
-        },
+        next: () => this.router.navigate([routesConfig.home]),
+        error: (error) => this.ui.toast.showToast(TOAST_STATE.error, error),
       });
   }
 

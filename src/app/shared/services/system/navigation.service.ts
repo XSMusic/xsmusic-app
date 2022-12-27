@@ -42,34 +42,38 @@ export class NavigationService {
 
   goToPage(data: GoToPageI) {
     try {
-      let route: any = '';
       if (data.type === 'admin' || data.type === 'home') {
         this.router.navigate(routesConfig[data.type]);
       } else {
-        const typeOne = `${data.type}`;
-        const typeAll = `${data.type}s`;
-        route = `${data.typeRoute === 'one' ? typeOne : typeAll}`;
-        if (data.admin) {
-          route = routesConfig[route + 'Admin'];
-        } else {
-          route = routesConfig[route];
-        }
-
-        if (data.item) {
-          if (data.admin) {
-            route = route.replace(':id', data.item._id);
-          } else {
-            route = route.replace(':slug', data.item.slug);
-          }
-        }
-        if (!data.queryParams) {
-          this.router.navigate([route]);
-        } else {
-          this.router.navigate([route], { queryParams: data.queryParams });
-        }
+        this.goToPageIsNotAdminOrHome(data);
       }
     } catch (error) {
       console.error('Error en goToPage');
     }
+  }
+
+  private goToPageIsNotAdminOrHome(data: GoToPageI) {
+    const typeOne = `${data.type}`;
+    const typeAll = `${data.type}s`;
+    let route = `${data.typeRoute === 'one' ? typeOne : typeAll}`;
+    if (data.admin) {
+      route = routesConfig[route + 'Admin'];
+    } else {
+      route = routesConfig[route];
+    }
+
+    if (data.item) {
+      if (data.admin) {
+        route = route.replace(':id', data.item._id);
+      } else {
+        route = route.replace(':slug', data.item.slug);
+      }
+    }
+    if (!data.queryParams) {
+      this.router.navigate([route]);
+    } else {
+      this.router.navigate([route], { queryParams: data.queryParams });
+    }
+    return route;
   }
 }

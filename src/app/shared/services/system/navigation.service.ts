@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
-import { GoToPageI } from '../../interfaces/goto.interface';
 import { routesConfig } from '@core/config';
+import { GoToPageI } from '@shared/interfaces/goto.interface';
 
 @Injectable()
 export class NavigationService {

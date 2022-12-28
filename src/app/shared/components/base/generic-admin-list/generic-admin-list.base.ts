@@ -61,7 +61,7 @@ export class GenericAdminListBase {
       this.vm.apiType = 'events';
     } else if (this.type === 'media') {
       this.vm.title = this.subType === 'set' ? 'Sets' : 'Tracks';
-      this.vm.typeTabs = 'mediaAdmin';
+      this.vm.typeTabs = 'mediasAdmin';
       this.vm.bodyMedia.type = this.subType;
       this.vm.typeItems = 'medias';
       this.vm.typeBody = 'bodyMedia';

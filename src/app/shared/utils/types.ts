@@ -76,6 +76,7 @@ export type TabsType =
   | 'siteAdmin'
   | 'sitesAdmin'
   | 'media'
+  | 'mediasAdmin'
   | 'mediaAdmin'
   | 'styleAdmin'
   | 'stylesAdmin'

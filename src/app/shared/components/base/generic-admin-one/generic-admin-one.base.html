@@ -58,7 +58,7 @@
 
   <div *ngIf="type === 'media'">
     <admin-media-one
-      *ngIf="vm.view === 'viewList'"
+      *ngIf="vm.view === 'viewInfo'"
       [media]="vm.media"
       [type]="vm.subType === 'set' ? 'set' : 'track'"
       (onSubmit)="onSubmit()"

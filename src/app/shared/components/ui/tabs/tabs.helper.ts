@@ -326,7 +326,7 @@ export const tabsByType = [
     ],
   },
   {
-    name: 'mediaAdmin',
+    name: 'mediasAdmin',
     buttons: [
       new TabsItem({
         name: 'Listado',
@@ -347,6 +347,16 @@ export const tabsByType = [
         name: 'Buscar',
         action: 'search',
         align: 'right',
+      }),
+    ],
+  },
+  {
+    name: 'mediaAdmin',
+    buttons: [
+      new TabsItem({
+        name: 'Info',
+        isActivatable: true,
+        action: 'viewInfo',
       }),
     ],
   },

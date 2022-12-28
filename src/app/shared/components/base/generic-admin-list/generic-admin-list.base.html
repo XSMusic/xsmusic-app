@@ -91,6 +91,7 @@
     <admin-media-one
       *ngIf="vm.view === 'viewAdd' && vm.media?.name !== ''"
       [media]="vm.media"
+      [type]="subType === 'set' ? 'set' : 'track'"
       [scraping]="vm.scraping"
       [scraping]="vm.scraping"
       (onSubmit)="onSubmit()"

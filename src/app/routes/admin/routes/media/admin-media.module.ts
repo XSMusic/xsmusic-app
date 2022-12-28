@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '@shared/shared.module';
 import { AdminMediaAddPage } from './pages/add/admin-media-add.page';
-import { AdminMediaEditPage } from './pages/edit/admin-media-edit.page';
-import { AdminMediaListPage } from './pages/list/admin-media-list.page';
+import { AdminMediaPage } from './pages/media/admin-media.page';
+import { AdminMediasPage } from './pages/medias/admin-medias.page';
 
 @NgModule({
   imports: [
@@ -13,28 +13,28 @@ import { AdminMediaListPage } from './pages/list/admin-media-list.page';
       { path: '', redirectTo: 'sets', pathMatch: 'full' },
       {
         path: 'sets',
-        component: AdminMediaListPage,
+        component: AdminMediasPage,
         data: { breadcrumb: '', title: 'Sets' },
       },
       {
         path: 'sets/:id',
-        component: AdminMediaEditPage,
+        component: AdminMediaPage,
         data: { breadcrumb: 'Editar Set', title: 'Editar Set' },
       },
       {
         path: 'tracks',
-        component: AdminMediaListPage,
+        component: AdminMediasPage,
         data: { breadcrumb: '', title: 'Tracks' },
       },
       {
         path: 'tracks/:id',
-        component: AdminMediaEditPage,
+        component: AdminMediaPage,
         data: { breadcrumb: 'Editar Track', title: 'Editar Track' },
       },
     ]),
   ],
   exports: [],
-  declarations: [AdminMediaListPage, AdminMediaAddPage, AdminMediaEditPage],
+  declarations: [AdminMediasPage, AdminMediaAddPage, AdminMediaPage],
   providers: [],
 })
 export class AdminMediaModule {}

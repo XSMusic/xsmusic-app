@@ -11,8 +11,8 @@ export class AdminMediaAddSearchComponent {
   @Input() source!: string;
   @Output() search = new EventEmitter<string>();
   @Output() onChangeSource = new EventEmitter<string>();
-  menu = false;
   sources: ScrapingSourceI[] = [];
+
   constructor(private scrapingService: ScrapingService) {
     this.sources = this.scrapingService.getSources('media');
   }

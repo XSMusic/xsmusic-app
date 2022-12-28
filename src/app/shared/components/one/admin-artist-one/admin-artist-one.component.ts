@@ -26,11 +26,9 @@ export class AdminArtistOneComponent {
     infos: [],
     styles: [],
   };
-  title!: string;
   countries = countries;
   image = '';
   imageState = false;
-  tempImages: string[] = [];
   @Output() onSubmit = new EventEmitter<{ scraping: any }>();
   @Output() showImage = new EventEmitter<ShowImageI>();
   @Output() uploadImageByUrl = new EventEmitter<string>();
@@ -43,13 +41,6 @@ export class AdminArtistOneComponent {
     private ui: UIService,
     private scrapingService: ScrapingService
   ) {}
-
-  onClickStyleScrapingItem(item: { name: string; _id: string }) {
-    this.artist.styles?.push(item);
-    this.scraping.styles = this.scraping.styles.filter(
-      (style: { name: string; _id: string }) => style !== item
-    );
-  }
 
   onKeyUpName() {
     try {

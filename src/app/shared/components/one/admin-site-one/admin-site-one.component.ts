@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { ScrapingGetInfoClubResponse, ShowImageI } from '@interfaces';
-import { Image, Site, Style } from '@models';
+import { Image, Site } from '@models';
 import { ScrapingService, GeoService, UIService, TOAST_STATE } from '@services';
 import { ScrapingGetInfoClubDto } from '@shared/services/api/scraping/scraping.dto';
 import { countries } from 'assets/data/countries';
@@ -22,15 +22,9 @@ export class AdminSiteOneComponent implements OnInit {
     infos: [],
     styles: [],
   };
-  styles: Style[] = [];
   countries = countries;
-  types = [
-    { name: 'Club', value: 'club' },
-    { name: 'Festival', value: 'festival' },
-  ];
   image = '';
   imageState = false;
-  tempImages: string[] = [];
   @Output() onSubmit = new EventEmitter<{ scraping: any }>();
   @Output() showImage = new EventEmitter<ShowImageI>();
   @Output() uploadImageByUrl = new EventEmitter<string>();
@@ -52,19 +46,6 @@ export class AdminSiteOneComponent implements OnInit {
     if (dataByParams.key && dataByParams.value) {
       this.site[dataByParams.key] = dataByParams.value;
     }
-  }
-
-  onClickStyleItem(item: { name: string; _id: string }) {
-    this.site.styles = this.site.styles?.filter(
-      (style) => style.name !== item.name
-    );
-  }
-
-  onChangeStyleSelect(e: any) {
-    const newStyle = this.styles.find(
-      (style) => style._id!.toString() === e.target.value.toString()
-    );
-    this.site.styles?.push(newStyle);
   }
 
   onKeyUpName() {

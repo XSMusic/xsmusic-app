@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'page-admin-media-list',
+  selector: 'page-admin-medias',
   template: `<generic-admin-list-base
     *ngIf="!loading"
     type="media"
     [subType]="subType"
   ></generic-admin-list-base>`,
 })
-export class AdminMediaListPage implements OnInit {
+export class AdminMediasPage implements OnInit {
   subType!: 'set' | 'track';
   loading = true;
   constructor(private route: ActivatedRoute) {}

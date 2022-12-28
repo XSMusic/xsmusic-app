@@ -55,11 +55,10 @@
     >
     </events-view-list>
 
-    <ng-container *ngIf="vm.view === 'viewScraping'">
-      <admin-events-scraping
-        (onEventCreated)="reloadItems()"
-      ></admin-events-scraping>
-    </ng-container>
+    <admin-events-scraping
+      *ngIf="vm.view === 'viewScraping'"
+      (onEventCreated)="reloadItems()"
+    ></admin-events-scraping>
   </ng-container>
 
   <ng-container *ngIf="type === 'media'">
@@ -73,29 +72,32 @@
       (onScroll)="onScroll()"
     ></media-view-list>
 
-    <ng-container *ngIf="vm.view === 'viewAdd'">
-      <admin-media-add-search
-        [source]="vm.mediaSource"
-        [searchText]="vm.searchText"
-        (onChangeSource)="vm.mediaSource = $event"
-        (search)="searchAdd($event)"
-      ></admin-media-add-search>
+    <admin-media-add-search
+      *ngIf="vm.view === 'viewAdd'"
+      [source]="vm.mediaSource"
+      [searchText]="vm.searchText"
+      (onChangeSource)="vm.mediaSource = $event"
+      (search)="searchAdd($event)"
+    ></admin-media-add-search>
 
-      <div *ngIf="vm.media?.name === ''">
-        <admin-media-add-search-items
-          [items]="vm.itemsSearch"
-          [itemSelected]="vm.scrapingItemSelected!"
-          (selectItem)="selectItem($event)"
-        ></admin-media-add-search-items>
-      </div>
+    <div *ngIf="vm.view === 'viewAdd' && vm.media?.name === ''">
+      <admin-media-add-search-items
+        [items]="vm.itemsSearch"
+        [itemSelected]="vm.scrapingItemSelected!"
+        (selectItem)="selectItem($event)"
+      ></admin-media-add-search-items>
+    </div>
 
-      <admin-media-one
-        *ngIf="vm.media?.name !== ''"
-        [media]="vm.media"
-        [scraping]="vm.scraping"
-        (onSubmitSuccess)="onCreated()"
-      ></admin-media-one>
-    </ng-container>
+    <admin-media-one
+      *ngIf="vm.view === 'viewAdd' && vm.media?.name !== ''"
+      [media]="vm.media"
+      [scraping]="vm.scraping"
+      [scraping]="vm.scraping"
+      (onSubmit)="onSubmit()"
+      (showImage)="showImage($event)"
+      (uploadImageByUrl)="uploadImageByUrl($event)"
+      (uploadImageByFile)="uploadImageByFile($event)"
+    ></admin-media-one>
   </ng-container>
 
   <ng-container *ngIf="type === 'site'">

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { ShowImageI } from '@interfaces';
-import { Event, Image, Style } from '@models';
+import { Event, Image } from '@models';
 
 @Component({
   selector: 'admin-event-one',
@@ -12,20 +12,13 @@ import { Event, Image, Style } from '@models';
 })
 export class AdminEventOneComponent {
   @Input() event = new Event();
-  styles: Style[] = [];
   scraping: any = {
     images: [],
     infos: [],
     styles: [],
   };
-  types = [
-    { name: 'Club', value: 'club' },
-    { name: 'Festival', value: 'festival' },
-  ];
   image = '';
   imageState = false;
-  tempImagesByUrl: string[] = [];
-  tempImagesByFile: File[] = [];
   @Output() onSubmit = new EventEmitter<{ scraping: any }>();
   @Output() showImage = new EventEmitter<ShowImageI>();
   @Output() uploadImageByUrl = new EventEmitter<string>();

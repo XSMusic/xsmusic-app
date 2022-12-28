@@ -56,6 +56,22 @@
     ></admin-event-one>
   </div>
 
+  <div *ngIf="type === 'media'">
+    <admin-media-one
+      *ngIf="vm.view === 'viewList'"
+      [media]="vm.media"
+      [type]="vm.subType === 'set' ? 'set' : 'track'"
+      (onSubmit)="onSubmit()"
+      (showImage)="showImage($event)"
+      (removeImage)="removeImage($event)"
+      (setFirstImage)="setFirstImage($event)"
+      (uploadImageByUrl)="uploadImageByUrl($event)"
+      (uploadImageByFile)="uploadImageByFile($event)"
+      (delete)="onDelete()"
+    >
+    </admin-media-one>
+  </div>
+
   <div *ngIf="type === 'site'">
     <admin-site-one
       *ngIf="vm.view === 'viewInfo'"

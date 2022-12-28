@@ -38,6 +38,7 @@ export class AdminEventsScrapingComponent {
   view = 'viewCompleted';
   raAreas = [
     { name: 'Madrid', value: '41' },
+    { name: 'Barcelona', value: '20' },
     { name: 'Este', value: '160' },
     { name: 'Norte', value: '170' },
     { name: 'Sur', value: '169' },

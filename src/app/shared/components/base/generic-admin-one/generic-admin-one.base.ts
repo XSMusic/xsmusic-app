@@ -279,7 +279,7 @@ export class GenericAdminOneBase implements OnInit {
       this.uploadImageByFile(imageFile);
     }
     setTimeout(() => {
-      this.ui.toast.showToast(TOAST_STATE.success, 'Sitio creado');
+      this.ui.toast.showToast(TOAST_STATE.success, 'Item creado');
       this.router.navigate([routesConfig.eventsAdmin]);
     }, 3000);
   }

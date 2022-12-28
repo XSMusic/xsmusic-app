@@ -100,7 +100,7 @@ export class BaseHelper {
     for (const imageFile of this.tempImagesByFile) {
       this.uploadImageByFile(item, type, imageFile);
     }
-    this.ui.toast.showToast(TOAST_STATE.success, 'Sitio creado');
+    this.ui.toast.showToast(TOAST_STATE.success, 'Item creado');
     this.router.navigate([routesConfig.admin]);
     setTimeout(() => {
       const data: GoToPageI = {

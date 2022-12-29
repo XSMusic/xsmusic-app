@@ -117,7 +117,51 @@
       *ngIf="vm.view === 'viewInfo'"
       [style]="vm.style"
       (onSubmit)="onSubmit()"
+      (delete)="onDelete()"
     ></admin-style-one>
+
+    <ng-container *ngIf="vm.view === 'viewArtists'">
+      <artists-view-list
+        [artists]="vm.style.artists"
+        [loading]="false"
+        (goToPage)="goToPage($event)"
+      >
+      </artists-view-list>
+    </ng-container>
+    <ng-container *ngIf="vm.view === 'viewClubs'">
+      <sites-view-list
+        [sites]="vm.style.clubs"
+        [loading]="false"
+        type="clubs"
+        (goToPage)="goToPage($event)"
+      >
+      </sites-view-list>
+    </ng-container>
+    <ng-container *ngIf="vm.view === 'viewFestivals'">
+      <sites-view-list
+        [sites]="vm.style.festivals"
+        [loading]="false"
+        type="festivals"
+        (goToPage)="goToPage($event)"
+      >
+      </sites-view-list>
+    </ng-container>
+    <ng-container *ngIf="vm.view === 'viewSets'">
+      <media-view-list
+        [media]="vm.style.sets"
+        [loading]="false"
+        type="set"
+        (goToPage)="goToPage($event)"
+      ></media-view-list>
+    </ng-container>
+    <ng-container *ngIf="vm.view === 'viewTracks'">
+      <media-view-list
+        [media]="vm.style.tracks"
+        [loading]="false"
+        type="track"
+        (goToPage)="goToPage($event)"
+      ></media-view-list>
+    </ng-container>
   </div>
 
   <div *ngIf="type === 'user'">

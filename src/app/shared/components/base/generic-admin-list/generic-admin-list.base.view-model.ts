@@ -38,7 +38,7 @@ export class GenericAdminListBaseViewModel {
     map: false,
     type: '',
   });
-  bodyStyle = new GetAllDto({ type: '' });
+  bodyStyle = new GetAllDto({ order: ['name', 'asc'] });
   bodyUser = new GetAllDto({ type: '' });
   view!: string;
   filter = false;

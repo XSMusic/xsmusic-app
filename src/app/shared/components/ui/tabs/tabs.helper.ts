@@ -115,8 +115,33 @@ export const tabsByType = [
     buttons: [
       new TabsItem({
         name: 'Info',
-        action: 'viewInfo',
         isActivatable: true,
+        action: 'viewInfo',
+      }),
+      new TabsItem({
+        name: 'Artistas',
+        isActivatable: true,
+        action: 'viewArtists',
+      }),
+      new TabsItem({
+        name: 'Sets',
+        isActivatable: true,
+        action: 'viewSets',
+      }),
+      new TabsItem({
+        name: 'Tracks',
+        isActivatable: true,
+        action: 'viewTracks',
+      }),
+      new TabsItem({
+        name: 'Clubs',
+        isActivatable: true,
+        action: 'viewClubs',
+      }),
+      new TabsItem({
+        name: 'Festivales',
+        isActivatable: true,
+        action: 'viewFestivals',
       }),
     ],
   },
@@ -370,41 +395,6 @@ export const tabsByType = [
       new TabsItem({
         name: 'Buscar',
         action: 'search',
-      }),
-    ],
-  },
-  {
-    name: 'styleAdmin',
-    buttons: [
-      new TabsItem({
-        name: 'Info',
-        isActivatable: true,
-        action: 'viewInfo',
-      }),
-      new TabsItem({
-        name: 'Artistas',
-        isActivatable: true,
-        action: 'viewArtists',
-      }),
-      new TabsItem({
-        name: 'Sets',
-        isActivatable: true,
-        action: 'viewSets',
-      }),
-      new TabsItem({
-        name: 'Tracks',
-        isActivatable: true,
-        action: 'viewTracks',
-      }),
-      new TabsItem({
-        name: 'Clubs',
-        isActivatable: true,
-        action: 'viewClubs',
-      }),
-      new TabsItem({
-        name: 'Festivales',
-        isActivatable: true,
-        action: 'viewFestivals',
       }),
     ],
   },

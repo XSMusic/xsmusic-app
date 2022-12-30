@@ -71,6 +71,8 @@ export class GenericAdminOneBase implements OnInit {
       this.vm.apiType = `${this.type}s`;
     } else if (this.type === 'style') {
       this.vm.apiType = `${this.type}s`;
+    } else if (this.type === 'user') {
+      this.vm.apiType = `${this.type}s`;
     }
   }
 

@@ -139,10 +139,10 @@
       [users]="vm.users"
       [loading]="vm.loading"
       (onScroll)="onScroll()"
+      (goToPage)="goToPage($event)"
     ></users-view-list>
   </ng-container>
 
-  <ng-container *ngIf="type === 'user'"></ng-container>
 
   <div
     class="grid gap-2 mt-2 md:gap-4 md:grid-cols-3"

@@ -28,7 +28,7 @@ export class BlockInfoProfileComponent {
   constructor(
     private router: Router,
     private ui: UIService,
-    private gaService: GoogleAnalyticsService,
+    private gaService: GoogleAnalyticsService
   ) {}
 
   getDate = () => {

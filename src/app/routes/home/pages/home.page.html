@@ -4,18 +4,18 @@
 >
   <last-artists
     [artists]="vm.artists"
-    [loading]="vm.loading.artists"
-    [error]="vm.error.artists"
+    [loading]="vm.loading"
+    [error]="vm.error"
     (goTo)="goTo($event)"
   ></last-artists>
 
   <last-media
     [sets]="vm.sets"
     [tracks]="vm.tracks"
-    [loadingSets]="vm.loading.sets"
-    [loadingTracks]="vm.loading.tracks"
-    [errorSets]="vm.error.sets"
-    [errorTracks]="vm.error.tracks"
+    [loadingSets]="vm.loading"
+    [loadingTracks]="vm.loading"
+    [errorSets]="vm.error"
+    [errorTracks]="vm.error"
     (goTo)="goTo($event)"
   ></last-media>
 
@@ -23,8 +23,8 @@
     <div class="my-2 lg:col-span-12">
       <last-events
         [events]="vm.events"
-        [loading]="vm.loading.events"
-        [error]="vm.error.events"
+        [loading]="vm.loading"
+        [error]="vm.error"
         (goTo)="goTo($event)"
       ></last-events>
     </div>
@@ -34,15 +34,15 @@
   <div class="lg:grid lg:grid-cols-2">
     <last-sites
       [sites]="vm.clubs"
-      [loading]="vm.loading.clubs"
-      [error]="vm.error.clubs"
+      [loading]="vm.loading"
+      [error]="vm.error"
       type="club"
       (goTo)="goTo($event)"
     ></last-sites>
     <last-sites
       [sites]="vm.festivals"
-      [loading]="vm.loading.festivals"
-      [error]="vm.error.festivals"
+      [loading]="vm.loading"
+      [error]="vm.error"
       type="festival"
       (goTo)="goTo($event)"
     ></last-sites>

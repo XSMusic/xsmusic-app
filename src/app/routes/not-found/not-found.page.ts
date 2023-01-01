@@ -18,10 +18,7 @@ export class NotFoundPage {
     | 'track'
     | 'festival'
     | 'user';
-  constructor(
-    private router: Router,
-    private ui: UIService
-  ) {
+  constructor(private router: Router, private ui: UIService) {
     const currentNav = this.router.getCurrentNavigation();
     if (currentNav && currentNav.extras.state) {
       this.type = currentNav.extras.state['type'];

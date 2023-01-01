@@ -4,7 +4,7 @@ import { Share, ShareOptions } from '@capacitor/share';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { routesConfig } from '@core/config';
 import { environment } from '@env/environment';
-import { NavigationService, TOAST_STATE, UIService } from '@services';
+import { TOAST_STATE, UIService } from '@services';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
 import {
   firstLetterCase,
@@ -29,7 +29,6 @@ export class BlockInfoProfileComponent {
     private router: Router,
     private ui: UIService,
     private gaService: GoogleAnalyticsService,
-    private navigationService: NavigationService
   ) {}
 
   getDate = () => {
@@ -77,7 +76,7 @@ export class BlockInfoProfileComponent {
   }
 
   goToPage(data: GoToPageI) {
-    this.navigationService.goToPage(data);
+    this.ui.navigation.goToPage(data);
   }
 
   async sharing() {

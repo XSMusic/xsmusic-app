@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationService, VersionUpdateService } from '@services';
-import { MetaService } from '@shared/services/system/meta/meta.service';
+import { UIService, VersionUpdateService } from '@services';
 
 @Component({
   selector: 'app-root',
@@ -11,23 +10,13 @@ export class AppComponent implements OnInit {
 
   constructor(
     public versionUpdateService: VersionUpdateService,
-    private navigationService: NavigationService,
-    private metaService: MetaService
+    private ui: UIService
   ) {}
 
   ngOnInit(): void {
-    this.navigationService.startSaveHistory();
+    this.ui.navigation.startSaveHistory();
     this.preventBackButton();
     this.setMeta();
-  }
-
-  public updateVersion(): void {
-    this.modalVersion = false;
-    window.location.reload();
-  }
-
-  public closeVersion(): void {
-    this.modalVersion = false;
   }
 
   preventBackButton() {
@@ -43,6 +32,6 @@ export class AppComponent implements OnInit {
   }
 
   setMeta() {
-    this.metaService.setMeta();
+    this.ui.meta.setMeta();
   }
 }

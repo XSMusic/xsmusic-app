@@ -6,7 +6,7 @@ import { Menu, User } from '@models';
 import { AuthService } from '@core/auth';
 import { routesConfig } from '@core/config';
 import { Location } from '@angular/common';
-import { NavigationService } from '@services';
+import { UIService } from '@services';
 
 @Component({
   selector: 'navbar',
@@ -35,7 +35,7 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private location: Location,
-    private navigationService: NavigationService
+    private ui: UIService
   ) {}
 
   ngOnInit(): void {
@@ -159,7 +159,7 @@ export class NavbarComponent implements OnInit {
     if (!this.backButton.state) {
       this.toggleMenu();
     } else {
-      if (this.navigationService.getPreviousUrl()) {
+      if (this.ui.navigation.getPreviousUrl()) {
         this.location.back();
       } else {
         this.router.navigate([this.backButton.route]);

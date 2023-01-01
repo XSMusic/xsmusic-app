@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { NavigationService } from '@services';
+import { UIService } from '@services';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
 
 @Component({
@@ -20,7 +20,7 @@ export class NotFoundPage {
     | 'user';
   constructor(
     private router: Router,
-    private navigationService: NavigationService
+    private ui: UIService
   ) {
     const currentNav = this.router.getCurrentNavigation();
     if (currentNav && currentNav.extras.state) {
@@ -29,6 +29,6 @@ export class NotFoundPage {
   }
 
   goToPage(data: GoToPageI) {
-    this.navigationService.goToPage(data);
+    this.ui.navigation.goToPage(data);
   }
 }

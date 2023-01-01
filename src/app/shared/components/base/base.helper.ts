@@ -132,7 +132,7 @@ export class BaseHelper {
     image: File
   ) {
     this.ui.spinner.show();
-    this.imageService.upload(data, image).subscribe({
+    this.imageService.uploadByFile(data, image).subscribe({
       next: (response) => {
         setTimeout(() => {
           if (type !== 'style') {

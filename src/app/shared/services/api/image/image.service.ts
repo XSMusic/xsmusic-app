@@ -15,7 +15,7 @@ export class ImageService {
   url = `${environment.urls.api}/images`;
   constructor(private httpClient: HttpClient) {}
 
-  upload(data: ImageUploadDto, file: File): Observable<Image> {
+  uploadByFile(data: ImageUploadDto, file: File): Observable<Image> {
     const url = `${this.url}/upload`;
     const formData = new FormData();
     formData.append('image', file);

@@ -1,9 +1,11 @@
-import { Artist, Site, Media, Event } from '@models';
+import { Artist, Site, Media, Event, Like, Image } from '@models';
 import { GetAllDto } from '@shared/services/api/api.dtos';
 
 export class GenericOneBaseViewModel {
   artist!: Artist;
   event!: Event;
+  image!: Image;
+  like!: Like;
   media!: Media;
   site!: Site;
   style!: Site;

@@ -13,6 +13,8 @@ export class TypePipe implements PipeTransform {
       return 'Evento';
     } else if (value === 'festival') {
       return 'Festival';
+    } else if (value === 'like') {
+      return 'Like';
     } else if (value === 'media') {
       return 'Set/Track';
     } else if (value === 'site') {

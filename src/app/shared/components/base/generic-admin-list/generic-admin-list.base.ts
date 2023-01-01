@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { ShowImageI } from '@interfaces';
-import { Artist, Event, Media, Site, Youtube } from '@models';
+import { Artist, Event, Image, Media, Site, Youtube } from '@models';
 import {
   ApiService,
   ScrapingService,
@@ -47,39 +47,90 @@ export class GenericAdminListBase {
   }
 
   setDataByTypes() {
+    this.setDataByTypesArtist();
+    this.setDataByTypesEvent();
+    this.setDataByTypesImage();
+    this.setDataByTypesLike();
+    this.setDataByTypesMedia();
+    this.setDataByTypesSite();
+    this.setDataByTypesStyle();
+    this.setDataByTypesUser();
+  }
+
+  private setDataByTypesArtist() {
     if (this.type === 'artist') {
       this.vm.title = 'Artistas';
       this.vm.typeTabs = 'artistsAdmin';
       this.vm.typeItems = 'artists';
       this.vm.typeBody = 'bodyArtist';
       this.vm.apiType = 'artists';
-    } else if (this.type === 'event') {
+    }
+  }
+
+  private setDataByTypesEvent() {
+    if (this.type === 'event') {
       this.vm.title = 'Eventos';
       this.vm.typeTabs = 'eventsAdmin';
       this.vm.typeItems = 'events';
       this.vm.typeBody = 'bodyEvent';
       this.vm.apiType = 'events';
-    } else if (this.type === 'media') {
+    }
+  }
+
+  private setDataByTypesImage() {
+    if (this.type === 'image') {
+      this.vm.title = 'Imagenes';
+      this.vm.typeTabs = 'imagesAdmin';
+      this.vm.typeItems = 'images';
+      this.vm.typeBody = 'bodyImage';
+      this.vm.apiType = 'images';
+    }
+  }
+
+  private setDataByTypesLike() {
+    if (this.type === 'like') {
+      this.vm.title = 'Likes';
+      this.vm.typeTabs = 'likesAdmin';
+      this.vm.typeItems = 'likes';
+      this.vm.typeBody = 'bodyLike';
+      this.vm.apiType = 'likes';
+    }
+  }
+
+  private setDataByTypesMedia() {
+    if (this.type === 'media') {
       this.vm.title = this.subType === 'set' ? 'Sets' : 'Tracks';
       this.vm.typeTabs = 'mediasAdmin';
       this.vm.bodyMedia.type = this.subType;
       this.vm.typeItems = 'medias';
       this.vm.typeBody = 'bodyMedia';
       this.vm.apiType = 'media';
-    } else if (this.type === 'site') {
+    }
+  }
+
+  private setDataByTypesSite() {
+    if (this.type === 'site') {
       this.vm.title = this.subType === 'club' ? 'Clubs' : 'Festivales';
       this.vm.typeTabs = 'sitesAdmin';
       this.vm.typeItems = 'sites';
       this.vm.typeBody = 'bodySite';
       this.vm.bodySite.type = this.subType;
       this.vm.apiType = 'sites';
-    } else if (this.type === 'style') {
+    }
+  }
+
+  private setDataByTypesStyle() {
+    if (this.type === 'style') {
       this.vm.title = 'Estilos';
       this.vm.typeTabs = 'stylesAdmin';
       this.vm.typeItems = 'styles';
       this.vm.typeBody = 'bodyStyle';
       this.vm.apiType = 'styles';
-    } else if (this.type === 'user') {
+    }
+  }
+
+  private setDataByTypesUser() {
+    if (this.type === 'user') {
       this.vm.title = 'Usuarios';
       this.vm.typeTabs = 'usersAdmin';
       this.vm.typeItems = 'users';
@@ -94,11 +145,10 @@ export class GenericAdminListBase {
       .subscribe({
         next: (response) => {
           if (!more) {
-            this.vm[this.vm.typeItems] = response.items;
-            this.vm.total = response.paginator.total;
+            this.vm[this.vm.typeItems] = response;
           } else {
             let data: any[] = this.vm[this.vm.typeItems];
-            data = data.concat(response.items);
+            data = data.concat(response);
             this.vm[this.vm.typeItems] = data;
           }
           this.vm.loading = false;
@@ -115,7 +165,9 @@ export class GenericAdminListBase {
     if (
       this.type !== 'media' &&
       this.type !== 'style' &&
-      this.type !== 'user'
+      this.type !== 'user' &&
+      this.type !== 'like' &&
+      this.type !== 'image'
     ) {
       let type = '';
       if (this.type === 'artist') {
@@ -282,5 +334,30 @@ export class GenericAdminListBase {
 
   showImage(data: ShowImageI) {
     this.ui.fullImage.show(data.image, data.remote);
+  }
+
+  deleteImage(item: Image) {
+    const modal = this.ui.modal.showModalConfirm(
+      'Eliminar Imagen',
+      '¿Estas seguro de eliminar la imagen?'
+    );
+    const sub$ = modal.subscribe({
+      next: (response) => {
+        if (response !== '') {
+          if (response === true) {
+            this.apiService.deleteOne('images', item._id!).subscribe({
+              next: (response) => {
+                this.ui.toast.showToast(TOAST_STATE.success, response.message);
+                this.vm.bodyImage.page = 1;
+                this.getItems();
+              },
+              error: (error) =>
+                this.ui.toast.showToast(TOAST_STATE.error, error),
+            });
+          }
+          sub$.unsubscribe();
+        }
+      },
+    });
   }
 }

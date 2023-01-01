@@ -40,6 +40,14 @@ import { AdminTotalsComponent } from '../../shared/components/ui/totals/admin-to
           ),
       },
       {
+        path: 'likes',
+        data: { breadcrumb: 'Likes' },
+        loadChildren: () =>
+          import('./routes/likes/admin-likes.module').then(
+            (m) => m.AdminLikesModule
+          ),
+      },
+      {
         path: 'sites',
         data: { breadcrumb: 'Sitios' },
         loadChildren: () =>

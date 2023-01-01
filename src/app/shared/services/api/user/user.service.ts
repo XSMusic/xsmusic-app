@@ -11,8 +11,8 @@ export class UserService {
   constructor(private localStorageService: LocalStorageService) {}
 
   private get user(): User | undefined {
-    this._user = this.localStorageService.getItem('user')
-      ? JSON.parse(this.localStorageService.getItem('user')!)
+    this._user = this.localStorageService.get('user')
+      ? JSON.parse(this.localStorageService.get('user')!)
       : undefined;
     return this._user;
   }
@@ -37,9 +37,9 @@ export class UserService {
   private save(user?: User): void {
     this._user = undefined;
     if (!user) {
-      this.localStorageService.removeItem('user');
+      this.localStorageService.remove('user');
     } else {
-      this.localStorageService.setItem('user', JSON.stringify(user));
+      this.localStorageService.set('user', JSON.stringify(user));
       this._user = user;
     }
     this.change$.next(user);

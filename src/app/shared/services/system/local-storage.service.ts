@@ -1,63 +1,45 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Injectable } from '@angular/core';
-import { AppComponent } from 'app/app.component';
+import { isPlatformBrowser } from '@angular/common';
+import { Inject, Injectable, InjectionToken, PLATFORM_ID } from '@angular/core';
 
-class LocalStorage implements Storage {
-  [name: string]: any;
-  readonly length!: number;
-
-  clear(): void {
-    /** */
-  }
-
-  getItem(key: string): string | null {
-    return null;
-  }
-  key(index: number): string | null {
-    return null;
-  }
-  removeItem(key: string): void {
-    /** */
-  }
-  setItem(key: string, value: string): void {
-    /** */
-  }
-}
+export const BROWSER_STORAGE = new InjectionToken<Storage>('Browser Storage', {
+  providedIn: 'root',
+  factory: () => localStorage,
+});
 
 @Injectable({
   providedIn: 'root',
 })
-export class LocalStorageService implements Storage {
-  private storage: Storage;
+export class LocalStorageService {
   [name: string]: any;
   length!: number;
+  private readonly isBrowser;
 
-  constructor() {
-    this.storage = new LocalStorage();
-    AppComponent.isBrowser.subscribe((isBrowser: boolean) => {
-      if (!isBrowser) {
-        this.storage = localStorage;
-      }
-    });
+  constructor(
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    @Inject(PLATFORM_ID) private platformId: Object,
+    @Inject(BROWSER_STORAGE) public storage: Storage
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
   }
 
   clear(): void {
     this.storage.clear();
   }
 
-  getItem(key: string): string | null {
-    return this.storage.getItem(key);
+  get(key: string): string | null {
+    return this.isBrowser ? this.storage.getItem(key) : null;
   }
 
   key(index: number): string | null {
     return this.storage.key(index);
   }
 
-  removeItem(key: string): void {
+  remove(key: string): void {
     return this.storage.removeItem(key);
   }
 
-  setItem(key: string, value: string): void {
+  set(key: string, value: string): void {
     return this.storage.setItem(key, value);
   }
 }

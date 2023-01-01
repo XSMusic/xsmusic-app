@@ -16,7 +16,7 @@ export class ImagesViewListComponent {
   @Input() loading = true;
   @Output() filter = new EventEmitter<{ name: string; value: string }>();
   @Output() onScroll = new EventEmitter<void>();
-  @Output() onDeleteImage = new EventEmitter<Image>();
+  @Output() deleteImage = new EventEmitter<Image>();
   constructor(private fullImage: FullImageService, private router: Router) {}
 
   showImage(image: Image) {

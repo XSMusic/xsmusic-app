@@ -1,5 +1,11 @@
 <div class="flex flex-row justify-center gap-2 pb-2">
   <button
+    (click)="likeOrDislike()"
+    class="px-3 py-1 mt-3 font-medium border border-gray-300 rounded-lg cursor-pointer hover:opacity-70 dark:bg-black dark:border-gray-800 dark:text-white"
+  >
+    <svg-icon svgClass="h-6 h-6" class="fill-red-800" name="heart"></svg-icon>
+  </button>
+  <button
     (click)="sharing()"
     class="px-3 py-1 mt-3 font-medium border border-gray-300 rounded-lg cursor-pointer hover:opacity-70 dark:bg-black dark:border-gray-800 dark:text-white"
   >

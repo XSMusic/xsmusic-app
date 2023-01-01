@@ -1,19 +1,21 @@
 import { FilterListI } from '@interfaces';
-import { Artist, Site, Media, Event, User, Style } from '@models';
+import { Artist, Site, Media, Event, User, Style, Like, Image } from '@models';
 import { GetAllDto } from '@shared/services/api/api.dtos';
-import { GenericBodyType, GenericItemsType } from '@shared/utils';
+import { GenericBodyType, GenericItemsType, TabsType } from '@shared/utils';
 import { Observable } from 'rxjs';
 
 export class GenericListBaseViewModel {
   typeItems!: GenericItemsType;
   typeBody!: GenericBodyType;
-  typeTabs!: 'artists' | 'events' | 'sites' | 'media';
+  typeTabs!: TabsType;
   typeAdminRoute: any;
   title!: string;
   artists: Artist[] = [];
-  sites: Site[] = [];
   events: Event[] = [];
+  images: Image[] = [];
+  likes: Like[] = [];
   medias: Media[] = [];
+  sites: Site[] = [];
   sitesMap: Site[] = [];
   styles: Style[] = [];
   users: User[] = [];
@@ -26,6 +28,8 @@ export class GenericListBaseViewModel {
     pageSize: 30,
     order: ['date', 'asc'],
   });
+  bodyImage = new GetAllDto();
+  bodyLike = new GetAllDto();
   bodySite = new GetAllDto({
     pageSize: 30,
     type: 'club',
@@ -46,7 +50,6 @@ export class GenericListBaseViewModel {
   filterData!: FilterListI;
   loading = true;
   error = false;
-  total = 0;
   typeForGalleryView!:
     | 'artist'
     | 'club'

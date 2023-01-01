@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
-import { MessageI, PaginatorI } from '@interfaces';
+import { MessageI } from '@interfaces';
 import { ApiTypes } from '@shared/utils';
 import { Observable, take } from 'rxjs';
 import { GetAllDto, GetOneDto } from './api.dtos';
@@ -11,15 +11,15 @@ export class ApiService {
   url = environment.urls.api;
   constructor(private httpClient: HttpClient) {}
 
-  getAll<T>(type: ApiTypes, data: GetAllDto): Observable<PaginatorI<T>> {
+  getAll<T>(type: ApiTypes, data: GetAllDto): Observable<T[]> {
     return this.httpClient
-      .post<PaginatorI<T>>(`${this.url}/${type}/getAll`, data)
+      .post<T[]>(`${this.url}/${type}/getAll`, data)
       .pipe(take(1));
   }
 
-  getAllForType<T>(type: ApiTypes, data: GetAllDto): Observable<PaginatorI<T>> {
+  getAllForType<T>(type: ApiTypes, data: GetAllDto): Observable<T[]> {
     return this.httpClient
-      .post<PaginatorI<T>>(`${this.url}/${type}/getAllForType`, data)
+      .post<T[]>(`${this.url}/${type}/getAllForType`, data)
       .pipe(take(1));
   }
 

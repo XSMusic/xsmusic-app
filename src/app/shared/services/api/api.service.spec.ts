@@ -4,7 +4,6 @@ import {
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { environment } from '@env/environment';
-import { PaginatorI } from '@interfaces';
 import { Artist } from '@models';
 import { ApiService } from '@services';
 import { GetAllDto, GetOneDto } from './api.dtos';
@@ -12,11 +11,6 @@ import { GetAllDto, GetOneDto } from './api.dtos';
 describe('ApiService', () => {
   let httpTestingController: HttpTestingController;
   let service: ApiService;
-  const responseGetAll: PaginatorI<Artist> = {
-    paginator: { pageSize: 1, currentPage: 1, totalPages: 1, total: 20 },
-    items: [],
-  };
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [ApiService],
@@ -38,34 +32,34 @@ describe('ApiService', () => {
   it('getAll', () => {
     const data = new GetAllDto();
     service.getAll('artists', data).subscribe((response) => {
-      expect(JSON.stringify(response)).toEqual(JSON.stringify(responseGetAll));
+      expect(JSON.stringify(response)).toEqual(JSON.stringify([]));
     });
     const req = httpTestingController.expectOne(
       `${environment.urls.api}/artists/getAll`
     );
-    req.flush(responseGetAll);
+    req.flush([]);
   });
 
   it('getAllForType', () => {
     const data = new GetAllDto();
     service.getAllForType('artists', data).subscribe((response) => {
-      expect(JSON.stringify(response)).toEqual(JSON.stringify(responseGetAll));
+      expect(JSON.stringify(response)).toEqual(JSON.stringify([]));
     });
     const req = httpTestingController.expectOne(
       `${environment.urls.api}/artists/getAllForType`
     );
-    req.flush(responseGetAll);
+    req.flush([]);
   });
 
   it('getOne', () => {
     const data = new GetOneDto();
     service.getOne('artists', data).subscribe((response) => {
-      expect(JSON.stringify(response)).toEqual(JSON.stringify(responseGetAll));
+      expect(JSON.stringify(response)).toEqual(JSON.stringify([]));
     });
     const req = httpTestingController.expectOne(
       `${environment.urls.api}/artists/getOne`
     );
-    req.flush(responseGetAll);
+    req.flush([]);
   });
 
   it('create', () => {

@@ -58,6 +58,7 @@ export { MediaViewListComponent } from './views/list/media-view-list/media-view-
 export { SitesViewListComponent } from './views/list/sites-view-list/sites-view-list.component';
 export { UsersViewListComponent } from './views/list/users-view-list/users-view-list.component';
 export { EventsViewListComponent } from './views/list/events-view-list/events-view-list.component';
+export { LikesListViewComponent } from './views/list/likes-view-list/likes-view-list.component';
 
 export { LastMultiItemsComponent } from './views/last-multi/last-multi-items/last-multi-items.component';
 export { LastMultiComponent } from './views/last-multi/last-multi/last-multi.component';

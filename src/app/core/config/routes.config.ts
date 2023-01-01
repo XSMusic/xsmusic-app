@@ -31,6 +31,8 @@ export const routesConfig: any = {
   home: '/',
   imageAdminAdd: '/admin/images/one',
   imagesAdmin: '/admin/images',
+  likeAdmin: '/admin/likes/:id',
+  likesAdmin: '/admin/likes',
   login: '/login',
   register: '/register',
   set: '/sets/:slug',

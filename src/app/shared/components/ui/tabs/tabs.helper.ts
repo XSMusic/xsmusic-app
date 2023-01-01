@@ -34,127 +34,7 @@ export const tabsByType = [
     name: 'artists',
     buttons: genericTabs,
   },
-  {
-    name: 'media',
-    buttons: genericTabs,
-  },
-  {
-    name: 'events',
-    buttons: [
-      new TabsItem({
-        name: 'Galeria',
-        isActivatable: true,
-        action: 'viewGallery',
-      }),
-      new TabsItem({
-        name: 'Listado',
-        isActivatable: true,
-        action: 'viewList',
-      }),
-      // new ButtonBlockItem({
-      //   name: 'Calendario',
-      //   isActivatable: true,
-      //   action: 'viewCal',
-      // }),
-      // new ButtonBlockItem({
-      //   name: 'Mapa',
-      //   isActivatable: true,
-      //   action: 'viewMap',
-      // }),
-      // new ButtonBlockItem({
-      //   name: 'Filtrar',
-      //   isActivatable: true,
-      //   align: 'right',
-      //   action: 'filter',
-      // }),
-      new TabsItem({
-        name: 'Buscar',
-        isActivatable: true,
-        align: 'right',
-        action: 'search',
-      }),
-    ],
-  },
-  {
-    name: 'eventsScraping',
-    buttons: [
-      new TabsItem({
-        name: 'Completos',
-        action: 'viewCompleted',
-        isActivatable: true,
-      }),
-      new TabsItem({
-        name: 'Incompletos',
-        action: 'viewNotCompleted',
-        isActivatable: true,
-      }),
-    ],
-  },
-  {
-    name: 'userAdmin',
-    buttons: [
-      new TabsItem({
-        name: 'Info',
-        action: 'viewInfo',
-        isActivatable: true,
-      }),
-    ],
-  },
-  {
-    name: 'usersAdmin',
-    buttons: [
-      new TabsItem({
-        name: 'Listado',
-        action: 'viewList',
-        isActivatable: true,
-      }),
-    ],
-  },
-  {
-    name: 'styleAdmin',
-    buttons: [
-      new TabsItem({
-        name: 'Info',
-        isActivatable: true,
-        action: 'viewInfo',
-      }),
-      new TabsItem({
-        name: 'Artistas',
-        isActivatable: true,
-        action: 'viewArtists',
-      }),
-      new TabsItem({
-        name: 'Sets',
-        isActivatable: true,
-        action: 'viewSets',
-      }),
-      new TabsItem({
-        name: 'Tracks',
-        isActivatable: true,
-        action: 'viewTracks',
-      }),
-      new TabsItem({
-        name: 'Clubs',
-        isActivatable: true,
-        action: 'viewClubs',
-      }),
-      new TabsItem({
-        name: 'Festivales',
-        isActivatable: true,
-        action: 'viewFestivals',
-      }),
-    ],
-  },
-  {
-    name: 'stylesAdmin',
-    buttons: [
-      new TabsItem({
-        name: 'Listado',
-        action: 'viewList',
-        isActivatable: true,
-      }),
-    ],
-  },
+
   {
     name: 'artistsAdmin',
     buttons: [
@@ -216,6 +96,42 @@ export const tabsByType = [
     ],
   },
   {
+    name: 'events',
+    buttons: [
+      new TabsItem({
+        name: 'Galeria',
+        isActivatable: true,
+        action: 'viewGallery',
+      }),
+      new TabsItem({
+        name: 'Listado',
+        isActivatable: true,
+        action: 'viewList',
+      }),
+      new TabsItem({
+        name: 'Buscar',
+        isActivatable: true,
+        align: 'right',
+        action: 'search',
+      }),
+    ],
+  },
+  {
+    name: 'eventsScraping',
+    buttons: [
+      new TabsItem({
+        name: 'Completos',
+        action: 'viewCompleted',
+        isActivatable: true,
+      }),
+      new TabsItem({
+        name: 'Incompletos',
+        action: 'viewNotCompleted',
+        isActivatable: true,
+      }),
+    ],
+  },
+  {
     name: 'eventsAdmin',
     buttons: [
       new TabsItem({
@@ -257,6 +173,65 @@ export const tabsByType = [
         name: 'Opciones',
         isActivatable: true,
         action: 'viewOptions',
+      }),
+    ],
+  },
+  {
+    name: 'likesAdmin',
+    buttons: [
+      new TabsItem({
+        name: 'Listado',
+        isActivatable: true,
+        action: 'viewList',
+      }),
+    ],
+  },
+  {
+    name: 'imagesAdmin',
+    buttons: [
+      new TabsItem({
+        name: 'Listado',
+        isActivatable: true,
+        action: 'viewList',
+      }),
+    ],
+  },
+  {
+    name: 'media',
+    buttons: genericTabs,
+  },
+  {
+    name: 'mediasAdmin',
+    buttons: [
+      new TabsItem({
+        name: 'Listado',
+        action: 'viewList',
+        isActivatable: true,
+      }),
+      new TabsItem({
+        name: 'Nuevo',
+        action: 'viewAdd',
+        isActivatable: true,
+      }),
+      new TabsItem({
+        name: 'Filtrar',
+        action: 'filter',
+        align: 'right',
+      }),
+      new TabsItem({
+        name: 'Buscar',
+        action: 'search',
+        align: 'right',
+      }),
+    ],
+  },
+  {
+    name: 'mediaAdmin',
+    buttons: [
+      new TabsItem({
+        name: 'Info',
+        isActivatable: true,
+        action: 'viewInfo',
       }),
     ],
   },
@@ -351,41 +326,6 @@ export const tabsByType = [
     ],
   },
   {
-    name: 'mediasAdmin',
-    buttons: [
-      new TabsItem({
-        name: 'Listado',
-        action: 'viewList',
-        isActivatable: true,
-      }),
-      new TabsItem({
-        name: 'Nuevo',
-        action: 'viewAdd',
-        isActivatable: true,
-      }),
-      new TabsItem({
-        name: 'Filtrar',
-        action: 'filter',
-        align: 'right',
-      }),
-      new TabsItem({
-        name: 'Buscar',
-        action: 'search',
-        align: 'right',
-      }),
-    ],
-  },
-  {
-    name: 'mediaAdmin',
-    buttons: [
-      new TabsItem({
-        name: 'Info',
-        isActivatable: true,
-        action: 'viewInfo',
-      }),
-    ],
-  },
-  {
     name: 'styles',
     buttons: [
       new TabsItem({
@@ -395,6 +335,71 @@ export const tabsByType = [
       new TabsItem({
         name: 'Buscar',
         action: 'search',
+      }),
+    ],
+  },
+  {
+    name: 'styleAdmin',
+    buttons: [
+      new TabsItem({
+        name: 'Info',
+        isActivatable: true,
+        action: 'viewInfo',
+      }),
+      new TabsItem({
+        name: 'Artistas',
+        isActivatable: true,
+        action: 'viewArtists',
+      }),
+      new TabsItem({
+        name: 'Sets',
+        isActivatable: true,
+        action: 'viewSets',
+      }),
+      new TabsItem({
+        name: 'Tracks',
+        isActivatable: true,
+        action: 'viewTracks',
+      }),
+      new TabsItem({
+        name: 'Clubs',
+        isActivatable: true,
+        action: 'viewClubs',
+      }),
+      new TabsItem({
+        name: 'Festivales',
+        isActivatable: true,
+        action: 'viewFestivals',
+      }),
+    ],
+  },
+  {
+    name: 'stylesAdmin',
+    buttons: [
+      new TabsItem({
+        name: 'Listado',
+        action: 'viewList',
+        isActivatable: true,
+      }),
+    ],
+  },
+  {
+    name: 'userAdmin',
+    buttons: [
+      new TabsItem({
+        name: 'Info',
+        action: 'viewInfo',
+        isActivatable: true,
+      }),
+    ],
+  },
+  {
+    name: 'usersAdmin',
+    buttons: [
+      new TabsItem({
+        name: 'Listado',
+        action: 'viewList',
+        isActivatable: true,
       }),
     ],
   },

@@ -49,7 +49,7 @@ export class FilterBarComponent implements OnInit {
         })
         .subscribe({
           next: (response) => {
-            this.itemsB = response.items.map((item) => {
+            this.itemsB = response.map((item) => {
               return { name: item.name!, value: item.name! };
             });
           },

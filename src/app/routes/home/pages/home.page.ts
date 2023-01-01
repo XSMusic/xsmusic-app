@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { routesConfig } from '@core/config';
-import { PaginatorI } from '@interfaces';
 import { ApiService, TOAST_STATE, UIService } from '@services';
 import {
   ApiTypes,
@@ -57,12 +56,12 @@ export class HomePage implements OnInit {
   }
 
   subscription(
-    service: Observable<PaginatorI<any>>,
+    service: Observable<any>,
     typeItems: GenericItemsAllType
   ) {
     service.subscribe({
       next: (response) => {
-        this.vm[typeItems] = response.items;
+        this.vm[typeItems] = response;
         this.vm.loading[typeItems] = false;
       },
       error: (error) => {

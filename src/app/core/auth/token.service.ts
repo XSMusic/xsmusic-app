@@ -14,7 +14,7 @@ export class TokenService {
 
   private get token(): string | undefined {
     if (!this._token) {
-      this._token = this.store.getItem(this.key)!;
+      this._token = this.store.get(this.key)!;
       return this._token;
     } else {
       return this._token;
@@ -50,9 +50,9 @@ export class TokenService {
     this._token = undefined;
 
     if (!token) {
-      this.store.removeItem(this.key);
+      this.store.remove(this.key);
     } else {
-      this.store.setItem(this.key, token);
+      this.store.set(this.key, token);
       this._token = token;
     }
 

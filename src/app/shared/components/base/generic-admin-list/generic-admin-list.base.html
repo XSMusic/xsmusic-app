@@ -1,6 +1,5 @@
 <header-custom
   [title]="vm.title"
-  [total]="vm.total"
   (onClickTitle)="goToPage({admin: false, typeRoute: 'all'})"
 ></header-custom>
 
@@ -61,14 +60,36 @@
     ></admin-events-scraping>
   </ng-container>
 
+  <ng-container *ngIf="type === 'image'">
+    <images-view-list
+      *ngIf="vm.view === 'viewList'"
+      [items]="vm.images"
+      [loading]="vm.loading"
+      (filter)="onFilter($event)"
+      (onScroll)="onScroll()"
+      (deleteImage)="deleteImage($event)"
+    ></images-view-list>
+  </ng-container>
+
+  <ng-container *ngIf="type === 'like'">
+    <likes-view-list
+      *ngIf="vm.view === 'viewList'"
+      [likes]="vm.likes"
+      [loading]="vm.loading"
+      (onScroll)="onScroll()"
+      (goToPage)="goToPage($event)"
+    >
+    </likes-view-list>
+  </ng-container>
+
   <ng-container *ngIf="type === 'media'">
     <media-view-list
       *ngIf="vm.view === 'viewList'"
       [media]="vm.medias"
       [loading]="vm.loading"
       [type]="subType === 'set' ? 'set' : 'track'"
-      (goToPage)="goToPage($event)"
       (filter)="onFilter($event)"
+      (goToPage)="goToPage($event)"
       (onScroll)="onScroll()"
     ></media-view-list>
 
@@ -142,7 +163,6 @@
       (goToPage)="goToPage($event)"
     ></users-view-list>
   </ng-container>
-
 
   <div
     class="grid gap-2 mt-2 md:gap-4 md:grid-cols-3"

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+import { GenericItemType } from '@shared/utils';
 import { ValidationsFormI } from './validations-form.interface';
 
 @Injectable({ providedIn: 'root' })
 export class ValidationsFormService {
   validation(
-    type: 'artist' | 'event' | 'media' | 'site' | 'style' | 'user',
+    type: GenericItemType,
     item: any,
     tempImagesByUrl?: any[],
     tempImagesByFile?: any[]

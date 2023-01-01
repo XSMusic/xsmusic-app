@@ -1,4 +1,4 @@
-import { Artist, Site, Media, Event, User, Style } from '@models';
+import { Artist, Site, Media, Event, User, Style, Like, Image } from '@models';
 import { GetAllDto } from '@shared/services/api/api.dtos';
 import { ApiTypes, GenericSubItemType, TabsType } from '@shared/utils';
 
@@ -8,6 +8,8 @@ export class GenericAdminOneBaseViewModel {
   apiType!: ApiTypes;
   artist = new Artist();
   event = new Event();
+  image = new Image();
+  like = new Like();
   media = new Media();
   site = new Site();
   style = new Style();

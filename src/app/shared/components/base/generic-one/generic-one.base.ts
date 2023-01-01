@@ -86,7 +86,7 @@ export class GenericOneBase implements OnInit {
     this.apiService
       .getAllForType<Event>('events', this.vm.bodyEvents)
       .subscribe({
-        next: (response) => (this.vm.events = response.items),
+        next: (response) => (this.vm.events = response),
         error: (err) => {
           this.vm.views = this.vm.views.filter(
             (item) => item.name !== 'Eventos'
@@ -101,7 +101,7 @@ export class GenericOneBase implements OnInit {
     this.apiService
       .getAllForType<Media>('media', this.vm.bodyMediaSet)
       .subscribe({
-        next: (response) => (this.vm.sets = response.items),
+        next: (response) => (this.vm.sets = response),
         error: (err) => {
           this.vm.views = this.vm.views.filter((item) => item.name !== 'Sets');
           this.ui.toast.showToast(TOAST_STATE.error, err);
@@ -114,7 +114,7 @@ export class GenericOneBase implements OnInit {
     this.apiService
       .getAllForType<Media>('media', this.vm.bodyMediaTrack)
       .subscribe({
-        next: (response) => (this.vm.tracks = response.items),
+        next: (response) => (this.vm.tracks = response),
         error: (err) => {
           this.vm.views = this.vm.views.filter(
             (item) => item.name !== 'Tracks'
@@ -126,28 +126,30 @@ export class GenericOneBase implements OnInit {
 
   setMeta() {
     let title: string;
-    if (this.type === 'event') {
-      title = `${this.vm.event.name} @ ${
-        this.vm.event.site.name
-      } - ${DateFunctions.new(this.vm.event.date).format('DD-MM-YYYY')}`;
-    } else {
-      title = this.vm[this.type].name!;
+    if (this.type !== 'like' && this.type !== 'image') {
+      if (this.type === 'event') {
+        title = `${this.vm.event.name} @ ${
+          this.vm.event.site.name
+        } - ${DateFunctions.new(this.vm.event.date).format('DD-MM-YYYY')}`;
+      } else {
+        title = this.vm[this.type].name!;
+      }
+      const typeRoute = this.type === 'site' ? this.subType : this.type;
+      const meta: MetadataI = {
+        title: title,
+        image: `${environment.urls.images}/${this.type}s/big/${
+          this.vm[this.type].images![0].url
+        }`,
+        url: `${environment.urls.app}${routesConfig[typeRoute].replace(
+          ':slug',
+          this.vm[this.type].slug!
+        )}`,
+      };
+      if (this.type !== 'user' && this.vm[this.type].info !== '') {
+        meta.description = this.vm[this.type].info;
+      }
+      this.ui.meta.setMetaDynamic(meta);
     }
-    const typeRoute = this.type === 'site' ? this.subType : this.type;
-    const meta: MetadataI = {
-      title: title,
-      image: `${environment.urls.images}/${this.type}s/big/${
-        this.vm[this.type].images![0].url
-      }`,
-      url: `${environment.urls.app}${routesConfig[typeRoute].replace(
-        ':slug',
-        this.vm[this.type].slug!
-      )}`,
-    };
-    if (this.type !== 'user' && this.vm[this.type].info !== '') {
-      meta.description = this.vm[this.type].info;
-    }
-    this.ui.meta.setMetaDynamic(meta);
   }
 
   setViews() {
@@ -192,15 +194,17 @@ export class GenericOneBase implements OnInit {
         counter: this.vm.event.artists.length,
       });
     }
-    if (this.vm[this.type].images && this.vm[this.type].images!.length > 1) {
-      this.vm.views.push({
-        name: 'Imagenes',
-        value: 'image',
-        counter:
-          this.vm[this.type].images && this.vm[this.type].images!.length === 0
-            ? this.vm[this.type].images!.length
-            : this.vm[this.type].images!.length - 1,
-      });
+    if (this.type !== 'like' && this.type !== 'image') {
+      if (this.vm[this.type].images && this.vm[this.type].images!.length > 1) {
+        this.vm.views.push({
+          name: 'Imagenes',
+          value: 'image',
+          counter:
+            this.vm[this.type].images && this.vm[this.type].images!.length === 0
+              ? this.vm[this.type].images!.length
+              : this.vm[this.type].images!.length - 1,
+        });
+      }
     }
   }
 

@@ -8,6 +8,5 @@ import { inOutAnimation } from '@core/animations/enter-leave.animations';
 })
 export class HeaderComponent {
   @Input() title = '';
-  @Input() total = 0;
   @Output() onClickTitle = new EventEmitter<void>();
 }

@@ -93,13 +93,12 @@ export class GenericListBase {
   getItems(more = false) {
     if (this.vm.service) {
       this.vm.service.subscribe({
-        next: (response) => {
+        next: (response: any[]) => {
           if (!more) {
-            this.vm[this.vm.typeItems] = response.items;
-            this.vm.total = response.paginator.total;
+            this.vm[this.vm.typeItems] = response;
           } else {
             let data: any[] = this.vm[this.vm.typeItems];
-            data = data.concat(response.items);
+            data = data.concat(response);
             this.vm[this.vm.typeItems] = data;
           }
           this.vm.loading = false;
@@ -120,7 +119,7 @@ export class GenericListBase {
     this.vm.bodySiteMap.type = this.subType;
     this.apiService.getAll<Site>('sites', this.vm.bodySiteMap).subscribe({
       next: (response) => {
-        this.vm.sitesMap = response.items;
+        this.vm.sitesMap = response;
         this.vm.loading = false;
       },
       error: () => {

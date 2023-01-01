@@ -55,10 +55,7 @@ export class HomePage implements OnInit {
     this.subscription(service, typeItems);
   }
 
-  subscription(
-    service: Observable<any>,
-    typeItems: GenericItemsAllType
-  ) {
+  subscription(service: Observable<any>, typeItems: GenericItemsAllType) {
     service.subscribe({
       next: (response) => {
         this.vm[typeItems] = response;

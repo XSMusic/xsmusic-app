@@ -38,16 +38,15 @@
                   <p
                     class="mt-1 text-sm leading-none text-gray-500 dark:text-gray-400 font-extralight"
                   >
-                  <span *ngIf="like.type !== 'media' && like.type !== 'site'">
-                    {{ like.type | type }}
+                    <span *ngIf="like.type !== 'media' && like.type !== 'site'">
+                      {{ like.type | type }}
                     </span>
-                  <span *ngIf="like.type === 'media' || like.type === 'site'">
-                    {{ like[like.type].type | type }}
+                    <span *ngIf="like.type === 'media' || like.type === 'site'">
+                      {{ like[like.type].type | type }}
                     </span>
                   </p>
                 </div>
               </div>
-
             </td>
             <td class="pl-3">
               <div class="flex gap-3 mr-16">

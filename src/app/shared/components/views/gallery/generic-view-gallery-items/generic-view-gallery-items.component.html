@@ -11,7 +11,6 @@
     <div
       *ngIf="item.name !== 'Desconocido'"
       class="relative overflow-hidden rounded-lg shadow-lg dark:border dark:border-gray-700"
-      (click)="type !== 'eventScraping' ? goToPage.emit({type, typeRoute: 'one', item}) : null"
     >
       <img
         *ngIf="
@@ -20,6 +19,7 @@
         class="object-cover w-full cursor-pointer h-80 hover:filter-grayscale hover:scale-105 hover:duration-1000"
         [src]="item.images! | imageArray: 'medium'"
         [alt]="item.name"
+        (click)="goToPage.emit({type, typeRoute: 'one', item})"
         onError
       />
 
@@ -71,7 +71,10 @@
         <div class="flex justify-center">
           <div class="mb-2 text-2xl font-extrabold text-white cursor-pointer">
             <ng-container *ngIf="type === 'set'">
-              <div class="text-lg font-medium text-white mb">
+              <div
+                class="text-lg font-medium text-white mb"
+                (click)="goToPage.emit({type, typeRoute: 'one', item})"
+              >
                 {{ item | titleMedia }}
               </div>
             </ng-container>
@@ -85,7 +88,10 @@
             </ng-container>
 
             <ng-container *ngIf="type !== 'set' && type !== 'track'">
-              <div class="flex justify-center gap-1">
+              <div
+                class="flex justify-center gap-1"
+                (click)="goToPage.emit({type, typeRoute: 'one', item})"
+              >
                 {{ item.name }}
               </div>
             </ng-container>

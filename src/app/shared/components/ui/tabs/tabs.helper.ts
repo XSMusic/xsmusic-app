@@ -239,13 +239,8 @@ export const tabsByType = [
     name: 'sites',
     buttons: [
       new TabsItem({
-        name: 'Galeria',
-        action: 'viewGallery',
-        isActivatable: true,
-      }),
-      new TabsItem({
         name: 'Listado',
-        action: 'viewList',
+        action: 'viewGallery',
         isActivatable: true,
       }),
       new TabsItem({
@@ -256,12 +251,10 @@ export const tabsByType = [
       new TabsItem({
         name: 'Filtrar',
         action: 'filter',
-        align: 'right',
       }),
       new TabsItem({
         name: 'Buscar',
         action: 'search',
-        align: 'right',
       }),
     ],
   },

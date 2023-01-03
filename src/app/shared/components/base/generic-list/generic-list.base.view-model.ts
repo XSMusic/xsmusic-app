@@ -39,7 +39,7 @@ export class GenericListBaseViewModel {
     pageSize: 1000,
     type: 'club',
     map: true,
-    maxDistance: 10000,
+    maxDistance: 600,
   });
   bodyMedia = new GetAllDto({
     pageSize: 30,

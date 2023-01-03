@@ -1,6 +1,11 @@
 <div
   *ngIf="!loading"
-  class="grid w-full grid-cols-1 gap-4 py-2 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4"
+  class="grid w-full grid-cols-1 gap-4 py-2 sm:grid-cols-2"
+  [ngClass]="{
+    'lg:grid-cols-3': type === 'set' || type === 'track' || type === 'event',
+    'lg:grid-cols-4':
+      this.type !== 'set' && this.type !== 'track' && this.type !== 'event'
+  }"
 >
   <ng-container *ngFor="let item of items">
     <div
@@ -174,7 +179,12 @@
 
 <div
   *ngIf="loading"
-  class="grid w-full grid-cols-1 gap-4 py-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3"
+  class="grid w-full grid-cols-1 gap-4 py-2 sm:grid-cols-2"
+  [ngClass]="{
+    'lg:grid-cols-3': type === 'set' || type === 'track' || type === 'event',
+    'lg:grid-cols-4':
+      this.type !== 'set' && this.type !== 'track' && this.type !== 'event'
+  }"
 >
   <ng-container
     *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]"

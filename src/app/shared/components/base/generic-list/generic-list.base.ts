@@ -120,7 +120,6 @@ export class GenericListBase {
     this.apiService.getAll<Site>('sites', this.vm.bodySiteMap).subscribe({
       next: (response) => {
         this.vm.sitesMap = response;
-        this.vm.loading = false;
       },
       error: () => {
         this.vm.loading = false;

@@ -137,9 +137,12 @@ export class GenericOneBase implements OnInit {
       const typeRoute = this.type === 'site' ? this.subType : this.type;
       const meta: MetadataI = {
         title: title,
-        image: `${environment.urls.images}/${this.type}s/big/${
-          this.vm[this.type].images![0].url
-        }`,
+        image:
+          this.vm[this.type].images && this.vm[this.type].images!.length > 0
+            ? `${environment.urls.images}/${this.type}s/big/${
+                this.vm[this.type].images![0].url
+              }`
+            : '',
         url: `${environment.urls.app}${routesConfig[typeRoute].replace(
           ':slug',
           this.vm[this.type].slug!
@@ -183,6 +186,7 @@ export class GenericOneBase implements OnInit {
         });
       }
     }
+
     if (
       this.type === 'event' &&
       this.vm.event.artists &&
@@ -194,6 +198,7 @@ export class GenericOneBase implements OnInit {
         counter: this.vm.event.artists.length,
       });
     }
+
     if (this.type !== 'like' && this.type !== 'image') {
       if (this.vm[this.type].images && this.vm[this.type].images!.length > 1) {
         this.vm.views.push({

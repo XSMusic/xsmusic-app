@@ -54,35 +54,17 @@ export class GenericAdminOneBase implements OnInit {
     this.setTypesUser();
   }
 
-  private setTypesUser() {
-    if (this.type === 'user') {
+  private setTypesArtist() {
+    if (this.type === 'artist') {
+      this.vm.bodyEvents.type = `${this.type}s`;
+      this.vm.bodyMediaSet.type = `${this.type}s`;
+      this.vm.bodyMediaTrack.type = `${this.type}s`;
       this.vm.apiType = `${this.type}s`;
-      this.vm.typeTabs = 'userAdmin';
-      this.vm.title = `${this.vm.id ? 'Editar' : 'Nuevo'} Usuario`;
-    }
-  }
-
-  private setTypesStyle() {
-    if (this.type === 'style') {
-      this.vm.apiType = `${this.type}s`;
-      this.vm.typeTabs = 'styleAdmin';
-      this.vm.title = `${this.vm.id ? 'Editar' : 'Nuevo'} Estilo`;
-    }
-  }
-
-  private setTypesSite() {
-    if (this.type === 'site') {
-      this.vm.bodyEvents.type = `${this.type}`;
-      this.vm.bodyMediaSet.type = `${this.type}`;
-      this.vm.subType = this.route.snapshot.routeConfig!.path!.includes('clubs')
-        ? 'club'
-        : 'festival';
-      this.vm.bodyMediaTrack.type = `${this.vm.subType}s`;
-      this.vm.apiType = `${this.type}s`;
-      this.vm.typeTabs = 'siteAdmin';
-      this.setTitleSub();
+      this.vm.typeTabs = 'artistAdmin';
+      this.vm.title = `${this.vm.id ? 'Editar' : 'Nuevo'} Artista`;
       this.vm.options.push(
         { name: 'Añadir Set', action: 'goToAdminSetAdd' },
+        { name: 'Añadir Track', action: 'goToAdminTrackAdd' },
         { name: 'Añadir Evento', action: 'goToAdminEventAdd' }
       );
     }
@@ -111,14 +93,37 @@ export class GenericAdminOneBase implements OnInit {
     }
   }
 
-  private setTypesArtist() {
-    if (this.type === 'artist') {
-      this.vm.bodyEvents.type = `${this.type}s`;
-      this.vm.bodyMediaSet.type = `${this.type}s`;
-      this.vm.bodyMediaTrack.type = `${this.type}s`;
+  private setTypesSite() {
+    if (this.type === 'site') {
+      this.vm.bodyEvents.type = `${this.type}`;
+      this.vm.bodyMediaSet.type = `${this.type}`;
+      this.vm.subType = this.route.snapshot.routeConfig!.path!.includes('clubs')
+        ? 'club'
+        : 'festival';
+      this.vm.bodyMediaTrack.type = `${this.vm.subType}s`;
       this.vm.apiType = `${this.type}s`;
-      this.vm.typeTabs = 'artistAdmin';
-      this.vm.title = `${this.vm.id ? 'Editar' : 'Nuevo'} Artista`;
+      this.vm.typeTabs = 'siteAdmin';
+      this.setTitleSub();
+      this.vm.options.push(
+        { name: 'Añadir Set', action: 'goToAdminSetAdd' },
+        { name: 'Añadir Evento', action: 'goToAdminEventAdd' }
+      );
+    }
+  }
+
+  private setTypesStyle() {
+    if (this.type === 'style') {
+      this.vm.apiType = `${this.type}s`;
+      this.vm.typeTabs = 'styleAdmin';
+      this.vm.title = `${this.vm.id ? 'Editar' : 'Nuevo'} Estilo`;
+    }
+  }
+
+  private setTypesUser() {
+    if (this.type === 'user') {
+      this.vm.apiType = `${this.type}s`;
+      this.vm.typeTabs = 'userAdmin';
+      this.vm.title = `${this.vm.id ? 'Editar' : 'Nuevo'} Usuario`;
     }
   }
 
@@ -365,7 +370,10 @@ export class GenericAdminOneBase implements OnInit {
         queryParams: {
           tab: 'viewAdd',
           source: 'default',
-          value: this.vm.artist.name,
+          value:
+            this.type === 'site' || this.type === 'artist'
+              ? this.vm[this.type].name
+              : '',
         },
       });
     } else if (event.action === 'goToAdminTrackAdd') {
@@ -373,7 +381,10 @@ export class GenericAdminOneBase implements OnInit {
         queryParams: {
           tab: 'viewAdd',
           source: 'default',
-          value: this.vm.artist.name,
+          value:
+            this.type === 'site' || this.type === 'artist'
+              ? this.vm[this.type].name
+              : '',
         },
       });
     }

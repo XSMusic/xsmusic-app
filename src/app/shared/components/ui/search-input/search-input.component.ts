@@ -62,11 +62,11 @@ export class SearchInputComponent implements OnInit {
     }
   }
 
-  onSearchResultsSuccess(response: any) {
-    if (response.items.length > 1) {
-      this.itemsSearch = response.items;
-    } else if (response.items.length === 1) {
-      this.onSelect(response.items[0]);
+  onSearchResultsSuccess(response: any[]) {
+    if (response.length > 1) {
+      this.itemsSearch = response;
+    } else if (response.length === 1) {
+      this.onSelect(response[0]);
     }
   }
 

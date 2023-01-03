@@ -18,6 +18,7 @@ export class GenericViewGalleryItemsComponent {
     | 'set'
     | 'track'
     | 'festival' = 'artist';
+  @Input() loading = true;
   @Output() goToPage = new EventEmitter<GoToPageI>();
   @Output() discartEvent = new EventEmitter<any>();
 }

@@ -7,6 +7,7 @@ import { Media } from '@models';
 })
 export class LastMediaItemComponent implements OnInit {
   @Input() media!: Media;
+  @Input() loading = true;
   @Input() type: 'one' | 'multi' = 'one';
   @Output() goToMedia = new EventEmitter<Media>();
   width = window.innerWidth;

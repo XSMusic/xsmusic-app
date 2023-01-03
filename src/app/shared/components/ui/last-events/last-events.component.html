@@ -1,5 +1,5 @@
-<ng-container *ngIf="!loading && !error">
-  <div @inOut class="flex justify-between">
+<ng-container>
+  <div class="flex justify-between">
     <h1 class="pb-2 text-lg font-extrabold dark:text-white">
       Proximos Eventos
     </h1>
@@ -10,7 +10,7 @@
       Ver todos
     </p>
   </div>
-  <div class="grid gap-2 md:grid-cols-12">
+  <div class="grid gap-2 md:grid-cols-12" *ngIf="!loading">
     <div class="col-span-6" *ngFor="let item of events">
       <div
         class="flex justify-between col-span-6 gap-1 p-2 border border-gray-200 rounded-lg cursor-pointer dark:border-gray-700"
@@ -61,6 +61,40 @@
           </div>
           <div class="text-xs font-bold">
             {{ item.date! | dateToDayOrMonth: 'month' | uppercase }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid gap-2 md:grid-cols-12 animate-pulse" *ngIf="loading">
+    <div class="col-span-6" *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8]">
+      <div
+        class="flex justify-between col-span-6 gap-1 p-2 border border-gray-200 rounded-lg cursor-pointer dark:border-gray-700"
+      >
+        <div class="flex gap-2">
+          <div class="w-12 h-12 bg-gray-200 rounded-lg dark:bg-gray-700"></div>
+          <div class="flex flex-col gap">
+            <p
+              class="h-3 px-10 mt-2 bg-gray-200 rounded-full w-52 dark:bg-gray-700"
+            ></p>
+            <p
+              class="h-3 px-10 mt-2 bg-gray-200 rounded-full w-52 dark:bg-gray-700"
+            ></p>
+          </div>
+        </div>
+        <div
+          class="flex flex-col gap-1 px-2 py-2 text-center text-white bg-black rounded-lg rounded-bl-lg dark:bg-gray-700"
+        >
+          <div class="text-xs font-light">
+            <p
+              class="w-5 h-2 mt-1 bg-gray-200 rounded-full dark:bg-gray-700"
+            ></p>
+          </div>
+          <div class="text-xs font-bold">
+            <p
+              class="w-5 h-2 mt-1 bg-gray-200 rounded-full dark:bg-gray-700"
+            ></p>
           </div>
         </div>
       </div>

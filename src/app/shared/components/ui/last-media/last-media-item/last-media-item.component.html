@@ -1,5 +1,5 @@
 <div
-  *ngIf="media"
+  *ngIf="!loading"
   class="relative overflow-hidden rounded-lg shadow-xl cursor-pointer"
   (click)="goToMedia.emit(media)"
 >
@@ -14,7 +14,6 @@
     class="absolute bottom-0 left-0 w-full px-6 pt-2 text-center text-white"
     style="background: rgba(0, 0, 0, 0.65)"
   >
-    <!-- DESKTOP -->
     <div class="hidden lg:justify-center lg:flex-col lg:flex">
       <div class="flex justify-center">
         <div class="flex justify-center gap-3">
@@ -25,11 +24,47 @@
       </div>
     </div>
 
-    <!-- ONE BLOCK MOBILE -->
     <div class="flex flex-col justify-center lg:hidden">
       <div class="flex justify-center">
         <div class="mb-2 text-lg font-medium text-white">
           {{ media | titleMedia | truncateText: 50 }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  *ngIf="loading"
+  class="relative overflow-hidden rounded-lg shadow-xl cursor-pointer animate-pulse"
+>
+  <div
+    class="object-cover w-full h-40 bg-gray-200 hover:filter-grayscale hover:scale-105 hover:duration-1000 dark:bg-gray-700"
+    [ngStyle]="{ height: height }"
+    onError
+  ></div>
+  <div
+    class="absolute bottom-0 left-0 w-full px-6 pt-2 text-center text-white"
+    style="background: rgba(0, 0, 0, 0.65)"
+  >
+    <div class="hidden lg:justify-center lg:flex-col lg:flex">
+      <div class="flex justify-center">
+        <div class="flex justify-center gap-3">
+          <div class="mb-2 text-lg font-medium text-white">
+            <p
+              class="mt-2 px-10 h-3 w-52 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"
+            ></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col justify-center lg:hidden">
+      <div class="flex justify-center">
+        <div class="mb-2 text-lg font-medium text-white">
+          <p
+            class="mt-2 px-10 h-3 w-52 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"
+          ></p>
         </div>
       </div>
     </div>

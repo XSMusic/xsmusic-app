@@ -1,8 +1,9 @@
-<div @inOut class="pt-4 pl-2 pr-4 md:grid md:grid-cols-5">
+<div class="pt-4 pl-2 pr-4 md:grid md:grid-cols-5" *ngIf="!loading">
   <div class="col-span-3 pb-1 md:pr-2">
     <last-media-item
       type="one"
       [media]="media[0]"
+      [loading]="loading"
       (goToMedia)="goToMedia($event)"
     ></last-media-item>
   </div>
@@ -16,6 +17,30 @@
       <last-media-item
         type="multi"
         [media]="item"
+        [loading]="loading"
+        (goToMedia)="goToMedia($event)"
+      ></last-media-item>
+    </div>
+  </div>
+</div>
+
+<div class="pt-4 pl-2 pr-4 md:grid md:grid-cols-5" *ngIf="loading">
+  <div class="col-span-3 pb-1 md:pr-2">
+    <last-media-item
+      type="one"
+      [loading]="loading"
+      (goToMedia)="goToMedia($event)"
+    ></last-media-item>
+  </div>
+
+  <div class="md:col-span-2">
+    <div
+      class="w-full col-span-3 py-1 md:pr-2"
+      *ngFor="let item of [1,2]"
+    >
+      <last-media-item
+        type="multi"
+        [loading]="loading"
         (goToMedia)="goToMedia($event)"
       ></last-media-item>
     </div>

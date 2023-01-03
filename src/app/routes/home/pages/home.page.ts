@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { routesConfig } from '@core/config';
-import { ResumeService, TOAST_STATE, UIService } from '@services';
+import { ApiService, TOAST_STATE, UIService } from '@services';
 import {
+  ApiTypes,
   GenericItemsAllType,
   GoToRouteType,
   GenericItemAllType,
 } from '@shared/utils';
+import { Observable } from 'rxjs';
 import { HomeViewModel } from './home.view-model';
 
 @Component({
@@ -16,13 +18,15 @@ import { HomeViewModel } from './home.view-model';
 export class HomePage implements OnInit {
   vm = new HomeViewModel();
   constructor(
-    private resumeService: ResumeService,
+    private apiService: ApiService,
     private ui: UIService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.getItems();
+    for (const item of this.vm.items) {
+      this.getItems(item.type, item.typeItems);
+    }
   }
 
   getBodyType(type: GenericItemsAllType) {
@@ -42,21 +46,24 @@ export class HomePage implements OnInit {
     }
   }
 
-  getItems() {
-    const service = this.resumeService.getForAll();
+  getItems(type: ApiTypes, typeItems: GenericItemsAllType) {
+    this.vm.loading[typeItems] = true;
+    const service = this.apiService.getAll<any>(
+      type,
+      this.vm[this.getBodyType(typeItems)]
+    );
+    this.subscription(service, typeItems);
+  }
+
+  subscription(service: Observable<any>, typeItems: GenericItemsAllType) {
     service.subscribe({
       next: (response) => {
-        this.vm.artists = response.artists;
-        this.vm.events = response.events;
-        this.vm.clubs = response.clubs;
-        this.vm.festivals = response.festivals;
-        this.vm.sets = response.sets;
-        this.vm.tracks = response.tracks;
-        this.vm.loading = false;
+        this.vm[typeItems] = response;
+        this.vm.loading[typeItems] = false;
       },
       error: (error) => {
-        this.vm.error = true;
-        this.vm.loading = false;
+        this.vm.loading[typeItems] = false;
+        this.vm.error[typeItems] = true;
         this.ui.toast.showToast(TOAST_STATE.error, error);
       },
     });

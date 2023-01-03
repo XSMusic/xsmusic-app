@@ -50,6 +50,21 @@ export class HomeViewModel {
   festivals: Site[] = [];
   styles: Style[] = [];
   users: Style[] = [];
-  loading = true;
-  error = false;
+  loading: any = {
+    artists: true,
+    events: true,
+    sets: true,
+    tracks: true,
+    clubs: true,
+    festivals: true,
+  };
+  error: any = {
+    artists: false,
+    events: false,
+    sets: false,
+    tracks: false,
+    sites: false,
+    clubs: false,
+    festivals: false,
+  };
 }

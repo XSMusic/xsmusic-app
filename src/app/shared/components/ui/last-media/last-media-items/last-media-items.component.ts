@@ -11,6 +11,7 @@ import { Media } from '@models';
 })
 export class LastMediaItemsComponent {
   @Input() media: Media[] = [];
+  @Input() loading = true;
   constructor(private router: Router) {}
 
   goToMedia(item: Media) {

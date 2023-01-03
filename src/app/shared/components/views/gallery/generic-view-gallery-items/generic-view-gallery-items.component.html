@@ -1,5 +1,5 @@
 <div
-  @inOut
+  *ngIf="!loading"
   class="grid w-full grid-cols-1 gap-4 py-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3"
 >
   <ng-container *ngFor="let item of items">
@@ -168,6 +168,23 @@
           </div>
         </div>
       </div>
+    </div>
+  </ng-container>
+</div>
+
+<div
+  *ngIf="loading"
+  class="grid w-full grid-cols-1 gap-4 py-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3"
+>
+  <ng-container
+    *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]"
+  >
+    <div
+      class="relative overflow-hidden rounded-lg shadow-lg dark:border dark:border-gray-700 animate-pulse"
+    >
+      <div
+        class="object-cover w-full cursor-pointer h-80 hover:filter-grayscale hover:scale-105 hover:duration-1000"
+      ></div>
     </div>
   </ng-container>
 </div>

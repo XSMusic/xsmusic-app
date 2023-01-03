@@ -1,27 +1,26 @@
-<ng-container *ngIf="!loading">
-  <ng-container *ngIf="items && items.length > 0">
-    <generic-view-gallery-items
-      [items]="items"
-      [type]="type"
-      (goToPage)="goToPage.emit($event)"
-      (discartEvent)="discartEvent.emit($event)"
-    ></generic-view-gallery-items>
+<ng-container>
+  <generic-view-gallery-items
+    [items]="items"
+    [type]="type"
+    [loading]="loading"
+    (goToPage)="goToPage.emit($event)"
+    (discartEvent)="discartEvent.emit($event)"
+  ></generic-view-gallery-items>
 
-    <div
-      class="search-results"
-      infiniteScroll
-      [infiniteScrollDistance]="2"
-      [infiniteScrollThrottle]="50"
-      (scrolled)="onScroll.emit()"
-    ></div>
-  </ng-container>
-
-  <div class="mt-1" *ngIf="items && items.length === 0">
-    <alert
-      @inOut
-      type="warning"
-      [message]="geTextNoItems()"
-      actionText="Quitar"
-    ></alert>
-  </div>
+  <div
+    class="search-results"
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="50"
+    (scrolled)="onScroll.emit()"
+  ></div>
 </ng-container>
+
+<div class="mt-1" *ngIf="!loading && items && items.length === 0">
+  <alert
+    @inOut
+    type="warning"
+    [message]="geTextNoItems()"
+    actionText="Quitar"
+  ></alert>
+</div>

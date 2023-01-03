@@ -85,7 +85,7 @@ export const darkMode = (user: User) => {
 
 export const firstLetterCase = (value: string) => {
   if (value) {
-    return value.charAt(0).toUpperCase() + value.slice(1);
+    return value.charAt(0).toUpperCase() + value.toLowerCase().slice(1);
   } else {
     return value;
   }

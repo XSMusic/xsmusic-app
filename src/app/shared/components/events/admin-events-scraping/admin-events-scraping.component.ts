@@ -17,6 +17,7 @@ import {
   ScrapingEventsI,
 } from '@shared/services/api/scraping/scraping-source.interface';
 import { ScrapingGetListEventsDto } from '@shared/services/api/scraping/scraping.dto';
+import { firstLetterCase } from '@shared/utils';
 import { DateFunctions } from '@shared/utils/dates';
 
 @Component({
@@ -137,7 +138,7 @@ export class AdminEventsScrapingComponent {
               queryParams: {
                 tab: 'viewAdd',
                 fieldKey: 'name',
-                fieldValue: data.item.name,
+                fieldValue: firstLetterCase(data.item.site),
               },
             });
           }

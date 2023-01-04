@@ -1,40 +1,28 @@
 import { TabsItem } from './tabs.model';
 
-const genericTabs = [
-  new TabsItem({
-    name: 'Galeria',
-    isActivatable: true,
-    action: 'viewGallery',
-  }),
-  new TabsItem({
-    name: 'Listado',
-    isActivatable: true,
-    action: 'viewList',
-  }),
-  new TabsItem({
-    name: 'Filtrar',
-    isActivatable: true,
-    align: 'right',
-    action: 'filter',
-  }),
-  new TabsItem({
-    name: 'Buscar',
-    isActivatable: true,
-    align: 'right',
-    action: 'search',
-  }),
-];
-
 export const tabsByType = [
   {
-    name: 'generic',
-    buttons: genericTabs,
-  },
-  {
     name: 'artists',
-    buttons: genericTabs,
+    buttons: [
+      new TabsItem({
+        name: 'Listado',
+        isActivatable: true,
+        action: 'viewGallery',
+      }),
+      new TabsItem({
+        name: 'Filtrar',
+        isActivatable: true,
+        align: 'right',
+        action: 'filter',
+      }),
+      new TabsItem({
+        name: 'Buscar',
+        isActivatable: true,
+        align: 'right',
+        action: 'search',
+      }),
+    ],
   },
-
   {
     name: 'artistsAdmin',
     buttons: [
@@ -99,19 +87,13 @@ export const tabsByType = [
     name: 'events',
     buttons: [
       new TabsItem({
-        name: 'Galeria',
+        name: 'Listado',
         isActivatable: true,
         action: 'viewGallery',
       }),
       new TabsItem({
-        name: 'Listado',
-        isActivatable: true,
-        action: 'viewList',
-      }),
-      new TabsItem({
         name: 'Buscar',
         isActivatable: true,
-        align: 'right',
         action: 'search',
       }),
     ],
@@ -198,7 +180,23 @@ export const tabsByType = [
   },
   {
     name: 'media',
-    buttons: genericTabs,
+    buttons: [
+      new TabsItem({
+        name: 'Listado',
+        isActivatable: true,
+        action: 'viewGallery',
+      }),
+      new TabsItem({
+        name: 'Filtrar',
+        isActivatable: true,
+        action: 'filter',
+      }),
+      new TabsItem({
+        name: 'Buscar',
+        isActivatable: true,
+        action: 'search',
+      }),
+    ],
   },
   {
     name: 'mediasAdmin',

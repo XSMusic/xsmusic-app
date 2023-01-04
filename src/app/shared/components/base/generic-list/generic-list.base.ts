@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { Site } from '@models';
+import { Image, Site } from '@models';
 import { ApiService, UIService } from '@services';
 import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
@@ -117,6 +117,7 @@ export class GenericListBase {
     const userCoordinates = await getUserLocation();
     this.vm.bodySiteMap.coordinates = userCoordinates;
     this.vm.bodySiteMap.type = this.subType;
+    this.vm.bodySiteMap.maxDistance = this.subType === 'club' ? 600 : 10000;
     this.apiService.getAll<Site>('sites', this.vm.bodySiteMap).subscribe({
       next: (response) => {
         this.vm.sitesMap = response;
@@ -191,5 +192,9 @@ export class GenericListBase {
       this.vm.filter = true;
       this.getItems();
     }
+  }
+
+  showImage(image: Image) {
+    this.ui.fullImage.show(image);
   }
 }

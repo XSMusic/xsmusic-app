@@ -28,6 +28,7 @@
         class="object-cover w-full cursor-pointer h-96 hover:filter-grayscale hover:scale-105 hover:duration-1000"
         [src]="item.images! | imageArray: 'medium'"
         [alt]="item.name"
+        (click)="type === 'event' ? goToPage.emit({type, typeRoute: 'one', item}) : null"
         onError
       />
       <div *ngIf="type === 'eventSite'" class="absolute top-1 right-1">
@@ -103,16 +104,87 @@
 
       <div *ngIf="type === 'set' || type === 'track'">
         <p
-          class="p-2 pb-0 text-xl font-bold text-center cursor-pointer dark:border-gray-700 dark:text-white"
+          *ngIf="type === 'set'"
+          class="p-2 pb-2 text-xl font-bold text-center border-b cursor-pointer dark:border-gray-700 dark:text-white hover:text-gray-500"
           (click)="goToPage.emit({type, typeRoute: 'one', item})"
         >
-           {{ item | titleMedia }}
+          {{ item.name }}
         </p>
+
+        <div
+          class="p-2 pt-3.5 flex"
+          *ngIf="item.artists && item.artists.length > 0"
+        >
+          <div class="flex justify-between w-full gap-3">
+            <img
+              [src]="item.artists[0].images! | imageArray: 'medium'"
+              [alt]="item.artists[0].name"
+              (click)="showImage.emit(item.artists[0].images[0])"
+              onError
+              class="object-cover object-center w-12 h-12 cursor-pointer rounded-2xl lg:h-12 lg:w-12 hover:filter-grayscale hover:scale-105 hover:duration-1000"
+            />
+
+            <div class="flex flex-col text-center">
+              <p
+                *ngIf="item.type === 'track'"
+                class="my-1 mr-2 leading-none text-black cursor-pointer font-extralight dark:text-white hover:text-gray-500"
+                (click)="goToPage.emit({type, typeRoute: 'one', item})"
+              >
+                {{ item.name }}
+              </p>
+              <p
+                class="my-1 mr-2 text-base font-extrabold leading-none text-black dark:text-white"
+              >
+                <span *ngFor="let artist of item.artists; let i = index">
+                  <span *ngIf="i !== 0"> & </span>
+                  <span
+                    class="cursor-pointer hover:text-gray-500"
+                    (click)="
+                      goToPage.emit({
+                        type: 'artist',
+                        typeRoute: 'one',
+                        item: artist
+                      })
+                    "
+                  >
+                    {{ artist.name }}
+                  </span>
+                </span>
+              </p>
+
+              <p
+                *ngIf="item.type === 'set'"
+                class="my-1 mr-2 leading-none text-black cursor-pointer font-extralight dark:text-white hover:text-gray-500"
+                (click)="
+                  item.site.name !== 'Desconocido'
+                    ? goToPage.emit({
+                        type: item.site.type,
+                        typeRoute: 'one',
+                        item: item.site
+                      })
+                    : null
+                "
+              >
+                {{ item.site && item.site.name ? item.site.name : '' }}
+              </p>
+            </div>
+            <div class="w-12">
+              <img
+                *ngIf="item.site.name !== 'Desconocido'"
+                (click)="showImage.emit(item.site.images[0])"
+                [src]="item.site.images! | imageArray: 'medium'"
+                [alt]="item.site.name"
+                onError
+                class="object-cover object-center w-12 h-12 cursor-pointer rounded-2xl lg:h-12 lg:w-12 hover:filter-grayscale hover:scale-105 hover:duration-1000"
+              />
+            </div>
+          </div>
+        </div>
       </div>
 
       <div *ngIf="type === 'club' || type === 'festival'">
         <p
-          class="p-2 pb-0 text-xl font-bold text-center cursor-pointer dark:border-gray-700 dark:text-white"
+          class="p-2 pb-1 text-xl font-bold text-center cursor-pointer dark:border-gray-700 dark:text-white"
           (click)="goToPage.emit({type, typeRoute: 'one', item})"
         >
           {{ item.name | truncateText: 25 }}
@@ -136,7 +208,8 @@
       </div>
       <div *ngIf="type === 'event' || type === 'eventScraping'">
         <p
-          class="p-2 text-xl font-bold text-center border-b dark:border-gray-700 dark:text-white"
+          class="p-2 text-xl font-bold text-center border-b cursor-pointer dark:border-gray-700 dark:text-white hover:text-gray-500"
+          (click)="goToPage.emit({type, typeRoute: 'one', item})"
         >
           {{ item.name | truncateText: 25 }}
         </p>
@@ -144,15 +217,23 @@
         <div class="p-2 pt-3.5 flex" *ngIf="item.site && item.site.name">
           <div class="flex w-full gap-3">
             <img
+              (click)="showImage.emit(item.site.images[0])"
               [src]="item.site.images! | imageArray: 'medium'"
               [alt]="item.site.name"
-              onError
               class="object-cover object-center w-12 h-12 cursor-pointer rounded-2xl lg:h-12 lg:w-12 hover:filter-grayscale hover:scale-105 hover:duration-1000"
+              onError
             />
 
             <div class="flex flex-col">
               <p
                 class="my-1 mr-2 text-base font-extrabold leading-none text-black cursor-pointer dark:text-white hover:text-gray-500"
+                (click)="
+                  goToPage.emit({
+                    type: item.site.type,
+                    typeRoute: 'one',
+                    item: item.site
+                  })
+                "
               >
                 {{ item.site.name }}
               </p>

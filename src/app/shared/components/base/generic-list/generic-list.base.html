@@ -25,52 +25,10 @@
     [type]="vm.typeForGalleryView"
     (goToPage)="goToPage($event)"
     (onScroll)="onScroll()"
+    (showImage)="showImage($event)"
   ></generic-view-gallery>
 
-  <ng-container *ngIf="type === 'artist'">
-    <artists-view-list
-      *ngIf="vm.view === 'viewList'"
-      [artists]="vm.artists"
-      [loading]="vm.loading"
-      (goToPage)="goToPage($event)"
-      (filter)="onFilter($event)"
-      (onScroll)="onScroll()"
-    >
-    </artists-view-list>
-  </ng-container>
-
-  <ng-container *ngIf="type === 'event'">
-    <events-view-list
-      *ngIf="vm.view === 'viewList'"
-      [items]="vm.events"
-      [loading]="vm.loading"
-      (goToPage)="goToPage($event)"
-      (filter)="onFilter($event)"
-      (onScroll)="onScroll()"
-    ></events-view-list>
-  </ng-container>
-
-  <ng-container *ngIf="type === 'media'">
-    <media-view-list
-      *ngIf="vm.view === 'viewList'"
-      [media]="vm.medias"
-      [loading]="vm.loading"
-      (goToPage)="goToPage($event)"
-      (filter)="onFilter($event)"
-      (onScroll)="onScroll()"
-    ></media-view-list>
-  </ng-container>
-
   <ng-container *ngIf="type === 'site'">
-    <sites-view-list
-      *ngIf="vm.view === 'viewList'"
-      [sites]="vm.sites"
-      [loading]="vm.loading"
-      (goToPage)="goToPage($event)"
-      (filter)="onFilter($event)"
-      (onScroll)="onScroll()"
-    ></sites-view-list>
-
     <map
       *ngIf="vm.view === 'viewMap'"
       [class]="'mt-2 rounded-lg overflow-hidden'"

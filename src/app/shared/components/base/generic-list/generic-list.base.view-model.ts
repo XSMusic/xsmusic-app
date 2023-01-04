@@ -34,6 +34,7 @@ export class GenericListBaseViewModel {
     pageSize: 30,
     type: 'club',
     map: false,
+    order: ['created', 'asc'],
   });
   bodySiteMap = new GetAllDto({
     pageSize: 1000,

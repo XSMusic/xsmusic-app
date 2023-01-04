@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
+import { Image } from '@models';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
 
 @Component({
@@ -21,4 +22,5 @@ export class GenericViewGalleryItemsComponent {
   @Input() loading = true;
   @Output() goToPage = new EventEmitter<GoToPageI>();
   @Output() discartEvent = new EventEmitter<any>();
+  @Output() showImage = new EventEmitter<Image>();
 }

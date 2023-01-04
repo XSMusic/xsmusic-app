@@ -4,13 +4,13 @@ export class Artist {
   _id?: string;
   name = '';
   images?: Image[];
-  birthdate = '';
+  birthdate? = '';
   styles?: any[] = [];
-  country = 'es';
-  gender = 'male';
+  country? = 'es';
+  gender? = 'male';
   info? = '';
   slug?: string;
-  social = {
+  social? = {
     web: '',
     facebook: '',
     twitter: '',

@@ -1,22 +1,29 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { SharedModule } from '@shared/shared.module';
-import { TabsComponent } from '@components';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ActivatedRoute } from '@angular/router';
 import {
   NgxPermissionsAllowStubDirective,
   NgxPermissionsModule,
   NgxPermissionsService,
 } from 'ngx-permissions';
+import { SocialInputsComponent } from '@components';
+import { ScrapingService, UIService } from '@services';
+import {
+  scrapingServiceMock,
+  svgIconRegistryServiceMock,
+  uiServiceMock,
+} from 'app/testing/services.mock';
+import { SvgIconRegistryService } from 'angular-svg-icon';
+import { Artist } from '@models';
 
-describe('TabsComponent', () => {
-  let component: TabsComponent;
-  let fixture: ComponentFixture<TabsComponent>;
+describe('SocialInputsComponent', () => {
+  let component: SocialInputsComponent;
+  let fixture: ComponentFixture<SocialInputsComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [TabsComponent, NgxPermissionsAllowStubDirective],
+      declarations: [SocialInputsComponent, NgxPermissionsAllowStubDirective],
       imports: [
         SharedModule,
         BrowserAnimationsModule,
@@ -25,22 +32,19 @@ describe('TabsComponent', () => {
       providers: [
         NgxPermissionsService,
         {
-          provide: ActivatedRoute,
-          useValue: {
-            snapshot: {
-              queryParamMap: {
-                get: () => '123',
-              },
-            },
-          },
+          provide: SvgIconRegistryService,
+          useValue: svgIconRegistryServiceMock,
         },
+        { provide: ScrapingService, useValue: scrapingServiceMock },
+        { provide: UIService, useValue: uiServiceMock },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TabsComponent);
+    fixture = TestBed.createComponent(SocialInputsComponent);
     component = fixture.componentInstance;
-
+    component.item = new Artist();
+    component.type = 'artist';
     fixture.detectChanges();
   }));
 

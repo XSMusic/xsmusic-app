@@ -42,7 +42,11 @@ export class TabsComponent implements OnInit {
       const tabByParam = getTabByParam(this.route, this.tabs);
       if (tabByParam) {
         this.onClickViewsButtons(tabByParam);
-      } else if (this.tabs[0].action.includes('view')) {
+      } else if (
+        this.tabs &&
+        this.tabs.length > 0 &&
+        this.tabs[0].action.includes('view')
+      ) {
         this.onClickViewsButtons(this.tabs[0]);
       }
     });
@@ -50,7 +54,9 @@ export class TabsComponent implements OnInit {
 
   setTabs() {
     const category = tabsByType.filter((item) => item.name === this.type)[0];
-    this.tabs = category.buttons;
+    if (category) {
+      this.tabs = category.buttons;
+    }
   }
 
   clickTab(tab: TabsItem) {

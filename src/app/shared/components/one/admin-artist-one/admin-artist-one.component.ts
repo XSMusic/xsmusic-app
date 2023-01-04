@@ -89,23 +89,29 @@ export class AdminArtistOneComponent {
   }
 
   private setSocialFromScraping(response: ScrapingGetInfoArtistResponse) {
-    if (response.social.web !== '' && this.artist.social.web === '') {
-      this.artist.social.web = response.social.web;
-    }
-    if (response.social.facebook !== '' && this.artist.social.facebook === '') {
-      this.artist.social.facebook = response.social.facebook;
-    }
-    if (response.social.twitter !== '' && this.artist.social.twitter === '') {
-      this.artist.social.twitter = response.social.twitter;
-    }
-    if (
-      response.social.soundcloud !== '' &&
-      this.artist.social.soundcloud === ''
-    ) {
-      this.artist.social.soundcloud = response.social.soundcloud;
-    }
-    if (response.social.spotify !== '' && this.artist.social.spotify === '') {
-      this.artist.social.spotify = response.social.spotify;
+    if (this.artist.social) {
+      if (response.social.web !== '' && this.artist.social.web === '') {
+        this.artist.social.web = response.social.web;
+      }
+      if (
+        response.social.facebook !== '' &&
+        this.artist.social.facebook === ''
+      ) {
+        this.artist.social.facebook = response.social.facebook;
+      }
+      if (response.social.twitter !== '' && this.artist.social.twitter === '') {
+        this.artist.social.twitter = response.social.twitter;
+      }
+      if (
+        response.social.soundcloud !== '' &&
+        this.artist.social.soundcloud &&
+        this.artist.social.soundcloud === ''
+      ) {
+        this.artist.social.soundcloud = response.social.soundcloud;
+      }
+      if (response.social.spotify !== '' && this.artist.social.spotify === '') {
+        this.artist.social.spotify = response.social.spotify;
+      }
     }
   }
 

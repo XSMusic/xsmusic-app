@@ -6,7 +6,7 @@
   <!-- Artists -->
   <div
     class="flex gap-2 my-2"
-    *ngIf="type === 'artist' && item.artists!.length > 0"
+    *ngIf="type === 'artist' && item.artists && item.artists!.length > 0"
   >
     <div
       (click)="onClickItem(artistI)"
@@ -26,7 +26,7 @@
   <!-- Styles -->
   <div
     class="flex gap-2 my-2"
-    *ngIf="type === 'style' && item.styles!.length > 0"
+    *ngIf="type === 'style' && item.styles && item.styles!.length > 0"
   >
     <div
       (click)="onClickItem(styleI)"

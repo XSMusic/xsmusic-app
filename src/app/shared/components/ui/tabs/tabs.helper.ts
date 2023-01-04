@@ -12,13 +12,11 @@ export const tabsByType = [
       new TabsItem({
         name: 'Filtrar',
         isActivatable: true,
-        align: 'right',
         action: 'filter',
       }),
       new TabsItem({
         name: 'Buscar',
         isActivatable: true,
-        align: 'right',
         action: 'search',
       }),
     ],

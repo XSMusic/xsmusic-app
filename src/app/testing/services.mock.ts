@@ -1,7 +1,31 @@
+import { StatsGetTopStatsI } from '@shared/services/api/stats/stats.interface';
+import { of } from 'rxjs';
 import { getAllGeneric } from './services-helper.mock';
 
 export const apiServiceMock = {
   getAll: () => getAllGeneric(),
+};
+
+export const scrapingServiceMock = {
+  getAll: () => getAllGeneric(),
+};
+
+export const imageServiceMock = {
+  getAll: () => getAllGeneric(),
+};
+
+export const uiServiceMock = {
+  toast: {
+    showToast: () => true,
+  },
+};
+
+export const statsServiceMock = {
+  getTopStats: () =>
+    of<StatsGetTopStatsI>({
+      topSocial: [],
+      topCountries: [],
+    }),
 };
 
 export const siteServiceMock = {

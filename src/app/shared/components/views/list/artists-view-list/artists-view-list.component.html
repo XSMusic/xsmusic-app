@@ -99,7 +99,7 @@
                 <div class="flex gap-3">
                   <div
                     *ngIf="artist.social?.web && artist.social?.web !== ''"
-                    (click)="goToSocial(artist.social.web)"
+                    (click)="goToSocial(artist.social!.web)"
                   >
                     <svg-icon
                       name="web"
@@ -110,7 +110,7 @@
                     *ngIf="
                       artist.social?.facebook && artist.social?.facebook !== ''
                     "
-                    (click)="goToSocial(artist.social.facebook)"
+                    (click)="goToSocial(artist.social!.facebook)"
                   >
                     <svg-icon
                       name="facebook"
@@ -121,7 +121,7 @@
                     *ngIf="
                       artist.social?.twitter && artist.social?.twitter !== ''
                     "
-                    (click)="goToSocial(artist.social.twitter)"
+                    (click)="goToSocial(artist.social!.twitter)"
                   >
                     <svg-icon
                       name="twitter"
@@ -133,7 +133,7 @@
                       artist.social?.soundcloud &&
                       artist.social?.soundcloud !== ''
                     "
-                    (click)="goToSocial(artist.social.soundcloud)"
+                    (click)="goToSocial(artist.social!.soundcloud)"
                   >
                     <svg-icon
                       name="soundcloud"
@@ -144,7 +144,7 @@
                     *ngIf="
                       artist.social?.spotify && artist.social?.spotify !== ''
                     "
-                    (click)="goToSocial(artist.social.spotify)"
+                    (click)="goToSocial(artist.social!.spotify)"
                   >
                     <svg-icon
                       name="spotify"
@@ -155,7 +155,7 @@
                     *ngIf="
                       artist.social?.tiktok && artist.social?.tiktok !== ''
                     "
-                    (click)="goToSocial(artist.social.tiktok)"
+                    (click)="goToSocial(artist.social!.tiktok)"
                   >
                     <svg-icon
                       name="tiktok"
@@ -167,7 +167,7 @@
                       artist.social?.instagram &&
                       artist.social?.instagram !== ''
                     "
-                    (click)="goToSocial(artist.social.instagram)"
+                    (click)="goToSocial(artist.social!.instagram)"
                   >
                     <svg-icon
                       name="instagram"
@@ -178,7 +178,7 @@
                     *ngIf="
                       artist.social?.youtube && artist.social?.youtube !== ''
                     "
-                    (click)="goToSocial(artist.social.youtube)"
+                    (click)="goToSocial(artist.social!.youtube)"
                   >
                     <svg-icon
                       name="youtube"
@@ -189,7 +189,7 @@
                     *ngIf="
                       artist.social?.mixcloud && artist.social?.mixcloud !== ''
                     "
-                    (click)="goToSocial(artist.social.mixcloud)"
+                    (click)="goToSocial(artist.social!.mixcloud)"
                   >
                     <svg-icon
                       name="mixcloud"

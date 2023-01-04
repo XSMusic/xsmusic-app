@@ -4,6 +4,7 @@
   (click)="goToMedia.emit(media)"
 >
   <img
+    *ngIf="media && media.images && media.images.length > 0"
     class="object-cover w-full h-40 hover:filter-grayscale hover:scale-105 hover:duration-1000"
     [ngStyle]="{ height: height }"
     [src]="media.images! | imageArray: 'big'"

@@ -9,7 +9,7 @@ import { Style } from '@models';
   templateUrl: 'styles-view-list.component.html',
   animations: [inOutAnimation],
 })
-export class StylesListViewComponent {
+export class StylesViewListComponent {
   @Input() styles: Style[] = [];
   @Input() loading = true;
   @Output() onScroll = new EventEmitter<void>();

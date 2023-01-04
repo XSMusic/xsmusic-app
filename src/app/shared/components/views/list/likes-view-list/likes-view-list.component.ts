@@ -11,7 +11,7 @@ import { FullImageService } from '@shared/services/ui/full-image/full-image.serv
   templateUrl: 'likes-view-list.component.html',
   animations: [inOutAnimation],
 })
-export class LikesListViewComponent {
+export class LikesViewListComponent {
   @Input() likes: Like[] = [];
   @Input() loading = true;
   @Output() onScroll = new EventEmitter<void>();

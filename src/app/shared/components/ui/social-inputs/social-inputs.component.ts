@@ -26,7 +26,7 @@ export class SocialInputsComponent {
         next: (response) => {
           if (response.length > 1) {
             this.soundcloudNames = response;
-          } else if (response.length === 1) {
+          } else if (response.length === 1 && this.item.social) {
             this.item.social.soundcloud = response[0].url;
           } else {
             this.ui.toast.showToast(
@@ -44,7 +44,7 @@ export class SocialInputsComponent {
       next: (response) => {
         if (response.length > 1) {
           this.youtubeNames = response;
-        } else if (response.length === 1) {
+        } else if (response.length === 1 && this.item.social) {
           this.item.social.youtube = `https://www.youtube.com/channel/${response[0].id}`;
         } else {
           this.ui.toast.showToast(
@@ -58,12 +58,16 @@ export class SocialInputsComponent {
   }
 
   onSelectSoundcloud(item: ScrapingSoundcloudSearchI) {
-    this.item.social.soundcloud = item.url;
-    this.soundcloudNames = [];
+    if (this.item.social) {
+      this.item.social.soundcloud = item.url;
+      this.soundcloudNames = [];
+    }
   }
 
   onSelectYoutube(item: ScrapingSearchNameYoutubeI) {
-    this.item.social.youtube = `https://www.youtube.com/channel/${item.id}`;
-    this.youtubeNames = [];
+    if (this.item.social) {
+      this.item.social.youtube = `https://www.youtube.com/channel/${item.id}`;
+      this.youtubeNames = [];
+    }
   }
 }

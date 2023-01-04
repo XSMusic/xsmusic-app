@@ -49,8 +49,8 @@ export const randomNumber = (max: number, min = 1, decimal = false): any => {
 
 export const getTitleMedia = (item: Media) => {
   let title = '';
-  if (item.artists!.length > 0 && item.artists![0].name) {
-    item.artists!.forEach((artist, i) => {
+  if (item && item.artists && item.artists.length > 0 && item.artists[0].name) {
+    item.artists.forEach((artist, i) => {
       if (i !== 0) {
         title += ' & ';
       }
@@ -58,14 +58,24 @@ export const getTitleMedia = (item: Media) => {
     });
     title += ' @ ';
   }
-  if (item.site && item.site.name && item.site.name !== 'Desconocido') {
+  if (
+    item &&
+    item.site !== undefined &&
+    item.site.name &&
+    item.site.name !== 'Desconocido'
+  ) {
     title += `${item.site.name}`;
-  } else if (item.site && item.site.name && item.site.name === 'Desconocido') {
+  } else if (
+    item &&
+    item.site &&
+    item.site.name &&
+    item.site.name === 'Desconocido'
+  ) {
     title += `${item.name}`;
   } else {
-    title += `${item.name}`;
+    title += `${item && item.name ? item.name : ''}`;
   }
-  if (item.year !== 0) {
+  if (item && item.year !== 0) {
     title += ' ' + item.year;
   }
   return title;
@@ -121,11 +131,11 @@ export const getUserLocation = async (): Promise<number[]> => {
 };
 
 export const getTabByParam = (
-  route: ActivatedRoute,
+  route: any,
   tabs: TabsItem[]
 ): TabsItem | null => {
   const tabItem = tabs.filter(
-    (tab) => tab.action === route.snapshot.queryParamMap.get('tab')
+    (tab) => tab.action === route.snapshot && route.snapshot.queryParams['tab']
   )[0];
   return tabItem ? tabItem : null;
 };

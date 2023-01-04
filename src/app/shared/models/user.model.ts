@@ -8,6 +8,7 @@ export class User {
   role!: 'ADMIN' | 'USER';
   darkMode!: string;
   slug!: string;
+  lastLogin?: string;
   created?: string;
   updated?: string;
 

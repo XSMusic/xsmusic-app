@@ -66,28 +66,18 @@
 
       <div
         class="absolute bottom-0 left-0 w-full px-6 pt-2 text-center text-white bg-black opacity-80"
-        *ngIf="type !== 'event' && type !== 'eventScraping'"
+        *ngIf="
+          type !== 'event' &&
+          type !== 'eventScraping' &&
+          type !== 'club' &&
+          type !== 'festival' &&
+          type !== 'set' &&
+          type !== 'track'
+        "
       >
         <div class="flex justify-center">
           <div class="mb-2 text-2xl font-extrabold text-white cursor-pointer">
-            <ng-container *ngIf="type === 'set'">
-              <div
-                class="text-lg font-medium text-white mb"
-                (click)="goToPage.emit({type, typeRoute: 'one', item})"
-              >
-                {{ item | titleMedia }}
-              </div>
-            </ng-container>
-
-            <ng-container *ngIf="type === 'track'">
-              <div class="flex justify-center gap-1">
-                <div class="text-lg font-medium text-white mb">
-                  {{ item | titleMedia }}
-                </div>
-              </div>
-            </ng-container>
-
-            <ng-container *ngIf="type !== 'set' && type !== 'track'">
+            <ng-container *ngIf="type === 'artist'">
               <div
                 class="flex justify-center gap-1"
                 (click)="goToPage.emit({type, typeRoute: 'one', item})"
@@ -111,6 +101,39 @@
         </div>
       </div>
 
+      <div *ngIf="type === 'set' || type === 'track'">
+        <p
+          class="p-2 pb-0 text-xl font-bold text-center cursor-pointer dark:border-gray-700 dark:text-white"
+          (click)="goToPage.emit({type, typeRoute: 'one', item})"
+        >
+           {{ item | titleMedia }}
+        </p>
+      </div>
+
+      <div *ngIf="type === 'club' || type === 'festival'">
+        <p
+          class="p-2 pb-0 text-xl font-bold text-center cursor-pointer dark:border-gray-700 dark:text-white"
+          (click)="goToPage.emit({type, typeRoute: 'one', item})"
+        >
+          {{ item.name | truncateText: 25 }}
+        </p>
+
+        <div class="flex flex-row justify-center">
+          <p class="pb-2 font-extralight">
+            {{
+              item.address.state
+                ? item.address.state
+                : (item.address.town | fixState | truncateText: 25)
+            }}
+          </p>
+          <img
+            *ngIf="item.address?.country"
+            [src]="item.address?.country | countryFlag"
+            class="w-5 h-5 mx-2 mt-0.5"
+            [alt]="item.country"
+          />
+        </div>
+      </div>
       <div *ngIf="type === 'event' || type === 'eventScraping'">
         <p
           class="p-2 text-xl font-bold text-center border-b dark:border-gray-700 dark:text-white"
@@ -139,8 +162,8 @@
                   [alt]="item.site.address.country"
                   class="w-4 h-4 my-1 cursor-pointer hover:scale-110 hover:duration-1000"
                 />
-                <p class="text-sm text-gray-500">
-                  {{ item.site.address.state | fixState | truncateText: 10 }}
+                <p class="text-sm font-extralight">
+                  {{ item.site.address.state | fixState | truncateText: 25 }}
                 </p>
               </div>
             </div>

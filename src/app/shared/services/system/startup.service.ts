@@ -4,7 +4,7 @@ import { NgxPermissionsService } from 'ngx-permissions';
 import { AuthService } from '@core/auth';
 import { User } from '@models';
 import { darkMode } from '@shared/utils';
-import { NgxSpinnerService } from './ngx-spinner/ngx-spinner.service';
+import { UIService } from '../ui';
 
 @Injectable({
   providedIn: 'root',
@@ -13,31 +13,36 @@ export class StartupService {
   constructor(
     private authService: AuthService,
     private permissonsService: NgxPermissionsService,
-    private spinnerService: NgxSpinnerService
+    private ui: UIService
   ) {}
 
   load() {
     return new Promise<void>((resolve) => {
-      this.spinnerService.show();
+      this.ui.spinner.show();
       this.authService
         .change()
         .pipe(
           tap((user: any) => {
+            this.sendAutologinEvent();
             this.setPermissions(user);
             darkMode(user);
           })
         )
         .subscribe({
           next: () => {
-            this.spinnerService.hide();
+            this.ui.spinner.hide();
             resolve();
           },
           error: () => {
-            this.spinnerService.hide();
+            this.ui.spinner.hide();
             resolve();
           },
         });
     });
+  }
+
+  private sendAutologinEvent() {
+    this.ui.ga.event('autoLogin', 'login', 'login');
   }
 
   private setPermissions(user: User) {

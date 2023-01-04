@@ -191,7 +191,7 @@
         </p>
 
         <div class="flex flex-row justify-center">
-          <p class="pb-2 font-extralight">
+          <p class="pb-2 font-extralight dark:text-white">
             {{
               item.address.state
                 ? item.address.state
@@ -243,7 +243,7 @@
                   [alt]="item.site.address.country"
                   class="w-4 h-4 my-1 cursor-pointer hover:scale-110 hover:duration-1000"
                 />
-                <p class="text-sm font-extralight">
+                <p class="text-sm font-extralight dark:text-white">
                   {{ item.site.address.state | fixState | truncateText: 25 }}
                 </p>
               </div>

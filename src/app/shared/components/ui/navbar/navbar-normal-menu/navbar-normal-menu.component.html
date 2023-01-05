@@ -46,7 +46,7 @@
             <a
               *ngFor="let menu of menuItemsForAdmin"
               [routerLink]="menu.route"
-              routerLinkActive=" border-b-2 border-b-black dark:border-white navbar-active"
+              routerLinkActive=" border-b-2 py-2 border-b-black dark:border-white navbar-active"
               [routerLinkActiveOptions]="
                 menu.route === '/' ? { exact: true } : { exact: false }
               "

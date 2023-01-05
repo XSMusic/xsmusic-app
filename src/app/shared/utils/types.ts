@@ -96,3 +96,12 @@ export type TabsType =
   | 'stylesAdmin'
   | 'userAdmin'
   | 'usersAdmin';
+
+export type GalleryViewType =
+  | 'artist'
+  | 'club'
+  | 'event'
+  | 'eventScraping'
+  | 'set'
+  | 'track'
+  | 'festival';

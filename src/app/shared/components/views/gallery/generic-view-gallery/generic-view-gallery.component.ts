@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { Image } from '@models';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
+import { GalleryViewType } from '@shared/utils';
 
 @Component({
   selector: 'generic-view-gallery',
@@ -10,14 +11,7 @@ import { GoToPageI } from '@shared/interfaces/goto.interface';
 })
 export class GenericViewGalleryComponent {
   @Input() items: any[] = [];
-  @Input() type:
-    | 'artist'
-    | 'club'
-    | 'event'
-    | 'eventScraping'
-    | 'set'
-    | 'track'
-    | 'festival' = 'artist';
+  @Input() type!: GalleryViewType;
   @Input() loading = true;
   @Input() cols = [];
   @Output() goToPage = new EventEmitter<GoToPageI>();

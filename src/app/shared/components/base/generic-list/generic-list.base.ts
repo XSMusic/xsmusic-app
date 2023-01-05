@@ -7,6 +7,7 @@ import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import {
+  GenericItemType,
   GenericSubItemType,
   getFilterList,
   getUserLocation,
@@ -19,7 +20,7 @@ import { GenericListBaseViewModel } from './generic-list.base.view-model';
   animations: [inOutAnimation],
 })
 export class GenericListBase {
-  @Input() type!: 'artist' | 'event' | 'media' | 'site' | any;
+  @Input() type!: GenericItemType;
   @Input() subType!: GenericSubItemType;
   vm = new GenericListBaseViewModel();
   constructor(
@@ -85,7 +86,12 @@ export class GenericListBase {
   setTypeForGalleryView() {
     if (this.type === 'site' || this.type === 'media') {
       this.vm.typeForGalleryView = this.subType;
-    } else {
+    } else if (
+      this.type !== 'image' &&
+      this.type !== 'like' &&
+      this.type !== 'style' &&
+      this.type !== 'user'
+    ) {
       this.vm.typeForGalleryView = this.type;
     }
   }

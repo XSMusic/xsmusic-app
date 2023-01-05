@@ -1,7 +1,12 @@
 import { FilterListI } from '@interfaces';
 import { Artist, Site, Media, Event, User, Style, Like, Image } from '@models';
 import { GetAllDto } from '@shared/services/api/api.dtos';
-import { GenericBodyType, GenericItemsType, TabsType } from '@shared/utils';
+import {
+  GalleryViewType,
+  GenericBodyType,
+  GenericItemsType,
+  TabsType,
+} from '@shared/utils';
 import { Observable } from 'rxjs';
 
 export class GenericListBaseViewModel {
@@ -51,12 +56,5 @@ export class GenericListBaseViewModel {
   filterData!: FilterListI;
   loading = true;
   error = false;
-  typeForGalleryView!:
-    | 'artist'
-    | 'club'
-    | 'event'
-    | 'eventScraping'
-    | 'set'
-    | 'track'
-    | 'festival';
+  typeForGalleryView!: GalleryViewType;
 }

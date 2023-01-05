@@ -46,7 +46,7 @@
             <a
               *ngFor="let menu of menuItemsForAdmin"
               [routerLink]="menu.route"
-              routerLinkActive=" border-b-2 py-2 border-b-black dark:border-white navbar-active"
+              routerLinkActive=" border-b-2 border-b-black dark:border-white navbar-active"
               [routerLinkActiveOptions]="
                 menu.route === '/' ? { exact: true } : { exact: false }
               "
@@ -60,7 +60,7 @@
               *ngFor="let menu of menuItemsForAdminInAdmin"
               [routerLink]="menu.route"
               routerLinkActive=" border-b-2 border-b-black dark:border-white navbar-active duration-400"
-              class="px-3 py-2 text-sm font-medium text-black duration-200 hover:border-b-2 navbar-no-active hover:border-black dark:text-white dark:hover:border-white dark:hover:border-b dark:hover:border-b-white hover:text-black"
+              class="px-3 py-2 text-sm font-medium text-black hover:border-b-2 navbar-no-active hover:border-black dark:text-white dark:hover:border-b-2 dark:hover:border-b-white hover:text-black"
               [routerLinkActiveOptions]="
                 menu.route === '/' ? { exact: true } : { exact: false }
               "

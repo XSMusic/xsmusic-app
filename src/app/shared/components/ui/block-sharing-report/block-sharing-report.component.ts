@@ -51,7 +51,6 @@ export class BlockSharingReportComponent {
       type = 'site';
     }
     const user = this.userService.getUser();
-    console.log(user);
     const like = new Like({ type, [type]: this.item._id, user });
     this.apiService.create('likes', like).subscribe({
       next: () => {

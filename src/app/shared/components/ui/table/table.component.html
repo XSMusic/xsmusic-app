@@ -3,7 +3,8 @@
     <tr>
       <th
         *ngFor="let x of headers"
-        class="text-left font-extralight dark:text-white"
+        class="text-left cursor-pointer font-extralight dark:text-white hover:opacity-70"
+        (click)="onSort.emit(x.key)"
       >
         {{ x.name }}
       </th>

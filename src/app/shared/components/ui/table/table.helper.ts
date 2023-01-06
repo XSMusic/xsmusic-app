@@ -62,7 +62,7 @@ export const itemsWithHeaders: TableHeaderItemI[] = [
     headers: [
       { name: '', key: 'image', type: 'image' },
       { name: 'Nombre', key: 'name', type: 'nameImage', action: 'link' },
-      { name: 'Tipo', key: 'country', type: 'type', action: 'filter' },
+      { name: 'Tipo', key: 'type', type: 'type', action: 'filter' },
       { name: 'Creado', key: 'created', type: 'date' },
     ],
   },

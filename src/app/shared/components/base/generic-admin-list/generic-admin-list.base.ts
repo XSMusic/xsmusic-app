@@ -214,8 +214,6 @@ export class GenericAdminListBase {
   }
 
   onFilter(event: { name: string; value: string }) {
-    console.log('onFilter');
-
     this.vm[this.vm.typeBody].page = 1;
     this.vm[this.vm.typeBody].filter = [event.name, event.value];
     this.vm.filter = true;
@@ -361,5 +359,19 @@ export class GenericAdminListBase {
         }
       },
     });
+  }
+
+  onSort(value: string) {
+    if (this.vm[this.vm.typeBody].order) {
+      if (this.vm[this.vm.typeBody].order![1] === 'desc') {
+        this.vm[this.vm.typeBody].order = [value, 'asc'];
+      } else {
+        this.vm[this.vm.typeBody].order = [value, 'desc'];
+      }
+    } else {
+      this.vm[this.vm.typeBody].order = [value, 'asc'];
+    }
+
+    this.getItems();
   }
 }

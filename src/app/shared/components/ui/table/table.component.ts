@@ -20,6 +20,7 @@ export class TableComponent implements OnInit {
   @Output() onScroll = new EventEmitter<void>();
   @Output() onShowImage = new EventEmitter<ShowImageI>();
   @Output() onDelete = new EventEmitter<DeleteI>();
+  @Output() onSort = new EventEmitter<string>();
 
   ngOnInit() {
     this.getHeadersWithType();

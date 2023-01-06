@@ -17,28 +17,30 @@
     ></admin-artist-one>
 
     <ng-container *ngIf="vm.view === 'viewSets'">
-      <media-view-list
-        [media]="vm.sets"
-        [loading]="false"
-        type="set"
-        (goToPage)="goToPage($event)"
-      ></media-view-list>
+      <custom-table
+        [items]="vm.sets"
+        type="media"
+        subType="set"
+        (onGoToPage)="goToPage($event)"
+        (onShowImage)="showImage($event)"
+      ></custom-table>
     </ng-container>
     <ng-container *ngIf="vm.view === 'viewTracks'">
-      <media-view-list
-        [media]="vm.tracks"
-        [loading]="false"
-        type="track"
-        (goToPage)="goToPage($event)"
-      ></media-view-list>
+      <custom-table
+        [items]="vm.tracks"
+        type="media"
+        subType="track"
+        (onGoToPage)="goToPage($event)"
+        (onShowImage)="showImage($event)"
+      ></custom-table>
     </ng-container>
     <ng-container *ngIf="vm.view === 'viewEvents'">
-      <events-view-list
+      <custom-table
         [items]="vm.events"
-        [loading]="false"
-        type="artist"
-        (goToPage)="goToPage($event)"
-      ></events-view-list>
+        type="event"
+        (onGoToPage)="goToPage($event)"
+        (onShowImage)="showImage($event)"
+      ></custom-table>
     </ng-container>
   </div>
 
@@ -94,21 +96,22 @@
     </ng-container>
 
     <ng-container *ngIf="vm.view === 'viewEvents'">
-      <events-view-list
+      <custom-table
         [items]="vm.events"
-        [loading]="false"
         type="event"
-        (goToPage)="goToPage($event)"
-      ></events-view-list>
+        (onGoToPage)="goToPage($event)"
+        (onShowImage)="showImage($event)"
+      ></custom-table>
     </ng-container>
 
     <ng-container *ngIf="vm.view === 'viewSets'">
-      <media-view-list
-        [media]="vm.sets"
-        [loading]="false"
-        type="set"
-        (goToPage)="goToPage($event)"
-      ></media-view-list>
+      <custom-table
+        [items]="vm.sets"
+        type="media"
+        subType="set"
+        (onGoToPage)="goToPage($event)"
+        (onShowImage)="showImage($event)"
+      ></custom-table>
     </ng-container>
   </div>
 
@@ -121,46 +124,48 @@
     ></admin-style-one>
 
     <ng-container *ngIf="vm.view === 'viewArtists'">
-      <artists-view-list
-        [artists]="vm.style.artists"
-        [loading]="false"
-        (goToPage)="goToPage($event)"
-      >
-      </artists-view-list>
+      <custom-table
+        [items]="vm.style.artists"
+        type="artist"
+        (onGoToPage)="goToPage($event)"
+        (onShowImage)="showImage($event)"
+      ></custom-table>
     </ng-container>
     <ng-container *ngIf="vm.view === 'viewClubs'">
-      <sites-view-list
-        [sites]="vm.style.clubs"
-        [loading]="false"
-        type="clubs"
-        (goToPage)="goToPage($event)"
-      >
-      </sites-view-list>
+      <custom-table
+        [items]="vm.style.clubs"
+        type="site"
+        subType="club"
+        (onGoToPage)="goToPage($event)"
+        (onShowImage)="showImage($event)"
+      ></custom-table>
     </ng-container>
     <ng-container *ngIf="vm.view === 'viewFestivals'">
-      <sites-view-list
-        [sites]="vm.style.festivals"
-        [loading]="false"
-        type="festivals"
-        (goToPage)="goToPage($event)"
-      >
-      </sites-view-list>
+      <custom-table
+        [items]="vm.style.festivals"
+        type="site"
+        subType="festival"
+        (onGoToPage)="goToPage($event)"
+        (onShowImage)="showImage($event)"
+      ></custom-table>
     </ng-container>
     <ng-container *ngIf="vm.view === 'viewSets'">
-      <media-view-list
-        [media]="vm.style.sets"
-        [loading]="false"
-        type="set"
-        (goToPage)="goToPage($event)"
-      ></media-view-list>
+      <custom-table
+        [items]="vm.sets"
+        type="media"
+        subType="set"
+        (onGoToPage)="goToPage($event)"
+        (onShowImage)="showImage($event)"
+      ></custom-table>
     </ng-container>
     <ng-container *ngIf="vm.view === 'viewTracks'">
-      <media-view-list
-        [media]="vm.style.tracks"
-        [loading]="false"
-        type="track"
-        (goToPage)="goToPage($event)"
-      ></media-view-list>
+      <custom-table
+        [items]="vm.tracks"
+        type="media"
+        subType="track"
+        (onGoToPage)="goToPage($event)"
+        (onShowImage)="showImage($event)"
+      ></custom-table>
     </ng-container>
   </div>
 

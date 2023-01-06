@@ -3,3 +3,8 @@ export interface FilterListI {
   value: string;
   data: string[];
 }
+
+export interface FilterI {
+  name: string;
+  value: string;
+}

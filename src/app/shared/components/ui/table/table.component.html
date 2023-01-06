@@ -1,0 +1,37 @@
+<div class="my-2 overflow-x-auto scrollbar-hidden">
+  <table class="w-full whitespace-nowrap" aria-label="user">
+    <tr>
+      <th
+        *ngFor="let x of headers"
+        class="text-left font-extralight dark:text-white"
+      >
+        {{ x.name }}
+      </th>
+    </tr>
+    <tbody>
+      <tr
+        *ngFor="let item of items"
+        class="h-16 border-b border-gray-100 rounded-lg dark:border-black dark:border-0"
+      >
+        <td *ngFor="let header of headers" class="pr-4 dark:text-white">
+          <table-items
+            [type]="type"
+            [subType]="subType"
+            [header]="header"
+            [item]="item"
+            (onGoToPage)="onGoToPage.emit($event)"
+            (onFilter)="onFilter.emit($event)"
+            (onShowImage)="onShowImage.emit($event)"
+          ></table-items>
+        </td>
+      </tr>
+    </tbody>
+    <div
+      class="search-results"
+      infiniteScroll
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="50"
+      (scrolled)="onScroll.emit()"
+    ></div>
+  </table>
+</div>

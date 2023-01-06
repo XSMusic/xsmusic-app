@@ -1,6 +1,6 @@
 <header-custom
   [title]="vm.title"
-  (onClickTitle)="goToPage({admin: false, typeRoute: 'all'})"
+  (onClickTitle)="onGoToPage({admin: false, typeRoute: 'all'})"
 ></header-custom>
 
 <div class="container px-4 pt-3 mx-auto max-w-full-xl sm:pb-0 max-w-7sm">
@@ -22,37 +22,37 @@
   ></alert>
 
   <ng-container *ngIf="type === 'artist'">
-    <artists-view-list
+    <custom-table
       *ngIf="vm.view === 'viewList'"
-      [artists]="vm.artists"
-      [loading]="vm.loading"
-      (goToPage)="goToPage($event)"
-      (filter)="onFilter($event)"
+      [items]="vm[vm.typeItems]"
+      [type]="type"
+      (onGoToPage)="onGoToPage($event)"
+      (onFilter)="onFilter($event)"
       (onScroll)="onScroll()"
-    >
-    </artists-view-list>
+      (onShowImage)="onShowImage($event)"
+    ></custom-table>
 
     <admin-artist-one
       *ngIf="vm.view === 'viewAdd'"
       [artist]="vm.artist"
       [scraping]="vm.scraping"
       (onSubmit)="onSubmit()"
-      (showImage)="showImage($event)"
+      (showImage)="onShowImage($event)"
       (uploadImageByUrl)="uploadImageByUrl($event)"
       (uploadImageByFile)="uploadImageByFile($event)"
     ></admin-artist-one>
   </ng-container>
 
   <ng-container *ngIf="type === 'event'">
-    <events-view-list
+    <custom-table
       *ngIf="vm.view === 'viewList'"
-      [items]="vm.events"
-      [loading]="vm.loading"
-      (goToPage)="goToPage($event)"
-      (filter)="onFilter($event)"
+      [items]="vm[vm.typeItems]"
+      [type]="type"
+      (onGoToPage)="onGoToPage($event)"
+      (onFilter)="onFilter($event)"
       (onScroll)="onScroll()"
-    >
-    </events-view-list>
+      (onShowImage)="onShowImage($event)"
+    ></custom-table>
 
     <admin-events-scraping
       *ngIf="vm.view === 'viewScraping'"
@@ -61,37 +61,50 @@
   </ng-container>
 
   <ng-container *ngIf="type === 'image'">
-    <images-view-list
+    <custom-table
       *ngIf="vm.view === 'viewList'"
-      [items]="vm.images"
-      [loading]="vm.loading"
-      (filter)="onFilter($event)"
+      [items]="vm[vm.typeItems]"
+      [type]="type"
+      (onGoToPage)="onGoToPage($event)"
+      (onFilter)="onFilter($event)"
       (onScroll)="onScroll()"
-      (deleteImage)="deleteImage($event)"
-    ></images-view-list>
+      (onShowImage)="onShowImage($event)"
+    ></custom-table>
   </ng-container>
 
   <ng-container *ngIf="type === 'like'">
-    <likes-view-list
+    <!-- <likes-view-list
       *ngIf="vm.view === 'viewList'"
       [likes]="vm.likes"
       [loading]="vm.loading"
       (onScroll)="onScroll()"
-      (goToPage)="goToPage($event)"
+      (goToPage)="onGoToPage($event)"
     >
-    </likes-view-list>
+    </likes-view-list> -->
+
+    <custom-table
+      *ngIf="vm.view === 'viewList'"
+      [items]="vm[vm.typeItems]"
+      [type]="type"
+      [subType]="subType"
+      (onGoToPage)="onGoToPage($event)"
+      (onFilter)="onFilter($event)"
+      (onScroll)="onScroll()"
+      (onShowImage)="onShowImage($event)"
+    ></custom-table>
   </ng-container>
 
   <ng-container *ngIf="type === 'media'">
-    <media-view-list
+    <custom-table
       *ngIf="vm.view === 'viewList'"
-      [media]="vm.medias"
-      [loading]="vm.loading"
-      [type]="subType === 'set' ? 'set' : 'track'"
-      (filter)="onFilter($event)"
-      (goToPage)="goToPage($event)"
+      [items]="vm[vm.typeItems]"
+      [type]="type"
+      [subType]="subType"
+      (onGoToPage)="onGoToPage($event)"
+      (onFilter)="onFilter($event)"
       (onScroll)="onScroll()"
-    ></media-view-list>
+      (onShowImage)="onShowImage($event)"
+    ></custom-table>
 
     <admin-media-add-search
       *ngIf="vm.view === 'viewAdd'"
@@ -116,22 +129,23 @@
       [scraping]="vm.scraping"
       [scraping]="vm.scraping"
       (onSubmit)="onSubmit()"
-      (showImage)="showImage($event)"
+      (showImage)="onShowImage($event)"
       (uploadImageByUrl)="uploadImageByUrl($event)"
       (uploadImageByFile)="uploadImageByFile($event)"
     ></admin-media-one>
   </ng-container>
 
   <ng-container *ngIf="type === 'site'">
-    <sites-view-list
+    <custom-table
       *ngIf="vm.view === 'viewList'"
-      [sites]="vm.sites"
-      [loading]="vm.loading"
-      [type]="subType === 'club' ? 'clubs' : 'festivals'"
-      (goToPage)="goToPage($event)"
-      (filter)="onFilter($event)"
+      [items]="vm[vm.typeItems]"
+      [type]="type"
+      [subType]="subType"
+      (onGoToPage)="onGoToPage($event)"
+      (onFilter)="onFilter($event)"
       (onScroll)="onScroll()"
-    ></sites-view-list>
+      (onShowImage)="onShowImage($event)"
+    ></custom-table>
 
     <admin-site-one
       *ngIf="vm.view === 'viewAdd'"
@@ -139,29 +153,36 @@
       [type]="subType === 'club' ? 'club' : 'festival'"
       [scraping]="vm.scraping"
       (onSubmit)="onSubmit()"
-      (showImage)="showImage($event)"
+      (showImage)="onShowImage($event)"
       (uploadImageByUrl)="uploadImageByUrl($event)"
       (uploadImageByFile)="uploadImageByFile($event)"
     ></admin-site-one>
   </ng-container>
 
   <ng-container *ngIf="type === 'style'">
-    <styles-view-list
+    <custom-table
       *ngIf="vm.view === 'viewList'"
-      [styles]="vm.styles"
-      [loading]="vm.loading"
+      [items]="vm[vm.typeItems]"
+      [type]="type"
+      [subType]="subType"
+      (onGoToPage)="onGoToPage($event)"
+      (onFilter)="onFilter($event)"
       (onScroll)="onScroll()"
-    ></styles-view-list>
+      (onShowImage)="onShowImage($event)"
+    ></custom-table>
   </ng-container>
 
   <ng-container *ngIf="type === 'user'">
-    <users-view-list
+    <custom-table
       *ngIf="vm.view === 'viewList'"
-      [users]="vm.users"
-      [loading]="vm.loading"
+      [items]="vm[vm.typeItems]"
+      [type]="type"
+      [subType]="subType"
+      (onGoToPage)="onGoToPage($event)"
+      (onFilter)="onFilter($event)"
       (onScroll)="onScroll()"
-      (goToPage)="goToPage($event)"
-    ></users-view-list>
+      (onShowImage)="onShowImage($event)"
+    ></custom-table>
   </ng-container>
 
   <div

@@ -38,7 +38,7 @@ export class LastMultiItemsComponent implements OnInit {
     this.router.navigate([route]);
   }
 
-  showFullImage(item: Image) {
-    this.fullImage.show(item);
+  showFullImage(image: Image) {
+    this.fullImage.show({ image });
   }
 }

@@ -34,6 +34,6 @@ export class BlockInfoProfileImageComponent implements OnInit {
       `${this.type}_show_image`,
       this.type
     );
-    this.fullImage.show(image);
+    this.fullImage.show({ image });
   }
 }

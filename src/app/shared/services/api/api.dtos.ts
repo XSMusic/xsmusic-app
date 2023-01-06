@@ -11,7 +11,7 @@ export class GetAllDto {
   coordinates?: any;
   complete?: boolean;
   old?: boolean;
-
+  admin?: boolean;
   constructor(data?: GetAllDto) {
     if (data) {
       for (const property in data) {

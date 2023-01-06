@@ -1,0 +1,333 @@
+<!-- IMAGE -->
+<ng-container *ngIf="header.type === 'image'">
+  <div class="w-12">
+    <img
+      (click)="
+        onShowImage.emit({ image: type !== 'image' ? item.images![0] : item })
+      "
+      [src]="
+        type !== 'image'
+          ? (item.images! | imageArray: 'small')
+          : ([item] | imageArray: 'small')
+      "
+      [alt]="item.name"
+      class="object-cover object-center w-12 h-12 cursor-pointer rounded-2xl lg:h-12 lg:w-12 hover:filter-grayscale hover:scale-105 hover:duration-1000"
+      onError
+    />
+  </div>
+</ng-container>
+
+<!-- NAME -->
+<ng-container
+  *ngIf="
+    header.type === 'name' ||
+    header.type === 'nameBirthdate' ||
+    header.type === 'nameAddress' ||
+    header.type === 'nameArtists'
+  "
+>
+  <p
+    class="font-black"
+    (click)="
+      header.action
+        ? onGoToPage.emit({ type: typeGoTo, typeRoute: 'one', item })
+        : null
+    "
+    [ngClass]="{ 'cursor-pointer': header.action }"
+  >
+    {{ item[header.key] }}
+  </p>
+  <p
+    *ngIf="header.type === 'nameBirthdate'"
+    class="mt-1 text-sm leading-none text-gray-500 dark:text-gray-400 font-extralight"
+  >
+    {{ item.birthdate ? getYearsOld(item.birthdate) + ' años' : '' }}
+  </p>
+
+  <p
+    *ngIf="header.type === 'nameAddress'"
+    class="mt-1 text-sm leading-none text-gray-500 dark:text-gray-400 font-extralight"
+  >
+    {{
+      item.address.town && item.address.town !== ''
+        ? item.address.town
+        : item.address.state
+    }}
+  </p>
+
+  <p
+    *ngIf="header.type === 'nameArtists'"
+    class="mt-1 text-sm leading-none text-gray-500 cursor-pointer font-extralight dark:text-gray-400 hover:text-gray-400"
+  >
+    <span
+      *ngFor="let artist of item.artists; let i = index"
+      (click)="
+        onGoToPage.emit({
+          type: 'artist',
+          typeRoute: 'one',
+          item: artist
+        })
+      "
+    >
+      <span *ngIf="i !== 0"> & </span>
+      {{ artist.name }}
+    </span>
+  </p>
+</ng-container>
+
+<!-- NAMEIMAGE -->
+<ng-container *ngIf="header.type === 'nameImage'">
+  <p
+    (click)="onDelete.emit({ type: typeGoTo, item })"
+    class="my-1 mr-2 text-base font-extrabold leading-none text-black cursor-pointer dark:text-white hover:text-gray-500"
+  >
+    <span *ngIf="item.type === 'event'">{{
+      (item.event?.name | truncateText: 25) ?? 'Elemento eliminado'
+    }}</span>
+    <span *ngIf="item.type === 'media'">{{
+      item.media?.name ?? 'Elemento eliminado'
+    }}</span>
+    <span *ngIf="item.type === 'user'">{{
+      item.user?.name ?? 'Elemento eliminado'
+    }}</span>
+    <span *ngIf="item.type === 'artist'">
+      {{ item.artist?.name ?? 'Elemento eliminado' }}
+    </span>
+    <span *ngIf="item.type === 'site'">{{
+      item.site?.name ?? 'Elemento eliminado'
+    }}</span>
+  </p>
+</ng-container>
+
+<!-- NAMELIKE -->
+<ng-container *ngIf="header.type === 'nameLike'">
+  <div class="flex gap-3 mr-16">
+    <img
+      [src]="item[item.type].images! | imageArray: 'small'"
+      [alt]="item[item.type].name"
+      onError
+      class="object-cover object-center w-12 h-12 cursor-pointer rounded-2xl lg:h-12 lg:w-12 hover:filter-grayscale hover:scale-105 hover:duration-1000"
+      (click)="onShowImage.emit(item[item.type].images![0])"
+    />
+    <div class="flex flex-col">
+      <p
+        class="my-1 mr-2 text-lg font-extrabold leading-none text-black cursor-pointer dark:text-white hover:text-gray-600"
+        (click)="
+          onGoToPage.emit({
+            type:
+              item.type !== 'media' && item.type !== 'site'
+                ? item.type
+                : item.type === 'media'
+                ? item.media.type
+                : item.site.type,
+            typeRoute: 'one',
+            item: item[item.type]
+          })
+        "
+      >
+        {{ item[item.type].name }}
+      </p>
+      <p
+        class="mt-1 text-sm leading-none text-gray-500 dark:text-gray-400 font-extralight"
+      >
+        <span *ngIf="item.type !== 'media' && item.type !== 'site'">
+          {{ item.type | type }}
+        </span>
+        <span *ngIf="item.type === 'media' || item.type === 'site'">
+          {{ item[item.type].type | type }}
+        </span>
+      </p>
+    </div>
+  </div>
+</ng-container>
+
+<!-- USERLIKE -->
+<ng-container *ngIf="header.type === 'userlike'">
+  <div class="flex gap-3 mr-16">
+    <img
+      [src]="item.user.images! | imageArray: 'small'"
+      [alt]="item.user.name"
+      onError
+      class="object-cover object-center w-12 h-12 cursor-pointer rounded-2xl lg:h-12 lg:w-12 hover:filter-grayscale hover:scale-105 hover:duration-1000"
+      (click)="onShowImage.emit({ image: item.user.images![0] })"
+    />
+    <div class="flex flex-col">
+      <p
+        class="my-1 mr-2 text-lg font-extrabold leading-none text-black cursor-pointer dark:text-white hover:text-gray-600"
+        (click)="
+          onGoToPage.emit({
+            type: 'user',
+            typeRoute: 'one',
+            item: item.user
+          })
+        "
+      >
+        {{ item.user.name }}
+      </p>
+      <p
+        class="mt-1 text-sm leading-none text-gray-500 dark:text-gray-400 font-extralight"
+      >
+        Usuario
+      </p>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="header.type === 'type'">
+  <p class="text-gray-500 dark:text-gray-400 font-extralight">
+    <span *ngIf="item.type === 'media'">
+      {{ item.media?.type | titlecase }}
+    </span>
+    <span *ngIf="item.type === 'site'">
+      {{ item.site?.type | titlecase }}
+    </span>
+    <span *ngIf="item.type !== 'media' && item.type !== 'site'">
+      {{ item?.type | type }}
+    </span>
+  </p>
+</ng-container>
+
+<!-- DATE -->
+<ng-container *ngIf="header.type === 'date' && item[header.key]">
+  <p class="text-sm font-extralight">
+    {{ item[header.key] | timeAgo | titlecase }}
+  </p>
+</ng-container>
+
+<!-- DATETIME -->
+<ng-container *ngIf="header.type === 'dateTime' && item[header.key]">
+  <div class="flex flex-col gap-2">
+    <div
+      class="mr-2 text-sm font-light leading-none text-gray-700 dark:text-gray-400"
+    >
+      {{ item.date! | dateFormat: 'DD-MM-YY' }}
+    </div>
+    <div
+      class="mr-2 text-sm font-light leading-none text-gray-700 dark:text-gray-400"
+    >
+      {{ item.date! | dateFormat: 'HH:mm' }}
+    </div>
+  </div>
+</ng-container>
+
+<!-- COUNTRY -->
+<ng-container
+  *ngIf="
+    (header.type === 'country' && item[header.key]) ||
+    header.type === 'countrySite'
+  "
+>
+  <div class="w-12">
+    <div class="flex items-center">
+      <img
+        [src]="
+          header.type === 'country'
+            ? (item.country! | countryFlag)
+            : (item.address.country | countryFlag)
+        "
+        [alt]="header.type === 'country' ? item.country : item.address.country"
+        class="w-6 h-6 mx-2 my-1 cursor-pointer hover:scale-110 hover:duration-1000"
+        (click)="
+          header.action
+            ? onFilter.emit({
+                name: 'country',
+                value:
+                  header.type === 'country'
+                    ? item.country!
+                    : item.address.country
+              })
+            : null
+        "
+      />
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="header.type === 'styles'"> </ng-container>
+
+<!-- STYLES -->
+<ng-container *ngIf="header.type === 'styles'">
+  <div class="flex gap-2" *ngIf="item.styles.length > 0">
+    <span
+      *ngFor="let style of item.styles; let i = index"
+      class="px-3 py-1 text-sm border border-gray-300 rounded-lg cursor-pointer dark:text-white dark:bg-black dark:border-gray-800 hover:opacity-70"
+      (click)="onFilter.emit({ name: 'styles', value: style.name })"
+    >
+      {{ style.name | titlecase }}
+    </span>
+  </div>
+
+  <div class="flex gap-2" *ngIf="item.styles.length === 0">
+    <span
+      class="px-3 py-1 text-sm border border-gray-300 rounded-lg cursor-pointer dark:text-white dark:bg-black dark:border-gray-800 hover:opacity-70"
+      *ngIf="item.styles.length === 0"
+    >
+      Sin estilos
+    </span>
+  </div>
+</ng-container>
+
+<!-- COUNTS -->
+<ng-container
+  *ngIf="
+    header.type === 'artists' ||
+    header.type === 'clubs' ||
+    header.type === 'events' ||
+    header.type === 'festivals' ||
+    header.type === 'images' ||
+    header.type === 'likes' ||
+    header.type === 'tracks' ||
+    header.type === 'sets'
+  "
+>
+  <p class="mr-2 font-black font-sm">
+    {{ item[header.type] ? item[header.type].count : 0 }}
+  </p>
+</ng-container>
+
+<!-- SITE -->
+<ng-container *ngIf="header.type === 'site'">
+  <div class="flex gap-3" *ngIf="item.site.name !== 'Desconocido'">
+    <img
+      [src]="item.site.images | imageArray: 'small'"
+      alt=""
+      class="object-cover object-center rounded-lg cursor-pointer h-9 w-9 hover:filter-grayscale hover:scale-110 hover:duration-1000"
+      (click)="onShowImage.emit({ image: item.site.image! })"
+      onError
+    />
+    <div class="flex flex-col">
+      <p
+        class="my-0.5 mr-2 text-base font-bold leading-none text-black dark:text-white cursor-pointer hover:text-gray-600"
+        (click)="
+          onGoToPage.emit({
+            type: item.site.type,
+            typeRoute: 'one',
+            item: item.site
+          })
+        "
+      >
+        {{ item.site.name }}
+      </p>
+      <div
+        *ngIf="item.site"
+        class="flex gap-1 text-sm font-light text-gray-400 cursor-pointer"
+      >
+        <img
+          [src]="
+            item.site.address && item.site.address.country
+              ? (item.site.address.country | countryFlag)
+              : ('es' | countryFlag)
+          "
+          [alt]="item.site.address.country"
+          class="w-3 h-3 my-1 cursor-pointer hover:scale-110 hover:duration-1000"
+        />
+        {{ item.site.address?.country ?? 'es' | countryName }}
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<!-- NORMAL -->
+<ng-container *ngIf="header.type === 'normal'">
+  {{ item[header.key] }}
+</ng-container>

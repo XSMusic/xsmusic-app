@@ -5,7 +5,9 @@ import { flags } from 'assets/data/flags';
   name: 'countryFlag',
 })
 export class CountryFlagPipe implements PipeTransform {
-  transform(countryCode: string): string {
-    return flags[countryCode];
+  transform(countryCode: string) {
+    if (countryCode) {
+      return flags[countryCode];
+    }
   }
 }

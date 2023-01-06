@@ -255,7 +255,7 @@ export class GenericAdminOneBase implements OnInit {
   }
 
   showImage(data: ShowImageI) {
-    this.ui.fullImage.show(data.image, data.remote);
+    this.ui.fullImage.show(data);
   }
 
   onSubmit() {

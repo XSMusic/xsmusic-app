@@ -197,7 +197,7 @@ export class GenericAdminListBase {
     }
   }
 
-  goToPage(data: GoToPageI) {
+  onGoToPage(data: GoToPageI) {
     if (data.admin === undefined) {
       data.admin = true;
     }
@@ -214,6 +214,8 @@ export class GenericAdminListBase {
   }
 
   onFilter(event: { name: string; value: string }) {
+    console.log('onFilter');
+
     this.vm[this.vm.typeBody].page = 1;
     this.vm[this.vm.typeBody].filter = [event.name, event.value];
     this.vm.filter = true;
@@ -332,8 +334,8 @@ export class GenericAdminListBase {
     );
   }
 
-  showImage(data: ShowImageI) {
-    this.ui.fullImage.show(data.image, data.remote);
+  onShowImage(data: ShowImageI) {
+    this.ui.fullImage.show(data);
   }
 
   deleteImage(item: Image) {

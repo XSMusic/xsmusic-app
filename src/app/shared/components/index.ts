@@ -1,5 +1,4 @@
 export { AdminStyleOneComponent } from './one/admin-style-one/admin-style-one.component';
-export { StylesViewListComponent } from './views/list/styles-view-list/styles-view-list.component';
 export { VideoYoutubeComponent } from './ui/youtube/video-youtube.component';
 export { AdminEventsScrapingSiteComponent } from './events/admin-events-scraping-site/admin-events-scraping-site.component';
 export { AdminMediaAddSearchItemsComponent } from './events/add-search-items/admin-media-add-search-items.component';
@@ -47,18 +46,11 @@ export { SocialInputsComponent } from './ui/social-inputs/social-inputs.componen
 export { BlockSocialComponent } from './ui/block-social/block-social.component';
 export { BlockInfoProfileAddressComponent } from './ui/block-info-profile/block-info-profile-address/block-info-profile-address.component';
 export { BlockInfoProfileImageComponent } from './ui/block-info-profile/block-info-profile-image/block-info-profile-image.component';
+export { TableComponent, TableItemsComponent } from './ui/table';
+
 // View Gallery
 export { GenericViewGalleryComponent } from './views/gallery/generic-view-gallery/generic-view-gallery.component';
 export { GenericViewGalleryItemsComponent } from './views/gallery/generic-view-gallery-items/generic-view-gallery-items.component';
-
-// Views List
-export { ArtistsViewListComponent } from './views/list/artists-view-list/artists-view-list.component';
-export { ImagesViewListComponent } from './views/list/images-view-list/images-view-list.component';
-export { MediaViewListComponent } from './views/list/media-view-list/media-view-list.component';
-export { SitesViewListComponent } from './views/list/sites-view-list/sites-view-list.component';
-export { UsersViewListComponent } from './views/list/users-view-list/users-view-list.component';
-export { EventsViewListComponent } from './views/list/events-view-list/events-view-list.component';
-export { LikesViewListComponent } from './views/list/likes-view-list/likes-view-list.component';
 
 export { LastMultiItemsComponent } from './views/last-multi/last-multi-items/last-multi-items.component';
 export { LastMultiComponent } from './views/last-multi/last-multi/last-multi.component';

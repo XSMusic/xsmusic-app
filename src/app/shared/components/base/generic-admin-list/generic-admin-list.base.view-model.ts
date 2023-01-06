@@ -47,15 +47,16 @@ export class GenericAdminListBaseViewModel {
   bodyEvent = new GetAllDto({
     order: ['date', 'asc'],
   });
-  bodyImage = new GetAllDto({ pageSize: 30 });
-  bodyLike = new GetAllDto();
-  bodyMedia = new GetAllDto({ type: '' });
+  bodyImage = new GetAllDto({ admin: true, pageSize: 30 });
+  bodyLike = new GetAllDto({ admin: true });
+  bodyMedia = new GetAllDto({ admin: true, type: '' });
   bodySite = new GetAllDto({
+    admin: true,
     map: false,
     type: '',
   });
-  bodyStyle = new GetAllDto({ order: ['name', 'asc'] });
-  bodyUser = new GetAllDto({ type: '' });
+  bodyStyle = new GetAllDto({ admin: true, order: ['name', 'asc'] });
+  bodyUser = new GetAllDto({ admin: true, type: '' });
   view!: string;
   filter = false;
   loading = true;

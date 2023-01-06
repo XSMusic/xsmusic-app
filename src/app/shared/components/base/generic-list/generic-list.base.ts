@@ -201,6 +201,6 @@ export class GenericListBase {
   }
 
   showImage(image: Image) {
-    this.ui.fullImage.show(image);
+    this.ui.fullImage.show({ image });
   }
 }

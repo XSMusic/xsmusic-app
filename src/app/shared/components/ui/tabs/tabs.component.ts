@@ -5,7 +5,16 @@ import {
   transition,
   animate,
 } from '@angular/animations';
-import { Component, EventEmitter, Output, OnInit, Input } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  OnInit,
+  Input,
+  HostListener,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
 import { getTabByParam, TabsType } from '@shared/utils';
@@ -25,15 +34,25 @@ import { TabsItem } from './tabs.model';
   ],
 })
 export class TabsComponent implements OnInit {
+  @ViewChild('searchInput') searchElement!: ElementRef;
   @Input() type: TabsType = 'generic';
   @Input() view = 'viewGallery';
   tabs: TabsItem[] = [];
   searchState = false;
   filterState = false;
+  key: any;
   @Output() changeView = new EventEmitter<string>();
   @Output() search = new EventEmitter<{ text: string; type: string }>();
   @Output() onFilter = new EventEmitter<{ name: string; value: string }>();
   @Output() onClickTab = new EventEmitter<TabsItem>();
+  @HostListener('document:keypress', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key === '-') {
+      this.showSearch();
+    } else if (event.key === '.') {
+      this.filterState = !this.filterState;
+    }
+  }
   constructor(public route: ActivatedRoute) {}
 
   ngOnInit(): void {
@@ -64,8 +83,7 @@ export class TabsComponent implements OnInit {
       this.searchState = false;
       this.onClickViewsButtons(tab);
     } else if (tab.action === 'search') {
-      this.filterState = false;
-      this.searchState = !this.searchState;
+      this.showSearch();
     } else if (tab.action === 'filter') {
       this.searchState = false;
       this.filterState = !this.filterState;
@@ -73,6 +91,16 @@ export class TabsComponent implements OnInit {
       this.searchState = false;
       this.filterState = false;
       this.onClickViewsButtons(tab);
+    }
+  }
+
+  showSearch() {
+    this.filterState = false;
+    this.searchState = !this.searchState;
+    if (this.searchState) {
+      setTimeout(() => {
+        document.getElementById('searchInput')!.focus();
+      });
     }
   }
 

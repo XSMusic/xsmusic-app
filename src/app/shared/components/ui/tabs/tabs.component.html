@@ -65,6 +65,7 @@
 
 <div *ngIf="searchState">
   <search-bar
+  #searchBar
     (search)="search.emit($event)"
     (closeSearch)="searchState = false"
   ></search-bar>

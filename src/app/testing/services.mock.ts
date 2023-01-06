@@ -1,9 +1,10 @@
 import { StatsGetTopStatsI } from '@shared/services/api/stats/stats.interface';
 import { of } from 'rxjs';
-import { getAllGeneric } from './services-helper.mock';
+import { getAllGeneric, getOneGeneric } from './services-helper.mock';
 
 export const apiServiceMock = {
   getAll: () => getAllGeneric(),
+  getOne: () => getOneGeneric(),
 };
 
 export const scrapingServiceMock = {

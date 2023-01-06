@@ -167,7 +167,7 @@ export class GenericAdminOneBase implements OnInit {
 
   private setMeta() {
     let title: string;
-    if (this.type === 'event') {
+    if (this.type === 'event' && this.vm.event.site) {
       title = `${this.vm.event.name} @ ${
         this.vm.event.site.name
       } - ${DateFunctions.new(this.vm.event.date).format('DD-MM-YYYY')}`;

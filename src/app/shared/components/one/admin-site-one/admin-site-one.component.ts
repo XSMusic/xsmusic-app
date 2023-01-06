@@ -1,13 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { routesConfig } from '@core/config';
 import { ScrapingGetInfoClubResponse, ShowImageI } from '@interfaces';
 import { Image, Site } from '@models';
 import { ScrapingService, GeoService, UIService, TOAST_STATE } from '@services';
 import { ScrapingGetInfoClubDto } from '@shared/services/api/scraping/scraping.dto';
 import { countries } from 'assets/data/countries';
 import { getKeyValueByParam } from '@shared/utils';
+import { GoToPageI } from '@shared/interfaces/goto.interface';
 
 @Component({
   selector: 'admin-site-one',
@@ -32,9 +32,9 @@ export class AdminSiteOneComponent implements OnInit {
   @Output() removeImage = new EventEmitter<Image>();
   @Output() setFirstImage = new EventEmitter<Image>();
   @Output() delete = new EventEmitter<Image>();
+  @Output() goToProfile = new EventEmitter<GoToPageI>();
   constructor(
     private ui: UIService,
-    private router: Router,
     private route: ActivatedRoute,
     private scrapingService: ScrapingService,
     private geoService: GeoService
@@ -142,14 +142,6 @@ export class AdminSiteOneComponent implements OnInit {
         });
     } else {
       this.ui.toast.showToast(TOAST_STATE.error, 'Revisa las coordenadas');
-    }
-  }
-
-  goToSite(slug: string) {
-    if (this.site.type === 'club') {
-      this.router.navigate([routesConfig.club.replace(':slug', slug)]);
-    } else {
-      this.router.navigate([routesConfig.festival.replace(':slug', slug)]);
     }
   }
 }

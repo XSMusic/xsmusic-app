@@ -1,9 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { routesConfig } from '@core/config';
 import { ShowImageI } from '@interfaces';
 import { Event, Image } from '@models';
+import { UIService } from '@services';
 
 @Component({
   selector: 'admin-event-one',
@@ -26,11 +25,13 @@ export class AdminEventOneComponent {
   @Output() removeImage = new EventEmitter<Image>();
   @Output() setFirstImage = new EventEmitter<Image>();
   @Output() delete = new EventEmitter<Image>();
-  constructor(private router: Router) {}
+  constructor(private ui: UIService) {}
 
-  goToProfile() {
-    this.router.navigate([
-      routesConfig.event.replace(':slug', this.event.slug!),
-    ]);
+  goToEvent() {
+    this.ui.navigation.goToPage({
+      type: 'event',
+      typeRoute: 'one',
+      item: this.event,
+    });
   }
 }

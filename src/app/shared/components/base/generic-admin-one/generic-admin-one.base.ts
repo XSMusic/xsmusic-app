@@ -355,8 +355,8 @@ export class GenericAdminOneBase implements OnInit {
     });
   }
 
-  goToPage(data: GoToPageI) {
-    data.admin = true;
+  goToPage(data: GoToPageI, admin = true) {
+    data.admin = admin;
     this.ui.navigation.goToPage(data);
   }
 

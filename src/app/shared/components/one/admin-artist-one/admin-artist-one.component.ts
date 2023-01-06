@@ -1,7 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Router } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { routesConfig } from '@core/config';
 import { ScrapingGetInfoArtistResponse, ShowImageI } from '@interfaces';
 import { Artist, Image, Style } from '@models';
 import {
@@ -10,6 +8,7 @@ import {
   MODAL_STATE,
   TOAST_STATE,
 } from '@services';
+import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { ScrapingGetInfoArtistDto } from '@shared/services/api/scraping/scraping.dto';
 import { countries } from 'assets/data/countries';
 
@@ -36,8 +35,8 @@ export class AdminArtistOneComponent {
   @Output() removeImage = new EventEmitter<Image>();
   @Output() setFirstImage = new EventEmitter<Image>();
   @Output() delete = new EventEmitter<Image>();
+  @Output() goToProfile = new EventEmitter<GoToPageI>();
   constructor(
-    private router: Router,
     private ui: UIService,
     private scrapingService: ScrapingService
   ) {}
@@ -121,11 +120,5 @@ export class AdminArtistOneComponent {
 
   selectInfo(info: string) {
     this.artist.info = info;
-  }
-
-  goToProfile() {
-    this.router.navigate([
-      routesConfig.artist.replace(':slug', this.artist.slug!),
-    ]);
   }
 }

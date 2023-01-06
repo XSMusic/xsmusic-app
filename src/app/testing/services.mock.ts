@@ -15,6 +15,14 @@ export const imageServiceMock = {
 };
 
 export const uiServiceMock = {
+  fullImage: {},
+  ga: {},
+  meta: {},
+  modal: {
+    showModal: () => null,
+  },
+  navigation: {},
+  spinner: {},
   toast: {
     showToast: () => true,
   },

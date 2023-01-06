@@ -10,11 +10,11 @@ import { ToastService } from './toast/toast.service';
 export class UIService {
   constructor(
     public fullImage: FullImageService,
-    public toast: ToastService,
-    public modal: ModalService,
-    public spinner: NgxSpinnerService,
+    public ga: GoogleAnalyticsService,
     public meta: MetaService,
+    public modal: ModalService,
     public navigation: NavigationService,
-    public ga: GoogleAnalyticsService
+    public spinner: NgxSpinnerService,
+    public toast: ToastService
   ) {}
 }

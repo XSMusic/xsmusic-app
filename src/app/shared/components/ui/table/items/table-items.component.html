@@ -327,6 +327,10 @@
   </div>
 </ng-container>
 
+<ng-container *ngIf="header.type === 'year'">
+    <p class="font-extralight">{{ item.year }}</p>
+</ng-container>
+
 <!-- NORMAL -->
 <ng-container *ngIf="header.type === 'normal'">
   {{ item[header.key] }}

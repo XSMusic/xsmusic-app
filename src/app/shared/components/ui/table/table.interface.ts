@@ -23,7 +23,8 @@ export type TabbleHeaderType =
   | 'styles'
   | 'type'
   | 'tracks'
-  | 'userlike';
+  | 'userlike'
+  | 'year';
 
 export interface TableHeaderI {
   key: string;

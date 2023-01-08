@@ -20,12 +20,13 @@
 
   <generic-view-gallery
     *ngIf="vm.view === 'viewGallery'"
-    [items]="this.vm[this.vm.typeItems]"
+    [items]="vm[this.vm.typeItems]"
     [loading]="vm.loading"
     [type]="vm.typeForGalleryView"
     (goToPage)="goToPage($event)"
     (onScroll)="onScroll()"
     (showImage)="showImage($event)"
+    (likeOrDislike)="likeOrDislike($event, vm[this.vm.typeItems])"
   ></generic-view-gallery>
 
   <ng-container *ngIf="type === 'site'">

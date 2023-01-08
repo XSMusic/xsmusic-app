@@ -10,7 +10,11 @@
       ></images-edit-block>
     </div>
     <div
-      *ngIf="site.address.coordinates.length === 2"
+      *ngIf="
+        site.address &&
+        site.address.coordinates &&
+        site.address.coordinates.length === 2
+      "
       class="col-span-2 mb-1 md:col-span-1"
     >
       <map
@@ -138,6 +142,7 @@
       </label>
       <div class="flex">
         <input
+          *ngIf="site.address && site.address.coordinates"
           name="lat"
           type="text"
           [(ngModel)]="site.address.coordinates[0]"

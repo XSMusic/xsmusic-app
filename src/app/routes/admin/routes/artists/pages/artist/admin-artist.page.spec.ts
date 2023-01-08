@@ -63,7 +63,7 @@ describe('AdminArtistPage', () => {
           useValue: {
             snapshot: {
               paramMap: {
-                get: ()=>{},
+                get: () => {},
                 id: '123',
               },
             },

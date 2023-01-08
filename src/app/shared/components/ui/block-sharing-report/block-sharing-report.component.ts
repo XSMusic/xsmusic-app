@@ -49,12 +49,14 @@ export class BlockSharingReportComponent {
     let type: any = this.type;
     if (this.type === 'club' || this.type === 'festival') {
       type = 'site';
+    } else if (this.type === 'set' || this.type === 'track') {
+      type = 'media';
     }
     const user = this.userService.getUser();
     const like = new Like({ type, [type]: this.item._id, user });
     this.apiService.create('likes', like).subscribe({
       next: () => {
-        this.ui.toast.showToast(TOAST_STATE.info, 'Like OK');
+        this.item.userLike = !this.item.userLike;
       },
       error: () => {
         this.ui.toast.showToast(TOAST_STATE.error, 'Like KO');

@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { Image } from '@models';
+import { Image, Like } from '@models';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
-import { GalleryViewType } from '@shared/utils';
+import { ApiTypes, GalleryViewType } from '@shared/utils';
 
 @Component({
   selector: 'generic-view-gallery',
@@ -18,6 +18,7 @@ export class GenericViewGalleryComponent {
   @Output() onScroll = new EventEmitter<void>();
   @Output() discartEvent = new EventEmitter<any>();
   @Output() showImage = new EventEmitter<Image>();
+  @Output() likeOrDislike = new EventEmitter<{ type: ApiTypes; like: Like }>();
 
   geTextNoItems() {
     switch (this.type) {

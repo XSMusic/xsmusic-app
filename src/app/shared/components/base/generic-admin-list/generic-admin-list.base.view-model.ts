@@ -43,8 +43,9 @@ export class GenericAdminListBaseViewModel {
   tempImagesByUrl: string[] = [];
   tempImagesByFile: File[] = [];
   stats: StatsGetTopStatsI = { topSocial: [], topCountries: [] };
-  bodyArtist = new GetAllDto();
+  bodyArtist = new GetAllDto({ admin: true });
   bodyEvent = new GetAllDto({
+    admin: true,
     order: ['date', 'asc'],
   });
   bodyImage = new GetAllDto({ admin: true, pageSize: 30 });

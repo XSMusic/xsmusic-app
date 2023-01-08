@@ -6,12 +6,12 @@
       name="searchText"
       placeholder="¿Que buscas?"
       (keyup)="onKeyUpSearch($event)"
-      class="w-full p-2 px-6 text-base font-medium bg-white border border-gray-200 dark:border-gray-700 dark:text-white dark:bg-black rounded-l-md ring-red-500 dark:ring-red-500"
+      class="w-full p-2 px-6 text-base font-medium bg-white border border-gray-200 rounded-l-lg dark:border-gray-700 dark:text-white dark:bg-black ring-0 focus:outline-1 focus:outline-slate-200"
       autocomplete="off"
       required
     />
     <button
-      class="px-3 text-sm font-medium text-white bg-red-500 border border-red-500 rounded-r-lg dark:bg-red-500 dark:text-black hover:bg-gray-800"
+      class="px-3 text-sm font-medium text-white bg-red-500 border border-red-500 rounded-r-lg dark:bg-red-500 dark:text-black hover:opacity-80"
       (click)="validationSearch()"
     >
       <svg-icon name="search" svgClass="h-5 w-5 dark:text-white"></svg-icon>

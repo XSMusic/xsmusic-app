@@ -157,32 +157,30 @@ export class GenericOneBase implements OnInit {
 
   setViews() {
     if (this.type === 'artist' || this.type === 'site') {
-      if (this.vm[this.type].sets && this.vm[this.type].sets.count > 0) {
+      if (this.vm[this.type].sets && this.vm[this.type].sets > 0) {
         this.vm.views.push({
           name: 'Sets',
           value: 'set',
-          counter: this.vm[this.type].sets.count,
+          counter: this.vm[this.type].sets,
         });
       }
       if (
         this.type === 'artist' &&
         this.vm.artist.tracks &&
-        this.vm.artist.tracks.count > 0
+        this.vm.artist.tracks > 0
       ) {
         this.vm.views.push({
           name: 'Tracks',
           value: 'track',
-          counter: this.vm.artist.tracks.count,
+          counter: this.vm.artist.tracks,
         });
       }
 
-      if (this.vm[this.type].events && this.vm[this.type].events.count > 0) {
+      if (this.vm[this.type].events && this.vm[this.type].events > 0) {
         this.vm.views.push({
           name: 'Eventos',
           value: 'event',
-          counter: this.vm[this.type].events
-            ? this.vm[this.type].events.count
-            : 0,
+          counter: this.vm[this.type].events ? this.vm[this.type].events : 0,
         });
       }
     }

@@ -103,6 +103,7 @@
 <ng-container *ngIf="header.type === 'nameLike'">
   <div class="flex gap-3 mr-16">
     <img
+      *ngIf="item[item.type] && item[item.type].images"
       [src]="item[item.type].images! | imageArray: 'small'"
       [alt]="item[item.type].name"
       onError
@@ -111,6 +112,7 @@
     />
     <div class="flex flex-col">
       <p
+        *ngIf="item[item.type] && item[item.type].name"
         class="my-1 mr-2 text-lg font-extrabold leading-none text-black cursor-pointer dark:text-white hover:text-gray-600"
         (click)="
           onGoToPage.emit({
@@ -247,7 +249,7 @@
 
 <!-- STYLES -->
 <ng-container *ngIf="header.type === 'styles'">
-  <div class="flex gap-2" *ngIf="item.styles.length > 0">
+  <div class="flex gap-2" *ngIf="item.styles && item.styles.length > 0">
     <span
       *ngFor="let style of item.styles; let i = index"
       class="px-3 py-1 text-sm border border-gray-300 rounded-lg cursor-pointer dark:text-white dark:bg-black dark:border-gray-800 hover:opacity-70"
@@ -257,7 +259,7 @@
     </span>
   </div>
 
-  <div class="flex gap-2" *ngIf="item.styles.length === 0">
+  <div class="flex gap-2" *ngIf="item.styles && item.styles.length === 0">
     <span
       class="px-3 py-1 text-sm border border-gray-300 rounded-lg cursor-pointer dark:text-white dark:bg-black dark:border-gray-800 hover:opacity-70"
       *ngIf="item.styles.length === 0"
@@ -281,7 +283,7 @@
   "
 >
   <p class="mr-2 font-black font-sm">
-    {{ item[header.type] ? item[header.type].count : 0 }}
+    {{ item[header.type] ? item[header.type] : 0 }}
   </p>
 </ng-container>
 
@@ -328,7 +330,7 @@
 </ng-container>
 
 <ng-container *ngIf="header.type === 'year'">
-    <p class="font-extralight">{{ item.year }}</p>
+  <p class="font-extralight">{{ item.year }}</p>
 </ng-container>
 
 <!-- NORMAL -->

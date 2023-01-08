@@ -11,6 +11,14 @@ export class User {
   lastLogin?: string;
   created?: string;
   updated?: string;
+  likes?: {
+    artists: number;
+    clubs: number;
+    festivals: number;
+    sets: number;
+    tracks: number;
+    events: number;
+  };
 
   constructor(data?: User) {
     if (data) {

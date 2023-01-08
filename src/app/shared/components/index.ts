@@ -47,7 +47,8 @@ export { BlockSocialComponent } from './ui/block-social/block-social.component';
 export { BlockInfoProfileAddressComponent } from './ui/block-info-profile/block-info-profile-address/block-info-profile-address.component';
 export { BlockInfoProfileImageComponent } from './ui/block-info-profile/block-info-profile-image/block-info-profile-image.component';
 export { TableComponent, TableItemsComponent } from './ui/table';
-
+export { ChartBarComponent } from './ui/chart-bar/chart-bar.component';
+export { AnalyticsVisitsLastDaysComponent } from './ui/analytics-visits-last-days/analytics-visits-last-days.component';
 // View Gallery
 export { GenericViewGalleryComponent } from './views/gallery/generic-view-gallery/generic-view-gallery.component';
 export { GenericViewGalleryItemsComponent } from './views/gallery/generic-view-gallery-items/generic-view-gallery-items.component';

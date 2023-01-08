@@ -55,6 +55,8 @@ import {
   AdminStyleOneComponent,
   TableComponent,
   TableItemsComponent,
+  ChartBarComponent,
+  AnalyticsVisitsLastDaysComponent,
 } from '@components';
 import {
   CountryFlagPipe,
@@ -75,6 +77,7 @@ import {
 import { OnImageErrorDirective } from './directives';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import {
+  AnalyticsService,
   AngularSvgIconPreloaderService,
   ApiService,
   LocalStorageService,
@@ -92,8 +95,10 @@ import { SwiperModule } from 'swiper/angular';
 import { InfiniteScrollModule } from './services/system/ngx-infinite-scroll/ngx-infinite-scroll.module';
 import { NgxSpinnerModule } from './services/system/ngx-spinner/ngx-spinner.module';
 import { YouTubePlayerModule } from '@angular/youtube-player';
+import { NgChartsModule } from 'ng2-charts';
 
 const components = [
+  AnalyticsVisitsLastDaysComponent,
   AdminArtistOneComponent,
   AdminEventOneComponent,
   AdminEventsScrapingComponent,
@@ -145,6 +150,7 @@ const components = [
   VideoYoutubeComponent,
   TableComponent,
   TableItemsComponent,
+  ChartBarComponent,
 ];
 const directives = [OnImageErrorDirective];
 const modules = [
@@ -159,6 +165,7 @@ const modules = [
   RouterModule,
   SwiperModule,
   YouTubePlayerModule,
+  NgChartsModule,
 ];
 const pipes = [
   CountryFlagPipe,
@@ -177,6 +184,7 @@ const pipes = [
   TypePipe,
 ];
 const services = [
+  AnalyticsService,
   AngularSvgIconPreloaderService,
   ApiService,
   LocalStorageService,

@@ -67,6 +67,13 @@ export class AdminTotalsComponent implements OnInit {
         route: routesConfig.imagesAdmin,
       },
       {
+        id: 'likes',
+        name: 'Likes',
+        value: 0,
+        percentages: [],
+        route: routesConfig.likesAdmin,
+      },
+      {
         id: 'sets',
         name: 'Sets',
         value: 0,

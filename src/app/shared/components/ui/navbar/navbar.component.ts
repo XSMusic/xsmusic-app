@@ -40,11 +40,11 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkPages();
-    this.setMenuProfileItems();
-    this.setMenuAdmin();
-    this.setMenuItems();
     this.authService.user().subscribe((response) => {
       this.user = response;
+      this.setMenuProfileItems();
+      this.setMenuAdmin();
+      this.setMenuItems();
     });
   }
 
@@ -82,10 +82,47 @@ export class NavbarComponent implements OnInit {
   }
 
   setMenuProfileItems() {
-    this.menuProfileItems = [
-      { name: 'Editar perfil', action: 'accountEdit' },
-      { name: 'Cerrar sesion', action: 'logout' },
-    ];
+    this.menuProfileItems = [{ name: 'Editar perfil', action: 'accountEdit' }];
+    if (this.user && this.user.likes) {
+      if (this.user.likes.artists > 0) {
+        this.menuProfileItems.push({
+          name: 'Artistas favoritos',
+          action: 'likesArtists',
+        });
+      }
+      if (this.user.likes.clubs > 0) {
+        this.menuProfileItems.push({
+          name: 'Clubs favoritos',
+          action: 'accountEdit',
+        });
+      }
+      if (this.user.likes.events > 0) {
+        this.menuProfileItems.push({
+          name: 'Eventos favoritos',
+          action: 'accountEdit',
+        });
+      }
+      if (this.user.likes.festivals > 0) {
+        this.menuProfileItems.push({
+          name: 'Festivales favoritos',
+          action: 'accountEdit',
+        });
+      }
+      if (this.user.likes.sets > 0) {
+        this.menuProfileItems.push({
+          name: 'Sets favoritos',
+          action: 'accountEdit',
+        });
+      }
+      if (this.user.likes.tracks > 0) {
+        this.menuProfileItems.push({
+          name: 'Tracks favoritos',
+          action: 'accountEdit',
+        });
+      }
+    }
+
+    this.menuProfileItems.push({ name: 'Cerrar sesion', action: 'logout' });
   }
 
   checkPages() {

@@ -49,6 +49,24 @@
         (click)="type === 'event' ? goToPage.emit({type, typeRoute: 'one', item}) : null"
         onError
       />
+      <button
+        *ngIf="item.userLike !== undefined && type === 'event'"
+        class="absolute cursor-pointer top-3 right-3"
+        (click)="setDataLikeOrDislike(item)"
+      >
+        <svg-icon
+          *ngIf="item.userLike === true"
+          svgClass="h-6 h-6"
+          class="fill-red-800"
+          name="heart"
+        ></svg-icon>
+        <svg-icon
+          *ngIf="item.userLike === false"
+          svgClass="h-6 h-6"
+          class="fill-red-800"
+          name="heart-line"
+        ></svg-icon>
+      </button>
       <div *ngIf="type === 'eventSite'" class="absolute top-1 right-1">
         <div
           class="flex flex-col gap-1 px-2 py-2 text-center text-white bg-black rounded-lg rounded-bl-lg dark:bg-gray-800"

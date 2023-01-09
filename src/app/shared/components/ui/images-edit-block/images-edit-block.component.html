@@ -4,6 +4,13 @@
       <div
         class="w-full overflow-hidden border rounded-lg dark:p-1 dark:border-gray-700"
       >
+      <div
+          *ngIf="item.images && item.images.length > 0"
+          (click)="removeImage.emit(item.images![0])"
+          class="relative w-5 h-5 m-1 bg-gray-200 rounded-full cursor-pointer sm:hidden hover:opacity-90"
+        >
+          <svg-icon name="close" svgClass="w-5 h-5"></svg-icon>
+        </div>
         <img
           [src]="
             item.images && item.images.length > 0
@@ -19,10 +26,12 @@
         <div
           *ngIf="item.images && item.images.length > 0"
           (click)="removeImage.emit(item.images![0])"
-          class="absolute w-5 h-5 bg-gray-200 rounded-full cursor-pointer top-1 right-1 hover:opacity-90"
+          class="absolute hidden w-5 h-5 bg-gray-200 rounded-full cursor-pointer sm:block top-1 right-1 hover:opacity-90"
         >
           <svg-icon name="close" svgClass="w-5 h-5"></svg-icon>
         </div>
+
+
       </div>
 
       <!-- IMAGENES INFERIORES -->

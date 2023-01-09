@@ -44,7 +44,7 @@ export class TabsComponent implements OnInit {
   @Output() changeView = new EventEmitter<string>();
   @Output() search = new EventEmitter<{ text: string; type: string }>();
   @Output() onFilter = new EventEmitter<{ name: string; value: string }>();
-  @Output() onClickTab = new EventEmitter<{tab: TabsItem, first: boolean}>();
+  @Output() onClickTab = new EventEmitter<{ tab: TabsItem; first: boolean }>();
   @HostListener('document:keypress', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     if (event.key === '-') {
@@ -110,7 +110,7 @@ export class TabsComponent implements OnInit {
       tab.isActive = true;
       this.view = tab.action;
     }
-    this.onClickTab.emit({tab, first});
+    this.onClickTab.emit({ tab, first });
   }
 
   private setViewButtonsInactive(): void {

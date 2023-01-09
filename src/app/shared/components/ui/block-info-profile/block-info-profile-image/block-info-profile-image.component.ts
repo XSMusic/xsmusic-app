@@ -2,11 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Image } from '@models';
 import { UIService } from '@services';
 import { GA } from '@shared/services/ui/google-analytics/ga.model';
-import {
-  GenericItemAllType,
-  GenericItemType,
-  GenericSubItemType,
-} from '@shared/utils';
+import { GenericItemAllType } from '@shared/utils';
 
 @Component({
   selector: 'block-info-profile-image',

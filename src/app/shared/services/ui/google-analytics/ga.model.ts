@@ -1,4 +1,4 @@
-import { GenericItemType, GenericSubItemType, GoToType } from "@shared/utils";
+import { GoToType } from '@shared/utils';
 
 export class GA {
   event = '';

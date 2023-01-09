@@ -71,6 +71,7 @@
       (uploadImageByUrl)="uploadImageByUrl($event)"
       (uploadImageByFile)="uploadImageByFile($event)"
       (delete)="onDelete()"
+      (goToProfile)="goToPage($event, false)"
     >
     </admin-media-one>
   </div>
@@ -88,6 +89,7 @@
       (uploadImageByUrl)="uploadImageByUrl($event)"
       (uploadImageByFile)="uploadImageByFile($event)"
       (delete)="onDelete()"
+      (goToProfile)="goToPage($event, false)"
     ></admin-site-one>
 
     <ng-container *ngIf="vm.view === 'viewScrapingEvent'">

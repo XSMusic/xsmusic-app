@@ -180,7 +180,7 @@ export class GenericListBase {
       this.getItems();
       this.vm.filter = false;
     } else {
-      this.sendEvent(`search_${event.text}}`);
+      this.sendEvent(`search_${event.text}`);
       this.vm[this.vm.typeBody].page = 1;
       this.vm[this.vm.typeBody].filter = ['name', event.text];
       this.vm.filter = true;

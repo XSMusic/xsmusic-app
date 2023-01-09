@@ -360,8 +360,8 @@ export class GenericAdminOneBase implements OnInit {
     this.ui.navigation.goToPage(data);
   }
 
-  onClickTab(tab: TabsItem) {
-    this.vm.view = tab.action;
+  onClickTab(data: { tab: TabsItem, first: boolean }) {
+    this.vm.view = data.tab.action;
   }
 
   onClickOptionItem(event: OptionsItemI) {

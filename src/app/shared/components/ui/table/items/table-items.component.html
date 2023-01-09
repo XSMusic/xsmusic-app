@@ -35,7 +35,7 @@
     "
     [ngClass]="{ 'cursor-pointer': header.action }"
   >
-    {{ item[header.key] | truncateText:25 }}
+    {{ item[header.key] | truncateText: 25 }}
   </p>
   <p
     *ngIf="header.type === 'nameBirthdate'"
@@ -60,7 +60,7 @@
     class="mt-1 text-sm leading-none text-gray-500 cursor-pointer font-extralight dark:text-gray-400 hover:text-gray-400"
   >
     <span
-      *ngFor="let artist of item.artists | sliceArray:0:3; let i = index"
+      *ngFor="let artist of item.artists | sliceArray: 0:3; let i = index"
       (click)="
         onGoToPage.emit({
           type: 'artist',
@@ -85,7 +85,7 @@
       (item.event?.name | truncateText: 25) ?? 'Elemento eliminado'
     }}</span>
     <span *ngIf="item.type === 'media'">{{
-      item.media?.name ?? 'Elemento eliminado'
+      (item.media?.name | truncateText: 25) ?? 'Elemento eliminado'
     }}</span>
     <span *ngIf="item.type === 'user'">{{
       item.user?.name ?? 'Elemento eliminado'
@@ -94,7 +94,7 @@
       {{ item.artist?.name ?? 'Elemento eliminado' }}
     </span>
     <span *ngIf="item.type === 'site'">{{
-      item.site?.name ?? 'Elemento eliminado'
+      (item.site?.name | truncateText: 25) ?? 'Elemento eliminado'
     }}</span>
   </p>
 </ng-container>
@@ -288,7 +288,7 @@
 
 <!-- SITE -->
 <ng-container *ngIf="header.type === 'site'">
-  <div class="flex gap-3" *ngIf="item.site.name !== 'Desconocido'">
+  <div class="flex w-64 gap-3" *ngIf="item.site.name !== 'Desconocido'">
     <img
       [src]="item.site.images | imageArray: 'small'"
       alt=""
@@ -307,7 +307,7 @@
           })
         "
       >
-        {{ item.site.name }}
+        {{ item.site.name | truncateText: 20}}
       </p>
       <div
         *ngIf="item.site"

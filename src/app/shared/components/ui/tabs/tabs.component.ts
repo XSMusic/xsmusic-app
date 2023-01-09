@@ -44,7 +44,7 @@ export class TabsComponent implements OnInit {
   @Output() changeView = new EventEmitter<string>();
   @Output() search = new EventEmitter<{ text: string; type: string }>();
   @Output() onFilter = new EventEmitter<{ name: string; value: string }>();
-  @Output() onClickTab = new EventEmitter<TabsItem>();
+  @Output() onClickTab = new EventEmitter<{tab: TabsItem, first: boolean}>();
   @HostListener('document:keypress', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     if (event.key === '-') {
@@ -60,13 +60,13 @@ export class TabsComponent implements OnInit {
     setTimeout(() => {
       const tabByParam = getTabByParam(this.route, this.tabs);
       if (tabByParam) {
-        this.onClickViewsButtons(tabByParam);
+        this.onClickViewsButtons(tabByParam, true);
       } else if (
         this.tabs &&
         this.tabs.length > 0 &&
         this.tabs[0].action.includes('view')
       ) {
-        this.onClickViewsButtons(this.tabs[0]);
+        this.onClickViewsButtons(this.tabs[0], true);
       }
     });
   }
@@ -81,7 +81,7 @@ export class TabsComponent implements OnInit {
   clickTab(tab: TabsItem) {
     if (tab.action.includes('view')) {
       this.searchState = false;
-      this.onClickViewsButtons(tab);
+      this.onClickViewsButtons(tab, false);
     } else if (tab.action === 'search') {
       this.showSearch();
     } else if (tab.action === 'filter') {
@@ -90,7 +90,7 @@ export class TabsComponent implements OnInit {
     } else {
       this.searchState = false;
       this.filterState = false;
-      this.onClickViewsButtons(tab);
+      this.onClickViewsButtons(tab, false);
     }
   }
 
@@ -104,13 +104,13 @@ export class TabsComponent implements OnInit {
     }
   }
 
-  onClickViewsButtons(tab: TabsItem) {
+  onClickViewsButtons(tab: TabsItem, first: boolean) {
     if (!tab.isActive) {
       this.setViewButtonsInactive();
       tab.isActive = true;
       this.view = tab.action;
     }
-    this.onClickTab.emit(tab);
+    this.onClickTab.emit({tab, first});
   }
 
   private setViewButtonsInactive(): void {

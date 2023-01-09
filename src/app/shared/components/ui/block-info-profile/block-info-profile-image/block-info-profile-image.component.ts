@@ -1,8 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Image } from '@models';
-import { FullImageService } from '@shared/services/ui/full-image/full-image.service';
-import { GenericItemAllType } from '@shared/utils';
-import { GoogleAnalyticsService } from 'ngx-google-analytics';
+import { UIService } from '@services';
+import { GA } from '@shared/services/ui/google-analytics/ga.model';
+import {
+  GenericItemAllType,
+  GenericItemType,
+  GenericSubItemType,
+} from '@shared/utils';
 
 @Component({
   selector: 'block-info-profile-image',
@@ -13,10 +17,7 @@ export class BlockInfoProfileImageComponent implements OnInit {
   @Input() type: GenericItemAllType = 'artist';
   class!: string;
 
-  constructor(
-    private gaService: GoogleAnalyticsService,
-    private fullImage: FullImageService
-  ) {}
+  constructor(private ui: UIService) {}
 
   ngOnInit() {
     if (this.type === 'artist') {
@@ -29,11 +30,8 @@ export class BlockInfoProfileImageComponent implements OnInit {
   }
 
   showImage(image: Image) {
-    this.gaService.event(
-      `${this.type}_show_image`,
-      `${this.type}_show_image`,
-      this.type
-    );
-    this.fullImage.show({ image });
+    const gaEvent = new GA({ event: 'show_image', one: true, type: this.type });
+    this.ui.ga2.event(gaEvent);
+    this.ui.fullImage.show({ image });
   }
 }

@@ -5,6 +5,7 @@ import { AuthService } from '@core/auth';
 import { User } from '@models';
 import { darkMode } from '@shared/utils';
 import { UIService } from '../ui';
+import { GA } from '../ui/google-analytics/ga.model';
 
 @Injectable({
   providedIn: 'root',
@@ -42,7 +43,10 @@ export class StartupService {
   }
 
   private sendAutologinEvent() {
-    this.ui.ga.event('autoLogin', 'login', 'login');
+    const gaEvent = new GA({
+      event: 'autoLogin',
+    });
+    this.ui.ga2.event(gaEvent);
   }
 
   private setPermissions(user: User) {

@@ -72,8 +72,8 @@ export class AdminEventsScrapingComponent {
     });
   }
 
-  onClickTab(button: TabsItem) {
-    this.view = button.action;
+  onClickTab(data: { tab: TabsItem }) {
+    this.view = data.tab.action;
   }
 
   addEventConfirmation(data: GoToPageI) {

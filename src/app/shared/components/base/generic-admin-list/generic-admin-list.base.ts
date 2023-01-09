@@ -232,10 +232,10 @@ export class GenericAdminListBase {
     this.getItems(true);
   }
 
-  onClickTab(tab: TabsItem) {
-    if (tab.action.includes('view')) {
-      this.vm.view = tab.action;
-    } else if (tab.action === 'order') {
+  onClickTab(data: { tab: TabsItem; first: boolean }) {
+    if (data.tab.action.includes('view')) {
+      this.vm.view = data.tab.action;
+    } else if (data.tab.action === 'order') {
       this.ui.toast.showToast(TOAST_STATE.info, 'En construccion');
     }
   }
@@ -265,7 +265,10 @@ export class GenericAdminListBase {
     }
     this.vm[this.vm.typeBody].page = 1;
     this.getItems();
-    this.onClickTab({ name: 'Listado', action: 'viewList' });
+    this.onClickTab({
+      tab: { name: 'Listado', action: 'viewList' },
+      first: false,
+    });
   }
 
   reloadItems() {

@@ -5,6 +5,7 @@ import { Image, Like, Site } from '@models';
 import { ApiService, UIService } from '@services';
 import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
+import { GA } from '@shared/services/ui/google-analytics/ga.model';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import {
   ApiTypes,
@@ -137,7 +138,7 @@ export class GenericListBase {
   }
 
   goToPage(data: GoToPageI) {
-    this.ui.ga.event('artists_link_profile', 'artists_link', 'artists');
+    this.sendEvent('link_profile');
     this.ui.navigation.goToPage(data);
   }
 
@@ -149,11 +150,7 @@ export class GenericListBase {
   }
 
   removeFilter() {
-    this.ui.ga.event(
-      `${this.type}s_remove_filter`,
-      `${this.type}s_filter`,
-      `${this.type}s`
-    );
+    this.sendEvent('remove_filter');
     this.vm[this.vm.typeBody].page = 1;
     this.vm[this.vm.typeBody].filter = [];
     this.vm.filter = false;
@@ -165,14 +162,12 @@ export class GenericListBase {
     this.getItems(true);
   }
 
-  onClickTab(button: TabsItem) {
-    if (button.action.includes('view')) {
-      this.vm.view = button.action;
-      this.ui.ga.event(
-        `${this.type}s_change_${button.action}`,
-        `${this.type}s_filter`,
-        `${this.type}s`
-      );
+  onClickTab(data: { tab: TabsItem; first: boolean }) {
+    if (data.tab.action.includes('view')) {
+      this.vm.view = data.tab.action;
+      if (!data.first) {
+        this.sendEvent(`change_${data.tab.action}`);
+      }
     } else {
       this.ui.toast.showToast(TOAST_STATE.info, 'En construccion');
     }
@@ -180,20 +175,12 @@ export class GenericListBase {
 
   onSearch(event: { text: string; type: string }) {
     if (event.text === '') {
-      this.ui.ga.event(
-        `${this.type}s_search_empty`,
-        `${this.type}s_search`,
-        `${this.type}s`
-      );
+      this.sendEvent('search_empty');
       this.vm[this.vm.typeBody].page = 1;
       this.getItems();
       this.vm.filter = false;
     } else {
-      this.ui.ga.event(
-        `${this.type}s_search_${event.text}}`,
-        `${this.type}s_search`,
-        `${this.type}s`
-      );
+      this.sendEvent(`search_${event.text}}`);
       this.vm[this.vm.typeBody].page = 1;
       this.vm[this.vm.typeBody].filter = ['name', event.text];
       this.vm.filter = true;
@@ -212,11 +199,24 @@ export class GenericListBase {
         items.forEach((i) => {
           if (i._id === event.like[event.like.type]) {
             i.userLike = !i.userLike;
+            this.sendEvent(i.userLike === true ? 'like' : 'dislike');
           }
           return i;
         }),
       error: () =>
         this.ui.toast.showToast(TOAST_STATE.error, 'Error al dar Like'),
     });
+  }
+
+  sendEvent(event: string) {
+    const gaEvent = new GA({
+      event,
+      one: false,
+      type:
+        this.type !== 'media' && this.type !== 'site'
+          ? this.type
+          : this.subType,
+    });
+    this.ui.ga2.event(gaEvent);
   }
 }

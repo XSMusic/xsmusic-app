@@ -8,12 +8,25 @@ const isProduction = environment === 'prod';
 const targetPath = isProduction
   ? `./src/environments/environment.prod.ts`
   : `./src/environments/environment.ts`;
+
+let apiUrl = '';
+let imagesUrl = '';
+if (process.env['API_URL'] && process.env['IMAGES_URL']) {
+  apiUrl = process.env['API_URL'];
+  imagesUrl = process.env['IMAGES_URL'];
+} else if (isProduction) {
+  apiUrl = 'https://api.xsmusic.es';
+  imagesUrl = 'https://api.xsmusic.es/uploads';
+} else {
+  apiUrl = 'http://localhost:6969';
+  imagesUrl = 'http://localhost:6969/uploads';
+}
 const environmentFileContent = `
   export const environment = {
     production: ${isProduction},
     urls: {
-      api: "${process.env['API_URL']}",
-      images: "${process.env['IMAGES_URL']}",
+      api: "${apiUrl}",
+      images: "${imagesUrl}",
       app: "${process.env['APP_URL']}",
     },
     apis: {

@@ -35,7 +35,7 @@
     "
     [ngClass]="{ 'cursor-pointer': header.action }"
   >
-    {{ item[header.key] }}
+    {{ item[header.key] | truncateText:25 }}
   </p>
   <p
     *ngIf="header.type === 'nameBirthdate'"
@@ -60,7 +60,7 @@
     class="mt-1 text-sm leading-none text-gray-500 cursor-pointer font-extralight dark:text-gray-400 hover:text-gray-400"
   >
     <span
-      *ngFor="let artist of item.artists; let i = index"
+      *ngFor="let artist of item.artists | sliceArray:0:3; let i = index"
       (click)="
         onGoToPage.emit({
           type: 'artist',
@@ -272,7 +272,6 @@
 <!-- COUNTS -->
 <ng-container
   *ngIf="
-    header.type === 'artists' ||
     header.type === 'clubs' ||
     header.type === 'events' ||
     header.type === 'festivals' ||

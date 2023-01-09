@@ -1,3 +1,4 @@
+export { SliceArrayPipe } from './slice-array/slice-array.pipe';
 export { FirstLetterPipe } from './first-letter-case/fist-letter-case.pipe';
 export { DateFormatAgoPipe } from './date-format/date-format.pipe';
 export { DateToDayOrMonthPipe } from './date-to-day-or-month/date-to-day-or-month.pipe';

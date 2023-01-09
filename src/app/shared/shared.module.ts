@@ -73,6 +73,7 @@ import {
   DateToDayOrMonthPipe,
   DateFormatAgoPipe,
   FirstLetterPipe,
+  SliceArrayPipe,
 } from '@pipes';
 import { OnImageErrorDirective } from './directives';
 import { NgxPermissionsModule } from 'ngx-permissions';
@@ -182,6 +183,7 @@ const pipes = [
   TitleMediaPipe,
   TruncateTextPipe,
   TypePipe,
+  SliceArrayPipe,
 ];
 const services = [
   AnalyticsService,

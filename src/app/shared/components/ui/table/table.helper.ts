@@ -20,11 +20,10 @@ export const itemsWithHeaders: TableHeaderItemI[] = [
     name: 'event',
     headers: [
       { name: '', key: 'image', type: 'image' },
-      { name: 'Nombre', key: 'name', type: 'name', action: 'link' },
+      { name: 'Nombre', key: 'name', type: 'nameArtists', action: 'link' },
       { name: 'Sitio', key: 'country', type: 'site', action: 'link' },
       { name: 'Estilos', key: 'styles', type: 'styles', action: 'filter' },
       { name: 'Fecha', key: 'date', type: 'dateTime', action: 'filter' },
-      { name: 'Artistas', key: 'artists', type: 'artists', action: 'filter' },
       { name: 'Creado', key: 'created', type: 'date' },
       { name: 'Actualizado', key: 'updated', type: 'date' },
     ],

@@ -1,10 +1,10 @@
-<div *ngIf="optionsChart" class="p-2 border rounded-lg">
+<div *ngIf="optionsChart" class="p-2 border rounded-lg dark:border-gray-700">
   <div class="flex justify-between">
-    <header class="flex items-center px-5 py-4 border-b border-gray-100">
-      <h2 class="font-semibold text-gray-800">Trafico</h2>
+    <header class="flex items-center px-5 py-1 ">
+      <h2 class="font-semibold dark:text-white">Trafico</h2>
     </header>
     <select
-      class="py-1 text-base font-bold bg-gray-100 border border-gray-200 rounded-l-lg dark:border-gray-700 dark:text-white dark:bg-black ring-red-500 dark:ring-red-500"
+      class="py-0 text-sm font-bold bg-gray-100 border border-gray-200 rounded-l-lg dark:border-gray-700 dark:text-white dark:bg-black ring-red-500 dark:ring-red-500"
       placeholder="Selecciona"
       name="dateSelected"
       [(ngModel)]="dateSelected"
@@ -16,7 +16,7 @@
     </select>
   </div>
   <div>
-    <hr class="my-2" />
+    <hr class="my-2 dark:border-gray-700" />
     <chart-bar *ngIf="!optionsChart.loading" [data]="optionsChart"></chart-bar>
   </div>
 </div>

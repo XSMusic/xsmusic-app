@@ -25,8 +25,8 @@ export class Site {
     ra: '',
   };
   distance?: number;
-  sets?: any;
-  events?: any;
+  sets?: number;
+  events?: number;
   created?: string;
   updated?: string;
   constructor(data?: Site) {

@@ -38,6 +38,7 @@
     [tracks]="vm.tracks"
     [views]="vm.views"
     (goToPage)="goToPage($event)"
+    (likeOrDislike)="$event.itemsType !== 'artists' ? helper.likeOrDislike($event, {items: vm[$event.itemsType], type, subType}): null"
   ></last-multi>
 
   <last-multi
@@ -45,5 +46,6 @@
     [item]="vm.event"
     [views]="vm.views"
     (goToPage)="goToPage($event)"
+    (likeOrDislike)="$event.itemsType === 'artists' ? helper.likeOrDislike($event, {items: vm.event.artists, type, subType}): null"
   ></last-multi>
 </ng-container>

@@ -11,6 +11,7 @@ import { GenericOneBaseViewModel } from './generic-one.base.view-model';
 import { GetOneDto } from '@shared/services/api/api.dtos';
 import { ApiTypes, GenericItemType, GenericSubItemType } from '@shared/utils';
 import { Event, Media } from '@models';
+import { BaseHelper } from '../base.helper';
 
 @Component({
   selector: 'generic-one-base',
@@ -26,7 +27,8 @@ export class GenericOneBase implements OnInit {
     private route: ActivatedRoute,
     private apiService: ApiService,
     private router: Router,
-    private ui: UIService
+    private ui: UIService,
+    public helper: BaseHelper
   ) {}
 
   ngOnInit() {
@@ -157,7 +159,7 @@ export class GenericOneBase implements OnInit {
 
   setViews() {
     if (this.type === 'artist' || this.type === 'site') {
-      if (this.vm[this.type].sets && this.vm[this.type].sets > 0) {
+      if (this.vm[this.type].sets && this.vm[this.type].sets! > 0) {
         this.vm.views.push({
           name: 'Sets',
           value: 'set',
@@ -176,7 +178,7 @@ export class GenericOneBase implements OnInit {
         });
       }
 
-      if (this.vm[this.type].events && this.vm[this.type].events > 0) {
+      if (this.vm[this.type].events && this.vm[this.type].events! > 0) {
         this.vm.views.push({
           name: 'Eventos',
           value: 'event',

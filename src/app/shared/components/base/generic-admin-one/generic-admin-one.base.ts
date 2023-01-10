@@ -193,22 +193,22 @@ export class GenericAdminOneBase implements OnInit {
   }
 
   private checkViewsArtist() {
-    if (this.vm.artist.sets && this.vm.artist.sets.count > 0) {
+    if (this.vm.artist.sets && this.vm.artist.sets > 0) {
       this.getMediaSets();
     }
-    if (this.vm.artist.tracks && this.vm.artist.tracks.count > 0) {
+    if (this.vm.artist.tracks && this.vm.artist.tracks > 0) {
       this.getMediaTracks();
     }
-    if (this.vm.artist.events && this.vm.artist.events.count > 0) {
+    if (this.vm.artist.events && this.vm.artist.events > 0) {
       this.getEvents();
     }
   }
 
   private checkViewsSite() {
-    if (this.vm.site.sets && this.vm.site.sets.count > 0) {
+    if (this.vm.site.sets && this.vm.site.sets > 0) {
       this.getMediaSets();
     }
-    if (this.vm.site.events && this.vm.site.events.count > 0) {
+    if (this.vm.site.events && this.vm.site.events > 0) {
       this.getEvents();
     }
   }

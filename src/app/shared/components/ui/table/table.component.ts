@@ -14,6 +14,7 @@ export class TableComponent implements OnInit {
   @Input() type!: GenericItemType;
   @Input() subType!: GenericSubItemType;
   @Input() items!: any[];
+  @Input() loading = false;
   headers!: TableHeaderI[];
   @Output() onGoToPage = new EventEmitter<GoToPageI>();
   @Output() onFilter = new EventEmitter<FilterI>();

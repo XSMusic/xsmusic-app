@@ -1,25 +1,26 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { Image, Like, Site } from '@models';
+import { Image, Site } from '@models';
 import { ApiService, UIService } from '@services';
 import { TabsItem } from '@shared/components/ui/tabs/tabs.model';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
 import { GA } from '@shared/services/ui/google-analytics/ga.model';
 import { TOAST_STATE } from '@shared/services/ui/toast/toast.service';
 import {
-  ApiTypes,
   GenericItemType,
   GenericSubItemType,
   getFilterList,
   getUserLocation,
 } from '@shared/utils';
+import { BaseHelper } from '../base.helper';
 import { GenericListBaseViewModel } from './generic-list.base.view-model';
 
 @Component({
   selector: 'generic-list-base',
   templateUrl: 'generic-list.base.html',
   animations: [inOutAnimation],
+  providers: [BaseHelper],
 })
 export class GenericListBase {
   @Input() type!: GenericItemType;
@@ -28,7 +29,8 @@ export class GenericListBase {
   constructor(
     private route: ActivatedRoute,
     private apiService: ApiService,
-    private ui: UIService
+    private ui: UIService,
+    public helper: BaseHelper
   ) {}
 
   ngOnInit() {
@@ -192,21 +194,21 @@ export class GenericListBase {
     this.ui.fullImage.show({ image });
   }
 
-  likeOrDislike(event: { type: ApiTypes; like: Like }, items: any[]) {
-    console.log(event.like[event.like.type]);
-    this.apiService.create(event.type, event.like).subscribe({
-      next: () =>
-        items.forEach((i) => {
-          if (i._id === event.like[event.like.type]) {
-            i.userLike = !i.userLike;
-            this.sendEvent(i.userLike === true ? 'like' : 'dislike');
-          }
-          return i;
-        }),
-      error: () =>
-        this.ui.toast.showToast(TOAST_STATE.error, 'Error al dar Like'),
-    });
-  }
+  // likeOrDislike(event: { type: ApiTypes; like: Like }, items: any[]) {
+  //   console.log(event.like[event.like.type]);
+  //   this.apiService.create(event.type, event.like).subscribe({
+  //     next: () =>
+  //       items.forEach((i) => {
+  //         if (i._id === event.like[event.like.type]) {
+  //           i.userLike = !i.userLike;
+  //           this.sendEvent(i.userLike === true ? 'like' : 'dislike');
+  //         }
+  //         return i;
+  //       }),
+  //     error: () =>
+  //       this.ui.toast.showToast(TOAST_STATE.error, 'Error al dar Like'),
+  //   });
+  // }
 
   sendEvent(event: string) {
     const gaEvent = new GA({

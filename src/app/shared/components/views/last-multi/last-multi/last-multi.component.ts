@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { inOutAnimation } from '@core/animations/enter-leave.animations';
-import { Event, Media } from '@models';
+import { Event, Like, Media } from '@models';
 import { GoToPageI } from '@shared/interfaces/goto.interface';
+import { ApiTypes } from '@shared/utils';
 
 @Component({
   selector: 'last-multi',
@@ -16,6 +17,11 @@ export class LastMultiComponent implements OnInit {
   @Input() tracks: Media[] = [];
   view = '';
   @Output() goToPage = new EventEmitter<GoToPageI>();
+  @Output() likeOrDislike = new EventEmitter<{
+    type: ApiTypes;
+    like: Like;
+    itemsType: 'artists' | 'sets' | 'tracks' | 'events';
+  }>();
 
   ngOnInit() {
     this.view = this.views.length > 0 ? this.views[0].value : '';

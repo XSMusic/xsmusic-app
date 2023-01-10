@@ -21,10 +21,10 @@ export class Artist {
     mixcloud: '',
     tiktok: '',
   };
-  sets?: any;
-  tracks?: any;
-  events?: any;
-  followers?: any;
+  sets?: number;
+  tracks?: number;
+  events?: number;
+  followers?: number;
   created?: string;
   updated?: string;
   constructor(data?: Artist) {

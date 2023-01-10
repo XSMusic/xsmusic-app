@@ -22,9 +22,9 @@ export class GenericAdminOneBaseViewModel {
   tracks: Media[] = [];
   view = 'viewList';
   options: { name: string; action: string }[] = [];
-  bodyEvents!: GetAllDto;
-  bodyMediaSet: GetAllDto;
-  bodyMediaTrack: GetAllDto;
+  bodyEvents = new GetAllDto({ order: ['date', 'asc'] });
+  bodyMediaSet = new GetAllDto({ typeMedia: 'set', admin: true });
+  bodyMediaTrack = new GetAllDto({ typeMedia: 'track', admin: true });
   tempImagesByUrl: string[] = [];
   tempImagesByFile: File[] = [];
   scraping: any = {
@@ -32,10 +32,5 @@ export class GenericAdminOneBaseViewModel {
     infos: [],
     styles: [],
   };
-
-  constructor() {
-    this.bodyEvents = new GetAllDto({ order: ['date', 'asc'] });
-    this.bodyMediaSet = new GetAllDto({ typeMedia: 'set' });
-    this.bodyMediaTrack = new GetAllDto({ typeMedia: 'track' });
-  }
+  loading = true;
 }

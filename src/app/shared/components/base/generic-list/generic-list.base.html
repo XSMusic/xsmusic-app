@@ -26,7 +26,7 @@
     (goToPage)="goToPage($event)"
     (onScroll)="onScroll()"
     (showImage)="showImage($event)"
-    (likeOrDislike)="likeOrDislike($event, vm[this.vm.typeItems])"
+    (likeOrDislike)="helper.likeOrDislike($event, { items: vm[this.vm.typeItems], type, subType })"
   ></generic-view-gallery>
 
   <ng-container *ngIf="type === 'site'">

@@ -29,6 +29,13 @@
       [type]="'artist'"
       [loading]="false"
       (goToPage)="goToPage.emit($event)"
+      (likeOrDislike)="
+        likeOrDislike.emit({
+          type: $event.type,
+          like: $event.like,
+          itemsType: 'artists'
+        })
+      "
     ></generic-view-gallery>
 
     <generic-view-gallery
@@ -37,6 +44,13 @@
       [type]="'set'"
       [loading]="false"
       (goToPage)="goToPage.emit($event)"
+      (likeOrDislike)="
+        likeOrDislike.emit({
+          type: $event.type,
+          like: $event.like,
+          itemsType: 'sets'
+        })
+      "
     ></generic-view-gallery>
 
     <generic-view-gallery
@@ -45,6 +59,13 @@
       [type]="'track'"
       [loading]="false"
       (goToPage)="goToPage.emit($event)"
+      (likeOrDislike)="
+        likeOrDislike.emit({
+          type: $event.type,
+          like: $event.like,
+          itemsType: 'tracks'
+        })
+      "
     ></generic-view-gallery>
 
     <generic-view-gallery-items
@@ -60,6 +81,13 @@
       [type]="'event'"
       [loading]="false"
       (goToPage)="goToPage.emit($event)"
+      (likeOrDislike)="
+        likeOrDislike.emit({
+          type: $event.type,
+          like: $event.like,
+          itemsType: 'events'
+        })
+      "
     ></generic-view-gallery>
     <last-multi-items
       *ngIf="view === 'image'"

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { routesConfig } from '@core/config';
 import { MessageI } from '@interfaces';
+import { Like } from '@models';
 import {
   ApiService,
   ImageService,
@@ -14,6 +15,7 @@ import {
   ImageUploadByUrlDto,
   ImageUploadDto,
 } from '@shared/services/api/image/image.dto';
+import { GA } from '@shared/services/ui/google-analytics/ga.model';
 import {
   ApiTypes,
   GenericItemType,
@@ -200,6 +202,68 @@ export class BaseHelper {
     }
   }
 
+  likeOrDislike(
+    event: { type: ApiTypes; like: Like },
+    data: {
+      item?: any;
+      items?: any;
+      type: GenericItemType;
+      subType?: GenericSubItemType;
+    }
+  ) {
+    this.apiService.create(event.type, event.like).subscribe({
+      next: () => {
+        if (data.items && data.items.length > 0) {
+          this.likeOrDislikeSuccessForAll(
+            event,
+            data.items,
+            data.type,
+            data.subType
+          );
+        } else {
+          this.likeOrDislikeSuccessForOne(data.item, data.type, data.subType);
+        }
+      },
+      error: () =>
+        this.ui.toast.showToast(TOAST_STATE.error, 'Error al dar Like'),
+    });
+  }
+  private likeOrDislikeSuccessForOne(
+    item: any,
+    type?: GenericItemType,
+    subType?: GenericSubItemType
+  ) {
+    item.userLike = !item.userLike;
+    item.name = 'tururu';
+    const gaEvent = new GA({
+      event: item.userLike === true ? 'like' : 'dislike',
+      one: false,
+      type: type !== 'media' && type !== 'site' ? type : subType,
+    });
+    this.ui.ga2.event(gaEvent);
+  }
+
+  private likeOrDislikeSuccessForAll(
+    event: { type: ApiTypes; like: Like },
+    items?: any[],
+    type?: GenericItemType,
+    subType?: GenericSubItemType
+  ) {
+    if (items) {
+      items.forEach((i) => {
+        if (i._id === event.like[event.like.type]) {
+          i.userLike = !i.userLike;
+          const gaEvent = new GA({
+            event: i.userLike === true ? 'like' : 'dislike',
+            one: false,
+            type: type !== 'media' && type !== 'site' ? type : subType,
+          });
+          this.ui.ga2.event(gaEvent);
+        }
+        return i;
+      });
+    }
+  }
   goToPage(data: GoToPageI) {
     data.admin = true;
     this.ui.navigation.goToPage(data);
